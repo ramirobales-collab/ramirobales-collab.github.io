@@ -203,8 +203,10 @@ export async function crearVisor({ lienzo, pixelRatioMax = 2, alProgreso = () =>
   async function cargarGLB(datos) {
     if (cache.has(datos.id)) return cache.get(datos.id);
     const gltf = await loader.loadAsync(new URL(datos.glb, RAIZ).href, (ev) => {
-      if (ev.lengthComputable) alProgreso(datos.id, ev.loaded / ev.total);
+      // Con el archivo comprimido en el servidor, `total` es el tamaño comprimido y `loaded` el real: se acota a 1.
+      if (ev.lengthComputable && ev.total > 0) alProgreso(datos.id, Math.min(1, ev.loaded / ev.total));
     });
+    alProgreso(datos.id, 1);
     const raiz = gltf.scene;
     const quitar = [];
     raiz.traverse((o) => { if (o.isLight) quitar.push(o); });
