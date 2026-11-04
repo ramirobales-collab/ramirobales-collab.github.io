@@ -1,0 +1,169 @@
+/* Páginas de caso (/proyectos/<slug>.html). Prefijo caso-. Se apoya en variables.css, base.css y componentes.css. */
+
+.caso-pagina { padding-top: calc(var(--nav-alto) + var(--e-4)); padding-bottom: var(--e-seccion); }
+.caso-pagina .folio { margin-bottom: var(--e-3); }
+
+/* ---------- Cabecera ---------- */
+.caso-cabecera { row-gap: var(--e-4); align-items: end; margin-bottom: var(--e-seccion); }
+.caso-cabecera__texto { grid-column: 1 / -1; display: grid; gap: var(--e-3); align-content: end; }
+.caso-cabecera__titulo { font-size: clamp(3rem, 1.6rem + 5.4vw, 7.5rem); line-height: 0.98; letter-spacing: -0.035em; }
+.caso-cabecera__linea { max-width: 34ch; }
+.caso-cabecera__media {
+  grid-column: 1 / -1;
+  position: relative;
+  aspect-ratio: 16 / 10;
+  background: var(--hundida);
+  border-radius: var(--radio);
+  overflow: hidden;
+  box-shadow: var(--sombra-papel);
+}
+.caso-cabecera__media picture { height: 100%; }
+.caso-cabecera__media img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
+/* La imagen de cabecera es la LCP: entra sola al cargar (en móvil queda bajo el margen del observador y no se revelaba). */
+.caso-cabecera__media.mascara { clip-path: inset(0); animation: caso-cabecera-revelar 1.2s var(--curva-entrada) 0.15s both; }
+@keyframes caso-cabecera-revelar { from { clip-path: inset(0 0 0 100%); } to { clip-path: inset(0); } }
+@media (min-width: 1024px) {
+  .caso-cabecera__texto { grid-column: 2 / 7; padding-bottom: var(--e-3); }
+  .caso-cabecera__media { grid-column: 7 / -1; margin-right: calc(-1 * max(var(--margen), (100vw - var(--ancho-max)) / 2)); border-top-right-radius: 0; border-bottom-right-radius: 0; }
+  .caso-cabecera--vertical .caso-cabecera__texto { grid-column: 2 / 8; align-self: center; }
+  .caso-cabecera--vertical .caso-cabecera__media { grid-column: 9 / 13; margin-right: 0; aspect-ratio: 2 / 3; border-radius: var(--radio); }
+}
+
+.caso-meta { display: grid; gap: var(--e-2); margin: 0; }
+.caso-meta > div { display: grid; grid-template-columns: 6.5rem 1fr; gap: var(--e-2); align-items: baseline; padding-top: var(--e-2); border-top: 1px solid var(--filete); }
+.caso-meta dt { color: var(--texto-3); }
+.caso-meta dd { margin: 0; font-size: var(--t-secundario); font-weight: 400; letter-spacing: 0; text-transform: none; }
+.caso-meta dd a { text-decoration-color: var(--borde); }
+/* Revelados por elemento dentro de texto en línea: la línea no puede ser un bloque. */
+.caso-meta .linea, .caso-nav__fila .linea, .caso-resultado > h2 .linea { display: inline-block; vertical-align: baseline; }
+.caso-meta dd a:hover { text-decoration-color: var(--acento-texto); }
+
+/* ---------- Cuerpo: índice + contenido + artefactos ---------- */
+.caso-cuerpo { row-gap: var(--e-4); align-items: start; }
+.caso-indice { grid-column: 1 / -1; }
+.caso-indice ol { margin: 0; padding: 0; list-style: none; display: flex; gap: var(--e-2) var(--e-3); overflow-x: auto; scrollbar-width: none; padding-bottom: var(--e-1); border-bottom: 1px solid var(--filete); }
+.caso-indice ol::-webkit-scrollbar { display: none; }
+.caso-indice a { display: inline-flex; align-items: baseline; gap: 0.5rem; text-decoration: none; color: var(--texto-2); font-size: var(--t-secundario); white-space: nowrap; padding-block: 0.2rem; border-bottom: 1px solid transparent; transition: color var(--d-micro) var(--curva-entrada), border-color var(--d-micro) var(--curva-entrada); }
+.caso-indice a:hover, .caso-indice a[aria-current="true"] { color: var(--texto); border-bottom-color: var(--acento-texto); }
+.caso-indice__n { font-family: var(--playfair); color: var(--acento-display); font-size: 0.875rem; font-variant-numeric: tabular-nums; }
+.caso-contenido { grid-column: 1 / -1; display: grid; gap: var(--e-4); }
+.caso-artefactos { grid-column: 1 / -1; align-self: stretch; }
+.caso-artefactos__in { display: grid; gap: var(--e-3); align-content: start; }
+.caso-resultado { grid-column: 1 / -1; }
+.caso-galeria { grid-column: 1 / -1; }
+@media (min-width: 1024px) {
+  .caso-indice { grid-column: 1 / 3; grid-row: 1 / span 4; position: sticky; top: calc(var(--nav-alto) + var(--e-3)); }
+  .caso-indice ol { flex-direction: column; gap: 0.1rem; overflow: visible; border-bottom: 0; padding-bottom: 0; border-left: 1px solid var(--filete); }
+  .caso-indice a { padding: 0.3rem 0 0.3rem var(--e-2); margin-left: -1px; border-bottom: 0; border-left: 2px solid transparent; white-space: normal; }
+  .caso-indice a:hover, .caso-indice a[aria-current="true"] { border-left-color: var(--acento-texto); }
+  .caso-contenido { grid-column: 3 / 9; }
+  .caso-artefactos { grid-column: 9 / -1; }
+  .caso-artefactos__in { position: sticky; top: calc(var(--nav-alto) + var(--e-3)); }
+  .caso-resultado { grid-column: 3 / -1; }
+  .caso-contenido--sigue { grid-column: 3 / 9; }
+  .caso-galeria { grid-column: 3 / -1; }
+}
+
+/* ---------- Partes ---------- */
+.caso-parte { display: grid; gap: var(--e-2); padding-top: var(--e-3); border-top: 1px solid var(--filete); scroll-margin-top: calc(var(--nav-alto) + var(--e-3)); }
+.caso-parte__n { color: var(--texto-3); }
+.caso-parte__titulo { font-size: var(--t-caso); line-height: 1.1; letter-spacing: -0.02em; margin-bottom: var(--e-1); }
+.caso-parte p + p { margin-top: var(--e-1); }
+
+.caso-pasos { margin: 0; padding: 0; list-style: none; display: grid; gap: var(--e-3); counter-reset: paso; }
+.caso-pasos li { display: grid; grid-template-columns: 2.75rem 1fr; gap: var(--e-2); align-items: baseline; }
+.caso-pasos li::before { counter-increment: paso; content: counter(paso, decimal-leading-zero); font-family: var(--playfair); font-size: 1.5rem; line-height: 1; color: var(--acento-display); font-variant-numeric: tabular-nums; }
+.caso-pasos strong { display: block; margin-bottom: 0.15rem; }
+
+.caso-decisiones { display: grid; gap: var(--e-3); }
+.caso-decision { padding: var(--e-3); display: grid; gap: var(--e-2); }
+.caso-decision__etiqueta { display: block; color: var(--texto-2); margin-bottom: 0.35rem; }
+.caso-decision__elegi { font-size: var(--t-h3); line-height: 1.2; letter-spacing: -0.01em; font-weight: 600; }
+.caso-decision__descarte { color: var(--texto-2); }
+.caso-decision__porque { font-size: var(--t-secundario); color: var(--texto-2); }
+
+/* Resultado verificable: bloque tinta */
+.caso-resultado { padding: var(--e-4) var(--e-3); border-radius: var(--radio); display: grid; gap: var(--e-3); scroll-margin-top: calc(var(--nav-alto) + var(--e-3)); position: relative; overflow: hidden; }
+.caso-resultado::before { content: ""; position: absolute; inset: 0; pointer-events: none; background-image: url("../assets/grano-512.webp"); background-size: 512px 512px; opacity: 0.05; mix-blend-mode: screen; }
+.caso-resultado > * { position: relative; }
+.caso-resultado__frase { font-size: clamp(1.75rem, 1.2rem + 2.2vw, 3.4rem); line-height: 1.08; letter-spacing: -0.025em; max-width: 24ch; }
+.caso-resultado__apoyo { color: var(--texto-2); max-width: 56ch; }
+@media (min-width: 1024px) { .caso-resultado { padding: var(--e-4); } }
+
+/* ---------- Artefactos ---------- */
+.caso-artefacto { padding: var(--e-3); display: grid; gap: var(--e-2); }
+.caso-artefacto__titulo { color: var(--texto-3); }
+.caso-artefacto ul { margin: 0; padding: 0; list-style: none; display: grid; gap: var(--e-1); font-size: var(--t-secundario); }
+.caso-artefacto li { display: flex; gap: var(--e-2); align-items: baseline; }
+.caso-artefacto li::before { content: ""; width: 10px; height: 2px; background: var(--acento-display); flex: none; transform: translateY(-0.3em); }
+.caso-artefacto p { font-size: var(--t-secundario); }
+.caso-artefacto__cita { font-family: var(--playfair); font-style: italic; font-size: 1.25rem; line-height: 1.35; }
+.caso-artefacto__media { aspect-ratio: 1; background: var(--hundida); border-radius: var(--radio); overflow: hidden; }
+.caso-artefacto__media--alta { aspect-ratio: 2 / 3; }
+.caso-artefacto__media picture { height: 100%; }
+.caso-artefacto__media img { width: 100%; height: 100%; object-fit: cover; }
+
+/* ---------- Galería ---------- */
+.caso-galeria { display: grid; gap: var(--e-3); }
+.caso-galeria__aviso { color: var(--texto-3); }
+.caso-galeria__items { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: var(--e-3) var(--calle); }
+.caso-galeria__item { grid-column: 1 / -1; margin: 0; display: grid; gap: var(--e-2); align-content: start; }
+.caso-galeria__media { background: var(--hundida); border-radius: var(--radio); overflow: hidden; box-shadow: var(--sombra-papel); border: 1px solid var(--filete); }
+.caso-galeria__media img { width: 100%; height: auto; }
+.caso-galeria__item figcaption { font-size: var(--t-secundario); color: var(--texto-2); }
+@media (min-width: 768px) {
+  .caso-galeria__item--7 { grid-column: span 7; }
+  .caso-galeria__item--5 { grid-column: span 5; }
+  .caso-galeria__item--6 { grid-column: span 6; }
+  .caso-galeria__item--4 { grid-column: span 4; }
+  .caso-galeria__item--12 { grid-column: 1 / -1; }
+}
+@media (max-width: 767px) {
+  .caso-galeria__item--4 { grid-column: span 6; }
+}
+
+/* ---------- Anterior / siguiente ---------- */
+.caso-nav { margin-top: var(--e-seccion); row-gap: var(--e-3); }
+.caso-nav__fila { grid-column: 1 / -1; margin: 0; display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--e-1) var(--e-2); padding-top: var(--e-2); border-top: 1px solid var(--filete); color: var(--texto-3); }
+.caso-nav__item { white-space: nowrap; }
+.caso-siguiente {
+  grid-column: 1 / -1;
+  position: relative;
+  display: grid;
+  gap: var(--e-2);
+  padding: var(--e-4) var(--e-3) 0;
+  min-height: 300px;
+  overflow: hidden;
+  text-decoration: none;
+  transition: transform 220ms var(--curva-entrada), box-shadow 220ms var(--curva-entrada);
+}
+.caso-siguiente:hover { transform: translateY(-2px); box-shadow: var(--sombra-flotante); }
+.caso-siguiente__texto { display: grid; gap: var(--e-2); align-content: start; max-width: 40ch; padding-bottom: 200px; }
+.caso-siguiente__etiqueta { color: var(--acento-texto); }
+.caso-siguiente__nombre { font-size: var(--t-seccion); line-height: 1.02; letter-spacing: -0.025em; }
+.caso-siguiente__frase { color: var(--texto-2); }
+.caso-siguiente__marco {
+  position: absolute;
+  right: -6%;
+  bottom: -22%;
+  width: min(78%, 560px);
+  translate: 0 48px;
+  rotate: -1.5deg;
+  filter: drop-shadow(0 18px 24px var(--sombra-tinte));
+  transition: translate 1.2s var(--curva-entrada), rotate 1.2s var(--curva-entrada);
+}
+.caso-siguiente__marco img { width: 100%; height: auto; }
+.caso-siguiente.visto .caso-siguiente__marco, .quieto .caso-siguiente__marco, .ir .caso-siguiente__marco { translate: 0 0; rotate: 0deg; }
+.caso-siguiente:hover .caso-siguiente__marco { translate: 0 -8px; }
+@media (min-width: 1024px) {
+  .caso-nav__fila { grid-column: 5 / -1; }
+  .caso-siguiente { grid-column: 5 / -1; grid-template-columns: 1fr 1fr; min-height: 360px; padding: var(--e-4) var(--e-4) 0; }
+  .caso-siguiente__texto { padding-bottom: var(--e-4); }
+  .caso-siguiente__marco { right: -4%; bottom: -26%; width: 56%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .caso-siguiente__marco { translate: 0 0; rotate: 0deg; transition: none; }
+}
+@media (forced-colors: active) {
+  .caso-decision, .caso-resultado, .caso-artefacto, .caso-galeria__media, .caso-siguiente { border: 1px solid CanvasText; box-shadow: none; }
+}

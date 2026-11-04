@@ -1,0 +1,1242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+<title>AthleteIQ · demo landing (2026) · Ramiro Bales</title>
+<meta name="description" content="Demo landing for AthleteIQ, performance intelligence for rugby league staff. Demonstration page with a fictional squad, built in 2026 by Ramiro Bales."/>
+<meta name="robots" content="noindex"/>
+<meta property="og:title" content="AthleteIQ · demo de landing"/>
+<meta property="og:description" content="The data has no favourites. Demo con plantel ficticio."/>
+<meta property="og:type" content="website"/>
+<meta property="og:site_name" content="AthleteIQ"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="AthleteIQ · demo de landing"/>
+<meta name="twitter:description" content="Real-time AI performance analytics. The data has no favourites."/>
+<meta property="og:image" content="https://ramirobales-collab.github.io/assets/og-1200x630.jpg"/>
+<meta property="og:url" content="https://ramirobales-collab.github.io/demos/athleteiq/"/>
+<meta name="twitter:image" content="https://ramirobales-collab.github.io/assets/og-1200x630.jpg"/>
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml"/>
+<link rel="preload" href="../../assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin/>
+<style>
+:root{
+  --bg:#07070C;--bg2:#0C0C15;--card:#10101A;--bd:#1C1C2C;
+  --red:#D42020;--red2:#A01010;--red3:#6A0808;
+  --green:#22C55E;--gdim:rgba(34,197,94,.1);--rdim:rgba(212,32,32,.08);
+  --text:#E8E8F0;--sub:#9090A8;--muted:#8E8EA4;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-serif;overflow-x:hidden}
+
+/* PROGRESS BAR */
+#pb{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--red3),var(--red));width:0%;z-index:9999;box-shadow:0 0 6px var(--red)}
+
+
+/* NAV */
+nav{position:fixed;top:3px;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:15px 48px;background:rgba(7,7,12,.94);backdrop-filter:blur(14px);border-bottom:1px solid var(--bd)}
+.nlogo{display:flex;align-items:center;gap:9px;font-size:1.2rem;font-weight:800;letter-spacing:-.5px;text-decoration:none;color:var(--text)}
+.nlogo-dot{width:8px;height:8px;background:var(--red);border-radius:50%}
+.nlogo span{color:var(--red)}
+.nright{display:flex;align-items:center;gap:10px}
+.lang-wrap{position:relative}
+.lang-btn{display:flex;align-items:center;gap:6px;background:var(--card);border:1px solid var(--bd);color:var(--sub);padding:8px 12px;border-radius:8px;font-size:.8rem;font-weight:600;cursor:pointer;user-select:none;transition:.18s;letter-spacing:.3px}
+.lang-btn:hover{border-color:var(--red);color:var(--text)}
+.lang-btn .arr{font-size:.6rem;opacity:.6;transition:.18s}
+.lang-wrap.open .arr{transform:rotate(180deg)}
+.lang-menu{position:absolute;top:calc(100% + 6px);right:0;background:var(--card);border:1px solid var(--bd);border-radius:10px;overflow:hidden;min-width:148px;z-index:200;opacity:0;pointer-events:none;transform:translateY(-6px);transition:all .18s ease;box-shadow:0 12px 32px rgba(0,0,0,.5)}
+.lang-wrap.open .lang-menu{opacity:1;pointer-events:all;transform:none}
+.lang-opt{padding:10px 14px;font-size:.8rem;color:var(--sub);cursor:pointer;transition:.15s;font-weight:500}
+.lang-opt:hover{background:var(--rdim);color:var(--text)}
+.lang-opt.active{color:var(--red);font-weight:700}
+.nbtn-c{background:transparent;color:var(--sub);border:1px solid var(--bd);padding:9px 16px;border-radius:8px;font-weight:600;font-size:.8rem;cursor:pointer;text-decoration:none;transition:.18s}
+.nbtn-c:hover{border-color:var(--red);color:var(--text)}
+.nbtn-ghost{background:transparent;color:var(--sub);border:1px solid var(--bd);padding:9px 16px;border-radius:8px;font-weight:600;font-size:.8rem;cursor:pointer;text-decoration:none;transition:.18s}
+.nbtn-ghost:hover{border-color:var(--green);color:var(--green)}
+.nbtn-t{background:var(--red);color:#fff;border:none;padding:9px 18px;border-radius:8px;font-weight:700;font-size:.8rem;cursor:pointer;text-decoration:none;transition:.18s;position:relative;overflow:hidden}
+.nbtn-t::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(-45deg,transparent,transparent 3px,rgba(0,0,0,.07) 3px,rgba(0,0,0,.07) 4px)}
+.nbtn-t:hover{background:var(--red2);transform:translateY(-1px);box-shadow:0 4px 14px rgba(212,32,32,.35)}
+
+/* HERO */
+#hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;padding:108px 48px 80px}
+#hcanvas{position:absolute;inset:0;width:100%;height:100%;z-index:0;opacity:.7;will-change:transform}
+.hgrid{position:absolute;inset:0;background-image:linear-gradient(rgba(212,32,32,.016) 1px,transparent 1px),linear-gradient(90deg,rgba(212,32,32,.016) 1px,transparent 1px);background-size:64px 64px;z-index:0}
+.hcontent{position:relative;z-index:2;max-width:620px}
+.hbadge{display:inline-flex;align-items:center;gap:7px;background:rgba(212,32,32,.08);border:1px solid rgba(212,32,32,.22);color:var(--red);padding:5px 12px;border-radius:20px;font-size:.72rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:24px}
+.hbadge-dot{width:5px;height:5px;background:var(--red);border-radius:50%}
+h1{font-size:clamp(3rem,5.5vw,5.5rem);font-weight:900;line-height:1.02;letter-spacing:-2.5px;margin-bottom:18px}
+h1 .cr{color:var(--red)}
+.hsub{font-size:1.05rem;color:var(--sub);line-height:1.72;margin-bottom:36px;max-width:500px}
+.hbtns{display:flex;gap:12px;flex-wrap:wrap}
+.btn-p{background:var(--red);color:#fff;border:none;padding:15px 28px;border-radius:10px;font-weight:800;font-size:.95rem;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:.22s;position:relative;overflow:hidden}
+.btn-p::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(-45deg,transparent,transparent 3px,rgba(0,0,0,.06) 3px,rgba(0,0,0,.06) 4px)}
+.btn-p:hover{background:var(--red2);transform:translateY(-2px);box-shadow:0 8px 24px rgba(212,32,32,.38)}
+.btn-s{background:transparent;color:var(--sub);border:1px solid var(--bd);padding:14px 28px;border-radius:10px;font-weight:600;font-size:.95rem;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:.22s}
+.btn-s:hover{border-color:var(--green);color:var(--green);transform:translateY(-2px)}
+.btn-g{background:transparent;color:var(--green);border:1.5px solid rgba(34,197,94,.35);padding:14px 28px;border-radius:10px;font-weight:700;font-size:.95rem;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:.22s}
+.btn-g:hover{background:var(--gdim);transform:translateY(-2px)}
+.hstats{display:flex;gap:32px;margin-top:48px;flex-wrap:wrap}
+.hstat{border-left:2px solid var(--red);padding-left:14px}
+.hstat-n{font-size:1.85rem;font-weight:900;color:var(--green);line-height:1}
+.hstat-l{font-size:.7rem;color:var(--muted);margin-top:4px;text-transform:uppercase;letter-spacing:.5px}
+.hscroll{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;color:var(--muted);font-size:.68rem;letter-spacing:1px;text-transform:uppercase;z-index:2}
+.hsa{width:16px;height:16px;border-right:1.5px solid var(--red);border-bottom:1.5px solid var(--red);transform:rotate(45deg)}
+
+/* SECTIONS */
+section{padding:90px 48px}
+.stag{display:inline-block;color:var(--red);font-size:.68rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:12px}
+.stit{font-size:clamp(1.8rem,2.8vw,2.6rem);font-weight:900;letter-spacing:-1px;line-height:1.1;margin-bottom:12px}
+.ssub{color:var(--sub);font-size:.97rem;line-height:1.7;max-width:540px}
+.ctr{text-align:center}.ctr .ssub{margin:0 auto}
+.gn{color:var(--green)}.gr{color:var(--red)}
+
+/* VALUE */
+#value{background:var(--bg2)}
+.vgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:18px;margin-top:50px}
+.vcard{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:26px;position:relative;overflow:hidden;transition:all .26s}
+.vcard::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--red3),var(--red));transform:scaleX(0);transform-origin:left;transition:.26s}
+.vcard:hover{border-color:rgba(212,32,32,.22);transform:translateY(-3px);box-shadow:0 12px 32px rgba(0,0,0,.38)}
+.vcard:hover::before{transform:scaleX(1)}
+.vico{width:40px;height:40px;background:rgba(212,32,32,.08);border:1px solid rgba(212,32,32,.16);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:.9rem;font-weight:700;color:var(--red);margin-bottom:16px;font-family:'Courier New',monospace}
+.vtit{font-size:.97rem;font-weight:700;margin-bottom:7px}
+.vtxt{color:var(--sub);font-size:.86rem;line-height:1.6}
+
+/* DEMO */
+#demo{background:linear-gradient(180deg,var(--bg) 0%,#0A0510 50%,var(--bg) 100%);position:relative;overflow:hidden}
+#demo::before{content:'';position:absolute;top:20%;left:50%;transform:translateX(-50%);width:480px;height:480px;background:radial-gradient(circle,rgba(212,32,32,.04) 0%,transparent 70%);pointer-events:none}
+.dlayout{display:grid;grid-template-columns:1fr 1fr;gap:68px;align-items:center;max-width:1060px;margin:52px auto 0}
+.flist{list-style:none;margin-top:24px;display:flex;flex-direction:column;gap:12px}
+.fitem{display:flex;align-items:flex-start;gap:11px;padding:13px;background:rgba(255,255,255,.015);border:1px solid var(--bd);border-radius:11px;transition:.2s}
+.fitem:hover{border-color:rgba(212,32,32,.18)}
+.fico{width:32px;height:32px;flex-shrink:0;background:rgba(212,32,32,.08);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:.85rem;font-weight:700;color:var(--red);font-family:'Courier New',monospace}
+.ftit{font-weight:700;font-size:.86rem;margin-bottom:2px}
+.fdesc{color:var(--sub);font-size:.78rem;line-height:1.5}
+/* Phone */
+.pwrap{display:flex;justify-content:center;position:relative}
+.phone{width:286px;height:590px;background:#0A0A12;border-radius:42px;border:6px solid #1A1A24;position:relative;box-shadow:0 32px 64px rgba(0,0,0,.65),0 0 0 1px #222230;overflow:hidden}
+.phone::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:82px;height:20px;background:#0A0A12;border-radius:0 0 12px 12px;z-index:10}
+.pscreen{position:absolute;inset:0;background:#0A0A12;display:flex;flex-direction:column}
+.phead{background:#0A0A12;padding:24px 12px 7px;display:flex;align-items:center;gap:9px;border-bottom:1px solid #161626;flex-shrink:0}
+.pavatar{width:32px;height:32px;background:linear-gradient(135deg,var(--red),var(--red3));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:800;color:#fff;flex-shrink:0}
+.pname{font-size:.8rem;font-weight:700}
+.ponline{font-size:.66rem;color:var(--green)}
+.pmsg-area{flex:1;overflow-y:auto;padding:9px 8px;display:flex;flex-direction:column;gap:6px;scroll-behavior:smooth}
+.cmsg{max-width:84%;padding:8px 11px;border-radius:12px;font-size:.72rem;line-height:1.5;opacity:0;transform:translateY(5px);transition:all .28s ease}
+.cmsg.vis{opacity:1;transform:translateY(0)}
+.cmsg-u{background:#1A3558;color:#C0DAFF;align-self:flex-end;border-bottom-right-radius:3px}
+.cmsg-b{background:#141420;color:var(--text);align-self:flex-start;border-bottom-left-radius:3px;border:1px solid #202030}
+.bname{font-size:.6rem;color:var(--red);font-weight:700;margin-bottom:3px;letter-spacing:.3px}
+.typdots{align-self:flex-start;background:#141420;border:1px solid #202030;padding:8px 11px;border-radius:12px;border-bottom-left-radius:3px;display:flex;gap:3px;align-items:center;opacity:0;transition:.22s;flex-shrink:0}
+.typdots.vis{opacity:1}
+.tdot{width:5px;height:5px;background:var(--red);border-radius:50%;animation:tb 1s 4}
+.tdot:nth-child(2){animation-delay:.17s}.tdot:nth-child(3){animation-delay:.34s}
+@keyframes tb{0%,100%{transform:translateY(0);opacity:.5}50%{transform:translateY(-4px);opacity:1}}
+.pglow{position:absolute;top:-20%;left:50%;transform:translateX(-50%);width:220px;height:220px;background:radial-gradient(circle,rgba(212,32,32,.14) 0%,transparent 70%);pointer-events:none;z-index:-1}
+
+.demo-chips{display:flex;flex-direction:column;gap:8px;margin-top:6px;width:286px}
+.demo-chips-label{font-size:.67rem;font-weight:700;color:var(--red);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:5px;display:flex;align-items:center;gap:6px;opacity:.85}
+.demo-chips-label::before{content:'';display:inline-block;width:16px;height:1px;background:var(--red);opacity:.6}
+.demo-chip{background:rgba(212,32,32,.13);border:1.5px solid rgba(212,32,32,.40);color:var(--text);padding:11px 15px;border-radius:10px;font-size:.80rem;cursor:pointer;text-align:left;transition:.20s;font-family:inherit;line-height:1.4;box-shadow:0 2px 8px rgba(212,32,32,.08)}
+.demo-chip:hover{border-color:var(--red);color:#fff;background:rgba(212,32,32,.24);transform:translateX(5px);box-shadow:0 4px 16px rgba(212,32,32,.22)}
+.demo-chip:active{transform:translateX(2px) scale(.98)}
+.demo-chip:disabled{opacity:.32;cursor:not-allowed;transform:none;box-shadow:none}
+.demo-chip::before{content:'→ ';color:var(--red);font-weight:800}
+/* SAVINGS */
+#savings{background:var(--bg2)}
+.sgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px;margin-top:50px}
+.scard{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:26px 20px;text-align:center;position:relative;overflow:hidden;transition:.26s}
+.scard:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(0,0,0,.36)}
+.scard.pos::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--green),transparent)}
+.scard.neg::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--red),transparent)}
+.snum{font-size:2.5rem;font-weight:900;line-height:1;margin-bottom:6px}
+.snum.g{color:var(--green)}.snum.r{color:var(--red)}
+.slbl{color:var(--sub);font-size:.83rem;line-height:1.4}
+.ssml{color:var(--muted);font-size:.7rem;margin-top:6px}
+
+/* HOW */
+#how{background:var(--bg)}
+.hwgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(195px,1fr));gap:16px;margin-top:50px}
+.hwstep{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:26px 20px;text-align:center;transition:.26s}
+.hwstep:hover{border-color:rgba(212,32,32,.2);transform:translateY(-3px)}
+.hwnum{width:50px;height:50px;background:var(--red);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.1rem;font-weight:900;margin:0 auto 16px;position:relative;overflow:hidden}
+.hwnum::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(-45deg,transparent,transparent 3px,rgba(0,0,0,.1) 3px,rgba(0,0,0,.1) 4px)}
+.hwtit{font-weight:700;font-size:.9rem;margin-bottom:6px}
+.hwtxt{color:var(--sub);font-size:.82rem;line-height:1.55}
+
+/* PRICING — value-focused, no fixed prices */
+#pricing{background:var(--bg2)}
+.val-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px;margin-top:50px}
+.val-card{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:28px 22px;text-align:center;position:relative;overflow:hidden;transition:.26s}
+.val-card:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(0,0,0,.36)}
+.val-card.gc::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--green),transparent)}
+.val-card.rc::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--red),transparent)}
+.val-num{font-size:3rem;font-weight:900;line-height:1;margin-bottom:8px;letter-spacing:-2px}
+.val-label{color:var(--sub);font-size:.83rem;line-height:1.45}
+.val-context{color:var(--muted);font-size:.72rem;margin-top:6px}
+.ptable-wrap{margin-top:56px;overflow-x:auto}
+.ptable{width:100%;border-collapse:collapse;font-size:.87rem}
+.ptable th{color:var(--muted);font-weight:600;text-align:left;padding:10px 16px;font-size:.7rem;letter-spacing:.8px;text-transform:uppercase;border-bottom:1px solid var(--bd)}
+.ptable td{padding:13px 16px;border-bottom:1px solid rgba(255,255,255,.035);color:var(--sub);vertical-align:middle}
+.ptable tr.hl td{color:var(--text);background:rgba(212,32,32,.04)}
+.ptable tr.hl td:first-child{border-left:2px solid var(--red)}
+.ptable td strong{color:var(--text);font-weight:700}
+.ptag-iq{display:inline-block;background:rgba(212,32,32,.1);border:1px solid rgba(212,32,32,.25);color:var(--red);font-size:.66rem;font-weight:700;padding:2px 8px;border-radius:10px;margin-left:8px;letter-spacing:.5px}
+.pricing-note{margin-top:32px;background:rgba(34,197,94,.04);border:1px solid rgba(34,197,94,.14);border-radius:12px;padding:22px 26px;font-size:.86rem;color:var(--sub);line-height:1.7;max-width:720px}
+.pricing-note strong{color:var(--green)}
+/* SOURCES */
+#sources{background:var(--bg)}
+.src-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px;margin-top:46px}
+.src-card{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:20px;transition:.22s}
+.src-card:hover{border-color:rgba(212,32,32,.2);transform:translateY(-2px)}
+.src-name{font-size:.88rem;font-weight:700;margin-bottom:4px;display:flex;align-items:center;gap:8px}
+.src-badge{display:inline-block;background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.22);color:var(--green);font-size:.6rem;font-weight:700;padding:1px 7px;border-radius:8px;letter-spacing:.5px}
+.src-type{color:var(--muted);font-size:.73rem;text-transform:uppercase;letter-spacing:.6px;margin-bottom:8px}
+.src-desc{color:var(--sub);font-size:.8rem;line-height:1.5}
+.src-link{display:inline-block;margin-top:8px;color:var(--red);font-size:.75rem;text-decoration:none;opacity:.7;transition:.15s}
+.src-link:hover{opacity:1}
+/* PRIVACY MODAL */
+#ppmodal{position:fixed;inset:0;z-index:5500;background:rgba(0,0,0,.82);backdrop-filter:blur(10px);display:none;align-items:flex-start;justify-content:center;padding:40px 20px;overflow-y:auto}
+#ppmodal.open{display:flex}
+.ppbox{background:var(--card);border:1px solid var(--bd);border-radius:18px;padding:44px;width:680px;max-width:100%;position:relative;box-shadow:0 24px 64px rgba(0,0,0,.7);margin:auto}
+.ppclose{position:absolute;top:16px;right:18px;background:none;border:none;color:var(--muted);font-size:1.4rem;cursor:pointer;transition:.18s}
+.ppclose:hover{color:var(--text)}
+.pp-title{font-size:1.4rem;font-weight:800;letter-spacing:-.5px;margin-bottom:4px}
+.pp-date{color:var(--muted);font-size:.75rem;margin-bottom:28px}
+.pp-body h3{font-size:.88rem;font-weight:700;color:var(--text);margin:20px 0 6px;text-transform:uppercase;letter-spacing:.5px;color:var(--red)}
+.pp-body p,.pp-body li{color:var(--sub);font-size:.85rem;line-height:1.7;margin-bottom:8px}
+.pp-body ul{padding-left:20px}
+.pp-body a{color:var(--red);text-decoration:none}
+.pp-body a:hover{text-decoration:underline}
+
+/* ABOUT */
+#about{background:linear-gradient(135deg,#0E0510 0%,var(--bg) 100%);position:relative;overflow:hidden}
+#about .agrid,#cta .cta-c{position:relative;z-index:1}
+.aring-in .ri{position:relative;z-index:2}
+.agrid{display:grid;grid-template-columns:1fr 1fr;gap:68px;align-items:center;margin-top:50px}
+.atxt p{color:var(--sub);line-height:1.72;margin-bottom:13px;font-size:.92rem}
+.abadges{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.abadge{background:rgba(212,32,32,.06);border:1px solid rgba(212,32,32,.18);color:var(--sub);padding:4px 12px;border-radius:16px;font-size:.74rem;font-weight:600}
+.aring-wrap{display:flex;justify-content:center;align-items:center;height:300px}
+.aring{width:280px;height:280px;border:1px solid rgba(212,32,32,.12);border-radius:50%;position:relative}
+.aring::before{content:'';position:absolute;top:50%;left:50%;width:72%;height:72%;border:1px solid rgba(212,32,32,.07);border-radius:50%;transform:translate(-50%,-50%)}
+.aring::after{content:'';position:absolute;top:50%;left:50%;width:44%;height:44%;border:1px solid rgba(34,197,94,.08);border-radius:50%;transform:translate(-50%,-50%)}
+.aring-in{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center}
+.ri{font-size:.68rem;font-weight:700;color:var(--red);letter-spacing:1px;text-transform:uppercase;line-height:1.4}
+
+/* CTA */
+#cta{background:linear-gradient(135deg,#120006 0%,var(--bg2) 50%,#080B12 100%);text-align:center;position:relative;overflow:hidden;padding:100px 48px}
+#cta::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:500px;height:260px;background:radial-gradient(ellipse,rgba(212,32,32,.06) 0%,transparent 70%)}
+.cta-c{position:relative;z-index:1;max-width:580px;margin:0 auto}
+.cta-t{font-size:clamp(1.9rem,3.8vw,3.2rem);font-weight:900;letter-spacing:-1.5px;margin-bottom:16px;line-height:1.05}
+.cta-s{color:var(--sub);font-size:.97rem;margin-bottom:40px;line-height:1.7}
+.cta-btns{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+
+/* CONTACT MODAL */
+#cmodal{position:fixed;inset:0;z-index:5000;background:rgba(0,0,0,.78);backdrop-filter:blur(10px);display:none;align-items:center;justify-content:center;padding:20px}
+#cmodal.open{display:flex}
+.mbox{background:var(--card);border:1px solid var(--bd);border-radius:18px;padding:40px;width:480px;max-width:100%;position:relative;box-shadow:0 24px 64px rgba(0,0,0,.7)}
+.mclose{position:absolute;top:16px;right:18px;background:none;border:none;color:var(--muted);font-size:1.4rem;cursor:pointer;line-height:1;transition:.18s}
+.mclose:hover{color:var(--text)}
+.mtitle{font-size:1.3rem;font-weight:800;letter-spacing:-.5px;margin-bottom:6px}
+.msub{color:var(--sub);font-size:.85rem;margin-bottom:26px;line-height:1.5}
+.mform{display:flex;flex-direction:column;gap:12px}
+.mform input,.mform textarea{background:rgba(255,255,255,.04);border:1px solid var(--bd);color:var(--text);padding:12px 14px;border-radius:9px;font-size:.88rem;font-family:inherit;outline:none;transition:.18s;width:100%}
+.mform input:focus,.mform textarea:focus{border-color:var(--red);background:rgba(212,32,32,.04)}
+.mform input::placeholder,.mform textarea::placeholder{color:var(--muted)}
+.mform textarea{height:90px;resize:vertical}
+.mform-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.msubmit{background:var(--red);color:#fff;border:none;padding:13px;border-radius:9px;font-weight:700;font-size:.92rem;cursor:pointer;transition:.2s;position:relative;overflow:hidden;font-family:inherit}
+.msubmit::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(-45deg,transparent,transparent 3px,rgba(0,0,0,.07) 3px,rgba(0,0,0,.07) 4px)}
+.msubmit:hover{background:var(--red2)}
+.msubmit:disabled{opacity:.6;cursor:not-allowed}
+#form-ok{display:none;text-align:center;padding:20px 0}
+#form-ok .ok-icon{font-size:2.5rem;margin-bottom:12px;color:var(--green)}
+#form-ok p{color:var(--sub);font-size:.9rem;line-height:1.6}
+#form-ok strong{color:var(--text)}
+#form-err{display:none;color:var(--red);font-size:.8rem;margin-top:8px;text-align:center}
+
+/* FOOTER */
+footer{background:var(--bg2);border-top:1px solid var(--bd);padding:32px 48px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.flogo{font-size:1rem;font-weight:800;letter-spacing:-.5px}
+.flogo span{color:var(--red)}
+.fcopy{color:var(--muted);font-size:.76rem}
+.flinks{display:flex;gap:16px}
+.flinks a{color:var(--muted);text-decoration:none;font-size:.78rem;transition:.18s}
+.flinks a:hover{color:var(--text)}
+
+/* SCROLL ANIMATIONS */
+.fu{opacity:0;transform:translateY(26px);transition:opacity .6s ease,transform .6s ease}
+.fl{opacity:0;transform:translateX(-26px);transition:opacity .6s ease,transform .6s ease}
+.fr{opacity:0;transform:translateX(26px);transition:opacity .6s ease,transform .6s ease}
+.fu.vis,.fl.vis,.fr.vis{opacity:1;transform:none}
+.d1{transition-delay:.07s}.d2{transition-delay:.14s}.d3{transition-delay:.21s}.d4{transition-delay:.28s}.d5{transition-delay:.35s}.d6{transition-delay:.42s}
+
+/* PARTICLES */
+#ptc{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.22}
+
+/* TYPEWRITER CURSOR */
+.tw-cur{animation:twbl .65s step-end 8;color:var(--red);font-weight:300}
+@keyframes twbl{0%,100%{opacity:1}50%{opacity:0}}
+
+/* TRUST BAR */
+#trust-bar{background:rgba(255,255,255,.016);border-top:1px solid var(--bd);border-bottom:1px solid var(--bd);padding:11px 48px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.trust-lbl{font-size:.66rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px;flex-shrink:0}
+.trust-items{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.trust-item{color:var(--sub);font-size:.76rem;font-weight:600;text-decoration:none;padding:3px 8px;border:1px solid transparent;border-radius:6px;transition:.18s;white-space:nowrap}
+.trust-item:hover{color:var(--text);border-color:var(--bd)}
+.tdot{color:var(--muted);font-size:.6rem}
+
+
+/* NODE TOOLTIP */
+#node-tip{position:fixed;z-index:2000;background:rgba(8,8,16,.95);border:1px solid var(--bd);border-radius:10px;padding:12px 16px;pointer-events:none;opacity:0;transition:opacity .15s;max-width:230px;box-shadow:0 8px 28px rgba(0,0,0,.6);transform:translate(12px,-50%)}
+#node-tip.show{opacity:1}
+.nt-lbl{font-size:.62rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:5px}
+.nt-stat{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:3px}
+.nt-det{font-size:.74rem;color:var(--sub);line-height:1.5}
+.nt-act{font-size:.68rem;color:var(--green);margin-top:8px;opacity:.8;letter-spacing:.3px}
+
+/* NAV LINKS */
+.nav-links{display:flex;gap:2px;align-items:center}
+.nav-link{color:var(--muted);font-size:.76rem;font-weight:600;text-decoration:none;padding:6px 10px;border-radius:6px;transition:.18s;position:relative;white-space:nowrap}
+.nav-link:hover{color:var(--text)}
+.nav-link::after{content:'';position:absolute;bottom:2px;left:50%;width:0;height:1.5px;background:var(--red);transform:translateX(-50%);transition:.22s}
+.nav-link.active{color:var(--text)}
+.nav-link.active::after{width:55%}
+
+/* SKELETON PHONE */
+.skel-msg{height:38px;border-radius:10px;margin-bottom:7px;background:linear-gradient(90deg,rgba(255,255,255,.03) 0%,rgba(255,255,255,.07) 50%,rgba(255,255,255,.03) 100%);background-size:200% 100%;animation:skelsh 1.5s ease-in-out 3}
+.skel-msg.short{height:26px;width:65%}
+.skel-msg.right{align-self:flex-end}
+@keyframes skelsh{0%{background-position:200% 0}100%{background-position:-200% 0}}
+
+/* (sin uso) */
+.tg-hint{margin-top:14px;font-size:.78rem;color:var(--muted);letter-spacing:.2px}
+.tg-handle{color:var(--red);font-weight:700;font-family:'Courier New',monospace;letter-spacing:.3px}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  nav{padding:13px 20px}
+  section{padding:60px 20px}
+  #hero{padding:94px 20px 56px}
+  .dlayout,.agrid{grid-template-columns:1fr;gap:40px}
+  .pwrap{order:-1}
+  #cta{padding:70px 20px}
+  .mform-row{grid-template-columns:1fr}
+  .pbar-row{gap:10px}
+}
+@media(max-width:600px){
+  .hstats{gap:18px}
+  .nbtn-c,.nbtn-ghost{display:none}
+  .phone{width:256px;height:520px}
+  h1{letter-spacing:-1.5px}
+}
+@font-face{font-family:'Inter';font-style:normal;font-weight:100 900;font-display:swap;src:url('../../assets/fonts/inter-latin.woff2') format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+.demo-rotulo{position:fixed;left:16px;bottom:16px;z-index:1001;font-size:.72rem;letter-spacing:.04em;color:var(--sub);background:rgba(7,7,12,.92);border:1px solid var(--bd);padding:8px 12px;border-radius:8px;text-decoration:none;backdrop-filter:blur(8px);max-width:calc(100vw - 32px)}
+.demo-rotulo:hover,.demo-rotulo:focus-visible{color:var(--text);border-color:var(--red)}
+@media(max-width:768px){#hcanvas{opacity:.28}footer{padding-bottom:84px}}
+a:focus-visible,button:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--red);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}.fu,.fl,.fr,.scard,.hwstep{opacity:1!important;transform:none!important}}
+</style>
+</head>
+<body>
+
+<a class="demo-rotulo" href="../../index.html" data-i18n="rotulo">Demo — landing built in 2026 · Back to the portfolio</a>
+<div id="pb"></div>
+<canvas id="ptc"></canvas>
+
+<!-- TOOLTIP (global) -->
+<div id="node-tip">
+  <div class="nt-lbl" id="nt-lbl"></div>
+  <div class="nt-stat" id="nt-stat"></div>
+  <div class="nt-det" id="nt-det"></div>
+  <div class="nt-act" data-i18n="nt_act">Click to explore &rarr;</div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a class="nlogo" href="#hero"><div class="nlogo-dot"></div>Athlete<span>IQ</span></a>
+  <div class="nav-links" id="navLinks">
+    <a class="nav-link" href="#value" data-section="value" data-i18n="nl1">Features</a>
+    <a class="nav-link" href="#demo" data-section="demo" data-i18n="nl2">Demo</a>
+  </div>
+  <div class="nright">
+    <div class="lang-wrap" id="lw">
+      <div class="lang-btn" onclick="toggleLang()" id="lbtn">
+        <span id="lcur">EN</span><span class="arr">&#9662;</span>
+      </div>
+      <div class="lang-menu" id="lmenu">
+        <div class="lang-opt active" onclick="pickLang('en','EN',event)">EN &mdash; English</div>
+        <div class="lang-opt" onclick="pickLang('es','ES',event)">ES &mdash; Espa&ntilde;ol</div>
+        <div class="lang-opt" onclick="pickLang('pt','PT',event)">PT &mdash; Portugu&ecirc;s</div>
+        <div class="lang-opt" onclick="pickLang('fr','FR',event)">FR &mdash; Fran&ccedil;ais</div>
+        <div class="lang-opt" onclick="pickLang('zh','ZH',event)">ZH &mdash; &#20013;&#25991;</div>
+      </div>
+    </div>
+    <a href="../../index.html" class="nbtn-c" data-i18n="nport">Portfolio</a>
+    <a href="mailto:ramirobales@gmail.com" class="nbtn-c" data-i18n="nc">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <canvas id="hcanvas"></canvas>
+  <div class="hgrid"></div>
+  <div class="hcontent">
+    <div class="hbadge"><div class="hbadge-dot"></div><span data-i18n="hb">Pro Rugby League 2027</span></div>
+    <h1><span class="cr" id="tw1" data-i18n="h1a">The Data</span><br><span id="tw2" data-i18n="h1b">Has No Favourites.</span></h1>
+    <p class="hsub" data-i18n="hs">AthleteIQ is a real-time performance intelligence system built for elite rugby league. Know your players' injury risk, readiness, and hidden potential &mdash; before the coaching staff arrives at training.</p>
+    <div class="hbtns">
+      <a class="btn-p" href="mailto:ramirobales@gmail.com" data-i18n="hc2">Write to me →</a>
+    </div>
+    <div class="hstats">
+      <div class="hstat"><div class="hstat-n" data-counter="19">0</div><div class="hstat-l" data-i18n="st1">Players in the demo squad</div></div>
+      <div class="hstat"><div class="hstat-n" data-counter="5">0</div><div class="hstat-l" data-i18n="st2">Languages on this landing</div></div>
+      <div class="hstat"><div class="hstat-n" data-counter="4">0</div><div class="hstat-l" data-i18n="st3">Scripted demo questions</div></div>
+    </div>
+  </div>
+  <div class="hscroll"><div class="hsa"></div><span data-i18n="scr">Scroll</span></div>
+</section>
+
+<!-- VALUE -->
+<section id="value">
+  <div class="stag" data-i18n="vtag">Why AthleteIQ</div>
+  <h2 class="stit" data-i18n="vtit">Everything your performance staff needs.<br><span class="gn">In seconds.</span></h2>
+  <p class="ssub" data-i18n="vsub">From injury prediction to lineup decisions &mdash; AthleteIQ turns raw squad data into actionable intelligence your coaching team can use immediately.</p>
+  <div class="vgrid">
+    <div class="vcard fu d1"><div class="vico">Rx</div><div class="vtit" data-i18n="v1t">Injury Risk Prediction</div><div class="vtxt" data-i18n="v1d">Cross-references injury history, training load, session quality scores, and psychological state to flag players at risk before they break down.</div></div>
+    <div class="vcard fu d2"><div class="vico">&#x2211;</div><div class="vtit" data-i18n="v2t">Real-Time Squad Analytics</div><div class="vtxt" data-i18n="v2d">Full stats database: run metres, tackle efficiency, post-contact metres, try assists &mdash; per player, per game, per 80 minutes played.</div></div>
+    <div class="vcard fu d3"><div class="vico">&#x25CE;</div><div class="vtit" data-i18n="v3t">Voice + Image Analysis</div><div class="vtxt" data-i18n="v3d">Send a voice note or photo from the training pitch. AthleteIQ analyses and responds with expert-level insight in under 5 seconds.</div></div>
+    <div class="vcard fu d4"><div class="vico">&#x25CE;&#x25CE;</div><div class="vtit" data-i18n="v4t">Hidden Talent Identification</div><div class="vtxt" data-i18n="v4d">Identifies undervalued players &mdash; high output per 80 minutes with limited game time. The stars the human eye cannot see.</div></div>
+    <div class="vcard fu d5"><div class="vico">RL</div><div class="vtit" data-i18n="v5t">Rugby League Intelligence</div><div class="vtxt" data-i18n="v5d">Built for rugby league. Speaks the sport's terminology, understands positional roles, adapts to pre-season vs in-season demands.</div></div>
+    <div class="vcard fu d6"><div class="vico">&gt;_</div><div class="vtit" data-i18n="v6t">Natural Language Interface</div><div class="vtxt" data-i18n="v6d">Ask in any language &mdash; AthleteIQ detects and responds in the language you use. Voice, photo, or text.</div></div>
+  </div>
+</section>
+
+<!-- DEMO -->
+<section id="demo">
+  <div class="stag ctr" data-i18n="dtag">Live Demo</div>
+  <h2 class="stit ctr" data-i18n="dtit">See it <span class="gn">in action.</span></h2>
+  <p class="ssub ctr" data-i18n="dsub">A simulated conversation with AthleteIQ. Fictional squad. Pre-season 2027.</p>
+  <div class="dlayout">
+    <div class="fl">
+      <div class="stag" data-i18n="dftag">What you can ask</div>
+      <h3 class="stit" style="font-size:1.65rem" data-i18n="dftit">Your analyst.<br>Available <span class="gn">24/7.</span></h3>
+      <ul class="flist">
+        <li class="fitem"><div class="fico">!</div><div><div class="ftit" data-i18n="f1t">Injury Alerts</div><div class="fdesc" data-i18n="f1d">"Who has the highest injury risk right now?" &mdash; ranked list with evidence in seconds.</div></div></li>
+        <li class="fitem"><div class="fico">&#x221E;</div><div><div class="ftit" data-i18n="f2t">Player Deep Dives</div><div class="fdesc" data-i18n="f2d">"Full analysis of Okafor" — physical state, risk level, load recommendation.</div></div></li>
+        <li class="fitem"><div class="fico">&#x25B7;</div><div><div class="ftit" data-i18n="f3t">Selection Decisions</div><div class="fdesc" data-i18n="f3d">"Reyes or Lindqvist Round 1?" — data-backed lineup recommendations.</div></div></li>
+        <li class="fitem"><div class="fico">&#x25CE;</div><div><div class="ftit" data-i18n="f4t">Voice Queries</div><div class="fdesc" data-i18n="f4d">Send a voice note from the pitch. Transcribed and analysed automatically.</div></div></li>
+      </ul>
+    </div>
+    <div class="pwrap fr">
+      <div class="pglow"></div>
+      <div class="phone">
+        <div class="pscreen">
+          <div class="phead">
+            <div class="pavatar">IQ</div>
+            <div><div class="pname">AthleteIQ</div><div class="ponline" data-i18n="pon">&#x25CF; Online</div></div>
+          </div>
+          <div class="pmsg-area" id="msgArea">
+            <div class="typdots" id="typingDots"><div class="tdot"></div><div class="tdot"></div><div class="tdot"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class='demo-chips' id='demoChips'>
+      <div class='demo-chips-label' data-i18n='dchip_label'>Ask the demo</div>
+      <button class='demo-chip' data-i18n='dq1' onclick='askDemo("injury")'>Who's highest injury risk?</button>
+      <button class='demo-chip' data-i18n='dq2' onclick='askDemo("undervalued")'>Most undervalued player?</button>
+      <button class='demo-chip' data-i18n='dq3' onclick='askDemo("roundone")'>Reyes or Lindqvist Round 1?</button>
+      <button class='demo-chip' data-i18n='dq4' onclick='askDemo("fitness")'>Is Okafor fit for pre-season?</button>
+    </div>
+  </div>
+</section>
+
+<!-- HOW -->
+<section id="how">
+  <div class="stag ctr" data-i18n="howtag">Process</div>
+  <h2 class="stit ctr" data-i18n="howtit">How <span class="gr">AthleteIQ</span> works</h2>
+  <div class="hwgrid">
+    <div class="hwstep fu d1"><div class="hwnum">1</div><div class="hwtit" data-i18n="h1t">Ask in plain language</div><div class="hwtxt" data-i18n="h1x">Type or speak your question in a chat. No app to download, no login required.</div></div>
+    <div class="hwstep fu d2"><div class="hwnum">2</div><div class="hwtit" data-i18n="h2t">System analyses the squad</div><div class="hwtxt" data-i18n="h2x">AthleteIQ cross-references your query with the full player database: stats, injuries, load, psychology.</div></div>
+    <div class="hwstep fu d3"><div class="hwnum">3</div><div class="hwtit" data-i18n="h3t">Expert answer in seconds</div><div class="hwtxt" data-i18n="h3x">Concise, expert-level analysis with exact numbers and a concrete recommendation.</div></div>
+    <div class="hwstep fu d4"><div class="hwnum">4</div><div class="hwtit" data-i18n="h4t">Continuous learning</div><div class="hwtxt" data-i18n="h4x">Add new context &mdash; injuries, training observations &mdash; and the system updates its analysis immediately.</div></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="agrid">
+    <div class="atxt fl">
+      <div class="stag" data-i18n="abtag">The Project</div>
+      <h2 class="stit" data-i18n="abtit">Built for <span class='gr'>one club.</span><br>From day one.</h2>
+      <p data-i18n="abp1">AthleteIQ was designed as a demo for a professional rugby league club's first season. The demo squad holds 19 fictional players, each with a complete record.</p>
+      <p data-i18n="abp2">Every player record includes injury history with exact dates, training quality scores from the last 5 sessions, psychological state and statistics from their most recent club.</p>
+      <p data-i18n="abp3">This is not generic sports analytics software. It is built around one squad, one season, one coaching staff.</p>
+      <div class="abadges">
+        <span class="abadge" data-i18n="ab1">Pro Rugby League 2027</span>
+        <span class="abadge" data-i18n="ab2">19-player demo squad</span>
+        <span class="abadge" data-i18n="ab3">Voice + Photo</span>
+        <span class="abadge" data-i18n="ab4">Chat native</span>
+        <span class="abadge" data-i18n="ab5">Pre-season Ready</span>
+      </div>
+    </div>
+    <div class="fr">
+      <div class="aring-wrap">
+        <div class="aring"><div class="aring-in"><div class="ri">DEMO<br>2027<br>ATHLETEIQ</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta" style="position:relative;overflow:hidden">
+  <div class="cta-c fu">
+    <div class="stag" style="display:block;margin-bottom:12px" data-i18n="ctatag">Get Started</div>
+    <h2 class="cta-t" data-i18n="ctatit">Ready to see what your squad <span class="gn">really</span> looks like?</h2>
+    <p class="cta-s" data-i18n="ctasub">This landing is a demo: the chat above runs on a fictional squad. The bots are an internal demo; write to me to see them.</p>
+    <div class="cta-btns">
+      <a class="btn-p" style="font-size:.97rem;padding:16px 32px" href="../../index.html" data-i18n="ctab2">Back to the portfolio →</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="flogo">Athlete<span>IQ</span></div>
+  <div class="fcopy" data-i18n="fcopy">© 2026 AthleteIQ — demo landing by Ramiro Bales.</div>
+  <div class="flinks">
+    <a href="mailto:ramirobales@gmail.com" data-i18n="fc">Contact</a>
+    <a href="#demo" data-i18n="fd">Demo</a>
+    <a href="../../index.html" data-i18n="fport">Portfolio</a>
+  </div>
+</footer>
+
+<script type="module">
+import * as THREE from '../../lib/three.module.min.js';
+// ── TRANSLATIONS ──────────────────────────────────────────────────────────
+const TR={"en":{"dchip_label":"Ask the demo","nc":"Contact","nt":"Try Free Demo","hb":"Pro Rugby League 2027","h1a":"The Data","h1b":"Has No Favourites.","hs":"AthleteIQ is a real-time performance intelligence system built for elite rugby league. Know your players' injury risk, readiness, and hidden potential — before the coaching staff arrives at training.","hc2":"Write to me →","st1":"Players in the demo squad","st2":"Languages on this landing","st3":"Scripted demo questions","scr":"Scroll","vtag":"Why AthleteIQ","vtit":"Everything your performance staff needs.<br><span class='gn'>In seconds.</span>","vsub":"From injury prediction to lineup decisions — AthleteIQ turns raw squad data into actionable intelligence your coaching team can use immediately.","v1t":"Injury Risk Prediction","v1d":"Cross-references injury history, training load, session quality scores, and psychological state to flag players at risk before they break down.","v2t":"Real-Time Squad Analytics","v2d":"Full stats database: run metres, tackle efficiency, post-contact metres, try assists — per player, per game, per 80 minutes played.","v3t":"Voice + Image Analysis","v3d":"Send a voice note or photo from the training pitch. AthleteIQ analyses and responds with expert-level insight in under 5 seconds.","v4t":"Hidden Talent Identification","v4d":"Identifies undervalued players — high output per 80 minutes with limited game time. The stars the human eye cannot see.","v5t":"Rugby League Intelligence","v5d":"Built for rugby league. Speaks the sport's terminology, understands positional roles, adapts to pre-season vs in-season demands.","v6t":"Natural Language Interface","v6d":"Ask anything in plain English or Spanish. No dashboards to learn, no software to install.","dtag":"Live Demo","dtit":"See it <span class='gn'>in action.</span>","dsub":"A simulated conversation with AthleteIQ. Fictional squad. Pre-season 2027.","dftag":"What you can ask","dftit":"Your analyst.<br>Available <span class='gn'>24/7.</span>","f1t":"Injury Alerts","f1d":"\"Who has the highest injury risk right now?\" — ranked list with evidence.","f2t":"Player Deep Dives","f2d":"\"Full analysis of Okafor\" — physical state, risk level, load recommendation.","f3t":"Selection Decisions","f3d":"\"Reyes or Lindqvist Round 1?\" — data-backed lineup recommendations.","f4t":"Voice Queries","f4d":"Send a voice note from the pitch. Transcribed and analysed automatically.","pon":"&#x25CF; Online","howtag":"Process","howtit":"How <span class='gr'>AthleteIQ</span> works","h1t":"Ask in plain language","h1x":"Type or speak your question in a chat. No app to download, no login required.","h2t":"System analyses the squad","h2x":"AthleteIQ cross-references your query with the full player database: stats, injuries, load, psychology.","h3t":"Expert answer in seconds","h3x":"Concise, expert-level analysis with exact numbers and a concrete recommendation.","h4t":"Continuous learning","h4x":"Add new context — injuries, training observations — and the system updates its analysis immediately.","qa_rq":"Reyes or Lindqvist Round 1?","dq3":"Reyes or Lindqvist Round 1?","dq4":"Is Okafor fit for pre-season?","dq2":"Most undervalued player?","qa_iq":"What is the highest injury risk right now?","qa_ia":"Okafor: HIGH. Grade 2 syndesmosis (May 2026) + prior ankle (2022) + training 1/1 last 2 sessions. Week 6 contact clearance minimum. Tanaka also flagged.","qa_fa":"Risk: ELEVATED. Syndesmosis (May 2026), 2nd ankle episode. Expected clearance mid June 2026. Cap first 4 contact sessions. Full fitness only after physio sign-off.","qa_ra":"Reyes starts. 5 tries, 26 goals, 139 kicks last season — elite output. Lindqvist off the bench first 4 rounds. Reyes is your Round 1 halfback.","dq1":"Injury risk check?","qa_ua":"Tanaka. 2 tries in 30 seconds on debut, Round 5 2026. Highest output per 80 minutes with the least game time. Age 21, fullback or wing.","qa_fq":"Is Okafor fit for pre-season?","dq0":"Demo squad loaded: 19 fictional players. Click a question below.","qa_uq":"Who is the most undervalued player?","abtag":"The Project","abtit":"Built for <span class='gr'>one club.</span><br>From day one.","abp1":"AthleteIQ was designed as a demo for a professional rugby league club's first season. The demo squad holds 19 fictional players, each with a complete record.","abp2":"Every player record includes injury history with exact dates, training quality scores from the last 5 sessions, psychological state and statistics from their most recent club.","abp3":"This is not generic sports analytics software. It is built around one squad, one season, one coaching staff.","ctatag":"Get Started","ctatit":"Ready to see what your squad <span class='gn'>really</span> looks like?","ctasub":"This landing is a demo: the chat above runs on a fictional squad. The bots are an internal demo; write to me to see them.","ctab2":"Back to the portfolio →","fcopy":"© 2026 AthleteIQ — demo landing by Ramiro Bales.","fc":"Contact","fd":"Demo","nport":"Portfolio","fport":"Portfolio","rotulo":"Demo — landing built in 2026 · Back to the portfolio","ab1":"Pro Rugby League 2027","ab2":"19-player demo squad","ab3":"Voice + Photo","ab4":"Chat native","ab5":"Pre-season Ready"},"es":{"dchip_label":"Preguntale al demo","nc":"Contacto","nt":"Probar Demo Gratis","hb":"Pro Rugby League 2027","h1a":"Los Datos","h1b":"No Tienen Favoritos.","hs":"AthleteIQ es un sistema de inteligencia de rendimiento en tiempo real para el rugby league de élite. Conocé el riesgo de lesión, preparación y potencial oculto de tus jugadores.","hc2":"Escribime →","st1":"Jugadores del plantel de demo","st2":"Idiomas de esta landing","st3":"Preguntas de demo en el chat","scr":"Deslizar","vtag":"Por qué AthleteIQ","vtit":"Todo lo que tu staff necesita.<br><span class='gn'>En segundos.</span>","vsub":"Desde la predicción de lesiones hasta las decisiones de alineación — AthleteIQ convierte datos brutos en inteligencia accionable.","v1t":"Predicción de Riesgo de Lesión","v1d":"Cruza historial de lesiones, carga de entrenamiento, scores de calidad de sesión y estado psicológico para marcar jugadores en riesgo.","v2t":"Analítica del Plantel en Tiempo Real","v2d":"Base de datos completa: metros ganados, eficiencia de tackles, metros post-contacto — por jugador, por partido, por 80 minutos.","v3t":"Análisis de Voz + Imagen","v3d":"Enviá una nota de voz o foto desde el campo. AthleteIQ analiza y responde en menos de 5 segundos.","v4t":"Identificación de Talento Oculto","v4d":"Identifica jugadores subvalorados — alto output por 80 minutos con poco tiempo de juego.","v5t":"Inteligencia específica de rugby league","v5d":"Construido para rugby league. Habla la terminología del deporte, entiende los roles posicionales.","v6t":"Interfaz en Lenguaje Natural","v6d":"Hablá en cualquier idioma — AthleteIQ detecta el idioma automáticamente y responde en el mismo. Voz, foto o texto.","dtag":"Demo en Vivo","dtit":"Miralo <span class='gn'>en acción.</span>","dsub":"Una conversación simulada con AthleteIQ. Plantel ficticio. Pretemporada 2027.","dftag":"Qué podés preguntar","dftit":"Tu analista.<br>Disponible <span class='gn'>24/7.</span>","f1t":"Alertas de Lesión","f1d":"\"¿Quién tiene mayor riesgo de lesión ahora?\" — lista rankeada.","f2t":"Análisis de Jugadores","f2d":"\"Análisis completo de Okafor\" — estado físico, riesgo, recomendación.","f3t":"Decisiones de Selección","f3d":"\"¿Reyes o Lindqvist en la Fecha 1?\" — recomendaciones por datos.","f4t":"Consultas por Voz","f4d":"Mandá una nota de voz desde el campo. Transcripta y analizada.","pon":"&#x25CF; En línea","howtag":"Proceso","howtit":"Cómo funciona <span class='gr'>AthleteIQ</span>","h1t":"Preguntá en lenguaje natural","h1x":"Escribí o hablá en un chat. Sin app, sin login.","h2t":"El sistema analiza el plantel","h2x":"Cruza tu consulta con la base de datos: stats, lesiones, carga, psicología.","h3t":"Respuesta experta en segundos","h3x":"Análisis con números exactos y recomendación concreta.","h4t":"Aprendizaje continuo","h4x":"Agregá contexto nuevo y el sistema actualiza su análisis.","qa_rq":"Reyes o Lindqvist Fecha 1?","dq3":"Reyes o Lindqvist Fecha 1?","dq4":"Okafor listo para la pretemporada?","dq2":"Jugador mas subvalorado?","qa_iq":"Cual es el mayor riesgo de lesion ahora?","qa_ia":"Okafor: ALTO. Sindesmosis grado 2 (mayo 2026) + tobillo previo (2022) + entrenamiento 1/1. Mínimo semana 6 de contacto. Tanaka también marcado.","qa_fa":"Riesgo: ELEVADO. Sindesmosis (mayo 2026), 2.º episodio. Alta esperada a mediados de junio de 2026. Limitar las primeras 4 sesiones de contacto.","qa_ra":"Reyes titular. 5 tries, 26 goles, 139 patadas la temporada pasada. Lindqvist desde el banco las primeras 4 fechas.","dq1":"Riesgo de lesion mas alto?","qa_ua":"Tanaka. 2 tries en 30 segundos en su debut, Fecha 5 2026. Mayor rendimiento por 80 minutos con menos minutos jugados. 21 años, fullback o ala.","qa_fq":"Okafor listo para la pretemporada?","dq0":"Plantel de demo cargado: 19 jugadores ficticios. Elegí una pregunta.","qa_uq":"Quien es el jugador mas subvalorado?","abtag":"El Proyecto","abtit":"Construido para <span class='gr'>un club.</span><br>Desde el primer día.","abp1":"AthleteIQ se diseñó como demo para la primera temporada de un club profesional de rugby league. El plantel de demo tiene 19 jugadores ficticios, cada uno con su ficha completa.","abp2":"Cada registro incluye historial de lesiones con fechas exactas, scores de entrenamiento de las últimas 5 sesiones, estado psicológico y estadísticas del club más reciente.","abp3":"Esto no es software genérico de analítica deportiva. Se construye alrededor de un plantel, una temporada y un cuerpo técnico.","ctatag":"Empezar","ctatit":"¿Listo para ver cómo es <span class='gn'>realmente</span> tu plantel?","ctasub":"Esta página es una demo: el chat de arriba corre sobre un plantel ficticio. Los bots son una demo interna; escribime para verlos.","ctab2":"Volver al portfolio →","fcopy":"© 2026 AthleteIQ — landing de demo de Ramiro Bales.","fc":"Contacto","fd":"Demo","nport":"Portfolio","fport":"Portfolio","rotulo":"Demo — landing construida en 2026 · Volver al portfolio","ab1":"Pro Rugby League 2027","ab2":"Plantel de demo de 19","ab3":"Voz + foto","ab4":"Nativo de chat","ab5":"Listo para pretemporada"},"pt":{"dchip_label":"Pergunte ao demo","nc":"Contato","nt":"Testar Demo Grátis","hb":"Pro Rugby League 2027","h1a":"Os Dados","h1b":"Não Têm Favoritos.","hs":"AthleteIQ é um sistema de inteligência de desempenho em tempo real para o rugby league de elite.","hc2":"Escreva-me →","st1":"Jogadores do elenco de demo","st2":"Idiomas desta landing","st3":"Perguntas de demo no chat","scr":"Rolar","vtag":"Por que AthleteIQ","vtit":"Tudo que seu staff precisa.<br><span class='gn'>Em segundos.</span>","vsub":"Da previsão de lesões às decisões de escalação — AthleteIQ transforma dados brutos em inteligência acionável.","v1t":"Previsão de Risco de Lesão","v1d":"Cruza histórico de lesões, carga de treino, scores de qualidade e estado psicológico.","v2t":"Análise de Elenco em Tempo Real","v2d":"Banco completo: metros ganhos, eficiência de tackles, metros pós-contato.","v3t":"Análise de Voz + Imagem","v3d":"Envie nota de voz ou foto do campo. Resposta em menos de 5 segundos.","v4t":"Identificação de Talentos Ocultos","v4d":"Identifica jogadores subvalorizados — alto output por 80 minutos com pouco tempo.","v5t":"Inteligência específica de rugby league","v5d":"Construído para rugby league. Terminologia do esporte, funções posicionais.","v6t":"Interface em Linguagem Natural","v6d":"Fale em qualquer idioma — AthleteIQ detecta automaticamente e responde no mesmo idioma. Voz, foto ou texto.","dtag":"Demo ao Vivo","dtit":"Veja <span class='gn'>em ação.</span>","dsub":"Uma conversa simulada com AthleteIQ. Elenco fictício. Pré-temporada 2027.","dftag":"O que você pode perguntar","dftit":"Seu analista.<br>Disponível <span class='gn'>24/7.</span>","f1t":"Alertas de Lesão","f1d":"\"Quem tem maior risco?\" — lista classificada em segundos.","f2t":"Análises Profundas","f2d":"\"Análise completa de Okafor\" — estado físico, risco, recomendação.","f3t":"Decisões de Escalação","f3d":"\"Reyes ou Lindqvist na Rodada 1?\" — recomendações por dados.","f4t":"Consultas por Voz","f4d":"Envie nota de voz. Transcrita e analisada automaticamente.","pon":"&#x25CF; Online","howtag":"Processo","howtit":"Como funciona o <span class='gr'>AthleteIQ</span>","h1t":"Pergunte em linguagem natural","h1x":"Digite ou fale num chat. Sem app, sem login.","h2t":"Sistema analisa o elenco","h2x":"Cruza sua consulta com o banco completo: stats, lesões, carga, psicologia.","h3t":"Resposta especializada em segundos","h3x":"Análise com números exatos e recomendação concreta.","h4t":"Aprendizado contínuo","h4x":"Adicione contexto e o sistema atualiza sua análise.","qa_rq":"Reyes ou Lindqvist Rodada 1?","dq3":"Reyes ou Lindqvist Rodada 1?","dq4":"Okafor apto para a pré-temporada?","dq2":"Jogador mais subvalorizado?","qa_iq":"Qual e o maior risco de lesao agora?","qa_ia":"Okafor: ALTO. Sindesmose grau 2 (maio 2026) + tornozelo anterior (2022) + treino 1/1. Mínimo semana 6 de contato. Tanaka também sinalizado.","qa_fa":"Risco: ELEVADO. Sindesmose (maio 2026), 2.º episódio. Alta esperada em meados de junho de 2026. Limitar as primeiras 4 sessões de contato.","qa_ra":"Reyes titular. 5 tries, 26 gols, 139 chutes na temporada passada. Lindqvist no banco nas primeiras 4 rodadas.","dq1":"Risco de lesao mais alto?","qa_ua":"Tanaka. 2 tries em 30 segundos na estreia, Rodada 5 2026. Maior rendimento por 80 minutos com menos tempo de jogo. 21 anos, fullback ou ala.","qa_fq":"Okafor apto para a pré-temporada?","dq0":"Elenco de demo carregado: 19 jogadores fictícios. Escolha uma pergunta.","qa_uq":"Quem e o jogador mais subvalorizado?","abtag":"O Projeto","abtit":"Construído para <span class='gr'>um clube.</span><br>Desde o primeiro dia.","abp1":"AthleteIQ foi projetado como demo para a primeira temporada de um clube profissional de rugby league. O elenco de demo tem 19 jogadores fictícios, cada um com ficha completa.","abp2":"Cada registro inclui histórico de lesões com datas exatas, scores de treino das últimas 5 sessões, estado psicológico e estatísticas do clube mais recente.","abp3":"Não é software genérico de análise esportiva. É construído em torno de um elenco, uma temporada e uma comissão técnica.","ctatag":"Começar","ctatit":"Pronto para ver como seu elenco <span class='gn'>realmente</span> é?","ctasub":"Esta página é uma demo: o chat acima roda sobre um elenco fictício. Os bots são uma demo interna; escreva para vê-los.","ctab2":"Voltar ao portfólio →","fcopy":"© 2026 AthleteIQ — landing de demo de Ramiro Bales.","fc":"Contato","fd":"Demo","nport":"Portfólio","fport":"Portfólio","rotulo":"Demo — landing construída em 2026 · Voltar ao portfólio","ab1":"Pro Rugby League 2027","ab2":"Elenco de demo de 19","ab3":"Voz + foto","ab4":"Nativo de chat","ab5":"Pronto para a pré-temporada"},"fr":{"dchip_label":"Posez une question","nc":"Contact","nt":"Essai Gratuit","hb":"Pro Rugby League 2027","h1a":"Les Données","h1b":"N'ont Pas de Favoris.","hs":"AthleteIQ est un système d'intelligence de performance en temps réel pour le rugby league d'élite.","hc2":"Écrivez-moi →","st1":"Joueurs de l'effectif de démo","st2":"Langues de cette landing","st3":"Questions de démo dans le chat","scr":"Défiler","vtag":"Pourquoi AthleteIQ","vtit":"Tout ce dont votre staff a besoin.<br><span class='gn'>En secondes.</span>","vsub":"De la prédiction des blessures aux décisions de composition.","v1t":"Prédiction du Risque de Blessure","v1d":"Croise l'historique des blessures, la charge et l'état psychologique pour signaler les joueurs à risque.","v2t":"Analytique en Temps Réel","v2d":"Base complète : mètres gagnés, efficacité aux plaquages, mètres post-contact.","v3t":"Analyse Vocale + Image","v3d":"Envoyez une note vocale ou photo depuis le terrain. Réponse en moins de 5 secondes.","v4t":"Identification des Talents Cachés","v4d":"Identifie les joueurs sous-évalués — fort rendement par 80 min avec peu de temps de jeu.","v5t":"Intelligence spécifique au rugby league","v5d":"Construit pour le rugby league. Terminologie du sport, rôles positionnels.","v6t":"Interface en Langage Naturel","v6d":"Posez n'importe quelle question en anglais ou espagnol.","dtag":"Démo en Direct","dtit":"Voyez-le <span class='gn'>en action.</span>","dsub":"Une conversation simulée avec AthleteIQ. Effectif fictif. Pré-saison 2027.","dftag":"Ce que vous pouvez demander","dftit":"Votre analyste.<br>Disponible <span class='gn'>24/7.</span>","f1t":"Alertes de Blessure","f1d":"\"Qui a le plus grand risque ?\" — liste classée en secondes.","f2t":"Analyses de Joueurs","f2d":"\"Analyse complète d'Okafor\" — état physique, risque, recommandation.","f3t":"Décisions de Composition","f3d":"\"Reyes ou Lindqvist en Ronde 1 ?\" — par données.","f4t":"Requêtes Vocales","f4d":"Envoyez une note vocale. Transcrite et analysée automatiquement.","pon":"&#x25CF; En ligne","howtag":"Processus","howtit":"Comment fonctionne <span class='gr'>AthleteIQ</span>","h1t":"Posez en langage naturel","h1x":"Tapez ou parlez dans un chat. Pas d'app à télécharger.","h2t":"Le système analyse l'équipe","h2x":"Croise votre requête avec la base complète : stats, blessures, charge, psychologie.","h3t":"Réponse experte en secondes","h3x":"Analyse avec chiffres exacts et recommandation concrète.","h4t":"Apprentissage continu","h4x":"Ajoutez du contexte et le système met à jour son analyse.","qa_rq":"Reyes ou Lindqvist Ronde 1?","dq3":"Reyes ou Lindqvist Ronde 1?","dq4":"Okafor apte pour la pré-saison?","dq2":"Joueur le plus sous-evalue?","qa_iq":"Quel est le risque de blessure le plus eleve?","qa_ia":"Okafor : ÉLEVÉ. Syndesmose grade 2 (mai 2026) + cheville antérieure (2022) + entraînement 1/1. Minimum semaine 6 de contact. Tanaka aussi signalé.","qa_fa":"Risque : ÉLEVÉ. Syndesmose (mai 2026), 2e épisode. Reprise attendue mi-juin 2026. Limiter les 4 premières sessions de contact.","qa_ra":"Reyes titulaire. 5 essais, 26 buts, 139 coups de pied la saison dernière. Lindqvist sur le banc les 4 premières rondes.","dq1":"Risque de blessure le plus eleve?","qa_ua":"Tanaka. 2 essais en 30 secondes pour ses débuts, Ronde 5 2026. Meilleur rendement par 80 minutes avec le moins de temps de jeu. 21 ans, arrière ou ailier.","qa_fq":"Okafor apte pour la pré-saison?","dq0":"Effectif de démo chargé : 19 joueurs fictifs. Choisissez une question.","qa_uq":"Qui est le joueur le plus sous-evalue?","abtag":"Le Projet","abtit":"Construit pour <span class='gr'>un club.</span><br>Dès le premier jour.","abp1":"AthleteIQ a été conçu comme démo pour la première saison d'un club professionnel de rugby league. L'effectif de démo compte 19 joueurs fictifs, chacun avec une fiche complète.","abp2":"Chaque fiche inclut l'historique des blessures avec dates exactes, les scores d'entraînement des 5 dernières sessions, l'état psychologique et les statistiques du club récent.","abp3":"Ce n'est pas un logiciel générique d'analyse sportive. Il est construit autour d'un effectif, d'une saison et d'un staff.","ctatag":"Commencer","ctatit":"Prêt à voir à quoi ressemble <span class='gn'>vraiment</span> votre effectif ?","ctasub":"Cette page est une démo : le chat ci-dessus tourne sur un effectif fictif. Les bots sont une démo interne ; écrivez-moi pour les voir.","ctab2":"Retour au portfolio →","fcopy":"© 2026 AthleteIQ — landing de démo de Ramiro Bales.","fc":"Contact","fd":"Démo","nport":"Portfolio","fport":"Portfolio","rotulo":"Démo — landing construite en 2026 · Retour au portfolio","ab1":"Pro Rugby League 2027","ab2":"Effectif de démo de 19","ab3":"Voix + photo","ab4":"Natif du chat","ab5":"Prêt pour la pré-saison"},"zh":{"dchip_label":"向演示提问","nc":"联系我们","nt":"免费试用","hb":"职业橄榄球联赛 2027","h1a":"数据没有","h1b":"偏见。","hs":"AthleteIQ是专为顶级橄榄球联赛打造的实时表现智能系统。在训练前了解球员的伤病风险、备战状态和隐藏潜力。","hc2":"给我写信 →","st1":"演示阵容球员","st2":"本页语言数","st3":"聊天演示问题数","scr":"滚动","vtag":"为何选择AthleteIQ","vtit":"您的团队所需的一切。<br><span class='gn'>即时获得。</span>","vsub":"从伤病预测到阵容决策——AthleteIQ将原始数据转化为可立即执行的智能分析。","v1t":"伤病风险预测","v1d":"交叉比对伤病史、训练负荷、课程质量和心理状态，在球员受伤前发出预警。","v2t":"实时球队分析","v2d":"完整统计数据库：推进码数、擒抱效率、接触后码数——按球员、按场次计算。","v3t":"语音+图像分析","v3d":"从训练场发送语音便条或照片。5秒内提供专家级分析。","v4t":"发掘隐藏人才","v4d":"识别被低估的球员——每80分钟产出高但上场时间有限。","v5t":"橄榄球联赛专项智能","v5d":"专为橄榄球联赛打造。使用该运动的术语，理解位置职责。","v6t":"自然语言界面","v6d":"用任何语言提问 — AthleteIQ自动检测语言并以相同语言回复。语音、照片或文字。","dtag":"实时演示","dtit":"看看<span class='gn'>实际效果。</span>","dsub":"与AthleteIQ的模拟对话。虚构阵容。2027季前赛。","dftag":"您可以询问什么","dftit":"您的分析师。<br><span class='gn'>全天候</span>待命。","f1t":"伤病警报","f1d":"\"现在谁的风险最高？\"——即时获得带证据的排名。","f2t":"球员深度分析","f2d":"\"对Okafor进行全面分析\"——状态、风险、负荷建议。","f3t":"选人决策","f3d":"\"第1轮Reyes还是Lindqvist？\"——数据支持的阵容建议。","f4t":"语音查询","f4d":"发送语音便条。自动转录和分析。","pon":"&#x25CF; 在线","howtag":"流程","howtit":"<span class='gr'>AthleteIQ</span>如何工作","h1t":"用自然语言提问","h1x":"在聊天中输入或说出您的问题。无需下载，无需登录。","h2t":"系统分析球队","h2x":"交叉比对您的查询与完整球员数据库。","h3t":"秒级专家回答","h3x":"带有精确数字和具体建议的专家级分析。","h4t":"持续学习","h4x":"添加新背景，系统立即更新其分析。","qa_rq":"第1轮Reyes还是Lindqvist？","dq3":"第1轮Reyes还是Lindqvist？","dq4":"Okafor季前赛准备情况？","dq2":"最被低估的球员？","qa_iq":"目前最高伤病风险是什么？","qa_ia":"Okafor：高风险。中度踝关节韧带联合损伤（2026年5月）+ 之前踝伤（2022年）+ 近2次训练评分1/1。最少第6周才能进行对抗训练。Tanaka也被标记。","qa_fa":"风险偏高。踝关节韧带联合损伤（2026年5月）第2次踝伤。预计2026年6月中旬恢复。前4次对抗训练需限制强度。","qa_ra":"Reyes首发。上赛季5次达阵、26脚球、139次踢球——精英表现。Lindqvist前4轮替补出场。","dq1":"伤病风险检查？","qa_ua":"Tanaka。首秀第5轮30秒内打入2次。出场时间最少而每80分钟产出最高。21岁，全卫或翼锋。","qa_fq":"Okafor季前赛准备情况？","dq0":"演示阵容已加载：19名虚构球员。点击下方问题。","qa_uq":"谁是最被低估的球员？","abtag":"项目介绍","abtit":"专为<span class='gr'>一家俱乐部</span>打造。<br>从第一天起。","abp1":"AthleteIQ作为演示，为一家职业橄榄球联赛俱乐部的首个赛季而设计。演示阵容包含19名虚构球员，每人都有完整档案。","abp2":"每条球员记录包括精确日期的伤病史、最近5次训练质量评分、心理状态和最近俱乐部的统计数据。","abp3":"这不是通用体育分析软件。它围绕一支球队、一个赛季、一个教练组而建。","ctatag":"开始使用","ctatit":"准备好真正了解您的<span class='gn'>球队</span>了吗？","ctasub":"本页面是演示：上方的聊天基于虚构阵容。机器人为内部演示；请给我写信了解。","ctab2":"返回作品集 →","fcopy":"© 2026 AthleteIQ — Ramiro Bales 的演示页面。","fc":"联系我们","fd":"演示","nport":"作品集","fport":"作品集","rotulo":"演示 — 2026年构建的页面 · 返回作品集","ab1":"职业橄榄球联赛 2027","ab2":"19人演示阵容","ab3":"语音 + 照片","ab4":"聊天原生","ab5":"季前赛就绪"}};
+
+window.currentLang='en';
+function setLang(l){
+  window.currentLang=l;
+  document.documentElement.lang=l;
+  const d=TR[l]||TR.en;
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const k=el.getAttribute('data-i18n');
+    if(d[k]!==undefined) el.innerHTML=d[k];
+  });
+  if(window.resetDemoLang) window.resetDemoLang(l);
+}
+
+// ── LANGUAGE DROPDOWN ─────────────────────────────────────
+function toggleLang(){document.getElementById('lw').classList.toggle('open')}
+function pickLang(code,label,event){
+  document.getElementById('lcur').textContent=label;
+  document.getElementById('lw').classList.remove('open');
+  document.querySelectorAll('.lang-opt').forEach(o=>o.classList.remove('active'));
+  event.target.classList.add('active');
+  setLang(code);
+}
+document.addEventListener('click',e=>{
+  if(!document.getElementById('lw').contains(e.target)) document.getElementById('lw').classList.remove('open');
+});
+
+// ── SCROLL PROGRESS ───────────────────────────────────────
+const pb=document.getElementById('pb');
+window.addEventListener('scroll',()=>{pb.style.width=(window.scrollY/(document.body.scrollHeight-window.innerHeight)*100)+'%';},{passive:true});
+
+// ── INTERSECTION OBSERVER ─────────────────────────────────
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add('vis');
+      if(e.target.hasAttribute('data-counter')) animC(e.target);
+      e.target.querySelectorAll&&e.target.querySelectorAll('[data-counter]').forEach(animC);
+      // animate probability bars
+      e.target.querySelectorAll&&e.target.querySelectorAll('.pbar-fill[data-width]').forEach(bar=>{
+        if(!bar._animated){bar._animated=true;setTimeout(()=>{bar.style.width=bar.getAttribute('data-width')+'%';},200);}
+      });
+    }
+  });
+},{threshold:0.1});
+document.querySelectorAll('.fu,.fl,.fr,.scard,.hwstep,.prob-section').forEach(el=>obs.observe(el));
+document.querySelectorAll('[data-counter]').forEach(el=>obs.observe(el));
+
+function animC(el){
+  if(el._done) return; el._done=true;
+  const t=parseInt(el.getAttribute('data-counter'));
+  const pre=el.getAttribute('data-prefix')||'';
+  const suf=el.getAttribute('data-suffix')||'';
+  let s=null;
+  (function f(ts){
+    if(!s)s=ts;
+    const p=Math.min((ts-s)/1500,1);
+    el.textContent=pre+Math.round((1-Math.pow(1-p,3))*t)+suf;
+    if(p<1) requestAnimationFrame(f);
+  })(performance.now());
+}
+
+// ── PARTICLES (optimised — no sqrt, clearRect not resize) ─
+(function(){
+  const c=document.getElementById('ptc'),ctx=c.getContext('2d');
+  let W,H,pts=[],rafId,calma2=1,prev2=0;
+  window.addEventListener('scroll',()=>{calma2=1;},{passive:true});
+  const CONN_D2=9025; // 95^2 — avoid sqrt
+  function rs(){
+    W=c.width=innerWidth;H=c.height=innerHeight;
+    pts.forEach(p=>{p.x=Math.random()*W;p.y=Math.random()*H;});
+  }
+  for(let i=0;i<42;i++) pts.push({
+    x:Math.random()*9999,y:Math.random()*9999,
+    vx:(Math.random()-.5)*.2,vy:(Math.random()-.5)*.2,
+    r:Math.random()*1.2+.35,a:Math.random()*.38+.07,
+    col:Math.random()>.78?'#22C55E':'#D42020'
+  });
+  rs();window.addEventListener('resize',rs,{passive:true});
+  function draw(){
+    rafId=requestAnimationFrame(draw);
+    ctx.clearRect(0,0,W,H);
+    const ahora2=performance.now(); const dt2=Math.min((ahora2-(prev2||ahora2))/16.67,6); prev2=ahora2;
+    calma2*=Math.pow(0.992,dt2); if(calma2<0.01)calma2=0;
+    for(let i=0;i<pts.length;i++){
+      const p=pts[i];
+      p.x+=p.vx*calma2;p.y+=p.vy*calma2;
+      if(p.x<0)p.x=W;else if(p.x>W)p.x=0;
+      if(p.y<0)p.y=H;else if(p.y>H)p.y=0;
+      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle=p.col;ctx.globalAlpha=p.a;ctx.fill();
+      for(let j=i+1;j<pts.length;j++){
+        const q=pts[j],dx=p.x-q.x,dy=p.y-q.y,d2=dx*dx+dy*dy;
+        if(d2<CONN_D2){
+          ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(q.x,q.y);
+          ctx.strokeStyle='#D42020';ctx.globalAlpha=(1-d2/CONN_D2)*.05;
+          ctx.lineWidth=.4;ctx.stroke();
+        }
+      }
+    }
+    ctx.globalAlpha=1;
+  }
+  draw();
+})();
+
+// ── 3D RUGBY BALL — photorealistic + interactive nodes ────
+(function(){
+  const canvas=document.getElementById('hcanvas');
+  if(!canvas) return;
+
+  const renderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:true,powerPreference:'high-performance'});
+  renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+  renderer.outputColorSpace=THREE.SRGBColorSpace;
+  renderer.toneMapping=THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure=1.05;
+  renderer.shadowMap.enabled=true;
+  renderer.shadowMap.type=THREE.PCFSoftShadowMap;
+
+  const scene=new THREE.Scene();
+  const camera=new THREE.PerspectiveCamera(50,1,.1,100);
+  camera.position.set(3.0,0.6,5.0);camera.lookAt(0,0,0);
+
+  function resize(){
+    const w=canvas.offsetWidth||window.innerWidth;
+    const h=canvas.offsetHeight||window.innerHeight;
+    renderer.setSize(w,h);camera.aspect=w/h;camera.updateProjectionMatrix();
+  }
+  resize();window.addEventListener('resize',resize,{passive:true});
+
+  // ── Pelota: mapas PBR (albedo + normal + rugosidad) generados en canvas ──
+  function buildBallMaps(){
+    const W=1024,H=512;
+
+    // ---- noise helpers ----
+    function h2(x,y){
+      let v=((x*1664525+y*1013904223)|0)>>>0;
+      v=(v^(v>>>13));v=(Math.imul(v,1664525)|0)>>>0;
+      v=(v^(v>>>17));v=(Math.imul(v,1013904223)|0)>>>0;
+      return((v^(v>>>5))>>>0&0xffff)/65535;
+    }
+    function vn(x,y){
+      const ix=x|0,iy=y|0,fx=x-ix,fy=y-iy;
+      const ux=fx*fx*(3-2*fx),uy=fy*fy*(3-2*fy);
+      return h2(ix,iy)*(1-ux)*(1-uy)+h2(ix+1,iy)*ux*(1-uy)+
+             h2(ix,iy+1)*(1-ux)*uy+h2(ix+1,iy+1)*ux*uy;
+    }
+    function fbm(x,y,oct){
+      let v=0,a=0.5,f=1,s=0;
+      for(let i=0;i<oct;i++){v+=vn(x*f,y*f)*a;s+=a;a*=0.52;f*=2.1;}
+      return v/s;
+    }
+    // Worley F1 — cellular noise → pebble cells
+    function wf1(x,y){
+      const ix=x|0,iy=y|0;let md=8;
+      for(let dx=-1;dx<=1;dx++){for(let dy=-1;dy<=1;dy++){
+        const cx=ix+dx,cy=iy+dy;
+        let hv=((cx*1664525)^(cy*1013904223))|0;
+        hv=(Math.imul(hv,1664525)^(hv>>>16))|0;
+        const ppx=cx+((hv>>>0)&0xffff)/65536;
+        hv=(Math.imul(hv,1013904223)^(hv>>>16))|0;
+        const ppy=cy+((hv>>>0)&0xffff)/65536;
+        const d=(x-ppx)*(x-ppx)+(y-ppy)*(y-ppy);
+        if(d<md)md=d;
+      }}
+      return Math.sqrt(md);
+    }
+    function ss(t){return t<0?0:t>1?1:t*t*(3-2*t);}
+
+    const SEAMS=[W/4,W/2,3*W/4,W];
+    // seam distance in px to nearest seam line
+    function seamDistPx(x){
+      let m=1e9;
+      for(const s of SEAMS){ m=Math.min(m,Math.abs(x-s),Math.abs(x-(s-W)),Math.abs(x-(s+W))); }
+      return m;
+    }
+
+    // ---- Height field (shared by albedo shading + normal map) ----
+    const height=new Float32Array(W*H);
+    for(let y=0;y<H;y++){
+      for(let x=0;x<W;x++){
+        // pebble dome: worley ridges, bright = raised pebble centre
+        const w=wf1(x/7.0+31,y/7.0+17);
+        const pebble=ss(Math.min(1,w*2.6));
+        const micro=fbm(x/3+99,y/3+55,2);
+        let hgt=pebble*0.78+micro*0.22;
+        // seam groove — recessed channel
+        const sd=seamDistPx(x);
+        if(sd<11){ hgt-=ss(1-sd/11)*0.92; }
+        height[y*W+x]=hgt;
+      }
+    }
+
+    // ---- ALBEDO ----
+    const cc=document.createElement('canvas');cc.width=W;cc.height=H;
+    const cx=cc.getContext('2d');
+    const id=cx.createImageData(W,H);const px=id.data;
+    for(let y=0;y<H;y++){
+      for(let x=0;x<W;x++){
+        const i=(y*W+x)*4;
+        const v=y/H;
+        const pole=Math.pow(Math.sin(v*Math.PI),0.30); // gentle pole falloff
+        const hgt=height[y*W+x];
+        const grain=fbm(x/40,y/40,3);
+        // white pebbled leather — base near #EFece6, pebble valleys slightly grey
+        const shade=0.80+hgt*0.18+grain*0.05;
+        const sd=seamDistPx(x);
+        const seamDark=sd<11?ss(1-sd/11)*0.55:0;
+        const br=(shade-seamDark)*pole;
+        px[i]  =Math.min(255,Math.max(0,(150+br*108)|0));
+        px[i+1]=Math.min(255,Math.max(0,(148+br*106)|0));
+        px[i+2]=Math.min(255,Math.max(0,(142+br*102)|0));
+        px[i+3]=255;
+      }
+    }
+    cx.putImageData(id,0,0);
+
+    // ---- Red accent bands flanking 2 opposite seams (gráfico) ----
+    [W/2, W].forEach(sx=>{
+      [-1,1].forEach(side=>{
+        const bx=sx+side*22;
+        const g=cx.createLinearGradient(bx-13,0,bx+13,0);
+        g.addColorStop(0,'rgba(200,18,18,0)');
+        g.addColorStop(0.5,'rgba(206,20,20,0.92)');
+        g.addColorStop(1,'rgba(200,18,18,0)');
+        cx.fillStyle=g;cx.fillRect(bx-13,0,26,H);
+      });
+    });
+
+    // ---- Seam grooves: dark line + white stitching ----
+    SEAMS.forEach(sx=>{
+      const g=cx.createLinearGradient(sx-9,0,sx+9,0);
+      g.addColorStop(0,'rgba(40,40,42,0)');
+      g.addColorStop(0.5,'rgba(28,28,30,0.85)');
+      g.addColorStop(1,'rgba(40,40,42,0)');
+      cx.fillStyle=g;cx.fillRect(sx-9,0,18,H);
+      for(let y=8;y<H;y+=16){
+        cx.beginPath();cx.moveTo(sx-7,y+3);cx.lineTo(sx+7,y-3);
+        cx.strokeStyle='rgba(245,242,236,0.85)';cx.lineWidth=2.2;cx.stroke();
+        cx.beginPath();cx.moveTo(sx-7,y+3);cx.lineTo(sx+7,y-3);
+        cx.strokeStyle='rgba(60,55,50,0.4)';cx.lineWidth=0.8;cx.stroke();
+      }
+    });
+
+    // ---- marca de la pelota (panel centred ~x=W*0.625) ----
+    cx.save();
+    cx.translate(W*0.625,H*0.42);
+    cx.textAlign='center';cx.textBaseline='middle';
+    cx.font='900 52px Arial,sans-serif';
+    cx.fillStyle='#C81414';
+    cx.fillText('ATHLETEIQ',0,0);
+    cx.font='900 30px Arial,sans-serif';
+    cx.fillStyle='#1A1A1C';
+    cx.fillText('DEMO',0,46);
+    cx.restore();
+
+    // ---- NORMAL MAP via Sobel on height field ----
+    const nmc=document.createElement('canvas');nmc.width=W;nmc.height=H;
+    const nmctx=nmc.getContext('2d');
+    const nmID=nmctx.createImageData(W,H);const npx=nmID.data;
+    const str=2.4;
+    const Hh=(x,y)=>height[(((y+H)%H)*W)+((x+W)%W)];
+    for(let y=0;y<H;y++){
+      for(let x=0;x<W;x++){
+        const i=(y*W+x)*4;
+        const dx=(Hh(x+1,y)-Hh(x-1,y))*str;
+        const dy=(Hh(x,y+1)-Hh(x,y-1))*str;
+        const len=Math.sqrt(dx*dx+dy*dy+1);
+        npx[i]  =((-dx/len)*0.5+0.5)*255|0;
+        npx[i+1]=((-dy/len)*0.5+0.5)*255|0;
+        npx[i+2]=((1/len)*0.5+0.5)*255|0;
+        npx[i+3]=255;
+      }
+    }
+    nmctx.putImageData(nmID,0,0);
+
+    // ---- ROUGHNESS: leather rough, branding/stitch a touch glossier ----
+    const rc=document.createElement('canvas');rc.width=W;rc.height=H;
+    const rctx=rc.getContext('2d');
+    rctx.fillStyle='#B0B0B0';rctx.fillRect(0,0,W,H);   // ~0.69 rough leather
+    SEAMS.forEach(sx=>{rctx.fillStyle='#707070';rctx.fillRect(sx-9,0,18,H);}); // seams smoother
+    const colorTex=new THREE.CanvasTexture(cc);
+    if('colorSpace' in colorTex) colorTex.colorSpace=THREE.SRGBColorSpace||'srgb';
+    else colorTex.encoding=THREE.sRGBEncoding||0;
+    return {
+      color: colorTex,
+      normal: new THREE.CanvasTexture(nmc),
+      roughness: new THREE.CanvasTexture(rc)
+    };
+  }
+
+  // ── Node label data (sports + tech + innovation) ─────────
+  const NODE_DATA=[
+    {label:'INJURY', sub:'RISK',     col:'#D42020'},
+    {label:'LOAD',   sub:'MGMT',     col:'#FF6B35'},
+    {label:'SPEED',  sub:'INDEX',    col:'#22C55E'},
+    {label:'METRES', sub:'RUN',      col:'#22C55E'},
+    {label:'AI',     sub:'ENGINE',   col:'#22C55E'},
+    {label:'DATA',   sub:'LIVE',     col:'#22C55E'},
+    {label:'TACKLE', sub:'EFF.',     col:'#D42020'},
+    {label:'FORM',   sub:'SCORE',    col:'#22C55E'},
+    {label:'RECOV',  sub:'STATUS',   col:'#22C55E'},
+    {label:'FITNESS',sub:'PEAK',     col:'#22C55E'},
+  ];
+
+  // ── Hex sprite texture factory ────────────────────────────
+  function makeNodeTex(label,sub,col){
+    const W=224,H=100;
+    const cv=document.createElement('canvas');cv.width=W;cv.height=H;
+    const cx=cv.getContext('2d');
+    const R=46,cx2=W/2,cy2=H/2;
+    // Hex path helper
+    function hex(r){
+      cx.beginPath();
+      for(let i=0;i<6;i++){
+        const a=i*Math.PI/3-Math.PI/6;
+        i===0?cx.moveTo(cx2+r*Math.cos(a),cy2+r*Math.sin(a))
+             :cx.lineTo(cx2+r*Math.cos(a),cy2+r*Math.sin(a));
+      }
+      cx.closePath();
+    }
+    // Outer glow ring
+    cx.shadowBlur=16;cx.shadowColor=col;
+    hex(R);cx.strokeStyle=col;cx.lineWidth=2;cx.stroke();
+    cx.shadowBlur=0;
+    // Inner fill — very dark semi-transparent
+    hex(R-3);cx.fillStyle=col+'1A';cx.fill();
+    // Scanline texture for HUD feel
+    cx.globalAlpha=0.035;
+    for(let ly=2;ly<H;ly+=3){
+      cx.beginPath();cx.moveTo(0,ly);cx.lineTo(W,ly);
+      cx.strokeStyle='#fff';cx.lineWidth=1;cx.stroke();
+    }
+    cx.globalAlpha=1;
+    // Inner hex accent ring
+    hex(R*0.55);cx.strokeStyle=col+'44';cx.lineWidth=1;cx.stroke();
+    // Label
+    cx.font='bold 17px "Courier New",monospace';
+    cx.fillStyle='#FFFFFF';cx.textAlign='center';cx.textBaseline='middle';
+    cx.fillText(label,cx2,cy2-7);
+    // Sub-label
+    cx.font='10px "Courier New",monospace';
+    cx.fillStyle=col;cx.fillText(sub,cx2,cy2+11);
+    // Corner tick marks (HUD bracket aesthetic)
+    const bx=R*0.7;
+    [[cx2-bx,cy2-bx,1,0,0,1],[cx2+bx,cy2-bx,-1,0,0,1],
+     [cx2-bx,cy2+bx,1,0,0,-1],[cx2+bx,cy2+bx,-1,0,0,-1]].forEach(([x,y,sx,sy,_a,_b])=>{
+      cx.beginPath();cx.moveTo(x,y);cx.lineTo(x+sx*10,y);
+      cx.moveTo(x,y);cx.lineTo(x,y+_b*10);
+      cx.strokeStyle=col+'99';cx.lineWidth=1.5;cx.stroke();
+    });
+    const t=new THREE.CanvasTexture(cv);t.needsUpdate=true;return t;
+  }
+
+  // ── Burst explosion + ring pulse ─────────────────────────
+  const bursts=[];
+  function spawnBurst(pos,colHex){
+    const c3=new THREE.Color(colHex);
+    // Particle explosion
+    for(let i=0;i<14;i++){
+      const sz=0.025+Math.random()*0.04;
+      const geo=new THREE.SphereGeometry(sz,4,4);
+      const mat=new THREE.MeshBasicMaterial({color:c3.clone(),transparent:true,opacity:1});
+      const p=new THREE.Mesh(geo,mat);
+      p.position.copy(pos);
+      const phi=Math.random()*Math.PI*2,theta=Math.random()*Math.PI;
+      const spd=0.055+Math.random()*0.11;
+      p._v=new THREE.Vector3(
+        Math.sin(theta)*Math.cos(phi)*spd,
+        Math.sin(theta)*Math.sin(phi)*spd,
+        Math.cos(theta)*spd
+      );
+      p._life=1;p._drag=0.90+Math.random()*0.06;p._mat=mat;
+      scene.add(p);bursts.push(p);
+    }
+    // Expanding rings (3 staggered)
+    for(let r=0;r<3;r++){
+      const rgeo=new THREE.RingGeometry(0.04,0.12,32);
+      const rmat=new THREE.MeshBasicMaterial({color:c3.clone(),side:THREE.DoubleSide,transparent:true,opacity:0.85-r*0.2});
+      const ring=new THREE.Mesh(rgeo,rmat);
+      ring.position.copy(pos);
+      ring._life=1-r*0.15;ring._delay=r*0.12;ring._mat=rmat;ring._isRing=true;
+      scene.add(ring);bursts.push(ring);
+    }
+  }
+
+  // ── Screen-space interaction (reliable, no raycaster issues) ─
+  const sprites=[];
+  const spriteScreen=new Map(); // sprite → {x,y,hw,hh}
+  let hoveredNode=null,draggedNode=null,dragMoved=false;
+  let dragStartMX=0,dragStartMY=0,dragStartAngle=0;
+
+  function getMouse(e){
+    const r=canvas.getBoundingClientRect();
+    return{x:e.clientX-r.left, y:e.clientY-r.top};
+  }
+
+  function hitTest(mx,my){
+    let best=null,bestD=Infinity;
+    for(const [s,p] of spriteScreen){
+      const dx=mx-p.x,dy=my-p.y;
+      if(Math.abs(dx)<p.hw&&Math.abs(dy)<p.hh){
+        const d=dx*dx+dy*dy;
+        if(d<bestD){bestD=d;best=s;}
+      }
+    }
+    return best;
+  }
+
+  canvas.addEventListener('mousemove',e=>{
+    const{x,y}=getMouse(e);
+    if(draggedNode){
+      const dx=x-dragStartMX;
+      // Map horizontal drag to angle delta (full width = one revolution)
+      draggedNode._a=dragStartAngle+dx*(Math.PI*2/canvas.offsetWidth)*2.2;
+      dragMoved=Math.abs(dx)>4;
+      canvas.style.cursor='grabbing';
+      return;
+    }
+    const hit=hitTest(x,y);
+    if(hit!==hoveredNode){
+      if(hoveredNode){hoveredNode._hover=false;}
+      hoveredNode=hit;
+      if(hoveredNode){hoveredNode._hover=true;}
+    }
+    canvas.style.cursor=hit?'grab':'default';
+  },{passive:true});
+
+  canvas.addEventListener('mousedown',e=>{
+    calma=1;
+    const{x,y}=getMouse(e);
+    const hit=hitTest(x,y);
+    if(hit){
+      draggedNode=hit;dragMoved=false;
+      dragStartMX=x;dragStartMY=y;
+      dragStartAngle=hit._a;
+      canvas.style.cursor='grabbing';
+      e.preventDefault();
+    }
+  },{passive:false});
+
+  canvas.addEventListener('mouseup',()=>{
+    if(draggedNode){
+      if(!dragMoved){
+        spawnBurst(draggedNode.position.clone(),draggedNode._col);
+        draggedNode._flash=1.2;
+      }
+      draggedNode=null;
+      canvas.style.cursor=hoveredNode?'grab':'default';
+    }
+  });
+
+  canvas.addEventListener('mouseleave',()=>{
+    draggedNode=null;
+    if(hoveredNode){hoveredNode._hover=false;hoveredNode=null;}
+    canvas.style.cursor='default';
+  });
+
+  // ── Build scene ──────────────────────────────────────────────
+  setTimeout(()=>{
+    const maps=buildBallMaps();
+
+    // Ball geometry — elongated prolate spheroid
+    const geo=new THREE.SphereGeometry(1.55,128,90);
+    geo.scale(0.66,1,0.66);
+    const mat=new THREE.MeshStandardMaterial({
+      map:maps.color,
+      normalMap:maps.normal,
+      normalScale:new THREE.Vector2(1.1,1.1),
+      roughnessMap:maps.roughness,
+      roughness:0.62,
+      metalness:0.0,
+      envMapIntensity:0.85
+    });
+    const ball=new THREE.Mesh(geo,mat);
+    ball.position.set(1.9,0,0);ball.rotation.z=Math.PI/2;
+    ball.castShadow=true;
+    scene.add(ball);
+
+    const wire=new THREE.Mesh(geo.clone(),
+      new THREE.MeshBasicMaterial({color:0x7A0808,wireframe:true,opacity:0.018,transparent:true}));
+    wire.position.copy(ball.position);wire.rotation.copy(ball.rotation);
+    scene.add(wire);
+
+    // ── Hex node sprites ──────────────────────────────────────
+    NODE_DATA.forEach((d,i)=>{
+      const ang=(i/NODE_DATA.length)*Math.PI*2;
+      const rad=2.52+Math.sin(i*1.3)*0.38;
+      const spriteTex=makeNodeTex(d.label,d.sub,d.col);
+      const spriteMat=new THREE.SpriteMaterial({map:spriteTex,transparent:true,depthTest:false,sizeAttenuation:true});
+      const sprite=new THREE.Sprite(spriteMat);
+      sprite.scale.set(1.1,0.48,1);
+      sprite.position.set(
+        ball.position.x+Math.cos(ang)*rad,
+        Math.sin(i*0.70)*0.85,
+        Math.sin(ang)*rad*0.35
+      );
+      sprite._a=ang;sprite._r=rad;sprite._sp=0.0018+Math.random()*0.0014;
+      sprite._col=d.col;sprite._hover=false;sprite._flash=0;
+      scene.add(sprite);sprites.push(sprite);
+    });
+
+    const lm=new THREE.LineBasicMaterial({color:0xD42020,opacity:0.06,transparent:true});
+    sprites.forEach((s,i)=>{
+      const ns=sprites[(i+1)%sprites.length];
+      scene.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints([s.position.clone(),ns.position.clone()]),lm));
+    });
+
+    // ── PBR Lighting — neutral studio + IBL env reflections ──
+    const hemi=new THREE.HemisphereLight(0xFFFFFF,0x202028,0.65*Math.PI);
+    scene.add(hemi);
+    const key=new THREE.DirectionalLight(0xFFFFFF,2.1*Math.PI);
+    key.position.set(5,8,6);key.castShadow=true;
+    key.shadow.mapSize.set(1024,1024);
+    key.shadow.camera.near=0.5;key.shadow.camera.far=30;
+    key.shadow.radius=3;
+    scene.add(key);
+    const fill=new THREE.DirectionalLight(0xDCE4FF,0.55*Math.PI);
+    fill.position.set(-4,1,3);scene.add(fill);
+    // Rim rojo sutil en la silueta
+    const rim=new THREE.PointLight(0xD42020,0.55*Math.PI*53,16);
+    rim.position.set(-3,-2,-5);scene.add(rim);
+
+    // Procedural env map (IBL) — self-contained studio gradient,
+    // no external RoomEnvironment dependency. Gives soft realistic
+    // reflections on the white leather.
+    if(THREE.PMREMGenerator){
+      try{
+        const ec=document.createElement('canvas');ec.width=512;ec.height=256;
+        const ex=ec.getContext('2d');
+        const g=ex.createLinearGradient(0,0,0,256);
+        g.addColorStop(0.0,'#f0f2f6');   // bright ceiling
+        g.addColorStop(0.45,'#c4c8d0');  // upper wall
+        g.addColorStop(0.55,'#9aa0aa');  // horizon
+        g.addColorStop(1.0,'#3a3a40');   // dark floor
+        ex.fillStyle=g;ex.fillRect(0,0,512,256);
+        // soft key highlight (window)
+        const hl=ex.createRadialGradient(150,70,4,150,70,90);
+        hl.addColorStop(0,'rgba(255,255,255,0.95)');
+        hl.addColorStop(1,'rgba(255,255,255,0)');
+        ex.fillStyle=hl;ex.fillRect(0,0,512,256);
+        // rebote ambiente rojo sutil
+        const rb=ex.createRadialGradient(400,180,6,400,180,120);
+        rb.addColorStop(0,'rgba(212,32,32,0.20)');
+        rb.addColorStop(1,'rgba(212,32,32,0)');
+        ex.fillStyle=rb;ex.fillRect(0,0,512,256);
+        const envTex=new THREE.CanvasTexture(ec);
+        envTex.mapping=THREE.EquirectangularReflectionMapping;
+        const pmrem=new THREE.PMREMGenerator(renderer);
+        const rt=pmrem.fromEquirectangular(envTex);
+        scene.environment=rt.texture;
+        pmrem.dispose();envTex.dispose();
+      }catch(e){}
+    }
+
+    scene._ball=ball;scene._wire=wire;
+  },80);
+
+  // ── Click on ball → spin impulse ─────────────────────────
+  let spinVel=0.012,ballAngY=0,calma=1,prevT=0;
+  const _rc=new THREE.Raycaster(),_m2=new THREE.Vector2();
+  canvas.addEventListener('click',e=>{
+    if(dragMoved||!scene._ball) return;
+    const r=canvas.getBoundingClientRect();
+    _m2.x=((e.clientX-r.left)/canvas.offsetWidth)*2-1;
+    _m2.y=-((e.clientY-r.top)/canvas.offsetHeight)*2+1;
+    _rc.setFromCamera(_m2,camera);
+    if(_rc.intersectObject(scene._ball).length>0){
+      calma=1; spinVel+=0.06+Math.random()*0.04;
+      scene._ball.scale.setScalar(1.07);
+      setTimeout(()=>{if(scene._ball)scene._ball.scale.setScalar(1);},130);
+    }
+  });
+
+  // ── Animation loop ─────────────────────────────────────────
+  let visible=true,t=0;
+  new IntersectionObserver(e=>{visible=e[0].isIntersecting;},{threshold:0}).observe(canvas);
+
+  function animate(){
+    requestAnimationFrame(animate);
+    if(!visible) return;
+    t+=0.006;
+
+    const ahora=performance.now(); const dtF=Math.min((ahora-(prevT||ahora))/16.67,6); prevT=ahora;
+    calma*=Math.pow(0.992,dtF); spinVel*=Math.pow(0.985,dtF); if(calma<0.01){calma=0;spinVel=0;}
+    ballAngY+=spinVel;
+    const ball=scene._ball;
+    if(ball){
+      ball.rotation.y=ballAngY;
+      scene._wire.rotation.y=ballAngY;
+      ball.position.y=Math.sin(t*0.44)*0.15*calma;
+      scene._wire.position.y=ball.position.y;
+    }
+
+    // Orbit nodes + screen-pos update for hit-testing
+    const sv=new THREE.Vector3();
+    sprites.forEach((s,i)=>{
+      if(s!==draggedNode) s._a+=s._sp*calma;
+      const bx=ball?ball.position.x:1.9;
+      s.position.x=bx+Math.cos(s._a)*s._r;
+      s.position.z=Math.sin(s._a)*s._r*0.35;
+      s.position.y=Math.sin(i*0.70)*0.85+Math.sin(t*0.8+i*0.6)*0.08*calma;
+
+      // Project to screen for hit-testing
+      sv.copy(s.position).project(camera);
+      const sx2=(sv.x+1)/2*canvas.offsetWidth;
+      const sy2=(-sv.y+1)/2*canvas.offsetHeight;
+      spriteScreen.set(s,{x:sx2,y:sy2,hw:72,hh:32});
+
+      // Hover pulse + drag scale
+      const base=1+Math.sin(t*1.2+i*0.7)*0.04*calma;
+      const hs=s._hover?1.28:s===draggedNode?1.35:1;
+      s.scale.set(1.1*base*hs,0.48*base*hs,1);
+
+      // Flash fade on click
+      if(s._flash>0){
+        s._flash-=0.035;
+        s.material.opacity=Math.min(1.8,1+s._flash*0.8);
+      } else {
+        s.material.opacity=0.88+Math.sin(t*1.5+i*0.8)*0.12*calma;
+      }
+    });
+
+    // Update burst particles
+    for(let i=bursts.length-1;i>=0;i--){
+      const p=bursts[i];
+      p._life-=0.022;
+      if(p._life<=0){scene.remove(p);p.geometry.dispose();p._mat.dispose();bursts.splice(i,1);continue;}
+      p._mat.opacity=Math.max(0,p._life);
+      if(p._isRing){
+        if(p._life>1-p._delay){p._mat.opacity=0;continue;}// delayed start
+        const s2=1+(1-p._life)*4.5;
+        p.scale.set(s2,s2,s2);
+        p.lookAt(camera.position);
+      } else {
+        p._v.multiplyScalar(p._drag);
+        p.position.add(p._v);
+      }
+    }
+
+    renderer.render(scene,camera);
+  }
+  animate();
+})();
+
+// ── Idioma del portfolio ──
+try{if(localStorage.getItem('idioma')==='es'){document.getElementById('lcur').textContent='ES';document.querySelectorAll('.lang-opt').forEach(o=>o.classList.toggle('active',o.textContent.trim().startsWith('ES')));setLang('es');}}catch(e){}
+Object.assign(window,{toggleLang,pickLang,setLang});
+
+// ── PHONE DEMO — interactive ────────────────────────────
+(function(){
+  const area=document.getElementById('msgArea');
+  const typing=document.getElementById('typingDots');
+  if(!area||!typing) return;
+  let busy=false;
+
+  function getQA(){
+    var l=window.currentLang||'en';
+    var T=TR[l]||TR.en||{};
+    return{
+      injury:{q:T.qa_iq||"Injury risk check?",a:T.qa_ia||""},
+      undervalued:{q:T.qa_uq||"Most undervalued player?",a:T.qa_ua||""},
+      roundone:{q:T.qa_rq||"",a:T.qa_ra||""},
+      fitness:{q:T.qa_fq||"",a:T.qa_fa||""}
+    };
+  }
+
+  function addMsg(role,text,cb){
+    const el=document.createElement('div');
+    el.className='cmsg '+(role==='u'?'cmsg-u':'cmsg-b');
+    if(role==='b') el.innerHTML='<div class="bname">AthleteIQ</div>'+text;
+    else el.textContent=text;
+    area.insertBefore(el,typing);
+    requestAnimationFrame(()=>requestAnimationFrame(()=>el.classList.add('vis')));
+    area.scrollTop=area.scrollHeight;
+    setTimeout(cb,380);
+  }
+
+  function showTyping(cb){
+    typing.classList.add('vis');area.scrollTop=area.scrollHeight;
+    setTimeout(()=>{typing.classList.remove('vis');cb();},1500+Math.random()*700);
+  }
+
+  function setChips(disabled){
+    document.querySelectorAll('.demo-chip').forEach(c2=>c2.disabled=disabled);
+  }
+
+  window.askDemo=function(key){
+    if(busy) return;
+    const qa=getQA()[key];if(!qa) return;
+    busy=true;setChips(true);
+    addMsg('u',qa.q,()=>{
+      showTyping(()=>{
+        addMsg('b',qa.a,()=>{busy=false;setChips(false);});
+      });
+    });
+  };
+
+  window.resetDemoLang=function(l){
+    if(busy) return;
+    const T=TR[l]||TR.en||{};
+    const greeting=T.dq0||'Demo squad loaded.';
+    Array.from(area.children).forEach(el=>{
+      if(!el.classList.contains('typdots')) area.removeChild(el);
+    });
+    setTimeout(()=>{
+      showTyping(()=>{ addMsg('b',greeting,()=>{}); });
+    },200);
+  };
+
+  // Initial greeting when section enters viewport
+  const dobs=new IntersectionObserver(entries=>{
+    if(entries[0].isIntersecting){
+      dobs.disconnect();
+      setTimeout(()=>{
+        showTyping(()=>{
+          addMsg('b',(function(){var l=window.currentLang||'en';var T=TR[l]||TR.en||{};return T.dq0||'Demo squad loaded.';}()),()=>{});
+        });
+      },700);
+    }
+  },{threshold:.3});
+  const ds=document.getElementById('demo');if(ds) dobs.observe(ds);
+})();
+</script>
+</body>
+</html>

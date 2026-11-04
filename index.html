@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>try{var t=new URLSearchParams(location.search).get('tema')||localStorage.getItem('tema');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t;}catch(e){}</script>
+<title data-i18n="meta.titulo">Ramiro Bales — AI Product Builder</title>
+<meta name="description" data-i18n-attr="content=meta.descripcion" content="Construyo productos dirigiendo agentes de IA: defino, diseño, verifico. Cuatro productos propios, uno publicado y en uso diario. Remoto desde Buenos Aires.">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#F3EEE4">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#040404">
+<meta name="author" content="Ramiro Bales">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Ramiro Bales — AI Product Builder">
+<meta property="og:description" content="Construyo productos dirigiendo agentes de IA: defino, diseño, verifico. Remoto desde Buenos Aires.">
+<meta property="og:image" content="assets/og-1200x630.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="es_AR">
+<meta property="og:locale:alternate" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/playfair-latin.woff2" as="font" type="font/woff2" crossorigin>
+<style id="critico">.papel{background:var(--papel);border:1px solid var(--filete);box-shadow:var(--sombra-papel);border-radius:var(--radio)}.hundida{background:var(--hundida);border-radius:var(--radio)}.nav{position:fixed;inset:0 0 auto 0;z-index:50;height:var(--nav-alto);background:color-mix(in oklab,var(--papel) 92%,transparent);border-bottom:1px solid var(--filete);box-shadow:0 1px 0 var(--sombra-tinte-suave)}@supports (backdrop-filter:blur(1px)){.nav{backdrop-filter:blur(14px) saturate(1.1);-webkit-backdrop-filter:blur(14px) saturate(1.1)}}.nav::before{content:"";position:absolute;inset:0;pointer-events:none;background-image:url("assets/grano-512.webp");background-size:512px 512px;opacity:var(--grano-opacidad);mix-blend-mode:var(--grano-mezcla)}.nav__in{position:relative;height:100%;display:flex;align-items:center;gap:var(--e-3)}.nav__marca{font-weight:600;letter-spacing:-0.01em;text-decoration:none;margin-right:auto;white-space:nowrap}.nav__marca:hover{text-decoration:underline;text-decoration-color:var(--acento-texto)}.nav__enlaces{display:flex;align-items:center;gap:clamp(0.75rem,0.5rem + 1vw,1.75rem)}.nav__enlaces a{font-size:var(--t-secundario);text-decoration:none;padding-block:0.25rem;border-bottom:1px solid transparent;transition:border-color var(--d-micro) var(--curva-entrada)}.nav__enlaces a:hover,.nav__enlaces a[aria-current="true"]{border-bottom-color:var(--acento-texto)}.nav__herramientas{display:flex;align-items:center;gap:var(--e-2)}.conmutador{display:inline-flex;border:1px solid var(--borde);border-radius:var(--radio);overflow:hidden}.conmutador button{font-size:var(--t-etiqueta);font-weight:500;letter-spacing:0.08em;padding:0.45rem 0.7rem;color:var(--texto-2);transition:background var(--d-micro) var(--curva-entrada),color var(--d-micro) var(--curva-entrada)}.conmutador button + button{border-left:1px solid var(--borde)}.conmutador button[aria-pressed="true"]{background:var(--texto);color:var(--fondo)}.conmutador button:focus-visible{outline-offset:-3px}.tema{display:inline-flex;align-items:center;gap:0.45rem;padding:0.4rem 0.7rem;border:1px solid var(--borde);border-radius:var(--radio);font-size:var(--t-etiqueta);font-weight:500;letter-spacing:0.08em;color:var(--texto-2);transition:color var(--d-micro) var(--curva-entrada),border-color var(--d-micro) var(--curva-entrada)}.tema:hover{color:var(--texto);border-color:var(--texto-2)}.tema svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}.tema__sol,.tema__claro{display:none}:root[data-theme="dark"] .tema__luna,:root[data-theme="dark"] .tema__oscuro{display:none}:root[data-theme="dark"] .tema__sol,:root[data-theme="dark"] .tema__claro{display:inline}@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .tema__luna,:root:not([data-theme="light"]) .tema__oscuro{display:none}:root:not([data-theme="light"]) .tema__sol,:root:not([data-theme="light"]) .tema__claro{display:inline}}.nav__menu{display:none}@media (max-width:1023px){:root{--nav-alto:56px}.nav__enlaces,.nav__herramientas{display:none}.nav__menu{display:inline-flex;align-items:center;gap:0.5rem;font-size:var(--t-etiqueta);font-weight:500;letter-spacing:0.08em;text-transform:uppercase;padding:0.5rem 0.25rem}.nav__menu svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round}.nav__menu[aria-expanded="true"] .nav__menu-abrir,.nav__menu:not([aria-expanded="true"]) .nav__menu-cerrar{display:none}.nav__panel{position:fixed;top:var(--nav-alto);left:0;right:0;z-index:49;padding:var(--e-3) var(--margen) var(--e-4);background:var(--papel);border-bottom:1px solid var(--filete);box-shadow:var(--sombra-flotante);display:none}.nav__panel[data-abierto="true"]{display:block}.nav__panel .nav__enlaces{display:flex;flex-direction:column;align-items:flex-start;gap:var(--e-2)}.nav__panel .nav__enlaces a{font-size:var(--t-cuerpo)}.nav__panel .nav__herramientas{display:flex;margin-top:var(--e-3);flex-wrap:wrap}}@media (min-width:1024px){.nav__panel{display:none !important}}.boton{display:inline-flex;align-items:center;justify-content:center;gap:0.5rem;min-height:48px;padding:0.75rem 1.4rem;border-radius:var(--radio);font-size:var(--t-boton);font-weight:600;letter-spacing:0;text-decoration:none;border:1px solid transparent;transition:transform var(--d-micro) var(--curva-entrada),background var(--d-micro) var(--curva-entrada),border-color var(--d-micro) var(--curva-entrada),box-shadow var(--d-micro) var(--curva-entrada)}.boton--primario{background:var(--acento-texto);color:var(--acento-contra);box-shadow:0 1px 0 var(--sombra-tinte-suave),0 8px 20px -10px var(--sombra-tinte)}.boton--primario:hover{transform:translateY(-1px);box-shadow:0 1px 0 var(--sombra-tinte-suave),0 12px 26px -10px var(--sombra-tinte)}.boton--primario:active{transform:translateY(0)}.boton--secundario{background:transparent;color:var(--texto);border-color:var(--borde)}.boton--secundario:hover{border-color:var(--texto);background:var(--papel)}.boton--texto{min-height:0;padding:0.25rem 0;border-radius:0;font-weight:500;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:0.2em}.boton--texto:hover{text-decoration-color:var(--acento-texto)}.boton--ancho{width:100%}.sello{display:inline-flex;align-items:center;gap:0.5rem;font-family:var(--playfair);font-weight:600;font-size:0.875rem;line-height:1.2;color:var(--estado-proceso);text-decoration:none;white-space:nowrap}.sello::before{content:"";width:8px;height:8px;border-radius:50%;background:currentColor;box-shadow:0 0 0 2px color-mix(in oklab,currentColor 25%,transparent)}.sello--en-uso{color:var(--estado-en-uso)}.sello--proceso{color:var(--estado-proceso)}.sello__nombre{font-family:var(--inter);font-weight:600;color:var(--texto)}a.sello:hover .sello__nombre{text-decoration:underline;text-decoration-color:var(--acento-texto)}.folio{display:grid;grid-template-columns:auto 1fr;align-items:baseline;column-gap:var(--e-3);margin-bottom:var(--e-4)}.folio__cifra{font-family:var(--playfair);font-weight:400;font-size:var(--t-folio);line-height:1;color:var(--acento-display);font-variant-numeric:tabular-nums}.folio__etiqueta{color:var(--texto-3);align-self:end;padding-bottom:0.35em}.folio__filete{grid-column:1 / -1;height:2px;margin-top:var(--e-2);background:var(--acento-display);width:0;transition:width var(--d-filete) var(--curva-entrada)}.folio.visto .folio__filete,.quieto .folio__filete,.ir .folio__filete{width:100%}@media (prefers-reduced-motion:reduce){.folio__filete{width:100%}}.heroe{overflow-y:clip;position:relative;min-height:calc(100svh - 80px);padding-top:var(--nav-alto);display:grid;align-items:center}.saltar{position:absolute;left:var(--margen);top:-100px;z-index:60;padding:0.6rem 1rem;background:var(--papel);border:1px solid var(--borde);border-radius:var(--radio);text-decoration:none;font-weight:600}.saltar:focus-visible{top:calc(var(--nav-alto) + 8px)}.cabecera-seccion{grid-column:1 / -1;display:grid;gap:var(--e-3);margin-bottom:var(--e-4)}@media (min-width:1024px){.cabecera-seccion{grid-column:2 / 11}}.heroe__texto{position:relative;z-index:2;grid-column:1 / -1;padding-block:var(--e-3) 0;container-type:inline-size}@media (min-width:1024px){.heroe__texto{grid-column:2 / 10;padding-block:0}}.heroe__etiqueta{color:var(--texto-3);margin-bottom:var(--e-2)}.heroe__titulo{margin-bottom:var(--e-2)}.heroe__titulo br{display:none}@media (min-width:1024px){.heroe__etiqueta{margin-bottom:var(--e-3)}.heroe__titulo{margin-bottom:var(--e-3);font-size:min(var(--t-display),8.7cqi)}.heroe__titulo br{display:inline}}.heroe__sub{margin-bottom:var(--e-3);max-width:36ch}.heroe__acciones{display:flex;flex-wrap:wrap;align-items:center;gap:var(--e-2) var(--e-3);margin-bottom:var(--e-3)}@media (min-width:1024px){.heroe__sub{margin-bottom:var(--e-4)}.heroe__acciones{margin-bottom:var(--e-4)}}.heroe__secundarias{display:flex;align-items:center;gap:var(--e-3);font-size:var(--t-secundario)}.heroe__sellos{display:flex;flex-wrap:wrap;gap:var(--e-2) var(--e-3);padding-top:var(--e-3);border-top:1px solid var(--filete)}@media (max-width:767px){.heroe__sellos{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin-inline:calc(-1 * var(--margen));padding-inline:var(--margen) calc(var(--margen) + 40px);-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 56px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 56px),transparent)}.heroe__sellos::-webkit-scrollbar{display:none}}.heroe__escena{position:absolute;z-index:1;top:50%;left:calc(50% + 9.5vw);width:44vw;aspect-ratio:16 / 10;transform:translateY(calc(-50% + var(--nav-alto) / 2));pointer-events:none}.heroe__escena>*{position:absolute;inset:0;width:100%;height:100%}.heroe__capa{object-fit:contain}.heroe__capa--sombra{z-index:1;transform-origin:30% 60%}.heroe__capa--losa{z-index:2}.heroe__lcp{z-index:3;transform-origin:0 0;width:1280px;max-width:none;height:720px;object-fit:fill;inset:0 auto auto 0;opacity:0}.heroe__lcp.ubicada{opacity:1}.heroe__capa--marco{z-index:4}.heroe__capa--sello{z-index:5}@media (prefers-reduced-motion:reduce){.heroe__capa,.heroe__lcp{animation:none !important}}@media (max-width:1023px){.heroe{min-height:0;display:block}.heroe__escena{position:relative;inset:auto;transform:none;width:100%;max-width:none;aspect-ratio:390 / 220;margin-top:var(--e-2);pointer-events:none;overflow:hidden}.heroe__escena>*{animation:none !important}.heroe__capa{position:absolute;inset:auto 0 auto 0;width:100%;height:auto;top:-5%;max-width:none}.heroe + main .seccion:first-child{padding-top:var(--e-4)}}@media (max-width:479px){:root{--t-cuerpo:1.0625rem;--t-sub-heroe:1.0625rem}.heroe__titulo{font-size:2.125rem}}</style>
+<link rel="stylesheet" href="css/variables.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/componentes.css" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="css/componentes.css"></noscript>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Person","name":"Ramiro Bales","jobTitle":"AI Product Builder","email":"mailto:ramirobales@gmail.com","url":"https://www.linkedin.com/in/ramiro-bales","sameAs":["https://www.linkedin.com/in/ramiro-bales"],"address":{"@type":"PostalAddress","addressLocality":"Quilmes","addressRegion":"Buenos Aires","addressCountry":"AR"},"knowsLanguage":["es","en"]}
+</script>
+</head>
+<body>
+<a class="saltar" href="#trabajo" data-i18n="nav.saltar">Saltar al contenido</a>
+
+<nav class="nav" aria-label="Principal">
+  <div class="contenedor nav__in">
+    <a class="nav__marca" href="#inicio" data-i18n="nav.marca">Ramiro Bales</a>
+    <div class="nav__enlaces">
+      <a href="#trabajo" data-i18n="nav.trabajo">Trabajo</a>
+      <a href="#metodo" data-i18n="nav.metodo">Método</a>
+      <a href="#prueba" data-i18n="nav.prueba">Página de prueba</a>
+      <a href="#sobre" data-i18n="nav.sobre">Sobre mí</a>
+      <a href="#contacto" data-i18n="nav.contacto">Contacto</a>
+      <a href="cv/ramiro-bales-cv-es.pdf" data-cv data-i18n="nav.cv">CV (PDF)</a>
+    </div>
+    <div class="nav__herramientas">
+      <div class="conmutador conmutador--idioma" role="group" aria-label="Idioma" data-i18n-attr="aria-label=nav.idioma.aria">
+        <button type="button" data-idioma="es" aria-pressed="true" lang="es">ES</button>
+        <button type="button" data-idioma="en" aria-pressed="false" lang="en">EN</button>
+      </div>
+      <button type="button" class="tema" aria-pressed="false" aria-label="Cambiar entre tema claro y oscuro" data-i18n-attr="aria-label=tema.aria">
+        <svg class="tema__luna" viewBox="0 0 20 20" aria-hidden="true"><path d="M16.4 12.2A7 7 0 0 1 7.8 3.6a7.2 7.2 0 1 0 8.6 8.6Z"/></svg>
+        <svg class="tema__sol" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="3.6"/><path d="M10 1.8v2.2M10 16v2.2M1.8 10H4M16 10h2.2M4.2 4.2l1.6 1.6M14.2 14.2l1.6 1.6M4.2 15.8l1.6-1.6M14.2 5.8l1.6-1.6"/></svg>
+        <span class="tema__oscuro" data-i18n="tema.oscuro">Oscuro</span>
+        <span class="tema__claro" data-i18n="tema.claro">Claro</span>
+      </button>
+    </div>
+    <button type="button" class="nav__menu" aria-expanded="false" aria-controls="panel-menu" aria-label="Abrir o cerrar el menú" data-i18n-attr="aria-label=nav.menu.aria">
+      <span data-i18n="nav.menu">Menú</span>
+      <svg class="nav__menu-abrir" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 6h14M3 10h14M3 14h14"/></svg>
+      <svg class="nav__menu-cerrar" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15"/></svg>
+    </button>
+  </div>
+  <div class="nav__panel" id="panel-menu" data-abierto="false">
+    <div class="nav__enlaces">
+      <a href="#trabajo" data-i18n="nav.trabajo">Trabajo</a>
+      <a href="#metodo" data-i18n="nav.metodo">Método</a>
+      <a href="#prueba" data-i18n="nav.prueba">Página de prueba</a>
+      <a href="#sobre" data-i18n="nav.sobre">Sobre mí</a>
+      <a href="#contacto" data-i18n="nav.contacto">Contacto</a>
+      <a href="cv/ramiro-bales-cv-es.pdf" data-cv data-i18n="nav.cv">CV (PDF)</a>
+    </div>
+    <div class="nav__herramientas">
+      <div class="conmutador conmutador--idioma" role="group" aria-label="Idioma" data-i18n-attr="aria-label=nav.idioma.aria">
+        <button type="button" data-idioma="es" aria-pressed="true" lang="es">ES</button>
+        <button type="button" data-idioma="en" aria-pressed="false" lang="en">EN</button>
+      </div>
+      <button type="button" class="tema" aria-pressed="false" aria-label="Cambiar entre tema claro y oscuro" data-i18n-attr="aria-label=tema.aria">
+        <svg class="tema__luna" viewBox="0 0 20 20" aria-hidden="true"><path d="M16.4 12.2A7 7 0 0 1 7.8 3.6a7.2 7.2 0 1 0 8.6 8.6Z"/></svg>
+        <svg class="tema__sol" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="3.6"/><path d="M10 1.8v2.2M10 16v2.2M1.8 10H4M16 10h2.2M4.2 4.2l1.6 1.6M14.2 14.2l1.6 1.6M4.2 15.8l1.6-1.6M14.2 5.8l1.6-1.6"/></svg>
+        <span class="tema__oscuro" data-i18n="tema.oscuro">Oscuro</span>
+        <span class="tema__claro" data-i18n="tema.claro">Claro</span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<header class="heroe contenedor reticula" id="inicio">
+  <div class="heroe__texto">
+    <p class="etiqueta heroe__etiqueta" data-revelar="bloque" data-i18n="heroe.etiqueta">AI Product Builder · remoto desde Buenos Aires</p>
+    <h1 class="display heroe__titulo" data-revelar data-i18n="heroe.titulo" data-i18n-html>Construyo productos <br>dirigiendo agentes de IA: <br>defino, diseño, verifico.</h1>
+    <p class="sub-heroe heroe__sub" data-revelar data-i18n="heroe.sub">Estudiante de Licenciatura en IA y Ciencia de Datos (UADE). Cuatro productos propios, uno publicado y en uso diario.</p>
+    <div class="heroe__acciones" data-revelar="bloque">
+      <a class="boton boton--primario" href="#trabajo" data-i18n="heroe.cta">Ver el trabajo</a>
+      <div class="heroe__secundarias">
+        <a class="boton boton--texto" href="mailto:ramirobales@gmail.com" data-i18n="heroe.mail">ramirobales@gmail.com</a>
+        <a class="boton boton--texto" href="https://www.linkedin.com/in/ramiro-bales" rel="me noopener" target="_blank" aria-label="LinkedIn de Ramiro Bales (abre en pestaña nueva)" data-i18n-attr="aria-label=heroe.linkedin.aria" data-i18n="heroe.linkedin">LinkedIn</a>
+      </div>
+    </div>
+    <ul class="heroe__sellos" role="list">
+      <li data-revelar="bloque"><a class="sello sello--proceso" href="proyectos/cathedra.html"><span class="sello__nombre">Cathedra</span><span aria-hidden="true">·</span><span data-i18n="heroe.sellos.cathedra">beta</span></a></li>
+      <li data-revelar="bloque"><a class="sello sello--en-uso" href="proyectos/fortal.html"><span class="sello__nombre">Fortal</span><span aria-hidden="true">·</span><span data-i18n="heroe.sellos.fortal">en uso</span></a></li>
+      <li data-revelar="bloque"><a class="sello sello--proceso" href="proyectos/athleteiq.html"><span class="sello__nombre">AthleteIQ</span><span aria-hidden="true">·</span><span data-i18n="heroe.sellos.athleteiq">demo</span></a></li>
+    </ul>
+  </div>
+  <div class="heroe__escena" data-esquinas="[[0.2761,0.1615],[0.6686,0.1844],[0.6544,0.5422],[0.2786,0.5032]]">
+    <picture>
+      <source type="image/avif" srcset="assets/img/heroe/sombra-800.avif 800w, assets/img/heroe/sombra-1200.avif 1200w, assets/img/heroe/sombra-1600.avif 1600w" sizes="(min-width: 1024px) 58vw, 100vw">
+      <img class="heroe__capa heroe__capa--sombra" src="assets/img/heroe/sombra-1600.webp" srcset="assets/img/heroe/sombra-800.webp 800w, assets/img/heroe/sombra-1200.webp 1200w, assets/img/heroe/sombra-1600.webp 1600w" sizes="(min-width: 1024px) 58vw, 100vw" width="1600" height="1000" alt="" decoding="async">
+    </picture>
+    <picture>
+      <source type="image/avif" srcset="assets/img/heroe/losa-800.avif 800w, assets/img/heroe/losa-1200.avif 1200w, assets/img/heroe/losa-1600.avif 1600w" sizes="(min-width: 1024px) 58vw, 100vw">
+      <img class="heroe__capa heroe__capa--losa" src="assets/img/heroe/losa-1600.webp" srcset="assets/img/heroe/losa-800.webp 800w, assets/img/heroe/losa-1200.webp 1200w, assets/img/heroe/losa-1600.webp 1600w" sizes="(min-width: 1024px) 58vw, 100vw" width="1600" height="1000" alt="" decoding="async">
+    </picture>
+    <picture>
+      <source type="image/avif" srcset="assets/img/cathedra/app-guia-640.avif 640w, assets/img/cathedra/app-guia-1280.avif 1280w" sizes="(min-width: 1024px) 24vw, 100vw">
+      <img class="heroe__lcp" src="assets/img/cathedra/app-guia-1280.webp" srcset="assets/img/cathedra/app-guia-640.webp 640w, assets/img/cathedra/app-guia-1280.webp 1280w" sizes="(min-width: 1024px) 24vw, 100vw" width="1280" height="720" fetchpriority="high" alt="Pantalla de Cathedra con la guía de una clase, bloque por bloque" data-i18n-attr="alt=heroe.alt">
+    </picture>
+    <picture>
+      <source type="image/avif" srcset="assets/img/heroe/marco-800.avif 800w, assets/img/heroe/marco-1200.avif 1200w, assets/img/heroe/marco-1600.avif 1600w" sizes="(min-width: 1024px) 58vw, 100vw">
+      <img class="heroe__capa heroe__capa--marco" src="assets/img/heroe/marco-1600.webp" srcset="assets/img/heroe/marco-800.webp 800w, assets/img/heroe/marco-1200.webp 1200w, assets/img/heroe/marco-1600.webp 1600w" sizes="(min-width: 1024px) 58vw, 100vw" width="1600" height="1000" alt="" fetchpriority="high">
+    </picture>
+    <picture>
+      <source type="image/avif" srcset="assets/img/heroe/sello-es-800.avif 800w, assets/img/heroe/sello-es-1200.avif 1200w, assets/img/heroe/sello-es-1600.avif 1600w" sizes="(min-width: 1024px) 58vw, 100vw" data-i18n-attr="srcset=heroe.sello.srcset.avif">
+      <img class="heroe__capa heroe__capa--sello" src="assets/img/heroe/sello-es-1600.webp" srcset="assets/img/heroe/sello-es-800.webp 800w, assets/img/heroe/sello-es-1200.webp 1200w, assets/img/heroe/sello-es-1600.webp 1600w" sizes="(min-width: 1024px) 58vw, 100vw" width="1600" height="1000" alt="" decoding="async" data-i18n-attr="srcset=heroe.sello.srcset.webp">
+    </picture>
+  </div>
+  <script src="js/lcp.js"></script>
+</header>
+
+<main>
+  <section class="seccion" id="trabajo" aria-labelledby="trabajo-titulo">
+    <div class="contenedor">
+      <div class="folio">
+        <span class="folio__cifra cifra" data-revelar="bloque" data-revelar-rango="100 88" aria-hidden="true">01</span>
+        <span class="folio__etiqueta etiqueta" data-i18n="folio.trabajo">Trabajo</span>
+        <span class="folio__filete" aria-hidden="true"></span>
+      </div>
+      <div class="reticula">
+        <div class="cabecera-seccion">
+          <h2 class="h-seccion" id="trabajo-titulo" data-revelar data-i18n="trabajo.titulo">Cuatro productos, estado real.</h2>
+          <p class="secundario cuerpo" data-revelar data-i18n="trabajo.sub">Cada uno con sus decisiones, lo que verifiqué y lo que falta.</p>
+        </div>
+      </div>
+      <div class="reticula casos">
+        <article class="caso papel caso--7" style="view-transition-name: caso-cathedra">
+          <a class="caso__enlace" href="proyectos/cathedra.html" aria-label="Cathedra: leer el caso" data-i18n-attr="aria-label=trabajo.cathedra.aria"></a>
+          <div class="caso__media mascara">
+            <picture>
+              <source type="image/avif" srcset="assets/img/cathedra/app-preguntar-640.avif 640w, assets/img/cathedra/app-preguntar-1280.avif 1280w, assets/img/cathedra/app-preguntar-1920.avif 1920w" sizes="(min-width: 1024px) 48vw, 100vw">
+              <img src="assets/img/cathedra/app-preguntar-1280.webp" srcset="assets/img/cathedra/app-preguntar-640.webp 640w, assets/img/cathedra/app-preguntar-1280.webp 1280w, assets/img/cathedra/app-preguntar-1920.webp 1920w" sizes="(min-width: 1024px) 48vw, 100vw" width="1920" height="1080" loading="lazy" decoding="async" alt="Cathedra respondiendo una pregunta con la frase de la profesora y el minuto de la clase" data-i18n-attr="alt=trabajo.cathedra.alt">
+            </picture>
+          </div>
+          <div class="caso__cuerpo">
+            <h3 class="h-caso caso__nombre" data-revelar>Cathedra</h3>
+            <p class="caso__frase" data-revelar data-i18n="trabajo.cathedra.frase">App de estudio para Windows: transcribe tus clases y cada respuesta cita la clase y el minuto.</p>
+            <div class="caso__pie">
+              <span class="sello sello--proceso" data-i18n="trabajo.cathedra.sello">Producto propio · en beta</span>
+              <span class="caso__leer" data-i18n="trabajo.leer">Leer el caso →</span>
+            </div>
+          </div>
+        </article>
+        <article class="caso papel caso--5" style="view-transition-name: caso-fortal">
+          <a class="caso__enlace" href="proyectos/fortal.html" aria-label="Fortal: leer el caso" data-i18n-attr="aria-label=trabajo.fortal.aria"></a>
+          <div class="caso__media caso__media--telefono mascara">
+            <picture>
+              <source type="image/avif" srcset="assets/img/fortal/musculo-pecho-640.avif 640w, assets/img/fortal/musculo-pecho-1206.avif 1206w" sizes="(min-width: 1024px) 34vw, 100vw">
+              <img src="assets/img/fortal/musculo-pecho-1206.webp" srcset="assets/img/fortal/musculo-pecho-640.webp 640w, assets/img/fortal/musculo-pecho-1206.webp 1206w" sizes="(min-width: 1024px) 34vw, 100vw" width="1206" height="2622" loading="lazy" decoding="async" alt="Ficha del músculo pecho sobre el cuerpo 3D: recuperación, rango y series de la semana" data-i18n-attr="alt=trabajo.fortal.alt">
+            </picture>
+          </div>
+          <div class="caso__cuerpo">
+            <h3 class="h-caso caso__nombre" data-revelar>Fortal</h3>
+            <p class="caso__frase" data-revelar data-i18n="trabajo.fortal.frase">App web para iPhone que arma tu rutina con tu equipo y tu tiempo reales, sobre un cuerpo 3D.</p>
+            <div class="caso__pie">
+              <span class="sello sello--en-uso" data-i18n="trabajo.fortal.sello">App personal · publicada y en uso</span>
+              <span class="caso__leer" data-i18n="trabajo.leer">Leer el caso →</span>
+            </div>
+          </div>
+        </article>
+        <article class="caso papel caso--5" style="view-transition-name: caso-athleteiq">
+          <a class="caso__enlace" href="proyectos/athleteiq.html" aria-label="AthleteIQ: leer el caso" data-i18n-attr="aria-label=trabajo.athleteiq.aria"></a>
+          <div class="caso__media mascara">
+            <picture>
+              <source type="image/avif" srcset="assets/img/athleteiq/landing-heroe-640.avif 640w, assets/img/athleteiq/landing-heroe-1280.avif 1280w, assets/img/athleteiq/landing-heroe-1920.avif 1920w" sizes="(min-width: 1024px) 34vw, 100vw">
+              <img src="assets/img/athleteiq/landing-heroe-1280.webp" srcset="assets/img/athleteiq/landing-heroe-640.webp 640w, assets/img/athleteiq/landing-heroe-1280.webp 1280w, assets/img/athleteiq/landing-heroe-1920.webp 1920w" sizes="(min-width: 1024px) 34vw, 100vw" width="1920" height="1080" loading="lazy" decoding="async" alt="Portada de AthleteIQ con la pelota 3D rodeada de métricas" data-i18n-attr="alt=trabajo.athleteiq.alt">
+            </picture>
+          </div>
+          <div class="caso__cuerpo">
+            <h3 class="h-caso caso__nombre" data-revelar>AthleteIQ</h3>
+            <p class="caso__frase" data-revelar data-i18n="trabajo.athleteiq.frase">Inteligencia de rendimiento para staff de rugby league: preguntás por chat, respondés con datos.</p>
+            <div class="caso__pie">
+              <span class="sello sello--proceso" data-i18n="trabajo.athleteiq.sello">Demo funcional</span>
+              <span class="caso__leer" data-i18n="trabajo.leer">Leer el caso →</span>
+            </div>
+          </div>
+        </article>
+        <article class="caso papel caso--7" style="view-transition-name: caso-coro">
+          <a class="caso__enlace" href="proyectos/coro.html" aria-label="coro: leer el caso" data-i18n-attr="aria-label=trabajo.coro.aria"></a>
+          <div class="caso__media mascara">
+            <picture>
+              <source type="image/avif" srcset="assets/img/coro/reporte-veredicto-640.avif 640w, assets/img/coro/reporte-veredicto-1280.avif 1280w, assets/img/coro/reporte-veredicto-1920.avif 1920w" sizes="(min-width: 1024px) 48vw, 100vw">
+              <img src="assets/img/coro/reporte-veredicto-1280.webp" srcset="assets/img/coro/reporte-veredicto-640.webp 640w, assets/img/coro/reporte-veredicto-1280.webp 1280w, assets/img/coro/reporte-veredicto-1920.webp 1920w" sizes="(min-width: 1024px) 48vw, 100vw" width="1920" height="1080" loading="lazy" decoding="async" alt="Reporte de coro con el veredicto y las cuatro métricas del producto de prueba" data-i18n-attr="alt=trabajo.coro.alt">
+            </picture>
+          </div>
+          <div class="caso__cuerpo">
+            <h3 class="h-caso caso__nombre" data-revelar>coro</h3>
+            <p class="caso__frase" data-revelar data-i18n="trabajo.coro.frase">Lee las reseñas de un producto, encuentra el defecto que se repite y quién ya lo resolvió.</p>
+            <div class="caso__pie">
+              <span class="sello sello--proceso" data-i18n="trabajo.coro.sello">Prototipo</span>
+              <span class="caso__leer" data-i18n="trabajo.leer">Leer el caso →</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="seccion seccion--tinta" id="metodo" aria-labelledby="metodo-titulo">
+    <div class="contenedor">
+      <div class="folio">
+        <span class="folio__cifra cifra" data-revelar="bloque" data-revelar-rango="100 88" aria-hidden="true">02</span>
+        <span class="folio__etiqueta etiqueta" data-i18n="folio.metodo">Método</span>
+        <span class="folio__filete" aria-hidden="true"></span>
+      </div>
+      <div class="reticula">
+        <div class="cabecera-seccion">
+          <h2 class="h-seccion" id="metodo-titulo" data-revelar data-i18n="metodo.titulo">Construyo con IA. Dirijo, diseño y verifico.</h2>
+          <p class="secundario cuerpo" data-revelar data-i18n="metodo.sub">La generación es barata. Lo que pongo yo es agencia, juicio y orquestación.</p>
+        </div>
+      </div>
+      <div class="reticula">
+        <div class="metodo__cols">
+          <div class="metodo__col">
+            <span class="metodo__cifra" data-revelar="bloque" aria-hidden="true">1</span>
+            <h3 class="h3" data-revelar data-i18n="metodo.agencia.titulo">Agencia</h3>
+            <p data-revelar data-i18n="metodo.agencia.texto">Decido qué se construye y qué no. Escribo el brief, el flujo y la vara de calidad antes de pedir una línea.</p>
+            <p class="metodo__ejemplo" data-revelar data-i18n="metodo.agencia.ejemplo" data-i18n-html><strong>Fortal:</strong> las reglas de entrenamiento (progresión doble, volumen por tiempo disponible, pesos que de verdad se pueden armar) se escribieron antes de la primera pantalla.</p>
+          </div>
+          <div class="metodo__col">
+            <span class="metodo__cifra" data-revelar="bloque" aria-hidden="true">2</span>
+            <h3 class="h3" data-revelar data-i18n="metodo.juicio.titulo">Juicio</h3>
+            <p data-revelar data-i18n="metodo.juicio.texto">Reviso cada entrega: la acepto, la corrijo o la hago rehacer con el porqué. Elijo entre alternativas y lo documento.</p>
+            <p class="metodo__ejemplo" data-revelar data-i18n="metodo.juicio.ejemplo" data-i18n-html><strong>coro:</strong> descarté rankear quejas por cantidad y elegí medir concentración; veinte temas con cinco quejas no son un defecto, uno con el 47 % sí.</p>
+          </div>
+          <div class="metodo__col">
+            <span class="metodo__cifra" data-revelar="bloque" aria-hidden="true">3</span>
+            <h3 class="h3" data-revelar data-i18n="metodo.orquestacion.titulo">Orquestación</h3>
+            <p data-revelar data-i18n="metodo.orquestacion.texto">Encadeno agentes, pruebas y capturas a resolución real. Nada se declara hecho sin verlo renderizado.</p>
+            <p class="metodo__ejemplo" data-revelar data-i18n="metodo.orquestacion.ejemplo" data-i18n-html><strong>Fortal:</strong> 391 + 85 pruebas unitarias y 237 + 33 de extremo a extremo; cada fase verificada con capturas a 1206×2622, una por una.</p>
+          </div>
+        </div>
+      </div>
+      <div class="reticula">
+        <div class="metodo__confio">
+          <h3 class="h3" data-revelar data-i18n="metodo.confio.titulo">Cuándo confío y cuándo rehago</h3>
+          <p data-revelar data-i18n="metodo.confio.texto">Confío cuando la prueba pasa y la captura coincide con el brief. Rehago cuando no entiendo el resultado: si no puedo explicarlo, no se publica. Cada caso muestra un ejemplo de las dos cosas.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="seccion" id="prueba" aria-labelledby="prueba-titulo">
+    <div class="contenedor">
+      <div class="folio">
+        <span class="folio__cifra cifra" data-revelar="bloque" data-revelar-rango="100 88" aria-hidden="true">03</span>
+        <span class="folio__etiqueta etiqueta" data-i18n="folio.prueba">Página de prueba</span>
+        <span class="folio__filete" aria-hidden="true"></span>
+      </div>
+      <div class="reticula">
+        <div class="cabecera-seccion">
+          <h2 class="h-seccion" id="prueba-titulo" data-revelar data-i18n="prueba.titulo">Para que vean cómo trabajo.</h2>
+          <p class="secundario cuerpo" data-revelar data-i18n="prueba.sub">Un producto ficticio con 3D real y materiales fotoescaneados, hecho con el mismo método y con el proceso a la vista.</p>
+        </div>
+      </div>
+      <div class="reticula">
+        <article class="prueba__tarjeta papel">
+          <div class="prueba__cuerpo">
+            <h3 class="h3" data-revelar data-i18n="prueba.card">Ánfora · jarra que mide con sombra (producto ficticio)</h3>
+            <p class="secundario" data-revelar data-i18n="prueba.texto">Porcelana, travertino y arcilla reales bajo la misma luz que este sitio. Brief, iteraciones y capturas de verificación, todo a la vista.</p>
+            <p data-revelar="bloque"><a class="boton boton--secundario" href="demos/producto/index.html" data-i18n="prueba.abrir">Abrir la página de prueba →</a></p>
+          </div>
+          <div class="prueba__media mascara">
+            <picture>
+              <source type="image/avif" srcset="assets/img/prueba/anfora-640.avif 640w, assets/img/prueba/anfora-1280.avif 1280w" sizes="(min-width: 1024px) 52vw, 100vw">
+              <img src="assets/img/prueba/anfora-1280.webp" srcset="assets/img/prueba/anfora-640.webp 640w, assets/img/prueba/anfora-1280.webp 1280w" sizes="(min-width: 1024px) 52vw, 100vw" width="1280" height="960" loading="lazy" decoding="async" alt="Render de Ánfora: jarra de porcelana con tapa de arcilla sobre una base de travertino" data-i18n-attr="alt=prueba.alt">
+            </picture>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="seccion" id="sobre" aria-labelledby="sobre-titulo">
+    <div class="contenedor">
+      <div class="folio">
+        <span class="folio__cifra cifra" data-revelar="bloque" data-revelar-rango="100 88" aria-hidden="true">04</span>
+        <span class="folio__etiqueta etiqueta" data-i18n="folio.sobre">Sobre mí</span>
+        <span class="folio__filete" aria-hidden="true"></span>
+      </div>
+      <div class="reticula">
+        <div class="sobre__texto pila">
+          <h2 class="h-seccion" id="sobre-titulo" data-revelar data-i18n="sobre.titulo">Quilmes, Buenos Aires. Remoto.</h2>
+          <p data-revelar data-i18n="sobre.texto">Ramiro Bales. Curso el primer año de la Licenciatura en IA y Ciencia de Datos en UADE y construyo productos propios desde la idea hasta la publicación. Español nativo, inglés fluido. Busco trabajo remoto como AI Product Builder, en automatización con IA o como tecnólogo creativo. Uso lo que construyo antes que nadie.</p>
+          <h3 class="etiqueta" data-revelar="bloque" data-i18n="sobre.busco.titulo">Qué busco</h3>
+          <ul class="busco" role="list">
+            <li data-revelar data-i18n="sobre.busco.1">Trabajo remoto, en equipo y en inglés o español.</li>
+            <li data-revelar data-i18n="sobre.busco.2">Producto con IA: definir, diseñar y verificar lo que se construye.</li>
+            <li data-revelar data-i18n="sobre.busco.3">Automatización con IA de procesos y tareas reales.</li>
+            <li data-revelar data-i18n="sobre.busco.4">Tecnología creativa: 3D en tiempo real, web y experiencias.</li>
+          </ul>
+        </div>
+        <div class="sobre__lado">
+          <div class="sobre__sello mascara">
+            <picture>
+              <source type="image/avif" srcset="assets/img/sobre/cilindro-es-400.avif 400w, assets/img/sobre/cilindro-es-800.avif 800w" sizes="(min-width: 1024px) 24vw, 60vw" data-i18n-attr="srcset=sobre.sello.srcset.avif">
+              <img src="assets/img/sobre/cilindro-es-800.webp" srcset="assets/img/sobre/cilindro-es-400.webp 400w, assets/img/sobre/cilindro-es-800.webp 800w" sizes="(min-width: 1024px) 24vw, 60vw" width="800" height="800" loading="lazy" decoding="async" alt="Sello de arcilla con el texto «verificado · 2026» en bajorrelieve" data-i18n-attr="alt=sobre.sello.alt;srcset=sobre.sello.srcset.webp">
+            </picture>
+          </div>
+          <p class="terciario etiqueta" data-revelar="bloque" data-i18n="sobre.actualizado">Última actualización: noviembre de 2026</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="seccion" id="contacto" aria-labelledby="contacto-titulo">
+    <div class="contenedor">
+      <div class="folio">
+        <span class="folio__cifra cifra" data-revelar="bloque" data-revelar-rango="100 88" aria-hidden="true">05</span>
+        <span class="folio__etiqueta etiqueta" data-i18n="folio.contacto">Contacto</span>
+        <span class="folio__filete" aria-hidden="true"></span>
+      </div>
+      <div class="reticula">
+        <div class="cabecera-seccion">
+          <h2 class="h-seccion" id="contacto-titulo" data-revelar data-i18n="contacto.titulo">Hablemos de lo que falta construir.</h2>
+          <p class="secundario cuerpo" data-revelar data-i18n="contacto.sub">Respondo en el día.</p>
+          <div class="contacto__acciones" data-revelar="bloque">
+            <a class="boton boton--primario" href="mailto:ramirobales@gmail.com" data-i18n="contacto.mail">Escribir a ramirobales@gmail.com</a>
+            <a class="boton boton--secundario" href="https://www.linkedin.com/in/ramiro-bales" rel="me noopener" target="_blank" aria-label="LinkedIn de Ramiro Bales (abre en pestaña nueva)" data-i18n-attr="aria-label=heroe.linkedin.aria" data-i18n="contacto.linkedin">LinkedIn</a>
+            <a class="boton boton--secundario" href="cv/ramiro-bales-cv-es.pdf" data-cv data-i18n="contacto.cv">Descargar CV (PDF)</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="pie seccion--tinta">
+  <div class="contenedor pie__in">
+    <div class="pila--chica">
+      <p class="pie__enlaces">
+        <a href="creditos.html" data-i18n="pie.creditos">Texturas y entorno CC0 de ambientCG y Poly Haven — créditos</a>
+        <a href="legal.html" data-i18n="pie.legal">Aviso legal y privacidad</a>
+      </p>
+      <p data-i18n="pie.hecho">Sitio estático hecho con desarrollo asistido por IA y verificado a mano. Sin cookies ni analítica.</p>
+    </div>
+    <p class="pie__copy" data-i18n="pie.copy">© 2026 Ramiro Bales</p>
+  </div>
+</footer>
+
+<script src="lib/gsap.min.js" defer></script>
+<script src="lib/ScrollTrigger.min.js" defer></script>
+<script src="lib/Flip.min.js" defer></script>
+<script type="module" src="js/comun.js"></script>
+</body>
+</html>

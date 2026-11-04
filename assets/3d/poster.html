@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<title>póster</title>
+<style>html,body{margin:0;background:transparent}#c{width:max-content}canvas{display:block}#datos{position:absolute;left:0;top:0;opacity:0.001;font-size:1px}</style>
+</head>
+<body>
+<div id="c"></div>
+<script type="module">
+import { poster } from '../../js/heroe.js';
+const p = new URLSearchParams(location.search);
+poster(document.getElementById('c'), { capa: p.get('poster') || 'compuesto', ancho: +(p.get('ancho') || 1600), idioma: p.get('idioma') || 'es' });
+</script>
+</body>
+</html>

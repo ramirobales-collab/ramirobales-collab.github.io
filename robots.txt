@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://ramirobales-collab.github.io/sitemap.xml

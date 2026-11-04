@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>try{var t=new URLSearchParams(location.search).get('tema')||localStorage.getItem('tema');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t;}catch(e){}</script>
+<title data-i18n="caso.fortal.titulo">Fortal — caso de estudio · Ramiro Bales</title>
+<meta name="description" data-i18n-attr="content=caso.fortal.descripcion" content="Fortal, app web para iPhone que arma la rutina con tu equipo y tu tiempo reales sobre un cuerpo 3D. App personal publicada y en uso.">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#F3EEE4">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#040404">
+<meta name="author" content="Ramiro Bales">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Fortal — caso de estudio · Ramiro Bales">
+<meta property="og:description" content="Fortal, app web para iPhone que arma la rutina con tu equipo y tu tiempo reales sobre un cuerpo 3D. App personal publicada y en uso.">
+<meta property="og:image" content="https://ramirobales-collab.github.io/assets/og-1200x630.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://ramirobales-collab.github.io/proyectos/fortal.html">
+<meta property="og:locale" content="es_AR">
+<meta property="og:locale:alternate" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://ramirobales-collab.github.io/assets/og-1200x630.jpg">
+<link rel="canonical" href="https://ramirobales-collab.github.io/proyectos/fortal.html">
+<link rel="alternate" hreflang="es" href="https://ramirobales-collab.github.io/proyectos/fortal.html?idioma=es">
+<link rel="alternate" hreflang="en" href="https://ramirobales-collab.github.io/proyectos/fortal.html?idioma=en">
+<link rel="alternate" hreflang="x-default" href="https://ramirobales-collab.github.io/proyectos/fortal.html">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="manifest" href="../manifest.webmanifest">
+<link rel="preload" href="../assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fonts/playfair-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../css/variables.css">
+<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/componentes.css">
+<link rel="stylesheet" href="../css/caso.css">
+</head>
+<body>
+<a class="saltar" href="#contenido" data-i18n="nav.saltar">Saltar al contenido</a>
+<nav class="nav" aria-label="Principal">
+  <div class="contenedor nav__in">
+    <a class="nav__marca" href="../index.html" data-i18n="nav.marca">Ramiro Bales</a>
+    <div class="nav__enlaces">
+      <a href="../index.html#trabajo" data-i18n="nav.trabajo">Trabajo</a>
+      <a href="../index.html#metodo" data-i18n="nav.metodo">Método</a>
+      <a href="../index.html#prueba" data-i18n="nav.prueba">Página de prueba</a>
+      <a href="../index.html#sobre" data-i18n="nav.sobre">Sobre mí</a>
+      <a href="../index.html#contacto" data-i18n="nav.contacto">Contacto</a>
+      <a href="../cv/ramiro-bales-cv-es.pdf" data-cv data-i18n="nav.cv">CV (PDF)</a>
+    </div>
+    <div class="nav__herramientas">
+      <div class="conmutador conmutador--idioma" role="group" aria-label="Idioma" data-i18n-attr="aria-label=nav.idioma.aria">
+        <button type="button" data-idioma="es" aria-pressed="true" lang="es">ES</button>
+        <button type="button" data-idioma="en" aria-pressed="false" lang="en">EN</button>
+      </div>
+      <button type="button" class="tema" aria-pressed="false" aria-label="Cambiar entre tema claro y oscuro" data-i18n-attr="aria-label=tema.aria">
+        <svg class="tema__luna" viewBox="0 0 20 20" aria-hidden="true"><path d="M16.4 12.2A7 7 0 0 1 7.8 3.6a7.2 7.2 0 1 0 8.6 8.6Z"/></svg>
+        <svg class="tema__sol" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="3.6"/><path d="M10 1.8v2.2M10 16v2.2M1.8 10H4M16 10h2.2M4.2 4.2l1.6 1.6M14.2 14.2l1.6 1.6M4.2 15.8l1.6-1.6M14.2 5.8l1.6-1.6"/></svg>
+        <span class="tema__oscuro" data-i18n="tema.oscuro">Oscuro</span>
+        <span class="tema__claro" data-i18n="tema.claro">Claro</span>
+      </button>
+    </div>
+    <button type="button" class="nav__menu" aria-expanded="false" aria-controls="panel-menu" aria-label="Abrir o cerrar el menú" data-i18n-attr="aria-label=nav.menu.aria">
+      <span data-i18n="nav.menu">Menú</span>
+      <svg class="nav__menu-abrir" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 6h14M3 10h14M3 14h14"/></svg>
+      <svg class="nav__menu-cerrar" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15"/></svg>
+    </button>
+  </div>
+  <div class="nav__panel" id="panel-menu" data-abierto="false">
+    <div class="nav__enlaces">
+      <a href="../index.html#trabajo" data-i18n="nav.trabajo">Trabajo</a>
+      <a href="../index.html#metodo" data-i18n="nav.metodo">Método</a>
+      <a href="../index.html#prueba" data-i18n="nav.prueba">Página de prueba</a>
+      <a href="../index.html#sobre" data-i18n="nav.sobre">Sobre mí</a>
+      <a href="../index.html#contacto" data-i18n="nav.contacto">Contacto</a>
+      <a href="../cv/ramiro-bales-cv-es.pdf" data-cv data-i18n="nav.cv">CV (PDF)</a>
+    </div>
+    <div class="nav__herramientas">
+      <div class="conmutador conmutador--idioma" role="group" aria-label="Idioma" data-i18n-attr="aria-label=nav.idioma.aria">
+        <button type="button" data-idioma="es" aria-pressed="true" lang="es">ES</button>
+        <button type="button" data-idioma="en" aria-pressed="false" lang="en">EN</button>
+      </div>
+      <button type="button" class="tema" aria-pressed="false" aria-label="Cambiar entre tema claro y oscuro" data-i18n-attr="aria-label=tema.aria">
+        <svg class="tema__luna" viewBox="0 0 20 20" aria-hidden="true"><path d="M16.4 12.2A7 7 0 0 1 7.8 3.6a7.2 7.2 0 1 0 8.6 8.6Z"/></svg>
+        <svg class="tema__sol" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="3.6"/><path d="M10 1.8v2.2M10 16v2.2M1.8 10H4M16 10h2.2M4.2 4.2l1.6 1.6M14.2 14.2l1.6 1.6M4.2 15.8l1.6-1.6M14.2 5.8l1.6-1.6"/></svg>
+        <span class="tema__oscuro" data-i18n="tema.oscuro">Oscuro</span>
+        <span class="tema__claro" data-i18n="tema.claro">Claro</span>
+      </button>
+    </div>
+  </div>
+</nav>
+<main class="caso-pagina" id="contenido">
+  <div class="contenedor">
+  <div class="folio">
+    <span class="folio__cifra cifra" data-revelar="bloque" aria-hidden="true">02</span>
+    <span class="folio__etiqueta etiqueta" data-i18n="caso.folio">Caso de estudio</span>
+    <span class="folio__filete" aria-hidden="true"></span>
+  </div>
+  <header class="reticula caso-cabecera caso-cabecera--vertical" id="cabecera">
+    <div class="caso-cabecera__texto">
+      <h1 class="display caso-cabecera__titulo" data-revelar>Fortal</h1>
+      <p class="sub-heroe caso-cabecera__linea" data-revelar data-i18n="trabajo.fortal.frase">App web para iPhone que arma tu rutina con tu equipo y tu tiempo reales, sobre un cuerpo 3D.</p>
+      <dl class="caso-meta etiqueta">
+        <div><dt data-i18n="caso.meta.estado" data-revelar="bloque">Estado</dt><dd><span class="sello sello--en-uso" data-i18n="trabajo.fortal.sello" data-revelar="bloque">App personal · publicada y en uso</span></dd></div>
+        <div><dt data-i18n="caso.meta.ano" data-revelar="bloque">Año</dt><dd class="datos" data-revelar="bloque">2026</dd></div>
+        <div><dt data-i18n="caso.meta.rol" data-revelar="bloque">Rol</dt><dd data-i18n="caso.fortal.rol" data-revelar="bloque">Product owner y usuario</dd></div>
+        <div><dt data-i18n="caso.meta.enlace" data-revelar="bloque">Enlace</dt><dd><span data-i18n="caso.fortal.enlace" data-revelar="bloque">Sin enlace público: app de usuario único, se muestra con capturas</span></dd></div>
+      </dl>
+    </div>
+    <div class="caso-cabecera__media mascara" style="view-transition-name: caso-fortal; aspect-ratio: 1140 / 1710">
+<picture>
+  <source type="image/avif" srcset="../assets/img/fortal/gimnasio-hoy-cabecera-640.avif 640w, ../assets/img/fortal/gimnasio-hoy-cabecera-1140.avif 1140w" sizes="(min-width: 1024px) 34vw, 100vw">
+  <img src="../assets/img/fortal/gimnasio-hoy-cabecera-1140.webp" srcset="../assets/img/fortal/gimnasio-hoy-cabecera-640.webp 640w, ../assets/img/fortal/gimnasio-hoy-cabecera-1140.webp 1140w" sizes="(min-width: 1024px) 34vw, 100vw" width="1140" height="1710" fetchpriority="high" alt="Pantalla «Hoy» de Fortal: holograma del cuerpo con los músculos del día, lo que toca y el botón Entrenar" data-i18n-attr="alt=caso.fortal.cabecera.alt">
+</picture>
+    </div>
+  </header>
+  <div class="reticula caso-cuerpo">
+    <nav class="caso-indice" aria-label="Partes del caso" data-i18n-attr="aria-label=caso.indice.aria">
+      <ol>
+      <li><a href="#cabecera"><span class="caso-indice__n" aria-hidden="true">01</span><span data-i18n="caso.parte.cabecera">Cabecera</span></a></li>
+      <li><a href="#problema"><span class="caso-indice__n" aria-hidden="true">02</span><span data-i18n="caso.parte.problema">Problema</span></a></li>
+      <li><a href="#rol"><span class="caso-indice__n" aria-hidden="true">03</span><span data-i18n="caso.parte.rol">Mi rol</span></a></li>
+      <li><a href="#proceso"><span class="caso-indice__n" aria-hidden="true">04</span><span data-i18n="caso.parte.proceso">Proceso con IA</span></a></li>
+      <li><a href="#decisiones"><span class="caso-indice__n" aria-hidden="true">05</span><span data-i18n="caso.parte.decisiones">Decisiones</span></a></li>
+      <li><a href="#resultado"><span class="caso-indice__n" aria-hidden="true">06</span><span data-i18n="caso.parte.resultado">Resultado verificable</span></a></li>
+      <li><a href="#sigue"><span class="caso-indice__n" aria-hidden="true">07</span><span data-i18n="caso.parte.sigue">Qué sigue</span></a></li>
+      <li><a href="#galeria"><span class="caso-indice__n" aria-hidden="true">08</span><span data-i18n="caso.parte.galeria">Galería</span></a></li>
+      </ol>
+    </nav>
+    <div class="caso-contenido">
+      <section class="caso-parte" id="problema" aria-labelledby="t-problema">
+        <span class="etiqueta caso-parte__n" aria-hidden="true">02</span>
+        <h2 class="caso-parte__titulo" id="t-problema" data-revelar data-i18n="caso.parte.problema">Problema</h2>
+        <p data-revelar data-i18n="caso.fortal.problema">Las apps de gimnasio no saben qué equipo tenés en casa ni cuánto tiempo real tenés por día. La rutina termina en notas del teléfono y los pesos se adivinan.</p>
+      </section>
+      <section class="caso-parte" id="rol" aria-labelledby="t-rol">
+        <span class="etiqueta caso-parte__n" aria-hidden="true">03</span>
+        <h2 class="caso-parte__titulo" id="t-rol" data-revelar data-i18n="caso.parte.rol">Mi rol</h2>
+        <p data-revelar data-i18n="caso.fortal.rol.texto">Definí el concepto, la estética (negros por capas, holograma azul), las secciones y las reglas de entrenamiento: progresión doble, seguridad sin barras de seguridad, volumen por tiempo disponible. Dirigí el desarrollo asistido por IA en fases y revisé cada captura a 1206×2622, una por una. La uso a diario.</p>
+      </section>
+      <section class="caso-parte" id="proceso" aria-labelledby="t-proceso">
+        <span class="etiqueta caso-parte__n" aria-hidden="true">04</span>
+        <h2 class="caso-parte__titulo" id="t-proceso" data-revelar data-i18n="caso.parte.proceso">Proceso con IA</h2>
+        <ol class="caso-pasos">
+          <li><div><strong data-revelar="bloque" data-i18n="caso.fortal.proceso.1.titulo">Brief y reglas de dominio.</strong><p data-revelar data-i18n="caso.fortal.proceso.1">Las reglas de entrenamiento y nutrición se escribieron antes de la primera pantalla; cada fase se midió contra ellas.</p></div></li>
+          <li><div><strong data-revelar="bloque" data-i18n="caso.fortal.proceso.2.titulo">Cuerpo 3D.</strong><p data-revelar data-i18n="caso.fortal.proceso.2">Un modelo con veinte regiones musculares pasó por un pipeline propio hasta un GLB liviano; cada región se pinta según lo que toca hoy y cómo se recupera.</p></div></li>
+          <li><div><strong data-revelar="bloque" data-i18n="caso.fortal.proceso.3.titulo">Fases con capturas.</strong><p data-revelar data-i18n="caso.fortal.proceso.3">Gimnasio, rutina, sesión en vivo, comida: cada fase entregada con capturas a 1206×2622 que revisé una por una contra el brief.</p></div></li>
+          <li><div><strong data-revelar="bloque" data-i18n="caso.fortal.proceso.4.titulo">Instalada desde Safari.</strong><p data-revelar data-i18n="caso.fortal.proceso.4">Web app local primero y sin conexión, con pruebas automáticas: 391 + 85 unitarias y 237 + 33 de extremo a extremo.</p></div></li>
+        </ol>
+      </section>
+      <section class="caso-parte" id="decisiones" aria-labelledby="t-decisiones">
+        <span class="etiqueta caso-parte__n" aria-hidden="true">05</span>
+        <h2 class="caso-parte__titulo" id="t-decisiones" data-revelar data-i18n="caso.parte.decisiones">Decisiones</h2>
+        <div class="caso-decisiones">
+          <div class="caso-decision hundida">
+            <div><span class="caso-decision__etiqueta etiqueta" data-i18n="caso.elegi">Elegí</span><h3 class="caso-decision__elegi" data-revelar data-i18n="caso.fortal.decision.1.elegi">Calcular los pesos que de verdad se pueden armar: discos por lado, dial de mancuernas, pila de placas.</h3></div>
+            <div><span class="caso-decision__etiqueta etiqueta" data-i18n="caso.descarte">Descarté</span><p class="tachado caso-decision__descarte" data-revelar data-i18n="caso.fortal.decision.1.descarte">Pedir el peso a mano.</p></div>
+            <div><span class="caso-decision__etiqueta etiqueta" data-i18n="caso.porque">Porque</span><p class="caso-decision__porque" data-revelar data-i18n="caso.fortal.decision.1.porque">Una sugerencia que no se puede cargar en el gimnasio es ruido.</p></div>
+          </div>
+          <div class="caso-decision hundida">
+            <div><span class="caso-decision__etiqueta etiqueta" data-i18n="caso.elegi">Elegí</span><h3 class="caso-decision__elegi" data-revelar data-i18n="caso.fortal.decision.2.elegi">Web app instalable desde Safari, local primero y sin conexión.</h3></div>
+            <div><span class="caso-decision__etiqueta etiqueta" data-i18n="caso.descarte">Descarté</span><p class="tachado caso-decision__descarte" data-revelar data-i18n="caso.fortal.decision.2.descarte">App de tienda con cuentas.</p></div>
+            <div><span class="caso-decision__etiqueta etiqueta" data-i18n="caso.porque">Porque</span><p class="caso-decision__porque" data-revelar data-i18n="caso.fortal.decision.2.porque">El único usuario era yo y necesitaba iterar a diario sin revisión ni servidor obligatorio.</p></div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <aside class="caso-artefactos" aria-label="Artefactos" data-i18n-attr="aria-label=caso.artefactos">
+      <div class="caso-artefactos__in">
+        <div class="caso-artefacto papel">
+          <h3 class="etiqueta caso-artefacto__titulo" data-revelar="bloque" data-i18n="caso.fortal.artefacto.1.titulo">Reglas del brief</h3>
+          <ul role="list">
+            <li data-revelar data-i18n="caso.fortal.artefacto.1.1">Progresión doble: primero las repeticiones, después el peso.</li>
+            <li data-revelar data-i18n="caso.fortal.artefacto.1.2">Pesos armables con el equipo real.</li>
+            <li data-revelar data-i18n="caso.fortal.artefacto.1.3">Volumen semanal por tiempo disponible.</li>
+          </ul>
+        </div>
+        <div class="caso-artefacto papel">
+          <h3 class="etiqueta caso-artefacto__titulo" data-revelar="bloque" data-i18n="caso.fortal.artefacto.2.titulo">Verificación</h3>
+          <ul role="list">
+            <li data-revelar data-i18n="caso.fortal.artefacto.2.1">476 pruebas unitarias y 270 de extremo a extremo.</li>
+            <li data-revelar data-i18n="caso.fortal.artefacto.2.2">Capturas a 1206×2622 por fase, miradas una por una.</li>
+          </ul>
+        </div>
+        <div class="caso-artefacto papel">
+          <h3 class="etiqueta caso-artefacto__titulo" data-revelar="bloque" data-i18n="caso.fortal.artefacto.3.titulo">Pipeline del cuerpo</h3>
+          <div class="caso-artefacto__media mascara caso-artefacto__media--alta">
+<picture>
+  <source type="image/avif" srcset="../assets/img/fortal/cuerpo-flex-limpio-640.avif 640w, ../assets/img/fortal/cuerpo-flex-limpio-1280.avif 1280w, ../assets/img/fortal/cuerpo-flex-limpio-1600.avif 1600w" sizes="(min-width: 1024px) 24vw, 100vw">
+  <img src="../assets/img/fortal/cuerpo-flex-limpio-1280.webp" srcset="../assets/img/fortal/cuerpo-flex-limpio-640.webp 640w, ../assets/img/fortal/cuerpo-flex-limpio-1280.webp 1280w, ../assets/img/fortal/cuerpo-flex-limpio-1600.webp 1600w" sizes="(min-width: 1024px) 24vw, 100vw" width="1600" height="2400" loading="lazy" decoding="async" alt="Cuerpo 3D en pose de flexión con las regiones musculares coloreadas" data-i18n-attr="alt=caso.fortal.artefacto.3.alt">
+</picture>
+          </div>
+          <p class="secundario" data-revelar data-i18n="caso.fortal.artefacto.3.texto">Pose de flexión: las regiones siguen al cuerpo.</p>
+        </div>
+      </div>
+    </aside>
+    <section class="caso-resultado seccion--tinta" id="resultado" aria-labelledby="t-resultado">
+      <h2 class="etiqueta" id="t-resultado"><span aria-hidden="true" data-revelar="bloque">06 —</span> <span data-i18n="caso.parte.resultado" data-revelar="bloque">Resultado verificable</span></h2>
+      <p class="caso-resultado__frase" data-revelar data-i18n="caso.fortal.resultado">Publicada e instalada en mi iPhone; la uso todos los días.</p>
+      <p class="caso-resultado__apoyo" data-revelar data-i18n="caso.fortal.apoyo">Sin otros usuarios y fuera de las tiendas: es una app personal.</p>
+    </section>
+    <div class="caso-contenido caso-contenido--sigue">
+      <section class="caso-parte" id="sigue" aria-labelledby="t-sigue">
+        <span class="etiqueta caso-parte__n" aria-hidden="true">07</span>
+        <h2 class="caso-parte__titulo" id="t-sigue" data-revelar data-i18n="caso.parte.sigue">Qué sigue</h2>
+        <p data-revelar data-i18n="caso.fortal.sigue">Abrir a más usuarios exigiría cuentas y onboarding; hoy no es el objetivo.</p>
+      </section>
+    </div>
+    <section class="caso-galeria caso-parte" id="galeria" aria-labelledby="t-galeria">
+      <span class="etiqueta caso-parte__n" aria-hidden="true">08</span>
+      <h2 class="caso-parte__titulo" id="t-galeria" data-revelar data-i18n="caso.parte.galeria">Galería</h2>
+      <div class="caso-galeria__items">
+        <figure class="caso-galeria__item caso-galeria__item--4">
+          <div class="caso-galeria__media mascara">
+<picture>
+  <source type="image/avif" srcset="../assets/img/fortal/gimnasio-hoy-640.avif 640w, ../assets/img/fortal/gimnasio-hoy-1206.avif 1206w" sizes="(min-width: 1024px) 26vw, 50vw">
+  <img src="../assets/img/fortal/gimnasio-hoy-1206.webp" srcset="../assets/img/fortal/gimnasio-hoy-640.webp 640w, ../assets/img/fortal/gimnasio-hoy-1206.webp 1206w" sizes="(min-width: 1024px) 26vw, 50vw" width="1206" height="2622" loading="lazy" decoding="async" alt="Pantalla principal: holograma con los músculos de hoy y la semana" data-i18n-attr="alt=caso.fortal.galeria.1">
+</picture>
+          </div>
+          <figcaption data-revelar data-i18n="caso.fortal.galeria.1.pie">Hoy: músculos y semana.</figcaption>
+        </figure>
+        <figure class="caso-galeria__item caso-galeria__item--4">
+          <div class="caso-galeria__media mascara">
+<picture>
+  <source type="image/avif" srcset="../assets/img/fortal/gimnasio-rangos-640.avif 640w, ../assets/img/fortal/gimnasio-rangos-1206.avif 1206w" sizes="(min-width: 1024px) 26vw, 50vw">
+  <img src="../assets/img/fortal/gimnasio-rangos-1206.webp" srcset="../assets/img/fortal/gimnasio-rangos-640.webp 640w, ../assets/img/fortal/gimnasio-rangos-1206.webp 1206w" sizes="(min-width: 1024px) 26vw, 50vw" width="1206" height="2622" loading="lazy" decoding="async" alt="Vista Rangos: cada músculo con su rango sobre el holograma" data-i18n-attr="alt=caso.fortal.galeria.2">
+</picture>
+          </div>
+          <figcaption data-revelar data-i18n="caso.fortal.galeria.2.pie">Rangos por músculo.</figcaption>
+        </figure>
+        <figure class="caso-galeria__item caso-galeria__item--4">
+          <div class="caso-galeria__media mascara">
+<picture>
+  <source type="image/avif" srcset="../assets/img/fortal/musculo-pecho-640.avif 640w, ../assets/img/fortal/musculo-pecho-1206.avif 1206w" sizes="(min-width: 1024px) 26vw, 50vw">
+  <img src="../assets/img/fortal/musculo-pecho-1206.webp" srcset="../assets/img/fortal/musculo-pecho-640.webp 640w, ../assets/img/fortal/musculo-pecho-1206.webp 1206w" sizes="(min-width: 1024px) 26vw, 50vw" width="1206" height="2622" loading="lazy" decoding="async" alt="Ficha del músculo pecho: recuperación, rango y series de la semana" data-i18n-attr="alt=caso.fortal.galeria.3">
+</picture>
+          </div>
+          <figcaption data-revelar data-i18n="caso.fortal.galeria.3.pie">Ficha de un músculo.</figcaption>
+        </figure>
+        <figure class="caso-galeria__item caso-galeria__item--4">
+          <div class="caso-galeria__media mascara">
+<picture>
+  <source type="image/avif" srcset="../assets/img/fortal/rutina-semana-640.avif 640w, ../assets/img/fortal/rutina-semana-1206.avif 1206w" sizes="(min-width: 1024px) 26vw, 50vw">
+  <img src="../assets/img/fortal/rutina-semana-1206.webp" srcset="../assets/img/fortal/rutina-semana-640.webp 640w, ../assets/img/fortal/rutina-semana-1206.webp 1206w" sizes="(min-width: 1024px) 26vw, 50vw" width="1206" height="2622" loading="lazy" decoding="async" alt="La semana armada: días con minutos, ejercicios y series" data-i18n-attr="alt=caso.fortal.galeria.4">
+</picture>
+          </div>
+          <figcaption data-revelar data-i18n="caso.fortal.galeria.4.pie">La semana armada.</figcaption>
+        </figure>
+        <figure class="caso-galeria__item caso-galeria__item--4">
+          <div class="caso-galeria__media mascara">
+<picture>
+  <source type="image/avif" srcset="../assets/img/fortal/sesion-en-vivo-640.avif 640w, ../assets/img/fortal/sesion-en-vivo-1206.avif 1206w" sizes="(min-width: 1024px) 26vw, 50vw">
+  <img src="../assets/img/fortal/sesion-en-vivo-1206.webp" srcset="../assets/img/fortal/sesion-en-vivo-640.webp 640w, ../assets/img/fortal/sesion-en-vivo-1206.webp 1206w" sizes="(min-width: 1024px) 26vw, 50vw" width="1206" height="2622" loading="lazy" decoding="async" alt="Sesión en vivo: registrar serie, fallo, drop y rest-pause, ejercicios con peso y repeticiones" data-i18n-attr="alt=caso.fortal.galeria.5">
+</picture>
+          </div>
+          <figcaption data-revelar data-i18n="caso.fortal.galeria.5.pie">Sesión en vivo.</figcaption>
+        </figure>
+        <figure class="caso-galeria__item caso-galeria__item--4">
+          <div class="caso-galeria__media mascara">
+<picture>
+  <source type="image/avif" srcset="../assets/img/fortal/cuerpo-regiones-34-640.avif 640w, ../assets/img/fortal/cuerpo-regiones-34-1280.avif 1280w, ../assets/img/fortal/cuerpo-regiones-34-1600.avif 1600w" sizes="(min-width: 1024px) 26vw, 50vw">
+  <img src="../assets/img/fortal/cuerpo-regiones-34-1280.webp" srcset="../assets/img/fortal/cuerpo-regiones-34-640.webp 640w, ../assets/img/fortal/cuerpo-regiones-34-1280.webp 1280w, ../assets/img/fortal/cuerpo-regiones-34-1600.webp 1600w" sizes="(min-width: 1024px) 26vw, 50vw" width="1600" height="2400" loading="lazy" decoding="async" alt="Render del pipeline: cuerpo 3D con las regiones musculares y su leyenda" data-i18n-attr="alt=caso.fortal.galeria.6">
+</picture>
+          </div>
+          <figcaption data-revelar data-i18n="caso.fortal.galeria.6.pie">Las veinte regiones.</figcaption>
+        </figure>
+      </div>
+    </section>
+  </div>
+  <nav class="reticula caso-nav" id="otros" aria-label="Otros casos" data-i18n-attr="aria-label=caso.otros.aria">
+    <a class="caso-siguiente papel" href="athleteiq.html" aria-label="Caso siguiente: AthleteIQ" data-i18n-attr="aria-label=caso.fortal.siguiente.aria" data-visto>
+      <div class="caso-siguiente__texto">
+        <span class="etiqueta caso-siguiente__etiqueta" data-revelar="bloque" data-i18n="caso.siguiente">Caso siguiente →</span>
+        <span class="caso-siguiente__nombre h-seccion" data-revelar>AthleteIQ</span>
+        <span class="caso-siguiente__frase secundario" data-revelar data-i18n="trabajo.athleteiq.frase">Inteligencia de rendimiento para staff de rugby league: preguntás por chat, respondés con datos.</span>
+      </div>
+      <div class="caso-siguiente__marco">
+        <picture>
+          <source type="image/avif" srcset="../assets/img/fortal/siguiente-370.avif 370w, ../assets/img/fortal/siguiente-740.avif 740w" sizes="(min-width: 1024px) 40vw, 80vw">
+          <img src="../assets/img/fortal/siguiente-740.webp" srcset="../assets/img/fortal/siguiente-370.webp 370w, ../assets/img/fortal/siguiente-740.webp 740w" sizes="(min-width: 1024px) 40vw, 80vw" width="740" height="520" loading="lazy" decoding="async" alt="Marco de porcelana con una captura de AthleteIQ" data-i18n-attr="alt=caso.fortal.siguiente.alt">
+        </picture>
+      </div>
+    </a>
+    <p class="caso-nav__fila"><a class="boton boton--texto" href="cathedra.html" aria-label="Caso anterior: Cathedra" data-i18n-attr="aria-label=caso.fortal.anterior.aria" data-i18n="caso.fortal.anterior.texto" data-revelar="bloque">← Caso anterior: Cathedra</a> <span class="caso-nav__item"><span aria-hidden="true">·</span> <a class="boton boton--texto" href="../index.html#trabajo" data-i18n="caso.volver" data-revelar="bloque">Todos los casos</a></span> <span class="caso-nav__item"><span aria-hidden="true">·</span> <a class="boton boton--texto" href="athleteiq.html" aria-label="Caso siguiente: AthleteIQ" data-i18n-attr="aria-label=caso.fortal.siguiente.aria" data-i18n="caso.fortal.siguiente.texto" data-revelar="bloque">Caso siguiente: AthleteIQ →</a></span></p>
+  </nav>
+  </div>
+</main>
+<footer class="pie seccion--tinta">
+  <div class="contenedor pie__in">
+    <div class="pila--chica">
+      <p class="pie__enlaces">
+        <a href="../creditos.html" data-i18n="pie.creditos">Texturas y entorno CC0 de ambientCG y Poly Haven — créditos</a>
+        <a href="../legal.html" data-i18n="pie.legal">Aviso legal y privacidad</a>
+      </p>
+      <p data-i18n="pie.hecho">Sitio estático hecho con desarrollo asistido por IA y verificado a mano. Sin cookies ni analítica.</p>
+    </div>
+    <p class="pie__copy" data-i18n="pie.copy">© 2026 Ramiro Bales</p>
+  </div>
+</footer>
+<script src="../lib/gsap.min.js" defer></script>
+<script src="../lib/ScrollTrigger.min.js" defer></script>
+<script type="module" src="../js/comun.js"></script>
+<script type="module">
+const enlaces = [...document.querySelectorAll('.caso-indice a')];
+const partes = enlaces.map((a) => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+if (partes.length && 'IntersectionObserver' in window) {
+  const io = new IntersectionObserver((es) => {
+    es.forEach((e) => {
+      if (!e.isIntersecting) return;
+      enlaces.forEach((a) => { if (a.getAttribute('href') === '#' + e.target.id) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current'); });
+    });
+  }, { rootMargin: '-30% 0px -55% 0px' });
+  partes.forEach((s) => io.observe(s));
+}
+</script>
+</body>
+</html>

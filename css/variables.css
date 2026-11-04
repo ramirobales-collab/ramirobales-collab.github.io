@@ -1,0 +1,71 @@
+:root {
+  color-scheme: light dark;
+
+  --fondo: light-dark(oklch(95% 0.012 85), oklch(7% 0 0));
+  --papel: light-dark(oklch(98% 0.008 85), oklch(11% 0.004 80));
+  --hundida: light-dark(oklch(91.5% 0.018 80), oklch(15% 0.008 80));
+  --tinta-bloque: light-dark(oklch(19% 0.008 80), oklch(19% 0.01 80));
+  --borde: light-dark(oklch(58% 0.03 80), oklch(49% 0.02 80));
+  --filete: light-dark(oklch(81% 0.02 80), oklch(30% 0.01 80));
+  --texto: light-dark(oklch(16% 0.012 80), oklch(92.5% 0.015 85));
+  --texto-2: light-dark(oklch(39% 0.015 80), oklch(71% 0.02 80));
+  --texto-3: light-dark(oklch(49% 0.018 80), oklch(58% 0.02 80));
+  --acento-display: light-dark(oklch(55% 0.21 29), oklch(66% 0.19 29));
+  --acento-texto: light-dark(oklch(51% 0.20 29), oklch(66% 0.19 29));
+  --acento-contra: light-dark(oklch(95% 0.012 85), oklch(7% 0 0));
+  --estado-en-uso: light-dark(oklch(46% 0.11 150), oklch(78% 0.08 140));
+  --estado-proceso: light-dark(oklch(47% 0.11 75), oklch(80% 0.12 85));
+  --foco: light-dark(oklch(41% 0.11 258), oklch(83% 0.08 258));
+
+  --marfil-sobre-tinta: oklch(95% 0.012 85);
+  --sec-sobre-tinta: oklch(80% 0.012 80);
+  --hundida-sobre-tinta: light-dark(oklch(24% 0.01 80), oklch(15% 0.008 80));
+
+  --sombra-tinte: light-dark(oklch(40% 0.05 80 / 0.18), oklch(10% 0.02 80 / 0.7));
+  --sombra-tinte-suave: light-dark(oklch(40% 0.05 80 / 0.08), oklch(10% 0.02 80 / 0.45));
+  --sombra-papel: 0 1px 0 var(--sombra-tinte-suave), 0 6px 18px -6px var(--sombra-tinte), 0 24px 48px -28px var(--sombra-tinte);
+  --sombra-flotante: 0 1px 0 var(--sombra-tinte-suave), 0 12px 32px -12px var(--sombra-tinte);
+  --grano-opacidad: 0.04;
+  --grano-mezcla: multiply;
+
+  --inter: "Inter", "Inter-respaldo", system-ui, sans-serif;
+  --playfair: "Playfair Display", "Playfair-respaldo", Georgia, serif;
+
+  --t-display: clamp(2.25rem, 1.2rem + 4.6vw, 8rem);
+  --t-seccion: clamp(2rem, 1.3rem + 3vw, 4.75rem);
+  --t-caso: clamp(1.75rem, 1.4rem + 1.2vw, 2.44rem);
+  --t-h3: 1.5625rem;
+  --t-cuerpo: 1.125rem;
+  --t-secundario: 1rem;
+  --t-etiqueta: 0.8125rem;
+  --t-folio: clamp(3rem, 2rem + 4vw, 5.9rem);
+  --t-sub-heroe: clamp(1.25rem, 1.05rem + 0.9vw, 1.75rem);
+  --t-boton: 0.9375rem;
+
+  --e-1: 0.5rem;
+  --e-2: 0.75rem;
+  --e-3: 1.5rem;
+  --e-4: 3rem;
+  --e-seccion: clamp(72px, 4rem + 5vw, 160px);
+  --margen: clamp(16px, 1rem + 2.5vw, 64px);
+  --calle: clamp(16px, 1rem + 0.4vw, 24px);
+  --ancho-max: 1360px;
+  --nav-alto: 72px;
+
+  --curva-entrada: cubic-bezier(0.16, 1, 0.3, 1);
+  --curva-salida: cubic-bezier(0.7, 0, 0.84, 0);
+  --d-micro: 180ms;
+  --d-etiqueta: 350ms;
+  --d-parrafo: 600ms;
+  --d-filete: 700ms;
+  --d-titulo: 900ms;
+
+  --radio: 6px;
+  --radio-chico: 3px;
+}
+
+:root[data-theme="light"] { color-scheme: light; }
+:root[data-theme="dark"] { color-scheme: dark; --grano-opacidad: 0.02; --grano-mezcla: screen; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --grano-opacidad: 0.02; --grano-mezcla: screen; }
+}
