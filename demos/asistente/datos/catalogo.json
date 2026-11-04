@@ -1,0 +1,371 @@
+{
+  "aviso": "Catálogo ficticio de Ámbar Muebles, marca creada para esta demo. Productos, precios, plazos y políticas son de ejemplo.",
+  "version": "2026-11-04",
+  "moneda": "US$",
+  "productos": [
+    {
+      "id": "lua",
+      "nombre": { "es": "Butaca Lúa", "en": "Lúa armchair" },
+      "clave": ["lua"],
+      "categoria": "butaca",
+      "modificadores": ["capitone", "tufted"],
+      "linea": { "es": "Butacas", "en": "Armchairs" },
+      "descripcion": { "es": "Butaca de terciopelo con capitoné, estructura de madera maciza y botones de metal.", "en": "Tufted velvet armchair with a solid wood frame and metal buttons." },
+      "medidas": { "ancho": 83, "prof": 57, "alto": 69, "extra": { "es": "Alto del asiento: 42 cm.", "en": "Seat height: 42 cm." } },
+      "entrega": { "bultos": [[88, 62, 74]], "peso": 14, "es": "Llega armada, en una caja.", "en": "Arrives assembled, in one box." },
+      "precio": { "desde": 540, "es": "con terciopelo Mango o Pavo real, nogal y latón", "en": "in Mango or Peacock velvet, walnut and brass" },
+      "materiales": { "es": "Estructura de madera maciza con terminación al aceite, espuma de alta densidad y tapizado de terciopelo.", "en": "Solid wood frame with an oil finish, high-density foam and velvet upholstery." },
+      "opciones": [
+        { "grupo": { "es": "Terciopelo", "en": "Velvet" }, "valores": [
+          { "id": "mango", "es": "Mango", "en": "Mango", "extra": 0 },
+          { "id": "pavo", "es": "Pavo real", "en": "Peacock", "extra": 0 },
+          { "id": "arcilla", "es": "Arcilla", "en": "Clay", "extra": 40 },
+          { "id": "oliva", "es": "Oliva", "en": "Olive", "extra": 40 },
+          { "id": "tinta", "es": "Tinta", "en": "Ink", "extra": 40 },
+          { "id": "marfil", "es": "Marfil", "en": "Ivory", "extra": 60 } ] },
+        { "grupo": { "es": "Madera", "en": "Wood" }, "valores": [
+          { "id": "nogal", "es": "Nogal", "en": "Walnut", "extra": 0 },
+          { "id": "ebano", "es": "Ébano", "en": "Ebony", "extra": 30 },
+          { "id": "roble", "es": "Roble claro", "en": "Light oak", "extra": 30 },
+          { "id": "fresno", "es": "Fresno blanqueado", "en": "Whitewashed ash", "extra": 50 } ] },
+        { "grupo": { "es": "Botones", "en": "Buttons" }, "valores": [
+          { "id": "laton", "es": "Latón", "en": "Brass", "extra": 0 },
+          { "id": "cromo", "es": "Cromo", "en": "Chrome", "extra": 20 },
+          { "id": "negro", "es": "Negro mate", "en": "Matte black", "extra": 0 } ] }
+      ],
+      "plazos": [
+        { "opciones": ["mango", "pavo"], "estado": "stock", "es": "en stock, 3 a 5 días hábiles", "en": "in stock, 3 to 5 business days" },
+        { "opciones": ["arcilla", "oliva", "tinta", "marfil"], "estado": "pedido", "es": "a pedido, 4 a 5 semanas", "en": "made to order, 4 to 5 weeks" }
+      ],
+      "garantia": { "es": "5 años en la estructura y 1 año en el tapizado.", "en": "5 years on the frame and 1 year on the upholstery." },
+      "cuidado": { "guias": ["terciopelo", "madera"], "es": "Tapizado fijo: no se saca ni va al lavarropas.", "en": "Fixed upholstery: it does not come off and cannot be machine washed." },
+      "configurador": "silla"
+    },
+    {
+      "id": "duna",
+      "nombre": { "es": "Sofá Duna", "en": "Duna sofa" },
+      "clave": ["duna"],
+      "categoria": "sofa",
+      "modificadores": ["curvo", "curved", "chaise"],
+      "linea": { "es": "Sofás", "en": "Sofas" },
+      "descripcion": { "es": "Sofá curvo de terciopelo para 3 personas, con chaise integrada y patas finas con punteras de metal.", "en": "Curved velvet sofa for 3 people, with a built-in chaise and slim legs with metal caps." },
+      "medidas": { "ancho": 219, "prof": 102, "alto": 79, "extra": { "es": "Alto del asiento: 44 cm. Lugares: 3.", "en": "Seat height: 44 cm. Seats: 3." } },
+      "entrega": { "bultos": [[222, 104, 66], [60, 40, 20]], "peso": 58, "es": "Llega en 2 bultos con las patas desmontadas; se arman en 5 minutos sin herramientas.", "en": "Arrives in 2 packages with the legs removed; they go on in 5 minutes without tools." },
+      "precio": { "desde": 1890, "es": "con terciopelo Champán, Azul noche, Gris perla o Negro, patas de laca negra y punteras oro rosa", "en": "in Champagne, Midnight blue, Pearl grey or Black velvet, black lacquer legs and rose gold caps" },
+      "materiales": { "es": "Estructura de madera de eucalipto y multilaminado, cinchas elásticas, espuma de alta densidad y tapizado de terciopelo.", "en": "Eucalyptus and plywood frame, elastic webbing, high-density foam and velvet upholstery." },
+      "opciones": [
+        { "grupo": { "es": "Terciopelo", "en": "Velvet" }, "valores": [
+          { "id": "champan", "es": "Champán", "en": "Champagne", "extra": 0 },
+          { "id": "marino", "es": "Azul noche", "en": "Midnight blue", "extra": 0 },
+          { "id": "gris", "es": "Gris perla", "en": "Pearl grey", "extra": 0 },
+          { "id": "negro", "es": "Negro", "en": "Black", "extra": 0 },
+          { "id": "rosa", "es": "Rosa pálido", "en": "Pale rose", "extra": 90 },
+          { "id": "musgo", "es": "Musgo", "en": "Moss", "extra": 120 },
+          { "id": "terracota", "es": "Terracota", "en": "Terracotta", "extra": 120 } ] },
+        { "grupo": { "es": "Patas", "en": "Legs" }, "valores": [
+          { "id": "laca", "es": "Laca negra", "en": "Black lacquer", "extra": 0 },
+          { "id": "nogal", "es": "Nogal", "en": "Walnut", "extra": 60 },
+          { "id": "roble", "es": "Roble claro", "en": "Light oak", "extra": 60 },
+          { "id": "marfil", "es": "Laca marfil", "en": "Ivory lacquer", "extra": 40 } ] },
+        { "grupo": { "es": "Punteras", "en": "Leg caps" }, "valores": [
+          { "id": "oro", "es": "Oro rosa", "en": "Rose gold", "extra": 0 },
+          { "id": "laton", "es": "Latón", "en": "Brass", "extra": 0 },
+          { "id": "cromo", "es": "Cromo", "en": "Chrome", "extra": 30 },
+          { "id": "negromate", "es": "Negro mate", "en": "Matte black", "extra": 0 } ] }
+      ],
+      "plazos": [
+        { "opciones": ["champan", "gris", "negro"], "estado": "stock", "es": "en stock, 5 a 7 días hábiles", "en": "in stock, 5 to 7 business days" },
+        { "opciones": ["marino", "rosa"], "estado": "taller", "es": "en taller, 2 a 3 semanas", "en": "in the workshop, 2 to 3 weeks" },
+        { "opciones": ["musgo", "terracota"], "estado": "pedido", "es": "a pedido, 6 a 8 semanas", "en": "made to order, 6 to 8 weeks" }
+      ],
+      "garantia": { "es": "10 años en la estructura y 2 años en tapizado y espuma.", "en": "10 years on the frame and 2 years on upholstery and foam." },
+      "cuidado": { "guias": ["terciopelo"], "es": "Tapizado fijo: no se saca ni va al lavarropas. Los almohadones del respaldo tienen cierre para airear el relleno.", "en": "Fixed upholstery: it does not come off and cannot be machine washed. The back cushions have a zip to air the filling." },
+      "configurador": "sofa"
+    },
+    {
+      "id": "bruma",
+      "nombre": { "es": "Sofá Bruma", "en": "Bruma sofa" },
+      "clave": ["bruma"],
+      "categoria": "sofa",
+      "modificadores": ["modular", "modulos", "modules", "boucle"],
+      "linea": { "es": "Sofás", "en": "Sofas" },
+      "descripcion": { "es": "Sofá modular de 3 cuerpos en bouclé, con funda removible y almohadones de pluma.", "en": "Three-module bouclé sofa with a removable cover and feather cushions." },
+      "medidas": { "ancho": 228, "prof": 95, "alto": 84, "extra": { "es": "Alto del asiento: 45 cm. Lugares: 3.", "en": "Seat height: 45 cm. Seats: 3." } },
+      "entrega": { "bultos": [[78, 98, 86], [78, 98, 86], [78, 98, 86]], "peso": 66, "es": "Llega en 3 módulos que se unen con grampas en casa, sin herramientas.", "en": "Arrives as 3 modules that clip together at home, without tools." },
+      "precio": { "desde": 1650, "es": "en bouclé Hueso, Arena o Carbón", "en": "in Bone, Sand or Charcoal bouclé" },
+      "materiales": { "es": "Estructura de madera maciza y multilaminado, resortes ensacados, almohadones de pluma y funda de bouclé de lana y poliéster.", "en": "Solid wood and plywood frame, pocket springs, feather cushions and a wool and polyester bouclé cover." },
+      "opciones": [
+        { "grupo": { "es": "Funda", "en": "Cover" }, "valores": [
+          { "id": "hueso", "es": "Bouclé Hueso", "en": "Bone bouclé", "extra": 0 },
+          { "id": "arena", "es": "Bouclé Arena", "en": "Sand bouclé", "extra": 0 },
+          { "id": "carbon", "es": "Bouclé Carbón", "en": "Charcoal bouclé", "extra": 0 },
+          { "id": "salvia", "es": "Lino lavado Salvia", "en": "Sage washed linen", "extra": 150 } ] }
+      ],
+      "plazos": [
+        { "opciones": ["hueso"], "estado": "stock", "es": "en stock, 5 a 7 días hábiles", "en": "in stock, 5 to 7 business days" },
+        { "opciones": ["arena", "carbon"], "estado": "taller", "es": "en taller, 3 a 4 semanas", "en": "in the workshop, 3 to 4 weeks" },
+        { "opciones": ["salvia"], "estado": "pedido", "es": "a pedido, 6 a 8 semanas", "en": "made to order, 6 to 8 weeks" }
+      ],
+      "garantia": { "es": "10 años en la estructura y 2 años en la funda y los almohadones.", "en": "10 years on the frame and 2 years on the cover and cushions." },
+      "cuidado": { "guias": [], "es": "Funda removible: se lava a 30 °C en ciclo delicado y se seca a la sombra, sin secarropas. Los almohadones de pluma se sacuden una vez por semana.", "en": "Removable cover: wash at 30 °C on a delicate cycle and dry in the shade, no tumble dryer. Shake the feather cushions once a week." }
+    },
+    {
+      "id": "sauce",
+      "nombre": { "es": "Mesa ratona Sauce", "en": "Sauce coffee table" },
+      "clave": ["sauce"],
+      "categoria": "mesa",
+      "modificadores": ["ratona", "centro", "living", "coffee", "baja"],
+      "linea": { "es": "Mesas", "en": "Tables" },
+      "descripcion": { "es": "Mesa ratona de roble macizo con esquinas redondeadas y un estante abajo.", "en": "Solid oak coffee table with rounded corners and a lower shelf." },
+      "medidas": { "ancho": 110, "prof": 60, "alto": 38, "extra": { "es": "Alto del estante: 12 cm.", "en": "Shelf height: 12 cm." } },
+      "entrega": { "bultos": [[114, 64, 14]], "peso": 18, "es": "Llega en una caja chata; las patas se atornillan en 10 minutos con la llave incluida.", "en": "Arrives in a flat box; the legs screw on in 10 minutes with the included key." },
+      "precio": { "desde": 420, "es": "en roble natural", "en": "in natural oak" },
+      "materiales": { "es": "Roble macizo con aceite natural.", "en": "Solid oak with a natural oil finish." },
+      "opciones": [
+        { "grupo": { "es": "Acabado", "en": "Finish" }, "valores": [
+          { "id": "natural", "es": "Roble natural", "en": "Natural oak", "extra": 0 },
+          { "id": "ahumado", "es": "Roble ahumado", "en": "Smoked oak", "extra": 40 } ] }
+      ],
+      "plazos": [
+        { "opciones": ["natural", "ahumado"], "estado": "stock", "es": "en stock, 3 a 5 días hábiles", "en": "in stock, 3 to 5 business days" }
+      ],
+      "garantia": { "es": "5 años en la estructura.", "en": "5 years on the frame." },
+      "cuidado": { "guias": ["madera"], "es": "Trae un kit de aceite para renovar la tapa.", "en": "Comes with an oil kit to refresh the top." }
+    },
+    {
+      "id": "alba",
+      "nombre": { "es": "Mesa de comedor Alba", "en": "Alba dining table" },
+      "clave": ["alba"],
+      "categoria": "mesa",
+      "modificadores": ["comedor", "comer", "extensible", "dining", "kitchen", "cocina"],
+      "linea": { "es": "Mesas", "en": "Tables" },
+      "descripcion": { "es": "Mesa de comedor extensible de madera maciza: 6 personas cerrada y hasta 10 extendida.", "en": "Extending solid wood dining table: seats 6 closed and up to 10 extended." },
+      "medidas": { "ancho": 180, "prof": 90, "alto": 75, "extra": { "es": "Extendida: 240 cm de largo. Personas: 6 cerrada, hasta 10 extendida.", "en": "Extended: 240 cm long. Seats: 6 closed, up to 10 extended." } },
+      "entrega": { "bultos": [[186, 96, 12], [80, 20, 20]], "peso": 52, "es": "Llega en 2 bultos: la tapa y una caja con las patas; el equipo de entrega la arma.", "en": "Arrives in 2 packages, the top and a box with the legs; the delivery team assembles it." },
+      "precio": { "desde": 1280, "es": "en roble", "en": "in oak" },
+      "materiales": { "es": "Tapa y patas de madera maciza con aceite natural; corredera metálica para la extensión.", "en": "Solid wood top and legs with a natural oil finish; metal runner for the extension." },
+      "opciones": [
+        { "grupo": { "es": "Madera", "en": "Wood" }, "valores": [
+          { "id": "roble", "es": "Roble", "en": "Oak", "extra": 0 },
+          { "id": "nogal", "es": "Nogal", "en": "Walnut", "extra": 220 } ] }
+      ],
+      "plazos": [
+        { "opciones": ["roble", "nogal"], "estado": "pedido", "es": "a pedido, 4 a 6 semanas", "en": "made to order, 4 to 6 weeks" }
+      ],
+      "garantia": { "es": "5 años en la estructura y en la corredera.", "en": "5 years on the frame and the runner." },
+      "cuidado": { "guias": ["madera"], "es": "Trae un kit de aceite para renovar la tapa.", "en": "Comes with an oil kit to refresh the top." }
+    },
+    {
+      "id": "nido",
+      "nombre": { "es": "Mesa de luz Nido", "en": "Nido bedside table" },
+      "clave": ["nido"],
+      "categoria": "mesa",
+      "modificadores": ["luz", "noche", "mesita", "bedside", "nightstand", "cama", "bed"],
+      "linea": { "es": "Mesas", "en": "Tables" },
+      "descripcion": { "es": "Mesa de luz de fresno con un cajón de cierre suave y una repisa abierta.", "en": "Ash bedside table with a soft-close drawer and an open shelf." },
+      "medidas": { "ancho": 48, "prof": 38, "alto": 52, "extra": { "es": "Interior del cajón: 40 × 30 × 10 cm.", "en": "Drawer interior: 40 × 30 × 10 cm." } },
+      "entrega": { "bultos": [[52, 42, 56]], "peso": 9, "es": "Llega armada.", "en": "Arrives assembled." },
+      "precio": { "desde": 190, "es": "en fresno natural", "en": "in natural ash" },
+      "materiales": { "es": "Fresno macizo y enchapado de fresno, guías metálicas de cierre suave.", "en": "Solid ash and ash veneer, soft-close metal runners." },
+      "opciones": [
+        { "grupo": { "es": "Acabado", "en": "Finish" }, "valores": [
+          { "id": "natural", "es": "Fresno natural", "en": "Natural ash", "extra": 0 },
+          { "id": "negro", "es": "Fresno teñido negro", "en": "Black-stained ash", "extra": 20 } ] }
+      ],
+      "plazos": [
+        { "opciones": ["natural", "negro"], "estado": "stock", "es": "en stock, 3 a 5 días hábiles", "en": "in stock, 3 to 5 business days" }
+      ],
+      "garantia": { "es": "5 años en la estructura y en las guías del cajón.", "en": "5 years on the frame and the drawer runners." },
+      "cuidado": { "guias": ["madera"], "es": "", "en": "" }
+    },
+    {
+      "id": "vera",
+      "nombre": { "es": "Silla Vera", "en": "Vera chair" },
+      "clave": ["vera"],
+      "categoria": "silla",
+      "modificadores": ["comedor", "dining"],
+      "linea": { "es": "Sillas", "en": "Chairs" },
+      "descripcion": { "es": "Silla de comedor de haya maciza con asiento tapizado. Se vende por unidad.", "en": "Solid beech dining chair with an upholstered seat. Sold individually." },
+      "medidas": { "ancho": 46, "prof": 52, "alto": 80, "extra": { "es": "Alto del asiento: 46 cm. Combina con la Mesa de comedor Alba (75 cm de alto).", "en": "Seat height: 46 cm. Pairs with the Alba dining table (75 cm high)." } },
+      "entrega": { "bultos": [[50, 56, 84]], "peso": 6, "es": "Llega armada.", "en": "Arrives assembled." },
+      "precio": { "desde": 165, "es": "por unidad, con asiento de lino", "en": "each, with a linen seat" },
+      "materiales": { "es": "Haya maciza laqueada al agua y asiento con espuma y tapizado.", "en": "Solid beech with a water-based lacquer and a padded, upholstered seat." },
+      "opciones": [
+        { "grupo": { "es": "Asiento", "en": "Seat" }, "valores": [
+          { "id": "arena", "es": "Lino Arena", "en": "Sand linen", "extra": 0 },
+          { "id": "carbon", "es": "Lino Carbón", "en": "Charcoal linen", "extra": 0 },
+          { "id": "tinta", "es": "Terciopelo Tinta", "en": "Ink velvet", "extra": 20 } ] }
+      ],
+      "plazos": [
+        { "opciones": ["arena", "carbon"], "estado": "stock", "es": "en stock, 3 a 5 días hábiles", "en": "in stock, 3 to 5 business days" },
+        { "opciones": ["tinta"], "estado": "taller", "es": "en taller, 3 a 4 semanas", "en": "in the workshop, 3 to 4 weeks" }
+      ],
+      "garantia": { "es": "5 años en la estructura y 1 año en el tapizado.", "en": "5 years on the frame and 1 year on the upholstery." },
+      "cuidado": { "guias": ["madera"], "es": "El asiento de lino se limpia con un paño apenas húmedo; el de terciopelo sigue la guía del terciopelo.", "en": "Wipe the linen seat with a barely damp cloth; the velvet seat follows the velvet guide." }
+    },
+    {
+      "id": "cierzo",
+      "nombre": { "es": "Aparador Cierzo", "en": "Cierzo sideboard" },
+      "clave": ["cierzo"],
+      "categoria": "aparador",
+      "modificadores": [],
+      "linea": { "es": "Guardado", "en": "Storage" },
+      "descripcion": { "es": "Aparador de nogal con tres puertas de listones y estantes regulables.", "en": "Walnut sideboard with three slatted doors and adjustable shelves." },
+      "medidas": { "ancho": 160, "prof": 45, "alto": 80, "extra": { "es": "Estantes regulables en 4 alturas.", "en": "Shelves adjust to 4 heights." } },
+      "entrega": { "bultos": [[166, 50, 86]], "peso": 48, "es": "Llega armado; necesita dos personas para moverlo.", "en": "Arrives assembled; it takes two people to move it." },
+      "precio": { "desde": 1150, "es": "en nogal", "en": "in walnut" },
+      "materiales": { "es": "Nogal macizo y enchapado de nogal con aceite natural; bisagras de cierre suave.", "en": "Solid walnut and walnut veneer with a natural oil finish; soft-close hinges." },
+      "opciones": [
+        { "grupo": { "es": "Madera", "en": "Wood" }, "valores": [
+          { "id": "nogal", "es": "Nogal", "en": "Walnut", "extra": 0 } ] }
+      ],
+      "plazos": [
+        { "opciones": ["nogal"], "estado": "pedido", "es": "a pedido, 5 a 6 semanas", "en": "made to order, 5 to 6 weeks" }
+      ],
+      "garantia": { "es": "5 años en la estructura y en las bisagras.", "en": "5 years on the frame and the hinges." },
+      "cuidado": { "guias": ["madera"], "es": "", "en": "" }
+    },
+    {
+      "id": "lumbre",
+      "nombre": { "es": "Lámpara de pie Lumbre", "en": "Lumbre floor lamp" },
+      "clave": ["lumbre"],
+      "categoria": "lampara",
+      "modificadores": ["pie", "floor"],
+      "linea": { "es": "Iluminación", "en": "Lighting" },
+      "descripcion": { "es": "Lámpara de pie con base de latón y pantalla de lino.", "en": "Floor lamp with a brass base and a linen shade." },
+      "medidas": { "ancho": 45, "prof": 45, "alto": 158, "extra": { "es": "Pantalla de 45 cm de diámetro; base de 28 cm.", "en": "45 cm shade diameter; 28 cm base." } },
+      "entrega": { "bultos": [[50, 50, 30], [90, 32, 12]], "peso": 7, "es": "Llega en 2 cajas; la pantalla se enrosca sin herramientas.", "en": "Arrives in 2 boxes; the shade screws on without tools." },
+      "precio": { "desde": 310, "es": "sin lámpara", "en": "bulb not included" },
+      "materiales": { "es": "Base y vástago de latón macizo, pantalla de lino. Rosca E27 para lámpara LED de hasta 12 W, no incluida. Cable de 2 m con interruptor de pie.", "en": "Solid brass base and stem, linen shade. E27 socket for an LED bulb up to 12 W, not included. 2 m cable with a foot switch." },
+      "opciones": [
+        { "grupo": { "es": "Pantalla", "en": "Shade" }, "valores": [
+          { "id": "crudo", "es": "Lino crudo", "en": "Natural linen", "extra": 0 } ] }
+      ],
+      "plazos": [
+        { "opciones": ["crudo"], "estado": "stock", "es": "en stock, 3 a 5 días hábiles", "en": "in stock, 3 to 5 business days" }
+      ],
+      "garantia": { "es": "2 años en la parte eléctrica.", "en": "2 years on the electrical parts." },
+      "cuidado": { "guias": [], "es": "Pantalla: plumero o aspiradora a baja potencia. Latón: paño seco; con el tiempo toma una pátina natural.", "en": "Shade: feather duster or vacuum on low. Brass: dry cloth; it develops a natural patina over time." }
+    },
+    {
+      "id": "trama",
+      "nombre": { "es": "Alfombra Trama", "en": "Trama rug" },
+      "clave": ["trama"],
+      "categoria": "alfombra",
+      "modificadores": [],
+      "linea": { "es": "Textiles", "en": "Textiles" },
+      "descripcion": { "es": "Alfombra tejida a mano en lana y yute, con trama en relieve.", "en": "Hand-woven wool and jute rug with a raised weave." },
+      "medidas": { "ancho": 200, "prof": 300, "alto": 1, "extra": { "es": "También en 160 × 230 cm. Espesor: 12 mm.", "en": "Also in 160 × 230 cm. Thickness: 12 mm." } },
+      "entrega": { "bultos": [[205, 40, 40]], "peso": 22, "es": "Llega enrollada.", "en": "Arrives rolled." },
+      "precio": { "desde": 480, "es": "en 160 × 230 cm; la de 200 × 300 cm sale US$ 640", "en": "in 160 × 230 cm; the 200 × 300 cm rug costs US$ 640" },
+      "materiales": { "es": "70 % lana y 30 % yute, base de algodón.", "en": "70% wool and 30% jute, cotton backing." },
+      "opciones": [
+        { "grupo": { "es": "Medida", "en": "Size" }, "valores": [
+          { "id": "chica", "es": "160 × 230 cm", "en": "160 × 230 cm", "extra": 0 },
+          { "id": "grande", "es": "200 × 300 cm", "en": "200 × 300 cm", "extra": 160 } ] }
+      ],
+      "plazos": [
+        { "opciones": ["grande"], "estado": "stock", "es": "en stock, 3 a 5 días hábiles", "en": "in stock, 3 to 5 business days" },
+        { "opciones": ["chica"], "estado": "taller", "es": "en taller, 2 a 3 semanas", "en": "in the workshop, 2 to 3 weeks" }
+      ],
+      "garantia": { "es": "1 año por fallas del tejido.", "en": "1 year against weaving faults." },
+      "cuidado": { "guias": [], "es": "Aspirar sin cepillo giratorio. Manchas: secar con un paño blanco, sin frotar. Limpieza a fondo, sólo profesional. Rotarla cada 6 meses para que se gaste parejo.", "en": "Vacuum without a rotating brush. Stains: blot with a white cloth, do not rub. Deep cleaning by a professional only. Rotate it every 6 months so it wears evenly." }
+    },
+    {
+      "id": "estela",
+      "nombre": { "es": "Cama Estela", "en": "Estela bed" },
+      "clave": ["estela"],
+      "categoria": "cama",
+      "modificadores": ["doble", "double", "queen"],
+      "linea": { "es": "Dormitorio", "en": "Bedroom" },
+      "descripcion": { "es": "Cama de dos plazas con respaldo tapizado en lino y base de listones de madera. No incluye colchón.", "en": "Double bed with a linen-upholstered headboard and a wooden slat base. Mattress not included." },
+      "medidas": { "ancho": 154, "prof": 206, "alto": 105, "extra": { "es": "Para colchón de 140 × 190 cm (no incluido). Versión para 160 × 200 cm: 174 × 216 × 105 cm.", "en": "For a 140 × 190 cm mattress (not included). Version for 160 × 200 cm: 174 × 216 × 105 cm." } },
+      "entrega": { "bultos": [[160, 110, 12], [200, 30, 20]], "peso": 61, "es": "Llega en 2 bultos; el equipo de entrega la arma.", "en": "Arrives in 2 packages; the delivery team assembles it." },
+      "precio": { "desde": 980, "es": "para colchón de 140 × 190 cm; la versión para 160 × 200 cm suma US$ 180", "en": "for a 140 × 190 cm mattress; the 160 × 200 cm version adds US$ 180" },
+      "materiales": { "es": "Estructura de eucalipto macizo, listones de haya y respaldo tapizado en lino.", "en": "Solid eucalyptus frame, beech slats and a linen-upholstered headboard." },
+      "opciones": [
+        { "grupo": { "es": "Respaldo", "en": "Headboard" }, "valores": [
+          { "id": "arena", "es": "Lino Arena", "en": "Sand linen", "extra": 0 },
+          { "id": "salvia", "es": "Lino Salvia", "en": "Sage linen", "extra": 0 } ] }
+      ],
+      "plazos": [
+        { "opciones": ["arena", "salvia"], "estado": "taller", "es": "en taller, 3 a 4 semanas", "en": "in the workshop, 3 to 4 weeks" }
+      ],
+      "garantia": { "es": "5 años en la estructura y los listones.", "en": "5 years on the frame and slats." },
+      "cuidado": { "guias": [], "es": "Respaldo fijo: aspirar y limpiar manchas con un paño apenas húmedo.", "en": "Fixed headboard: vacuum it and wipe stains with a barely damp cloth." }
+    },
+    {
+      "id": "faro",
+      "nombre": { "es": "Escritorio Faro", "en": "Faro desk" },
+      "clave": ["faro"],
+      "categoria": "escritorio",
+      "modificadores": [],
+      "linea": { "es": "Estudio", "en": "Study" },
+      "descripcion": { "es": "Escritorio de roble con pasacables y un cajón chato.", "en": "Oak desk with a cable outlet and a slim drawer." },
+      "medidas": { "ancho": 120, "prof": 60, "alto": 75, "extra": { "es": "Espacio libre para las piernas: 68 cm de alto.", "en": "Legroom: 68 cm high." } },
+      "entrega": { "bultos": [[126, 66, 14]], "peso": 26, "es": "Llega en una caja chata; las patas se atornillan en 15 minutos con la llave incluida.", "en": "Arrives in a flat box; the legs screw on in 15 minutes with the included key." },
+      "precio": { "desde": 690, "es": "en roble natural", "en": "in natural oak" },
+      "materiales": { "es": "Roble macizo con aceite natural; pasacables de latón.", "en": "Solid oak with a natural oil finish; brass cable outlet." },
+      "opciones": [
+        { "grupo": { "es": "Acabado", "en": "Finish" }, "valores": [
+          { "id": "natural", "es": "Roble natural", "en": "Natural oak", "extra": 0 } ] }
+      ],
+      "plazos": [
+        { "opciones": ["natural"], "estado": "stock", "es": "en stock, 3 a 5 días hábiles", "en": "in stock, 3 to 5 business days" }
+      ],
+      "garantia": { "es": "5 años en la estructura.", "en": "5 years on the frame." },
+      "cuidado": { "guias": ["madera"], "es": "", "en": "" }
+    }
+  ],
+  "documentos": [
+    {
+      "id": "terciopelo",
+      "tipo": "guia",
+      "nombre": { "es": "Guía de cuidado del terciopelo", "en": "Velvet care guide" },
+      "clave": ["terciopelo", "velvet"],
+      "secciones": [
+        { "id": "rutina", "campo": "cuidado", "titulo": { "es": "Rutina", "en": "Routine" }, "es": "Aspirá una vez por semana con la boquilla de tapizados, en el sentido del pelo.", "en": "Vacuum once a week with the upholstery nozzle, following the direction of the pile." },
+        { "id": "manchas", "campo": "cuidado", "titulo": { "es": "Manchas", "en": "Stains" }, "es": "Secá la mancha enseguida con un paño blanco, sin frotar; después pasá un paño apenas húmedo con agua y unas gotas de jabón neutro.", "en": "Blot the stain right away with a white cloth, without rubbing; then wipe with a barely damp cloth and a few drops of mild soap." },
+        { "id": "evitar", "campo": "cuidado", "titulo": { "es": "Qué evitar", "en": "What to avoid" }, "es": "No uses lavandina, solventes ni vapor apoyado sobre la tela; el sol directo aclara el color.", "en": "Do not use bleach, solvents or steam pressed onto the fabric; direct sun fades the colour." },
+        { "id": "marcas", "campo": "cuidado", "titulo": { "es": "Marcas de presión", "en": "Pressure marks" }, "es": "Las marcas de presión se levantan con vapor de plancha a 20 cm de la tela, sin apoyarla, y cepillando suave en el sentido del pelo.", "en": "Pressure marks lift with iron steam held 20 cm from the fabric, without touching it, then brushing gently along the pile." }
+      ]
+    },
+    {
+      "id": "madera",
+      "tipo": "guia",
+      "nombre": { "es": "Guía de cuidado de la madera maciza", "en": "Solid wood care guide" },
+      "clave": ["madera", "wood", "roble", "oak", "nogal", "walnut", "fresno", "ash", "haya", "beech"],
+      "secciones": [
+        { "id": "limpieza", "campo": "cuidado", "titulo": { "es": "Limpieza", "en": "Cleaning" }, "es": "Limpiá con un paño seco o apenas húmedo y secá enseguida.", "en": "Clean with a dry or barely damp cloth and dry it straight away." },
+        { "id": "proteger", "campo": "cuidado", "titulo": { "es": "Protección", "en": "Protection" }, "es": "Usá posavasos e individuales con cosas calientes o mojadas; las manchas de agua se marcan en el aceite.", "en": "Use coasters and placemats under hot or wet things; water rings mark the oil finish." },
+        { "id": "aceite", "campo": "cuidado", "titulo": { "es": "Aceite", "en": "Oil" }, "es": "Renová el aceite natural una vez por año con el kit de mantenimiento.", "en": "Refresh the natural oil once a year with the maintenance kit." },
+        { "id": "evitar", "campo": "cuidado", "titulo": { "es": "Qué evitar", "en": "What to avoid" }, "es": "No uses productos con siliconas ni amoníaco, y dejá 50 cm de distancia con estufas y radiadores.", "en": "Do not use products with silicone or ammonia, and keep it 50 cm away from heaters and radiators." }
+      ]
+    },
+    {
+      "id": "envios",
+      "tipo": "politica",
+      "nombre": { "es": "Política de envíos", "en": "Delivery policy" },
+      "clave": [],
+      "secciones": [
+        { "id": "turno", "campo": "envio", "titulo": { "es": "Entrega", "en": "Delivery" }, "es": "Entregamos a domicilio dentro del área de cobertura, con un turno que se coordina por mensaje.", "en": "We deliver to your door within the coverage area, with a time slot arranged by message." },
+        { "id": "costo", "campo": "envio", "etiquetas": "cuesta cuestan cobran precio sale gratis cargo cost costs price charge free", "titulo": { "es": "Costo", "en": "Cost" }, "es": "El envío no tiene cargo en compras desde US$ 1.000; en compras menores, el costo se calcula en el carrito con el código postal.", "en": "Delivery is free on orders from US$ 1,000; on smaller orders, the cost is worked out in the cart from your postcode." },
+        { "id": "plazo", "campo": "plazo", "etiquetas": "plazo tarda demora llega cuando entrega lead time arrive when", "titulo": { "es": "Desde cuándo corre el plazo", "en": "When the lead time starts" }, "es": "El plazo de cada ficha corre desde que se confirma el pago.", "en": "The lead time on each product page starts once payment is confirmed." },
+        { "id": "pisos", "campo": "envio", "titulo": { "es": "Pisos y escaleras", "en": "Floors and stairs" }, "es": "Subimos por escalera hasta un segundo piso sin cargo; más pisos o subir por el balcón se cotiza aparte.", "en": "We carry items up the stairs to a second floor at no charge; higher floors or hoisting through a balcony are quoted separately." },
+        { "id": "fuera", "campo": "envio", "titulo": { "es": "Fuera del área", "en": "Outside the area" }, "es": "Fuera del área de cobertura, el envío se cotiza por pedido con un transporte externo.", "en": "Outside the coverage area, delivery is quoted per order with an external carrier." }
+      ]
+    },
+    {
+      "id": "devoluciones",
+      "tipo": "politica",
+      "nombre": { "es": "Garantía y devoluciones", "en": "Warranty and returns" },
+      "clave": [],
+      "secciones": [
+        { "id": "stock", "campo": "devolucion", "titulo": { "es": "Productos en stock", "en": "In-stock products" }, "es": "Los productos en stock se pueden devolver dentro de los 30 días de la entrega, sin uso y en su embalaje; el retiro lo paga Ámbar.", "en": "In-stock products can be returned within 30 days of delivery, unused and in their packaging; Ámbar pays for the pickup." },
+        { "id": "pedido", "campo": "devolucion", "titulo": { "es": "Productos a pedido", "en": "Made-to-order products" }, "es": "Lo que se fabrica a pedido o en taller con la tela o el acabado que elegiste no tiene devolución, salvo falla.", "en": "Anything made to order or in the workshop with the fabric or finish you chose cannot be returned, except for faults." },
+        { "id": "cubre", "campo": "garantia", "titulo": { "es": "Qué cubre la garantía", "en": "What the warranty covers" }, "es": "La garantía cubre fallas de fabricación durante el plazo de cada ficha; no cubre el mal uso, el daño de mascotas, el sol directo ni la humedad.", "en": "The warranty covers manufacturing faults for the period on each product page; it does not cover misuse, pet damage, direct sun or damp." },
+        { "id": "reclamo", "campo": "garantia", "titulo": { "es": "Cómo se hace un reclamo", "en": "How to make a claim" }, "es": "Para un reclamo, una persona del equipo revisa las fotos del producto y el número de pedido.", "en": "For a claim, a person on the team reviews photos of the product and the order number." }
+      ]
+    }
+  ]
+}

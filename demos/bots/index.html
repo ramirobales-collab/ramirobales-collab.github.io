@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<script>try{var q=new URLSearchParams(location.search).get('tema'),t=q==='claro'?'light':q==='oscuro'?'dark':q||localStorage.getItem('tema');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t;}catch(e){}</script>
+<title>Sala de bots · demo de Ramiro Bales</title>
+<meta name="description" content="Simulación en el navegador de un bot de respuesta (texto, foto y nota de voz) y de cuatro bots proactivos, con datos ficticios y la arquitectura de proyectos reales. Demo de Ramiro Bales.">
+<meta name="robots" content="index, follow">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#F3EEE4">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#040404">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Sala de bots · demo de Ramiro Bales">
+<meta property="og:description" content="Un bot que contesta con datos (texto, foto y voz) y cuatro bots que avisan solos. Simulación con datos ficticios; arquitectura de proyectos reales.">
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../../favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../../apple-touch-icon.png">
+<link rel="preload" href="../../assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../../assets/fonts/playfair-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/estilo.css">
+<link rel="modulepreload" href="js/datos.js">
+</head>
+<body>
+<a class="saltar" href="#respuesta" data-i18n="barra.saltar">Saltar a la demo</a>
+
+<div class="cinta" role="note">
+  <p class="cinta__texto"><span class="cinta__largo" data-i18n="cinta.texto">Demo de Ramiro Bales · Simulación en tu navegador con datos ficticios. La arquitectura es la de proyectos reales.</span><span class="cinta__corto" data-i18n="cinta.corto">Demo · datos ficticios</span></p>
+  <a class="cinta__volver" href="../../index.html" data-i18n="cinta.volver">← Volver al portfolio</a>
+</div>
+
+<header class="barra">
+  <a class="marca" href="#respuesta" aria-label="Sala de bots, inicio de la demo" data-i18n-attr="aria-label=marca.aria">
+    <svg class="marca__signo" viewBox="0 0 32 32" aria-hidden="true"><path d="M6.5 7.5h19a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H14l-5.5 4v-4h-2a2 2 0 0 1-2-2v-11a2 2 0 0 1 2-2Z"/><path d="M11.5 15h.01M16 15h.01M20.5 15h.01"/></svg>
+    <span class="marca__nombre" data-i18n="marca.nombre">Sala de bots</span>
+  </a>
+  <nav class="barra__nav" aria-label="Secciones de la demo" data-i18n-attr="aria-label=nav.aria">
+    <a href="#respuesta" data-i18n="nav.respuesta">Bot de respuesta</a>
+    <a href="#proactivos" data-i18n="nav.proactivos">Bots proactivos</a>
+    <a href="#marca" data-i18n="nav.marca">Qué gana la marca</a>
+    <a href="#como" data-i18n="nav.como">Cómo está hecho</a>
+  </nav>
+  <div class="barra__herr">
+    <div class="conm" role="group" aria-label="Idioma" data-i18n-attr="aria-label=barra.idioma">
+      <button type="button" data-idioma="es" aria-pressed="true" lang="es">ES</button>
+      <button type="button" data-idioma="en" aria-pressed="false" lang="en">EN</button>
+    </div>
+    <button type="button" class="tema" aria-pressed="false" aria-label="Cambiar entre tema claro y oscuro" data-i18n-attr="aria-label=barra.tema">
+      <svg class="tema__luna" viewBox="0 0 20 20" aria-hidden="true"><path d="M16.4 12.2A7 7 0 0 1 7.8 3.6a7.2 7.2 0 1 0 8.6 8.6Z"/></svg>
+      <svg class="tema__sol" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="3.6"/><path d="M10 1.8v2.2M10 16v2.2M1.8 10H4M16 10h2.2M4.2 4.2l1.6 1.6M14.2 14.2l1.6 1.6M4.2 15.8l1.6-1.6M14.2 5.8l1.6-1.6"/></svg>
+      <span class="tema__oscuro" data-i18n="barra.oscuro">Oscuro</span><span class="tema__claro" data-i18n="barra.claro">Claro</span>
+    </button>
+  </div>
+</header>
+
+<main id="contenido">
+  <!-- 01 · Bot de respuesta -->
+  <section class="escenario" id="respuesta" aria-labelledby="titulo">
+    <div class="escenario__texto">
+      <p class="folio folio--chico"><span class="folio__cifra" aria-hidden="true">01</span><span class="folio__etiqueta" data-i18n="intro.etiqueta">Bot de respuesta</span></p>
+      <h1 class="titulo-1" id="titulo" data-i18n="intro.titulo">Bots que contestan con datos y avisan solos.</h1>
+      <p class="intro" data-i18n="intro.texto">Este es el bot de un staff deportivo: recibe texto, fotos y notas de voz, y contesta con los datos del plantel. Mandale algo y mirá en el panel qué pasa por dentro de cada mensaje.</p>
+
+      <h2 class="mini-titulo" id="probar-titulo" data-i18n="probar.titulo">Probalo</h2>
+      <ul class="acciones" role="list" aria-labelledby="probar-titulo">
+        <li><button type="button" class="accion" data-accion="voz">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3.5" width="6" height="11" rx="3"/><path d="M5.5 11.5a6.5 6.5 0 0 0 13 0M12 18v2.5"/></svg>
+          <span class="accion__texto"><span class="accion__nombre" data-i18n="acc.voz">Mandar una nota de voz</span><span class="accion__que" data-i18n="acc.voz.que">se transcribe y se contesta</span></span>
+        </button></li>
+        <li><button type="button" class="accion" data-accion="foto">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5.5" width="17" height="13" rx="2"/><circle cx="9" cy="10.5" r="1.6"/><path d="m4 17 5-4.5 3.5 3 2.5-2 5 4"/></svg>
+          <span class="accion__texto"><span class="accion__nombre" data-i18n="acc.foto">Mandar la foto del reporte</span><span class="accion__que" data-i18n="acc.foto.que">lee la tabla y marca lo dudoso</span></span>
+        </button></li>
+        <li><button type="button" class="accion" data-accion="riesgo">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 5.5h15a1.5 1.5 0 0 1 1.5 1.5v8.5a1.5 1.5 0 0 1-1.5 1.5H11l-4.5 3.5V17h-2A1.5 1.5 0 0 1 3 15.5V7a1.5 1.5 0 0 1 1.5-1.5Z"/></svg>
+          <span class="accion__texto"><span class="accion__nombre" data-i18n="acc.riesgo">Repetir la pregunta de carga</span><span class="accion__que" data-i18n="acc.riesgo.que">sale de la caché, sin modelo</span></span>
+        </button></li>
+        <li><button type="button" class="accion" data-accion="fuera">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M9.6 9.4a2.5 2.5 0 1 1 3.4 2.3c-.7.3-1 .8-1 1.5v.6M12 16.6v.1"/></svg>
+          <span class="accion__texto"><span class="accion__nombre" data-i18n="acc.fuera">Preguntar algo que no está</span><span class="accion__que" data-i18n="acc.fuera.que">lo dice y no inventa</span></span>
+        </button></li>
+        <li><button type="button" class="accion" data-accion="duplicado">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V5.5A1.5 1.5 0 0 0 14.5 4h-9A1.5 1.5 0 0 0 4 5.5v9A1.5 1.5 0 0 0 5.5 16H8"/></svg>
+          <span class="accion__texto"><span class="accion__nombre" data-i18n="acc.duplicado">Simular un reintento del canal</span><span class="accion__que" data-i18n="acc.duplicado.que">el duplicado se descarta</span></span>
+        </button></li>
+        <li><button type="button" class="accion" data-accion="limite">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg>
+          <span class="accion__texto"><span class="accion__nombre" data-i18n="acc.limite">Gastar el cupo del día</span><span class="accion__que" data-i18n="acc.limite.que">el límite frena y deriva</span></span>
+        </button></li>
+      </ul>
+
+      <dl class="contadores">
+        <div><dt data-i18n="cont.consultas">Consultas de hoy</dt><dd><span id="c-consultas">1</span><span class="contadores__de"> / <span id="c-limite">20</span></span></dd></div>
+        <div><dt data-i18n="cont.cache">Desde la caché</dt><dd id="c-cache">0</dd></div>
+        <div><dt data-i18n="cont.duplicados">Duplicados descartados</dt><dd id="c-dup">0</dd></div>
+        <div><dt data-i18n="cont.modelo">Llamadas al modelo</dt><dd id="c-modelo">1</dd></div>
+      </dl>
+
+      <aside class="aviso" aria-labelledby="aviso-titulo">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 11v5.5M12 7.6v.1"/></svg>
+        <div>
+          <h2 class="aviso__titulo" id="aviso-titulo" data-i18n="aviso.titulo">Es una simulación</h2>
+          <p data-i18n="aviso.texto">No hay servidor, modelo ni bot conectado: todo corre en tu navegador y nada de lo que escribas sale de acá. El club, los jugadores y sus datos son inventados. Lo real es la arquitectura, la misma de mis bots en producción.</p>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Teléfono con el chat -->
+    <div class="telefono" id="telefono">
+      <div class="telefono__pantalla">
+        <div class="chat__cabeza">
+          <svg class="chat__atras" viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 5.5 8 12l6.5 6.5"/></svg>
+          <span class="chat__avatar" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M9.5 10 16 23l6.5-13"/></svg></span>
+          <span class="chat__quien"><span class="chat__nombre" data-i18n="chat.nombre">Staff · Ventisca RL</span><span class="chat__estado" id="chat-estado" data-i18n="chat.estado">bot · club ficticio</span></span>
+        </div>
+        <ol class="chat__mensajes" id="mensajes" role="log" aria-live="polite" aria-label="Conversación con el bot" data-i18n-attr="aria-label=chat.aria"></ol>
+        <form class="chat__componer" id="componer" autocomplete="off">
+          <button type="button" class="chat__boton" data-accion="foto" aria-label="Adjuntar la foto del reporte de ejemplo" data-i18n-attr="aria-label=chat.adjuntar">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m19.5 11.4-7.1 7.1a4.6 4.6 0 0 1-6.5-6.5l7.6-7.6a3 3 0 0 1 4.3 4.3l-7.5 7.5a1.5 1.5 0 0 1-2.1-2.1l6.8-6.8"/></svg>
+          </button>
+          <label class="sr" for="campo" data-i18n="chat.campo">Escribí una pregunta para el bot</label>
+          <input class="chat__campo" id="campo" name="campo" type="text" maxlength="160" enterkeyhint="send" placeholder="Preguntá por un jugador…" data-i18n-attr="placeholder=chat.placeholder">
+          <button type="button" class="chat__boton chat__boton--voz" id="boton-voz" data-accion="voz" aria-label="Mandar la nota de voz de ejemplo" data-i18n-attr="aria-label=chat.microfono">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3.5" width="6" height="11" rx="3"/><path d="M5.5 11.5a6.5 6.5 0 0 0 13 0M12 18v2.5"/></svg>
+          </button>
+          <button type="submit" class="chat__boton chat__boton--enviar" id="boton-enviar" aria-label="Enviar" data-i18n-attr="aria-label=chat.mandar" hidden>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 12h14M13 6l6 6-6 6"/></svg>
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Panel de trazabilidad -->
+    <section class="traza" id="traza" aria-labelledby="traza-titulo">
+      <div class="traza__cabeza">
+        <p class="etiqueta" data-i18n="traza.etiqueta">Qué pasó por dentro</p>
+        <h2 class="traza__titulo" id="traza-titulo">—</h2>
+      </div>
+      <ol class="pasos" id="pasos" role="list"></ol>
+      <p class="traza__pie" id="traza-pie"></p>
+      <p class="traza__nota" data-i18n="traza.nota">En producción cada paso queda en un registro: qué entró, qué datos se usaron, qué regla se aplicó y qué salió.</p>
+    </section>
+  </section>
+
+  <!-- 02 · Bots proactivos -->
+  <section class="seccion" id="proactivos" aria-labelledby="pro-titulo">
+    <div class="seccion__in">
+      <p class="folio"><span class="folio__cifra" aria-hidden="true">02</span><span class="folio__etiqueta" data-i18n="pro.folio">Bots proactivos</span></p>
+      <div class="cabecera">
+        <h2 class="titulo-2" id="pro-titulo" data-i18n="pro.titulo">Cuatro bots que trabajan sin que nadie pregunte.</h2>
+        <p class="intro" data-i18n="pro.intro">Un reloj o un calendario los despierta, leen lo que tienen que leer y avisan sólo si hay algo nuevo. Mové la hora o reproducí el día. Los mensajes, los umbrales y los datos son de ejemplo; el tipo de bot y su arquitectura son reales.</p>
+      </div>
+
+      <div class="dia">
+        <div class="bloqueo" aria-hidden="true">
+          <div class="bloqueo__pantalla">
+            <p class="bloqueo__dia" data-i18n="dia.nombre">martes</p>
+            <p class="bloqueo__hora" id="bloqueo-hora">22:00</p>
+            <ol class="bloqueo__avisos" id="avisos"></ol>
+            <p class="bloqueo__vacio" id="avisos-vacio" data-i18n="dia.vacio">Sin avisos todavía.</p>
+          </div>
+        </div>
+
+        <div class="dia__panel">
+          <div class="reloj">
+            <div class="reloj__lectura">
+              <span class="etiqueta" data-i18n="dia.hora">Hora del día</span>
+              <output class="reloj__hora" id="reloj-hora" for="regla">22:00</output>
+            </div>
+            <button type="button" class="boton" id="reproducir" aria-pressed="false">
+              <svg class="i-play" viewBox="0 0 20 20" aria-hidden="true"><path d="M7 4.8v10.4l8.2-5.2Z"/></svg>
+              <svg class="i-pausa" viewBox="0 0 20 20" aria-hidden="true"><path d="M7 5v10M13 5v10"/></svg>
+              <span id="reproducir-texto" data-i18n="dia.reproducir">Reproducir el día</span>
+            </button>
+          </div>
+
+          <div class="eje">
+            <ol class="eje__marcas" id="marcas" role="list" aria-label="Bots del día" data-i18n-attr="aria-label=dia.marcas"></ol>
+            <div class="eje__pista">
+              <label class="sr" for="regla" data-i18n="dia.regla">Hora del día, de 6:00 a 22:00</label>
+              <input class="eje__regla" id="regla" type="range" min="360" max="1320" step="5" value="1320">
+            </div>
+            <div class="eje__ticks" aria-hidden="true" id="ticks"></div>
+          </div>
+
+          <article class="ficha" id="ficha"></article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 · Qué gana la marca -->
+  <section class="seccion seccion--tinta" id="marca" aria-labelledby="marca-titulo">
+    <div class="seccion__in">
+      <p class="folio"><span class="folio__cifra" aria-hidden="true">03</span><span class="folio__etiqueta" data-i18n="marca.folio">Qué gana la marca</span></p>
+      <div class="cabecera">
+        <h2 class="titulo-2" id="marca-titulo" data-i18n="marca.titulo">Atención a toda hora y avisos que nadie tiene que acordarse de pedir.</h2>
+        <p class="intro" data-i18n="marca.intro">Lo que ves arriba con un plantel deportivo sirve igual para una tienda, un equipo comercial o un área de soporte: cambian los datos, no la arquitectura.</p>
+      </div>
+      <ol class="ganancias" role="list">
+        <li class="ganancia">
+          <span class="ganancia__n" aria-hidden="true">01</span>
+          <h3 data-i18n="gana1.t">Atención 24/7 con los datos de la marca</h3>
+          <p data-i18n="gana1.p">Contesta a las 3 de la mañana con la misma información que el mejor vendedor, por texto, foto o voz. Si el dato no está, lo dice y deriva a una persona.</p>
+        </li>
+        <li class="ganancia">
+          <span class="ganancia__n" aria-hidden="true">02</span>
+          <h3 data-i18n="gana2.t">Avisos sin que nadie mire</h3>
+          <p data-i18n="gana2.p">Precios de la competencia, faltantes de stock, vencimientos u oportunidades: el bot revisa a la hora fijada y avisa sólo lo nuevo, sin repetir lo que ya mandó.</p>
+        </li>
+        <li class="ganancia">
+          <span class="ganancia__n" aria-hidden="true">03</span>
+          <h3 data-i18n="gana3.t">Cada respuesta, auditable</h3>
+          <p data-i18n="gana3.p">Queda registro de qué entró, qué datos se usaron, qué regla se aplicó y qué salió. Si una respuesta está mal, se sabe por qué y se corrige la regla en vez de adivinar.</p>
+        </li>
+        <li class="ganancia">
+          <span class="ganancia__n" aria-hidden="true">04</span>
+          <h3 data-i18n="gana4.t">Costo por mensaje conocido</h3>
+          <p data-i18n="gana4.p">La caché evita pagar dos veces la misma respuesta, la deduplicación evita contestar dos veces el mismo mensaje y el límite por chat le pone techo al gasto. El radar real cuesta US$ 0,18 por corrida.</p>
+        </li>
+      </ol>
+      <h3 class="mini-titulo" data-i18n="usos.titulo">Dónde lo pondría en una marca</h3>
+      <ul class="usos" role="list">
+        <li><strong data-i18n="uso1.t">Tienda online.</strong> <span data-i18n="uso1.p">El cliente manda la foto del comprobante o pregunta por su pedido; el bot busca el estado y contesta, o lo pasa a una persona con el resumen hecho.</span></li>
+        <li><strong data-i18n="uso2.t">Equipo comercial.</strong> <span data-i18n="uso2.p">Brief de precios de la competencia todas las mañanas y un radar de licitaciones, sponsors o clientes nuevos que no repite lo ya visto.</span></li>
+        <li><strong data-i18n="uso3.t">Operación interna.</strong> <span data-i18n="uso3.p">Notas de voz del depósito o de la calle que se transcriben y se cargan solas en la planilla, con aviso cuando algo no se entiende.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 04 · Cómo está hecho de verdad -->
+  <section class="seccion" id="como" aria-labelledby="como-titulo">
+    <div class="seccion__in">
+      <p class="folio"><span class="folio__cifra" aria-hidden="true">04</span><span class="folio__etiqueta" data-i18n="como.folio">Cómo está hecho de verdad</span></p>
+      <div class="cabecera">
+        <h2 class="titulo-2" id="como-titulo" data-i18n="como.titulo">Dos caminos: cuando alguien escribe y cuando nadie escribe.</h2>
+        <p class="intro" data-i18n="como.intro">Es la arquitectura de los bots que construí para AthleteIQ (respuesta por Telegram, brief de precios y radar), Cathedra (recordatorios de parciales y entregas) y Fortal (avisos push de rutina). Los hice con desarrollo asistido por IA: yo definí qué hace cada pieza y por qué, y verifiqué el resultado.</p>
+      </div>
+
+      <div class="carriles">
+        <div class="carril">
+          <h3 class="carril__titulo" data-i18n="carril1.t">Cuando alguien escribe</h3>
+          <ol class="flujo" role="list">
+            <li class="caja"><span class="caja__n" aria-hidden="true">1</span><h4 data-i18n="caja.canal.t">Canal</h4><p data-i18n="caja.canal.p">Telegram le avisa al servidor con una llamada HTTP por cada mensaje: texto, foto o voz.</p></li>
+            <li class="caja"><span class="caja__n" aria-hidden="true">2</span><h4 data-i18n="caja.dup.t">Deduplicación</h4><p data-i18n="caja.dup.p">Cada mensaje trae un número. Si el canal lo reenvía, se procesa una sola vez.</p></li>
+            <li class="caja"><span class="caja__n" aria-hidden="true">3</span><h4 data-i18n="caja.lim.t">Límite de uso</h4><p data-i18n="caja.lim.p">Cupo por chat y por día: protege el costo y frena el abuso.</p></li>
+            <li class="caja"><span class="caja__n" aria-hidden="true">4</span><h4 data-i18n="caja.prep.t">Preparación</h4><p data-i18n="caja.prep.p">La voz se transcribe y la foto se lee antes de pensar la respuesta.</p></li>
+            <li class="caja"><span class="caja__n" aria-hidden="true">5</span><h4 data-i18n="caja.cache.t">Caché</h4><p data-i18n="caja.cache.p">Misma pregunta con los mismos datos: misma respuesta, sin volver a pagar.</p></li>
+            <li class="caja"><span class="caja__n" aria-hidden="true">6</span><h4 data-i18n="caja.modelo.t">Modelo con reglas</h4><p data-i18n="caja.modelo.p">Contesta sólo con los datos del cliente y el historial del chat, y nombra la fuente.</p></li>
+            <li class="caja"><span class="caja__n" aria-hidden="true">7</span><h4 data-i18n="caja.resp.t">Respuesta</h4><p data-i18n="caja.resp.p">Vuelve al chat en el idioma de quien preguntó y queda en el historial.</p></li>
+          </ol>
+        </div>
+        <div class="carril">
+          <h3 class="carril__titulo" data-i18n="carril2.t">Cuando nadie escribe</h3>
+          <ol class="flujo flujo--4" role="list">
+            <li class="caja"><span class="caja__n" aria-hidden="true">1</span><h4 data-i18n="caja.reloj.t">Tarea programada</h4><p data-i18n="caja.reloj.p">Un horario fijo o una fecha del calendario despierta al bot.</p></li>
+            <li class="caja"><span class="caja__n" aria-hidden="true">2</span><h4 data-i18n="caja.fuentes.t">Fuentes</h4><p data-i18n="caja.fuentes.p">Lee precios públicos, noticias del rubro, el calendario o la rutina del día.</p></li>
+            <li class="caja"><span class="caja__n" aria-hidden="true">3</span><h4 data-i18n="caja.novedad.t">Regla de novedad</h4><p data-i18n="caja.novedad.p">Compara con lo ya enviado y descarta lo repetido o lo poco relevante.</p></li>
+            <li class="caja"><span class="caja__n" aria-hidden="true">4</span><h4 data-i18n="caja.aviso.t">Aviso</h4><p data-i18n="caja.aviso.p">Mensaje o notificación push, sólo si queda algo que valga la pena.</p></li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="reales">
+        <div class="real">
+          <p class="real__n" data-i18n="real1.n">US$ 0,18</p>
+          <p class="real__que" data-i18n="real1.que">por corrida del radar de oportunidades, con el modelo de lenguaje incluido.</p>
+        </div>
+        <div class="real">
+          <p class="real__n" data-i18n="real2.n">≈ US$ 5,50</p>
+          <p class="real__que" data-i18n="real2.que">por mes con una corrida diaria, sacado del costo medido por corrida.</p>
+        </div>
+        <div class="real">
+          <p class="real__n">3</p>
+          <p class="real__que" data-i18n="real3.que">formatos de entrada en el bot de respuesta: texto, foto y nota de voz.</p>
+        </div>
+        <div class="real">
+          <p class="real__n">3</p>
+          <p class="real__que" data-i18n="real4.que">proyectos con bots proactivos: AthleteIQ, Cathedra y Fortal.</p>
+        </div>
+      </div>
+      <p class="nota" data-i18n="reales.nota">Cifras de los proyectos reales, no de esta página. Esta página no llama a ningún modelo: su costo es cero.</p>
+
+      <div class="comparacion">
+        <table class="tabla">
+          <caption data-i18n="tabla.caption">Qué es simulado en esta página y cómo funciona en producción.</caption>
+          <thead><tr><th scope="col" data-i18n="tabla.pieza">Pieza</th><th scope="col" data-i18n="tabla.demo">En esta demo</th><th scope="col" data-i18n="tabla.real">En producción</th></tr></thead>
+          <tbody>
+            <tr><th scope="row" data-i18n="tabla.f1">Canal</th><td data-i18n="tabla.f1.d">Un chat dibujado en la página.</td><td data-i18n="tabla.f1.r">Telegram, con el servidor recibiendo cada mensaje por HTTP.</td></tr>
+            <tr><th scope="row" data-i18n="tabla.f2">Nota de voz</th><td data-i18n="tabla.f2.d">Audio simulado con una transcripción fija.</td><td data-i18n="tabla.f2.r">Transcripción automática del audio antes de responder.</td></tr>
+            <tr><th scope="row" data-i18n="tabla.f3">Foto</th><td data-i18n="tabla.f3.d">Una imagen dibujada con las filas ya leídas.</td><td data-i18n="tabla.f3.r">Un modelo que lee la imagen y devuelve la tabla.</td></tr>
+            <tr><th scope="row" data-i18n="tabla.f4">Respuesta</th><td data-i18n="tabla.f4.d">Plantillas sobre datos inventados.</td><td data-i18n="tabla.f4.r">Modelo de lenguaje con reglas, datos del cliente e historial del chat.</td></tr>
+            <tr><th scope="row" data-i18n="tabla.f5">Deduplicación, caché y límite</th><td data-i18n="tabla.f5.d">La misma lógica, en la memoria del navegador.</td><td data-i18n="tabla.f5.r">La misma lógica, guardada del lado del servidor.</td></tr>
+            <tr><th scope="row" data-i18n="tabla.f6">Bots proactivos</th><td data-i18n="tabla.f6.d">Un reloj acelerado en la página.</td><td data-i18n="tabla.f6.r">Tareas programadas en la nube y notificaciones push.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="mini-titulo" data-i18n="dec.titulo">Tres decisiones</h3>
+      <div class="decisiones">
+        <article class="decision">
+          <p class="decision__insight" data-i18n="dec1.i">El canal reintenta cuando el bot tarda.</p>
+          <h4 data-i18n="dec1.t">Deduplicar por número de mensaje antes de cualquier otra cosa.</h4>
+          <p class="decision__no" data-i18n="dec1.no">Descarté confiar en que cada mensaje llega una vez: con una respuesta lenta, el usuario recibe dos y se paga dos veces.</p>
+        </article>
+        <article class="decision">
+          <p class="decision__insight" data-i18n="dec2.i">Un aviso repetido se deja de leer.</p>
+          <h4 data-i18n="dec2.t">El radar guarda lo que ya mandó y rechaza lo repetido.</h4>
+          <p class="decision__no" data-i18n="dec2.no">Descarté mandar todo lo que encuentra: a la semana el canal es ruido.</p>
+        </article>
+        <article class="decision">
+          <p class="decision__insight" data-i18n="dec3.i">Una cifra mal leída es peor que ninguna.</p>
+          <h4 data-i18n="dec3.t">Lo que no está o no se entiende, se pregunta o se dice.</h4>
+          <p class="decision__no" data-i18n="dec3.no">Descarté que el bot complete el hueco con lo más probable: en un parte médico o en un precio, adivinar sale caro.</p>
+        </article>
+      </div>
+
+      <div class="afuera">
+        <h3 class="mini-titulo" data-i18n="afuera.titulo">Qué no muestra esta demo</h3>
+        <ul>
+          <li data-i18n="afuera1">No hay modelo de lenguaje: las respuestas son plantillas sobre datos inventados, así que entiende pocas preguntas.</li>
+          <li data-i18n="afuera2">El audio y la foto son de ejemplo; no podés subir los tuyos.</li>
+          <li data-i18n="afuera3">El asistente de voz y el examen oral de Cathedra no están acá.</li>
+          <li data-i18n="afuera4">El cupo de 20 consultas es el de esta demo; en cada proyecto el límite se ajusta a su uso.</li>
+          <li data-i18n="afuera5">Probé teclado, foco y estructura; no hice pruebas con usuarios ni con lectores de pantalla reales.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="pie">
+  <div class="pie__in">
+    <p class="pie__aclara" data-i18n="pie.aclara">Simulación: el club Ventisca RL, sus jugadores, las tiendas, los precios, las oportunidades y las materias son inventados. Cualquier parecido con personas o marcas reales es casual.</p>
+    <p class="pie__enlaces">
+      <a href="../../proyectos/athleteiq.html" data-i18n="pie.athleteiq">Caso AthleteIQ</a>
+      <a href="../../proyectos/cathedra.html" data-i18n="pie.cathedra">Caso Cathedra</a>
+      <a href="../../proyectos/fortal.html" data-i18n="pie.fortal">Caso Fortal</a>
+      <a href="../../index.html" data-i18n="cinta.volver">← Volver al portfolio</a>
+    </p>
+    <p class="pie__copy" data-i18n="pie.copy">Demo de Ramiro Bales, 2026. Hecha con desarrollo asistido por IA y verificada a mano.</p>
+  </div>
+</footer>
+
+<p class="sr" id="anuncio" aria-live="polite"></p>
+<script type="module" src="js/app.js"></script>
+</body>
+</html>

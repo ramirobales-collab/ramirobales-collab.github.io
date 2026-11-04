@@ -8,6 +8,32 @@
 .caso-cabecera__texto { grid-column: 1 / -1; display: grid; gap: var(--e-3); align-content: end; }
 .caso-cabecera__titulo { font-size: clamp(3rem, 1.6rem + 5.4vw, 7.5rem); line-height: 0.98; letter-spacing: -0.035em; }
 .caso-cabecera__linea { max-width: 34ch; }
+.caso-cabecera__sello { margin: 0; }
+.caso-resumen { margin: 0; display: grid; gap: 0; max-width: 52ch; }
+.caso-resumen > div { display: grid; grid-template-columns: 7.5rem 1fr; gap: var(--e-2); align-items: baseline; padding-block: var(--e-2); border-top: 1px solid var(--filete); }
+.caso-resumen > div:last-child { border-bottom: 1px solid var(--filete); }
+.caso-resumen dt { color: var(--texto-3); }
+.caso-resumen dd { margin: 0; font-size: var(--t-secundario); line-height: 1.5; }
+.caso-cabecera__cta { margin: 0; }
+@media (max-width: 479px) { .caso-resumen > div { grid-template-columns: 1fr; gap: 0.2rem; } }
+
+/* ---------- Ficha (metadatos) ---------- */
+.caso-ficha { margin: calc(-1 * var(--e-seccion) + var(--e-4)) 0 calc(var(--e-4) * 1.5); row-gap: var(--e-3); padding-block: var(--e-3); border-top: 1px solid var(--filete); border-bottom: 1px solid var(--filete); }
+.caso-ficha__item { grid-column: span 2; display: grid; gap: 0.3rem; align-content: start; }
+.caso-ficha__item--ancho { grid-column: 1 / -1; }
+.caso-ficha dt { color: var(--texto-3); }
+.caso-ficha dd { margin: 0; font-size: var(--t-secundario); line-height: 1.5; }
+.caso-ficha dd a { text-decoration-color: var(--borde); }
+.caso-ficha dd a:hover { text-decoration-color: var(--acento-texto); }
+@media (min-width: 768px) {
+  .caso-ficha__item { grid-column: span 3; }
+  .caso-ficha__item--ancho { grid-column: span 3; }
+}
+@media (min-width: 1024px) {
+  .caso-ficha__item { grid-column: span 2; }
+  .caso-ficha__item--ancho { grid-column: span 3; }
+  .caso-ficha__item:first-child { grid-column: 1 / span 2; }
+}
 .caso-cabecera__media {
   grid-column: 1 / -1;
   position: relative;
@@ -19,6 +45,7 @@
 }
 .caso-cabecera__media picture { height: 100%; }
 .caso-cabecera__media img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
+.caso-cabecera--vertical .caso-cabecera__media img { object-position: 50% 0; }
 /* La imagen de cabecera es la LCP: entra sola al cargar (en móvil queda bajo el margen del observador y no se revelaba). */
 .caso-cabecera__media.mascara { clip-path: inset(0); animation: caso-cabecera-revelar 1.2s var(--curva-entrada) 0.15s both; }
 @keyframes caso-cabecera-revelar { from { clip-path: inset(0 0 0 100%); } to { clip-path: inset(0); } }
@@ -35,7 +62,7 @@
 .caso-meta dd { margin: 0; font-size: var(--t-secundario); font-weight: 400; letter-spacing: 0; text-transform: none; }
 .caso-meta dd a { text-decoration-color: var(--borde); }
 /* Revelados por elemento dentro de texto en línea: la línea no puede ser un bloque. */
-.caso-meta .linea, .caso-nav__fila .linea, .caso-resultado > h2 .linea { display: inline-block; vertical-align: baseline; }
+.caso-nav__fila .linea, .caso-resultado > h2 .linea { display: inline-block; vertical-align: baseline; }
 .caso-meta dd a:hover { text-decoration-color: var(--acento-texto); }
 
 /* ---------- Cuerpo: índice + contenido + artefactos ---------- */
@@ -47,20 +74,16 @@
 .caso-indice a:hover, .caso-indice a[aria-current="true"] { color: var(--texto); border-bottom-color: var(--acento-texto); }
 .caso-indice__n { font-family: var(--playfair); color: var(--acento-display); font-size: 0.875rem; font-variant-numeric: tabular-nums; }
 .caso-contenido { grid-column: 1 / -1; display: grid; gap: var(--e-4); }
-.caso-artefactos { grid-column: 1 / -1; align-self: stretch; }
-.caso-artefactos__in { display: grid; gap: var(--e-3); align-content: start; }
 .caso-resultado { grid-column: 1 / -1; }
 .caso-galeria { grid-column: 1 / -1; }
 @media (min-width: 1024px) {
-  .caso-indice { grid-column: 1 / 3; grid-row: 1 / span 4; position: sticky; top: calc(var(--nav-alto) + var(--e-3)); }
+  .caso-indice { grid-column: 1 / 3; grid-row: 1 / span 8; align-self: start; position: sticky; top: calc(var(--nav-alto) + var(--e-3)); }
   .caso-indice ol { flex-direction: column; gap: 0.1rem; overflow: visible; border-bottom: 0; padding-bottom: 0; border-left: 1px solid var(--filete); }
   .caso-indice a { padding: 0.3rem 0 0.3rem var(--e-2); margin-left: -1px; border-bottom: 0; border-left: 2px solid transparent; white-space: normal; }
   .caso-indice a:hover, .caso-indice a[aria-current="true"] { border-left-color: var(--acento-texto); }
-  .caso-contenido { grid-column: 3 / 9; }
-  .caso-artefactos { grid-column: 9 / -1; }
-  .caso-artefactos__in { position: sticky; top: calc(var(--nav-alto) + var(--e-3)); }
+  .caso-contenido { grid-column: 3 / -1; }
   .caso-resultado { grid-column: 3 / -1; }
-  .caso-contenido--sigue { grid-column: 3 / 9; }
+  .caso-contenido--sigue { grid-column: 3 / -1; }
   .caso-galeria { grid-column: 3 / -1; }
 }
 
@@ -69,6 +92,17 @@
 .caso-parte__n { color: var(--texto-3); }
 .caso-parte__titulo { font-size: var(--t-caso); line-height: 1.1; letter-spacing: -0.02em; margin-bottom: var(--e-1); }
 .caso-parte p + p { margin-top: var(--e-1); }
+.caso-parte > p { max-width: 64ch; }
+
+/* ---------- Qué hace ---------- */
+.capacidades { list-style: none; margin: var(--e-1) 0 0; padding: 0; display: grid; gap: var(--e-2); }
+.capacidad { display: grid; grid-template-columns: 2.75rem 1fr; gap: var(--e-2); align-items: start; padding: var(--e-3) var(--e-3) var(--e-3) var(--e-2); background: var(--papel); border: 1px solid var(--filete); border-radius: var(--radio); }
+.capacidad__icono { display: inline-grid; place-items: center; width: 2.75rem; height: 2.75rem; border-radius: var(--radio); background: var(--hundida); color: var(--acento-texto); }
+.capacidad__icono svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.capacidad__t { font-size: var(--t-cuerpo); font-weight: 600; line-height: 1.3; letter-spacing: -0.005em; margin-bottom: 0.2rem; }
+.capacidad p { font-size: var(--t-secundario); line-height: 1.5; color: var(--texto-2); }
+@media (min-width: 768px) { .capacidades { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1280px) { .capacidades { grid-template-columns: repeat(3, minmax(0, 1fr)); } .capacidades--4 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 
 .caso-pasos { margin: 0; padding: 0; list-style: none; display: grid; gap: var(--e-3); counter-reset: paso; }
 .caso-pasos li { display: grid; grid-template-columns: 2.75rem 1fr; gap: var(--e-2); align-items: baseline; }
@@ -76,7 +110,14 @@
 .caso-pasos strong { display: block; margin-bottom: 0.15rem; }
 
 .caso-decisiones { display: grid; gap: var(--e-3); }
-.caso-decision { padding: var(--e-3); display: grid; gap: var(--e-2); }
+.caso-decision { position: relative; padding: var(--e-3); display: grid; gap: var(--e-3); }
+.caso-decision__n { font-size: 1.5rem; line-height: 1; color: var(--acento-display); }
+.caso-decision__vi p { font-size: var(--t-cuerpo); line-height: 1.5; }
+.caso-decision__descarte-bloque { display: grid; gap: 0.35rem; }
+.caso-decision__porque .etiqueta { color: var(--texto-2); margin-right: 0.35rem; }
+@media (min-width: 1024px) {
+  .caso-decision { grid-template-columns: 2.5rem 1fr 1.25fr 1fr; gap: var(--e-3) var(--e-4); padding: var(--e-4) var(--e-4) var(--e-4) var(--e-3); align-items: start; }
+}
 .caso-decision__etiqueta { display: block; color: var(--texto-2); margin-bottom: 0.35rem; }
 .caso-decision__elegi { font-size: var(--t-h3); line-height: 1.2; letter-spacing: -0.01em; font-weight: 600; }
 .caso-decision__descarte { color: var(--texto-2); }
@@ -89,19 +130,7 @@
 .caso-resultado__frase { font-size: clamp(1.75rem, 1.2rem + 2.2vw, 3.4rem); line-height: 1.08; letter-spacing: -0.025em; max-width: 24ch; }
 .caso-resultado__apoyo { color: var(--texto-2); max-width: 56ch; }
 @media (min-width: 1024px) { .caso-resultado { padding: var(--e-4); } }
-
-/* ---------- Artefactos ---------- */
-.caso-artefacto { padding: var(--e-3); display: grid; gap: var(--e-2); }
-.caso-artefacto__titulo { color: var(--texto-3); }
-.caso-artefacto ul { margin: 0; padding: 0; list-style: none; display: grid; gap: var(--e-1); font-size: var(--t-secundario); }
-.caso-artefacto li { display: flex; gap: var(--e-2); align-items: baseline; }
-.caso-artefacto li::before { content: ""; width: 10px; height: 2px; background: var(--acento-display); flex: none; transform: translateY(-0.3em); }
-.caso-artefacto p { font-size: var(--t-secundario); }
-.caso-artefacto__cita { font-family: var(--playfair); font-style: italic; font-size: 1.25rem; line-height: 1.35; }
-.caso-artefacto__media { aspect-ratio: 1; background: var(--hundida); border-radius: var(--radio); overflow: hidden; }
-.caso-artefacto__media--alta { aspect-ratio: 2 / 3; }
-.caso-artefacto__media picture { height: 100%; }
-.caso-artefacto__media img { width: 100%; height: 100%; object-fit: cover; }
+.caso-reflexion { border-top: 0; padding-top: 0; }
 
 /* ---------- Galería ---------- */
 .caso-galeria { display: grid; gap: var(--e-3); }
@@ -110,12 +139,16 @@
 .caso-galeria__item { grid-column: 1 / -1; margin: 0; display: grid; gap: var(--e-2); align-content: start; }
 .caso-galeria__media { background: var(--hundida); border-radius: var(--radio); overflow: hidden; box-shadow: var(--sombra-papel); border: 1px solid var(--filete); }
 .caso-galeria__media img { width: 100%; height: auto; }
+.caso-galeria__items--telefono .caso-galeria__media { aspect-ratio: 2 / 3; }
+.caso-galeria__items--telefono .caso-galeria__media picture { height: 100%; }
+.caso-galeria__items--telefono .caso-galeria__media img { height: 100%; object-fit: cover; object-position: 50% 0; }
 .caso-galeria__item figcaption { font-size: var(--t-secundario); color: var(--texto-2); }
 @media (min-width: 768px) {
   .caso-galeria__item--7 { grid-column: span 7; }
   .caso-galeria__item--5 { grid-column: span 5; }
   .caso-galeria__item--6 { grid-column: span 6; }
   .caso-galeria__item--4 { grid-column: span 4; }
+  .caso-galeria__item--8 { grid-column: span 8; }
   .caso-galeria__item--12 { grid-column: 1 / -1; }
 }
 @media (max-width: 767px) {
@@ -165,5 +198,5 @@
   .caso-siguiente__marco { translate: 0 0; rotate: 0deg; transition: none; }
 }
 @media (forced-colors: active) {
-  .caso-decision, .caso-resultado, .caso-artefacto, .caso-galeria__media, .caso-siguiente { border: 1px solid CanvasText; box-shadow: none; }
+  .caso-decision, .caso-resultado, .capacidad, .caso-galeria__media, .caso-siguiente { border: 1px solid CanvasText; box-shadow: none; }
 }

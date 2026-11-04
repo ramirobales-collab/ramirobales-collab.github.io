@@ -1,0 +1,562 @@
+{
+  "lang": "es",
+  "locale": "es_AR",
+  "archivo": "seguridad.html",
+  "otro": "seguridad-en.html",
+  "meta": {
+    "titulo": "Revisión de seguridad — caso de estudio · Ramiro Bales",
+    "descripcion": "Cómo revisé la seguridad de una app de escritorio con servidor local antes de su beta: modelo de amenazas, riesgos por probabilidad e impacto, defensas con pruebas, riesgo residual, legal y privacidad, y una mini revisión de las demos del portfolio."
+  },
+  "nav": {
+    "saltar": "Saltar al contenido",
+    "principal": "Principal",
+    "trabajo": "Trabajo",
+    "marcas": "Para marcas",
+    "metodo": "Método",
+    "sobre": "Sobre mí",
+    "contacto": "Contacto",
+    "cv": "CV (PDF)",
+    "idioma": "Idioma",
+    "tema": "Cambiar entre tema claro y oscuro",
+    "oscuro": "Oscuro",
+    "claro": "Claro",
+    "menu": "Menú",
+    "menu_aria": "Abrir o cerrar el menú"
+  },
+  "ui": {
+    "folio": "Caso de estudio",
+    "que": "Qué es",
+    "para": "Para quién",
+    "estado": "Estado",
+    "ficha_aria": "Ficha del proyecto",
+    "indice_aria": "Partes del caso",
+    "vi": "Lo que vi",
+    "elegi": "Decidí",
+    "descarte": "Descarté",
+    "porque": "Porque",
+    "quiere": "Qué quiere",
+    "pordonde": "Por dónde",
+    "riesgos_rel": "Riesgos",
+    "otros_aria": "Otros casos"
+  },
+  "cabecera": {
+    "sello": "Caso escrito · sobre una app en beta",
+    "titulo": "Seguridad",
+    "gancho": "Una app que corre en tu computadora también tiene a alguien del otro lado. La revisé antes de abrir la beta.",
+    "que": "La revisión de seguridad y el análisis de riesgo que hice sobre Cathedra, mi app de estudio para Windows, antes de su beta.",
+    "para": "Equipos que distribuyen software que corre en la máquina del usuario, y sitios sin servidor como las demos de este portfolio.",
+    "estado": "Defensas aplicadas y con pruebas: 126 pruebas de seguridad en verde al 4/11/2026. Lo pendiente está documentado abajo."
+  },
+  "ficha": [
+    {
+      "t": "Proyecto",
+      "d": "Propio, sobre mi app Cathedra"
+    },
+    {
+      "t": "Mi rol",
+      "d": "Definí el modelo de amenazas, puntué cada riesgo, elegí cada defensa y su criterio de aceptación, y verifiqué con pruebas automáticas. El código lo escribieron agentes de IA bajo mi dirección.",
+      "ancho": true
+    },
+    {
+      "t": "Herramientas",
+      "d": "Claude Code (desarrollo asistido) · Python · pruebas automáticas · lectura de normativa argentina de datos personales y consumo",
+      "ancho": true
+    },
+    {
+      "t": "Período",
+      "d": "Septiembre y octubre de 2026, antes de la beta"
+    },
+    {
+      "t": "Caso relacionado",
+      "d": "Cathedra, el producto revisado",
+      "href": "cathedra.html"
+    }
+  ],
+  "indice": {
+    "cabecera": "Resumen",
+    "alcance": "Alcance",
+    "amenazas": "Amenazas",
+    "riesgos": "Riesgos",
+    "hallazgos": "Hallazgos",
+    "verificacion": "Verificación",
+    "resultado": "Resultado y residual",
+    "legal": "Legal y privacidad",
+    "demos": "Las demos",
+    "metodo": "Cómo lo hice"
+  },
+  "alcance": {
+    "titulo": "Alcance",
+    "p": [
+      "Cathedra corre en la computadora del alumno: una ventana de escritorio habla con un servidor HTTP propio, que lee y escribe sus clases, transcripciones y apuntes.",
+      "Ese diseño engaña. Como el servidor sólo escucha en la propia máquina, parece que no hay nadie del otro lado. Hay, y es real: cualquier página abierta en otra pestaña del navegador puede mandarle pedidos.",
+      "Antes de entregar el instalador quería saber qué podía salir mal, cuánto costaría y qué arreglar primero. Revisé el servidor local, las cuentas, el panel de administración, la publicación del instalador y qué datos salen de la máquina."
+    ]
+  },
+  "amenazas": {
+    "titulo": "Modelo de amenazas",
+    "intro": "Seis actores, qué quiere cada uno y por dónde entraría. Cada uno remite a los riesgos de la tabla siguiente.",
+    "items": [
+      {
+        "icono": "pestana",
+        "quien": "Una página de otro sitio",
+        "quiere": "Que la app abra un programa, borre archivos o entregue transcripciones.",
+        "pordonde": "Pedidos al servidor local desde otra pestaña, o desde un dominio que se resuelve a la propia máquina (rebote de DNS).",
+        "r": [
+          "R1",
+          "R3"
+        ]
+      },
+      {
+        "icono": "ruta",
+        "quien": "Un dato armado a propósito",
+        "quiere": "Salir de la carpeta de estudio y leer o ejecutar otro archivo del disco.",
+        "pordonde": "Nombres de clase, materia o tema que llegan en la dirección del pedido.",
+        "r": [
+          "R2"
+        ]
+      },
+      {
+        "icono": "disco",
+        "quien": "Alguien con el disco en la mano",
+        "quiere": "Contraseñas, sesiones o la clave del servicio de IA del usuario.",
+        "pordonde": "Una computadora compartida, una copia de seguridad, un archivo copiado.",
+        "r": [
+          "R4",
+          "R6"
+        ]
+      },
+      {
+        "icono": "candado",
+        "quien": "Quien prueba contraseñas o códigos",
+        "quiere": "Entrar a una cuenta o a la beta sin permiso.",
+        "pordonde": "La pantalla de inicio de sesión y los códigos de acceso de la beta.",
+        "r": [
+          "R5",
+          "R8"
+        ]
+      },
+      {
+        "icono": "paquete",
+        "quien": "Yo mismo, por descuido",
+        "quiere": "Nada; el riesgo es publicar una clave o una ruta personal dentro del paquete.",
+        "pordonde": "El instalador y los módulos que se suben a un repositorio público.",
+        "r": [
+          "R7"
+        ]
+      },
+      {
+        "icono": "instalador",
+        "quien": "Quien reparte un instalador falso",
+        "quiere": "Que alguien ejecute su versión modificada.",
+        "pordonde": "Un instalador sin firma digital: Windows advierte igual por el original que por la copia.",
+        "r": [
+          "R9"
+        ]
+      }
+    ]
+  },
+  "riesgos": {
+    "titulo": "Riesgos: probabilidad × impacto",
+    "intro": "Puntué cada riesgo de 1 a 5 en probabilidad y en impacto; el producto ordena la prioridad. Es el mismo criterio de costo esperado que usé en el agente antifraude del hackatón de IA de UADE 2026 (nota 10/10).",
+    "nota": "Puntajes de criterio propio, asignados al escribir este caso sobre los hallazgos y las defensas reales. Prioridad: 15 a 25 alta, 8 a 14 media, 1 a 7 baja.",
+    "caption": "Diez riesgos con su probabilidad, su impacto y su prioridad antes y después de las defensas",
+    "cols": {
+      "id": "N.º",
+      "riesgo": "Riesgo",
+      "p": "Prob.",
+      "i": "Impacto",
+      "antes": "Antes",
+      "despues": "Después",
+      "estado": "Estado"
+    },
+    "prioridad": {
+      "alta": "alta",
+      "media": "media",
+      "baja": "baja"
+    },
+    "filas": [
+      {
+        "id": "R1",
+        "riesgo": "Otra pestaña maneja la app por atrás (CSRF)",
+        "p": 5,
+        "i": 5,
+        "p2": 1,
+        "i2": 5,
+        "estado": "Mitigado y probado"
+      },
+      {
+        "id": "R2",
+        "riesgo": "Un nombre con «..» sale de la carpeta de estudio",
+        "p": 3,
+        "i": 5,
+        "p2": 1,
+        "i2": 5,
+        "estado": "Mitigado y probado"
+      },
+      {
+        "id": "R3",
+        "riesgo": "Rebote de DNS para leer respuestas",
+        "p": 2,
+        "i": 4,
+        "p2": 2,
+        "i2": 4,
+        "estado": "Cerrado en el panel; pendiente en el servidor de la app"
+      },
+      {
+        "id": "R4",
+        "riesgo": "Se copian las cuentas del disco",
+        "p": 3,
+        "i": 4,
+        "p2": 3,
+        "i2": 1,
+        "estado": "Mitigado: no se recupera nada"
+      },
+      {
+        "id": "R5",
+        "riesgo": "Fuerza bruta de contraseñas",
+        "p": 3,
+        "i": 4,
+        "p2": 1,
+        "i2": 4,
+        "estado": "Mitigado y probado"
+      },
+      {
+        "id": "R6",
+        "riesgo": "Se lee del disco la clave de IA del usuario",
+        "p": 3,
+        "i": 5,
+        "p2": 2,
+        "i2": 5,
+        "estado": "Mitigado; límite aceptado"
+      },
+      {
+        "id": "R7",
+        "riesgo": "Una clave o ruta personal se publica en el paquete",
+        "p": 3,
+        "i": 5,
+        "p2": 1,
+        "i2": 5,
+        "estado": "Mitigado y probado"
+      },
+      {
+        "id": "R8",
+        "riesgo": "El panel de administración queda expuesto o un código de beta se adivina",
+        "p": 2,
+        "i": 5,
+        "p2": 1,
+        "i2": 5,
+        "estado": "Mitigado y probado"
+      },
+      {
+        "id": "R9",
+        "riesgo": "Circula un instalador modificado",
+        "p": 2,
+        "i": 4,
+        "p2": 2,
+        "i2": 4,
+        "estado": "Aceptado y documentado"
+      },
+      {
+        "id": "R10",
+        "riesgo": "El material del alumno viaja a un servicio externo",
+        "p": 5,
+        "i": 3,
+        "p2": 2,
+        "i2": 3,
+        "estado": "Consentimiento y modo local"
+      }
+    ],
+    "matriz": {
+      "antes": "Antes de las defensas",
+      "despues": "Después",
+      "eje_p": "Probabilidad",
+      "eje_i": "Impacto",
+      "aviso": "Las dos matrices muestran los mismos datos que la tabla."
+    }
+  },
+  "hallazgos": {
+    "titulo": "Hallazgos y decisiones",
+    "intro": "Los tres que más pesaban, con lo que descarté. Abajo, el resto de las defensas en una línea cada una.",
+    "decisiones": [
+      {
+        "vi": "El servidor escucha sólo en la propia máquina. Eso lo esconde de la red, no del navegador del alumno: una página de otro sitio le puede mandar pedidos, y aunque el navegador le esconda la respuesta, el efecto ocurre igual.",
+        "elegi": "Rechazar todo pedido a la API que traiga un Origin que no sea de la propia máquina, en las lecturas y en todo lo que cambia algo.",
+        "descarte": "Confiar en que sólo escucha en la propia máquina.",
+        "porque": "Alcanzaba para que otra pestaña hiciera abrir un programa o borrar archivos."
+      },
+      {
+        "vi": "Comparar rutas como texto no frena el «..»: una ruta que parecía caer adentro de la carpeta de estudio terminaba, ya resuelta, en un ejecutable del sistema.",
+        "elegi": "Un nombre suelto se acepta sólo si cumple un alfabeto estricto; una ruta entera se resuelve antes de comprobar que cae adentro.",
+        "descarte": "Sanear lo que llega quitándole los «..» y seguir.",
+        "porque": "Sanear es un juego que se pierde: siempre aparece una codificación más. Se rechazan barras, «..», unidades, caracteres de control, Unicode ambiguo y los nombres que Windows reserva."
+      },
+      {
+        "vi": "El instalador y los módulos se suben a un repositorio público, y una clave o una ruta personal se puede colar en cualquier archivo de texto.",
+        "elegi": "Una guardia dentro del comando de publicación que corta todo si encuentra claves, credenciales o rutas personales.",
+        "descarte": "Revisar a mano antes de cada versión.",
+        "porque": "La revisión a mano se saltea el día que hay apuro. La guardia revisa siempre todo lo que se va a subir, antes de armar el instalador."
+      }
+    ],
+    "otros_titulo": "Las demás defensas",
+    "otros": [
+      {
+        "icono": "llave",
+        "t": "Contraseñas con scrypt y sal",
+        "p": "Se guarda scrypt(contraseña, sal), nunca la contraseña; de la sesión, sólo su huella SHA-256. Con el archivo en la mano no se entra a nada."
+      },
+      {
+        "icono": "reloj",
+        "t": "Tope de intentos",
+        "p": "Cinco intentos fallidos por correo en cinco minutos y se frena. Sin eso, una contraseña de ocho letras se prueba en una tarde."
+      },
+      {
+        "icono": "atomico",
+        "t": "Escritura atómica",
+        "p": "Cada archivo se escribe entero o no se escribe: archivo temporal al lado y reemplazo en un paso."
+      },
+      {
+        "icono": "huella",
+        "t": "Códigos de beta como huella",
+        "p": "Se guarda sólo su huella, se compara en tiempo constante y cada código tiene un límite de pedidos por minuto."
+      },
+      {
+        "icono": "escudo",
+        "t": "Clave del usuario cifrada",
+        "p": "La clave de su servicio de IA se guarda cifrada con la protección de datos de Windows (DPAPI), atada a su cuenta."
+      },
+      {
+        "icono": "panel",
+        "t": "Panel con tres cerrojos",
+        "p": "Sólo en la propia máquina, rechaza cabeceras de proxy o túnel, exige un Host propio y pide una ficha por sesión. Manda CSP, X-Frame-Options y Referrer-Policy."
+      },
+      {
+        "icono": "ojo",
+        "t": "La interfaz no delata cómo está hecha",
+        "p": "Los mensajes que ve la persona no nombran archivos, huellas ni detalles internos; hay una prueba que lo revisa."
+      },
+      {
+        "icono": "sello",
+        "t": "Lo que se sube es lo que se armó",
+        "p": "La publicación compara huellas SHA-256: si algo cambió después de armarlo, no sube."
+      }
+    ],
+    "fortal_t": "La misma lista, en otra app",
+    "fortal_p": "En Fortal, mi app de entrenamiento, el servidor sólo consulta por https una lista fija de sitios, sigue redirecciones a mano (dos como máximo) sin salir de esa lista, con tiempo máximo y tope de bytes: sin SSRF. Los cuerpos que llegan tienen tope por ruta, y un barrido de 15 rutas comprueba que sin credencial responden 401 y con una ajena 403. Doce pruebas lo cubren."
+  },
+  "verificacion": {
+    "titulo": "Mitigación y verificación",
+    "intro": "Cada defensa tiene pruebas que la atacan. No alcanza con que el código exista: tiene que fallar cuando alguien intenta lo que la defensa frena.",
+    "caption": "Qué prueba cada defensa",
+    "cols": {
+      "defensa": "Defensa",
+      "prueba": "Cómo se verifica",
+      "r": "Riesgo"
+    },
+    "filas": [
+      {
+        "defensa": "Control de Origin",
+        "prueba": "Orígenes de la propia máquina pasan en cualquier puerto; orígenes ajenos reciben 403.",
+        "r": "R1"
+      },
+      {
+        "defensa": "Nombres y rutas",
+        "prueba": "Los nombres legítimos pasan; barras, «..», unidades, control, Unicode ambiguo y nombres reservados se rechazan. Una prueba demuestra que comparar como texto no alcanza.",
+        "r": "R2"
+      },
+      {
+        "defensa": "Cuentas",
+        "prueba": "Ni la contraseña ni la sesión quedan en el archivo; al quinto intento fallido se frena; la sesión vence.",
+        "r": "R4 · R5"
+      },
+      {
+        "defensa": "Panel de administración",
+        "prueba": "Con cabeceras de túnel no responde; un Host ajeno no entra; escucha sólo en la propia máquina; cada acción pide la ficha de la sesión.",
+        "r": "R3 · R8"
+      },
+      {
+        "defensa": "Guardia de publicación",
+        "prueba": "Una clave plantada frena todo antes de armar el instalador y de subir; lo que se sube coincide con las huellas de lo que se armó.",
+        "r": "R7 · R9"
+      }
+    ],
+    "medicion_cifra": "126",
+    "medicion_t": "pruebas de seguridad en verde",
+    "medicion_p": "4 omitidas, en 58 s, sobre cuatro suites: servidor local, cuentas, panel y publicación. Las corrí el 4/11/2026 para escribir este caso; son parte de las más de 6.000 pruebas de la app."
+  },
+  "resultado": {
+    "titulo": "Resultado",
+    "frase": "Los cinco riesgos de prioridad alta bajaron a media o baja.",
+    "apoyo": "Con las defensas aplicadas y 126 pruebas de seguridad en verde. Es una revisión propia: nadie de afuera la auditó todavía."
+  },
+  "residual": {
+    "titulo": "Riesgo residual y qué haría después",
+    "items": [
+      {
+        "t": "Rebote de DNS en las lecturas",
+        "p": "El panel exige un Host propio; el servidor de la app todavía se apoya en el control de Origin. Próximo paso: la misma lista de Host en todas sus rutas, con su prueba."
+      },
+      {
+        "t": "CSP en la ventana principal",
+        "p": "Hoy la manda el panel. Llevarla a la ventana de la app es lo siguiente después del Host."
+      },
+      {
+        "t": "Límite de DPAPI",
+        "p": "Protege contra otra cuenta de Windows o un disco copiado, no contra un programa malicioso que corre con la misma cuenta. Aceptado: es el techo de una app de escritorio sin hardware dedicado."
+      },
+      {
+        "t": "Instalador sin firma",
+        "p": "Windows muestra su advertencia; la página de descarga lo explica y cada versión publica sus huellas SHA-256. Aceptado para una beta chica; firmarlo antes de abrirla más."
+      },
+      {
+        "t": "Licencias firmadas",
+        "p": "Firmar las licencias con Ed25519 está planificado, no hecho."
+      },
+      {
+        "t": "Auditoría externa",
+        "p": "La pediría antes de cobrar: una revisión propia encuentra lo que uno sabe buscar."
+      }
+    ]
+  },
+  "legal": {
+    "titulo": "Legal y privacidad antes de la beta",
+    "intro": "Lo investigué en la norma, en su fuente oficial, antes de entregar la beta. Es información general, no asesoramiento legal: lo dudoso quedó marcado para validar con un abogado.",
+    "items": [
+      {
+        "t": "Qué datos viajan",
+        "p": "El audio se transcribe en la computadora. Con el motor local no sale nada; con el motor en la nube viajan la pregunta y los fragmentos del material que hacen falta para contestarla. El registro de uso del administrador guarda conteos, nunca el contenido."
+      },
+      {
+        "t": "Consentimiento",
+        "p": "La Ley 25.326 (art. 5) pide consentimiento libre, expreso e informado para tratar datos personales, y es revocable."
+      },
+      {
+        "t": "Transferencia internacional",
+        "p": "El art. 12 restringe enviar datos a países sin protección adecuada, y Estados Unidos no figura en la lista de la autoridad de datos. Por eso el modo nube pide consentimiento expreso y existe la alternativa local."
+      },
+      {
+        "t": "Grabar clases",
+        "p": "El Código Civil y Comercial (art. 53) pide consentimiento para captar la voz de una persona, con excepción educativa; la Ley 11.723 (art. 27) no deja publicar conferencias sin autorización. Grabar depende de cada cátedra, y una grabación no se publica."
+      },
+      {
+        "t": "Aviso de IA",
+        "p": "Cada respuesta cita clase, minuto y quién lo dijo; lo que no está en el material queda marcado como ausente en vez de inventarse."
+      },
+      {
+        "t": "Términos y consumo",
+        "p": "Términos y privacidad redactados en borrador para la beta. Si se cobra, la Ley 24.240 y la Disposición 954/2025 piden botón de arrepentimiento y de baja visibles, y la baja por el mismo medio."
+      }
+    ]
+  },
+  "demos": {
+    "titulo": "Mini revisión de las demos del portfolio",
+    "intro": "Apliqué la misma lista, en chico, a las dos demos para marcas de este sitio: el configurador 3D y el asistente de catálogo. Revisé la versión del 4/11/2026.",
+    "items": [
+      {
+        "icono": "capas",
+        "t": "Superficie mínima",
+        "p": "Archivos estáticos del mismo origen: sin servidor, sin cookies, sin analítica y sin formularios que envíen datos. El catálogo del asistente es un archivo local y la pregunta no sale del navegador."
+      },
+      {
+        "icono": "enlace",
+        "t": "Sin scripts de terceros",
+        "p": "three.js y las fuentes se sirven desde el propio sitio. Afuera sólo hay enlaces a las fuentes de las cifras, con rel=\"noopener\"."
+      },
+      {
+        "icono": "texto",
+        "t": "Entrada del usuario",
+        "p": "El campo del asistente tiene un tope de 240 caracteres y lo escrito entra como texto o escapado: nunca se interpreta como HTML. En el configurador, el HTML sólo se arma con datos propios."
+      },
+      {
+        "icono": "licencia",
+        "t": "Activos con licencia",
+        "p": "Modelos 3D CC0 y CC BY 4.0 y entornos HDRI CC0, acreditados al pie de la demo y en Créditos."
+      },
+      {
+        "icono": "lupa",
+        "t": "Hallazgo",
+        "p": "El configurador asigna el color de cada muestra con un atributo style, que una CSP estricta bloquearía. Arreglo: asignarlo con style.setProperty."
+      },
+      {
+        "icono": "nube",
+        "t": "Límite del alojamiento",
+        "p": "El sitio se publica en GitHub Pages, que no deja enviar cabeceras propias: la CSP va en una etiqueta meta, donde frame-ancestors no funciona. Riesgo bajo: una demo sin datos no tiene nada que robar dentro de un iframe."
+      }
+    ],
+    "csp_t": "CSP sugerida para las demos",
+    "csp": "default-src 'self';\n/* sha256: tema e importmap */\nscript-src 'self' 'sha256-…';\nstyle-src 'self';\nimg-src 'self' data: blob:;\nconnect-src 'self' blob:;\nfont-src 'self';\nobject-src 'none';\nbase-uri 'self';\nform-action 'none'",
+    "csp_p": "Esta página ya aplica la suya: CSP en una meta con las huellas SHA-256 de sus dos scripts y de su estilo en línea, sin scripts de terceros, y probada sin errores de consola."
+  },
+  "metodo": {
+    "titulo": "Cómo lo hice con agentes de IA",
+    "pasos": [
+      {
+        "t": "La amenaza escrita en el brief.",
+        "p": "Cada módulo sensible empieza explicando qué cuida y por qué: «lo que se cuida, porque es lo que se roba». Esa explicación fue el criterio de aceptación de la tanda."
+      },
+      {
+        "t": "Una defensa, una prueba que la ataca.",
+        "p": "Orígenes ajenos, rutas con «..», cinco contraseñas malas, una clave plantada en el paquete: cada defensa entró con la prueba que intenta romperla."
+      },
+      {
+        "t": "Medir en vez de suponer.",
+        "p": "Que comparar rutas como texto no alcanza quedó demostrado con un caso que pasaba la validación y terminaba en un ejecutable del sistema. Ese caso es hoy una prueba."
+      },
+      {
+        "t": "Qué rehice.",
+        "p": "La primera versión del control de Origin exigía el puerto exacto. La ventana de escritorio levanta su propio servidor y el puerto quedaba en cero: todos los pedidos que cambian algo devolvían 403, en 19 lugares, y en pantalla se veían botones que no hacían nada. Lo cambié por aceptar cualquier puerto de la propia máquina, que es lo que importa frenar: una página de internet."
+      },
+      {
+        "t": "Volver a correr todo al cerrar.",
+        "p": "Para escribir este caso corrí de nuevo las cuatro suites de seguridad: 126 en verde y 4 omitidas."
+      }
+    ]
+  },
+  "reflexion": {
+    "titulo": "Qué cambiaría",
+    "p": [
+      "Haría el modelo de amenazas el primer día. Las defensas llegaron módulo por módulo, y por eso el control de Host quedó en el panel y no en el servidor de la app. Una lista única desde el principio lo habría evitado.",
+      "Lo que falta: una auditoría de afuera y la firma del instalador antes de abrir la beta a más gente."
+    ]
+  },
+  "caso_nav": {
+    "etiqueta": "Caso relacionado →",
+    "nombre": "Cathedra",
+    "frase": "App de estudio para Windows: transcribe clases, arma el plan, genera exámenes y fichas, y cada respuesta cita clase y minuto.",
+    "aria": "Caso relacionado: Cathedra",
+    "alt": "Marco de porcelana con una captura de Cathedra",
+    "todos": "Todos los casos",
+    "inicio": "Volver al inicio"
+  },
+  "pie": {
+    "creditos": "Créditos: texturas, modelos 3D y entornos de terceros",
+    "legal": "Aviso legal y privacidad",
+    "hecho": "Sitio estático hecho con desarrollo asistido por IA y verificado a mano. Sin cookies ni analítica.",
+    "copy": "© 2026 Ramiro Bales"
+  },
+  "svg": {
+    "titulo": "Modelo de amenazas de Cathedra",
+    "desc": "Esquema: a la izquierda, lo que viene de internet (una página de otro sitio y un instalador modificado); en el centro, la computadora del alumno con el navegador, la ventana de la app, el servidor local y el disco; a la derecha, lo que se publica. Las flechas rojas punteadas son ataques y las etiquetas sobre las líneas son las defensas.",
+    "internet": "Internet",
+    "pc": "La computadora del alumno",
+    "publica": "Lo que se publica",
+    "pagina": "Página de otro sitio",
+    "instalador": "Instalador modificado",
+    "navegador": "Navegador",
+    "ventana": "Ventana de la app",
+    "servidor": "Servidor local",
+    "servidor_2": "sólo en 127.0.0.1",
+    "disco": "Disco",
+    "disco_2": "clases · cuentas · clave",
+    "archivos": "Archivos del proyecto",
+    "paquete": "Paquete e instalador",
+    "repo": "Repositorio público",
+    "d_origin": "Origin propio",
+    "d_ruta": "Ruta resuelta",
+    "d_disco": "scrypt · DPAPI",
+    "d_guardia": "Guardia de secretos",
+    "d_huellas": "Huellas SHA-256",
+    "a_csrf": "Pedidos desde otra pestaña",
+    "a_ruta": "«../..»",
+    "a_fuga": "Clave colada"
+  }
+}

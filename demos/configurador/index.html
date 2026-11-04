@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<script>try{var q=new URLSearchParams(location.search).get('tema'),t=q==='claro'?'light':q==='oscuro'?'dark':q||localStorage.getItem('tema');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t;}catch(e){}</script>
+<title>Configurador 3D · Ámbar Muebles (marca ficticia) · Ramiro Bales</title>
+<meta name="description" content="Ficha de producto con configurador 3D para e-commerce: tela, madera y metal en tiempo real, precio vivo y carrito. Demo de Ramiro Bales con una marca ficticia.">
+<meta name="robots" content="index, follow">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#F3EEE4">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#040404">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Configurador 3D para e-commerce · demo de Ramiro Bales">
+<meta property="og:description" content="Ficha de producto con configurador 3D: tela, madera y metal en tiempo real, precio vivo y carrito. Marca ficticia creada para la demo.">
+<meta property="og:image" content="https://ramirobales-collab.github.io/demos/configurador/img/og-1200x630.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../../favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../../apple-touch-icon.png">
+<link rel="preload" href="../../assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../../assets/fonts/playfair-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/estilo.css">
+<script type="importmap">{"imports":{"three":"../../lib/three.module.min.js"}}</script>
+<link rel="modulepreload" href="../../lib/three.module.min.js">
+<link rel="modulepreload" href="../../lib/GLTFLoader.js">
+<link rel="modulepreload" href="js/visor.js">
+</head>
+<body>
+<a class="saltar" href="#ficha" data-i18n="barra.saltar">Saltar a la ficha</a>
+
+<div class="cinta" role="note">
+  <p class="cinta__texto"><span class="cinta__largo" data-i18n="cinta.texto">Demo de Ramiro Bales · Ámbar Muebles es una marca ficticia creada para esta demo.</span><span class="cinta__corto" data-i18n="cinta.corto">Demo · marca ficticia</span></p>
+  <a class="cinta__volver" href="../../index.html" data-i18n="cinta.volver">← Volver al portfolio</a>
+</div>
+
+<header class="tienda" aria-label="Ámbar Muebles">
+  <a class="marca" href="#ficha" aria-label="Ámbar Muebles, inicio de la ficha" data-i18n-attr="aria-label=marca.aria">
+    <svg class="marca__signo" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3.5c5.8 4.6 9 9.6 9 14.6A9 9 0 0 1 7 18.1C7 13.1 10.2 8.1 16 3.5Z"/><path d="M16 9.5v17.4M11.6 15.8 16 20.2l4.4-4.4"/></svg>
+    <span class="marca__nombre">Ámbar</span><span class="marca__sub" data-i18n="marca.sub">Muebles</span>
+  </a>
+  <nav class="tienda__nav" aria-label="Secciones de la demo" data-i18n-attr="aria-label=nav.aria">
+    <a href="#ficha" data-i18n="nav.ficha">Ficha</a>
+    <a href="#marca" data-i18n="nav.marca">Qué gana la marca</a>
+    <a href="#integra" data-i18n="nav.integra">Cómo se integra</a>
+    <a href="#proceso" data-i18n="nav.proceso">Proceso</a>
+  </nav>
+  <div class="tienda__herr">
+    <div class="conm" role="group" aria-label="Idioma" data-i18n-attr="aria-label=barra.idioma">
+      <button type="button" data-idioma="es" aria-pressed="true" lang="es">ES</button>
+      <button type="button" data-idioma="en" aria-pressed="false" lang="en">EN</button>
+    </div>
+    <button type="button" class="tema" aria-pressed="false" aria-label="Cambiar entre tema claro y oscuro" data-i18n-attr="aria-label=barra.tema">
+      <svg class="tema__luna" viewBox="0 0 20 20" aria-hidden="true"><path d="M16.4 12.2A7 7 0 0 1 7.8 3.6a7.2 7.2 0 1 0 8.6 8.6Z"/></svg>
+      <svg class="tema__sol" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="3.6"/><path d="M10 1.8v2.2M10 16v2.2M1.8 10H4M16 10h2.2M4.2 4.2l1.6 1.6M14.2 14.2l1.6 1.6M4.2 15.8l1.6-1.6M14.2 5.8l1.6-1.6"/></svg>
+      <span class="tema__oscuro" data-i18n="barra.oscuro">Oscuro</span><span class="tema__claro" data-i18n="barra.claro">Claro</span>
+    </button>
+    <button type="button" class="carrito" id="carrito" aria-haspopup="dialog" aria-controls="panel-carrito" aria-label="Carrito: 0 artículos" data-i18n-attr="aria-label=carrito.aria0">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 4.5h2.2l2.1 10.2a1.6 1.6 0 0 0 1.6 1.3h7.7a1.6 1.6 0 0 0 1.6-1.2l1.6-6.3H6.6"/><circle cx="10" cy="19.6" r="1.3"/><circle cx="17" cy="19.6" r="1.3"/></svg>
+      <span class="carrito__n" id="carrito-n" aria-hidden="true">0</span>
+    </button>
+  </div>
+</header>
+
+<main id="contenido">
+  <section class="ficha" id="ficha" aria-labelledby="producto-nombre">
+    <div class="visor" id="visor">
+      <div class="visor__fondo" aria-hidden="true"></div>
+      <picture class="visor__poster" id="poster">
+        <source type="image/webp" srcset="img/poster-silla-800.webp 800w, img/poster-silla-1600.webp 1600w" sizes="(min-width: 1024px) 62vw, 100vw">
+        <img src="img/poster-silla-1600.webp" width="1600" height="1200" alt="Butaca Lúa en terciopelo Mango con madera de nogal y botones de latón, sobre fondo de estudio claro." data-i18n-attr="alt=poster.silla" fetchpriority="high" decoding="async">
+      </picture>
+      <canvas class="visor__lienzo" id="lienzo" tabindex="0" role="img" aria-label="Vista 3D de la butaca. Arrastrá o usá las flechas del teclado para girarla." data-i18n-attr="aria-label=visor.aria"></canvas>
+
+      <p class="visor__estado" id="estado" role="status" aria-live="polite"><span class="visor__barra" aria-hidden="true"><span id="estado-barra"></span></span><span id="estado-texto" data-i18n="estado.cargando">Cargando el modelo 3D…</span></p>
+      <p class="visor__nota-poster" data-i18n="poster.nota">Vista fija: tu navegador no muestra 3D aquí. Las opciones cambian el precio y el carrito; la imagen muestra la versión de catálogo.</p>
+      <p class="visor__pista" id="pista" data-i18n="visor.pista">Arrastrá para girar</p>
+
+      <div class="visor__macro-nota" id="macro-nota" hidden>
+        <p class="visor__macro-titulo" data-i18n="macro.titulo">Terciopelo, de cerca</p>
+        <p class="visor__macro-texto" data-i18n="macro.texto">El brillo de la fibra (sheen) cambia con el ángulo de la luz: girá un poco para verlo moverse.</p>
+      </div>
+
+      <div class="visor__controles" role="group" aria-label="Controles de la vista 3D" data-i18n-attr="aria-label=controles.aria">
+        <button type="button" class="ctl" id="ctl-auto" aria-pressed="true" aria-label="Pausar el giro automático" data-i18n-attr="aria-label=controles.pausar">
+          <svg class="ctl__pausa" viewBox="0 0 20 20" aria-hidden="true"><path d="M7 5v10M13 5v10"/></svg>
+          <svg class="ctl__play" viewBox="0 0 20 20" aria-hidden="true"><path d="M7 4.8v10.4l8.2-5.2Z"/></svg>
+        </button>
+        <span class="ctl__sep" aria-hidden="true"></span>
+        <button type="button" class="ctl" id="ctl-izq" aria-label="Girar a la izquierda" data-i18n-attr="aria-label=controles.izq"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4.6 9.2A5.6 5.6 0 1 1 6 14.4"/><path d="M4.2 4.8v4.6h4.6"/></svg></button>
+        <button type="button" class="ctl" id="ctl-der" aria-label="Girar a la derecha" data-i18n-attr="aria-label=controles.der"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M15.4 9.2A5.6 5.6 0 1 0 14 14.4"/><path d="M15.8 4.8v4.6h-4.6"/></svg></button>
+        <span class="ctl__sep" aria-hidden="true"></span>
+        <button type="button" class="ctl" id="ctl-menos" aria-label="Alejar" data-i18n-attr="aria-label=controles.menos"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 10h10"/></svg></button>
+        <button type="button" class="ctl" id="ctl-mas" aria-label="Acercar" data-i18n-attr="aria-label=controles.mas"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 10h10M10 5v10"/></svg></button>
+      </div>
+      <button type="button" class="tejido" id="ctl-macro" aria-pressed="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6"/><path d="m15 15 5 5"/><path d="M8 9.2c1.4-.9 3-.9 4.4 0M8 12c1.4-.9 3-.9 4.4 0"/></svg>
+        <span id="ctl-macro-texto" data-i18n="macro.ver">Ver el tejido</span>
+      </button>
+    </div>
+
+    <div class="panel" id="panel">
+      <div class="panel__cabeza">
+        <p class="miga"><span data-i18n="miga.living">Living</span><span aria-hidden="true"> / </span><span id="miga-cat" data-i18n="miga.silla">Butacas</span></p>
+        <h1 class="producto" id="producto-nombre" data-i18n="silla.nombre">Butaca Lúa</h1>
+        <p class="producto__bajada" id="producto-bajada" data-i18n="silla.bajada">Terciopelo con capitoné, estructura de madera maciza y botones de metal.</p>
+      </div>
+
+      <div class="selector-producto" role="radiogroup" aria-label="Producto" data-i18n-attr="aria-label=selector.aria">
+        <button type="button" role="radio" class="sp" data-producto="silla" aria-checked="true">
+          <img src="img/poster-silla-200.webp" width="200" height="150" alt="" decoding="async">
+          <span class="sp__texto"><span class="sp__nombre" data-i18n="silla.corto">Butaca</span><span class="sp__precio" id="sp-silla">US$ 540</span></span>
+        </button>
+        <button type="button" role="radio" class="sp" data-producto="sofa" aria-checked="false" tabindex="-1">
+          <img src="img/poster-sofa-200.webp" width="200" height="150" alt="" decoding="async">
+          <span class="sp__texto"><span class="sp__nombre" data-i18n="sofa.corto">Sofá</span><span class="sp__precio" id="sp-sofa">US$ 1.890</span></span>
+        </button>
+      </div>
+
+      <div class="precio">
+        <p class="precio__cifra" id="precio" aria-live="polite" aria-atomic="true">US$ 540</p>
+        <p class="precio__nota" data-i18n="precio.nota">Precio de ejemplo con la configuración elegida.</p>
+      </div>
+
+      <div class="hoja" id="hoja">
+      <div class="pestanas" role="tablist" aria-label="Partes a configurar" data-i18n-attr="aria-label=pestanas.aria" id="pestanas"></div>
+      <div class="grupos" id="grupos"></div>
+
+      <div class="compra" id="compra">
+        <p class="resumen" id="resumen"></p>
+        <p class="compra__precio" id="precio-movil" aria-hidden="true">US$ 540</p>
+        <button type="button" class="cta" id="cta">
+          <span class="cta__texto" id="cta-texto" data-i18n="cta.agregar">Agregar al carrito</span>
+          <svg class="cta__tilde" viewBox="0 0 20 20" aria-hidden="true"><path d="m5 10.4 3.2 3.1L15 6.6"/></svg>
+        </button>
+      </div>
+      </div>
+      <p class="panel__medidas" id="medidas" data-i18n="silla.medidas">83 × 57 × 69 cm (ancho × profundidad × alto), tomadas del modelo 3D.</p>
+      <p class="panel__aviso" data-i18n="panel.aviso">Marca ficticia: no hay pago ni envío.</p>
+    </div>
+  </section>
+
+  <section class="seccion" id="marca" aria-labelledby="marca-titulo">
+    <div class="seccion__in">
+      <p class="folio"><span class="folio__cifra">01</span><span class="folio__etiqueta" data-i18n="marca.folio">Qué gana la marca</span></p>
+      <h2 class="titulo" id="marca-titulo" data-i18n="marca.titulo">Cuando el cliente puede girar el producto, compra con menos dudas.</h2>
+      <p class="intro" data-i18n="marca.intro">Una foto muestra un ángulo; esta ficha muestra todos, con la tela y el acabado que el cliente eligió. Las cifras de abajo las publicaron terceros sobre tiendas que ya usan 3D: no son resultados de esta demo.</p>
+      <ul class="cifras" role="list">
+        <li class="cifra">
+          <p class="cifra__pre" data-i18n="cifra1.pre">Conversión, hasta</p>
+          <p class="cifra__n" data-i18n="cifra1.n">2×</p>
+          <p class="cifra__que" data-i18n="cifra1.que">en fichas de producto con 3D y realidad aumentada.</p>
+          <p class="cifra__fuente"><span data-i18n="cifra.segun">Según</span> <a href="https://www.threekit.com/guide-to-roi-in-3d-and-augmented-reality" rel="noopener" target="_blank" data-i18n="cifra1.fuente">Threekit, guía de ROI en 3D y AR (datos de Shopify)</a></p>
+        </li>
+        <li class="cifra">
+          <p class="cifra__pre" data-i18n="cifra2.pre">Devoluciones, hasta</p>
+          <p class="cifra__n" data-i18n="cifra2.n">−40 %</p>
+          <p class="cifra__que" data-i18n="cifra2.que">cuando el cliente ve el producto en 3D o AR antes de comprar.</p>
+          <p class="cifra__fuente"><span data-i18n="cifra.segun">Según</span> <a href="https://www.threekit.com/guide-to-roi-in-3d-and-augmented-reality" rel="noopener" target="_blank" data-i18n="cifra2.fuente">Threekit, guía de ROI en 3D y AR (datos de Shopify)</a></p>
+        </li>
+        <li class="cifra">
+          <p class="cifra__pre" data-i18n="cifra3.pre">Agregar al carrito</p>
+          <p class="cifra__n" data-i18n="cifra3.n">+44 %</p>
+          <p class="cifra__que" data-i18n="cifra3.que">al interactuar con modelos 3D (caso Rebecca Minkoff).</p>
+          <p class="cifra__fuente"><span data-i18n="cifra.segun">Según</span> <a href="https://www.shopify.com/blog/3d-ecommerce" rel="noopener" target="_blank" data-i18n="cifra3.fuente">Shopify, «3D Ecommerce» (2026)</a></p>
+        </li>
+        <li class="cifra">
+          <p class="cifra__pre" data-i18n="cifra4.pre">Prefiere 3D a video</p>
+          <p class="cifra__n" data-i18n="cifra4.n">95 %</p>
+          <p class="cifra__que" data-i18n="cifra4.que">de los compradores elige una vista 3D interactiva antes que un video del producto.</p>
+          <p class="cifra__fuente"><span data-i18n="cifra.segun">Según</span> <a href="https://www.threekit.com/comprehensive-guide-to-3d-product-configurators" rel="noopener" target="_blank" data-i18n="cifra4.fuente">Threekit, guía de configuradores 3D</a></p>
+        </li>
+      </ul>
+
+      <h3 class="subtitulo" data-i18n="resuelve.titulo">Qué resuelve esta ficha en particular</h3>
+      <div class="resuelve">
+        <article class="resuelve__item">
+          <h4 data-i18n="resuelve1.t">La duda del color</h4>
+          <p data-i18n="resuelve1.p">El terciopelo cambia con la luz. El botón «Ver el tejido» acerca la cámara a la fibra para que el cliente vea el brillo real antes de pagar, que es donde nace el «no era el color que esperaba».</p>
+        </article>
+        <article class="resuelve__item">
+          <h4 data-i18n="resuelve2.t">Combinaciones sin fotografiar</h4>
+          <p data-i18n="resuelve2.p">6 telas × 4 maderas × 3 metales: 72 versiones de la butaca y 112 del sofá, sin una sola sesión de fotos. Una tela nueva es una línea más en el catálogo.</p>
+        </article>
+        <article class="resuelve__item">
+          <h4 data-i18n="resuelve3.t">Precio sin sorpresas</h4>
+          <p data-i18n="resuelve3.p">El total cambia con cada elección y la configuración entra al carrito como una línea de pedido con su precio: la misma información que necesita el depósito.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="seccion seccion--hundida" id="integra" aria-labelledby="integra-titulo">
+    <div class="seccion__in">
+      <p class="folio"><span class="folio__cifra">02</span><span class="folio__etiqueta" data-i18n="integra.folio">Cómo se integra</span></p>
+      <h2 class="titulo" id="integra-titulo" data-i18n="integra.titulo">Se enchufa a la ficha y al carrito que la marca ya tiene.</h2>
+      <ol class="flujo" role="list">
+        <li class="flujo__paso">
+          <span class="flujo__n" aria-hidden="true">1</span>
+          <h3 data-i18n="integra1.t">Modelo</h3>
+          <p data-i18n="integra1.p">El GLB sale del catálogo de la marca (muchos fabricantes ya lo tienen para sus renders) o se modela una vez por producto.</p>
+        </li>
+        <li class="flujo__paso">
+          <span class="flujo__n" aria-hidden="true">2</span>
+          <h3 data-i18n="integra2.t">Optimización</h3>
+          <p data-i18n="integra2.p">Menos de 2 MB por producto: texturas WebP, geometría cuantizada y un solo entorno de estudio. Esta butaca pesa 1,13 MB y el sofá 0,51 MB.</p>
+        </li>
+        <li class="flujo__paso">
+          <span class="flujo__n" aria-hidden="true">3</span>
+          <h3 data-i18n="integra3.t">Ficha de producto</h3>
+          <p data-i18n="integra3.p">Un componente que va donde hoy está la galería de fotos. Sin plugin ni app: corre en el navegador del celular y de la computadora.</p>
+        </li>
+        <li class="flujo__paso">
+          <span class="flujo__n" aria-hidden="true">4</span>
+          <h3 data-i18n="integra4.t">Carrito</h3>
+          <p data-i18n="integra4.p">Cada opción es una variante del SKU. Al agregar, la configuración viaja como línea de pedido con su precio, igual que una talla o un color.</p>
+        </li>
+        <li class="flujo__paso flujo__paso--opcional">
+          <span class="flujo__n" aria-hidden="true">5</span>
+          <h3 data-i18n="integra5.t">Realidad aumentada (opcional)</h3>
+          <p><span data-i18n="integra5.p">El mismo modelo abre en realidad aumentada en Android (glTF) y, con una copia USDZ, en iPhone, para verlo en el living. Según</span> <a href="https://www.shopify.com/blog/ar-shopping" rel="noopener" target="_blank" data-i18n="integra5.fuente">Shopify</a><span data-i18n="integra5.p2">, la AR aumentó la probabilidad de compra un 65 %.</span></p>
+        </li>
+      </ol>
+      <dl class="medidas" id="medidas-tabla">
+        <div><dt data-i18n="med.peso">Primera vista (butaca)</dt><dd><span data-i18n="med.peso.v">2,0 MB</span></dd></div>
+        <div><dt data-i18n="med.carga">Primer render 3D en 4G simulado (9 Mbps)</dt><dd><span data-i18n="med.carga.v">2,1 s</span></dd></div>
+        <div><dt data-i18n="med.fps">Cuadros por segundo al girar (tope de la pantalla)</dt><dd><span data-i18n="med.fps.v">120</span></dd></div>
+        <div><dt data-i18n="med.reposo">Cuadros dibujados en reposo</dt><dd><span data-i18n="med.reposo.v">0 por segundo</span></dd></div>
+      </dl>
+      <p class="nota" data-i18n="med.nota">Medido por mí en esta página con Edge sin ventana y GPU integrada, caché vacía. Con 4G lento (1,6 Mbps) el póster aparece a los 2,2 s y el 3D a los 10,6 s.</p>
+    </div>
+  </section>
+
+  <section class="seccion" id="proceso" aria-labelledby="proceso-titulo">
+    <div class="seccion__in">
+      <p class="folio"><span class="folio__cifra">03</span><span class="folio__etiqueta" data-i18n="proceso.folio">Proceso a la vista</span></p>
+      <h2 class="titulo" id="proceso-titulo" data-i18n="proceso.titulo">Cómo la hice y qué medí.</h2>
+      <div class="proceso">
+        <div class="proceso__brief">
+          <h3 data-i18n="brief.t">El brief</h3>
+          <p data-i18n="brief.p">Una ficha de muebles donde el cliente elige tela, madera y metal y ve el resultado en 3D con luz de estudio, con el precio siempre a la vista. Criterios de aceptación: que el terciopelo se vea terciopelo, que la primera vista pese menos de 2,5 MB, que se use con un dedo o con el teclado y que no gaste batería cuando nadie la toca.</p>
+          <p class="proceso__como" data-i18n="brief.como">La construí con desarrollo asistido por IA: yo definí el brief, los criterios y las decisiones de abajo, y verifiqué cada versión con capturas a resolución real y mediciones.</p>
+        </div>
+        <div class="decisiones">
+          <article class="decision">
+            <p class="decision__insight" data-i18n="dec1.i">El terciopelo depende del ángulo.</p>
+            <h3 data-i18n="dec1.t">Usé el brillo de fibra (sheen) del modelo y sumé un macro de la tela.</h3>
+            <p class="decision__no" data-i18n="dec1.no">Descarté una foto de muestra de tela: no muestra cómo cambia con la luz.</p>
+          </article>
+          <article class="decision">
+            <p class="decision__insight" data-i18n="dec2.i">Una ficha no es una escena.</p>
+            <h3 data-i18n="dec2.t">Fondo de estudio claro, una luz con sombra suave y un giro lento que se detiene solo tras una vuelta.</h3>
+            <p class="decision__no" data-i18n="dec2.no">Descarté la escenografía de living y el posprocesado: suman peso y le quitan protagonismo al producto.</p>
+          </article>
+          <article class="decision">
+            <p class="decision__insight" data-i18n="dec3.i">La batería del celular también es experiencia.</p>
+            <h3 data-i18n="dec3.t">Render bajo demanda: si nada cambia, no se dibuja ningún cuadro.</h3>
+            <p class="decision__no" data-i18n="dec3.no">Descarté el bucle continuo a 60 cuadros por segundo con la imagen quieta.</p>
+          </article>
+        </div>
+        <div class="presupuesto">
+          <h3 data-i18n="pres.t">Presupuesto de peso, medido</h3>
+          <table class="tabla">
+            <caption data-i18n="pres.caption">Primera vista de la butaca: bytes que viajan por la red con la caché vacía (el código se sirve comprimido con gzip, como en el hosting). 27 pedidos.</caption>
+            <thead><tr><th scope="col" data-i18n="pres.col1">Pieza</th><th scope="col" data-i18n="pres.col2">Peso</th></tr></thead>
+            <tbody id="pres-cuerpo">
+              <tr><th scope="row" data-i18n="pres.three">Motor 3D (three.js + cargadores)</th><td data-i18n="pres.three.v">202 KB</td></tr>
+              <tr><th scope="row" data-i18n="pres.modelo">Modelo de la butaca (GLB)</th><td data-i18n="pres.modelo.v">1.135 KB</td></tr>
+              <tr><th scope="row" data-i18n="pres.hdr">Entorno de estudio (HDR 512 px)</th><td data-i18n="pres.hdr.v">410 KB</td></tr>
+              <tr><th scope="row" data-i18n="pres.fuentes">Tipografías</th><td data-i18n="pres.fuentes.v">109 KB</td></tr>
+              <tr><th scope="row" data-i18n="pres.pagina">Página, estilos, código y póster</th><td data-i18n="pres.pagina.v">160 KB</td></tr>
+            </tbody>
+            <tfoot><tr><th scope="row" data-i18n="pres.total">Total</th><td data-i18n="pres.total.v">2,0 MB</td></tr></tfoot>
+          </table>
+          <p class="nota" data-i18n="pres.nota">El sofá (0,51 MB) se descarga sólo si el cliente lo elige. Para bajar de 1,55 a 1,13 MB el modelo de la butaca, cuanticé la geometría y quité una etiqueta interna que no se ve.</p>
+        </div>
+        <div class="afuera">
+          <h3 data-i18n="afuera.t">Qué quedó afuera</h3>
+          <ul>
+            <li data-i18n="afuera1">La realidad aumentada está descrita, no implementada.</li>
+            <li data-i18n="afuera2">Los modelos son muestras públicas de Khronos, no un catálogo real; los precios y nombres son de ejemplo.</li>
+            <li data-i18n="afuera3">El carrito es simulado: no hay pago, stock ni envío.</li>
+            <li data-i18n="afuera4">Las texturas siguen en WebP; con KTX2 ocuparían menos memoria de video en celulares modestos.</li>
+            <li data-i18n="afuera5">Probé teclado, foco y estructura ARIA; no hice pruebas con usuarios ni con lectores de pantalla reales.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="pie">
+  <div class="pie__in">
+    <p class="pie__atrib" data-i18n="pie.atrib">Modelos 3D: Sheen Chair © 2020 Wayfair, LLC / Eric Chadwick (CC0) y Glam Velvet Sofa © 2021 Wayfair, LLC / Eric Chadwick (CC BY 4.0), Khronos glTF Sample Assets; HDRI Studio Small 08/09, Poly Haven (CC0).</p>
+    <p class="pie__cambios" data-i18n="pie.cambios">Cambios propios: geometría de la butaca cuantizada, etiqueta interna quitada, colores y acabados agregados por factor. Ámbar Muebles es una marca ficticia; Wayfair no participa ni respalda esta demo.</p>
+    <p class="pie__enlaces">
+      <a href="https://github.com/KhronosGroup/glTF-Sample-Assets" rel="noopener" target="_blank">Khronos glTF Sample Assets</a>
+      <a href="https://creativecommons.org/licenses/by/4.0/" rel="noopener" target="_blank">CC BY 4.0</a>
+      <a href="https://polyhaven.com/a/studio_small_09" rel="noopener" target="_blank">Poly Haven</a>
+      <a href="../../creditos.html" data-i18n="pie.creditos">Créditos del portfolio</a>
+      <a href="../../index.html" data-i18n="cinta.volver">← Volver al portfolio</a>
+    </p>
+    <p class="pie__copy" data-i18n="pie.copy">Demo de Ramiro Bales, 2026. Hecha con desarrollo asistido por IA y verificada a mano.</p>
+  </div>
+</footer>
+
+<dialog class="cajon" id="panel-carrito" aria-labelledby="cajon-titulo">
+  <div class="cajon__cabeza">
+    <h2 id="cajon-titulo" data-i18n="cajon.titulo">Tu carrito</h2>
+    <button type="button" class="cajon__cerrar" id="cajon-cerrar" aria-label="Cerrar el carrito" data-i18n-attr="aria-label=cajon.cerrar"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 5l10 10M15 5 5 15"/></svg></button>
+  </div>
+  <ul class="cajon__lista" id="cajon-lista" role="list"></ul>
+  <p class="cajon__vacio" id="cajon-vacio" data-i18n="cajon.vacio">Todavía no agregaste nada.</p>
+  <div class="cajon__total"><span data-i18n="cajon.total">Total de ejemplo</span><span id="cajon-total">US$ 0</span></div>
+  <p class="cajon__nota" data-i18n="cajon.nota">Esto es una demo: no hay pago. En una tienda real, acá sigue el checkout de la marca.</p>
+</dialog>
+
+<p class="sr" id="anuncio" aria-live="polite"></p>
+<span class="vuelo" id="vuelo" aria-hidden="true" hidden></span>
+<p class="medicion" id="medicion" hidden></p>
+
+<script type="module" src="js/app.js"></script>
+</body>
+</html>

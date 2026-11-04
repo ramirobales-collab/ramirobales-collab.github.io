@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<script>try{var q=new URLSearchParams(location.search).get('tema'),t=q==='claro'?'light':q==='oscuro'?'dark':q||localStorage.getItem('tema');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t;}catch(e){}</script>
+<title>Asistente de catálogo · Ámbar Muebles (marca ficticia) · Ramiro Bales</title>
+<meta name="description" content="Asistente de preventa para e-commerce que responde sólo con la ficha del producto, cita cada dato, dice «no está en el catálogo» en vez de inventar y deriva a una persona con un resumen. Demo de Ramiro Bales con una marca ficticia.">
+<meta name="robots" content="index, follow">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#F3EEE4">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#040404">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Asistente de catálogo que no inventa · demo de Ramiro Bales">
+<meta property="og:description" content="Responde con la ficha y cita cada dato; si no está, lo dice y deriva a una persona. Marca ficticia creada para la demo.">
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../../favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../../apple-touch-icon.png">
+<link rel="preload" href="../../assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../../assets/fonts/playfair-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="datos/catalogo.json" as="fetch" crossorigin>
+<link rel="modulepreload" href="js/motor.js">
+<link rel="stylesheet" href="css/estilo.css">
+</head>
+<body>
+<a class="saltar" href="#chat-entrada" data-i18n="barra.saltar">Saltar a la conversación</a>
+
+<div class="cinta" role="note">
+  <p class="cinta__texto"><span class="cinta__largo" data-i18n="cinta.texto">Demo de Ramiro Bales · Ámbar Muebles es una marca ficticia creada para esta demo.</span><span class="cinta__corto" data-i18n="cinta.corto">Demo · marca ficticia</span></p>
+  <a class="cinta__volver" href="../../index.html" data-i18n="cinta.volver">← Volver al portfolio</a>
+</div>
+
+<header class="tienda" aria-label="Ámbar Muebles">
+  <a class="marca" href="#asistente" aria-label="Ámbar Muebles, inicio de la demo" data-i18n-attr="aria-label=marca.aria">
+    <svg class="marca__signo" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3.5c5.8 4.6 9 9.6 9 14.6A9 9 0 0 1 7 18.1C7 13.1 10.2 8.1 16 3.5Z"/><path d="M16 9.5v17.4M11.6 15.8 16 20.2l4.4-4.4"/></svg>
+    <span class="marca__nombre">Ámbar</span><span class="marca__sub" data-i18n="marca.sub">Muebles</span>
+  </a>
+  <nav class="tienda__nav" aria-label="Secciones de la demo" data-i18n-attr="aria-label=nav.aria">
+    <a href="#asistente" data-i18n="nav.asistente">Asistente</a>
+    <a href="#marca" data-i18n="nav.marca">Qué gana la marca</a>
+    <a href="#conecta" data-i18n="nav.conecta">Cómo se conecta</a>
+    <a href="#catalogo" data-i18n="nav.catalogo">Catálogo</a>
+    <a href="#proceso" data-i18n="nav.proceso">Proceso</a>
+  </nav>
+  <div class="tienda__herr">
+    <div class="conm" role="group" aria-label="Idioma" data-i18n-attr="aria-label=barra.idioma">
+      <button type="button" data-idioma="es" aria-pressed="true" lang="es">ES</button>
+      <button type="button" data-idioma="en" aria-pressed="false" lang="en">EN</button>
+    </div>
+    <button type="button" class="tema" aria-pressed="false" aria-label="Cambiar entre tema claro y oscuro" data-i18n-attr="aria-label=barra.tema">
+      <svg class="tema__luna" viewBox="0 0 20 20" aria-hidden="true"><path d="M16.4 12.2A7 7 0 0 1 7.8 3.6a7.2 7.2 0 1 0 8.6 8.6Z"/></svg>
+      <svg class="tema__sol" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="3.6"/><path d="M10 1.8v2.2M10 16v2.2M1.8 10H4M16 10h2.2M4.2 4.2l1.6 1.6M14.2 14.2l1.6 1.6M4.2 15.8l1.6-1.6M14.2 5.8l1.6-1.6"/></svg>
+      <span class="tema__oscuro" data-i18n="barra.oscuro">Oscuro</span><span class="tema__claro" data-i18n="barra.claro">Claro</span>
+    </button>
+  </div>
+</header>
+
+<main id="contenido">
+  <section class="escena" id="asistente" aria-labelledby="titulo">
+    <div class="escena__cabeza">
+      <div class="escena__texto">
+        <p class="etiqueta" data-i18n="cabeza.etiqueta">Atención y preventa · e-commerce</p>
+        <h1 class="escena__titulo" id="titulo" data-i18n="cabeza.titulo">Un asistente de tienda que responde con la ficha, o no responde.</h1>
+        <p class="escena__bajada" data-i18n="cabeza.bajada">Preguntale como lo haría un cliente. Cada dato sale de una ficha y se puede abrir; lo que no está, lo dice, y lo que no le corresponde, lo pasa a una persona con un resumen.</p>
+      </div>
+      <aside class="honesto" aria-labelledby="honesto-t">
+        <p class="honesto__t" id="honesto-t"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="7.2"/><path d="M10 9v5M10 6.2v.1"/></svg><span data-i18n="honesto.titulo">Qué hay y qué no hay en esta demo</span></p>
+        <p class="honesto__p" data-i18n="honesto.texto">Esta demo usa un buscador local y plantillas; en producción el mismo diseño se conecta a un modelo de lenguaje con recuperación (RAG) y las mismas reglas: citar, no inventar, derivar.</p>
+        <p class="honesto__p honesto__p--2" data-i18n="honesto.texto2">Todo corre en tu navegador: no hay servidor, no se guarda nada y no se envía nada a nadie.</p>
+      </aside>
+    </div>
+
+    <div class="vista" role="tablist" aria-label="Vista" data-i18n-attr="aria-label=vista.aria">
+      <button type="button" role="tab" id="tab-chat" aria-controls="chat" aria-selected="true" data-vista="chat" data-i18n="vista.chat">Conversación</button>
+      <button type="button" role="tab" id="tab-traza" aria-controls="traza" aria-selected="false" tabindex="-1" data-vista="traza"><span class="vista__largo" data-i18n="vista.traza">Qué pasó por dentro</span><span class="vista__corto" data-i18n="vista.traza.corto">Por dentro</span><span class="vista__punto" id="vista-punto" aria-hidden="true"></span></button>
+    </div>
+
+    <div class="escena__cuerpo">
+      <section class="chat" id="chat" aria-labelledby="chat-t" role="tabpanel">
+        <header class="chat__cabeza">
+          <span class="chat__avatar" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M16 3.5c5.8 4.6 9 9.6 9 14.6A9 9 0 0 1 7 18.1C7 13.1 10.2 8.1 16 3.5Z"/><path d="M16 9.5v17.4M11.6 15.8 16 20.2l4.4-4.4"/></svg></span>
+          <div class="chat__quien">
+            <h2 class="chat__t" id="chat-t" data-i18n="chat.titulo">Asistente de Ámbar</h2>
+            <p class="chat__sub" id="chat-sub" data-i18n="chat.sub">Responde con 12 fichas y 4 guías y políticas</p>
+          </div>
+          <button type="button" class="boton boton--borde chat__persona" id="persona">
+            <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="6.6" r="3"/><path d="M4 16.5c.8-3 3.2-4.6 6-4.6s5.2 1.6 6 4.6"/></svg>
+            <span data-i18n="chat.persona">Hablar con una persona</span>
+          </button>
+        </header>
+        <ol class="log" id="log" role="log" aria-live="polite" aria-relevant="additions" aria-label="Conversación" data-i18n-attr="aria-label=chat.log"></ol>
+        <div class="sugeridas" id="sugeridas">
+          <p class="sugeridas__t" id="sugeridas-t" data-i18n="sug.titulo">Probá con una de estas</p>
+          <ul class="sugeridas__lista" role="list" aria-labelledby="sugeridas-t">
+            <li><button type="button" class="sug" data-sug="1"><span class="sug__tipo" data-i18n="sug.1.tipo">No está</span><span class="sug__q" data-i18n="sug.1">¿Tienen colchones de dos plazas?</span></button></li>
+            <li><button type="button" class="sug" data-sug="2"><span class="sug__tipo" data-i18n="sug.2.tipo">Ambigua</span><span class="sug__q" data-i18n="sug.2">¿Cuánto tarda en llegar la mesa?</span></button></li>
+            <li><button type="button" class="sug" data-sug="3"><span class="sug__tipo" data-i18n="sug.3.tipo">Medidas</span><span class="sug__q" data-i18n="sug.3">¿La Butaca Lúa entra por una puerta de 70 cm?</span></button></li>
+            <li><button type="button" class="sug" data-sug="4"><span class="sug__tipo" data-i18n="sug.4.tipo">Plazos</span><span class="sug__q" data-i18n="sug.4">Si compro el Sofá Duna en terciopelo Musgo, ¿cuándo me llega?</span></button></li>
+            <li><button type="button" class="sug" data-sug="5"><span class="sug__tipo" data-i18n="sug.5.tipo">Cuidado</span><span class="sug__q" data-i18n="sug.5">¿Cómo saco una mancha del terciopelo?</span></button></li>
+            <li><button type="button" class="sug" data-sug="6"><span class="sug__tipo" data-i18n="sug.6.tipo">Comparar</span><span class="sug__q" data-i18n="sug.6">¿Qué diferencia hay entre el Sofá Duna y el Sofá Bruma?</span></button></li>
+          </ul>
+        </div>
+        <form class="entrada" id="form" autocomplete="off">
+          <label class="entrada__label" for="chat-entrada" data-i18n="entrada.label">Tu pregunta</label>
+          <div class="entrada__fila">
+            <input class="entrada__campo" id="chat-entrada" name="q" type="text" maxlength="240" enterkeyhint="send" aria-describedby="entrada-ayuda">
+            <button class="boton boton--marca entrada__enviar" type="submit" id="enviar">
+              <span data-i18n="entrada.mandar">Enviar</span>
+              <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 5.5 15.5 10 11 14.5"/></svg>
+            </button>
+          </div>
+          <p class="entrada__ayuda" id="entrada-ayuda" data-i18n="entrada.ayuda">Medidas, plazos, precios, cuidado, garantía, envíos o comparar. Enter para enviar.</p>
+        </form>
+      </section>
+
+      <aside class="traza" id="traza" aria-labelledby="traza-t" role="tabpanel" tabindex="-1">
+        <header class="traza__cabeza">
+          <h2 class="traza__t" id="traza-t" data-i18n="traza.titulo">Qué pasó por dentro</h2>
+          <div class="traza__nav" role="group" aria-label="Elegir pregunta" data-i18n-attr="aria-label=traza.nav">
+            <button type="button" class="traza__flecha" id="traza-ant" aria-label="Pregunta anterior" data-i18n-attr="aria-label=traza.ant"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M12.5 5 7.5 10l5 5"/></svg></button>
+            <p class="traza__turno" id="traza-turno" aria-live="polite">—</p>
+            <button type="button" class="traza__flecha" id="traza-sig" aria-label="Pregunta siguiente" data-i18n-attr="aria-label=traza.sig"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m7.5 5 5 5-5 5"/></svg></button>
+          </div>
+        </header>
+        <div class="traza__cuerpo" id="traza-cuerpo">
+          <div class="traza__vacia" id="traza-vacia">
+            <p data-i18n="traza.vacia1">Hacé una pregunta y acá vas a ver cada paso: qué palabras entendió, qué fragmentos del catálogo recuperó y con qué puntaje, qué regla aplicó, cómo verificó las cifras y la salida con esquema fijo.</p>
+            <ol class="traza__reglas" role="list" id="traza-reglas"></ol>
+          </div>
+        </div>
+        <footer class="traza__pie" id="traza-pie" data-i18n="traza.pie">Sin servidor ni modelo de lenguaje: el motor corre en tu navegador.</footer>
+      </aside>
+    </div>
+  </section>
+
+  <section class="seccion" id="marca" aria-labelledby="marca-titulo">
+    <div class="seccion__in">
+      <p class="folio"><span class="folio__cifra">01</span><span class="folio__etiqueta" data-i18n="marca.folio">Qué gana la marca</span></p>
+      <h2 class="titulo" id="marca-titulo" data-i18n="marca.titulo">Las preguntas que se repiten se responden solas, y cada respuesta se puede auditar.</h2>
+      <p class="intro" data-i18n="marca.intro">Medidas, plazos, cuidado y garantía son las preguntas de todos los días en una mueblería online, y las respuestas ya están en las fichas. El asistente las responde con esas fichas y deja al equipo lo que necesita criterio: reclamos, excepciones y ventas a medida. No pongo cifras de ahorro porque esta demo no tiene clientes que medir; abajo está qué mediría.</p>
+      <ul class="ganas" role="list">
+        <li class="gana">
+          <span class="gana__n" aria-hidden="true">1</span>
+          <h3 data-i18n="gana1.t">Menos tickets repetidos</h3>
+          <p data-i18n="gana1.p">«¿Pasa por mi puerta?», «¿cuándo llega en este color?», «¿cómo lo limpio?»: se responden con la ficha en el momento, sin esperar a que alguien del equipo se libere.</p>
+          <button type="button" class="gana__probar" data-probar="3" data-i18n="gana1.b">Ver la de la puerta</button>
+        </li>
+        <li class="gana">
+          <span class="gana__n" aria-hidden="true">2</span>
+          <h3 data-i18n="gana2.t">Respuestas consistentes</h3>
+          <p data-i18n="gana2.p">La misma pregunta recibe la misma respuesta, porque sale de la ficha y no de quién atiende ese día. Si cambia un plazo en el catálogo, cambia en todas las respuestas a la vez.</p>
+          <button type="button" class="gana__probar" data-probar="4" data-i18n="gana2.b">Ver la del plazo</button>
+        </li>
+        <li class="gana">
+          <span class="gana__n" aria-hidden="true">3</span>
+          <h3 data-i18n="gana3.t">Auditoría de cada respuesta</h3>
+          <p data-i18n="gana3.p">Cada respuesta guarda qué se buscó, qué fragmentos salieron, qué regla se aplicó y qué ficha se citó. Si un cliente reclama «me dijeron otra cosa», se puede ver exactamente qué se le dijo y de dónde salió.</p>
+          <button type="button" class="gana__probar" data-probar="6" data-i18n="gana3.b">Ver una comparación citada</button>
+        </li>
+        <li class="gana">
+          <span class="gana__n" aria-hidden="true">4</span>
+          <h3 data-i18n="gana4.t">Atención fuera de horario</h3>
+          <p data-i18n="gana4.p">De noche responde lo que está en el catálogo, y lo que no, lo deja anotado en un resumen para el equipo, con lo que el cliente preguntó y lo que ya se le contestó. A la mañana nadie arranca de cero.</p>
+          <button type="button" class="gana__probar" data-probar="1" data-i18n="gana4.b">Ver una que no está</button>
+        </li>
+      </ul>
+      <div class="nohace">
+        <h3 class="subtitulo" data-i18n="nohace.t">Lo que no hace, a propósito</h3>
+        <ul role="list">
+          <li data-i18n="nohace.1">No inventa precios, plazos ni medidas: si no están en la ficha, lo dice.</li>
+          <li data-i18n="nohace.2">No promete descuentos ni excepciones: los pasa a una persona.</li>
+          <li data-i18n="nohace.3">No resuelve reclamos de pedidos: arma el resumen y deriva.</li>
+          <li data-i18n="nohace.4">No adivina qué mesa quisiste decir: si hay tres, pregunta cuál.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="seccion seccion--hundida" id="conecta" aria-labelledby="conecta-titulo">
+    <div class="seccion__in">
+      <p class="folio"><span class="folio__cifra">02</span><span class="folio__etiqueta" data-i18n="conecta.folio">Cómo se conecta en producción</span></p>
+      <h2 class="titulo" id="conecta-titulo" data-i18n="conecta.titulo">Cinco piezas, y la última siempre es una persona.</h2>
+      <p class="intro" data-i18n="conecta.intro">En una tienda real el diseño es el mismo; cambia lo que hay dentro de cada caja. Debajo de cada una dice qué la reemplaza en esta demo.</p>
+      <ol class="flujo" role="list">
+        <li class="flujo__paso">
+          <span class="flujo__n" aria-hidden="true">1</span>
+          <h3 data-i18n="flujo1.t">Canal</h3>
+          <p data-i18n="flujo1.p">El chat de la tienda, WhatsApp, Instagram o el mail. Todos entran al mismo asistente.</p>
+          <p class="flujo__demo"><span data-i18n="flujo.demo">En la demo:</span> <span data-i18n="flujo1.d">este chat.</span></p>
+        </li>
+        <li class="flujo__paso">
+          <span class="flujo__n" aria-hidden="true">2</span>
+          <h3 data-i18n="flujo2.t">Recuperación</h3>
+          <p data-i18n="flujo2.p">Catálogo, políticas y guías partidos en fragmentos e indexados. Cuando cambia una ficha, se vuelve a indexar sola.</p>
+          <p class="flujo__demo"><span data-i18n="flujo.demo">En la demo:</span> <span id="flujo2-d" data-i18n="flujo2.d">BM25 en JavaScript sobre 113 fragmentos.</span></p>
+        </li>
+        <li class="flujo__paso">
+          <span class="flujo__n" aria-hidden="true">3</span>
+          <h3 data-i18n="flujo3.t">Modelo con reglas</h3>
+          <p data-i18n="flujo3.p">Redacta sólo con los fragmentos recuperados y una de cinco reglas: responder con cita, aclarar, «no está», comparar o derivar. Devuelve una salida con esquema fijo.</p>
+          <p class="flujo__demo"><span data-i18n="flujo.demo">En la demo:</span> <span data-i18n="flujo3.d">plantillas escritas a mano; no hay modelo.</span></p>
+        </li>
+        <li class="flujo__paso">
+          <span class="flujo__n" aria-hidden="true">4</span>
+          <h3 data-i18n="flujo4.t">Verificación</h3>
+          <p data-i18n="flujo4.p">Antes de enviar, cada cifra de la respuesta tiene que aparecer en un fragmento citado. Si falta una, la respuesta no sale y se deriva.</p>
+          <p class="flujo__demo"><span data-i18n="flujo.demo">En la demo:</span> <span data-i18n="flujo4.d">el mismo chequeo, en cada respuesta.</span></p>
+        </li>
+        <li class="flujo__paso flujo__paso--persona">
+          <span class="flujo__n" aria-hidden="true">5</span>
+          <h3 data-i18n="flujo5.t">Persona</h3>
+          <p data-i18n="flujo5.p">El equipo recibe el resumen en su bandeja o en su sistema de tickets, decide las excepciones y responde. Sus respuestas muestran qué falta en el catálogo.</p>
+          <p class="flujo__demo"><span data-i18n="flujo.demo">En la demo:</span> <span data-i18n="flujo5.d">el resumen se muestra y se copia; no se envía.</span></p>
+        </li>
+      </ol>
+
+      <h3 class="subtitulo" id="medir" data-i18n="medir.t">Qué mediría</h3>
+      <div class="medir">
+        <table class="tabla tabla--medir">
+          <caption data-i18n="medir.caption">Lo que miraría cada semana en producción, y cómo da en tu conversación de ahora (se actualiza con cada pregunta).</caption>
+          <thead><tr><th scope="col" data-i18n="medir.col1">Métrica</th><th scope="col" data-i18n="medir.col2">Por qué importa</th><th scope="col" data-i18n="medir.col3">En tu sesión</th></tr></thead>
+          <tbody>
+            <tr><th scope="row" data-i18n="medir.cita">Respuestas con cita</th><td data-i18n="medir.cita.p">Si baja, el asistente está respondiendo cosas que no puede respaldar.</td><td class="medir__v" id="m-cita">—</td></tr>
+            <tr><th scope="row" data-i18n="medir.deriva">Tasa de derivación</th><td data-i18n="medir.deriva.p">Cuánto trabajo le queda al equipo. Muy alta: falta catálogo; muy baja: puede estar respondiendo de más.</td><td class="medir__v" id="m-deriva">—</td></tr>
+            <tr><th scope="row" data-i18n="medir.noesta">«No está en el catálogo»</th><td data-i18n="medir.noesta.p">La lista de lo que la gente pregunta y la tienda no publica: es la lista de fichas para completar.</td><td class="medir__v" id="m-noesta">—</td></tr>
+            <tr><th scope="row" data-i18n="medir.tiempo">Tiempo de primera respuesta</th><td data-i18n="medir.tiempo.p">En producción se mide de punta a punta (con el modelo). Acá sólo se puede medir el motor local.</td><td class="medir__v" id="m-tiempo">—</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="seccion" id="catalogo" aria-labelledby="catalogo-titulo">
+    <div class="seccion__in">
+      <p class="folio"><span class="folio__cifra">03</span><span class="folio__etiqueta" data-i18n="catalogo.folio">El catálogo que lee</span></p>
+      <h2 class="titulo" id="catalogo-titulo" data-i18n="catalogo.titulo">Todo lo que sabe está acá. Nada más.</h2>
+      <p class="intro"><span data-i18n="catalogo.intro">Doce productos ficticios y cuatro documentos (dos guías de cuidado y dos políticas). La Butaca Lúa y el Sofá Duna son los mismos del</span> <a href="../configurador/index.html" data-i18n="catalogo.config">configurador 3D</a><span data-i18n="catalogo.intro2">, con las mismas telas y precios. Abrí cualquier ficha para ver los fragmentos que el asistente puede citar.</span></p>
+      <ul class="fichas" id="fichas" role="list"></ul>
+      <h3 class="subtitulo" data-i18n="catalogo.docs">Guías y políticas</h3>
+      <ul class="fichas fichas--docs" id="docs" role="list"></ul>
+    </div>
+  </section>
+
+  <section class="seccion seccion--hundida" id="proceso" aria-labelledby="proceso-titulo">
+    <div class="seccion__in">
+      <p class="folio"><span class="folio__cifra">04</span><span class="folio__etiqueta" data-i18n="proceso.folio">Proceso a la vista</span></p>
+      <h2 class="titulo" id="proceso-titulo" data-i18n="proceso.titulo">Cómo lo hice y cómo lo pruebo.</h2>
+      <div class="proceso">
+        <div class="proceso__brief">
+          <h3 data-i18n="brief.t">El brief</h3>
+          <p data-i18n="brief.p">Un asistente de preventa para una mueblería online que responda las preguntas de todos los días con la ficha del producto. Criterios de aceptación: que cada dato tenga cita a la ficha, que diga «no está» en vez de inventar, que pregunte cuando la consulta es ambigua, que derive a una persona con un resumen, que cada respuesta deje rastro y que funcione en español y en inglés.</p>
+          <p class="proceso__como" data-i18n="brief.como">Lo construí con desarrollo asistido por IA: yo definí el brief, las reglas, el catálogo y las preguntas de prueba, y verifiqué cada versión corriendo las pruebas y mirando capturas a resolución real.</p>
+        </div>
+        <div class="decisiones">
+          <article class="decision">
+            <p class="decision__insight" data-i18n="dec1.i">En una tienda, un dato inventado cuesta una devolución.</p>
+            <h3 data-i18n="dec1.t">Una respuesta sale sólo si cada cifra aparece en un fragmento citado.</h3>
+            <p class="decision__no" data-i18n="dec1.no">Descarté confiar en que «el modelo cita bien»: la cita se verifica, no se supone.</p>
+          </article>
+          <article class="decision">
+            <p class="decision__insight" data-i18n="dec2.i">«La mesa» son tres productos distintos.</p>
+            <h3 data-i18n="dec2.t">Si hay más de un producto posible, pregunta cuál antes de responder.</h3>
+            <p class="decision__no" data-i18n="dec2.no">Descarté elegir el de más puntaje: acierta casi siempre y, cuando falla, da un plazo equivocado con total seguridad.</p>
+          </article>
+          <article class="decision">
+            <p class="decision__insight" data-i18n="dec3.i">La confianza en el asistente se gana mostrando cómo decide.</p>
+            <h3 data-i18n="dec3.t">Un panel con cada paso, del texto de la consulta a la salida con esquema.</h3>
+            <p class="decision__no" data-i18n="dec3.no">Descarté un chat «mágico» sin explicación: lindo para una demo, imposible de auditar en una tienda.</p>
+          </article>
+        </div>
+        <div class="pruebas" id="pruebas">
+          <h3 data-i18n="pruebas.t">Preguntas de prueba</h3>
+          <p class="pruebas__p" data-i18n="pruebas.p">Cada cambio al motor se prueba contra una lista fija de preguntas, en los dos idiomas, que dice qué regla y qué ficha se espera. Corren en tu navegador con el mismo motor de arriba. Pasarlas no garantiza que entienda cualquier pregunta: son las que escribí yo, y cuando una frase nueva falla, se suma a la lista.</p>
+          <button type="button" class="boton boton--marca" id="correr" data-i18n="pruebas.b">Correr las pruebas</button>
+          <p class="pruebas__res" id="pruebas-res" aria-live="polite"></p>
+          <div class="pruebas__tabla" id="pruebas-tabla" hidden></div>
+        </div>
+        <div class="afuera">
+          <h3 data-i18n="afuera.t">Qué quedó afuera</h3>
+          <ul>
+            <li data-i18n="afuera1">No hay modelo de lenguaje: las respuestas son plantillas. Entiende las formas de preguntar que probé, no cualquier frase.</li>
+            <li data-i18n="afuera2">El catálogo es ficticio y chico; con miles de fichas, el índice tendría que vivir en un servidor.</li>
+            <li data-i18n="afuera3">El resumen para el equipo no se envía a ningún lado: en producción iría a la bandeja o al sistema de tickets.</li>
+            <li data-i18n="afuera4">No hay historial entre visitas ni datos del cliente: cada recarga empieza de cero.</li>
+            <li data-i18n="afuera5">Probé teclado, foco y estructura ARIA; no hice pruebas con usuarios ni con lectores de pantalla reales.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="pie">
+  <div class="pie__in">
+    <p class="pie__atrib" data-i18n="pie.atrib">Ámbar Muebles es una marca ficticia: productos, precios, plazos y políticas son de ejemplo y no representan a ninguna empresa.</p>
+    <p class="pie__enlaces">
+      <a href="../configurador/index.html" data-i18n="pie.config">Demo 1: configurador 3D</a>
+      <a href="../../creditos.html" data-i18n="pie.creditos">Créditos del portfolio</a>
+      <a href="../../index.html" data-i18n="cinta.volver">← Volver al portfolio</a>
+    </p>
+    <p class="pie__copy" data-i18n="pie.copy">Demo de Ramiro Bales, 2026. Hecha con desarrollo asistido por IA y verificada a mano.</p>
+  </div>
+</footer>
+
+<dialog class="ficha-d" id="ficha-d" aria-labelledby="ficha-d-t">
+  <div class="ficha-d__cabeza">
+    <div>
+      <p class="etiqueta" id="ficha-d-linea"></p>
+      <h2 id="ficha-d-t"></h2>
+    </div>
+    <button type="button" class="ficha-d__cerrar" id="ficha-d-cerrar" aria-label="Cerrar la ficha" data-i18n-attr="aria-label=ficha.cerrar"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 5l10 10M15 5 5 15"/></svg></button>
+  </div>
+  <p class="ficha-d__nota" data-i18n="ficha.nota">Fragmentos que el asistente puede citar. El resaltado es el que se citó.</p>
+  <ol class="ficha-d__lista" id="ficha-d-lista" role="list"></ol>
+  <p class="ficha-d__config" id="ficha-d-config" hidden><a href="#" id="ficha-d-config-a" data-i18n="ficha.config">Configurarlo en 3D →</a></p>
+</dialog>
+
+<p class="sr" id="anuncio" aria-live="polite"></p>
+<script type="module" src="js/app.js"></script>
+</body>
+</html>

@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://ramirobales-collab.github.io/</loc><lastmod>2026-11-03</lastmod><priority>1.0</priority></url>
-  <url><loc>https://ramirobales-collab.github.io/proyectos/cathedra.html</loc><lastmod>2026-11-03</lastmod></url>
-  <url><loc>https://ramirobales-collab.github.io/proyectos/fortal.html</loc><lastmod>2026-11-03</lastmod></url>
-  <url><loc>https://ramirobales-collab.github.io/proyectos/athleteiq.html</loc><lastmod>2026-11-03</lastmod></url>
-  <url><loc>https://ramirobales-collab.github.io/proyectos/coro.html</loc><lastmod>2026-11-03</lastmod></url>
-  <url><loc>https://ramirobales-collab.github.io/demos/producto/index.html</loc><lastmod>2026-11-03</lastmod></url>
-  <url><loc>https://ramirobales-collab.github.io/creditos.html</loc><lastmod>2026-11-03</lastmod><priority>0.3</priority></url>
-  <url><loc>https://ramirobales-collab.github.io/legal.html</loc><lastmod>2026-11-03</lastmod><priority>0.2</priority></url>
+  <url><loc>https://ramirobales-collab.github.io/</loc><lastmod>2026-11-04</lastmod><priority>1.0</priority></url>
+  <url><loc>https://ramirobales-collab.github.io/proyectos/cathedra.html</loc><lastmod>2026-11-04</lastmod></url>
+  <url><loc>https://ramirobales-collab.github.io/proyectos/fortal.html</loc><lastmod>2026-11-04</lastmod></url>
+  <url><loc>https://ramirobales-collab.github.io/proyectos/athleteiq.html</loc><lastmod>2026-11-04</lastmod></url>
+  <url><loc>https://ramirobales-collab.github.io/proyectos/coro.html</loc><lastmod>2026-11-04</lastmod></url>
+  <url><loc>https://ramirobales-collab.github.io/proyectos/seguridad.html</loc><lastmod>2026-11-04</lastmod></url>
+  <url><loc>https://ramirobales-collab.github.io/demos/configurador/index.html</loc><lastmod>2026-11-04</lastmod></url>
+  <url><loc>https://ramirobales-collab.github.io/demos/asistente/index.html</loc><lastmod>2026-11-04</lastmod></url>
+  <url><loc>https://ramirobales-collab.github.io/demos/bots/index.html</loc><lastmod>2026-11-04</lastmod></url>
+  <url><loc>https://ramirobales-collab.github.io/demos/athleteiq/index.html</loc><lastmod>2026-11-04</lastmod></url>
+  <url><loc>https://ramirobales-collab.github.io/creditos.html</loc><lastmod>2026-11-04</lastmod><priority>0.3</priority></url>
+  <url><loc>https://ramirobales-collab.github.io/legal.html</loc><lastmod>2026-11-04</lastmod><priority>0.2</priority></url>
 </urlset>

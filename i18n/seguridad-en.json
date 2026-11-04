@@ -1,0 +1,562 @@
+{
+  "lang": "en",
+  "locale": "en_US",
+  "archivo": "seguridad-en.html",
+  "otro": "seguridad.html",
+  "meta": {
+    "titulo": "Security review — case study · Ramiro Bales",
+    "descripcion": "How I reviewed the security of a desktop app with a local server before its beta: threat model, risks scored by likelihood and impact, defenses with tests, residual risk, legal and privacy, and a short review of the portfolio demos."
+  },
+  "nav": {
+    "saltar": "Skip to content",
+    "principal": "Main",
+    "trabajo": "Work",
+    "marcas": "For brands",
+    "metodo": "Method",
+    "sobre": "About",
+    "contacto": "Contact",
+    "cv": "CV (PDF)",
+    "idioma": "Language",
+    "tema": "Switch between light and dark theme",
+    "oscuro": "Dark",
+    "claro": "Light",
+    "menu": "Menu",
+    "menu_aria": "Open or close the menu"
+  },
+  "ui": {
+    "folio": "Case study",
+    "que": "What it is",
+    "para": "For whom",
+    "estado": "Status",
+    "ficha_aria": "Project facts",
+    "indice_aria": "Parts of the case",
+    "vi": "What I saw",
+    "elegi": "I decided",
+    "descarte": "I ruled out",
+    "porque": "Because",
+    "quiere": "What they want",
+    "pordonde": "Way in",
+    "riesgos_rel": "Risks",
+    "otros_aria": "Other cases"
+  },
+  "cabecera": {
+    "sello": "Written case · on an app in beta",
+    "titulo": "Security",
+    "gancho": "An app that runs on your own computer still has someone on the other side. I reviewed it before opening the beta.",
+    "que": "The security review and risk analysis I did on Cathedra, my Windows study app, before its beta.",
+    "para": "Teams that ship software running on the user's machine, and serverless sites like the demos in this portfolio.",
+    "estado": "Defenses in place and tested: 126 security tests passing as of 4 Nov 2026. What is still open is documented below."
+  },
+  "ficha": [
+    {
+      "t": "Project",
+      "d": "Personal, on my app Cathedra"
+    },
+    {
+      "t": "My role",
+      "d": "I defined the threat model, scored every risk, chose each defense and its acceptance criterion, and verified with automated tests. AI agents wrote the code under my direction.",
+      "ancho": true
+    },
+    {
+      "t": "Tools",
+      "d": "Claude Code (AI-assisted development) · Python · automated tests · reading Argentine data-protection and consumer law",
+      "ancho": true
+    },
+    {
+      "t": "Period",
+      "d": "September and October 2026, before the beta"
+    },
+    {
+      "t": "Related case",
+      "d": "Cathedra, the product reviewed",
+      "href": "cathedra.html"
+    }
+  ],
+  "indice": {
+    "cabecera": "Summary",
+    "alcance": "Scope",
+    "amenazas": "Threats",
+    "riesgos": "Risks",
+    "hallazgos": "Findings",
+    "verificacion": "Verification",
+    "resultado": "Result and residual",
+    "legal": "Legal and privacy",
+    "demos": "The demos",
+    "metodo": "How I did it"
+  },
+  "alcance": {
+    "titulo": "Scope",
+    "p": [
+      "Cathedra runs on the student's computer: a desktop window talks to its own HTTP server, which reads and writes their lectures, transcripts and notes.",
+      "That design is deceptive. Because the server only listens on the machine itself, it feels like nobody is on the other side. Someone is: any page open in another browser tab can send it requests.",
+      "Before releasing the installer I wanted to know what could go wrong, what it would cost and what to fix first. I reviewed the local server, the accounts, the admin panel, how the installer is published and which data leaves the machine."
+    ]
+  },
+  "amenazas": {
+    "titulo": "Threat model",
+    "intro": "Six actors, what each one wants and how they would get in. Each one maps to risks in the next table.",
+    "items": [
+      {
+        "icono": "pestana",
+        "quien": "A page from another site",
+        "quiere": "To make the app open a program, delete files or hand over transcripts.",
+        "pordonde": "Requests to the local server from another tab, or from a domain that resolves to the machine itself (DNS rebinding).",
+        "r": [
+          "R1",
+          "R3"
+        ]
+      },
+      {
+        "icono": "ruta",
+        "quien": "A crafted input",
+        "quiere": "To escape the study folder and read or run another file on disk.",
+        "pordonde": "Lecture, subject or topic names that arrive in the request address.",
+        "r": [
+          "R2"
+        ]
+      },
+      {
+        "icono": "disco",
+        "quien": "Someone holding the disk",
+        "quiere": "Passwords, sessions or the user's AI service key.",
+        "pordonde": "A shared computer, a backup, a copied file.",
+        "r": [
+          "R4",
+          "R6"
+        ]
+      },
+      {
+        "icono": "candado",
+        "quien": "Someone guessing passwords or codes",
+        "quiere": "To get into an account or the beta without permission.",
+        "pordonde": "The sign-in screen and the beta access codes.",
+        "r": [
+          "R5",
+          "R8"
+        ]
+      },
+      {
+        "icono": "paquete",
+        "quien": "Me, by mistake",
+        "quiere": "Nothing; the risk is publishing a key or a personal path inside the package.",
+        "pordonde": "The installer and the modules uploaded to a public repository.",
+        "r": [
+          "R7"
+        ]
+      },
+      {
+        "icono": "instalador",
+        "quien": "Someone handing out a fake installer",
+        "quiere": "For someone to run their modified version.",
+        "pordonde": "An unsigned installer: Windows warns the same way for the original and for the copy.",
+        "r": [
+          "R9"
+        ]
+      }
+    ]
+  },
+  "riesgos": {
+    "titulo": "Risks: likelihood × impact",
+    "intro": "I scored each risk from 1 to 5 for likelihood and for impact; the product sets the priority. It is the same expected-cost criterion I used in the fraud-detection agent at the UADE 2026 AI hackathon (graded 10/10).",
+    "nota": "My own judgment scores, assigned while writing this case on the real findings and defenses. Priority: 15 to 25 high, 8 to 14 medium, 1 to 7 low.",
+    "caption": "Ten risks with their likelihood, impact and priority before and after the defenses",
+    "cols": {
+      "id": "No.",
+      "riesgo": "Risk",
+      "p": "Likel.",
+      "i": "Impact",
+      "antes": "Before",
+      "despues": "After",
+      "estado": "Status"
+    },
+    "prioridad": {
+      "alta": "high",
+      "media": "medium",
+      "baja": "low"
+    },
+    "filas": [
+      {
+        "id": "R1",
+        "riesgo": "Another tab drives the app behind the user's back (CSRF)",
+        "p": 5,
+        "i": 5,
+        "p2": 1,
+        "i2": 5,
+        "estado": "Mitigated and tested"
+      },
+      {
+        "id": "R2",
+        "riesgo": "A name with “..” escapes the study folder",
+        "p": 3,
+        "i": 5,
+        "p2": 1,
+        "i2": 5,
+        "estado": "Mitigated and tested"
+      },
+      {
+        "id": "R3",
+        "riesgo": "DNS rebinding to read responses",
+        "p": 2,
+        "i": 4,
+        "p2": 2,
+        "i2": 4,
+        "estado": "Closed in the panel; open in the app server"
+      },
+      {
+        "id": "R4",
+        "riesgo": "The accounts file is copied off the disk",
+        "p": 3,
+        "i": 4,
+        "p2": 3,
+        "i2": 1,
+        "estado": "Mitigated: nothing can be recovered"
+      },
+      {
+        "id": "R5",
+        "riesgo": "Password brute force",
+        "p": 3,
+        "i": 4,
+        "p2": 1,
+        "i2": 4,
+        "estado": "Mitigated and tested"
+      },
+      {
+        "id": "R6",
+        "riesgo": "The user's AI key is read from disk",
+        "p": 3,
+        "i": 5,
+        "p2": 2,
+        "i2": 5,
+        "estado": "Mitigated; limit accepted"
+      },
+      {
+        "id": "R7",
+        "riesgo": "A key or personal path ships inside the package",
+        "p": 3,
+        "i": 5,
+        "p2": 1,
+        "i2": 5,
+        "estado": "Mitigated and tested"
+      },
+      {
+        "id": "R8",
+        "riesgo": "The admin panel gets exposed or a beta code is guessed",
+        "p": 2,
+        "i": 5,
+        "p2": 1,
+        "i2": 5,
+        "estado": "Mitigated and tested"
+      },
+      {
+        "id": "R9",
+        "riesgo": "A modified installer circulates",
+        "p": 2,
+        "i": 4,
+        "p2": 2,
+        "i2": 4,
+        "estado": "Accepted and documented"
+      },
+      {
+        "id": "R10",
+        "riesgo": "The student's material travels to an external service",
+        "p": 5,
+        "i": 3,
+        "p2": 2,
+        "i2": 3,
+        "estado": "Consent and local mode"
+      }
+    ],
+    "matriz": {
+      "antes": "Before the defenses",
+      "despues": "After",
+      "eje_p": "Likelihood",
+      "eje_i": "Impact",
+      "aviso": "Both matrices show the same data as the table."
+    }
+  },
+  "hallazgos": {
+    "titulo": "Findings and decisions",
+    "intro": "The three that weighed most, with what I ruled out. Below, the rest of the defenses in one line each.",
+    "decisiones": [
+      {
+        "vi": "The server only listens on the machine itself. That hides it from the network, not from the student's browser: a page from another site can send it requests, and even if the browser hides the response, the effect still happens.",
+        "elegi": "Reject every API request whose Origin is not the machine itself, on reads and on everything that changes something.",
+        "descarte": "Trusting that it only listens on the machine itself.",
+        "porque": "That was enough for another tab to make the app open a program or delete files."
+      },
+      {
+        "vi": "Comparing paths as text does not stop “..”: a path that seemed to fall inside the study folder ended up, once resolved, at a system executable.",
+        "elegi": "A bare name is accepted only if it fits a strict alphabet; a full path is resolved before checking that it falls inside.",
+        "descarte": "Sanitizing the input by removing the “..” and moving on.",
+        "porque": "Sanitizing is a losing game: there is always one more encoding. Slashes, “..”, drive letters, control characters, ambiguous Unicode and Windows reserved names are rejected."
+      },
+      {
+        "vi": "The installer and modules are uploaded to a public repository, and a key or a personal path can slip into any text file.",
+        "elegi": "A guard inside the publish command that stops everything if it finds keys, credentials or personal paths.",
+        "descarte": "Checking by hand before each release.",
+        "porque": "A manual check gets skipped on the day you are in a hurry. The guard always scans everything about to be uploaded, before the installer is built."
+      }
+    ],
+    "otros_titulo": "The other defenses",
+    "otros": [
+      {
+        "icono": "llave",
+        "t": "Passwords with scrypt and salt",
+        "p": "What is stored is scrypt(password, salt), never the password; for sessions, only their SHA-256 fingerprint. Holding the file gets you into nothing."
+      },
+      {
+        "icono": "reloj",
+        "t": "Attempt limit",
+        "p": "Five failed attempts per email within five minutes and it locks. Without that, an eight-letter password falls in an afternoon."
+      },
+      {
+        "icono": "atomico",
+        "t": "Atomic writes",
+        "p": "Every file is written whole or not at all: a temporary file next to it, then a one-step replace."
+      },
+      {
+        "icono": "huella",
+        "t": "Beta codes as fingerprints",
+        "p": "Only their fingerprint is stored, compared in constant time, and each code has a per-minute request limit."
+      },
+      {
+        "icono": "escudo",
+        "t": "The user's key, encrypted",
+        "p": "The key to their AI service is stored encrypted with Windows data protection (DPAPI), bound to their account."
+      },
+      {
+        "icono": "panel",
+        "t": "A panel with three locks",
+        "p": "Only on the machine itself, it rejects proxy or tunnel headers, requires its own Host and asks for a per-session secret. It sends CSP, X-Frame-Options and Referrer-Policy."
+      },
+      {
+        "icono": "ojo",
+        "t": "The interface does not reveal how it is built",
+        "p": "Messages the person sees never name files, fingerprints or internals; a test checks it."
+      },
+      {
+        "icono": "sello",
+        "t": "What ships is what was built",
+        "p": "Publishing compares SHA-256 fingerprints: if anything changed after the build, it does not upload."
+      }
+    ],
+    "fortal_t": "The same checklist, in another app",
+    "fortal_p": "In Fortal, my training app, the server only fetches over https from a fixed list of sites, follows redirects by hand (two at most) without leaving that list, with a time limit and a byte cap: no SSRF. Incoming bodies have a cap per route, and a sweep of 15 routes checks they answer 401 without a credential and 403 with someone else's. Twelve tests cover it."
+  },
+  "verificacion": {
+    "titulo": "Mitigation and verification",
+    "intro": "Every defense has tests that attack it. It is not enough for the code to exist: it has to fail when someone tries what the defense blocks.",
+    "caption": "What each defense is tested against",
+    "cols": {
+      "defensa": "Defense",
+      "prueba": "How it is verified",
+      "r": "Risk"
+    },
+    "filas": [
+      {
+        "defensa": "Origin check",
+        "prueba": "Origins from the machine itself pass on any port; foreign origins get 403.",
+        "r": "R1"
+      },
+      {
+        "defensa": "Names and paths",
+        "prueba": "Legitimate names pass; slashes, “..”, drive letters, control characters, ambiguous Unicode and reserved names are rejected. One test proves that comparing as text is not enough.",
+        "r": "R2"
+      },
+      {
+        "defensa": "Accounts",
+        "prueba": "Neither the password nor the session ends up in the file; the fifth failed attempt locks; the session expires.",
+        "r": "R4 · R5"
+      },
+      {
+        "defensa": "Admin panel",
+        "prueba": "With tunnel headers it does not answer; a foreign Host is refused; it only listens on the machine itself; every action needs the session secret.",
+        "r": "R3 · R8"
+      },
+      {
+        "defensa": "Publish guard",
+        "prueba": "A planted key stops everything before the installer is built and uploaded; what uploads matches the fingerprints of what was built.",
+        "r": "R7 · R9"
+      }
+    ],
+    "medicion_cifra": "126",
+    "medicion_t": "security tests passing",
+    "medicion_p": "4 skipped, in 58 s, across four suites: local server, accounts, panel and publishing. I ran them on 4 Nov 2026 to write this case; they are part of the app's more than 6,000 tests."
+  },
+  "resultado": {
+    "titulo": "Result",
+    "frase": "The five high-priority risks dropped to medium or low.",
+    "apoyo": "With the defenses in place and 126 security tests passing. It is my own review: nobody from outside has audited it yet."
+  },
+  "residual": {
+    "titulo": "Residual risk and what I would do next",
+    "items": [
+      {
+        "t": "DNS rebinding on reads",
+        "p": "The panel requires its own Host; the app server still relies on the Origin check. Next step: the same Host allowlist on all its routes, with its test."
+      },
+      {
+        "t": "CSP in the main window",
+        "p": "Today the panel sends it. Bringing it to the app window comes right after the Host check."
+      },
+      {
+        "t": "The DPAPI limit",
+        "p": "It protects against another Windows account or a copied disk, not against malware running under the same account. Accepted: it is the ceiling for a desktop app without dedicated hardware."
+      },
+      {
+        "t": "Unsigned installer",
+        "p": "Windows shows its warning; the download page explains it and every release publishes its SHA-256 fingerprints. Accepted for a small beta; sign it before opening it wider."
+      },
+      {
+        "t": "Signed licenses",
+        "p": "Signing licenses with Ed25519 is planned, not done."
+      },
+      {
+        "t": "External audit",
+        "p": "I would get one before charging: your own review finds what you already know how to look for."
+      }
+    ]
+  },
+  "legal": {
+    "titulo": "Legal and privacy before the beta",
+    "intro": "I researched the law at its official source before releasing the beta. This is general information, not legal advice: anything uncertain was flagged for a lawyer to confirm.",
+    "items": [
+      {
+        "t": "Which data travels",
+        "p": "Audio is transcribed on the computer. With the local engine nothing leaves; with the cloud engine, the question and the pieces of material needed to answer it travel. The admin usage log stores counts, never content."
+      },
+      {
+        "t": "Consent",
+        "p": "Argentina's Law 25.326 (art. 5) requires free, express and informed consent to process personal data, and it can be withdrawn."
+      },
+      {
+        "t": "International transfer",
+        "p": "Art. 12 restricts sending data to countries without adequate protection, and the United States is not on the data authority's list. That is why cloud mode asks for express consent and a local alternative exists."
+      },
+      {
+        "t": "Recording lectures",
+        "p": "The Civil and Commercial Code (art. 53) requires consent to capture a person's voice, with an educational exception; Law 11.723 (art. 27) bars publishing lectures without authorization. Recording depends on each course, and a recording is not published."
+      },
+      {
+        "t": "AI notice",
+        "p": "Every answer cites the lecture, the minute and who said it; what is not in the material is marked as missing instead of being made up."
+      },
+      {
+        "t": "Terms and consumer law",
+        "p": "Terms and privacy drafted for the beta. If it charges, Law 24.240 and Provision 954/2025 require visible withdrawal and cancel buttons, and cancelling through the same channel."
+      }
+    ]
+  },
+  "demos": {
+    "titulo": "Short review of the portfolio demos",
+    "intro": "I applied the same checklist, on a small scale, to the two brand demos on this site: the 3D configurator and the catalog assistant. I reviewed the 4 Nov 2026 version.",
+    "items": [
+      {
+        "icono": "capas",
+        "t": "Minimal surface",
+        "p": "Static same-origin files: no server, no cookies, no analytics and no forms that send data. The assistant's catalog is a local file and the question never leaves the browser."
+      },
+      {
+        "icono": "enlace",
+        "t": "No third-party scripts",
+        "p": "three.js and the fonts are served from the site itself. The only outside references are links to the sources of the figures, with rel=\"noopener\"."
+      },
+      {
+        "icono": "texto",
+        "t": "User input",
+        "p": "The assistant's field is capped at 240 characters and what you type goes in as text or escaped: it is never interpreted as HTML. In the configurator, HTML is only built from its own data."
+      },
+      {
+        "icono": "licencia",
+        "t": "Licensed assets",
+        "p": "CC0 and CC BY 4.0 3D models and CC0 HDRI environments, credited in the demo footer and on the Credits page."
+      },
+      {
+        "icono": "lupa",
+        "t": "Finding",
+        "p": "The configurator sets each swatch color with a style attribute, which a strict CSP would block. Fix: set it with style.setProperty."
+      },
+      {
+        "icono": "nube",
+        "t": "Hosting limit",
+        "p": "The site is published on GitHub Pages, which does not allow custom headers: the CSP goes in a meta tag, where frame-ancestors does not work. Low risk: a demo with no data has nothing to steal inside an iframe."
+      }
+    ],
+    "csp_t": "Suggested CSP for the demos",
+    "csp": "default-src 'self';\n/* sha256: theme and importmap */\nscript-src 'self' 'sha256-…';\nstyle-src 'self';\nimg-src 'self' data: blob:;\nconnect-src 'self' blob:;\nfont-src 'self';\nobject-src 'none';\nbase-uri 'self';\nform-action 'none'",
+    "csp_p": "This page already applies its own: a CSP in a meta tag with the SHA-256 fingerprints of its two scripts and its inline style, no third-party scripts, and tested with no console errors."
+  },
+  "metodo": {
+    "titulo": "How I did it with AI agents",
+    "pasos": [
+      {
+        "t": "The threat written into the brief.",
+        "p": "Every sensitive module opens by explaining what it protects and why: “what is protected, because it is what gets stolen”. That explanation was the batch's acceptance criterion."
+      },
+      {
+        "t": "One defense, one test that attacks it.",
+        "p": "Foreign origins, paths with “..”, five bad passwords, a key planted in the package: every defense came in with the test that tries to break it."
+      },
+      {
+        "t": "Measure instead of assuming.",
+        "p": "That comparing paths as text is not enough was shown with a case that passed validation and ended at a system executable. That case is now a test."
+      },
+      {
+        "t": "What I redid.",
+        "p": "The first version of the Origin check required the exact port. The desktop window starts its own server and the port stayed at zero: every request that changes something returned 403, in 19 places, and on screen it looked like buttons that did nothing. I changed it to accept any port on the machine itself, which is what matters to stop: a page from the internet."
+      },
+      {
+        "t": "Run everything again at the end.",
+        "p": "To write this case I ran the four security suites again: 126 passing and 4 skipped."
+      }
+    ]
+  },
+  "reflexion": {
+    "titulo": "What I would change",
+    "p": [
+      "I would write the threat model on day one. The defenses arrived module by module, which is why the Host check ended up in the panel and not in the app server. A single checklist from the start would have avoided it.",
+      "Still missing: an outside audit and a signed installer before opening the beta to more people."
+    ]
+  },
+  "caso_nav": {
+    "etiqueta": "Related case →",
+    "nombre": "Cathedra",
+    "frase": "Windows study app: it transcribes lectures, builds the plan, generates exams and flashcards, and every answer cites the class and the minute.",
+    "aria": "Related case: Cathedra",
+    "alt": "Porcelain frame with a Cathedra screenshot",
+    "todos": "All cases",
+    "inicio": "Back to home"
+  },
+  "pie": {
+    "creditos": "Credits: third-party textures, 3D models and environments",
+    "legal": "Legal notice and privacy",
+    "hecho": "Static site built with AI-assisted development and verified by hand. No cookies, no analytics.",
+    "copy": "© 2026 Ramiro Bales"
+  },
+  "svg": {
+    "titulo": "Cathedra threat model",
+    "desc": "Diagram: on the left, what comes from the internet (a page from another site and a modified installer); in the middle, the student's computer with the browser, the app window, the local server and the disk; on the right, what gets published. Red dashed arrows are attacks and the labels on the lines are the defenses.",
+    "internet": "Internet",
+    "pc": "The student's computer",
+    "publica": "What gets published",
+    "pagina": "Page from another site",
+    "instalador": "Modified installer",
+    "navegador": "Browser",
+    "ventana": "App window",
+    "servidor": "Local server",
+    "servidor_2": "only on 127.0.0.1",
+    "disco": "Disk",
+    "disco_2": "lectures · accounts · key",
+    "archivos": "Project files",
+    "paquete": "Package and installer",
+    "repo": "Public repository",
+    "d_origin": "Own Origin",
+    "d_ruta": "Resolved path",
+    "d_disco": "scrypt · DPAPI",
+    "d_guardia": "Secrets guard",
+    "d_huellas": "SHA-256 fingerprints",
+    "a_csrf": "Requests from another tab",
+    "a_ruta": "“../..”",
+    "a_fuga": "Leaked key"
+  }
+}
