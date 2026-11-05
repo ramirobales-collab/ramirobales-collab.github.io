@@ -4,7 +4,6 @@ export const QUIETO = params.get('quieto') === '1';
 export const IR = params.get('ir');
 export const REDUCIDO = matchMedia('(prefers-reduced-motion: reduce)').matches;
 export const SIN_MOVIMIENTO = QUIETO || REDUCIDO;
-export const FORZAR_3D = params.get('3d') === '1';
 export const BASE = new URL('../', import.meta.url);
 export const qs = (s, r = document) => r.querySelector(s);
 export const qsa = (s, r = document) => Array.from(r.querySelectorAll(s));
@@ -223,23 +222,13 @@ function iniciarVistos() {
   observar('[data-visto]', 30);
 }
 
-/* ---------- Proyección de la captura LCP sobre el marco (js/lcp.js la calcula antes del primer pintado) ---------- */
-export function ubicarLcp(esquinas) { if (window.__ubicarLcp) window.__ubicarLcp(esquinas); }
-function iniciarLcp() { document.addEventListener('lcp-reubicar', () => ubicarLcp()); }
-
-/* ---------- Héroe WebGL diferido ---------- */
-function puedeWebGL() {
-  if (innerWidth < 1024) return false;
-  if (SIN_MOVIMIENTO && !FORZAR_3D) return false;
-  if (navigator.connection?.saveData) return false;
-  if ((navigator.deviceMemory ?? 8) < 4) return false;
-  try { const c = document.createElement('canvas'); return !!c.getContext('webgl2'); } catch { return false; }
-}
-function iniciarHeroe() {
-  const escena = qs('.heroe__escena');
-  if (!escena || !puedeWebGL()) return;
-  const cargar = () => import('./heroe.js').then((m) => m.iniciar(escena, { ubicarLcp })).catch((e) => console.warn('héroe 3D no disponible', e));
-  if (document.readyState === 'complete') setTimeout(cargar, 50); else addEventListener('load', () => setTimeout(cargar, 50));
+/* ---------- Fondo líquido del inicio ---------- */
+function iniciarLava() {
+  const lienzo = qs('.heroe__lava'), cabecera = qs('.heroe');
+  if (!lienzo || !cabecera || navigator.connection?.saveData) return;
+  if (params.get('fondo') === '1') html.classList.add('solo-fondo');
+  const cargar = () => import('./lava.js').then((m) => m.iniciar(lienzo, cabecera)).catch((e) => console.warn('fondo líquido no disponible', e));
+  if (document.readyState === 'complete') cargar(); else addEventListener('load', cargar);
 }
 
 /* ---------- ?ir=<id> ---------- */
@@ -265,13 +254,12 @@ function irASeccion() {
 export async function iniciar() {
   iniciarTema();
   iniciarMenu();
-  iniciarLcp();
   await iniciarIdioma();
   irASeccion();
   iniciarRevelados();
   iniciarVistos();
   iniciarNavActual();
-  iniciarHeroe();
+  iniciarLava();
 }
 
 iniciar();

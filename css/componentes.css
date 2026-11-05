@@ -298,73 +298,133 @@ a.sello:hover .sello__nombre { text-decoration: underline; text-decoration-color
   .heroe__sellos::-webkit-scrollbar { display: none; }
 }
 
-.heroe__escena {
+.heroe__lava {
+  position: absolute;
+  inset: 0 0 auto 0;
+  z-index: 0;
+  display: block;
+  width: 100%;
+  height: 100svh;
+  pointer-events: none;
+  background:
+    radial-gradient(38% 52% at 72% 42%, light-dark(oklch(82% 0.1 300 / 0.55), oklch(38% 0.17 300 / 0.5)), transparent 72%),
+    radial-gradient(26% 36% at 86% 72%, light-dark(oklch(84% 0.09 330 / 0.45), oklch(36% 0.15 335 / 0.42)), transparent 72%);
+}
+.heroe__lava.listo { background: none; }
+.heroe > * { position: relative; z-index: 2; }
+.heroe__titulo { text-wrap: balance; }
+.heroe__acento {
+  font-family: var(--playfair);
+  font-style: italic;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  background: linear-gradient(100deg, light-dark(oklch(38% 0.2 295), oklch(86% 0.08 300)) 10%, light-dark(oklch(44% 0.21 330), oklch(78% 0.15 325)) 95%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  padding-right: 0.08em;
+}
+@media (forced-colors: active) { .heroe__acento { color: CanvasText; background: none; } }
+.heroe .boton--primario {
+  background: var(--texto);
+  color: var(--fondo);
+  box-shadow: 0 0 0 1px light-dark(oklch(40% 0.17 295 / 0.25), oklch(80% 0.1 300 / 0.35)), 0 10px 34px -10px light-dark(oklch(45% 0.2 295 / 0.55), oklch(62% 0.22 300 / 0.75));
+}
+.heroe .boton--primario:hover {
+  box-shadow: 0 0 0 1px light-dark(oklch(40% 0.17 295 / 0.45), oklch(80% 0.1 300 / 0.6)), 0 14px 44px -8px light-dark(oklch(45% 0.2 295 / 0.7), oklch(62% 0.22 300 / 1));
+}
+.heroe__obras { perspective: 1400px; }
+.obra {
+  display: block;
+  position: absolute;
+  overflow: hidden;
+  border-radius: 12px;
+  background: oklch(14% 0.02 295);
+  text-decoration: none;
+  transform: translate3d(calc(var(--px, 0) * var(--z, 1) * 1px), calc(var(--py, 0) * var(--z, 1) * 1px), 0) rotateY(var(--ry, 0deg)) rotateZ(var(--rz, 0deg));
+  transition: transform 500ms var(--curva-entrada), box-shadow 300ms var(--curva-entrada);
+  box-shadow:
+    0 0 0 1px light-dark(oklch(45% 0.12 295 / 0.28), oklch(82% 0.08 300 / 0.26)),
+    inset 0 1px 0 oklch(100% 0 0 / 0.14),
+    0 28px 64px -22px light-dark(oklch(35% 0.16 295 / 0.55), oklch(4% 0.03 295 / 0.95)),
+    0 16px 70px -26px light-dark(oklch(55% 0.2 300 / 0.5), oklch(58% 0.22 300 / 0.55));
+}
+.obra::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(125deg, oklch(100% 0 0 / 0.1), transparent 34%);
+}
+.obra img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top; }
+.obra__rotulo {
   position: absolute;
   z-index: 1;
-  top: 50%;
-  left: calc(50% + 9.5vw);
-  width: 44vw;
-  aspect-ratio: 16 / 10;
-  transform: translateY(calc(-50% + var(--nav-alto) / 2));
-  pointer-events: none;
+  left: 10px;
+  bottom: 10px;
+  display: inline-flex;
+  gap: 0.45rem;
+  padding: 0.28rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.3;
+  color: oklch(96% 0.01 300);
+  background: oklch(12% 0.03 295 / 0.82);
+  box-shadow: 0 0 0 1px oklch(85% 0.07 300 / 0.28);
 }
-.heroe__escena > * { position: absolute; inset: 0; width: 100%; height: 100%; }
-.heroe__capa { object-fit: contain; }
-.heroe__capa--sombra { z-index: 1; transform-origin: 30% 60%; }
-.heroe__capa--losa { z-index: 2; }
-.heroe__lcp {
-  z-index: 3;
-  transform-origin: 0 0;
-  width: 1280px;
-  max-width: none;
-  height: 720px;
-  object-fit: fill;
-  inset: 0 auto auto 0;
-  opacity: 0;
+.obra__rotulo span + span { font-family: var(--playfair); font-style: italic; font-weight: 500; color: oklch(84% 0.09 310); }
+.obra:hover, .obra:focus-visible {
+  z-index: 5;
+  transform: translate3d(calc(var(--px, 0) * var(--z, 1) * 1px), calc((var(--py, 0) * var(--z, 1) - 8) * 1px), 0) rotateY(0deg) rotateZ(0deg) scale(1.03);
 }
-.heroe__lcp.ubicada { opacity: 1; }
-.heroe__capa--marco { z-index: 4; }
-.heroe__capa--sello { z-index: 5; }
-.heroe__canvas { z-index: 6; opacity: 0; transition: opacity 400ms linear; }
-.heroe__canvas.listo { opacity: 1; }
-.heroe__escena.webgl .heroe__capa { opacity: 0; transition: opacity 400ms linear; }
-.heroe__escena.webgl .heroe__capa--sombra, .heroe__escena.webgl .heroe__capa--losa { opacity: 0; }
-.heroe__escena.webgl .heroe__capa--marco, .heroe__escena.webgl .heroe__capa--sello { opacity: 0; }
-
-@supports (animation-timeline: scroll()) {
-  .heroe__capa--losa { animation: parallax-losa linear both; animation-timeline: scroll(root); animation-range: 0 100vh; }
-  .heroe__capa--marco { animation: parallax-marco linear both; animation-timeline: scroll(root); animation-range: 0 100vh; }
-  .heroe__capa--sello { animation: parallax-sello linear both; animation-timeline: scroll(root); animation-range: 0 100vh; }
-  .heroe__capa--sombra { animation: parallax-sombra linear both; animation-timeline: scroll(root); animation-range: 0 100vh; }
-  .heroe__lcp.ubicada { animation: parallax-marco linear both; animation-timeline: scroll(root); animation-range: 0 100vh; }
+@media (min-width: 1024px) {
+  .heroe__texto { grid-column: 2 / 9; }
+  .heroe__obras {
+    position: absolute;
+    top: calc(50% + var(--nav-alto) / 2);
+    left: calc(50vw + 13.5vw);
+    width: 37vw;
+    aspect-ratio: 1 / 1.02;
+    translate: 0 -50%;
+  }
+  .obra--cathedra { --ry: 7deg; --rz: -2.5deg; --z: 0.7; width: 74%; aspect-ratio: 16 / 9; left: 0; top: 25%; z-index: 2; }
+  .obra--athleteiq { --ry: -6deg; --rz: 2.5deg; --z: 0.35; width: 56%; aspect-ratio: 16 / 9; right: 2%; top: 4%; z-index: 1; }
+  .obra--coro { --ry: -5deg; --rz: 2deg; --z: 0.5; width: 58%; aspect-ratio: 16 / 9; right: 0; bottom: 8%; z-index: 1; }
+  .obra--fortal { --ry: 4deg; --rz: -3deg; --z: 1.15; width: 25%; aspect-ratio: 9 / 18.6; left: 15%; bottom: 0; z-index: 3; border-radius: 20px; box-shadow: 0 0 0 5px oklch(14% 0.015 295), 0 0 0 6px light-dark(oklch(45% 0.12 295 / 0.4), oklch(82% 0.08 300 / 0.3)), 0 30px 70px -18px light-dark(oklch(35% 0.16 295 / 0.65), oklch(3% 0.03 295)); }
+  html:not(.quieto) .obra { animation: obra-entra 900ms var(--curva-entrada) both; }
+  html:not(.quieto) .obra--athleteiq { animation-delay: 80ms; }
+  html:not(.quieto) .obra--cathedra { animation-delay: 160ms; }
+  html:not(.quieto) .obra--coro { animation-delay: 240ms; }
+  html:not(.quieto) .obra--fortal { animation-delay: 340ms; }
 }
-@keyframes parallax-losa { to { translate: 0 -24px; } }
-@keyframes parallax-marco { to { translate: 0 -40px; } }
-@keyframes parallax-sello { to { translate: 0 -56px; } }
-@keyframes parallax-sombra { to { scale: 1.45 1; translate: 36px 0; } }
-@media (prefers-reduced-motion: reduce) {
-  .heroe__capa, .heroe__lcp { animation: none !important; }
+@keyframes obra-entra { from { opacity: 0; translate: 0 26px; } to { opacity: 1; translate: 0 0; } }
+@media (prefers-reduced-motion: reduce) { .obra { animation: none !important; transition: none; } }
+@media (max-width: 1023px) {
+  .heroe__obras {
+    display: flex;
+    gap: var(--e-2);
+    margin: var(--e-3) calc(-1 * var(--margen)) 0;
+    padding: 6px var(--margen) var(--e-3);
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+    scrollbar-width: none;
+  }
+  .heroe__obras::-webkit-scrollbar { display: none; }
+  .obra { position: relative; flex: 0 0 auto; height: 188px; aspect-ratio: 16 / 9; scroll-snap-align: start; scroll-margin-inline-start: var(--margen); }
+  .obra--cathedra { order: 1; }
+  .obra--fortal { order: 2; aspect-ratio: 9 / 18.6; border-radius: 16px; }
+  .obra--athleteiq { order: 3; }
+  .obra--coro { order: 4; }
 }
-.heroe__escena.asentar .heroe__capa--marco, .heroe__escena.asentar .heroe__lcp { transition: translate 700ms var(--curva-entrada); }
+.heroe__etiqueta { color: var(--texto-2); }
+.solo-fondo .heroe > *, .solo-fondo .nav { visibility: hidden; }
 
 @media (max-width: 1023px) {
-  .heroe { min-height: 0; display: block; }
-  .heroe__escena {
-    position: relative;
-    inset: auto;
-    transform: none;
-    width: 100%;
-    max-width: none;
-    aspect-ratio: 390 / 220;
-    margin-top: var(--e-2);
-    pointer-events: none;
-    overflow: hidden;
-  }
-  .heroe__escena > * { animation: none !important; }
-  .heroe__capa { position: absolute; inset: auto 0 auto 0; width: 100%; height: auto; top: -5%; max-width: none; }
-  .heroe__canvas { display: none; }
+  .heroe { min-height: calc(100svh - 40px); align-content: center; }
   .heroe + main .seccion:first-child { padding-top: var(--e-4); }
 }
+
 @media (max-width: 479px) {
   :root { --t-cuerpo: 1.0625rem; --t-sub-heroe: 1.0625rem; }
   .heroe__titulo { font-size: 2.125rem; }
