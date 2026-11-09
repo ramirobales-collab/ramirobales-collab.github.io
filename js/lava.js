@@ -85,8 +85,10 @@ void main(){
   c=mix(mix(violeta,vec3(.9,.86,1.),.72),c,cuerpo);
   float ac=max(cuerpo*.96,halo*halo*.26);
 
-  /* El texto vive a la izquierda: ahí el fondo se apaga. En vertical se apaga parejo. */
-  float apaga=mix(.6,mix(.2,1.,smoothstep(-.28*asp,.14*asp,p.x)),uApaisado);
+  /* El texto vive a la izquierda: ahí el fondo se apaga. En vertical el texto ocupa la parte de arriba: ahí se
+     apaga más (la bajada daba 3,57:1 en celular) y abajo, donde están las capturas, conserva el brillo. */
+  float vertical=mix(.6,.34,smoothstep(.3,.56,uv.y));
+  float apaga=mix(vertical,mix(.2,1.,smoothstep(-.28*asp,.14*asp,p.x)),uApaisado);
   o*=apaga;
   o+=vec3(.026,.018,.046)*(1.-apaga);
   ac*=apaga;

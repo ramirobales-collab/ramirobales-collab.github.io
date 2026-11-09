@@ -318,7 +318,7 @@ a.sello:hover .sello__nombre { text-decoration: underline; text-decoration-color
   font-style: italic;
   font-weight: 500;
   letter-spacing: -0.01em;
-  background: linear-gradient(100deg, light-dark(oklch(38% 0.2 295), oklch(86% 0.08 300)) 10%, light-dark(oklch(44% 0.21 330), oklch(78% 0.15 325)) 95%);
+  background: linear-gradient(100deg, light-dark(oklch(34% 0.19 295), oklch(86% 0.08 300)) 10%, light-dark(oklch(37% 0.19 330), oklch(78% 0.15 325)) 95%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
