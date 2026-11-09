@@ -222,15 +222,6 @@ function iniciarVistos() {
   observar('[data-visto]', 30);
 }
 
-/* ---------- Fondo líquido del inicio ---------- */
-function iniciarLava() {
-  const lienzo = qs('.heroe__lava'), cabecera = qs('.heroe');
-  if (!lienzo || !cabecera || navigator.connection?.saveData) return;
-  if (params.get('fondo') === '1') html.classList.add('solo-fondo');
-  const cargar = () => import('./lava.js').then((m) => m.iniciar(lienzo, cabecera)).catch((e) => console.warn('fondo líquido no disponible', e));
-  if (document.readyState === 'complete') cargar(); else addEventListener('load', cargar);
-}
-
 /* ---------- ?ir=<id> ---------- */
 function irASeccion() {
   if (!IR) return;
@@ -259,7 +250,6 @@ export async function iniciar() {
   iniciarRevelados();
   iniciarVistos();
   iniciarNavActual();
-  iniciarLava();
 }
 
 iniciar();

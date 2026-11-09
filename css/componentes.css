@@ -379,12 +379,15 @@ a.sello:hover .sello__nombre { text-decoration: underline; text-decoration-color
   transform: translate3d(calc(var(--px, 0) * var(--z, 1) * 1px), calc((var(--py, 0) * var(--z, 1) - 8) * 1px), 0) rotateY(0deg) rotateZ(0deg) scale(1.03);
 }
 @media (min-width: 1024px) {
-  .heroe__texto { grid-column: 2 / 9; }
+  /* El texto ocupa las columnas 1 a 7 y la galería arranca después, medida contra el contenedor (no contra
+     la ventana: con vw se corría 280 px a la derecha a 1920 y el Cathedra quedaba fuera de cuadro). Puede
+     entrar en el margen derecho hasta 10rem sin pasar el borde de la ventana. */
+  .heroe__texto { grid-column: 1 / 8; }
   .heroe__obras {
     position: absolute;
     top: calc(50% + var(--nav-alto) / 2);
-    left: calc(50vw + 13.5vw);
-    width: 37vw;
+    left: calc(100% * 7.45 / 12);
+    right: calc(-1 * min(max((100vw - 100%) / 2 - 24px, 0px), 10rem));
     aspect-ratio: 1 / 1.02;
     translate: 0 -50%;
   }
@@ -402,6 +405,7 @@ a.sello:hover .sello__nombre { text-decoration: underline; text-decoration-color
 @media (prefers-reduced-motion: reduce) { .obra { animation: none !important; transition: none; } }
 @media (max-width: 1023px) {
   .heroe__obras {
+    grid-column: 1 / -1; /* sin esto la tira caía en la primera columna de la grilla y sólo se veía media tarjeta */
     display: flex;
     gap: var(--e-2);
     margin: var(--e-3) calc(-1 * var(--margen)) 0;
@@ -414,11 +418,16 @@ a.sello:hover .sello__nombre { text-decoration: underline; text-decoration-color
   .obra { position: relative; flex: 0 0 auto; height: 188px; aspect-ratio: 16 / 9; scroll-snap-align: start; scroll-margin-inline-start: var(--margen); }
   .obra--cathedra { order: 1; }
   .obra--fortal { order: 2; aspect-ratio: 9 / 18.6; border-radius: 16px; }
+  .obra__rotulo { white-space: nowrap; }
+  .obra--fortal .obra__rotulo span + span { display: none; } /* el teléfono es angosto; el estado está en los sellos */
   .obra--athleteiq { order: 3; }
   .obra--coro { order: 4; }
 }
 .heroe__etiqueta { color: var(--texto-2); }
 .solo-fondo .heroe > *, .solo-fondo .nav { visibility: hidden; }
+/* Lienzo de la galería 3D: ocupa todo el ancho de la ventana (la galería entra en el margen) y arranca invisible. */
+.heroe > .heroe__escena { position: absolute; top: 0; left: calc(50% - 50vw); z-index: 1; width: 100vw; max-width: none; height: 100%; pointer-events: none; opacity: 0; }
+@media (max-width: 1023px) { .heroe > .heroe__escena { display: none; } }
 
 @media (max-width: 1023px) {
   .heroe { min-height: calc(100svh - 40px); align-content: center; }
@@ -429,6 +438,37 @@ a.sello:hover .sello__nombre { text-decoration: underline; text-decoration-color
   :root { --t-cuerpo: 1.0625rem; --t-sub-heroe: 1.0625rem; }
   .heroe__titulo { font-size: 2.125rem; }
 }
+
+/* ---------- Héroe 3D ---------- */
+/* Cuando la escena está lista, las piezas 3D toman el lugar visual de las tarjetas; las tarjetas siguen como
+   enlace, foco y respaldo (quedan transparentes, con su rótulo encima). */
+@media (min-width: 1024px) {
+  .heroe > .heroe__escena { transition: opacity 700ms var(--curva-entrada); }
+  .obras-3d .heroe > .heroe__escena { opacity: 1; }
+  .obras-3d .obra { background: transparent; box-shadow: none; transition: none; }
+  .obras-3d .obra picture, .obras-3d .obra::after { opacity: 0; transition: opacity 700ms var(--curva-entrada); }
+  .obras-3d .obra:hover, .obras-3d .obra:focus-visible { transform: translate3d(calc(var(--px, 0) * var(--z, 1) * 1px), calc(var(--py, 0) * var(--z, 1) * 1px), 0) rotateY(var(--ry, 0deg)) rotateZ(var(--rz, 0deg)); }
+  .obras-3d .obra:focus-visible { outline: 2px solid var(--acento-texto); outline-offset: 6px; }
+  .obras-3d .obra__rotulo { backdrop-filter: blur(10px) saturate(1.2); -webkit-backdrop-filter: blur(10px) saturate(1.2); background: oklch(12% 0.03 295 / 0.66); }
+  /* Rótulos sin tapar otra pieza: el de AthleteIQ caería sobre Cathedra (que está delante) y el de Cathedra sobre el teléfono. */
+  .obras-3d .obra--athleteiq .obra__rotulo { left: auto; right: 10px; bottom: auto; top: 10px; }
+  .obras-3d .obra--cathedra .obra__rotulo { bottom: auto; top: 20px; left: 20px; }
+  html.obras-3d:not(.quieto) .obra__rotulo { animation: rotulo-entra 800ms var(--curva-entrada) 900ms both; }
+}
+/* Celular y tableta: la tira de capturas gira en profundidad al deslizarla (carrusel 3D sólo con CSS, atado al
+   scroll horizontal). Sin soporte de animation-timeline o con movimiento reducido queda la tira plana. */
+@media (max-width: 1023px) and (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .obra { animation: obra-carrusel linear both; animation-timeline: view(inline); transform-origin: 50% 55%; }
+  }
+}
+@keyframes obra-carrusel {
+  0% { transform: perspective(700px) rotateY(-24deg) scale(0.92); filter: brightness(0.8); }
+  35%, 65% { transform: perspective(700px) rotateY(0deg) scale(1); filter: brightness(1); }
+  100% { transform: perspective(700px) rotateY(24deg) scale(0.92); filter: brightness(0.8); }
+}
+@keyframes rotulo-entra { from { opacity: 0; translate: 0 8px; } to { opacity: 1; translate: 0 0; } }
+@media (prefers-reduced-motion: reduce) { .obras-3d .obra__rotulo { animation: none !important; } }
 
 /* ---------- Trabajo ---------- */
 .casos { row-gap: var(--e-4); }

@@ -297,7 +297,7 @@
  "uso3.p": "Notas de voz del depósito o de la calle que se transcriben y se cargan solas en la planilla, con aviso cuando algo no se entiende.",
  "como.folio": "Cómo está hecho de verdad",
  "como.titulo": "Dos caminos: cuando alguien escribe y cuando nadie escribe.",
- "como.intro": "Es la arquitectura de los bots que construí para AthleteIQ (respuesta por Telegram, brief de precios y radar), Cathedra (recordatorios de parciales y entregas) y Fortal (avisos push de rutina). Los hice con desarrollo asistido por IA: yo definí qué hace cada pieza y por qué, y verifiqué el resultado.",
+ "como.intro": "Es la arquitectura de los bots que construí para AthleteIQ (respuesta por Telegram, un prototipo de brief de noticias y radar), Cathedra (recordatorios de parciales y entregas) y Fortal (avisos push de rutina). Los hice con desarrollo asistido por IA: yo definí qué hace cada pieza y por qué, y verifiqué el resultado.",
  "carril1.t": "Cuando alguien escribe",
  "carril2.t": "Cuando nadie escribe",
  "caja.canal.t": "Canal",

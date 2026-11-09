@@ -116,23 +116,33 @@ export function iniciar(lienzo, cabecera) {
   const tFijo = QS.has('t') ? parseFloat(QS.get('t')) : null;
   const quieto = () => QS.get('quieto') === '1' || reducido.matches || tFijo !== null;
   const opciones = { alpha: true, premultipliedAlpha: true, antialias: false, depth: false, stencil: false, powerPreference: 'low-power' };
-  const gl = lienzo.getContext('webgl', opciones) || lienzo.getContext('experimental-webgl', opciones);
-  if (!gl) return false;
-  const compilar = (tipo, src) => { const s = gl.createShader(tipo); gl.shaderSource(s, src); gl.compileShader(s); return s; };
-  const prog = gl.createProgram();
-  gl.attachShader(prog, compilar(gl.VERTEX_SHADER, VERT));
-  gl.attachShader(prog, compilar(gl.FRAGMENT_SHADER, FRAG));
-  gl.linkProgram(prog);
-  if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) { console.warn('fondo líquido:', gl.getProgramInfoLog(prog)); return false; }
-  gl.useProgram(prog);
-  gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
-  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
-  const a = gl.getAttribLocation(prog, 'a');
-  gl.enableVertexAttribArray(a);
-  gl.vertexAttribPointer(a, 2, gl.FLOAT, false, 0, 0);
-  gl.clearColor(0, 0, 0, 0);
+  // Cada salida deja su estado en data-estado y en la consola: sin esto, un fallo en el celular no dejaba rastro.
+  const fallar = (estado, detalle) => { lienzo.dataset.estado = estado; console.warn(`fondo líquido: ${estado}`, detalle || ''); return false; };
+  let gl = null;
+  try { gl = lienzo.getContext('webgl', opciones) || lienzo.getContext('experimental-webgl', opciones); } catch (e) { return fallar('sin-webgl', e); }
+  if (!gl) return fallar('sin-webgl', 'el navegador no dio un contexto WebGL');
   const U = {};
-  ['uRes', 'uB', 'uT', 'uClaro', 'uApaisado'].forEach((n) => { U[n] = gl.getUniformLocation(prog, n); });
+  const preparar = () => {
+    const compilar = (tipo, src, nombre) => {
+      const sh = gl.createShader(tipo); gl.shaderSource(sh, src); gl.compileShader(sh);
+      if (!gl.getShaderParameter(sh, gl.COMPILE_STATUS) && !gl.isContextLost()) throw new Error(`${nombre}: ${gl.getShaderInfoLog(sh)}`);
+      return sh;
+    };
+    const prog = gl.createProgram();
+    gl.attachShader(prog, compilar(gl.VERTEX_SHADER, VERT, 'vértices'));
+    gl.attachShader(prog, compilar(gl.FRAGMENT_SHADER, FRAG, 'fragmentos'));
+    gl.linkProgram(prog);
+    if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) throw new Error(gl.getProgramInfoLog(prog) || 'no enlazó');
+    gl.useProgram(prog);
+    gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
+    const a = gl.getAttribLocation(prog, 'a');
+    gl.enableVertexAttribArray(a);
+    gl.vertexAttribPointer(a, 2, gl.FLOAT, false, 0, 0);
+    gl.clearColor(0, 0, 0, 0);
+    ['uRes', 'uB', 'uT', 'uClaro', 'uApaisado'].forEach((n) => { U[n] = gl.getUniformLocation(prog, n); });
+  };
+  try { preparar(); } catch (e) { return fallar('error-shader', e.message); }
 
   const datos = new Float32Array(8 * 3);
   const puntero = { x: 0, y: 0, ax: 0, ay: 0, fuerza: 0, objetivo: 0 };
@@ -151,9 +161,8 @@ export function iniciar(lienzo, cabecera) {
     const escala = Math.min(0.62 * dpr * calidad, 1000 / Math.max(css.width, 1));
     const w = Math.max(2, Math.round(css.width * escala));
     const h = Math.max(2, Math.round(css.height * escala));
-    if (w !== ancho || h !== alto) {
-      ancho = w; alto = h; lienzo.width = w; lienzo.height = h; gl.viewport(0, 0, w, h);
-    }
+    if (w !== ancho || h !== alto) { ancho = w; alto = h; lienzo.width = w; lienzo.height = h; }
+    gl.viewport(0, 0, w, h);
     asp = w / h;
     gl.uniform2f(U.uRes, w, h);
     gl.uniform1f(U.uApaisado, asp > 1.1 ? 1 : 0);
@@ -200,6 +209,7 @@ export function iniciar(lienzo, cabecera) {
   medir();
   un_cuadro();
   lienzo.classList.add('listo');
+  lienzo.dataset.estado = 'listo';
   arrancar();
 
   new ResizeObserver(() => { medir(); if (quieto()) un_cuadro(); }).observe(cabecera);
@@ -208,7 +218,15 @@ export function iniciar(lienzo, cabecera) {
   document.addEventListener('visibilitychange', () => { activo = !document.hidden; arrancar(); });
   new MutationObserver(un_cuadro).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
   reducido.addEventListener('change', () => { if (quieto()) { cancelAnimationFrame(raf); raf = 0; un_cuadro(); } else arrancar(); });
-  lienzo.addEventListener('webglcontextlost', (e) => { e.preventDefault(); activo = false; lienzo.classList.remove('listo'); });
+  lienzo.addEventListener('webglcontextlost', (e) => {
+    e.preventDefault(); activo = false; cancelAnimationFrame(raf); raf = 0;
+    lienzo.classList.remove('listo'); fallar('contexto-perdido', 'el sistema liberó la placa; se rearma al volver');
+  });
+  lienzo.addEventListener('webglcontextrestored', () => {
+    try { preparar(); } catch (e) { fallar('error-shader', e.message); return; }
+    ancho = 0; medir(); un_cuadro(); lienzo.classList.add('listo'); lienzo.dataset.estado = 'listo';
+    activo = !document.hidden; arrancar();
+  });
 
   const obras = reducido.matches ? null : cabecera.querySelector('.heroe__obras');
   if (matchMedia('(hover: hover)').matches) {

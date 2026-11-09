@@ -297,7 +297,7 @@
  "uso3.p": "Voice notes from the warehouse or the field that get transcribed and logged into the sheet automatically, with a flag when something isn't clear.",
  "como.folio": "How it's really built",
  "como.titulo": "Two paths: when someone writes and when nobody does.",
- "como.intro": "This is the architecture of the bots I built for AthleteIQ (Telegram replies, price brief and radar), Cathedra (exam and assignment reminders) and Fortal (workout push alerts). I built them with AI-assisted development: I defined what each piece does and why, and I verified the result.",
+ "como.intro": "This is the architecture of the bots I built for AthleteIQ (Telegram replies, a prototype news brief and radar), Cathedra (exam and assignment reminders) and Fortal (workout push alerts). I built them with AI-assisted development: I defined what each piece does and why, and I verified the result.",
  "carril1.t": "When someone writes",
  "carril2.t": "When nobody writes",
  "caja.canal.t": "Channel",
