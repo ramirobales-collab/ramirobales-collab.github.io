@@ -1,148 +1,406 @@
-/* Páginas de caso (/proyectos/<slug>.html). Prefijo caso-. Se apoya en variables.css, base.css y componentes.css. */
+/* Páginas interiores de «la sala negra»: casos (/proyectos/<slug>.html), seguridad, legal, créditos y 404.
+   Se apoya en variables.css, base.css y componentes.css (placas, texto que entra, botones, sellos, folio, nav, pie).
+   Prefijos: caso- (casos y seguridad), doc (legal y créditos), pagina-404 / puerta (404). v3/pagina.md manda. */
 
-.caso-pagina { padding-top: calc(var(--nav-alto) + var(--e-4)); padding-bottom: var(--e-seccion); }
-.caso-pagina .folio { margin-bottom: var(--e-3); }
+/* ---------- Común: profundidad detrás del contenido ---------- */
+/* Primer pintado sin saltos (crítico H2): en 404, legal y créditos componentes.css llega diferido y caso.css es la
+   hoja bloqueante; sin estas dos reglas el lienzo entraba en el flujo (1440×748) y empujaba el contenido, y el enlace
+   de salto se veía arriba. Son copia exacta de las de componentes.css (allí siguen siendo las de la portada). */
+.mundo { position: fixed; inset: 0; z-index: 0; width: 100%; height: 100%; pointer-events: none; }
+.saltar { position: absolute; left: var(--margen); top: -100px; z-index: 60; }
+/* La atmósfera: luz blanca muy tenue que cae de arriba a la derecha y un piso que se hunde en negro, quieta, debajo
+   del lienzo del fondo vivo (canvas.mundo pinta encima las motas). En claro: luz de ventana sobre el papel. */
+@property --fundir-foto { syntax: "<color>"; inherits: true; initial-value: transparent; }
+:root { --fundir-foto: light-dark(transparent, #000); }
+/* Máscara de las fotos de sala: en oscuro el borde se funde con el negro de la página (alfa 0); en claro la foto es una
+   placa oscura sobre el papel y no se funde (alfa 1). Registrada como color para que se resuelva en :root. */
+@property --mascara-foto { syntax: "<color>"; inherits: true; initial-value: #000; }
+:root { --mascara-foto: light-dark(#000, transparent); }
+body:has(> canvas.mundo)::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 60% 52% at 88% -6%, light-dark(oklch(100% 0 0 / 0.75), oklch(100% 0.006 85 / 0.05)), transparent 70%),
+    radial-gradient(ellipse 42% 60% at -4% 32%, light-dark(oklch(100% 0 0 / 0.35), oklch(100% 0.006 85 / 0.022)), transparent 72%),
+    linear-gradient(transparent 55%, light-dark(oklch(88% 0.02 80 / 0.35), oklch(0% 0 0 / 0.6)));
+}
+/* Sin motor (sin WebGL2, ahorro de datos, ?mundo=0, error): motas quietas pintadas en CSS sobre el mismo lienzo. */
+canvas.mundo:is([data-estado="sin-webgl2"], [data-estado="ahorro-de-datos"], [data-estado="respaldo"], [data-estado^="error"]) {
+  background:
+    radial-gradient(circle 2px at 12% 22%, light-dark(oklch(30% 0.01 80 / 0.22), oklch(100% 0 0 / 0.5)), transparent),
+    radial-gradient(circle 1.5px at 31% 64%, light-dark(oklch(30% 0.01 80 / 0.2), oklch(100% 0 0 / 0.42)), transparent),
+    radial-gradient(circle 2.5px at 58% 18%, light-dark(oklch(30% 0.01 80 / 0.18), oklch(100% 0.01 85 / 0.38)), transparent),
+    radial-gradient(circle 1.5px at 77% 47%, light-dark(oklch(30% 0.01 80 / 0.2), oklch(100% 0 0 / 0.45)), transparent),
+    radial-gradient(circle 2px at 91% 81%, light-dark(oklch(30% 0.01 80 / 0.2), oklch(100% 0 0 / 0.4)), transparent),
+    radial-gradient(circle 1.5px at 44% 88%, light-dark(oklch(30% 0.01 80 / 0.18), oklch(100% 0 0 / 0.36)), transparent),
+    radial-gradient(circle 22px at 70% 30%, light-dark(oklch(30% 0.01 80 / 0.04), oklch(100% 0.01 85 / 0.045)), transparent),
+    radial-gradient(circle 34px at 18% 74%, light-dark(oklch(30% 0.01 80 / 0.035), oklch(100% 0.01 85 / 0.035)), transparent);
+}
 
-/* ---------- Cabecera ---------- */
-.caso-cabecera { row-gap: var(--e-4); align-items: end; margin-bottom: var(--e-seccion); }
-.caso-cabecera__texto { grid-column: 1 / -1; display: grid; gap: var(--e-3); align-content: end; }
-.caso-cabecera__titulo { font-size: clamp(3rem, 1.6rem + 5.4vw, 7.5rem); line-height: 0.98; letter-spacing: -0.035em; }
-.caso-cabecera__linea { max-width: 34ch; }
+/* Entre páginas: con movimiento reducido el guion del <head> salta la transición (pagereveal/pageswap). */
+
+/* Progreso de lectura: un filete de luz fijo arriba, con punta cereza, atado al scroll de la página. */
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .caso-pagina::before {
+      content: "";
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 60;
+      height: 2px;
+      pointer-events: none;
+      background: linear-gradient(90deg, transparent, var(--filete-luz) 30%, color-mix(in oklab, var(--acento-display) 70%, var(--texto)) 99.4%, var(--acento-display));
+      transform-origin: 0 50%;
+      animation: lectura linear both;
+      animation-timeline: scroll(root);
+    }
+  }
+}
+@keyframes lectura { from { scale: 0 1; } to { scale: 1 1; } }
+
+/* ---------- Caso: cabecera ---------- */
+.caso-pagina { padding-top: calc(var(--nav-alto) + var(--e-4)); padding-bottom: var(--e-5); }
+.caso-cabecera { position: relative; padding-bottom: var(--e-5); scroll-margin-top: var(--nav-alto); }
+.caso-cabecera__in { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); column-gap: var(--calle); row-gap: var(--e-3); align-items: end; }
+.caso-cabecera__folio { grid-column: 1 / -1; margin-bottom: 0; }
+.caso-cabecera__texto { grid-column: 1 / -1; position: relative; z-index: 2; display: grid; gap: var(--e-3); justify-items: start; }
 .caso-cabecera__sello { margin: 0; }
-.caso-resumen { margin: 0; display: grid; gap: 0; max-width: 52ch; }
-.caso-resumen > div { display: grid; grid-template-columns: 7.5rem 1fr; gap: var(--e-2); align-items: baseline; padding-block: var(--e-2); border-top: 1px solid var(--filete); }
-.caso-resumen > div:last-child { border-bottom: 1px solid var(--filete); }
+.caso-cabecera__titulo { font-size: clamp(3.4rem, 1.2rem + 7.6vw, 9.75rem); line-height: 0.9; letter-spacing: -0.048em; margin-left: -0.04em; }
+.caso-cabecera__linea { max-width: 30ch; color: var(--texto-2); }
+.caso-cabecera__cta { margin: 0; }
+/* La foto del producto: la misma que la tarjeta de la portada (dos capas, nombre compartido para la transición). En
+   celular va a todo el ancho; desde 1024 px es el escenario de la cabecera: ocupa de la columna 5 al borde de la
+   pantalla y del folio al resumen. En oscuro no tiene bordes: una máscara la funde con el negro arriba, abajo y a la
+   izquierda (antes un degradé encima dejaba un filo de luz arriba, lum 28 → 0 en una fila). Siempre sala negra. */
+.caso-cabecera__media {
+  --funde-izq: 0%;
+  --funde-arr: 64px;
+  --funde-aba: 22%;
+  grid-column: 1 / -1;
+  position: relative;
+  margin-inline: calc(-1 * var(--margen));
+  aspect-ratio: 5 / 4;
+  overflow: clip;
+  background: #000;
+  color-scheme: dark;
+  view-transition-class: caso;
+  isolation: isolate;
+  -webkit-mask-image: linear-gradient(90deg, var(--mascara-foto), #000 var(--funde-izq)), linear-gradient(180deg, var(--mascara-foto), #000 var(--funde-arr), #000 calc(100% - var(--funde-aba)), var(--mascara-foto));
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(90deg, var(--mascara-foto), #000 var(--funde-izq)), linear-gradient(180deg, var(--mascara-foto), #000 var(--funde-arr), #000 calc(100% - var(--funde-aba)), var(--mascara-foto));
+  mask-composite: intersect;
+}
+[data-caso="cathedra"] .caso-cabecera__media { view-transition-name: caso-cathedra; }
+[data-caso="fortal"] .caso-cabecera__media { view-transition-name: caso-fortal; }
+[data-caso="athleteiq"] .caso-cabecera__media { view-transition-name: caso-athleteiq; }
+[data-caso="coro"] .caso-cabecera__media { view-transition-name: caso-coro; }
+.caso-cabecera__media .caso__capa { object-position: 78% 50%; }
+/* las capas entran solas al cargar (es la imagen principal: no espera al observador) */
+html.mov .caso-cabecera__media .caso__capa--fondo { animation: capa-asienta 1600ms var(--curva-entrada) both; }
+html.mov .caso-cabecera__media .caso__capa--disp { animation: capa-asienta-disp 1800ms var(--curva-entrada) 80ms both; }
+/* el barrido de luz de la cabecera no es un rectángulo: es el dispositivo mismo, más brillante, revelado por una franja
+   que lo cruza una vez (contorno exacto, como la lámina de «verifico» en la sala) */
+.caso-cabecera__media .caso__luz { display: none; }
+.caso__brillo {
+  opacity: 0;
+  mix-blend-mode: plus-lighter;
+  filter: brightness(1.35) contrast(1.08);
+  -webkit-mask-image: linear-gradient(100deg, transparent 40%, #000 49%, #000 51%, transparent 60%);
+  mask-image: linear-gradient(100deg, transparent 40%, #000 49%, #000 51%, transparent 60%);
+  -webkit-mask-size: 300% 100%;
+  mask-size: 300% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: 92% 0;
+  mask-position: 92% 0;
+  pointer-events: none;
+}
+html.mov .caso-cabecera__media .caso__brillo { animation: capa-asienta-disp 1800ms var(--curva-entrada) 80ms both, brillo-barre 2300ms cubic-bezier(0.45, 0, 0.3, 1) 650ms 1 both; }
+html.mov.vt .caso-cabecera__media .caso__brillo { animation: brillo-barre 2300ms cubic-bezier(0.45, 0, 0.3, 1) 250ms 1 both; }
+@keyframes brillo-barre {
+  0% { opacity: 0; -webkit-mask-position: 92% 0; mask-position: 92% 0; }
+  12% { opacity: 0.6; }
+  78% { opacity: 0.6; }
+  100% { opacity: 0; -webkit-mask-position: 4% 0; mask-position: 4% 0; }
+}
+/* y además se desplazan a otra velocidad que el texto al deslizar (como en la portada) */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    html.mov .caso-cabecera__media .caso__capa--fondo { animation: capa-asienta 1600ms var(--curva-entrada) both, cab-lenta linear both; animation-timeline: auto, view(); }
+    html.mov .caso-cabecera__media .caso__capa--disp { animation: capa-asienta-disp 1800ms var(--curva-entrada) 80ms both, cab-rapida linear both; animation-timeline: auto, view(); }
+    html.mov .caso-cabecera__media .caso__brillo { animation: capa-asienta-disp 1800ms var(--curva-entrada) 80ms both, brillo-barre 2300ms cubic-bezier(0.45, 0, 0.3, 1) 650ms 1 both, cab-rapida linear both; animation-timeline: auto, auto, view(); }
+    html.mov.vt .caso-cabecera__media .caso__capa--fondo { animation: cab-lenta linear both; animation-timeline: view(); }
+    html.mov.vt .caso-cabecera__media .caso__capa--disp { animation: cab-rapida linear both; animation-timeline: view(); }
+    html.mov.vt .caso-cabecera__media .caso__brillo { animation: brillo-barre 2300ms cubic-bezier(0.45, 0, 0.3, 1) 250ms 1 both, cab-rapida linear both; animation-timeline: auto, view(); }
+  }
+}
+/* llegando con la transición desde la tarjeta de la portada, la foto ya está entera: no se vuelve a armar */
+html.vt .caso-cabecera__media .caso__capa { animation-name: none; }
+@supports (animation-timeline: view()) { @media (prefers-reduced-motion: no-preference) { html.vt .caso-cabecera__media .caso__capa--fondo { animation-name: cab-lenta; } html.vt .caso-cabecera__media .caso__capa--disp { animation-name: cab-rapida; } } }
+/* más recorrido que en la portada: el fondo baja y el dispositivo sube al deslizar, y los dos siguen al puntero en
+   sentidos opuestos con más amplitud (la escala deja margen para que nunca asome el borde) */
+.caso-cabecera__media .caso__capa--fondo { --escala: 1.16; transform: translate3d(calc(var(--px, 0) * -26px), calc(var(--py, 0) * -14px), 0); }
+.caso-cabecera__media .caso__capa--disp { --escala: 1.1; transform: translate3d(calc(var(--px, 0) * 20px), calc(var(--py, 0) * 11px), 0); }
+@keyframes cab-lenta { from { translate: 0 -5%; } to { translate: 0 5%; } }
+@keyframes cab-rapida { from { translate: 0 3.4%; } to { translate: 0 -3.4%; } }
+@keyframes capa-asienta { from { opacity: 0.4; scale: 1.18; } }
+@keyframes capa-asienta-disp { from { opacity: 0; scale: 1.14; filter: blur(6px); } }
+/* el fundido con la página lo hace la máscara de arriba (en claro no hay fundido: la foto es una placa sobre el papel) */
+.caso-resumen {
+  grid-column: 1 / -1;
+  position: relative;
+  z-index: 3;
+  margin: calc(-1 * var(--e-4)) 0 0;
+  padding: var(--e-2) var(--e-3);
+  display: grid;
+}
+.caso-resumen > div { display: grid; grid-template-columns: 7rem 1fr; gap: var(--e-2); align-items: baseline; padding-block: var(--e-2); }
+.caso-resumen > div + div { border-top: 1px solid var(--filete); }
 .caso-resumen dt { color: var(--texto-3); }
 .caso-resumen dd { margin: 0; font-size: var(--t-secundario); line-height: 1.5; }
-.caso-cabecera__cta { margin: 0; }
 @media (max-width: 479px) { .caso-resumen > div { grid-template-columns: 1fr; gap: 0.2rem; } }
+@media (min-width: 768px) {
+  .caso-cabecera__in { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+  .caso-cabecera__media { aspect-ratio: 16 / 10; }
+  .caso-cabecera__media .caso__capa { object-position: 50% 50%; }
+  .caso-resumen { grid-column: 1 / 6; margin-top: calc(-1 * var(--e-5)); box-shadow: var(--placa-sombra-alta); }
+}
+@media (min-width: 1024px) {
+  .caso-cabecera__in { grid-template-columns: repeat(12, minmax(0, 1fr)); grid-template-rows: auto 1fr auto; }
+  .caso-cabecera__folio { grid-column: 1 / 6; grid-row: 1; position: relative; z-index: 2; }
+  .caso-cabecera__texto { grid-column: 1 / 6; grid-row: 2; align-self: center; padding-bottom: var(--e-5); }
+  .caso-cabecera__media {
+    --funde-izq: 34%;
+    --funde-arr: 96px;
+    --funde-aba: 26%;
+    grid-column: 5 / -1;
+    grid-row: 1 / span 2;
+    aspect-ratio: auto;
+    min-height: clamp(560px, 82svh, 820px);
+    margin: calc(-1 * var(--e-4)) calc(-1 * max(var(--margen), (100vw - var(--ancho-max)) / 2)) 0 var(--e-2);
+  }
+  .caso-cabecera__media .caso__capa { object-position: 72% 50%; }
+  /* el resumen aterriza sobre el piso de la escena: tres columnas por delante de la foto, con sombra larga */
+  .caso-resumen {
+    grid-column: 1 / -1;
+    grid-row: 3;
+    margin-top: calc(-1 * var(--e-5));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    padding: var(--e-3) var(--e-4);
+    column-gap: var(--e-4);
+    box-shadow: var(--placa-sombra-alta);
+  }
+  .caso-resumen > div { grid-template-columns: 1fr; gap: 0.45rem; align-content: start; padding-block: var(--e-1); }
+  .caso-resumen > div + div { border-top: 0; position: relative; }
+  .caso-resumen > div + div::before { content: ""; position: absolute; left: calc(var(--e-4) / -2); top: 0; bottom: 0; width: 1px; background: linear-gradient(transparent, var(--filete) 18%, var(--filete) 82%, transparent); }
+}
+/* en claro la foto es una placa: bordes redondeados del lado de adentro y sombra (en oscuro no hay borde que redondear) */
+:root[data-theme="light"] .caso-cabecera__media { box-shadow: var(--placa-sombra); }
+@media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) .caso-cabecera__media { box-shadow: var(--placa-sombra); } }
+/* y como no se funde, no puede quedar debajo del titular: arranca una columna más a la derecha */
+@media (min-width: 1024px) {
+  :root[data-theme="light"] .caso-cabecera__media { border-radius: var(--radio-bloque) 0 0 var(--radio-bloque); grid-column: 6 / -1; margin-left: var(--e-3); }
+}
+@media (min-width: 1024px) and (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) .caso-cabecera__media { border-radius: var(--radio-bloque) 0 0 var(--radio-bloque); grid-column: 6 / -1; margin-left: var(--e-3); }
+}
 
 /* ---------- Ficha (metadatos) ---------- */
-.caso-ficha { margin: calc(-1 * var(--e-seccion) + var(--e-4)) 0 calc(var(--e-4) * 1.5); row-gap: var(--e-3); padding-block: var(--e-3); border-top: 1px solid var(--filete); border-bottom: 1px solid var(--filete); }
+.caso-ficha { margin: var(--e-5) 0 var(--e-5); row-gap: var(--e-3); padding: var(--e-3); }
 .caso-ficha__item { grid-column: span 2; display: grid; gap: 0.3rem; align-content: start; }
 .caso-ficha__item--ancho { grid-column: 1 / -1; }
 .caso-ficha dt { color: var(--texto-3); }
 .caso-ficha dd { margin: 0; font-size: var(--t-secundario); line-height: 1.5; }
 .caso-ficha dd a { text-decoration-color: var(--borde); }
 .caso-ficha dd a:hover { text-decoration-color: var(--acento-texto); }
-@media (min-width: 768px) {
-  .caso-ficha__item { grid-column: span 3; }
-  .caso-ficha__item--ancho { grid-column: span 3; }
-}
+@media (min-width: 768px) { .caso-ficha__item, .caso-ficha__item--ancho { grid-column: span 3; } }
 @media (min-width: 1024px) {
+  .caso-ficha { padding: var(--e-4); }
   .caso-ficha__item { grid-column: span 2; }
   .caso-ficha__item--ancho { grid-column: span 3; }
   .caso-ficha__item:first-child { grid-column: 1 / span 2; }
 }
-.caso-cabecera__media {
-  grid-column: 1 / -1;
-  position: relative;
-  aspect-ratio: 16 / 10;
-  background: var(--hundida);
-  border-radius: var(--radio);
-  overflow: hidden;
-  box-shadow: var(--sombra-papel);
-}
-.caso-cabecera__media picture { height: 100%; }
-.caso-cabecera__media img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
-.caso-cabecera--vertical .caso-cabecera__media img { object-position: 50% 0; }
-/* La imagen de cabecera es la LCP: entra sola al cargar (en móvil queda bajo el margen del observador y no se revelaba). */
-.caso-cabecera__media.mascara { clip-path: inset(0); animation: caso-cabecera-revelar 1.2s var(--curva-entrada) 0.15s both; }
-@keyframes caso-cabecera-revelar { from { clip-path: inset(0 0 0 100%); } to { clip-path: inset(0); } }
-@media (min-width: 1024px) {
-  .caso-cabecera__texto { grid-column: 2 / 7; padding-bottom: var(--e-3); }
-  .caso-cabecera__media { grid-column: 7 / -1; margin-right: calc(-1 * max(var(--margen), (100vw - var(--ancho-max)) / 2)); border-top-right-radius: 0; border-bottom-right-radius: 0; }
-  .caso-cabecera--vertical .caso-cabecera__texto { grid-column: 2 / 8; align-self: center; }
-  .caso-cabecera--vertical .caso-cabecera__media { grid-column: 9 / 13; margin-right: 0; aspect-ratio: 2 / 3; border-radius: var(--radio); }
-}
 
-.caso-meta { display: grid; gap: var(--e-2); margin: 0; }
-.caso-meta > div { display: grid; grid-template-columns: 6.5rem 1fr; gap: var(--e-2); align-items: baseline; padding-top: var(--e-2); border-top: 1px solid var(--filete); }
-.caso-meta dt { color: var(--texto-3); }
-.caso-meta dd { margin: 0; font-size: var(--t-secundario); font-weight: 400; letter-spacing: 0; text-transform: none; }
-.caso-meta dd a { text-decoration-color: var(--borde); }
-/* Revelados por elemento dentro de texto en línea: la línea no puede ser un bloque. */
-.caso-nav__fila .linea, .caso-resultado > h2 .linea { display: inline-block; vertical-align: baseline; }
-.caso-meta dd a:hover { text-decoration-color: var(--acento-texto); }
-
-/* ---------- Cuerpo: índice + contenido + artefactos ---------- */
-.caso-cuerpo { row-gap: var(--e-4); align-items: start; }
-.caso-indice { grid-column: 1 / -1; }
-.caso-indice ol { margin: 0; padding: 0; list-style: none; display: flex; gap: var(--e-2) var(--e-3); overflow-x: auto; scrollbar-width: none; padding-bottom: var(--e-1); border-bottom: 1px solid var(--filete); }
+/* ---------- Cuerpo: índice lateral + contenido ---------- */
+.caso-cuerpo { row-gap: var(--e-5); align-items: start; }
+.caso-indice { grid-column: 1 / -1; min-width: 0; }
+.caso-indice ol { margin: 0; padding: 0 0 var(--e-1); list-style: none; display: flex; gap: var(--e-2) var(--e-3); overflow-x: auto; scrollbar-width: none; border-bottom: 1px solid var(--filete); }
 .caso-indice ol::-webkit-scrollbar { display: none; }
-.caso-indice a { display: inline-flex; align-items: baseline; gap: 0.5rem; text-decoration: none; color: var(--texto-2); font-size: var(--t-secundario); white-space: nowrap; padding-block: 0.2rem; border-bottom: 1px solid transparent; transition: color var(--d-micro) var(--curva-entrada), border-color var(--d-micro) var(--curva-entrada); }
+.caso-indice a { display: inline-flex; align-items: center; gap: 0.5rem; min-height: 44px; text-decoration: none; color: var(--texto-2); font-size: var(--t-secundario); white-space: nowrap; border-bottom: 1px solid transparent; transition: color var(--d-micro) var(--curva-entrada), border-color var(--d-micro) var(--curva-entrada); }
 .caso-indice a:hover, .caso-indice a[aria-current="true"] { color: var(--texto); border-bottom-color: var(--acento-texto); }
-.caso-indice__n { font-family: var(--playfair); color: var(--acento-display); font-size: 0.875rem; font-variant-numeric: tabular-nums; }
-.caso-contenido { grid-column: 1 / -1; display: grid; gap: var(--e-4); }
-.caso-resultado { grid-column: 1 / -1; }
-.caso-galeria { grid-column: 1 / -1; }
+.caso-indice__n { font-family: var(--playfair); color: var(--acento-display); font-size: 0.875rem; font-variant-numeric: lining-nums tabular-nums; }
+.caso-contenido { grid-column: 1 / -1; display: grid; gap: var(--e-5); }
+.caso-resultado, .caso-galeria { grid-column: 1 / -1; }
 @media (min-width: 1024px) {
   .caso-indice { grid-column: 1 / 3; grid-row: 1 / span 8; align-self: start; position: sticky; top: calc(var(--nav-alto) + var(--e-3)); }
-  .caso-indice ol { flex-direction: column; gap: 0.1rem; overflow: visible; border-bottom: 0; padding-bottom: 0; border-left: 1px solid var(--filete); }
-  .caso-indice a { padding: 0.3rem 0 0.3rem var(--e-2); margin-left: -1px; border-bottom: 0; border-left: 2px solid transparent; white-space: normal; }
-  .caso-indice a:hover, .caso-indice a[aria-current="true"] { border-left-color: var(--acento-texto); }
-  .caso-contenido { grid-column: 3 / -1; }
-  .caso-resultado { grid-column: 3 / -1; }
-  .caso-contenido--sigue { grid-column: 3 / -1; }
-  .caso-galeria { grid-column: 3 / -1; }
+  .caso-indice ol { position: relative; flex-direction: column; gap: 0; overflow: visible; border-bottom: 0; padding: 0; }
+  /* riel del índice: un filete tenue y, encima, la luz que avanza con la lectura */
+  .caso-indice ol::before, .caso-indice ol::after { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 1px; background: var(--filete); }
+  .caso-indice ol::after { background: linear-gradient(var(--filete-luz), var(--acento-display)); transform-origin: 50% 0; scale: 1 0; }
+  .caso-indice a { min-height: 40px; padding: 0.3rem 0 0.3rem var(--e-2); border-bottom: 0; white-space: normal; position: relative; }
+  .caso-indice a::before { content: ""; position: absolute; left: -2px; top: 50%; width: 5px; height: 5px; border-radius: 50%; translate: 0 -50%; background: var(--acento-display); box-shadow: 0 0 0 3px color-mix(in oklab, var(--acento-display) 22%, transparent); scale: 0; transition: scale var(--d-etiqueta) var(--curva-entrada); }
+  .caso-indice a[aria-current="true"]::before { scale: 1; }
+  .caso-contenido, .caso-resultado, .caso-contenido--sigue, .caso-galeria { grid-column: 3 / -1; }
 }
+@supports (animation-timeline: scroll()) {
+  @media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+    .caso-indice ol::after { animation: lectura-riel linear both; animation-timeline: scroll(root); }
+  }
+}
+@keyframes lectura-riel { from { scale: 1 0; } to { scale: 1 1; } }
 
 /* ---------- Partes ---------- */
-.caso-parte { display: grid; gap: var(--e-2); padding-top: var(--e-3); border-top: 1px solid var(--filete); scroll-margin-top: calc(var(--nav-alto) + var(--e-3)); }
-.caso-parte__n { color: var(--texto-3); }
-.caso-parte__titulo { font-size: var(--t-caso); line-height: 1.1; letter-spacing: -0.02em; margin-bottom: var(--e-1); }
+/* Tres planos: el numeral fantasma de la parte (detrás, deriva más lento), el filete que se dibuja y el contenido. */
+.caso-parte { position: relative; display: grid; gap: var(--e-2); padding-top: var(--e-4); scroll-margin-top: calc(var(--nav-alto) + var(--e-3)); }
+.caso-parte::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 1px; background: linear-gradient(90deg, var(--filete-luz), color-mix(in oklab, var(--filete-luz) 30%, transparent) 60%, transparent); transform-origin: 0 50%; }
+html.mov .caso-parte::before { scale: 0 1; }
+html.mov .caso-parte.visto::before { scale: 1 1; transition: scale var(--d-filete) var(--curva-entrada); }
+.caso-parte[data-n]::after {
+  content: attr(data-n) / "";
+  position: absolute;
+  z-index: -1;
+  top: calc(var(--e-2) * -1);
+  right: -0.04em;
+  font-family: var(--playfair);
+  font-weight: 400;
+  font-size: clamp(8rem, 4rem + 14vw, 19rem);
+  line-height: 0.8;
+  letter-spacing: -0.05em;
+  font-variant-numeric: lining-nums;
+  color: var(--numeral-relleno);
+  -webkit-text-stroke: 1px var(--numeral-trazo);
+  pointer-events: none;
+}
+.caso-parte__n { font-family: var(--playfair); font-size: 1.5rem; font-weight: 400; letter-spacing: 0; line-height: 1; color: var(--acento-display); font-variant-numeric: lining-nums tabular-nums; }
+.caso-parte__titulo { font-size: var(--t-caso); line-height: 1.02; letter-spacing: -0.035em; margin-bottom: var(--e-2); max-width: 18ch; }
 .caso-parte p + p { margin-top: var(--e-1); }
-.caso-parte > p { max-width: 64ch; }
+.caso-parte > p { max-width: 62ch; font-size: 1.1875rem; line-height: 1.6; }
+.caso-reflexion { padding-top: var(--e-4); }
+.caso-reflexion > p { color: var(--texto); }
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .caso-parte[data-n]::after { animation: deriva-parte linear both; animation-timeline: view(); }
+  }
+}
+@keyframes deriva-parte { from { translate: 0 9vh; } to { translate: 0 -9vh; } }
 
-/* ---------- Qué hace ---------- */
-.capacidades { list-style: none; margin: var(--e-1) 0 0; padding: 0; display: grid; gap: var(--e-2); }
-.capacidad { display: grid; grid-template-columns: 2.75rem 1fr; gap: var(--e-2); align-items: start; padding: var(--e-3) var(--e-3) var(--e-3) var(--e-2); background: var(--papel); border: 1px solid var(--filete); border-radius: var(--radio); }
-.capacidad__icono { display: inline-grid; place-items: center; width: 2.75rem; height: 2.75rem; border-radius: var(--radio); background: var(--hundida); color: var(--acento-texto); }
+/* ---------- Qué hace: placas ---------- */
+.capacidades { list-style: none; margin: var(--e-2) 0 0; padding: 0; display: grid; gap: var(--calle); }
+.capacidad { display: grid; grid-template-columns: 2.75rem 1fr; gap: var(--e-2); align-items: start; padding: var(--e-3); }
+.capacidad__icono {
+  display: inline-grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 12px;
+  color: var(--acento-texto);
+  background: radial-gradient(circle at 50% 0%, color-mix(in oklab, var(--texto) 10%, transparent), transparent 70%), var(--hundida);
+  box-shadow: inset 0 1px 0 color-mix(in oklab, var(--texto) 14%, transparent), inset 0 0 0 1px color-mix(in oklab, var(--texto) 6%, transparent);
+}
 .capacidad__icono svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
-.capacidad__t { font-size: var(--t-cuerpo); font-weight: 600; line-height: 1.3; letter-spacing: -0.005em; margin-bottom: 0.2rem; }
+.capacidad__t { font-size: var(--t-cuerpo); font-weight: 600; line-height: 1.3; letter-spacing: -0.005em; margin-bottom: 0.25rem; }
 .capacidad p { font-size: var(--t-secundario); line-height: 1.5; color: var(--texto-2); }
 @media (min-width: 768px) { .capacidades { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (min-width: 1280px) { .capacidades { grid-template-columns: repeat(3, minmax(0, 1fr)); } .capacidades--4 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-
-.caso-pasos { margin: 0; padding: 0; list-style: none; display: grid; gap: var(--e-3); counter-reset: paso; }
-.caso-pasos li { display: grid; grid-template-columns: 2.75rem 1fr; gap: var(--e-2); align-items: baseline; }
-.caso-pasos li::before { counter-increment: paso; content: counter(paso, decimal-leading-zero); font-family: var(--playfair); font-size: 1.5rem; line-height: 1; color: var(--acento-display); font-variant-numeric: tabular-nums; }
-.caso-pasos strong { display: block; margin-bottom: 0.15rem; }
-
-.caso-decisiones { display: grid; gap: var(--e-3); }
-.caso-decision { position: relative; padding: var(--e-3); display: grid; gap: var(--e-3); }
-.caso-decision__n { font-size: 1.5rem; line-height: 1; color: var(--acento-display); }
-.caso-decision__vi p { font-size: var(--t-cuerpo); line-height: 1.5; }
-.caso-decision__descarte-bloque { display: grid; gap: 0.35rem; }
-.caso-decision__porque .etiqueta { color: var(--texto-2); margin-right: 0.35rem; }
-@media (min-width: 1024px) {
-  .caso-decision { grid-template-columns: 2.5rem 1fr 1.25fr 1fr; gap: var(--e-3) var(--e-4); padding: var(--e-4) var(--e-4) var(--e-4) var(--e-3); align-items: start; }
+/* al pasar por una, las demás bajan (como en la portada) */
+@media (hover: hover) and (pointer: fine) {
+  .capacidades:has(.capacidad:hover) .capacidad:not(:hover) { opacity: 0.62; }
 }
-.caso-decision__etiqueta { display: block; color: var(--texto-2); margin-bottom: 0.35rem; }
-.caso-decision__elegi { font-size: var(--t-h3); line-height: 1.2; letter-spacing: -0.01em; font-weight: 600; }
+
+/* ---------- Cómo lo construí: pasos unidos por una línea de luz ---------- */
+.caso-pasos { position: relative; margin: var(--e-1) 0 0; padding: 0; list-style: none; display: grid; gap: var(--e-4); counter-reset: paso; }
+.caso-pasos::before { content: ""; position: absolute; left: 1.375rem; top: 1.6rem; bottom: 0.6rem; width: 1px; background: linear-gradient(var(--filete-luz), color-mix(in oklab, var(--filete-luz) 25%, transparent)); transform-origin: 50% 0; }
+html.mov .caso-pasos::before { scale: 1 0; }
+html.mov .caso-pasos.visto::before { scale: 1 1; transition: scale 2200ms var(--curva-entrada) 200ms; }
+.caso-pasos li { position: relative; display: grid; grid-template-columns: 2.75rem 1fr; gap: var(--e-3); align-items: start; }
+.caso-pasos li::before {
+  counter-increment: paso;
+  content: counter(paso, decimal-leading-zero);
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  font-family: var(--playfair);
+  font-size: 1.0625rem;
+  line-height: 1;
+  color: var(--acento-display);
+  font-variant-numeric: lining-nums tabular-nums;
+  background: var(--fondo);
+  box-shadow: inset 0 0 0 1px var(--placa-borde), 0 0 0 6px var(--fondo), 0 0 24px -4px var(--halo);
+}
+.caso-pasos strong { display: block; font-size: var(--t-h3); line-height: 1.2; letter-spacing: -0.015em; margin-bottom: 0.35rem; }
+.caso-pasos p { color: var(--texto-2); }
+
+/* ---------- Decisiones ---------- */
+.caso-decisiones { display: grid; gap: var(--calle); margin-top: var(--e-1); }
+.caso-decision { position: relative; padding: var(--e-3); display: grid; gap: var(--e-3); }
+.caso-decision__n { font-size: 2.25rem; line-height: 1; color: var(--acento-display); }
+.caso-decision__vi p { font-size: var(--t-cuerpo); line-height: 1.5; }
+.caso-decision__descarte-bloque { display: grid; gap: 0.5rem; }
+.caso-decision__etiqueta { display: block; color: var(--texto-3); margin-bottom: 0.45rem; }
+.caso-decision__elegi { font-size: var(--t-h3); line-height: 1.22; letter-spacing: -0.012em; font-weight: 600; }
 .caso-decision__descarte { color: var(--texto-2); }
 .caso-decision__porque { font-size: var(--t-secundario); color: var(--texto-2); }
+.caso-decision__porque .etiqueta { color: var(--texto-2); margin-right: 0.35rem; }
+@media (min-width: 1024px) {
+  .caso-decision { grid-template-columns: 3rem 1fr 1.3fr 1fr; gap: var(--e-3) var(--e-4); padding: var(--e-4) var(--e-4) var(--e-4) var(--e-3); align-items: start; }
+  /* el «decidí» es el centro de la placa: un filete de luz lo separa de lo que vio y de lo que descartó */
+  .caso-decision__elegi-bloque { position: relative; }
+  .caso-decision__elegi-bloque::before, .caso-decision__elegi-bloque::after { content: ""; position: absolute; top: 0; bottom: 0; width: 1px; background: linear-gradient(transparent, var(--filete) 20%, var(--filete) 80%, transparent); }
+  .caso-decision__elegi-bloque::before { left: calc(var(--e-4) / -2); }
+  .caso-decision__elegi-bloque::after { right: calc(var(--e-4) / -2); }
+}
 
-/* Resultado verificable: bloque tinta */
-.caso-resultado { padding: var(--e-4) var(--e-3); border-radius: var(--radio); display: grid; gap: var(--e-3); scroll-margin-top: calc(var(--nav-alto) + var(--e-3)); position: relative; overflow: hidden; }
-.caso-resultado::before { content: ""; position: absolute; inset: 0; pointer-events: none; background-image: url("../assets/grano-512.webp"); background-size: 512px 512px; opacity: 0.05; mix-blend-mode: screen; }
-.caso-resultado > * { position: relative; }
-.caso-resultado__frase { font-size: clamp(1.75rem, 1.2rem + 2.2vw, 3.4rem); line-height: 1.08; letter-spacing: -0.025em; max-width: 24ch; }
-.caso-resultado__apoyo { color: var(--texto-2); max-width: 56ch; }
-@media (min-width: 1024px) { .caso-resultado { padding: var(--e-4); } }
-.caso-reflexion { border-top: 0; padding-top: 0; }
+/* ---------- Resultado: banda tinta (oscura en los dos temas) ---------- */
+.caso-resultado {
+  position: relative;
+  overflow: clip;
+  display: grid;
+  gap: var(--e-3);
+  padding: var(--e-4) var(--e-3);
+  border-radius: var(--radio-bloque);
+  scroll-margin-top: calc(var(--nav-alto) + var(--e-3));
+  box-shadow: var(--placa-sombra), inset 0 1px 0 oklch(100% 0 0 / 0.12), inset 0 0 0 1px oklch(100% 0 0 / 0.06);
+}
+/* haz de luz diagonal y grano: la banda es materia, no un rectángulo plano */
+.caso-resultado::before {
+  content: "";
+  position: absolute;
+  inset: -20% -10%;
+  pointer-events: none;
+  background: linear-gradient(112deg, transparent 38%, oklch(100% 0.01 85 / 0.035) 46%, oklch(100% 0.01 85 / 0.075) 50%, oklch(100% 0.01 85 / 0.02) 55%, transparent 62%);
+}
+.caso-resultado::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: url("../assets/grano-512.webp") 0 0 / 256px 256px; opacity: 0.06; mix-blend-mode: screen; }
+.caso-resultado > * { position: relative; z-index: 1; }
+.caso-resultado > h2 { color: var(--acento-texto); display: flex; align-items: center; gap: var(--e-2); }
+.caso-resultado > h2::after { content: ""; flex: 1; height: 1px; max-width: 12rem; background: linear-gradient(90deg, var(--acento-display), transparent); transform-origin: 0 50%; }
+html.mov .caso-resultado > h2::after { scale: 0 1; }
+html.mov .caso-resultado.visto > h2::after { scale: 1 1; transition: scale var(--d-filete) var(--curva-entrada) 300ms; }
+.caso-resultado__frase { font-size: clamp(1.9rem, 1.1rem + 2.8vw, 3.75rem); line-height: 1.04; letter-spacing: -0.03em; font-weight: 600; max-width: 22ch; }
+.caso-resultado__apoyo { color: var(--texto-2); max-width: 58ch; }
+@media (min-width: 1024px) { .caso-resultado { padding: var(--e-5) var(--e-4); } }
 
 /* ---------- Galería ---------- */
 .caso-galeria { display: grid; gap: var(--e-3); }
 .caso-galeria__aviso { color: var(--texto-3); }
-.caso-galeria__items { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: var(--e-3) var(--calle); }
-.caso-galeria__item { grid-column: 1 / -1; margin: 0; display: grid; gap: var(--e-2); align-content: start; }
-.caso-galeria__media { background: var(--hundida); border-radius: var(--radio); overflow: hidden; box-shadow: var(--sombra-papel); border: 1px solid var(--filete); }
+.caso-galeria__items { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: var(--e-4) var(--calle); }
+.caso-galeria__item { grid-column: 1 / -1; margin: 0; display: grid; gap: var(--e-3); align-content: start; }
+.caso-galeria__media { overflow: clip; color-scheme: dark; background: #000; transition: translate 520ms var(--curva-entrada), box-shadow 520ms var(--curva-entrada); }
 .caso-galeria__media img { width: 100%; height: auto; }
+.caso-galeria__media.placa::after { z-index: 3; }
+/* sombra corta: la leyenda va justo debajo y no puede quedar en la penumbra de la foto (contraste medido en claro) */
+.caso-galeria__media.placa { box-shadow: 0 1px 1px var(--sombra-contacto), 0 16px 26px -22px var(--sombra-ambiente); }
+@media (hover: hover) and (pointer: fine) { .caso-galeria__item:hover .caso-galeria__media.placa { box-shadow: 0 2px 2px var(--sombra-contacto), 0 22px 34px -26px var(--sombra-ambiente); } }
+@media (hover: hover) and (pointer: fine) { .caso-galeria__item:hover .caso-galeria__media { translate: 0 -3px; box-shadow: var(--placa-sombra-alta); } }
 .caso-galeria__items--telefono .caso-galeria__media { aspect-ratio: 2 / 3; }
 .caso-galeria__items--telefono .caso-galeria__media picture { height: 100%; }
 .caso-galeria__items--telefono .caso-galeria__media img { height: 100%; object-fit: cover; object-position: 50% 0; }
-.caso-galeria__item figcaption { font-size: var(--t-secundario); color: var(--texto-2); }
+.caso-galeria__item figcaption { font-size: var(--t-secundario); color: var(--texto-2); max-width: 52ch; }
 @media (min-width: 768px) {
   .caso-galeria__item--7 { grid-column: span 7; }
   .caso-galeria__item--5 { grid-column: span 5; }
@@ -150,53 +408,250 @@
   .caso-galeria__item--4 { grid-column: span 4; }
   .caso-galeria__item--8 { grid-column: span 8; }
   .caso-galeria__item--12 { grid-column: 1 / -1; }
+  /* las piezas de la derecha bajan un poco: ritmo de pared de galería, no grilla pareja */
+  .caso-galeria__item--5, .caso-galeria__item--4:nth-child(3n + 2) { margin-top: var(--e-4); }
 }
-@media (max-width: 767px) {
-  .caso-galeria__item--4 { grid-column: span 6; }
+@media (max-width: 767px) { .caso-galeria__items--telefono .caso-galeria__item--4 { grid-column: span 6; } }
+/* teléfono (Fortal): siete capturas verticales; desde 1024 van de a cuatro (4 + 3), con las pares un poco más abajo */
+@media (min-width: 1024px) {
+  .caso-galeria__items--telefono .caso-galeria__item--4 { grid-column: span 3; margin-top: 0; }
+  .caso-galeria__items--telefono .caso-galeria__item--4:nth-child(even) { margin-top: var(--e-4); }
 }
 
-/* ---------- Anterior / siguiente ---------- */
-.caso-nav { margin-top: var(--e-seccion); row-gap: var(--e-3); }
-.caso-nav__fila { grid-column: 1 / -1; margin: 0; display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--e-1) var(--e-2); padding-top: var(--e-2); border-top: 1px solid var(--filete); color: var(--texto-3); }
-.caso-nav__item { white-space: nowrap; }
-.caso-siguiente {
-  grid-column: 1 / -1;
-  position: relative;
-  display: grid;
-  gap: var(--e-2);
-  padding: var(--e-4) var(--e-3) 0;
-  min-height: 300px;
-  overflow: hidden;
-  text-decoration: none;
-  transition: transform 220ms var(--curva-entrada), box-shadow 220ms var(--curva-entrada);
-}
-.caso-siguiente:hover { transform: translateY(-2px); box-shadow: var(--sombra-flotante); }
-.caso-siguiente__texto { display: grid; gap: var(--e-2); align-content: start; max-width: 40ch; padding-bottom: 200px; }
-.caso-siguiente__etiqueta { color: var(--acento-texto); }
-.caso-siguiente__nombre { font-size: var(--t-seccion); line-height: 1.02; letter-spacing: -0.025em; }
-.caso-siguiente__frase { color: var(--texto-2); }
-.caso-siguiente__marco {
-  position: absolute;
-  right: -6%;
-  bottom: -22%;
-  width: min(78%, 560px);
-  translate: 0 48px;
-  rotate: -1.5deg;
-  filter: drop-shadow(0 18px 24px var(--sombra-tinte));
-  transition: translate 1.2s var(--curva-entrada), rotate 1.2s var(--curva-entrada);
-}
-.caso-siguiente__marco img { width: 100%; height: auto; }
-.caso-siguiente.visto .caso-siguiente__marco, .quieto .caso-siguiente__marco, .ir .caso-siguiente__marco { translate: 0 0; rotate: 0deg; }
-.caso-siguiente:hover .caso-siguiente__marco { translate: 0 -8px; }
+/* ---------- Cierre del caso: contacto ---------- */
+/* El que llegó al final de un caso es el lector más interesado: el contacto está a mano, sin volver a la barra. */
+.caso-contacto { position: relative; margin-top: var(--e-seccion); padding: var(--e-4) var(--e-3); display: grid; gap: var(--e-4); align-items: end; overflow: clip; }
+.caso-contacto::before { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 70% 120% at 100% 0%, color-mix(in oklab, var(--texto) 7%, transparent), transparent 60%); }
+.caso-contacto > * { position: relative; }
+.caso-contacto__texto { display: grid; gap: var(--e-2); justify-items: start; }
+.caso-contacto__etiqueta { color: var(--acento-texto); }
+.caso-contacto__titulo { font-size: var(--t-caso); line-height: 1.02; letter-spacing: -0.035em; max-width: 16ch; }
+.caso-contacto__sub { font-family: var(--playfair); font-style: italic; font-size: var(--t-sub-heroe); line-height: 1.35; color: var(--texto-2); }
+.caso-contacto__acciones { display: flex; flex-wrap: wrap; gap: var(--e-2); }
+.caso-contacto__acciones .boton { max-width: 100%; white-space: normal; text-align: center; }
+@media (max-width: 599px) { .caso-contacto__acciones .boton { flex: 1 1 100%; } }
 @media (min-width: 1024px) {
-  .caso-nav__fila { grid-column: 5 / -1; }
-  .caso-siguiente { grid-column: 5 / -1; grid-template-columns: 1fr 1fr; min-height: 360px; padding: var(--e-4) var(--e-4) 0; }
-  .caso-siguiente__texto { padding-bottom: var(--e-4); }
-  .caso-siguiente__marco { right: -4%; bottom: -26%; width: 56%; }
+  .caso-contacto { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); padding: var(--e-5) var(--e-5); column-gap: var(--e-5); }
+  .caso-contacto__acciones { flex-direction: column; align-items: stretch; }
 }
+
+/* ---------- Otros casos: el siguiente es una puerta; el anterior, un enlace chico ---------- */
+.caso-nav { margin-top: var(--e-seccion); display: grid; gap: var(--e-3); }
+.caso-nav__folio { margin-bottom: 0; }
+.caso-nav__pares { display: grid; gap: var(--e-4); }
+.caso-par { display: grid; text-decoration: none; overflow: clip; color: var(--texto); }
+.caso-par__media { position: relative; display: block; aspect-ratio: 16 / 10; overflow: clip; background: #000; color-scheme: dark; border-radius: var(--radio-bloque) var(--radio-bloque) 0 0; view-transition-class: caso; }
+.caso-par__media .caso__capa { object-position: 62% 50%; }
+.caso-par__texto { display: grid; gap: var(--e-2); justify-items: start; padding: var(--e-3); }
+.caso-par__etiqueta { color: var(--acento-texto); }
+.caso-par__nombre { font-size: var(--t-caso); font-weight: 600; line-height: 1; letter-spacing: -0.04em; }
+.caso-par__frase { color: var(--texto-2); font-size: var(--t-secundario); line-height: 1.5; max-width: 44ch; }
+@media (hover: hover) and (pointer: fine) {
+  .caso-par:hover .caso__capa, .puerta:hover .caso__capa { --px: 0.9; --py: -0.6; }
+  .caso-par:hover .caso__luz { animation: barrido-pasa 900ms var(--curva-entrada) 1; }
+}
+.caso-par:focus-visible { outline-offset: 6px; border-radius: var(--radio-bloque); }
+.caso-nav__todos { margin: var(--e-2) 0 0; max-width: none; display: flex; justify-content: center; }
+
+/* La puerta: la foto del caso siguiente a todo el ancho de la pantalla, sala negra en los dos temas, con el nombre
+   grande encima del lado oscuro. Al pasar, las capas siguen al puntero (pagina.js), la luz la cruza y la foto se
+   acerca un poco: es por dónde se sigue. Al tocarla, la foto vuela a la cabecera del caso (transición con nombre). */
+.caso-puerta {
+  --sangria: max(var(--margen), (100vw - var(--ancho-max)) / 2);
+  position: relative;
+  isolation: isolate;
+  grid-template-areas: "media" "texto";
+  margin-inline: calc(-1 * var(--sangria));
+  color-scheme: dark;
+  color: var(--texto);
+  background: var(--mascara-foto); /* negro en claro (banda), transparente en oscuro: la foto se funde con la página */
+}
+.caso-puerta .caso-par__media { grid-area: media; }
+.caso-puerta .caso-par__texto { grid-area: texto; }
+/* en celular la foto va arriba y el texto debajo (encima de la foto tapaba el teléfono); desde 768 el texto va sobre
+   el lado en sombra de la foto */
+@media (min-width: 768px) {
+  .caso-puerta { grid-template-areas: "puerta"; min-height: clamp(420px, 62svh, 680px); }
+  .caso-puerta > .caso-par__media, .caso-puerta > .caso-par__texto { grid-area: puerta; }
+}
+.caso-puerta .caso-par__media {
+  aspect-ratio: 4 / 3;
+  border-radius: 0;
+  transition: scale 1200ms var(--curva-entrada);
+  -webkit-mask-image: linear-gradient(180deg, var(--mascara-foto), #000 18%, #000 80%, var(--mascara-foto));
+  mask-image: linear-gradient(180deg, var(--mascara-foto), #000 18%, #000 80%, var(--mascara-foto));
+}
+.caso-puerta .caso-par__media .caso__capa { object-position: 70% 50%; }
+.caso-puerta .caso-par__media .caso__capa--fondo { --escala: 1.14; transform: translate3d(calc(var(--px, 0) * -22px), calc(var(--py, 0) * -12px), 0); }
+.caso-puerta .caso-par__media .caso__capa--disp { --escala: 1.08; transform: translate3d(calc(var(--px, 0) * 18px), calc(var(--py, 0) * 10px), 0); }
+/* el lado del texto queda en sombra (en los dos temas): así el nombre se lee sobre negro y no sobre el portal */
+.caso-puerta .caso-par__media::after { content: none; }
+@media (min-width: 768px) { .caso-puerta .caso-par__media { aspect-ratio: auto; } .caso-puerta .caso-par__media::after { content: ""; position: absolute; inset: 0; z-index: 3; pointer-events: none; background: linear-gradient(90deg, #000 0%, oklch(0% 0 0 / 0.82) 26%, oklch(0% 0 0 / 0.25) 52%, transparent 66%); } }
+.caso-puerta .caso-par__texto {
+  position: relative;
+  z-index: 4;
+  align-self: center;
+  align-content: center;
+  gap: var(--e-2);
+  padding: var(--e-2) var(--sangria) var(--e-4);
+  max-width: calc(var(--sangria) + 40rem);
+}
+@media (min-width: 768px) { .caso-puerta .caso-par__texto { padding: var(--e-5) var(--sangria); } }
+.caso-puerta .caso-par__nombre { font-size: clamp(3.25rem, 1rem + 7.4vw, 8.75rem); line-height: 0.92; letter-spacing: -0.05em; }
+.caso-puerta .caso-par__frase { font-size: var(--t-cuerpo); max-width: 34ch; color: var(--texto-2); }
+.caso-puerta .caso-par__etiqueta { display: inline-flex; align-items: center; gap: 0.6rem; }
+.caso-puerta:focus-visible { outline-offset: -8px; border-radius: 0; }
+/* en claro la puerta es una banda oscura entre el papel: cantos de luz arriba y abajo en vez del fundido */
+:root[data-theme="light"] .caso-puerta { box-shadow: inset 0 1px 0 oklch(100% 0 0 / 0.1), inset 0 -1px 0 oklch(100% 0 0 / 0.06); }
+@media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) .caso-puerta { box-shadow: inset 0 1px 0 oklch(100% 0 0 / 0.1), inset 0 -1px 0 oklch(100% 0 0 / 0.06); } }
+@media (hover: hover) and (pointer: fine) {
+  .caso-puerta:hover .caso__capa { --px: inherit; --py: inherit; }
+  .caso-puerta:hover .caso-par__media { scale: 1.015; }
+  .caso-puerta:hover .caso-par__nombre { translate: 0.04em 0; }
+}
+.caso-puerta .caso-par__nombre { transition: translate 900ms var(--curva-entrada); }
+@media (min-width: 768px) {
+  /* el anterior: una fila chica con la foto en miniatura */
+  .caso-par--anterior { grid-template-columns: 240px minmax(0, 1fr); align-items: center; max-width: 44rem; }
+  .caso-par--anterior .caso-par__media { border-radius: var(--radio-bloque) 0 0 var(--radio-bloque); height: 100%; aspect-ratio: auto; min-height: 150px; }
+  .caso-par--anterior .caso-par__texto { padding: var(--e-2) var(--e-3); gap: 0.4rem; }
+  .caso-par--anterior .caso-par__nombre { font-size: clamp(1.75rem, 1.2rem + 1.4vw, 2.5rem); }
+  /* debajo de la puerta, en una fila: el anterior a la izquierda y «Todos los casos» a la derecha */
+  .caso-nav__pares:has(> .caso-puerta) { grid-template-columns: minmax(0, 44rem) minmax(0, 1fr); align-items: center; }
+  .caso-nav__pares > .caso-puerta { grid-column: 1 / -1; }
+  .caso-nav__pares > .caso-nav__todos { margin: 0; justify-content: flex-end; }
+}
+
+/* ---------- Seguridad (comparte la estructura de los casos; su esquema es SVG, no foto) ---------- */
+.caso-cabecera__titulo--largo { font-size: clamp(2.75rem, 1.4rem + 4.6vw, 6.25rem); line-height: 0.96; letter-spacing: -0.04em; }
+.caso-nav__pares--uno { grid-template-columns: 1fr !important; }
+.caso-cabecera__in:has(.caso-cabecera__media--esquema) .caso-resumen { margin-top: 0; translate: none; }
+@media (min-width: 1024px) { .caso-cabecera__in:has(.caso-cabecera__media--esquema) .caso-cabecera__media { grid-row: 2; align-self: center; } }
+@media (min-width: 768px) { .caso-nav__pares--uno .caso-par { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); } .caso-nav__pares--uno .caso-par__media { border-radius: var(--radio-bloque) 0 0 var(--radio-bloque); } .caso-nav__pares--uno .caso-par__texto { align-content: center; padding: var(--e-4); } }
+.caso-cabecera__media--esquema { aspect-ratio: auto; background: transparent; color-scheme: inherit; margin-inline: 0; overflow: visible; -webkit-mask-image: none; mask-image: none; box-shadow: none !important; }
+.caso-cabecera__media--esquema::after { content: none; }
+.caso-cabecera__media--esquema .seg-heroe { border-radius: var(--radio-bloque); overflow: clip; }
+@media (min-width: 1024px) {
+  .caso-cabecera__media--esquema { margin: 0; border-radius: var(--radio-bloque) !important; box-shadow: none; align-self: start; grid-column: 6 / -1; min-height: 0; }
+}
+
+/* ---------- Documentos: legal y créditos ---------- */
+.pagina-doc .contenido { grid-column: 1 / -1; }
+.doc { display: grid; gap: var(--e-3); }
+.doc__folio { margin-bottom: 0; }
+.doc__titulo { margin-bottom: var(--e-1); }
+.doc.placa { padding: var(--e-4) var(--e-3); }
+.doc.placa > p { max-width: 62ch; }
+.doc.placa > p + p { padding-top: var(--e-3); border-top: 1px solid var(--filete); }
+.doc > p.secundario { font-family: var(--playfair); font-style: italic; font-size: var(--t-sub-heroe); line-height: 1.35; color: var(--texto-2); }
+@media (min-width: 1024px) {
+  .pagina-doc .contenido { grid-column: 2 / 11; }
+  .doc.placa { padding: var(--e-5) var(--e-5) var(--e-4); }
+}
+.lista-creditos { display: grid; gap: var(--calle); margin-top: var(--e-2); align-items: start; }
+.lista-creditos li { padding: var(--e-3); border-bottom: 0; display: grid; gap: var(--e-1); align-content: start; }
+.lista-creditos h2 { font-size: var(--t-h3); line-height: 1.2; letter-spacing: -0.015em; margin-bottom: 0; }
+.lista-creditos p { font-size: var(--t-secundario); line-height: 1.55; color: var(--texto-2); }
+.lista-creditos__enlaces { display: flex; flex-wrap: wrap; gap: 0 var(--e-3); }
+.lista-creditos__enlaces a, .lista-creditos .pie__enlaces a { display: inline-flex; align-items: center; min-height: 44px; color: var(--texto); text-decoration-color: var(--borde); }
+.lista-creditos__enlaces a:hover { text-decoration-color: var(--acento-texto); }
+@media (min-width: 768px) { .lista-creditos { grid-template-columns: repeat(2, minmax(0, 1fr)); } .lista-creditos li:last-child:nth-child(odd) { grid-column: 1 / -1; } }
+
+/* ---------- 404: en la sala negra ---------- */
+/* La foto final de la sala (el póster de la portada) llena la primera pantalla, apagada: los productos se ven a lo
+   lejos, en penumbra. El texto va a la izquierda, sobre el piso oscuro. Oscura también en tema claro. */
+.pagina-404 { position: relative; padding-top: 0; }
+.sala404 { position: absolute; inset: 0 0 auto 0; height: min(100svh, 1100px); overflow: clip; z-index: 0; background: #000; -webkit-mask-image: linear-gradient(#000 62%, transparent); mask-image: linear-gradient(#000 62%, transparent); }
+.sala404 img { width: 100%; height: 100%; max-width: none; object-fit: cover; object-position: 66% 50%; filter: brightness(0.5) saturate(0.85); animation: sala404 2400ms var(--curva-entrada) both; }
+.sala404::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, #000 0%, oklch(0% 0 0 / 0.7) 34%, transparent 64%); }
+@keyframes sala404 { from { opacity: 0; scale: 1.06; } }
+.pagina-404__in { position: relative; z-index: 1; row-gap: var(--e-5); }
+.pagina-404__texto {
+  color-scheme: dark;
+  color: var(--texto);
+  min-height: min(74svh, 760px);
+  padding-top: calc(var(--nav-alto) + var(--e-5));
+  padding-bottom: var(--e-5);
+  display: grid;
+  align-content: center;
+  justify-items: start;
+  gap: var(--e-3);
+}
+.pagina-404__texto .folio { margin-bottom: 0; width: min(100%, 22rem); }
+.pagina-404__texto .folio__cifra { font-size: clamp(3rem, 2rem + 4vw, 5.5rem); letter-spacing: -0.03em; }
+.pagina-404__texto h1 { max-width: 11ch; }
+.pagina-404__linea { font-family: var(--playfair); font-style: italic; font-size: var(--t-sub-heroe); line-height: 1.35; color: var(--texto-2); }
+.pagina-404__acciones { display: flex; flex-wrap: wrap; gap: var(--e-2); margin-top: var(--e-1); }
+.puertas { grid-column: 1 / -1; display: grid; gap: var(--calle); grid-template-columns: repeat(2, minmax(0, 1fr)); padding-bottom: var(--e-4); }
+.puerta { display: grid; gap: var(--e-1); padding: 0 0 var(--e-2); text-decoration: none; overflow: clip; justify-items: start; }
+.puerta__media { position: relative; display: block; width: 100%; aspect-ratio: 16 / 10; overflow: clip; background: #000; color-scheme: dark; border-radius: var(--radio-placa) var(--radio-placa) 0 0; }
+.puerta__media .caso__capa { object-position: 62% 50%; }
+.puerta__nombre { padding-inline: var(--e-2); font-size: 1.375rem; font-weight: 600; letter-spacing: -0.02em; line-height: 1.2; }
+.puerta .sello { margin-inline: var(--e-2); white-space: normal; align-items: baseline; }
+@media (hover: hover) and (pointer: fine) { .puerta:hover .caso__luz { animation: barrido-pasa 900ms var(--curva-entrada) 1; } }
+@media (min-width: 1024px) {
+  .pagina-404__texto { grid-column: 1 / 7; }
+  .puertas { grid-template-columns: repeat(4, minmax(0, 1fr)); margin-top: calc(-1 * var(--e-5)); }
+}
+@media (max-width: 599px) { .pagina-404__acciones .boton { flex: 1 1 100%; } }
+
+/* ---------- Movimiento reducido y colores forzados ---------- */
 @media (prefers-reduced-motion: reduce) {
-  .caso-siguiente__marco { translate: 0 0; rotate: 0deg; transition: none; }
+  .caso-cabecera__media .caso__capa, .caso-par .caso__capa, .puerta .caso__capa, .sala404 img { animation: none !important; transition: none; }
+  .caso__brillo { display: none; }
+  .caso-puerta .caso-par__media, .caso-puerta .caso-par__nombre { transition: none; }
+  .caso-parte::before, .caso-pasos::before, .caso-resultado > h2::after { scale: none !important; }
 }
+.quieto .caso__brillo { display: none; }
+.quieto .caso-parte::before, .quieto .caso-pasos::before, .quieto .caso-resultado > h2::after { scale: none !important; }
 @media (forced-colors: active) {
-  .caso-decision, .caso-resultado, .capacidad, .caso-galeria__media, .caso-siguiente { border: 1px solid CanvasText; box-shadow: none; }
+  .caso-decision, .caso-resultado, .capacidad, .caso-galeria__media, .caso-par, .caso-resumen, .caso-ficha, .doc, .lista-creditos li, .puerta, .caso-contacto { border: 1px solid CanvasText; box-shadow: none; }
+  .caso__brillo, .caso-puerta .caso-par__media::after { display: none; }
+  .caso-parte[data-n]::after, body:has(> canvas.mundo)::before { display: none; }
+}
+
+/* ---------- Impresión de un caso ---------- */
+/* Base en base.css (blanco, sin lienzo ni barra, enlaces con su dirección). Acá: el caso en una columna, la foto de la
+   cabecera chica y sin máscara, sin índice ni puertas ni numerales fantasma, banda de resultado como recuadro. */
+@media print {
+  .caso-pagina { padding-top: 0; }
+  .caso-pagina::before, .caso-parte[data-n]::after, .caso-parte__n, .caso-indice, .caso-nav, .caso__brillo,
+  body:has(> canvas.mundo)::before, .caso-resultado::before, .caso-resultado::after, .caso-contacto::before { display: none !important; }
+  .caso-cabecera { padding-bottom: 4mm; }
+  .caso-cabecera__in { display: block; }
+  .caso-cabecera__titulo { font-size: 30pt; margin-bottom: 2mm; }
+  .caso-cabecera__linea { font-size: 13pt; max-width: none; }
+  .caso-cabecera__media { width: 110mm; min-height: 0 !important; aspect-ratio: 16 / 10 !important; margin: 4mm 0 !important; -webkit-mask-image: none !important; mask-image: none !important; border-radius: 2mm !important; break-inside: avoid; }
+  .caso-cabecera__media .caso__capa { scale: 1 !important; transform: none !important; translate: none !important; }
+  .caso-resumen { display: block !important; margin: 0 !important; translate: none !important; padding: 3mm 4mm !important; }
+  .caso-resumen > div { display: grid !important; grid-template-columns: 30mm 1fr !important; padding-block: 1.5mm !important; }
+  .caso-resumen > div + div::before { display: none; }
+  .caso-ficha { display: block; margin: 4mm 0; padding: 3mm 4mm; }
+  .caso-ficha__item { padding-block: 1mm; }
+  .caso-cuerpo, .caso-contenido { display: block !important; }
+  .caso-parte { padding-top: 6mm; display: block; }
+  .caso-parte::before { scale: 1 1 !important; }
+  .caso-parte__titulo { font-size: 18pt; margin-bottom: 2mm; }
+  .caso-parte > p { font-size: 11pt; max-width: none; }
+  .capacidades { display: grid !important; grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 2mm !important; }
+  .capacidad { display: block !important; padding: 2mm 3mm; break-inside: avoid; }
+  .capacidad__icono { display: none; }
+  .capacidad, .caso-decision, .caso-pasos li, .caso-resultado { break-inside: avoid; }
+  .caso-decision { display: block; padding: 3mm 4mm; margin-bottom: 2mm; }
+  .caso-decision > * + * { margin-top: 2mm; }
+  .caso-decision__elegi-bloque::before, .caso-decision__elegi-bloque::after { display: none; }
+  .caso-pasos::before { display: none; }
+  .caso-pasos li::before { box-shadow: inset 0 0 0 1px #888 !important; background: #fff; }
+  .caso-resultado { color: #000 !important; background: none !important; border: 1px solid #888; padding: 4mm !important; margin-top: 6mm; }
+  .caso-resultado > h2::after { display: none; }
+  .caso-resultado__frase { font-size: 18pt; }
+  .caso-galeria__items { display: grid !important; grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 3mm !important; }
+  .caso-galeria__item { grid-column: auto !important; margin: 0 !important; }
+  .caso-galeria__items--telefono { grid-template-columns: repeat(4, minmax(0, 1fr)) !important; }
+  .caso-galeria__media { background: none !important; }
+  .caso-galeria__item--4 { max-width: 60mm; }
+  .caso-contacto { display: block; margin-top: 8mm; padding: 4mm; break-inside: avoid; }
+  .caso-contacto__titulo { font-size: 18pt; }
+  .caso-contacto__acciones { display: block; margin-top: 3mm; }
+  .caso-contacto__acciones .boton { display: block; margin: 1.5mm 0; text-align: left; }
 }

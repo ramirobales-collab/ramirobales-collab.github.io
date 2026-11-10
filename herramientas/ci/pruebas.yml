@@ -1,0 +1,49 @@
+# Integración continua del sitio. Está acá y no en .github/workflows/ porque el acceso con que se
+# preparó no puede subir flujos de trabajo. Para activarla (lo hace el dueño, una vez):
+#   mkdir -p .github/workflows && cp herramientas/ci/pruebas.yml .github/workflows/pruebas.yml
+#   cp herramientas/ci/dependabot.yml .github/dependabot.yml
+#   git add .github && git commit -m "CI: pruebas del sitio" && git push
+# Las acciones van fijadas por el SHA completo del commit (una etiqueta como @v4 se puede mover y correría
+# código ajeno); dependabot.yml las mantiene al día con un pull request por mes.
+# Corre en cada push y pull request: la política de contenido (Python y Node, por separado) y todas las
+# pruebas, incluida la de humo en Chrome sin ventana. Sin dependencias: nada de npm install.
+name: pruebas
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 6 1 * *" # una vez por mes: avisa si security.txt está por vencer
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pruebas-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  pruebas:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30 # medido en local con SwiftShader y CI=1 (10/11/2026): humo 5,3 min + vitales 1,2 min
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          fetch-depth: 0 # historial completo: la prueba de secretos revisa todos los commits
+          persist-credentials: false
+
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0 (Node 22: WebSocket nativo para el CDP)
+        with:
+          node-version: "22"
+
+      - name: Política de contenido al día (Python)
+        run: python3 herramientas/proteccion.py --comprobar
+
+      - name: Pruebas (estáticas + humo en el navegador)
+        env:
+          CI: "1"
+        run: |
+          export NAVEGADOR="$(command -v google-chrome || command -v chromium || command -v chromium-browser)"
+          echo "navegador: $NAVEGADOR"
+          node pruebas/correr.mjs

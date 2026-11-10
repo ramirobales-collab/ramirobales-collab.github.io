@@ -381,7 +381,7 @@
     ],
     "medicion_cifra": "126",
     "medicion_t": "pruebas de seguridad en verde",
-    "medicion_p": "4 omitidas, en 58 s, sobre cuatro suites: servidor local, cuentas, panel y publicación. Las corrí el 4/11/2026 para escribir este caso; son parte de las más de 6.000 pruebas de la app."
+    "medicion_p": "4 omitidas, en 58 s, sobre cuatro suites: servidor local, cuentas, panel y publicación. Las corrí el 4/11/2026 para escribir este caso; son parte de las más de 5.500 pruebas de la app."
   },
   "resultado": {
     "titulo": "Resultado",
@@ -449,7 +449,7 @@
   },
   "demos": {
     "titulo": "Mini revisión de las demos del portfolio",
-    "intro": "Apliqué la misma lista, en chico, a las dos demos para marcas de este sitio: el configurador 3D y el asistente de catálogo. Revisé la versión del 4/11/2026.",
+    "intro": "Apliqué la misma lista, en chico, a las dos demos para marcas de este sitio: el configurador 3D y el asistente de catálogo. Revisé la versión del 4/11/2026; el 10/11/2026 la política quedó aplicada en todo el sitio.",
     "items": [
       {
         "icono": "capas",
@@ -459,7 +459,7 @@
       {
         "icono": "enlace",
         "t": "Sin scripts de terceros",
-        "p": "three.js y las fuentes se sirven desde el propio sitio. Afuera sólo hay enlaces a las fuentes de las cifras, con rel=\"noopener\"."
+        "p": "three.js y las fuentes se sirven desde el propio sitio. Afuera sólo hay enlaces a las fuentes de las cifras, con rel=\"noopener noreferrer\", y ninguna página envía la dirección de origen (referrer «no-referrer»)."
       },
       {
         "icono": "texto",
@@ -474,7 +474,7 @@
       {
         "icono": "lupa",
         "t": "Hallazgo",
-        "p": "El configurador asigna el color de cada muestra con un atributo style, que una CSP estricta bloquearía. Arreglo: asignarlo con style.setProperty."
+        "p": "El configurador asignaba el color de cada muestra con un atributo style, que una política estricta bloquea. Arreglado: ahora lo asigna con style.setProperty, y ninguna página del sitio usa atributos style ni manejadores de eventos en línea."
       },
       {
         "icono": "nube",
@@ -482,9 +482,9 @@
         "p": "El sitio se publica en GitHub Pages, que no deja enviar cabeceras propias: la CSP va en una etiqueta meta, donde frame-ancestors no funciona. Riesgo bajo: una demo sin datos no tiene nada que robar dentro de un iframe."
       }
     ],
-    "csp_t": "CSP sugerida para las demos",
-    "csp": "default-src 'self';\n/* sha256: tema e importmap */\nscript-src 'self' 'sha256-…';\nstyle-src 'self';\nimg-src 'self' data: blob:;\nconnect-src 'self' blob:;\nfont-src 'self';\nobject-src 'none';\nbase-uri 'self';\nform-action 'none'",
-    "csp_p": "Esta página ya aplica la suya: CSP en una meta con las huellas SHA-256 de sus dos scripts y de su estilo en línea, sin scripts de terceros, y probada sin errores de consola."
+    "csp_t": "Política aplicada en el configurador",
+    "csp": "default-src 'none';\nscript-src 'self' 'sha256-…' 'sha256-…';\nstyle-src 'self';\nimg-src 'self' data: blob:;\nfont-src 'self';\nconnect-src 'self' blob:;\nmedia-src 'self';\nmanifest-src 'self';\nobject-src 'none';\nbase-uri 'none';\nform-action 'none'",
+    "csp_p": "Todas las páginas del sitio aplican la suya: una meta con las huellas SHA-256 de cada script y estilo en línea, que recalcula un guion del repositorio. Una prueba automática falla si una huella no coincide y recorre cada página en el navegador buscando violaciones de la política y errores de consola. Para reportar un problema: /.well-known/security.txt."
   },
   "metodo": {
     "titulo": "Cómo lo hice con agentes de IA",

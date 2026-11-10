@@ -61,6 +61,7 @@ precision highp sampler2D;
 const FS_DATOS = CABEZA + `
 uniform sampler2D u_p, u_n;
 uniform vec3 u_cl;   // cerca, lejos, z de la capa
+uniform float u_rel; // 1 = guardar la profundidad relativa al z de la capa (media precisión: pasos de 0,2 mm en vez de 2,6)
 uniform float u_hayN;
 out vec4 o;
 ivec2 tam;
@@ -97,7 +98,7 @@ void main(){
     /* el pase de normales trae el relieve del material (motas del piso): sin apoyo en la profundidad, el quiebre pesa poco */
     borde = max(borde, u_hayN * smoothstep(0.08, 0.3, quiebre) * (0.2 + 0.8 * smoothstep(0.012, 0.06, escalon)));
   }
-  o = vec4(d, t.b, borde, 1.0);
+  o = vec4(d - u_rel * u_cl.z, t.b, borde, 1.0);
 }`;
 
 /* Color recto sRGB → premultiplicado en lineal (nivel 0 de la pirámide). */
@@ -129,7 +130,8 @@ function capaGLSL(i) {
     vec2 p = (pp * zz + txy) / zc;
     vec2 uv = vec2(p.x * 0.5 + 0.5, 0.5 - p.y * 0.5);
     vec4 dat = textureLod(u_d${i}, uv, 0.0);
-    float sig = u_foco.y * abs(u_foco.x - 1.0 / zc);
+    dat.r += zc;
+    float sig = min(u_foco.y * abs(u_foco.x - 1.0 / zc), u_cocMax.${k});   // tope: el plano cercano queda suave pero legible
     vec4 c = u_foco.z > 0.5 ? foco(u_c${i}, uv, max(log2(1.0 + sig * 0.6), u_lod0.${k}), u_razon.${k})
                             : vec4(0.0, 0.0, 0.0, smoothstep(0.03, 0.09, dat.g));
     float a = c.a * u_vis.${k};
@@ -141,24 +143,33 @@ function capaGLSL(i) {
       float ll = llave(dat.r, X);
       float m = smoothstep(u_acto.z - 0.03, u_acto.z + 0.03, ll);
       vec3 col = c.rgb * (mix(u_ver.w, 1.0, m) * u_ver.z * u_vis.${k});
-      col += a * u_acto.w * calma * 0.55 * FILO * exp(-pow((ll - u_acto.z) / 0.022, 2.0));
+      /* filo del frente de materia: acotado a +25 % del color que ya tiene el píxel (más un mínimo de luz). Sin tope,
+         en una cara de frente (un zócalo) la llave es casi pareja y la cara entera se quemaba a blanco de golpe */
+      vec3 fil = a * u_acto.w * calma * 0.55 * FILO * exp(-pow((ll - u_acto.z) / 0.022, 2.0));
+      col += min(fil, 0.25 * col + 0.004);
       C = C * (1.0 - a) + col;
       Eb = max(Eb * (1.0 - a * 0.85), dat.b * a);
       Gb = max(Gb * (1.0 - a * 0.85), textureLod(u_d${i}, uv, 2.5).b * a);
       if (a > 0.5) {
-        Dor = dat.r; N = textureLod(u_n${i}, uv, 0.0).xyz; Mv = m; Ll = ll;
+        Dor = dat.r; pasoD = exp2(floor(log2(max(abs(dat.r - zc), 0.004))) - 10.0); N = textureLod(u_n${i}, uv, 0.0).xyz; Mv = m; Ll = ll;
         Mk = texelFetch(u_d${i}, clamp(ivec2(uv * vec2(textureSize(u_d${i}, 0))), ivec2(0), textureSize(u_d${i}, 0) - 1), 0).g;
       }
     }
   }`;
 }
 
+/* Los niveles 2 y 3 comparten el MISMO programa (luces y muestras de bruma van por uniforme): subir de nivel no
+   recompila nada. Compilar y estrenar el programa grande traba la página casi un segundo en la placa (ANGLE termina
+   de compilar recién en el primer dibujo), y eso se veía como un tirón al subir de 2 a 3. */
+function claveSala(P) { return P.luces > 0 ? CLAVE_ALTA : P; }
+const CLAVE_ALTA = { tomas: 4, luces: 8, bruma: 3 };
 function fuenteSala(P) {
+  P = claveSala(P);
   return CABEZA + `
 #define TOMAS ${P.tomas}
 #define LUCES ${P.luces}
 #define BRUMA ${P.bruma}
-#define PASOS ${P.bruma === 3 ? 2 : 1}
+#define PASOS_MAX ${P.bruma > 1 ? 2 : 1}
 #define FILO vec3(1.25, 1.2, 1.12)
 layout(location = 0) out vec4 o_color;
 layout(location = 1) out vec4 o_info;
@@ -170,6 +181,7 @@ uniform vec4 u_enc;         // x0, y0, pw·k, ph·k (px de búfer, origen arriba
 uniform vec3 u_t;           // cámara viva (m, ejes de vista)
 uniform vec2 u_T;           // tan(fov/2) en x, y
 uniform vec4 u_z, u_vis, u_lod0, u_razon;   // por capa: z, visibilidad, lod mínimo, texeles por px
+uniform vec4 u_cocMax;      // por capa: tope del desenfoque (σ en px de lámina)
 uniform vec3 u_foco;        // 1/df, σ en px de lámina por dioptría, hay color (0|1)
 uniform vec4 u_acto;        // L, frente de líneas, frente de materia, filo
 uniform vec4 u_ver;         // V, zs (m), sombra, penumbra
@@ -181,7 +193,9 @@ uniform vec3 u_portalColor;
 uniform vec3 u_bruma;       // densidad, intensidad, tiempo
 uniform vec4 u_texto;       // bloque de texto del héroe (px de búfer): ahí la luz de líneas y barrido se calma
 uniform vec2 u_eje;         // derecha de la sala en el piso (xz de mundo): las juntas y la grilla fugan al portal
+uniform float u_rejX;       // 1 = composición al lado: la grilla se desvanece en el 45 % izquierdo (el del texto)
 uniform vec4 u_brillo;      // por obra: su pantalla sube de brillo cuando el enjambre la ronda
+uniform int u_pasos;        // muestras de bruma por tramo (2 en nivel 3, 1 en los demás)
 #if LUCES > 0
 uniform vec4 u_luz[8];      // xyz en vista viva, intensidad
 uniform vec3 u_luzC[8];
@@ -216,8 +230,10 @@ void niebla(inout vec3 C, float zA, float zB, vec2 pp){
   float largo = zA - zB;
   if (largo <= 0.0) return;
   float od = 0.0, luz = 0.0;
-  for (int i = 0; i < PASOS; i++) {
-    float zm = mix(zB, zA, (float(i) + 0.5) / float(PASOS));
+  float np = float(u_pasos);
+  for (int i = 0; i < PASOS_MAX; i++) {
+    if (i >= u_pasos) break;
+    float zm = mix(zB, zA, (float(i) + 0.5) / np);
     vec3 Xv = vec3(pp * zm * u_T, -zm);
     float n = ruido(Xv * vec3(0.45, 0.8, 0.45) + vec3(0.05, -0.02, 0.08) * u_bruma.z);
     float rho = u_bruma.x * (0.3 + 1.4 * n * n);
@@ -225,13 +241,20 @@ void niebla(inout vec3 C, float zA, float zB, vec2 pp){
     float g = 1.0 / (1.0 + dot(r, r) / (u_portal.w * u_portal.w));
     od += rho; luz += rho * g * g;
   }
-  float T = exp(-od * largo / float(PASOS));
+  float T = exp(-od * largo / np);
   C = C * T + u_portalColor * (u_bruma.y * luz / max(od, 1e-5) * (1.0 - T));
 }
 
 void main(){
   vec2 q = vec2(gl_FragCoord.x, u_lienzo.y - gl_FragCoord.y);
   vec2 uvp = (q - u_enc.xy) / u_enc.zw;
+  /* borde izquierdo de la lámina (cuando el encuadre la achica): no hay costura. Adentro, la lámina se funde a negro
+     sobre el 18 % del ancho del lienzo con una curva suave; afuera, la sala sigue sugerida con su propio reflejo
+     (la lámina en espejo, cada vez más tenue): aletas y piso que se pierden en el negro. */
+  float fx = (q.x - u_enc.x) / u_lienzo.x, borde = 1.0;
+  if (fx < 0.0) { borde = 0.1 * exp(fx / 0.1) * smoothstep(-0.5, -0.25, fx); uvp.x = -uvp.x; }
+  else { float b = smoothstep(0.0, 0.18, fx); borde = 0.1 + 0.9 * b * b * (1.6 - 0.6 * b); }
+  borde = mix(1.0, borde, smoothstep(0.0, 0.03, u_enc.x / u_lienzo.x));   // sólo si la lámina está achicada (en «cover» o vertical, nada)
   vec2 pp = vec2(uvp.x * 2.0 - 1.0, 1.0 - uvp.y * 2.0);
   vec2 txy = u_t.xy / u_T;
   /* detrás del bloque de texto, la luz de líneas, del filo y del barrido se calma */
@@ -254,14 +277,16 @@ void main(){
   float Mv = smoothstep(u_acto.z - 0.03, u_acto.z + 0.03, Ll);
   /* filo del frente: una línea de luz donde el frente es fino; en una pared de frente (llave casi pareja) sería un fogonazo: ahí baja */
   float fino = calma * mix(0.12, 1.0, smoothstep(0.001, 0.005, fwidth(Ll)));
-  C = C * (mix(u_ver.w, 1.0, Mv) * u_ver.z) + u_acto.w * fino * FILO * exp(-pow((Ll - u_acto.z) / 0.022, 2.0));
-  float Dor = d, Mk = dat.g;
+  C = C * (mix(u_ver.w, 1.0, Mv) * u_ver.z);
+  C += min(u_acto.w * fino * FILO * exp(-pow((Ll - u_acto.z) / 0.022, 2.0)), 0.25 * C + 0.03);   // el mismo tope que en las capas
+  float Dor = d, Mk = dat.g, pasoD = exp2(floor(log2(max(d, 0.1))) - 9.6);
   vec3 N = textureLod(u_n0, uv, 0.0).xyz;
   /* grilla del piso: 0,45 m en coordenadas de sala (sobre las juntas de las losas: fuga al portal), se apaga con la distancia */
   vec2 g = vec2(dot(X.xz, u_eje) - 0.225, dot(X.xz, vec2(u_eje.y, -u_eje.x))) / 0.45, fw = fwidth(g);
   vec2 gr = 1.0 - smoothstep(vec2(0.0), fw * 1.5, abs(fract(g - 0.5) - 0.5));
   float suelo = 1.0 - smoothstep(0.02, 0.06, abs(X.y - u_piso));
   float grilla = max(gr.x, gr.y) * suelo * (1.0 - smoothstep(0.25, 0.7, max(fw.x, fw.y))) * exp(-d * 0.09);
+  grilla *= smoothstep(0.0, 0.12, max(dq.x, dq.y) / u_lienzo.x) * mix(1.0, smoothstep(0.3, 0.55, q.x / u_lienzo.x), u_rejX);   // la grilla no pasa por detrás del texto
   float Eb = max(dat.b, grilla * 0.6);
   float Gb = textureLod(u_d0, uv, 2.5).b;
   float zN = d - u_t.z;
@@ -294,35 +319,137 @@ ${capaGLSL(1)}${capaGLSL(2)}${capaGLSL(3)}
   float tr = smoothstep(u_acto.y, u_acto.y + 0.06, Ll);
   float cab = exp(-pow((Ll - u_acto.y) / 0.05, 2.0));
   float Lw = u_acto.x * (1.0 - 0.85 * Mv * u_ver.z);
-  C += vec3(0.80, 0.90, 1.0) * ((Eb * 0.95 + Gb * 0.32) * tr + (Eb + Gb * 0.5) * cab * 1.2) * (Lw * calma);
+  /* trazo de plano técnico: tinta clara apenas fría, casi sin resplandor (no es neón: es un dibujo de 1 px) */
+  C += vec3(0.88, 0.91, 0.94) * ((Eb * 0.6 + Gb * 0.05) * tr + (Eb * 0.7 + Gb * 0.1) * cab) * (Lw * calma);
 
   /* verificación: plano de luz en z = zs (cámara de la lámina) */
   /* (la profundidad vive en media precisión: pasos de ~2 mm entre 2 y 4 m. En las caras de frente al plano se verían
      terrazas; un tramado del tamaño del paso las deshace) */
-  float zs = u_ver.y, Dt = Dor + (azar(vec3(q, u_bruma.z * 60.0)) - 0.5) * exp2(floor(log2(max(Dor, 0.1))) - 9.6);
-  float fina = exp(-abs(Dt - zs) / clamp(fwidth(Dor) * 8.0, 0.016, 0.035));
-  float cola = 0.25 * exp(-max(zs - Dor, 0.0) / 0.6);
-  C += u_ver.x * (vec3(1.0, 0.98, 0.95) * fina * 1.05 * calma + C * cola * 1.6 + vec3(0.85, 0.92, 1.0) * Eb * exp(-abs(Dor - zs) / 0.12) * 0.6 * calma);
+  float zs = u_ver.y, Dt = Dor + (azar(vec3(q, u_bruma.z * 60.0)) - 0.5) * pasoD;
+  /* en una cara de frente a la cámara la profundidad casi no cambia de píxel a píxel: el plano la cruzaría entera de
+     golpe (un fogonazo). La ganancia baja con lo de frente que esté la cara (fwidth de la profundidad), así que en
+     todas partes se lee como una línea fina con una estela suave; y la estela no quema lo que ya es claro. */
+  float fwD = fwidth(Dor);
+  float fina = exp(-abs(Dt - zs) / clamp(fwD * 1.6, max(0.0015, pasoD), 0.03));   // ≈ 2 px de ancho donde la profundidad cambia
+  float frente = clamp(fwD / 0.0012, 0.08, 1.0);
+  float lumC = dot(C, vec3(0.2126, 0.7152, 0.0722));
+  float cola = 0.16 * exp(-max(zs - Dor, 0.0) / 0.45) * exp(-max(Dor - zs, 0.0) / 0.02) * (1.0 - smoothstep(0.05, 0.5, lumC));
+  C += u_ver.x * (vec3(1.0, 0.98, 0.95) * fina * frente * 0.9 * calma + C * cola + vec3(0.85, 0.92, 1.0) * Eb * exp(-abs(Dor - zs) / 0.08) * 0.5 * calma);
 
   /* el borde de la lámina se funde a negro (cuando el encuadre la achica, lo que sigue es sala a oscuras) */
-  vec2 bo = smoothstep(vec2(0.0), vec2(0.03, 0.035), uvp) * smoothstep(vec2(0.0), vec2(0.008, 0.035), 1.0 - uvp);
-  o_color = vec4(C * (bo.x * bo.y), 1.0);
+  /* derecha, arriba y abajo: fundidos cortos (el borde derecho coincide con el del lienzo; arriba queda bajo la navegación) */
+  float bo = smoothstep(0.0, 0.008, 1.0 - uvp.x) * smoothstep(0.0, 0.06, uvp.y) * smoothstep(0.0, 0.035, 1.0 - uvp.y);
+  /* lo muy luminoso (el portal y su reflejo) baja cerca del bloque de texto: no compite con el titular en anchos medios */
+  float dT = max(dq.x, dq.y) / u_lienzo.x;
+  C *= 1.0 - 0.55 * (1.0 - smoothstep(0.02, 0.09, dT)) * smoothstep(0.12, 0.6, dot(C, vec3(0.2126, 0.7152, 0.0722)));
+  o_color = vec4(C * (borde * bo), 1.0);
   o_info = vec4(D, Mk, Eb, Mv);
 }`;
 }
 
+/* Programa liviano de «defino»: sólo las líneas (contornos precalculados en el canal B de los datos, grilla del piso y el
+   frente que las dibuja), con la misma proyección por capa que el programa grande. Compila en milésimas: con él la
+   secuencia de carga arranca apenas están los datos, mientras el programa grande (más de 3 s en frío) se compila
+   detrás. Al pasar al grande no hay salto: las líneas caen en el mismo lugar. */
+function capaLineas(i) {
+  const k = 'xyzw'[i];
+  return `
+  if (u_vis.${k} > 0.002) {
+    float zc = u_z.${k}, zz = zc - u_t.z;
+    vec2 p = (pp * zz + txy) / zc;
+    vec2 uv = vec2(p.x * 0.5 + 0.5, 0.5 - p.y * 0.5);
+    vec4 dat = textureLod(u_d${i}, uv, 0.0);
+    dat.r += zc;
+    float a = smoothstep(0.03, 0.09, dat.g) * u_vis.${k};
+    if (a > 0.003) {
+      float ll = llave(dat.r, aMundo(p, dat.r));
+      Eb = max(Eb * (1.0 - a * 0.85), dat.b * a);
+      Gb = max(Gb * (1.0 - a * 0.85), textureLod(u_d${i}, uv, 2.5).b * a);
+      if (a > 0.5) { Dor = dat.r; Ll = ll; Mk = dat.g; }
+    }
+  }`;
+}
+const FS_LINEAS = CABEZA + `
+layout(location = 0) out vec4 o_color;
+layout(location = 1) out vec4 o_info;
+uniform sampler2D u_d0, u_d1, u_d2, u_d3;
+uniform vec2 u_lienzo;
+uniform vec4 u_enc;
+uniform vec3 u_t;
+uniform vec2 u_T;
+uniform vec4 u_z, u_vis;
+uniform vec4 u_acto;
+uniform vec2 u_dn;
+uniform mat4 u_vInv;
+uniform float u_piso;
+uniform vec4 u_texto;
+uniform vec2 u_eje;
+uniform float u_rejX;
+float azar(vec3 p){ p = fract(p * 0.1031); p += dot(p, p.zyx + 31.32); return fract((p.x + p.y) * p.z); }
+float ruido(vec3 x){
+  vec3 i = floor(x), f = fract(x); f = f * f * (3.0 - 2.0 * f);
+  return mix(mix(mix(azar(i), azar(i + vec3(1, 0, 0)), f.x), mix(azar(i + vec3(0, 1, 0)), azar(i + vec3(1, 1, 0)), f.x), f.y),
+             mix(mix(azar(i + vec3(0, 0, 1)), azar(i + vec3(1, 0, 1)), f.x), mix(azar(i + vec3(0, 1, 1)), azar(i + vec3(1, 1, 1)), f.x), f.y), f.z);
+}
+vec3 aMundo(vec2 p, float d){ return (u_vInv * vec4(p * d * u_T, -d, 1.0)).xyz; }
+float llave(float d, vec3 X){
+  return clamp(log(max(d, u_dn.x) / u_dn.x) * u_dn.y, 0.0, 1.0) + 0.18 * ruido(X * 0.6) + 0.05 * ruido(X * 5.0);
+}
+void main(){
+  vec2 q = vec2(gl_FragCoord.x, u_lienzo.y - gl_FragCoord.y);
+  vec2 uvp = (q - u_enc.xy) / u_enc.zw;
+  float fx = (q.x - u_enc.x) / u_lienzo.x, borde = 1.0;
+  if (fx < 0.0) { borde = 0.1 * exp(fx / 0.1) * smoothstep(-0.5, -0.25, fx); uvp.x = -uvp.x; }
+  else { float b = smoothstep(0.0, 0.18, fx); borde = 0.1 + 0.9 * b * b * (1.6 - 0.6 * b); }
+  borde = mix(1.0, borde, smoothstep(0.0, 0.03, u_enc.x / u_lienzo.x));
+  vec2 pp = vec2(uvp.x * 2.0 - 1.0, 1.0 - uvp.y * 2.0);
+  vec2 txy = u_t.xy / u_T;
+  vec2 dq = max(u_texto.xy - q, q - u_texto.zw);
+  float calma = mix(0.05, 1.0, smoothstep(-0.01, 0.07, max(dq.x, dq.y) / u_lienzo.x));
+  float d = textureLod(u_d0, uvp, 0.0).r + u_t.z;
+  vec2 p, uv; vec4 dat;
+  for (int i = 0; i < 2; i++) {
+    p = (pp * max(d - u_t.z, 0.05) + txy) / d;
+    uv = vec2(p.x * 0.5 + 0.5, 0.5 - p.y * 0.5);
+    dat = textureLod(u_d0, uv, 0.0);
+    d = dat.r;
+  }
+  vec3 X = aMundo(p, d);
+  float Ll = llave(d, X);
+  vec2 g = vec2(dot(X.xz, u_eje) - 0.225, dot(X.xz, vec2(u_eje.y, -u_eje.x))) / 0.45, fw = fwidth(g);
+  vec2 gr = 1.0 - smoothstep(vec2(0.0), fw * 1.5, abs(fract(g - 0.5) - 0.5));
+  float suelo = 1.0 - smoothstep(0.02, 0.06, abs(X.y - u_piso));
+  float grilla = max(gr.x, gr.y) * suelo * (1.0 - smoothstep(0.25, 0.7, max(fw.x, fw.y))) * exp(-d * 0.09);
+  grilla *= smoothstep(0.0, 0.12, max(dq.x, dq.y) / u_lienzo.x) * mix(1.0, smoothstep(0.3, 0.55, q.x / u_lienzo.x), u_rejX);
+  float Eb = max(dat.b, grilla * 0.6), Gb = textureLod(u_d0, uv, 2.5).b, Dor = d, Mk = dat.g;
+${capaLineas(1)}${capaLineas(2)}${capaLineas(3)}
+  float tr = smoothstep(u_acto.y, u_acto.y + 0.06, Ll);
+  float cab = exp(-pow((Ll - u_acto.w) / 0.05, 2.0));   // w = la cabeza del frente (puede volver a pasar sin borrar)
+  vec3 C = vec3(0.88, 0.91, 0.94) * ((Eb * 0.6 + Gb * 0.05) * tr + (Eb * 0.7 + Gb * 0.1) * cab) * (u_acto.x * calma);
+  float bo = smoothstep(0.0, 0.008, 1.0 - uvp.x) * smoothstep(0.0, 0.06, uvp.y) * smoothstep(0.0, 0.035, 1.0 - uvp.y);
+  o_color = vec4(C * (borde * bo), 1.0);
+  o_info = vec4(Dor - u_t.z, Mk, Eb, 0.0);
+}`;
+
 /* Salida: suma el resplandor, viñeta hacia los bordes del escenario, lineal → sRGB con hombro suave, grano con
    tramado (que no toca el negro exacto) y fundido inferior hacia la página. */
-const FS_SALIDA = CABEZA + `
+export const CAJAS = 16;
+const FS_SALIDA = CABEZA + `#define CAJAS ${CAJAS}
 uniform sampler2D u_t, u_r;
 uniform vec2 u_lienzo;
 uniform vec4 u_esc;      // escenario en px de búfer (origen arriba a la izquierda)
-uniform vec4 u_par;      // semilla, fundido inferior y superior (fracción del alto), entrada
-uniform vec4 u_post;     // fuerza del resplandor, viñeta, grano, —
+uniform vec4 u_par;      // semilla, largo del fundido inferior y fundido superior (fracción del alto), entrada
+uniform float u_fin;     // dónde termina la sala (fracción del alto del escenario): ahí el fundido llega a cero
+uniform vec4 u_post;     // fuerza del resplandor, viñeta, grano, px de búfer por px CSS
 uniform vec4 u_texto;    // bloque de texto (px de búfer): ahí el resplandor baja
 uniform vec4 u_texto2;   // segunda caja de texto (botones y sellos, que pueden ser más anchos que el titular)
+uniform vec4 u_cajas[CAJAS];   // renglones de texto (px de búfer): x0, y0, x1, y1
+uniform float u_nivelCaja[CAJAS]; // log2 del tope de luz bajo cada renglón
+uniform int u_nCajas;
 out vec4 o;
 float azar(vec2 p){ vec3 q = fract(vec3(p.xyx) * 0.1031); q += dot(q, q.yzx + 33.33); return fract((q.x + q.y) * q.z); }
+/* distancia (px) desde q hasta la caja b; negativa adentro */
+float aCaja(vec2 q, vec4 b){ vec2 d = abs(q - 0.5 * (b.xy + b.zw)) - 0.5 * (b.zw - b.xy); return length(max(d, 0.0)) + min(max(d.x, d.y), 0.0); }
 void main(){
   vec2 q = vec2(gl_FragCoord.x, u_lienzo.y - gl_FragCoord.y);
   vec3 c = max(texelFetch(u_t, ivec2(gl_FragCoord.xy), 0).rgb, 0.0);
@@ -330,11 +457,18 @@ void main(){
   if (u_post.x > 0.0) c += u_post.x * mix(0.2, 1.0, smoothstep(-0.01, 0.05, max(dq.x, dq.y) / u_lienzo.x)) * texture(u_r, gl_FragCoord.xy / u_lienzo).rgb;
   vec2 e = (q - u_esc.xy) / u_esc.zw;
   c *= 1.0 - u_post.y * smoothstep(0.7, 1.3, length((e - 0.5) * vec2(2.0, 1.7)));
-  /* garantía de lectura: detrás del bloque de texto nada supera 0,019 de luz (lineal). Con eso, aunque coincidan
-     una línea, una mota y el resplandor, el texto marfil queda a más de 12:1, el secundario a más de 5,5:1 y el
-     verbo activo (cereza, que sobre negro puro mide 6,19:1) nunca baja de 4,5:1. */
-  vec2 dq2 = max(u_texto2.xy - q, q - u_texto2.zw);
-  float tope = mix(0.019, 8.0, smoothstep(0.0, 0.02, min(max(dq.x, dq.y), max(dq2.x, dq2.y)) / u_lienzo.x));
+  /* garantía de lectura, renglón por renglón: bajo cada renglón de texto nada supera su tope (0,019 de luz lineal;
+     0,011 bajo los verbos, que son cereza). Afuera el tope sube en escala logarítmica a 0,04 diafragmas por px CSS
+     (de 0,019 a 1 en ≈ 150 px, con arranque suave): una caída sin borde, nunca un rectángulo. Con eso el texto
+     marfil queda a más de 12:1, el secundario a más de 5,5:1 y el verbo activo a más de 4,5:1. */
+  float lt = 9.0;
+  for (int i = 0; i < CAJAS; i++) {
+    if (i >= u_nCajas) break;
+    float x = max(aCaja(q, u_cajas[i]), 0.0) / u_post.w;          // px CSS afuera del renglón
+    x = x < 28.0 ? x * x / 56.0 : x - 14.0;                         // arranque suave (sin quiebre)
+    lt = min(lt, u_nivelCaja[i] + x * 0.04);
+  }
+  float tope = exp2(lt);
   float mx = max(c.r, max(c.g, c.b));
   if (mx > tope) c *= tope / mx;
   c = mix(c, 0.8 + 0.2 * (1.0 - exp(-(c - 0.8) / 0.2)), step(0.8, c));
@@ -345,7 +479,9 @@ void main(){
   c *= 1.0 + u_post.z * (n1 - 0.5);
   c += (n1 + n2 - 1.0) / 255.0 * hay;
   /* abajo se funde con la página (transparente); arriba, en vertical, se funde a negro: el héroe sigue siendo sala */
-  float a = (1.0 - smoothstep(1.0 - u_par.y, 1.0, e.y)) * u_par.w;
+  /* fundido largo con curva (smootherstep): llega a cero justo donde termina la lámina, sin escalón ni franja negra */
+  float f = clamp((u_fin - e.y) / max(u_par.y, 1e-3), 0.0, 1.0);
+  float a = f * f * f * (f * (f * 6.0 - 15.0) + 10.0) * u_par.w;
   if (u_par.z > 0.0) c *= smoothstep(0.0, u_par.z, e.y);
   o = vec4(max(c, 0.0) * a, a);
 }`;
@@ -376,11 +512,12 @@ export function crearSala(motor, datos, formato, base) {
     formato, datos, cam, zs,
     enc: encuadrar(datos, 0, 0, 1, 1, {}),
     /* parámetros animables: los maneja index.js */
-    p: { L: 0, fL: -0.3, fM: -0.4, filo: 0, V: 0, zs: 0, sombra: 1, penumbra: 0.05, q: 1 / datos.foco.distancia, apertura: 1, bruma: 1, entrada: 1, fundido: 0.16, fundidoArriba: 0 },
+    p: { L: 0, fL: -0.3, fM: -0.4, filo: 0, V: 0, zs: 0, sombra: 1, penumbra: 0.05, q: 1 / datos.foco.distancia, apertura: 1, cocCerca: 1.6, bruma: 1, entrada: 1, fundido: 0.16, fundidoArriba: 0, fin: 1 },
     /* reluz: hasta 8 luces; por luz x, y, z (mundo), intensidad; color lineal aparte */
     luces: new Float32Array(32), coloresLuz: new Float32Array(24).fill(1), nLuces: 0,
     texto: new Float32Array(4),   // bloque de texto en px CSS del lienzo: x0, y0, x1, y1 (lo pone index.js)
     texto2: new Float32Array(4),  // segunda caja (botones y sellos); en cero si no hay
+    cajas: new Float32Array(CAJAS * 4), nivelCaja: new Float32Array(CAJAS), nCajas: 0, // renglones de texto (px CSS del lienzo) y log2 de su tope de luz
     brillo: new Float32Array(4),  // por obra (orden de la máscara: cathedra, fortal, athleteiq, coro): la sube el enjambre
     resplandor: null, fuerzaResplandor: 0, vineta: 0.28, grano: 0.03, // los pone post.js
     heroeY: null,                 // borde superior del héroe en px CSS del lienzo, si el escenario no lo ocupa entero (vertical): ahí va negro
@@ -397,6 +534,9 @@ export function crearSala(motor, datos, formato, base) {
      que el nuevo esté. `Pprog` = la fila de niveles con la que se compiló el que está en uso. */
   let prog = null, nivelProg = 0, Pprog = motor.P, enCurso = null, nivelEnCurso = 0;
   function programaSala() {
+    if (nivelProg !== motor.nivel && prog && claveSala(motor.P) === claveSala(Pprog)) {
+      nivelProg = motor.nivel;   // mismo programa: nada que compilar
+    }
     if (nivelProg !== motor.nivel) {
       if (nivelEnCurso !== motor.nivel) {
         if (enCurso) gl.deleteProgram(enCurso.p);
@@ -413,6 +553,22 @@ export function crearSala(motor, datos, formato, base) {
     return prog;
   }
   programaSala();
+  const progLin = motor.programaAparte(FS_LINEAS, 'sala (líneas)');
+  let linListo = false;
+  const lineasUsables = () => {
+    if (linListo) return true;
+    if (!progLin.listo()) return false;
+    gl.useProgram(progLin.p);
+    for (let i = 0; i < 4; i++) gl.uniform1i(progLin.u['u_d' + i], 4 + i);
+    return (linListo = true);
+  };
+  sala.lineasListas = () => new Promise((ok, mal) => {
+    const f = () => { try { if (!sala.vivo || motor.perdido || lineasUsables()) ok(); else setTimeout(f, 16); } catch (e) { mal(e); } };
+    f();
+  });
+  sala.grande = false;      // index.js lo pone en true cuando el programa grande y los demás ya se calentaron
+  sala.soloLineas = false;  // el último cuadro se dibujó con el programa liviano
+  sala.rejX = 0;            // máscara izquierda de la grilla (composición al lado)
   /* Se cumple cuando el programa ya se puede usar (o falla con el registro del compilador). */
   sala.programaListo = () => new Promise((ok, mal) => {
     const f = () => { try { if (!sala.vivo || motor.perdido || programaSala()) ok(); else setTimeout(f, 16); } catch (e) { mal(e); } };
@@ -422,7 +578,7 @@ export function crearSala(motor, datos, formato, base) {
   const negro = motor.pixel(0, 0, 0, 0), normalPlana = motor.pixel(128, 128, 255, 255);
   const capas = IDS.map(() => ({ color: negro, datos: null, normal: normalPlana, alto: 1 }));
   const url = (nombre) => new URL(`${formato}-${nombre}`, base);
-  const conNormal = datos.datos?.normales || ['fondo', 'medio'];
+  const conNormal = datos.datos?.normales || IDS;   // las cuatro capas traen su -n.webp
 
   function pase(fb, w, h) {
     gl.bindFramebuffer(gl.FRAMEBUFFER, fb); gl.viewport(0, 0, w, h);
@@ -443,6 +599,7 @@ export function crearSala(motor, datos, formato, base) {
     ligar(0, crudo); ligar(1, capas[i].normal);
     gl.uniform1i(progDatos.u.u_p, 0); gl.uniform1i(progDatos.u.u_n, 1);
     gl.uniform3f(progDatos.u.u_cl, datos.camara.cerca, datos.camara.lejos, zs[i]);
+    gl.uniform1f(progDatos.u.u_rel, i > 0 ? 1 : 0);
     gl.uniform1f(progDatos.u.u_hayN, mapaN ? 1 : 0);
     motor.triangulo();
     gl.bindFramebuffer(gl.FRAMEBUFFER, null);
@@ -554,10 +711,11 @@ export function crearSala(motor, datos, formato, base) {
   sala.rectObra = (obra, out) => rectObra(sala.enc, cam, obra.pantalla, zDeCapa(datos, obra.capa), out);
 
   /* Dibuja la sala en sus destinos. Devuelve false si el escenario no está a la vista (queda todo en 0). */
-  sala.dibujar = () => {
+  sala.dibujar = (forzarGrande = false) => {
     destinos();
-    const pr = programaSala();
-    if (!pr) return false;
+    const pr = sala.grande || forzarGrande ? programaSala() : null;
+    if (!pr) return dibujarLineas();
+    sala.soloLineas = false;
     const u = pr.u, E = motor.escala, e = sala.enc, p = sala.p;
     gl.bindFramebuffer(gl.FRAMEBUFFER, dest.fb);
     gl.drawBuffers(dest.bufs);
@@ -579,6 +737,7 @@ export function crearSala(motor, datos, formato, base) {
     gl.uniform4f(u.u_enc, e.x0 * E, e.y0 * E, e.W * E, e.H * E);
     gl.uniform3f(u.u_t, cam.tx, cam.ty, cam.tz);
     gl.uniform2f(u.u_T, cam.Tx, cam.Ty);
+    gl.uniform4f(u.u_cocMax, 1e3, 1e3, 1e3, sala.p.cocCerca * capas[3].alto / 1440);
     gl.uniform4fv(u.u_z, uZ); gl.uniform4fv(u.u_vis, uVis); gl.uniform4fv(u.u_lod0, uLod); gl.uniform4fv(u.u_razon, uRazon);
     gl.uniform3f(u.u_foco, p.q, KF * capas[2].alto * p.apertura, sala.listoColor ? 1 : 0);
     gl.uniform4f(u.u_acto, p.L, p.fL, p.fM, p.filo);
@@ -592,10 +751,12 @@ export function crearSala(motor, datos, formato, base) {
     gl.uniform3f(u.u_portalColor, po.color[0], po.color[1], po.color[2]);
     gl.uniform4f(u.u_texto, sala.texto[0] * E, sala.texto[1] * E, sala.texto[2] * E, sala.texto[3] * E);
     gl.uniform2f(u.u_eje, vista[0], vista[8]);
+    gl.uniform1f(u.u_rejX, sala.rejX);
     gl.uniform4fv(u.u_brillo, sala.brillo);
+    gl.uniform1i(u.u_pasos, motor.P.bruma === 3 ? 2 : 1);
     gl.uniform3f(u.u_bruma, 0.022 * p.bruma, 0.07 * p.bruma * (0.25 + 0.75 * Math.min(1, p.sombra)), motor.t);
     if (Pprog.luces > 0) {
-      const n = Math.min(sala.nLuces, Pprog.luces);
+      const n = Math.min(sala.nLuces, motor.P.luces);
       for (let i = 0; i < n; i++) { aVista(sala.luces[i * 4], sala.luces[i * 4 + 1], sala.luces[i * 4 + 2], lucesVista, i * 4); lucesVista[i * 4 + 3] = sala.luces[i * 4 + 3]; }
       gl.uniform4fv(u.u_luz, lucesVista); gl.uniform3fv(u.u_luzC, sala.coloresLuz); gl.uniform1i(u.u_nLuces, n);
     }
@@ -604,6 +765,39 @@ export function crearSala(motor, datos, formato, base) {
     return true;
   };
 
+  /* Cuadro con el programa liviano (sólo líneas). Devuelve false si todavía no se puede. */
+  function dibujarLineas() {
+    if (!linListo && !lineasUsables()) return false;
+    const u = progLin.u, E = motor.escala, e = sala.enc, p = sala.p;
+    gl.bindFramebuffer(gl.FRAMEBUFFER, dest.fb);
+    gl.drawBuffers(dest.bufs);
+    gl.viewport(0, 0, dest.ancho, dest.alto);
+    gl.disable(gl.BLEND); gl.disable(gl.SCISSOR_TEST);
+    gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT);
+    if (!sala.listoDatos || !sala.recortar()) return false;
+    sala.moverCamara();
+    gl.useProgram(progLin.p);
+    for (let i = 0; i < 4; i++) ligar(4 + i, capas[i].datos);
+    for (let i = 0; i < 4; i++) { const zz = zs[i] - cam.tz, x = Math.min(1, Math.max(0, (zz - 0.12) / 0.33)); uVis[i] = i === 0 ? 1 : x * x * (3 - 2 * x); }
+    gl.uniform2f(u.u_lienzo, dest.ancho, dest.alto);
+    gl.uniform4f(u.u_enc, e.x0 * E, e.y0 * E, e.W * E, e.H * E);
+    gl.uniform3f(u.u_t, cam.tx, cam.ty, cam.tz);
+    gl.uniform2f(u.u_T, cam.Tx, cam.Ty);
+    gl.uniform4fv(u.u_z, uZ); gl.uniform4fv(u.u_vis, uVis);
+    gl.uniform4f(u.u_acto, p.L, p.fL, p.fM, p.cabeza ?? p.fL);
+    gl.uniform2f(u.u_dn, D_MIN, 1 / Math.log(zs[0] / D_MIN));
+    gl.uniformMatrix4fv(u.u_vInv, false, vInv);
+    gl.uniform1f(u.u_piso, datos.piso?.y || 0);
+    gl.uniform4f(u.u_texto, sala.texto[0] * E, sala.texto[1] * E, sala.texto[2] * E, sala.texto[3] * E);
+    gl.uniform2f(u.u_eje, vista[0], vista[8]);
+    gl.uniform1f(u.u_rejX, sala.rejX);
+    motor.triangulo();
+    gl.disable(gl.SCISSOR_TEST);
+    sala.soloLineas = true;
+    return true;
+  }
+
+  const cajasBuf = new Float32Array(CAJAS * 4);
   /* Salida al lienzo. `tex` = color lineal a mostrar (por defecto el de la sala; el post pasa el suyo). */
   sala.salida = (tex = sala.texColor) => {
     const E = motor.escala, e = sala.enc, p = sala.p;
@@ -626,12 +820,15 @@ export function crearSala(motor, datos, formato, base) {
     const res = sala.resplandor && sala.fuerzaResplandor > 0;
     ligar(1, res ? sala.resplandor : negro); gl.uniform1i(progSal.u.u_r, 1);
     ligar(0, tex); gl.uniform1i(progSal.u.u_t, 0);
-    gl.uniform4f(progSal.u.u_post, res ? sala.fuerzaResplandor : 0, sala.vineta, sala.grano, 0);
+    gl.uniform4f(progSal.u.u_post, res ? sala.fuerzaResplandor : 0, sala.vineta, sala.grano, E);
+    for (let i = 0; i < sala.nCajas * 4; i++) cajasBuf[i] = sala.cajas[i] * E;
+    gl.uniform4fv(progSal.u.u_cajas, cajasBuf); gl.uniform1fv(progSal.u.u_nivelCaja, sala.nivelCaja); gl.uniform1i(progSal.u.u_nCajas, sala.nCajas);
     gl.uniform4f(progSal.u.u_texto, sala.texto[0] * E, sala.texto[1] * E, sala.texto[2] * E, sala.texto[3] * E);
     gl.uniform4f(progSal.u.u_texto2, sala.texto2[0] * E, sala.texto2[1] * E, sala.texto2[2] * E, sala.texto2[3] * E);
     gl.uniform2f(progSal.u.u_lienzo, motor.ancho, motor.alto);
     gl.uniform4f(progSal.u.u_esc, e.Sx * E, e.Sy * E, e.Sw * E, e.Sh * E);
     gl.uniform4f(progSal.u.u_par, (motor.t * 61.7) % 97, p.fundido, p.fundidoArriba, p.entrada);
+    gl.uniform1f(progSal.u.u_fin, p.fin);
     motor.triangulo();
     gl.disable(gl.SCISSOR_TEST);
   };
@@ -654,7 +851,7 @@ export function crearSala(motor, datos, formato, base) {
     if (gl.isContextLost()) return;
     for (const c of capas) { if (c.color !== negro) gl.deleteTexture(c.color); if (c.datos) gl.deleteTexture(c.datos); if (c.normal !== normalPlana) gl.deleteTexture(c.normal); }
     if (dest) { dest.liberar(); gl.deleteFramebuffer(sala.fbColor); }
-    for (const pr of [progDatos, progPre, progDes, progSal, prog, enCurso]) if (pr) gl.deleteProgram(pr.p);
+    for (const pr of [progDatos, progPre, progDes, progSal, prog, enCurso, progLin]) if (pr) gl.deleteProgram(pr.p);
   };
 
   return sala;

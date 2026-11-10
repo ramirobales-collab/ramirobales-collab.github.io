@@ -87,9 +87,15 @@ def inyectar(html, estilo, hoja_pesada, prefijo):
     html = re.sub(r"<style id=\"critico\">.*?</style>\n?", "", html, flags=re.S)
     html = re.sub(r"<noscript><link rel=\"stylesheet\" href=\"[^\"]*" + re.escape(hoja_pesada) + r"\"></noscript>\n?", "", html)
     enlace = f'<link rel="stylesheet" href="{prefijo}{hoja_pesada}">'
-    diferido = (f'<link rel="stylesheet" href="{prefijo}{hoja_pesada}" media="print" onload="this.media=\'all\'">\n'
+    patron = r'<link rel="stylesheet" href="' + re.escape(prefijo + hoja_pesada) + r'"( media="print" (onload="this\.media=\'all\'"|data-diferida))?>'
+    previo = re.search(patron, html)
+    # Si la página ya pasó por herramientas/proteccion.py, la hoja diferida usa data-diferida (sin manejador en
+    # línea, que la política de contenido bloquea) y se conserva así; si no, la forma clásica con onload, que
+    # proteccion.py convierte después (siempre corre después de este guion).
+    forma = "data-diferida" if previo and "data-diferida" in previo.group(0) else "onload=\"this.media='all'\""
+    diferido = (f'<link rel="stylesheet" href="{prefijo}{hoja_pesada}" media="print" {forma}>\n'
                 f'<noscript>{enlace}</noscript>')
-    html, n = re.subn(r'<link rel="stylesheet" href="' + re.escape(prefijo + hoja_pesada) + r'"( media="print" onload="this\.media=\'all\'")?>', diferido, html, count=1)
+    html, n = re.subn(patron, lambda _m: diferido, html, count=1)
     assert n == 1, "no encontré el <link> de " + hoja_pesada
     m = re.search(r'<link rel="stylesheet"', html)
     html = html[:m.start()] + f'<style id="critico">{estilo}</style>\n' + html[m.start():]
@@ -103,7 +109,8 @@ def pagina(nombre):
     css = bloques(leer(os.path.join(CSS, "componentes.css")), BLOQUES[nombre])
     css = re.sub(r"url\((['\"]?)\.\./", lambda m: "url(" + m.group(1) + prefijo, css)
     estilo = podar(minificar(css))
-    io.open(ruta, "w", encoding="utf-8", newline="\n").write(inyectar(html, estilo, "css/componentes.css", prefijo))
+    nuevo = inyectar(html, estilo, "css/componentes.css", prefijo)  # calcular antes de abrir: "w" vacía el archivo
+    io.open(ruta, "w", encoding="utf-8", newline="\n").write(nuevo)
     return len(estilo.encode("utf-8"))
 
 
@@ -114,7 +121,8 @@ def demo():
     html = leer(ruta)
     css = re.sub(r"url\((['\"]?)\.\./", r"url(\1", leer(os.path.join(RAIZ, "demos", "producto", "css", "estilo.css")))
     estilo = minificar(css)
-    io.open(ruta, "w", encoding="utf-8", newline="\n").write(inyectar(html, estilo, "css/estilo.css", ""))
+    nuevo = inyectar(html, estilo, "css/estilo.css", "")
+    io.open(ruta, "w", encoding="utf-8", newline="\n").write(nuevo)
     return len(estilo.encode("utf-8"))
 
 

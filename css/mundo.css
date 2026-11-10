@@ -1,34 +1,23 @@
 /* mundo.css — lo que acompaña al motor de «la sala negra» y no hace falta para el primer pintado:
-   paso del fondo en CSS al lienzo, póster de respaldo, verbos, zonas activas y marcas de verificación.
+   paso del póster al lienzo, verbos, zonas activas, señal de «deslizá» y marcas de verificación.
    El primer pintado del héroe está en el bloque «Héroe» de componentes.css (va en el CSS crítico). */
 
 /* ---------- Del fondo en CSS al lienzo ---------- */
-/* el fundido de abajo empieza donde dice el motor (después del último renglón de texto), igual que en el lienzo */
+/* el fundido de abajo es el mismo del lienzo (index.js: desde el pie de la pantalla más baja hasta donde termina la lámina) */
 .heroe__fondo {
   transition: opacity 600ms var(--curva-entrada);
-  -webkit-mask-image: linear-gradient(#000 var(--fundido-desde, 84%), transparent);
-  mask-image: linear-gradient(#000 var(--fundido-desde, 84%), transparent);
+  -webkit-mask-image: linear-gradient(#000 var(--fundido-desde, 84%), transparent var(--fundido-hasta, 100%));
+  mask-image: linear-gradient(#000 var(--fundido-desde, 84%), transparent var(--fundido-hasta, 100%));
 }
 .mundo-vivo .heroe__fondo { opacity: 0; }
-.heroe__poster {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  max-width: none;
-  object-fit: cover;
-  object-position: 64% 50%;
-  opacity: 0;
-  transition: opacity 600ms var(--curva-entrada), filter 600ms var(--curva-entrada);
-}
-.heroe__poster.visto, noscript .heroe__poster { opacity: 1; }
-/* vertical: el póster es la lámina 9:16 apoyada abajo, igual que el escenario del motor */
-@media (max-aspect-ratio: 3/4) {
-  .heroe__poster { top: auto; height: auto; max-height: 100%; aspect-ratio: 9 / 16; object-position: 50% 100%; -webkit-mask-image: linear-gradient(transparent, #000 14%); mask-image: linear-gradient(transparent, #000 14%); }
-}
-/* sin motor, el póster igual responde a los verbos */
-.heroe[data-acto="defino"] .heroe__poster { filter: grayscale(1) contrast(1.6) brightness(0.4); }
-.heroe[data-acto="verifico"] .heroe__poster { filter: contrast(1.08) brightness(1.08); }
+/* el póster (primer pintado, la pausa mientras la placa prepara el motor, y el respaldo): aparece con un fundido y
+   se asienta despacio (un acercamiento de cámara que se detiene, una sola vez): nunca hay una pausa muerta */
+.heroe__poster { transition: opacity 900ms var(--curva-entrada), filter 900ms var(--curva-entrada); }
+.heroe__poster.visto { animation: poster-asienta 9s var(--curva-entrada) both; }
+@keyframes poster-asienta { from { scale: 1.045; } to { scale: 1; } }
+/* el póster responde a los verbos (mientras arranca el motor, y sin motor): «defino» es la sala a oscuras */
+.js .heroe[data-acto="defino"] .heroe__poster { filter: grayscale(1) contrast(1.5) brightness(0.42); }
+.js .heroe[data-acto="verifico"] .heroe__poster { filter: contrast(1.08) brightness(1.08); }
 
 /* ---------- Verbos ---------- */
 .acto { border-radius: var(--radio-chico); transition: color var(--d-etiqueta) var(--curva-entrada), text-decoration-color var(--d-etiqueta) var(--curva-entrada); }
@@ -36,7 +25,9 @@
 .acto:focus-visible { outline: 2px solid var(--foco); outline-offset: 0.06em; }
 
 /* ---------- Zonas activas: un enlace sobre la pantalla de cada producto ---------- */
-.heroe__obras.ubicadas { visibility: visible; }
+/* los rótulos aparecen recién cuando hay imagen debajo (sala viva o póster de respaldo) y ya están ubicados:
+   nunca flotan sobre el negro ni quedan apilados en una esquina */
+.mundo-vivo .heroe__obras.ubicadas, .mundo-poster .heroe__obras.ubicadas { visibility: visible; }
 .obra {
   display: block;
   border-radius: 4px;
@@ -91,10 +82,14 @@
   opacity: 0;
   transition: max-width 600ms var(--curva-entrada), opacity 350ms var(--curva-entrada);
 }
-.obra:hover .obra__estado, .obra:focus-visible .obra__estado { max-width: 10em; opacity: 1; }
+.obra:hover .obra__estado, .obra:focus-visible .obra__estado, .obra--enfocada .obra__estado { max-width: 10em; opacity: 1; }
+/* el foco que vaga (index.js) enciende el rótulo del producto enfocado */
+.obra--enfocada::before { opacity: 0.55; transform: none; }
+.obra__rotulo { transition: box-shadow 500ms var(--curva-entrada); }
+.obra--enfocada .obra__rotulo { box-shadow: inset 0 1px 0 oklch(100% 0 0 / 0.22), 0 0 0 1px oklch(100% 0 0 / 0.3), 0 10px 24px -10px #000; }
 @media (hover: none) { .obra__estado { max-width: 10em; opacity: 1; } }
 /* vertical: las pantallas son chicas; el rótulo va debajo de la pantalla (el del teléfono, a su izquierda) */
-@media (max-aspect-ratio: 3/4) {
+@media (max-aspect-ratio: 4/5) {
   .obra__rotulo { left: 0; top: calc(100% + 5px); bottom: auto; padding: 0.2rem 0.5rem; font-size: 0.6875rem; }
   .obra--fortal .obra__rotulo { left: auto; right: calc(100% + 6px); top: auto; bottom: 10px; }
 }
@@ -113,6 +108,50 @@
   transition: stroke-dashoffset 650ms var(--curva-entrada) 80ms;
 }
 .verificada .obra__tilde { stroke-dashoffset: 0; }
+
+/* ---------- Señal de «deslizá»: rótulo en versalitas, filete y una gota de luz (la mueve index.js, al azar) ---------- */
+/* sólo en la composición al lado, alineada con el texto y debajo de su último renglón (index.js la ubica y la
+   esconde si no hay lugar); entra con un fundido después de la secuencia y se apaga al deslizar */
+.heroe__deslizar {
+  position: absolute;
+  left: 0;
+  bottom: 18px;
+  z-index: 2;
+  display: none;
+  align-items: center;
+  gap: 0.9rem;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 700ms var(--curva-entrada);
+}
+.heroe__deslizar.lista { display: inline-flex; }
+.heroe__deslizar.lista.vista { opacity: 1; }
+.heroe__deslizar.lista.vista.apagada { opacity: 0; }
+.heroe__desliza {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-variant-caps: all-small-caps;
+  color: oklch(78% 0.015 85);
+}
+.heroe__filete {
+  position: relative;
+  width: 1px;
+  height: 30px;
+  background: linear-gradient(transparent, oklch(93% 0.015 85 / 0.34) 25%, oklch(93% 0.015 85 / 0.34) 75%, transparent);
+}
+.heroe__gota {
+  position: absolute;
+  left: -1px;
+  top: 0;
+  width: 3px;
+  height: 8px;
+  border-radius: 2px;
+  background: linear-gradient(transparent, oklch(97% 0.012 85));
+  box-shadow: 0 2px 8px 1px oklch(100% 0 0 / 0.35);
+  opacity: 0;
+}
 
 /* ---------- Lente de rayos X: la lectura (el disco lo dibuja el motor en el lienzo) ---------- */
 .lente__lectura {
@@ -144,10 +183,11 @@
 .lente__obra:empty { display: none; }
 
 /* ---------- ?fondo=1: sólo el lienzo (para medir contraste) ---------- */
-.solo-fondo .heroe__dentro, .solo-fondo .heroe__obras, .solo-fondo .lente__lectura, .solo-fondo .nav, .solo-fondo main, .solo-fondo .pie, .solo-fondo .saltar { visibility: hidden; }
+.solo-fondo .heroe__dentro, .solo-fondo .heroe__obras, html.solo-fondo .heroe__obras.ubicadas, .solo-fondo .lente__lectura, .solo-fondo .nav, .solo-fondo main, .solo-fondo .pie, .solo-fondo .saltar { visibility: hidden; }
 
 @media (prefers-reduced-motion: reduce) {
-  .heroe__fondo, .heroe__poster { transition: opacity 200ms linear; }
+  .heroe__fondo, .heroe__poster, .heroe__deslizar { transition: opacity 200ms linear; }
+  .heroe__poster.visto { animation: none; }
   .acto, .obra::before, .obra__estado, .obra__tilde, .lente__lectura { transition: none; }
 }
 @media (forced-colors: active) {

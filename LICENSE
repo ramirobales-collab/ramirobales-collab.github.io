@@ -1,0 +1,78 @@
+Este repositorio tiene dos licencias distintas, según qué parte se use.
+This repository has two different licenses, depending on the part used.
+
+================================================================================
+1. CÓDIGO PROPIO — Licencia MIT / OWN CODE — MIT License
+================================================================================
+
+Alcance: el código fuente escrito para este sitio: los archivos .js y .mjs de js/,
+demos/*/js/ y pruebas/; las hojas .css de css/ y demos/*/css/; los guiones .py de
+herramientas/; y el marcado HTML como estructura (sin los textos que contiene, ver 2).
+No incluye nada de lib/ ni el material de terceros listado en 3.
+
+Scope: the source code written for this site (.js/.mjs in js/, demos/*/js/ and pruebas/,
+.css in css/ and demos/*/css/, .py in herramientas/, and the HTML markup as structure,
+excluding its text, see 2). It excludes lib/ and the third-party material listed in 3.
+
+MIT License
+
+Copyright (c) 2026 Ramiro Bales
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+================================================================================
+2. CONTENIDO — Todos los derechos reservados / CONTENT — All rights reserved
+================================================================================
+
+Copyright (c) 2026 Ramiro Bales. Todos los derechos reservados.
+
+Alcance: los textos (los de las páginas .html, i18n/, demos/*/i18n/ y el CV), las
+imágenes, los renders, las láminas y pósters de la sala (assets/mundo/), las capturas
+de pantalla de los productos, los modelos 3D propios, la identidad visual (nombre,
+logotipo, íconos y favicons) y los PDF de cv/.
+
+Se publican para que se puedan ver y evaluar. No se otorga licencia para copiarlos,
+modificarlos, redistribuirlos ni usarlos en otro sitio o producto. Para cualquier uso,
+escribí a ramirobales@gmail.com.
+
+Scope: texts (in the .html pages, i18n/, demos/*/i18n/ and the CV), images, renders,
+the room layers and posters (assets/mundo/), product screenshots, own 3D models, visual
+identity (name, logo, icons, favicons) and the PDFs in cv/. They are published to be
+viewed and evaluated; no license is granted to copy, modify, redistribute or reuse them.
+For any use, write to ramirobales@gmail.com.
+
+================================================================================
+3. MATERIAL DE TERCEROS / THIRD-PARTY MATERIAL
+================================================================================
+
+Cada uno conserva su licencia; el detalle de autores y enlaces está en creditos.html.
+Each keeps its own license; authors and links are listed in creditos.html.
+
+- lib/three.module.min.js, lib/GLTFLoader.js, lib/RGBELoader.js,
+  lib/BufferGeometryUtils.js — three.js r160, Copyright 2010-2023 three.js authors, MIT.
+- assets/fonts/inter-*.woff2 — Inter (Rasmus Andersson), SIL Open Font License 1.1.
+- assets/fonts/playfair-*.woff2 — Playfair Display (Claus Eggers Sørensen),
+  SIL Open Font License 1.1.
+- assets/3d/modelos/sofa.glb — Glam Velvet Sofa, (c) 2021 Wayfair, LLC / Eric Chadwick
+  (Khronos glTF Sample Assets), CC BY 4.0, modificado.
+- assets/3d/modelos/silla.glb — Sheen Chair, (c) 2020 Wayfair, LLC / Eric Chadwick
+  (Khronos glTF Sample Assets), CC0 1.0.
+- assets/3d/env/ — Poly Haven, CC0 1.0.
+
+Esto no es asesoramiento legal. This is not legal advice.

@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-HG5cMEl9NOgxBFFeZVXSHD2p0vzv0pJOqP6yvasTouo='; style-src 'self' 'sha256-9YhPxslC9jndyZPVv0pAUUIz6gJHVWb+cYX6DdxsZhM='; img-src 'self' data:; font-src 'self'; connect-src 'self'; media-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
 <title>AthleteIQ · demo landing (2026) · Ramiro Bales</title>
 <meta name="description" content="Demo landing for AthleteIQ, performance intelligence for rugby league staff. Demonstration page with a fictional squad, built in 2026 by Ramiro Bales."/>
@@ -13,9 +15,9 @@
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:title" content="AthleteIQ · demo de landing"/>
 <meta name="twitter:description" content="Real-time AI performance analytics. The data has no favourites."/>
-<meta property="og:image" content="https://ramirobales-collab.github.io/assets/og-1200x630.jpg"/>
+<meta property="og:image" content="https://ramirobales-collab.github.io/assets/mundo/og-1200x630.jpg"/>
 <meta property="og:url" content="https://ramirobales-collab.github.io/demos/athleteiq/"/>
-<meta name="twitter:image" content="https://ramirobales-collab.github.io/assets/og-1200x630.jpg"/>
+<meta name="twitter:image" content="https://ramirobales-collab.github.io/assets/mundo/og-1200x630.jpg"/>
 <link rel="icon" href="../../favicon.svg" type="image/svg+xml"/>
 <link rel="preload" href="../../assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin/>
 <style>
@@ -86,6 +88,7 @@ h1 .cr{color:var(--red)}
 section{padding:90px 48px}
 .stag{display:inline-block;color:var(--red);font-size:.68rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:12px}
 .stit{font-size:clamp(1.8rem,2.8vw,2.6rem);font-weight:900;letter-spacing:-1px;line-height:1.1;margin-bottom:12px}
+.stit--165{font-size:1.65rem}.stag--bloque{display:block;margin-bottom:12px}.btn-p--grande{font-size:.97rem;padding:16px 32px}
 .ssub{color:var(--sub);font-size:.97rem;line-height:1.7;max-width:540px}
 .ctr{text-align:center}.ctr .ssub{margin:0 auto}
 .gn{color:var(--green)}.gr{color:var(--red)}
@@ -336,6 +339,12 @@ footer{background:var(--bg2);border-top:1px solid var(--bd);padding:32px 48px;di
 @media(max-width:768px){#hcanvas{opacity:.28}footer{padding-bottom:84px}}
 a:focus-visible,button:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--red);outline-offset:3px}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}.fu,.fl,.fr,.scard,.hwstep{opacity:1!important;transform:none!important}}
+
+/* ==== marco del portfolio (interiores, 10/11/2026) ==== */
+.demo-rotulo{display:inline-flex;align-items:center;min-height:44px;padding:8px 14px;border-radius:999px;font-family:Inter,system-ui,sans-serif;font-weight:600;color:oklch(93% 0.015 85);background:linear-gradient(oklch(12% 0.005 80 / .94),oklch(5% 0 0 / .96));border:0;box-shadow:inset 0 0 0 1px oklch(100% 0 0 / .18),inset 0 1px 0 oklch(100% 0 0 / .16),0 18px 40px -18px #000;backdrop-filter:none}
+.demo-rotulo:hover,.demo-rotulo:focus-visible{color:oklch(97% 0.008 85);border:0;box-shadow:inset 0 0 0 1px oklch(68% 0.19 29),inset 0 1px 0 oklch(100% 0 0 / .16),0 18px 40px -18px #000}
+.demo-rotulo:focus-visible{outline:2px solid oklch(97% 0.008 85);outline-offset:3px}
+/* ==== fin del marco del portfolio ==== */
 </style>
 </head>
 <body>
@@ -361,15 +370,15 @@ a:focus-visible,button:focus-visible,[tabindex]:focus-visible{outline:2px solid 
   </div>
   <div class="nright">
     <div class="lang-wrap" id="lw">
-      <div class="lang-btn" onclick="toggleLang()" id="lbtn">
+      <div class="lang-btn" id="lbtn">
         <span id="lcur">EN</span><span class="arr">&#9662;</span>
       </div>
       <div class="lang-menu" id="lmenu">
-        <div class="lang-opt active" onclick="pickLang('en','EN',event)">EN &mdash; English</div>
-        <div class="lang-opt" onclick="pickLang('es','ES',event)">ES &mdash; Espa&ntilde;ol</div>
-        <div class="lang-opt" onclick="pickLang('pt','PT',event)">PT &mdash; Portugu&ecirc;s</div>
-        <div class="lang-opt" onclick="pickLang('fr','FR',event)">FR &mdash; Fran&ccedil;ais</div>
-        <div class="lang-opt" onclick="pickLang('zh','ZH',event)">ZH &mdash; &#20013;&#25991;</div>
+        <div class="lang-opt active" data-lang="en" data-label="EN">EN &mdash; English</div>
+        <div class="lang-opt" data-lang="es" data-label="ES">ES &mdash; Espa&ntilde;ol</div>
+        <div class="lang-opt" data-lang="pt" data-label="PT">PT &mdash; Portugu&ecirc;s</div>
+        <div class="lang-opt" data-lang="fr" data-label="FR">FR &mdash; Fran&ccedil;ais</div>
+        <div class="lang-opt" data-lang="zh" data-label="ZH">ZH &mdash; &#20013;&#25991;</div>
       </div>
     </div>
     <a href="../../index.html" class="nbtn-c" data-i18n="nport">Portfolio</a>
@@ -420,7 +429,7 @@ a:focus-visible,button:focus-visible,[tabindex]:focus-visible{outline:2px solid 
   <div class="dlayout">
     <div class="fl">
       <div class="stag" data-i18n="dftag">What you can ask</div>
-      <h3 class="stit" style="font-size:1.65rem" data-i18n="dftit">Your analyst.<br>Available <span class="gn">24/7.</span></h3>
+      <h3 class="stit stit--165" data-i18n="dftit">Your analyst.<br>Available <span class="gn">24/7.</span></h3>
       <ul class="flist">
         <li class="fitem"><div class="fico">!</div><div><div class="ftit" data-i18n="f1t">Injury Alerts</div><div class="fdesc" data-i18n="f1d">"Who has the highest injury risk right now?" &mdash; ranked list with evidence in seconds.</div></div></li>
         <li class="fitem"><div class="fico">&#x221E;</div><div><div class="ftit" data-i18n="f2t">Player Deep Dives</div><div class="fdesc" data-i18n="f2d">"Full analysis of Okafor" — physical state, risk level, load recommendation.</div></div></li>
@@ -444,10 +453,10 @@ a:focus-visible,button:focus-visible,[tabindex]:focus-visible{outline:2px solid 
     </div>
     <div class='demo-chips' id='demoChips'>
       <div class='demo-chips-label' data-i18n='dchip_label'>Ask the demo</div>
-      <button class='demo-chip' data-i18n='dq1' onclick='askDemo("injury")'>Who's highest injury risk?</button>
-      <button class='demo-chip' data-i18n='dq2' onclick='askDemo("undervalued")'>Most undervalued player?</button>
-      <button class='demo-chip' data-i18n='dq3' onclick='askDemo("roundone")'>Reyes or Lindqvist Round 1?</button>
-      <button class='demo-chip' data-i18n='dq4' onclick='askDemo("fitness")'>Is Okafor fit for pre-season?</button>
+      <button class='demo-chip' data-i18n='dq1' data-pregunta='injury'>Who's highest injury risk?</button>
+      <button class='demo-chip' data-i18n='dq2' data-pregunta='undervalued'>Most undervalued player?</button>
+      <button class='demo-chip' data-i18n='dq3' data-pregunta='roundone'>Reyes or Lindqvist Round 1?</button>
+      <button class='demo-chip' data-i18n='dq4' data-pregunta='fitness'>Is Okafor fit for pre-season?</button>
     </div>
   </div>
 </section>
@@ -490,13 +499,13 @@ a:focus-visible,button:focus-visible,[tabindex]:focus-visible{outline:2px solid 
 </section>
 
 <!-- CTA -->
-<section id="cta" style="position:relative;overflow:hidden">
+<section id="cta">
   <div class="cta-c fu">
-    <div class="stag" style="display:block;margin-bottom:12px" data-i18n="ctatag">Get Started</div>
+    <div class="stag stag--bloque" data-i18n="ctatag">Get Started</div>
     <h2 class="cta-t" data-i18n="ctatit">Ready to see what your squad <span class="gn">really</span> looks like?</h2>
     <p class="cta-s" data-i18n="ctasub">This landing is a demo: the chat above runs on a fictional squad. The bots are an internal demo; write to me to see them.</p>
     <div class="cta-btns">
-      <a class="btn-p" style="font-size:.97rem;padding:16px 32px" href="../../index.html" data-i18n="ctab2">Back to the portfolio →</a>
+      <a class="btn-p btn-p--grande" href="../../index.html" data-i18n="ctab2">Back to the portfolio →</a>
     </div>
   </div>
 </section>
@@ -541,6 +550,9 @@ function pickLang(code,label,event){
 document.addEventListener('click',e=>{
   if(!document.getElementById('lw').contains(e.target)) document.getElementById('lw').classList.remove('open');
 });
+document.getElementById('lbtn').addEventListener('click',toggleLang);
+document.querySelectorAll('.lang-opt[data-lang]').forEach(o=>o.addEventListener('click',e=>pickLang(o.dataset.lang,o.dataset.label,e)));
+document.querySelectorAll('.demo-chip[data-pregunta]').forEach(b=>b.addEventListener('click',()=>window.askDemo&&window.askDemo(b.dataset.pregunta)));
 
 // ── SCROLL PROGRESS ───────────────────────────────────────
 const pb=document.getElementById('pb');

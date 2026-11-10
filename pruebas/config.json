@@ -1,0 +1,201 @@
+{
+  "_léeme": "Configuración versionada de las pruebas. Cada excepción lleva su motivo. 1 KB = 1000 B y 1 MB = 1 000 000 B (más estricto que 1024), salvo el CSS crítico, que usa el mismo tope que herramientas/critico.py (14 × 1024 B).",
+
+  "presupuestos": {
+    "juego_h": { "patron": "^assets/mundo/h-.*\\.(webp|png)$", "max": 1900000, "fuente": "decisión del dueño: láminas del motor" },
+    "juego_v": { "patron": "^assets/mundo/v-.*\\.(webp|png)$", "max": 950000, "fuente": "decisión del dueño: láminas del motor" },
+    "poster": { "patron": "^assets/mundo/poster-[hv]\\.(avif|webp)$", "max_cada_uno": 160000, "fuente": "decisión del dueño: láminas del motor" },
+    "css_critico": { "max": 14336, "fuente": "herramientas/critico.py (LIMITE)" },
+    "primera_carga_portada": { "max": 1100000, "fuente": "decisión del dueño: HTML + CSS + JS + fuentes precargadas + mundo.json + póster + juego h (sin imágenes diferidas)" }
+  },
+
+  "politica": {
+    "_léeme": "pruebas/politica.mjs. img-src con data: sólo en estas páginas (las dos con three.js; herramientas/proteccion.py → EXTRA). Una página sin <script> tiene script-src y connect-src 'none'.",
+    "img_data": ["demos/configurador/index.html", "demos/athleteiq/index.html"]
+  },
+
+  "veracidad": {
+    "_léeme": "Reglas de contenido del dueño. Se busca en todo texto publicado (HTML, JSON, JS propio, CSS, manifest, sitemap, CV, README, SEGURIDAD, LICENSE) sin distinguir mayúsculas ni tildes. Las palabras que no se pueden publicar NO están acá en claro: van como huella (ver «huellas» y pruebas/lib/huella.mjs); los motivos son genéricos a propósito.",
+    "cerca_de_cathedra": {
+      "_léeme": "Se revisa cada ORACIÓN que nombra a Cathedra (en HTML por bloque de texto, y cada li.saber__item junto con el texto de su chip en ES y EN; en JSON por valor; en JS por línea); «lanzado» se busca en todo el párrafo o valor. Además, la página de Cathedra entera con el texto de sus claves en ES y EN. Las huellas «proveedores» e «internos» se buscan en esas mismas oraciones.",
+      "lanzado": { "re": "\\blanzad[oa]s?\\b|\\blaunched\\b|\\blanzamiento\\b|\\bya disponible\\b|\\bnow available\\b", "motivo": "Cathedra nunca «lanzado»" },
+      "prohibidas": [
+        { "re": "us\\$|\\b(usd|ars)\\b|€|\\$\\s?\\d|\\bprecios?\\b|\\bpric(e|es|ing)\\b|\\bsuscripci[oó]n\\b|\\bsubscription\\b", "motivo": "Cathedra sin precios ni planes" },
+        { "re": "\\bmodel(os|s)\\b(?!\\s+3d)", "no_si": "\\b3d\\s+models\\b", "motivo": "Cathedra sin modelos de IA (sí «modelos 3D»)" }
+      ]
+    },
+    "cifra_pruebas": {
+      "_léeme": "La única cifra de pruebas en miles que publica el sitio es la de Cathedra. Toda cifra con separador de miles seguida (hasta dos palabras después) de «pruebas/tests» tiene que ser una de estas, en cualquier archivo publicado.",
+      "re": "(\\d{1,3}(?:[.,]\\d{3})+)\\s+(?:\\p{L}+\\s+){0,2}?(?:pruebas|tests)\\b",
+      "validas": ["5.500", "5,500"],
+      "motivo": "Cathedra: «más de 5.500» pruebas (última suite registrada)"
+    },
+    "frases_prohibidas": [
+      { "re": "\\bbrief de precios\\b|\\bprice brief\\b|\\bbot de precios\\b|\\bprice bot\\b", "motivo": "el brief de AthleteIQ es un prototipo que lee noticias, no precios" }
+    ],
+    "paginas_sin_proveedor": {
+      "_léeme": "AthleteIQ: sin proveedor. Se mira la página del caso entera contra la huella «proveedores».",
+      "paginas": ["proyectos/athleteiq.html"]
+    },
+    "coro_reseñas": {
+      "_léeme": "coro: 400 reseñas en la corrida real más grande, 1.200 en una prueba de carga. Toda cifra pegada a «reseñas/reviews» tiene que ser una de esas o estar declarada abajo con su motivo.",
+      "re": "(\\d[\\d.,]*)\\s*(reseñas|reviews)",
+      "validas": ["400", "1.200", "1,200", "1200"],
+      "otras_permitidas": [
+        { "cifra": "32", "motivo": "fixture propio de prueba descripto en el caso de coro (texto existente), no una corrida" }
+      ]
+    }
+  },
+
+  "huellas": {
+    "_léeme": "sha256(«pv1:» + palabra normalizada), 20 caracteres. Para sumar una: node pruebas/lib/huella.mjs <palabra>. en_todo: en todo el árbol (también pruebas/ y herramientas/) y en el historial de git. proveedores e internos: cerca de Cathedra y en la página de AthleteIQ. servicios: en todo el árbol y el historial (prueba secretos).",
+    "en_todo": [
+      {"h": "2d4064d278cb5c90b61b", "motivo": "nombre interno 2 (decisión del dueño)"},
+      {"h": "adf3795cbfaf42dd95a6", "motivo": "nombre interno 1 (decisión del dueño)"},
+      {"h": "d50ae3d19bcedd4f5d62", "motivo": "nombre interno 3 (decisión del dueño)"}
+    ],
+    "proveedores": [
+      {"h": "0913b6be810790aed785", "motivo": "proveedor o modelo de IA", "si_sigue_cifra": true},
+      {"h": "0b940f97d540f7369da6", "motivo": "proveedor o modelo de IA"},
+      {"h": "2c6aa5a7f0ad7197b58b", "motivo": "proveedor o modelo de IA"},
+      {"h": "30a915527cabe261830b", "motivo": "proveedor o modelo de IA"},
+      {"h": "48cdfd9ca873ffdf7436", "motivo": "proveedor o modelo de IA"},
+      {"h": "48ff7667650c40d9216b", "motivo": "proveedor o modelo de IA"},
+      {"h": "4c7bea52fcfdcd458e5d", "motivo": "proveedor o modelo de IA"},
+      {"h": "511b08195562b4b02ddc", "motivo": "proveedor o modelo de IA"},
+      {"h": "543047da15844abe406d", "motivo": "proveedor o modelo de IA"},
+      {"h": "89e1e7b20e8786e2da31", "motivo": "proveedor o modelo de IA", "salvo_si_sigue": "cd66eb0aeb2d2be83dee"},
+      {"h": "8fc5147480197a16c833", "motivo": "proveedor o modelo de IA"},
+      {"h": "9782b001230c2a500b0d", "motivo": "proveedor o modelo de IA"},
+      {"h": "a2c4db58baac0124cb90", "motivo": "proveedor o modelo de IA"},
+      {"h": "bc0a1db06108e51048f0", "motivo": "proveedor o modelo de IA"},
+      {"h": "cef055df358542e4d2b2", "motivo": "proveedor o modelo de IA"},
+      {"h": "f0bf66b166c223477b7b", "motivo": "proveedor o modelo de IA"},
+      {"h": "f1bb9d1b1d04863a9f03", "motivo": "proveedor o modelo de IA"},
+      {"h": "f7d7baba5f14ccbbbb1e", "motivo": "proveedor o modelo de IA"}
+    ],
+    "internos": [
+      {"h": "00f2dfdebfb4c9e0ea80", "motivo": "dato interno del producto"},
+      {"h": "292649905aaa53fc4790", "motivo": "dato interno del producto"},
+      {"h": "6490f86a9a93d2efcffb", "motivo": "dato interno del producto"},
+      {"h": "71cc394d7e88114820bb", "motivo": "dato interno del producto"},
+      {"h": "800906e0202587287f2d", "motivo": "dato interno del producto"},
+      {"h": "b4effb691341b4cb6361", "motivo": "dato interno del producto"},
+      {"h": "c99c43578972b7833e72", "motivo": "dato interno del producto"},
+      {"h": "d853b60b907d7906504d", "motivo": "dato interno del producto"}
+    ],
+    "servicios": [
+      {"h": "2011b21753f464cb35ae", "motivo": "punto de entrada de un servicio propio"},
+      {"h": "9d5a02bb1d6064cc2389", "motivo": "punto de entrada de un servicio propio"},
+      {"h": "d778cb5734e1388ff0ef", "motivo": "punto de entrada de un servicio propio"}
+    ]
+  },
+
+  "contraste": {
+    "_léeme": "pruebas/contraste.mjs: tokens de css/variables.css en los dos temas. Clases: texto (cuerpo), secundario (bajadas, etiquetas, enlaces, sellos), grande (bordes funcionales, foco, cifras ≥ 24 px). Superficies compuestas: placa-a/b sobre el fondo, nav (capa-1 al 95 %), banda tinta (oscura en los dos temas: adentro rigen los tokens oscuros), «+mota» = el peor caso de una luz desenfocada del fondo vivo detrás.",
+    "vara": { "claro": { "texto": 7, "secundario": 4.5, "grande": 3 }, "oscuro": { "texto": 4.5, "secundario": 4.5, "grande": 3 } },
+    "requeridos": ["--fondo", "--capa-1", "--capa-2", "--texto", "--texto-2", "--texto-3", "--placa-a", "--placa-b", "--borde", "--foco", "--acento-texto", "--acento-display"],
+    "mota": { "color": "#9E9C94", "motivo": "luz desenfocada del enjambre detrás de una placa (sRGB 0,62 0,61 0,58)" },
+    "banda": { "color": "oklch(8% 0.005 80)", "velo": { "claro": 0.97, "oscuro": 0.82 } },
+    "nav_alfa": 0.95,
+    "hover_alfa": 0.09,
+    "pares": [
+      ["--texto", "--fondo", "texto", "cuerpo sobre la página"],
+      ["--texto", "placa-a", "texto", "cuerpo sobre placa"],
+      ["--texto", "placa-b", "texto", ""],
+      ["--texto", "placa-b+mota", "texto", "placa con una mota detrás"],
+      ["--texto", "--capa-2", "texto", "capa hundida"],
+      ["--texto", "nav", "texto", "barra en placa"],
+      ["--texto-2", "--fondo", "secundario", "secundario"],
+      ["--texto-2", "placa-a", "secundario", ""],
+      ["--texto-2", "placa-b", "secundario", ""],
+      ["--texto-2", "placa-b+mota", "secundario", ""],
+      ["--texto-2", "nav", "secundario", "enlaces de la barra"],
+      ["--texto-3", "--fondo", "secundario", "etiquetas"],
+      ["--texto-3", "placa-a", "secundario", ""],
+      ["--texto-3", "placa-b", "secundario", ""],
+      ["--texto-3", "placa-b+mota", "secundario", ""],
+      ["--texto-3", "nav", "secundario", "folios del riel"],
+      ["--acento-texto", "--fondo", "secundario", "enlaces y chips"],
+      ["--acento-texto", "placa-a", "secundario", ""],
+      ["--acento-texto", "placa-b", "secundario", ""],
+      ["--acento-texto", "placa-b+mota", "secundario", ""],
+      ["--acento-display", "--fondo", "grande", "cifras y folios (≥ 24 px)"],
+      ["--acento-display", "placa-a", "grande", ""],
+      ["--acento-display", "placa-b", "grande", ""],
+      ["--estado-en-uso", "--fondo", "secundario", "sello verde"],
+      ["--estado-proceso", "--fondo", "secundario", "sello ámbar"],
+      ["--foco", "--fondo", "grande", "aro de foco"],
+      ["--foco", "placa-b", "grande", ""],
+      ["--borde", "--fondo", "grande", "borde funcional"],
+      ["--borde", "placa-b", "grande", ""],
+      ["--fondo", "--texto", "texto", "texto del botón primario"],
+      ["--acento-contra", "--acento-display", "secundario", "selección de texto"],
+      ["--texto", "hover-secundario", "texto", "botón secundario al pasar"],
+      ["banda:texto", "banda", "texto", "banda tinta: cuerpo"],
+      ["banda:texto", "banda+mota", "texto", "banda con una mota detrás"],
+      ["banda:texto-2", "banda", "secundario", "banda: secundario"],
+      ["banda:texto-2", "banda+mota", "secundario", ""],
+      ["banda:texto-3", "banda", "secundario", "banda: etiquetas"],
+      ["banda:texto-3", "banda+mota", "secundario", ""],
+      ["banda:acento-texto", "banda", "secundario", "banda: acento"],
+      ["banda:acento-display", "banda", "grande", "banda: cifras"],
+      ["banda:texto", "banda:placa-b", "texto", "placa dentro de la banda"],
+      ["banda:texto-2", "banda:placa-b", "secundario", ""],
+      ["banda:foco", "banda", "grande", "foco en la banda"],
+      ["banda:borde", "banda", "grande", ""]
+    ],
+    "demo_athleteiq": {
+      "pagina": "demos/athleteiq/index.html",
+      "pares": [["--text", "--bg", "secundario"], ["--sub", "--bg", "secundario"], ["--muted", "--bg", "secundario"], ["--red", "--bg", "grande"], ["--green", "--bg", "grande"], ["#FFFFFF", "--red", "secundario"]]
+    }
+  },
+
+  "vitales": {
+    "_léeme": "pruebas/vitales.mjs. Perfil frío, sin caché, red y CPU limitadas. Las varas: CLS de WebVitals (bueno ≤ 0,1; acá más estricto), tarea larga después del primer pintado, tiempo de «cargando» a «lineas» en la portada, y cuadros por segundo mínimos para que el motor siga vivo sin placa (SwiftShader).",
+    "paginas": ["index.html", "404.html", "creditos.html", "legal.html"],
+    "red": { "latencia": 150, "bajada": 1600000, "subida": 750000 },
+    "cpu": 4,
+    "espera": 9000,
+    "espera_portada": 20000,
+    "espera_reducido": 1500,
+    "espera_swiftshader": 12000,
+    "tope_visita": 60000,
+    "cls_max": 0.05,
+    "tarea_larga_max": 250,
+    "lineas_max_ms": 3000,
+    "swiftshader_cps_min": 10
+  },
+
+  "secretos": {
+    "credenciales": [
+      { "re": "ghp_[A-Za-z0-9]{36}|github_pat_[A-Za-z0-9_]{40,}|gho_[A-Za-z0-9]{36}", "motivo": "token de GitHub" },
+      { "re": "AKIA[0-9A-Z]{16}", "motivo": "clave de AWS" },
+      { "re": "AIza[0-9A-Za-z_-]{35}", "motivo": "clave de Google" },
+      { "re": "xox[abprs]-[A-Za-z0-9-]{10,}", "motivo": "token de Slack" },
+      { "re": "sk-ant-[A-Za-z0-9_-]{20,}|sk-(proj-)?[A-Za-z0-9]{32,}", "motivo": "clave de API de un modelo" },
+      { "re": "(sk|pk|rk)_live_[A-Za-z0-9]{16,}", "motivo": "clave de pagos" },
+      { "re": "-----BEGIN [A-Z ]*PRIVATE KEY-----", "motivo": "clave privada" },
+      { "re": "hooks\\.slack\\.com/services/|discord(app)?\\.com/api/webhooks/|api\\.telegram\\.org/bot\\d|\\bbot\\d{8,10}:[A-Za-z0-9_-]{35}", "motivo": "webhook o bot" },
+      { "re": "eyJ[A-Za-z0-9_-]{10,}\\.eyJ[A-Za-z0-9_-]{10,}\\.[A-Za-z0-9_-]{10,}", "motivo": "JWT" },
+      { "re": "(mongodb(\\+srv)?|postgres(ql)?|redis|mysql)://[^\\s'\"]+@", "motivo": "cadena de conexión con credenciales" },
+      { "re": "(api[_-]?key|client[_-]?secret|x-api-key|authorization)\\s*[:=]\\s*['\"][^'\"]{8,}", "motivo": "clave escrita en el código" }
+    ],
+    "nombres_prohibidos": "(^|/)(\\.env(\\..*)?|id_rsa|id_ed25519|.*\\.pem|.*\\.key|credentials\\.json|secrets?\\.json|\\.npmrc|\\.netrc)$",
+    "rutas_locales": "[A-Za-z]:[\\\\/]+Users[\\\\/]|/Users/[A-Za-z]|/home/[a-z]+/|AppData|Perfil-laboral",
+    "direcciones_locales": { "re": "(127\\.0\\.0\\.1|localhost):\\d{2,5}", "motivo": "servidor de desarrollo con puerto; sólo en lo publicado («sólo en 127.0.0.1» del modelo de amenazas de Cathedra es contenido, no una fuga)" },
+    "correos_permitidos": [
+      { "correo": "ramirobales@gmail.com", "motivo": "contacto público del sitio" }
+    ],
+    "telefono": "\\+\\d{2}[\\s-]?\\d{2}[\\s-]?\\d{4}[\\s-]?\\d{4}",
+    "telefono_permitido": [
+      { "en": "^cv/", "motivo": "CV: decisión del dueño; se informa como aviso, no como falla" }
+    ]
+  },
+
+  "almacenamiento": {
+    "_léeme": "Lo que legal.html y SEGURIDAD.md dicen que se guarda. La prueba de humo falla si aparece otra clave.",
+    "localStorage": ["idioma", "tema"],
+    "sessionStorage": ["mundo-visto"]
+  }
+}

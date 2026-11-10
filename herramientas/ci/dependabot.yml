@@ -1,0 +1,10 @@
+# Mantiene al día los SHA de las acciones de herramientas/ci/pruebas.yml (van fijadas por commit, no por
+# etiqueta). Se activa junto con el flujo: cp herramientas/ci/dependabot.yml .github/dependabot.yml
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+    commit-message:
+      prefix: "CI"

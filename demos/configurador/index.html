@@ -2,6 +2,8 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-65Zfo6b4nH9P/crz3HSjEFkFtQ38xCcrmHqXgX7QsKA=' 'sha256-VpifGmDug4xIyU+ZADqk11zvwN3ROuMmbQwJMY9pYZg='; style-src 'self'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self' blob:; media-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <script>try{var q=new URLSearchParams(location.search).get('tema'),t=q==='claro'?'light':q==='oscuro'?'dark':q||localStorage.getItem('tema');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t;}catch(e){}</script>
 <title>Configurador 3D · Ámbar Muebles (marca ficticia) · Ramiro Bales</title>
@@ -36,7 +38,7 @@
   <a class="cinta__volver" href="../../index.html" data-i18n="cinta.volver">← Volver al portfolio</a>
 </div>
 
-<header class="tienda" aria-label="Ámbar Muebles">
+<header class="tienda" aria-label="Ámbar Muebles" data-i18n-attr="aria-label=marca.nombre">
   <a class="marca" href="#ficha" aria-label="Ámbar Muebles, inicio de la ficha" data-i18n-attr="aria-label=marca.aria">
     <svg class="marca__signo" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3.5c5.8 4.6 9 9.6 9 14.6A9 9 0 0 1 7 18.1C7 13.1 10.2 8.1 16 3.5Z"/><path d="M16 9.5v17.4M11.6 15.8 16 20.2l4.4-4.4"/></svg>
     <span class="marca__nombre">Ámbar</span><span class="marca__sub" data-i18n="marca.sub">Muebles</span>
@@ -152,25 +154,25 @@
           <p class="cifra__pre" data-i18n="cifra1.pre">Conversión, hasta</p>
           <p class="cifra__n" data-i18n="cifra1.n">2×</p>
           <p class="cifra__que" data-i18n="cifra1.que">en fichas de producto con 3D y realidad aumentada.</p>
-          <p class="cifra__fuente"><span data-i18n="cifra.segun">Según</span> <a href="https://www.threekit.com/guide-to-roi-in-3d-and-augmented-reality" rel="noopener" target="_blank" data-i18n="cifra1.fuente">Threekit, guía de ROI en 3D y AR (datos de Shopify)</a></p>
+          <p class="cifra__fuente"><span data-i18n="cifra.segun">Según</span> <a href="https://www.threekit.com/guide-to-roi-in-3d-and-augmented-reality" rel="noopener noreferrer" target="_blank" data-i18n="cifra1.fuente">Threekit, guía de ROI en 3D y AR (datos de Shopify)</a></p>
         </li>
         <li class="cifra">
           <p class="cifra__pre" data-i18n="cifra2.pre">Devoluciones, hasta</p>
           <p class="cifra__n" data-i18n="cifra2.n">−40 %</p>
           <p class="cifra__que" data-i18n="cifra2.que">cuando el cliente ve el producto en 3D o AR antes de comprar.</p>
-          <p class="cifra__fuente"><span data-i18n="cifra.segun">Según</span> <a href="https://www.threekit.com/guide-to-roi-in-3d-and-augmented-reality" rel="noopener" target="_blank" data-i18n="cifra2.fuente">Threekit, guía de ROI en 3D y AR (datos de Shopify)</a></p>
+          <p class="cifra__fuente"><span data-i18n="cifra.segun">Según</span> <a href="https://www.threekit.com/guide-to-roi-in-3d-and-augmented-reality" rel="noopener noreferrer" target="_blank" data-i18n="cifra2.fuente">Threekit, guía de ROI en 3D y AR (datos de Shopify)</a></p>
         </li>
         <li class="cifra">
           <p class="cifra__pre" data-i18n="cifra3.pre">Agregar al carrito</p>
           <p class="cifra__n" data-i18n="cifra3.n">+44 %</p>
           <p class="cifra__que" data-i18n="cifra3.que">al interactuar con modelos 3D (caso Rebecca Minkoff).</p>
-          <p class="cifra__fuente"><span data-i18n="cifra.segun">Según</span> <a href="https://www.shopify.com/blog/3d-ecommerce" rel="noopener" target="_blank" data-i18n="cifra3.fuente">Shopify, «3D Ecommerce» (2026)</a></p>
+          <p class="cifra__fuente"><span data-i18n="cifra.segun">Según</span> <a href="https://www.shopify.com/blog/3d-ecommerce" rel="noopener noreferrer" target="_blank" data-i18n="cifra3.fuente">Shopify, «3D Ecommerce» (2026)</a></p>
         </li>
         <li class="cifra">
           <p class="cifra__pre" data-i18n="cifra4.pre">Prefiere 3D a video</p>
           <p class="cifra__n" data-i18n="cifra4.n">95 %</p>
           <p class="cifra__que" data-i18n="cifra4.que">de los compradores elige una vista 3D interactiva antes que un video del producto.</p>
-          <p class="cifra__fuente"><span data-i18n="cifra.segun">Según</span> <a href="https://www.threekit.com/comprehensive-guide-to-3d-product-configurators" rel="noopener" target="_blank" data-i18n="cifra4.fuente">Threekit, guía de configuradores 3D</a></p>
+          <p class="cifra__fuente"><span data-i18n="cifra.segun">Según</span> <a href="https://www.threekit.com/comprehensive-guide-to-3d-product-configurators" rel="noopener noreferrer" target="_blank" data-i18n="cifra4.fuente">Threekit, guía de configuradores 3D</a></p>
         </li>
       </ul>
 
@@ -220,7 +222,7 @@
         <li class="flujo__paso flujo__paso--opcional">
           <span class="flujo__n" aria-hidden="true">5</span>
           <h3 data-i18n="integra5.t">Realidad aumentada (opcional)</h3>
-          <p><span data-i18n="integra5.p">El mismo modelo abre en realidad aumentada en Android (glTF) y, con una copia USDZ, en iPhone, para verlo en el living. Según</span> <a href="https://www.shopify.com/blog/ar-shopping" rel="noopener" target="_blank" data-i18n="integra5.fuente">Shopify</a><span data-i18n="integra5.p2">, la AR aumentó la probabilidad de compra un 65 %.</span></p>
+          <p><span data-i18n="integra5.p">El mismo modelo abre en realidad aumentada en Android (glTF) y, con una copia USDZ, en iPhone, para verlo en el living. Según</span> <a href="https://www.shopify.com/blog/ar-shopping" rel="noopener noreferrer" target="_blank" data-i18n="integra5.fuente">Shopify</a><span data-i18n="integra5.p2">, la AR aumentó la probabilidad de compra un 65 %.</span></p>
         </li>
       </ol>
       <dl class="medidas" id="medidas-tabla">
@@ -293,12 +295,12 @@
 
 <footer class="pie">
   <div class="pie__in">
-    <p class="pie__atrib" data-i18n="pie.atrib">Modelos 3D: Sheen Chair © 2020 Wayfair, LLC / Eric Chadwick (CC0) y Glam Velvet Sofa © 2021 Wayfair, LLC / Eric Chadwick (CC BY 4.0), Khronos glTF Sample Assets; HDRI Studio Small 08/09, Poly Haven (CC0).</p>
+    <p class="pie__atrib" data-i18n="pie.atrib">Modelos 3D: Sheen Chair © 2020 Wayfair, LLC / Eric Chadwick (CC0) y Glam Velvet Sofa © 2021 Wayfair, LLC / Eric Chadwick (CC BY 4.0), Khronos glTF Sample Assets; HDRI Studio Small 09, Poly Haven (CC0).</p>
     <p class="pie__cambios" data-i18n="pie.cambios">Cambios propios: geometría de la butaca cuantizada, etiqueta interna quitada, colores y acabados agregados por factor. Ámbar Muebles es una marca ficticia; Wayfair no participa ni respalda esta demo.</p>
     <p class="pie__enlaces">
-      <a href="https://github.com/KhronosGroup/glTF-Sample-Assets" rel="noopener" target="_blank">Khronos glTF Sample Assets</a>
-      <a href="https://creativecommons.org/licenses/by/4.0/" rel="noopener" target="_blank">CC BY 4.0</a>
-      <a href="https://polyhaven.com/a/studio_small_09" rel="noopener" target="_blank">Poly Haven</a>
+      <a href="https://github.com/KhronosGroup/glTF-Sample-Assets" rel="noopener noreferrer" target="_blank">Khronos glTF Sample Assets</a>
+      <a href="https://creativecommons.org/licenses/by/4.0/" rel="noopener noreferrer" target="_blank">CC BY 4.0</a>
+      <a href="https://polyhaven.com/a/studio_small_09" rel="noopener noreferrer" target="_blank">Poly Haven</a>
       <a href="../../creditos.html" data-i18n="pie.creditos">Créditos del portfolio</a>
       <a href="../../index.html" data-i18n="cinta.volver">← Volver al portfolio</a>
     </p>

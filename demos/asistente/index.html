@@ -2,6 +2,8 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-VpifGmDug4xIyU+ZADqk11zvwN3ROuMmbQwJMY9pYZg='; style-src 'self'; img-src 'self'; font-src 'self'; connect-src 'self'; media-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <script>try{var q=new URLSearchParams(location.search).get('tema'),t=q==='claro'?'light':q==='oscuro'?'dark':q||localStorage.getItem('tema');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t;}catch(e){}</script>
 <title>Asistente de catálogo · Ámbar Muebles (marca ficticia) · Ramiro Bales</title>
@@ -30,7 +32,7 @@
   <a class="cinta__volver" href="../../index.html" data-i18n="cinta.volver">← Volver al portfolio</a>
 </div>
 
-<header class="tienda" aria-label="Ámbar Muebles">
+<header class="tienda" aria-label="Ámbar Muebles" data-i18n-attr="aria-label=marca.nombre">
   <a class="marca" href="#asistente" aria-label="Ámbar Muebles, inicio de la demo" data-i18n-attr="aria-label=marca.aria">
     <svg class="marca__signo" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3.5c5.8 4.6 9 9.6 9 14.6A9 9 0 0 1 7 18.1C7 13.1 10.2 8.1 16 3.5Z"/><path d="M16 9.5v17.4M11.6 15.8 16 20.2l4.4-4.4"/></svg>
     <span class="marca__nombre">Ámbar</span><span class="marca__sub" data-i18n="marca.sub">Muebles</span>

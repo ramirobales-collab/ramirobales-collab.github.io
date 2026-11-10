@@ -1,0 +1,38 @@
+# Fin de línea LF para todo el texto, en el índice y en el disco, en cualquier máquina (también con
+# core.autocrlf=true en Windows). Así los bytes con que herramientas/proteccion.py calcula los hashes de la
+# política, y con que pruebas/presupuestos.mjs y herramientas/critico.py miden pesos, son los mismos que
+# publica GitHub Pages.
+* text=auto eol=lf
+
+# Texto del sitio, nombrado para que nunca dependa de la detección automática
+*.html        text eol=lf
+*.css         text eol=lf
+*.js          text eol=lf
+*.mjs         text eol=lf
+*.json        text eol=lf
+*.webmanifest text eol=lf
+*.svg         text eol=lf
+*.xml         text eol=lf
+*.txt         text eol=lf
+*.md          text eol=lf
+*.py          text eol=lf
+*.yml         text eol=lf
+LICENSE       text eol=lf
+.nojekyll     text eol=lf
+
+# Binarios: sin conversión ni diff de texto
+*.webp  binary
+*.avif  binary
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.gif   binary
+*.ico   binary
+*.glb   binary
+*.hdr   binary
+*.exr   binary
+*.pdf   binary
+*.woff2 binary
+*.woff  binary
+*.mp4   binary
+*.webm  binary

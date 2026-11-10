@@ -1,0 +1,17 @@
+# Lo que nunca se publica: dependencias, cachés, archivos del sistema y del editor, registros.
+node_modules/
+__pycache__/
+*.pyc
+*.log
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+*.swp
+*~
+# Variables y claves locales (la prueba «secretos» también falla si aparecen)
+.env
+.env.*
+*.pem
+*.key

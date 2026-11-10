@@ -1,5 +1,5 @@
 /* lente.js — lente de rayos X de «la sala negra» (motor.md §4.4): con puntero fino, un disco con inercia muestra
-   el plano de líneas debajo de la materia, con aumento 1,15 y desfase cromático en el borde; al lado, la lectura
+   el plano de líneas debajo de la materia, con aumento 1,15 y un filo de luz blanca neutra en el borde; al lado, la lectura
    real de profundidad en metros bajo el cursor y el nombre del producto. Nunca aparece sobre el texto, no atrapa
    eventos y no reemplaza el cursor. Sin asignaciones por cuadro. */
 
@@ -26,7 +26,7 @@ vec3 rayos(vec2 q){
   float d5 = d / 5.0, w5 = max(fwidth(d5), 1e-4);
   float marcada = (1.0 - smoothstep(0.0, 1.4, abs(fract(d5 - 0.5) - 0.5) / w5)) * (1.0 - smoothstep(0.3, 0.7, w5));
   float lum = dot(c, vec3(0.2126, 0.7152, 0.0722));
-  return vec3(lum * 0.09) + c * 0.06 + vec3(0.80, 0.90, 1.0) * (inf.b * 1.5 + (fina * 0.22 + marcada * 0.5) * step(0.01, inf.r));
+  return vec3(lum * 0.09) + c * 0.06 + vec3(0.88, 0.91, 0.94) * (inf.b * 1.5 + (fina * 0.22 + marcada * 0.5) * step(0.01, inf.r));
 }
 void main(){
   vec2 q = vec2(gl_FragCoord.x, u_lienzo.y - gl_FragCoord.y);
@@ -39,17 +39,15 @@ void main(){
   }
   vec2 dir = r / max(l, 1e-3);
   float borde = smoothstep(R * 0.72, R, l);
-  /* aumento 1,15 (un poco más hacia el borde, como una lupa) y desfase cromático de 2 px en el borde */
+  /* aumento 1,15 (un poco más hacia el borde, como una lupa). Sin desfase cromático: era el único arcoíris del sitio
+     («luz blanca y un solo acento»); el borde se lee por el filo de luz y la sombra interior */
   vec2 f = u_lente.xy + r / (1.15 + 0.1 * borde * borde);
-  vec2 des = dir * (2.0 * u_e) * borde;
-  vec3 c = vec3(rayos(f - des).r, rayos(f).g, rayos(f + des).b);
+  vec3 c = rayos(f);
   c += vec3(0.010, 0.014, 0.022) * (1.0 - borde);             // el vidrio apenas se ve
   c *= 1.0 - 0.35 * borde * borde;
-  /* aro de 1 px, también con el desfase: rojo adentro, azul afuera */
-  vec3 aro = vec3(1.0 - smoothstep(0.0, 0.9 * u_e, abs(l - (R - 1.2 * u_e))),
-                  1.0 - smoothstep(0.0, 0.9 * u_e, abs(l - R)),
-                  1.0 - smoothstep(0.0, 0.9 * u_e, abs(l - (R + 1.2 * u_e))));
-  c += aro * 0.55;
+  /* filo de 1 px de luz blanca (apenas cálida arriba y fría abajo, saturación < 5 %) */
+  float aro = 1.0 - smoothstep(0.0, 0.9 * u_e, abs(l - R));
+  c += aro * 0.55 * mix(vec3(1.0, 0.985, 0.965), vec3(0.965, 0.98, 1.0), 0.5 + 0.5 * dir.y);
   c = mix(c, 0.8 + 0.2 * (1.0 - exp(-(c - 0.8) / 0.2)), step(0.8, c));
   c = mix(c * 12.92, 1.055 * pow(c, vec3(1.0 / 2.4)) - 0.055, step(0.0031308, c));
   float a = u_lente.w * (1.0 - smoothstep(R + 0.5 * u_e, R + 2.0 * u_e, l));

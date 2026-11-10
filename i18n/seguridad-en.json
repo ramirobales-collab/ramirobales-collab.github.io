@@ -381,7 +381,7 @@
     ],
     "medicion_cifra": "126",
     "medicion_t": "security tests passing",
-    "medicion_p": "4 skipped, in 58 s, across four suites: local server, accounts, panel and publishing. I ran them on 4 Nov 2026 to write this case; they are part of the app's more than 6,000 tests."
+    "medicion_p": "4 skipped, in 58 s, across four suites: local server, accounts, panel and publishing. I ran them on 4 Nov 2026 to write this case; they are part of the app's more than 5,500 tests."
   },
   "resultado": {
     "titulo": "Result",
@@ -449,7 +449,7 @@
   },
   "demos": {
     "titulo": "Short review of the portfolio demos",
-    "intro": "I applied the same checklist, on a small scale, to the two brand demos on this site: the 3D configurator and the catalog assistant. I reviewed the 4 Nov 2026 version.",
+    "intro": "I applied the same checklist, on a small scale, to the two brand demos on this site: the 3D configurator and the catalog assistant. I reviewed the 4 Nov 2026 version; on 10 Nov 2026 the policy was applied across the whole site.",
     "items": [
       {
         "icono": "capas",
@@ -459,7 +459,7 @@
       {
         "icono": "enlace",
         "t": "No third-party scripts",
-        "p": "three.js and the fonts are served from the site itself. The only outside references are links to the sources of the figures, with rel=\"noopener\"."
+        "p": "three.js and the fonts are served from the site itself. The only outside references are links to the sources of the figures, with rel=\"noopener noreferrer\", and no page sends its address as referrer (\"no-referrer\")."
       },
       {
         "icono": "texto",
@@ -474,7 +474,7 @@
       {
         "icono": "lupa",
         "t": "Finding",
-        "p": "The configurator sets each swatch color with a style attribute, which a strict CSP would block. Fix: set it with style.setProperty."
+        "p": "The configurator set each swatch color with a style attribute, which a strict policy blocks. Fixed: it now sets it with style.setProperty, and no page on the site uses inline style attributes or inline event handlers."
       },
       {
         "icono": "nube",
@@ -482,9 +482,9 @@
         "p": "The site is published on GitHub Pages, which does not allow custom headers: the CSP goes in a meta tag, where frame-ancestors does not work. Low risk: a demo with no data has nothing to steal inside an iframe."
       }
     ],
-    "csp_t": "Suggested CSP for the demos",
-    "csp": "default-src 'self';\n/* sha256: theme and importmap */\nscript-src 'self' 'sha256-…';\nstyle-src 'self';\nimg-src 'self' data: blob:;\nconnect-src 'self' blob:;\nfont-src 'self';\nobject-src 'none';\nbase-uri 'self';\nform-action 'none'",
-    "csp_p": "This page already applies its own: a CSP in a meta tag with the SHA-256 fingerprints of its two scripts and its inline style, no third-party scripts, and tested with no console errors."
+    "csp_t": "Policy applied to the configurator",
+    "csp": "default-src 'none';\nscript-src 'self' 'sha256-…' 'sha256-…';\nstyle-src 'self';\nimg-src 'self' data: blob:;\nfont-src 'self';\nconnect-src 'self' blob:;\nmedia-src 'self';\nmanifest-src 'self';\nobject-src 'none';\nbase-uri 'none';\nform-action 'none'",
+    "csp_p": "Every page on the site applies its own: a meta tag with the SHA-256 fingerprints of each inline script and style, recalculated by a script in the repository. An automated test fails if a fingerprint does not match and visits every page in the browser looking for policy violations and console errors. To report an issue: /.well-known/security.txt."
   },
   "metodo": {
     "titulo": "How I did it with AI agents",
