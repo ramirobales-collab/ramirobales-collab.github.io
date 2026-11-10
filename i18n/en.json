@@ -14,7 +14,7 @@
   "tema.oscuro": "Dark",
   "tema.aria": "Switch between light and dark theme",
   "heroe.etiqueta": "AI Product Builder · remote from Buenos Aires",
-  "heroe.titulo": "I build products <br>by directing AI agents: <br><em class=\"heroe__acento\">I define, design, verify.</em>",
+  "heroe.titulo": "I build products <br>by directing AI agents: <br><em class=\"heroe__acento\">I <span class=\"verbo\"><button type=\"button\" class=\"acto\" data-acto=\"defino\" aria-pressed=\"false\">define</button>,</span> <span class=\"verbo\"><button type=\"button\" class=\"acto\" data-acto=\"diseno\" aria-pressed=\"false\">design</button>,</span> <span class=\"verbo\"><button type=\"button\" class=\"acto\" data-acto=\"verifico\" aria-pressed=\"false\">verify</button>.</span></em>",
   "heroe.sub": "AI and Data Science student (UADE). Four products of my own: an app in beta, one in daily use, a demo and a prototype.",
   "heroe.obra.cathedra.alt": "Cathedra: a lecture guide, block by block",
   "heroe.obra.cathedra.estado": "beta",

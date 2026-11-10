@@ -14,7 +14,7 @@
   "tema.oscuro": "Oscuro",
   "tema.aria": "Cambiar entre tema claro y oscuro",
   "heroe.etiqueta": "AI Product Builder · remoto desde Buenos Aires",
-  "heroe.titulo": "Construyo productos <br>dirigiendo agentes de IA: <br><em class=\"heroe__acento\">defino, diseño, verifico.</em>",
+  "heroe.titulo": "Construyo productos <br>dirigiendo agentes de IA: <br><em class=\"heroe__acento\"><span class=\"verbo\"><button type=\"button\" class=\"acto\" data-acto=\"defino\" aria-pressed=\"false\">defino</button>,</span> <span class=\"verbo\"><button type=\"button\" class=\"acto\" data-acto=\"diseno\" aria-pressed=\"false\">diseño</button>,</span> <span class=\"verbo\"><button type=\"button\" class=\"acto\" data-acto=\"verifico\" aria-pressed=\"false\">verifico</button>.</span></em>",
   "heroe.sub": "Estudiante de IA y Ciencia de Datos (UADE). Cuatro productos propios: una app en beta, una en uso diario, una demo y un prototipo.",
   "heroe.obra.cathedra.alt": "Cathedra: guía de una clase, bloque por bloque",
   "heroe.obra.cathedra.estado": "beta",

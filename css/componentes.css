@@ -233,14 +233,40 @@ a.sello:hover .sello__nombre { text-decoration: underline; text-decoration-color
 @media (prefers-reduced-motion: reduce) { .folio__filete { width: 100%; } }
 
 /* ---------- Héroe ---------- */
+/* «La sala negra». Primer pintado sin imágenes: negro, el portal dibujado en CSS y todo el texto. El lienzo
+   .mundo va fijo detrás de la página y el motor (js/mundo) lo enciende después; lo que no hace falta para el
+   primer pintado (zonas activas, póster de respaldo, transiciones) está en css/mundo.css. */
+.mundo { position: fixed; inset: 0; z-index: 0; width: 100%; height: 100%; pointer-events: none; }
 .heroe {
-  overflow-y: clip;
   position: relative;
-  min-height: calc(100svh - 80px);
+  color-scheme: dark; /* la sala es negra también en tema claro */
+  color: var(--texto);
+  min-height: calc(100svh - 80px); /* el bloque siguiente asoma bajo el pliegue */
   padding-top: var(--nav-alto);
   display: grid;
   align-items: center;
+  overflow: clip;
+  --portal-x: 52.9%; /* proyección del portal de la lámina final con el encuadre del motor (js/mundo/index.js la ajusta al medir) */
+  --portal-alto: 41%;
+  --portal-y: 0%;
+  --portal-luz: 22%;
 }
+.heroe__fondo {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, transparent calc(var(--portal-x) - 7px), oklch(97% 0.012 85) calc(var(--portal-x) - 3px), oklch(97% 0.012 85) calc(var(--portal-x) + 3px), transparent calc(var(--portal-x) + 7px)) 0 var(--portal-y) / 100% var(--portal-alto) no-repeat,
+    radial-gradient(ellipse 15% 55% at var(--portal-x) var(--portal-luz), oklch(100% 0 0 / 0.13), transparent 72%),
+    #000;
+  -webkit-mask-image: linear-gradient(#000 84%, transparent);
+  mask-image: linear-gradient(#000 84%, transparent);
+}
+.heroe__dentro { position: relative; z-index: 2; }
+.heroe__obras { position: absolute; inset: 0; z-index: 3; visibility: hidden; pointer-events: none; }
+.obra { position: absolute; left: 0; top: 0; }
 .saltar {
   position: absolute;
   left: var(--margen);
@@ -257,23 +283,40 @@ a.sello:hover .sello__nombre { text-decoration: underline; text-decoration-color
 .cabecera-seccion { grid-column: 1 / -1; display: grid; gap: var(--e-3); margin-bottom: var(--e-4); }
 @media (min-width: 1024px) { .cabecera-seccion { grid-column: 2 / 11; } }
 .heroe__texto {
-  position: relative;
-  z-index: 2;
   grid-column: 1 / -1;
-  padding-block: var(--e-3) 0;
+  padding-block: var(--e-3);
   container-type: inline-size;
 }
-@media (min-width: 1024px) {
-  .heroe__texto { grid-column: 2 / 10; padding-block: 0; }
-}
-.heroe__etiqueta { color: var(--texto-3); margin-bottom: var(--e-2); }
-.heroe__titulo { margin-bottom: var(--e-2); }
+.heroe__etiqueta { color: var(--texto-2); margin-bottom: var(--e-2); }
+.heroe__titulo { margin-bottom: var(--e-2); text-wrap: balance; }
 .heroe__titulo br { display: none; }
 @media (min-width: 1024px) {
+  /* el texto ocupa las columnas 1 a 7; el peso de la sala está del centro hacia la derecha */
+  .heroe__texto { grid-column: 1 / 8; padding-block: 0; }
   .heroe__etiqueta { margin-bottom: var(--e-3); }
-  .heroe__titulo { margin-bottom: var(--e-3); font-size: min(var(--t-display), 8.7cqi); }
+  .heroe__titulo { margin-bottom: var(--e-3); font-size: min(var(--t-display), 7.6cqi); } /* la línea más larga termina antes de la mitad del cuadro: de ahí en más es de la sala */
   .heroe__titulo br { display: inline; }
 }
+.heroe__acento {
+  font-family: var(--playfair);
+  font-style: italic;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  padding-right: 0.08em;
+}
+/* los tres verbos son botones: llevan la sala a ese acto */
+.verbo { white-space: nowrap; }
+.acto {
+  padding: 0;
+  font-style: inherit;
+  letter-spacing: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.14em;
+  text-decoration-color: color-mix(in oklab, currentColor 38%, transparent);
+}
+.acto.activo, .acto[aria-pressed="true"] { color: var(--acento-display); text-decoration-color: currentColor; }
+@media (forced-colors: active) { .acto.activo, .acto[aria-pressed="true"] { color: Highlight; } }
 .heroe__sub { margin-bottom: var(--e-3); max-width: 36ch; }
 .heroe__acciones { display: flex; flex-wrap: wrap; align-items: center; gap: var(--e-2) var(--e-3); margin-bottom: var(--e-3); }
 @media (min-width: 1024px) {
@@ -281,6 +324,7 @@ a.sello:hover .sello__nombre { text-decoration: underline; text-decoration-color
   .heroe__acciones { margin-bottom: var(--e-4); }
 }
 .heroe__secundarias { display: flex; align-items: center; gap: var(--e-3); font-size: var(--t-secundario); }
+.heroe .boton--primario { background: var(--texto); color: var(--fondo); }
 .heroe__sellos {
   display: flex;
   flex-wrap: wrap;
@@ -297,178 +341,21 @@ a.sello:hover .sello__nombre { text-decoration: underline; text-decoration-color
   }
   .heroe__sellos::-webkit-scrollbar { display: none; }
 }
-
-.heroe__lava {
-  position: absolute;
-  inset: 0 0 auto 0;
-  z-index: 0;
-  display: block;
-  width: 100%;
-  height: 100svh;
-  pointer-events: none;
-  background:
-    radial-gradient(38% 52% at 72% 42%, light-dark(oklch(82% 0.1 300 / 0.55), oklch(38% 0.17 300 / 0.5)), transparent 72%),
-    radial-gradient(26% 36% at 86% 72%, light-dark(oklch(84% 0.09 330 / 0.45), oklch(36% 0.15 335 / 0.42)), transparent 72%);
-}
-.heroe__lava.listo { background: none; }
-.heroe > * { position: relative; z-index: 2; }
-.heroe__titulo { text-wrap: balance; }
-.heroe__acento {
-  font-family: var(--playfair);
-  font-style: italic;
-  font-weight: 500;
-  letter-spacing: -0.01em;
-  background: linear-gradient(100deg, light-dark(oklch(34% 0.19 295), oklch(86% 0.08 300)) 10%, light-dark(oklch(37% 0.19 330), oklch(78% 0.15 325)) 95%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  padding-right: 0.08em;
-}
-@media (forced-colors: active) { .heroe__acento { color: CanvasText; background: none; } }
-.heroe .boton--primario {
-  background: var(--texto);
-  color: var(--fondo);
-  box-shadow: 0 0 0 1px light-dark(oklch(40% 0.17 295 / 0.25), oklch(80% 0.1 300 / 0.35)), 0 10px 34px -10px light-dark(oklch(45% 0.2 295 / 0.55), oklch(62% 0.22 300 / 0.75));
-}
-.heroe .boton--primario:hover {
-  box-shadow: 0 0 0 1px light-dark(oklch(40% 0.17 295 / 0.45), oklch(80% 0.1 300 / 0.6)), 0 14px 44px -8px light-dark(oklch(45% 0.2 295 / 0.7), oklch(62% 0.22 300 / 1));
-}
-.heroe__obras { perspective: 1400px; }
-.obra {
-  display: block;
-  position: absolute;
-  overflow: hidden;
-  border-radius: 12px;
-  background: oklch(14% 0.02 295);
-  text-decoration: none;
-  transform: translate3d(calc(var(--px, 0) * var(--z, 1) * 1px), calc(var(--py, 0) * var(--z, 1) * 1px), 0) rotateY(var(--ry, 0deg)) rotateZ(var(--rz, 0deg));
-  transition: transform 500ms var(--curva-entrada), box-shadow 300ms var(--curva-entrada);
-  box-shadow:
-    0 0 0 1px light-dark(oklch(45% 0.12 295 / 0.28), oklch(82% 0.08 300 / 0.26)),
-    inset 0 1px 0 oklch(100% 0 0 / 0.14),
-    0 28px 64px -22px light-dark(oklch(35% 0.16 295 / 0.55), oklch(4% 0.03 295 / 0.95)),
-    0 16px 70px -26px light-dark(oklch(55% 0.2 300 / 0.5), oklch(58% 0.22 300 / 0.55));
-}
-.obra::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: linear-gradient(125deg, oklch(100% 0 0 / 0.1), transparent 34%);
-}
-.obra img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top; }
-.obra__rotulo {
-  position: absolute;
-  z-index: 1;
-  left: 10px;
-  bottom: 10px;
-  display: inline-flex;
-  gap: 0.45rem;
-  padding: 0.28rem 0.6rem;
-  border-radius: 999px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  line-height: 1.3;
-  color: oklch(96% 0.01 300);
-  background: oklch(12% 0.03 295 / 0.82);
-  box-shadow: 0 0 0 1px oklch(85% 0.07 300 / 0.28);
-}
-.obra__rotulo span + span { font-family: var(--playfair); font-style: italic; font-weight: 500; color: oklch(84% 0.09 310); }
-.obra:hover, .obra:focus-visible {
-  z-index: 5;
-  transform: translate3d(calc(var(--px, 0) * var(--z, 1) * 1px), calc((var(--py, 0) * var(--z, 1) - 8) * 1px), 0) rotateY(0deg) rotateZ(0deg) scale(1.03);
-}
-@media (min-width: 1024px) {
-  /* El texto ocupa las columnas 1 a 7 y la galería arranca después, medida contra el contenedor (no contra
-     la ventana: con vw se corría 280 px a la derecha a 1920 y el Cathedra quedaba fuera de cuadro). Puede
-     entrar en el margen derecho hasta 10rem sin pasar el borde de la ventana. */
-  .heroe__texto { grid-column: 1 / 8; }
-  .heroe__obras {
-    position: absolute;
-    top: calc(50% + var(--nav-alto) / 2);
-    left: calc(100% * 7.45 / 12);
-    right: calc(-1 * min(max((100vw - 100%) / 2 - 24px, 0px), 10rem));
-    aspect-ratio: 1 / 1.02;
-    translate: 0 -50%;
-  }
-  .obra--cathedra { --ry: 7deg; --rz: -2.5deg; --z: 0.7; width: 74%; aspect-ratio: 16 / 9; left: 0; top: 25%; z-index: 2; }
-  .obra--athleteiq { --ry: -6deg; --rz: 2.5deg; --z: 0.35; width: 56%; aspect-ratio: 16 / 9; right: 2%; top: 4%; z-index: 1; }
-  .obra--coro { --ry: -5deg; --rz: 2deg; --z: 0.5; width: 58%; aspect-ratio: 16 / 9; right: 0; bottom: 8%; z-index: 1; }
-  .obra--fortal { --ry: 4deg; --rz: -3deg; --z: 1.15; width: 25%; aspect-ratio: 9 / 18.6; left: 15%; bottom: 0; z-index: 3; border-radius: 20px; box-shadow: 0 0 0 5px oklch(14% 0.015 295), 0 0 0 6px light-dark(oklch(45% 0.12 295 / 0.4), oklch(82% 0.08 300 / 0.3)), 0 30px 70px -18px light-dark(oklch(35% 0.16 295 / 0.65), oklch(3% 0.03 295)); }
-  html:not(.quieto) .obra { animation: obra-entra 900ms var(--curva-entrada) both; }
-  html:not(.quieto) .obra--athleteiq { animation-delay: 80ms; }
-  html:not(.quieto) .obra--cathedra { animation-delay: 160ms; }
-  html:not(.quieto) .obra--coro { animation-delay: 240ms; }
-  html:not(.quieto) .obra--fortal { animation-delay: 340ms; }
-}
-@keyframes obra-entra { from { opacity: 0; translate: 0 26px; } to { opacity: 1; translate: 0 0; } }
-@media (prefers-reduced-motion: reduce) { .obra { animation: none !important; transition: none; } }
 @media (max-width: 1023px) {
-  .heroe__obras {
-    grid-column: 1 / -1; /* sin esto la tira caía en la primera columna de la grilla y sólo se veía media tarjeta */
-    display: flex;
-    gap: var(--e-2);
-    margin: var(--e-3) calc(-1 * var(--margen)) 0;
-    padding: 6px var(--margen) var(--e-3);
-    overflow-x: auto;
-    scroll-snap-type: x proximity;
-    scrollbar-width: none;
-  }
-  .heroe__obras::-webkit-scrollbar { display: none; }
-  .obra { position: relative; flex: 0 0 auto; height: 188px; aspect-ratio: 16 / 9; scroll-snap-align: start; scroll-margin-inline-start: var(--margen); }
-  .obra--cathedra { order: 1; }
-  .obra--fortal { order: 2; aspect-ratio: 9 / 18.6; border-radius: 16px; }
-  .obra__rotulo { white-space: nowrap; }
-  .obra--fortal .obra__rotulo span + span { display: none; } /* el teléfono es angosto; el estado está en los sellos */
-  .obra--athleteiq { order: 3; }
-  .obra--coro { order: 4; }
-}
-.heroe__etiqueta { color: var(--texto-2); }
-.solo-fondo .heroe > *, .solo-fondo .nav { visibility: hidden; }
-/* Lienzo de la galería 3D: ocupa todo el ancho de la ventana (la galería entra en el margen) y arranca invisible. */
-.heroe > .heroe__escena { position: absolute; top: 0; left: calc(50% - 50vw); z-index: 1; width: 100vw; max-width: none; height: 100%; pointer-events: none; opacity: 0; }
-@media (max-width: 1023px) { .heroe > .heroe__escena { display: none; } }
-
-@media (max-width: 1023px) {
-  .heroe { min-height: calc(100svh - 40px); align-content: center; }
+  .heroe { min-height: calc(100svh - 40px); }
   .heroe + main .seccion:first-child { padding-top: var(--e-4); }
 }
-
+/* Vertical (celular): el texto arriba y la sala abajo. El escenario es la lámina vertical (9:16) a todo el ancho,
+   apoyada en el borde inferior del héroe; la fila de abajo deja libre su mitad inferior, donde están los productos. */
+@media (max-aspect-ratio: 3/4) {
+  .heroe { grid-template-rows: auto minmax(92vw, 1fr); align-items: start; --portal-x: 38.6%; --portal-alto: 39.5vw; --portal-y: calc(100% - 100vw); --portal-luz: calc(100% - 80vw); }
+  .heroe__texto { padding-block: var(--e-2) var(--e-3); }
+  .mundo-zonas .heroe__sellos { display: none; } /* en la sala cada producto ya lleva su rótulo con el estado */
+}
 @media (max-width: 479px) {
   :root { --t-cuerpo: 1.0625rem; --t-sub-heroe: 1.0625rem; }
   .heroe__titulo { font-size: 2.125rem; }
 }
-
-/* ---------- Héroe 3D ---------- */
-/* Cuando la escena está lista, las piezas 3D toman el lugar visual de las tarjetas; las tarjetas siguen como
-   enlace, foco y respaldo (quedan transparentes, con su rótulo encima). */
-@media (min-width: 1024px) {
-  .heroe > .heroe__escena { transition: opacity 700ms var(--curva-entrada); }
-  .obras-3d .heroe > .heroe__escena { opacity: 1; }
-  .obras-3d .obra { background: transparent; box-shadow: none; transition: none; }
-  .obras-3d .obra picture, .obras-3d .obra::after { opacity: 0; transition: opacity 700ms var(--curva-entrada); }
-  .obras-3d .obra:hover, .obras-3d .obra:focus-visible { transform: translate3d(calc(var(--px, 0) * var(--z, 1) * 1px), calc(var(--py, 0) * var(--z, 1) * 1px), 0) rotateY(var(--ry, 0deg)) rotateZ(var(--rz, 0deg)); }
-  .obras-3d .obra:focus-visible { outline: 2px solid var(--acento-texto); outline-offset: 6px; }
-  .obras-3d .obra__rotulo { backdrop-filter: blur(10px) saturate(1.2); -webkit-backdrop-filter: blur(10px) saturate(1.2); background: oklch(12% 0.03 295 / 0.66); }
-  /* Rótulos sin tapar otra pieza: el de AthleteIQ caería sobre Cathedra (que está delante) y el de Cathedra sobre el teléfono. */
-  .obras-3d .obra--athleteiq .obra__rotulo { left: auto; right: 10px; bottom: auto; top: 10px; }
-  .obras-3d .obra--cathedra .obra__rotulo { bottom: auto; top: 20px; left: 20px; }
-  html.obras-3d:not(.quieto) .obra__rotulo { animation: rotulo-entra 800ms var(--curva-entrada) 900ms both; }
-}
-/* Celular y tableta: la tira de capturas gira en profundidad al deslizarla (carrusel 3D sólo con CSS, atado al
-   scroll horizontal). Sin soporte de animation-timeline o con movimiento reducido queda la tira plana. */
-@media (max-width: 1023px) and (prefers-reduced-motion: no-preference) {
-  @supports (animation-timeline: view()) {
-    .obra { animation: obra-carrusel linear both; animation-timeline: view(inline); transform-origin: 50% 55%; }
-  }
-}
-@keyframes obra-carrusel {
-  0% { transform: perspective(700px) rotateY(-24deg) scale(0.92); filter: brightness(0.8); }
-  35%, 65% { transform: perspective(700px) rotateY(0deg) scale(1); filter: brightness(1); }
-  100% { transform: perspective(700px) rotateY(24deg) scale(0.92); filter: brightness(0.8); }
-}
-@keyframes rotulo-entra { from { opacity: 0; translate: 0 8px; } to { opacity: 1; translate: 0 0; } }
-@media (prefers-reduced-motion: reduce) { .obras-3d .obra__rotulo { animation: none !important; } }
 
 /* ---------- Trabajo ---------- */
 .casos { row-gap: var(--e-4); }
