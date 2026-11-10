@@ -2,10 +2,10 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-VEO1VU+I3bXQtbvJmG7rpbHnVFOpON9AR17z2ZfLzpI='; style-src 'self'; img-src 'self'; font-src 'self'; connect-src 'self'; media-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-qjuWUyWKqt0Fss48UG4bCZhHldwUiLUb4aBs52h7UYk='; style-src 'self'; img-src 'self'; font-src 'self'; connect-src 'self'; media-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script>var d=document.documentElement;try{var t=new URLSearchParams(location.search).get('tema')||localStorage.getItem('tema');if(t==='light'||t==='dark')d.dataset.theme=t;}catch(e){}d.classList.add('js');if(!/[?&](quieto=1|ir=)/.test(location.search))d.classList.add('mov');setTimeout(function(){if(!d.dataset.mov)d.classList.remove('js','mov')},4000);(function(){var r=matchMedia('(prefers-reduced-motion: reduce)'),h=[];function n(el,v){if(el){el.style.viewTransitionName=v;h.push(el);}}addEventListener('pagereveal',function(e){h.forEach(function(el){el.style.viewTransitionName='';});h=[];var v=e.viewTransition;if(v){if(r.matches){v.ready.catch(function(){});v.skipTransition();}else d.classList.add('vt');}});addEventListener('pageswap',function(e){var v=e.viewTransition;if(!v)return;if(r.matches){v.ready.catch(function(){});v.skipTransition();return;}var a=e.activation,u=a&&a.entry&&a.entry.url?new URL(a.entry.url):null,c=document.querySelector('.caso-cabecera__media'),m=u&&u.pathname.match(/\/proyectos\/(cathedra|fortal|athleteiq|coro)\.html$/);if(m){n(c,'none');n(document.querySelector('[data-vt="'+m[1]+'"]'),'caso-'+m[1]);}else if(!(a&&(a.navigationType==='traverse'||(u&&u.hash==='#trabajo'))))n(c,'none');});})();</script>
+<script>var d=document.documentElement;if(self!==top){d.classList.add('enmarcado');try{top.location.replace(location.href)}catch(e){}}try{var t=new URLSearchParams(location.search).get('tema')||localStorage.getItem('tema');if(t==='light'||t==='dark')d.dataset.theme=t;}catch(e){}d.classList.add('js');if(!/[?&](quieto=1|ir=)/.test(location.search))d.classList.add('mov');setTimeout(function(){if(!d.dataset.mov)d.classList.remove('js','mov')},4000);(function(){var r=matchMedia('(prefers-reduced-motion: reduce)'),h=[];function n(el,v){if(el){el.style.viewTransitionName=v;h.push(el);}}addEventListener('pagereveal',function(e){h.forEach(function(el){el.style.viewTransitionName='';});h=[];var v=e.viewTransition;if(v){if(r.matches){v.ready.catch(function(){});v.skipTransition();}else d.classList.add('vt');}});addEventListener('pageswap',function(e){var v=e.viewTransition;if(!v)return;if(r.matches){v.ready.catch(function(){});v.skipTransition();return;}var a=e.activation,u=a&&a.entry&&a.entry.url?new URL(a.entry.url):null,c=document.querySelector('.caso-cabecera__media'),m=u&&u.pathname.match(/\/proyectos\/(cathedra|fortal|athleteiq|coro)\.html$/);if(m){n(c,'none');n(document.querySelector('[data-vt="'+m[1]+'"]'),'caso-'+m[1]);}else if(!(a&&(a.navigationType==='traverse'||(u&&u.hash==='#trabajo'))))n(c,'none');});})();</script>
 <title data-i18n="caso.coro.titulo">coro — caso de estudio · Ramiro Bales</title>
 <meta name="description" data-i18n-attr="content=caso.coro.descripcion" content="coro lee las reseñas públicas de un producto, agrupa el defecto que se repite y encuentra qué competidor ya lo resolvió. Prototipo con informe HTML.">
 <meta name="color-scheme" content="light dark">
@@ -46,6 +46,7 @@
 <link rel="stylesheet" href="../css/caso.css">
 </head>
 <body>
+<a class="enmarcado-aviso" href="https://ramirobales-collab.github.io/proyectos/coro.html" target="_top" rel="noopener noreferrer" data-i18n="enmarcado.aviso">Esta página está dentro de otro sitio. Abrila en su dirección real: ramirobales-collab.github.io</a>
 <a class="saltar" href="#contenido" data-i18n="nav.saltar">Saltar al contenido</a>
 <nav class="nav nav--placa" aria-label="Principal">
   <div class="contenedor nav__in">
@@ -190,7 +191,7 @@
           <li><div><strong data-revelar="bloque" data-i18n="caso.coro.agentes.1.t">Brief.</strong><p data-revelar data-i18n="caso.coro.agentes.1">Los perfiles y la métrica se definieron antes del código: concentración, por severidad, con recargo si el tema crece.</p></div></li>
           <li><div><strong data-revelar="bloque" data-i18n="caso.coro.agentes.2.t">Un módulo por tanda.</strong><p data-revelar data-i18n="caso.coro.agentes.2">Análisis, calidad, historial, perfiles, soluciones e informe, cada uno con su criterio de aceptación.</p></div></li>
           <li><div><strong data-revelar="bloque" data-i18n="caso.coro.agentes.3.t">Regla de soluciones.</strong><p data-revelar data-i18n="caso.coro.agentes.3">Se buscan y se citan con fuente; si no hay evidencia, el informe lo dice.</p></div></li>
-          <li><div><strong data-revelar="bloque" data-i18n="caso.coro.agentes.4.t">Verificación.</strong><p data-revelar data-i18n="caso.coro.agentes.4">Validé con un conjunto de prueba propio (32 reseñas de un cabezal de ducha con filtro), lo corrí sobre 400 reseñas reales y lo cargué con 1.200; revisé el informe renderizado.</p></div></li>
+          <li><div><strong data-revelar="bloque" data-i18n="caso.coro.agentes.4.t">Verificación.</strong><p data-revelar data-i18n="caso.coro.agentes.4">Lo corrí sobre 400 reseñas reales en la corrida más grande y sobre 1.200 en una prueba de carga; como caso de prueba usé un juego propio de 32 reseñas de un cabezal de ducha con filtro, y revisé el informe renderizado.</p></div></li>
           <li><div><strong data-revelar="bloque" data-i18n="caso.coro.agentes.5.t">Qué saqué para mostrarlo.</strong><p data-revelar data-i18n="caso.coro.agentes.5">En una copia del informe reemplacé tiendas y proveedores reales por nombres genéricos.</p></div></li>
         </ol>
       </section>
@@ -210,7 +211,7 @@
     <section class="caso-galeria caso-parte" id="galeria" data-n="07" data-visto aria-labelledby="t-galeria">
       <span class="etiqueta caso-parte__n" aria-hidden="true">07</span>
       <h2 class="caso-parte__titulo" id="t-galeria" data-revelar data-i18n="caso.parte.galeria">Galería</h2>
-      <p class="caso-galeria__aviso etiqueta" data-revelar="bloque" data-i18n="caso.coro.galeria.aviso">Capturas sobre el fixture de prueba; proveedores y fuentes reemplazados por nombres genéricos.</p>
+      <p class="caso-galeria__aviso etiqueta" data-revelar="bloque" data-i18n="caso.coro.galeria.aviso">Capturas sobre el juego de prueba propio; proveedores y fuentes reemplazados por nombres genéricos.</p>
       <div class="caso-galeria__items">
         <figure class="caso-galeria__item caso-galeria__item--12 caso-galeria__item--antes">
           <div class="caso-galeria__media placa mascara">

@@ -230,5 +230,6 @@
   "anuncio.respuesta": "Respuesta del asistente. Regla: {r}.",
   "msg.fuentes": "{n} fuentes",
   "traza.mas": "Y {n} fragmentos citados más.",
-  "vista.traza.corto": "Por dentro"
+  "vista.traza.corto": "Por dentro",
+  "enmarcado.aviso": "Esta página está dentro de otro sitio. Abrila en su dirección real: ramirobales-collab.github.io"
 }

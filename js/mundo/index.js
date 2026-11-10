@@ -2,7 +2,7 @@
    máquina de actos, verbos del titular, zonas activas de cada producto y respaldos.
    El texto y los botones del héroe ya se ven y funcionan antes de que esto corra (y sin esto).
    Plano: portfolio-docs/v3/motor.md. Interfaz para la segunda mitad: portfolio-docs/v3/progreso-motor-1.md. */
-import { crearMotor, LOCAL } from './motor.js';
+import { crearMotor, LOCAL, ceder } from './motor.js';
 import { crearSala, encuadrar, crearCamara, rectObra, zDeCapa, CAJAS } from './sala.js';
 import { crearEnjambre } from './enjambre.js';
 import { crearPost } from './post.js';
@@ -30,6 +30,15 @@ if (CAPTURA && par.get('fondo') === '1') html.classList.add('solo-fondo');
 const MQ_APILADA = matchMedia('(max-width: 939px), (max-width: 1023px) and (max-aspect-ratio: 1449/1000), (max-aspect-ratio: 1333/1000)');
 const MQ_VERTICAL = matchMedia('(max-aspect-ratio: 4/5)');
 const MQ_CLARO = matchMedia('(prefers-color-scheme: light)');
+/* H10: las láminas se piden apenas corre este módulo (antes esperaban a crear el motor, compilar y armar todo: más de
+   1 s de red quieta en frío). Primero los datos, que son los que necesita «defino»; los colores, con prioridad baja.
+   El motor toma estas respuestas en vez de pedirlas otra vez (motor.cargarImagen con m.previa): sin pedidos dobles. */
+const PREVIA = new Map();
+if (par.get('mundo') !== '0' && !navigator.connection?.saveData && 'WebGL2RenderingContext' in window && lienzo) {
+  const f = MQ_VERTICAL.matches ? 'v' : 'h', pedir = (n, op) => { const u = new URL(`${f}-${n}`, BASE).href; const r = fetch(u, op); r.catch(() => {}); PREVIA.set(u, r); };
+  for (const id of ['fondo', 'lejos', 'medio', 'cerca']) { pedir(id + '-p.webp'); pedir(id + '-n.webp'); }
+  for (const id of ['fondo', 'lejos', 'medio', 'cerca']) pedir(id + '.webp', { priority: 'low' });
+}
 let apilada = false;
 let visto0 = false;
 try { visto0 = sessionStorage.getItem('mundo-visto') === '1'; } catch {}
@@ -65,13 +74,15 @@ let actoVisto = null;   // el acto que se VE (sale de la interpolación de la sa
 const mostrado = () => (motor && sala && actoVisto) || (eco ? eco.tipo : acto) || ACTO_FIJO || fijado || previa || INICIAL;
 const pedido = () => ACTO_FIJO || fijado || previa;
 
-/* aria-pressed = el verbo fijado con un clic (queda hasta que se elige otro o se vuelve a pulsar); la clase «activo»
-   (cereza) = el acto que se está viendo. Cada verbo dice qué hace (aria-describedby, texto traducido oculto). */
+/* aria-pressed y la clase «activo» (cereza) dicen lo mismo: el acto que se está viendo. Así el lector anuncia el
+   estado que se ve, también cuando la sala cambia sola (secuencia y ecos); un clic fija el acto hasta otro clic o
+   hasta volver a pulsarlo (sin temporizador). Cada verbo dice qué hace (aria-describedby, texto traducido oculto). */
 function marcarVerbos() {
   const m = mostrado();
   heroe.dataset.acto = m;
   for (const b of heroe.querySelectorAll('.acto')) {
-    b.setAttribute('aria-pressed', String(fijado === b.dataset.acto));
+    const si = String(m === b.dataset.acto);
+    if (b.getAttribute('aria-pressed') !== si) b.setAttribute('aria-pressed', si);
     if (b.getAttribute('aria-describedby') !== 'actos-ayuda') b.setAttribute('aria-describedby', 'actos-ayuda');
     b.classList.toggle('activo', m === b.dataset.acto);
   }
@@ -130,6 +141,18 @@ function medirHeroe() {
   medirRenglones(rh, rango);
   altoNav = document.querySelector('.nav')?.offsetHeight || 0;
   medirEncuadre();
+  unCamino();
+}
+/* Un solo camino accesible a cada producto: si los sellos se ven (composición al lado), las zonas sobre las pantallas
+   son sólo para el puntero (fuera del orden de Tab y del árbol de accesibilidad); si los sellos se esconden (apilada y
+   vertical), las zonas son el enlace. */
+function unCamino() {
+  const sellos = heroe.querySelector('.heroe__sellos');
+  const visibles = !!sellos && sellos.getClientRects().length > 0;
+  for (const a of heroe.querySelectorAll('.obra')) {
+    if (visibles) { a.setAttribute('aria-hidden', 'true'); a.tabIndex = -1; }
+    else if (a.hasAttribute('aria-hidden')) { a.removeAttribute('aria-hidden'); a.removeAttribute('tabindex'); }
+  }
 }
 /* Renglones: la extensión real de cada línea de texto (las cajas de línea del navegador, unidas por renglón), más un
    margen para el suavizado y el vuelo de la itálica. Los verbos van aparte, con un tope más bajo (son cereza). */
@@ -179,6 +202,15 @@ function medirEncuadre() {
   const cubre = datos.ancho * Math.max(anchoH / datos.ancho, altoH / datos.alto);
   /* margen entre el titular y el portal: la garantía de contraste cae suave (≈ 150 px) y el portal tiene que quedar fuera de esa caída */
   anchoMax = Math.max(0.8 * cubre, (anchoH - derTexto - 0.075 * anchoH) / (1 - fx + medio));
+  /* en pantallas muy anchas (2560×1080) el «cover» va por el ancho y recorta arriba: la pantalla más alta quedaba
+     debajo de la barra. Se achica la lámina lo justo para que su borde de arriba quede 16 px bajo la barra (nunca
+     menos que cubrir el alto: no aparecen franjas) */
+  let vMin = 1;
+  for (const o of datos.obras) vMin = Math.min(vMin, o.pantalla[1]);
+  if (vMin < 0.5) {
+    const hMax = (altoH / 2 - altoNav - 16) / (0.5 - vMin);
+    anchoMax = Math.min(anchoMax, Math.max(hMax, altoH) * datos.ancho / datos.alto);
+  }
   if (anchoMax >= cubre) anchoMax = Infinity;
   /* el portal dibujado en CSS (primer pintado) queda donde lo va a poner el motor */
   encuadrar(datos, 0, 0, anchoH, altoH, encDom, anchoMax);
@@ -223,6 +255,7 @@ function iniciarZonas() {
     z.el.addEventListener('focus', entra); z.el.addEventListener('blur', sale);
   }
   html.classList.add('mundo-zonas');
+  unCamino();
 }
 /* ¿El rectángulo de la zona (con su rótulo) toca algún renglón de texto? Red de seguridad: con la composición
    correcta no pasa nunca; si pasa, la zona se esconde (el sello del producto sigue siendo su enlace). */
@@ -296,10 +329,19 @@ function iniciarPoster() {
   const img = poster();
   if (img) img.addEventListener('load', mostrarPoster);
 }
+/* El HTML trae un póster liviano para el primer pintado (en la primera visita se ve a oscuras, bajo «defino», y el motor
+   lo reemplaza enseguida): si el póster queda como imagen final, se piden los de resolución completa (srcset por ancho). */
+let posterCompleto = false;
+function completarPoster() {
+  if (posterCompleto) return;
+  posterCompleto = true;
+  for (const el of heroe.querySelectorAll('.heroe__fondo picture [data-completo]')) el.setAttribute('srcset', el.dataset.completo);
+}
 function respaldo(nombre, motivo) {
   if (nombre) { lienzo.dataset.estado = nombre; console.info('mundo:', nombre, '— ' + motivo); }
   html.classList.remove('mundo-vivo');
   enRespaldo = true;
+  if (lienzo.dataset.estado !== 'ahorro-de-datos') completarPoster();
   if (!datos) { posterUbicado = true; mostrarPoster(); acto = pedido() || 'diseno'; marcarVerbos(); return; }   // sin datos: el encuadre de CSS y sin zonas
   ubicarRespaldo();
   if (!oyeRespaldo) { oyeRespaldo = true; addEventListener('resize', () => { if (enRespaldo) ubicarRespaldo(); }); }
@@ -315,6 +357,7 @@ const CLAVES = ['L', 'fL', 'fM', 'V', 'sombra', 'vs', 'tzE', 'cab'];
 const val = { L: 0, fL: -0.3, fM: -0.4, V: 0, sombra: 1, vs: 0, tzE: 0, cab: -0.3 };
 const tw = CLAVES.map(() => ({ a: 0, b: 0, t0: 0, d: 1, vivo: false, suave: false }));
 let reloj = 0, sec = null, barriendo = false, finBarrido = 0, proxEco = 12, zsFijo = 0;
+let calentando = false;   // mientras la placa estrena el programa grande no arranca otra pasada de inspección (ver calentar)
 
 /* cubic-bezier(0.16, 1, 0.3, 1): la curva única del sitio */
 function curva(x) {
@@ -399,7 +442,7 @@ function actuar(dt) {
   if (sec) {
     const e = reloj - sec.t0;
     if (sec.fase === 1 && sala.listoColor && sala.grande && e >= 1.25) { irA('diseno'); sec.fase = 2; sec.t0 = reloj; }
-    else if (sec.fase === 1 && e >= sec.proxCab) {
+    else if (sec.fase === 1 && e >= sec.proxCab && !calentando) {
       /* mientras se prepara la materia, el frente vuelve a recorrer el plano (sin borrarlo): pasadas de inspección al azar */
       poner('cab', 1.3); animar('cab', -0.3, 1.5, 0, true);
       sec.proxCab = e + 2.3 + 1.7 * Math.random();
@@ -559,25 +602,37 @@ function cuadro(m) {
 
 /* ================= Arranque ================= */
 const espera = (ms) => new Promise((ok) => setTimeout(ok, ms));
-/* La placa termina de preparar cada programa recién la primera vez que dibuja con él (más de un segundo en total):
-   si eso pasa con la secuencia andando, se ve un tirón. Entonces se dibujan cuadros invisibles con todo lo que
-   se va a usar y se espera a que la placa termine, sin trabar la página; recién después arranca la secuencia. */
+/* La placa termina de preparar cada programa recién la primera vez que dibuja con él: en frío, el programa grande, el
+   enjambre y el resplandor la traban 1 a 3 s en ese primer dibujo. Mientras la placa está trabada, cualquier llamada que
+   espera respuesta (consultar un programa, subir una imagen) traba también la página: eso eran las tareas largas de
+   0,7 a 2,8 s. Entonces: (1) se espera, con consultas rápidas, a que todos los programas estén compilados y los colores
+   subidos; (2) si la secuencia ya corre, se espera a que el plano de líneas esté quieto (terminó de dibujarse y no hay
+   una pasada de inspección en curso: si la placa se traba, lo que queda congelado es una imagen quieta); (3) un solo
+   cuadro estrena todo junto; (4) se espera la cerca sin bloquear (clientWaitSync con 0 no espera) y sin ninguna otra
+   llamada que espere a la placa. */
 async function calentar(esta) {
   if (QUIETO || T_FIJO != null) return;
   const gl = motor.gl, t0 = performance.now(), p = esta.p;
   /* con la secuencia ya corriendo en el programa liviano, el calentamiento dibuja el camino grande sólo en los destinos
-     intermedios (el lienzo sigue mostrando las líneas); si no, cuadros invisibles completos como antes */
+     intermedios (el lienzo sigue mostrando las líneas); si no, un cuadro invisible completo */
   const detras = !!motor.alCuadro;
   if (!detras) { p.entrada = 0; medirHeroe(); motor.ajustar(); }   // tras recuperar el contexto el lienzo vuelve sin medida
-  while (esta.vivo && !motor.perdido) {
-    if (detras) precalentar(esta); else cuadro(motor);
-    if ((enjambre.dibujo && post.dibujo && (detras || fondoVivo.dibujo)) || performance.now() - t0 > 3000) break;
-    await espera(40);
-  }
+  const listos = () => enjambre.listo() && post.listo() && fondoVivo.listo();
+  while (esta.vivo && !motor.perdido && !listos() && performance.now() - t0 < 5000) await espera(30);
+  if (!esta.vivo || motor.perdido) return;
+  if (detras) {
+    calentando = true;
+    const quietas = () => !tw[1].vivo && !tw[7].vivo && !tw[0].vivo;
+    const t1 = performance.now();
+    while (esta.vivo && !motor.perdido && !quietas() && performance.now() - t1 < 3000) await espera(30);
+    precalentar(esta);
+  } else cuadro(motor);
   const s = gl.fenceSync(gl.SYNC_GPU_COMMANDS_COMPLETE, 0);
   gl.flush();
-  while (s && !motor.perdido && gl.clientWaitSync(s, 0, 0) === gl.TIMEOUT_EXPIRED && performance.now() - t0 < 6000) await espera(30);
-  if (s) gl.deleteSync(s);
+  while (s && !motor.perdido && gl.clientWaitSync(s, 0, 0) === gl.TIMEOUT_EXPIRED && performance.now() - t0 < 9000) await espera(30);
+  if (s && !motor.perdido) gl.deleteSync(s);
+  calentando = false;
+  if (sec) sec.proxCab = Math.max(sec.proxCab, reloj - sec.t0 + 0.4);
   p.entrada = 1;
 }
 
@@ -621,16 +676,16 @@ async function armar() {
       html.classList.add('mundo-vivo');
       motor.alCuadro = cuadro; motor.despertar();
     }
-    await programa;
-    if (!esta.vivo || motor.perdido) return;
-    /* los colores se suben mientras la placa se calienta: así la secuencia no se traba al subirlos */
+    /* los colores se suben ya, de a una lámina por cuadro, con la placa libre (el programa grande se compila en otro
+       hilo): subirlos con la placa trabada en el estreno del programa grande era una tarea de hasta 2,8 s */
     const color = esta.cargarColor(pedidos);
     color.catch(() => {});
+    await Promise.all([programa, color]);
+    if (!esta.vivo || motor.perdido) return;
+    motor.hitos.color = Math.round(performance.now());
     if (directo) esta.grande = true;
     await calentar(esta);
     motor.hitos.calentado = Math.round(performance.now());
-    if (!esta.vivo || motor.perdido) return;
-    await color;
     if (!esta.vivo || motor.perdido) return;
     esta.grande = true;   // el bucle pasa al programa grande: las líneas caen en el mismo lugar
     motor.vigilarDesde();
@@ -677,12 +732,18 @@ async function arrancar() {
   if (navigator.connection?.saveData) return respaldo('ahorro-de-datos', 'el navegador pide ahorrar datos: queda el póster');
   motor = crearMotor(lienzo, { nivel: CAPTURA ? par.get('nivel') : null, tiempoFijo: T_FIJO, quieto: QUIETO, sinTope: CAPTURA && par.get('tope') === '0' });
   if (!motor) return respaldo();
-  /* segunda mitad: enjambre y guías, resplandor, lente y fondo vivo (se enganchan solos en motor.ganchos) */
+  motor.previa = PREVIA;
+  /* segunda mitad: enjambre y guías, resplandor, lente y fondo vivo (se enganchan solos en motor.ganchos). Entre una
+     y otra se cede el hilo: juntas eran una tarea de ≈ 0,4 s con CPU×4 */
   const ctx = { val, puntero, heroe, topeHeroe: () => topeH - sY, enfocada: () => apuntada || enfocada };
+  await ceder();
   enjambre = crearEnjambre(motor, ctx);
+  await ceder();
   post = crearPost(motor);
   crearLente(motor, ctx);
+  await ceder();
   fondoVivo = crearFondo(motor);
+  await ceder();
 
   /* el DOM manda: tamaño del héroe, scroll y puntero */
   const alMedir = () => {
@@ -759,13 +820,17 @@ function deslizar() {
   const el = heroe.querySelector('.heroe__deslizar'), gota = el?.querySelector('.heroe__gota');
   if (!el || !gota) return;
   let apagada = false, t = 0, lista = false;
+  /* el folio de «Trabajo» asoma dentro del pie del héroe (componentes.css): la señal va entre el último renglón y él */
+  const folio = document.querySelector('#trabajo .folio');
   const poner = () => {
-    const libre = altoH - cajaTexto[3];
+    const rh = heroe.getBoundingClientRect(), rf = folio?.getBoundingClientRect();
+    const tope = rf && rf.height > 0 ? Math.min(altoH, rf.top - rh.top - 10) : altoH;
+    const libre = tope - cajaTexto[3];
     const hay = heroe.dataset.comp === 'lado' && libre >= 56;
     el.classList.toggle('lista', hay);
     if (!hay) return;
     el.style.left = (cajaTexto[0] || 0).toFixed(1) + 'px';
-    el.style.bottom = Math.min(22, (libre - 30) / 2).toFixed(1) + 'px';
+    el.style.bottom = (altoH - tope + Math.min(22, (libre - 30) / 2)).toFixed(1) + 'px';
   };
   poner(); addEventListener('resize', poner);
   if ('ResizeObserver' in window) new ResizeObserver(poner).observe(heroe);

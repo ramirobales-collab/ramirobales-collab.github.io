@@ -2,10 +2,10 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-65Zfo6b4nH9P/crz3HSjEFkFtQ38xCcrmHqXgX7QsKA=' 'sha256-VpifGmDug4xIyU+ZADqk11zvwN3ROuMmbQwJMY9pYZg='; style-src 'self'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self' blob:; media-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-3H8oVr/HGPXX3fAQbSetAKEcGxpenzF9/6nAJO5IWwU=' 'sha256-65Zfo6b4nH9P/crz3HSjEFkFtQ38xCcrmHqXgX7QsKA='; style-src 'self'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self' blob:; media-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<script>try{var q=new URLSearchParams(location.search).get('tema'),t=q==='claro'?'light':q==='oscuro'?'dark':q||localStorage.getItem('tema');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t;}catch(e){}</script>
+<script>if(self!==top){document.documentElement.classList.add('enmarcado');try{top.location.replace(location.href)}catch(e){}}try{var q=new URLSearchParams(location.search).get('tema'),t=q==='claro'?'light':q==='oscuro'?'dark':q||localStorage.getItem('tema');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t;}catch(e){}</script>
 <title>Configurador 3D · Ámbar Muebles (marca ficticia) · Ramiro Bales</title>
 <meta name="description" content="Ficha de producto con configurador 3D para e-commerce: tela, madera y metal en tiempo real, precio vivo y carrito. Demo de Ramiro Bales con una marca ficticia.">
 <meta name="robots" content="index, follow">
@@ -31,6 +31,7 @@
 <link rel="modulepreload" href="js/visor.js">
 </head>
 <body>
+<a class="enmarcado-aviso" href="https://ramirobales-collab.github.io/demos/configurador/" target="_top" rel="noopener noreferrer" data-i18n="enmarcado.aviso">Esta página está dentro de otro sitio. Abrila en su dirección real: ramirobales-collab.github.io</a>
 <a class="saltar" href="#ficha" data-i18n="barra.saltar">Saltar a la ficha</a>
 
 <div class="cinta" role="note">

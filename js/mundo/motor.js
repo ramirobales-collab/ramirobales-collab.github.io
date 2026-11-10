@@ -23,6 +23,13 @@ const DEPURAR = PAR.get('depurar') === '1';
 const CON_SOFTWARE = (LOCAL || PAR.get('captura') === '1') && PAR.get('software') === '1';
 const SOFTWARE = /swiftshader|llvmpipe|softpipe|basic render|microsoft basic|warp/i;
 
+/* Cede el hilo principal (parte una tarea larga): una tarea nueva, sin la espera mínima ni el freno de los
+   temporizadores en una pestaña de fondo. */
+export function ceder() {
+  if (globalThis.scheduler?.yield) return scheduler.yield();
+  return new Promise((ok) => { const c = new MessageChannel(); c.port1.onmessage = () => { c.port1.close(); ok(); }; c.port2.postMessage(0); });
+}
+
 /* Devuelve el motor, o null si no hay WebGL2 con destinos flotantes, o si sólo hay WebGL por software (el motivo
    queda en data-estado y en la consola). */
 export function crearMotor(lienzo, op = {}) {
@@ -140,11 +147,19 @@ export function crearMotor(lienzo, op = {}) {
     gl.attachShader(p, a); gl.attachShader(p, b);
     if (salidas) gl.transformFeedbackVaryings(p, salidas, gl.INTERLEAVED_ATTRIBS);
     gl.linkProgram(p);
+    /* Toda consulta al programa espera respuesta de la placa: si la placa está trabada estrenando otro programa (el
+       primer dibujo con uno nuevo la traba hasta segundos en frío), la consulta traba la página igual. Por eso antes de
+       consultar se pone una cerca y se espera, sin bloquear, a que la placa la pase: recién ahí se pregunta. */
+    let cerca = null;
     const pr = {
       p, u: null,
       listo() {
         if (pr.u) return true;
-        if (par && !gl.isContextLost() && !gl.getProgramParameter(p, par.COMPLETION_STATUS_KHR)) return false;
+        if (gl.isContextLost()) return false;
+        if (!cerca) { cerca = gl.fenceSync(gl.SYNC_GPU_COMMANDS_COMPLETE, 0); gl.flush(); return false; }
+        if (gl.clientWaitSync(cerca, 0, 0) === gl.TIMEOUT_EXPIRED) return false;
+        gl.deleteSync(cerca); cerca = null;
+        if (par && !gl.getProgramParameter(p, par.COMPLETION_STATUS_KHR)) return false;
         if (!gl.getProgramParameter(p, gl.LINK_STATUS) && !gl.isContextLost()) {
           throw new Error(`shader «${nombre}»: ${gl.getShaderInfoLog(b) || gl.getShaderInfoLog(a) || gl.getProgramInfoLog(p)}`);
         }
@@ -154,6 +169,16 @@ export function crearMotor(lienzo, op = {}) {
       },
     };
     return pr;
+  };
+
+  /* Espera, sin bloquear, a que la placa termine lo pedido hasta ahora (una cerca): antes de subir una imagen grande,
+     que con la placa trabada espera lugar en el búfer de transferencia y traba la página. */
+  m.placaAlDia = async (tope = 4000) => {
+    if (gl.isContextLost()) return;
+    const s = gl.fenceSync(gl.SYNC_GPU_COMMANDS_COMPLETE, 0), t0 = performance.now();
+    gl.flush();
+    while (s && !gl.isContextLost() && gl.clientWaitSync(s, 0, 0) === gl.TIMEOUT_EXPIRED && performance.now() - t0 < tope) await new Promise((ok) => setTimeout(ok, 16));
+    if (s && !gl.isContextLost()) gl.deleteSync(s);
   };
 
   /* ---------- Texturas y destinos ---------- */
@@ -213,7 +238,9 @@ export function crearMotor(lienzo, op = {}) {
 
   /* Imagen → ImageBitmap sin tocar (ni color ni alfa). `lado` acota el lado largo. */
   m.cargarImagen = async (url, lado = 0) => {
-    const r = await fetch(url);
+    const clave = String(url), previa = m.previa?.get(clave);   // ya pedida por index.js al cargar (una sola vez)
+    if (previa) m.previa.delete(clave);
+    const r = await (previa || fetch(url));
     if (!r.ok) throw new Error(`${r.status} en ${url}`);
     const blob = await r.blob();
     const crudo = { premultiplyAlpha: 'none', colorSpaceConversion: 'none' };

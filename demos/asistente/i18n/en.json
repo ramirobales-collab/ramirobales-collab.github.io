@@ -230,5 +230,6 @@
   "anuncio.respuesta": "Assistant reply. Rule: {r}.",
   "msg.fuentes": "{n} sources",
   "traza.mas": "And {n} more cited passages.",
-  "vista.traza.corto": "Inside"
+  "vista.traza.corto": "Inside",
+  "enmarcado.aviso": "This page is inside another site. Open it at its real address: ramirobales-collab.github.io"
 }

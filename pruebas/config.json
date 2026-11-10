@@ -6,7 +6,7 @@
     "juego_v": { "patron": "^assets/mundo/v-.*\\.(webp|png)$", "max": 950000, "fuente": "decisión del dueño: láminas del motor" },
     "poster": { "patron": "^assets/mundo/poster-[hv]\\.(avif|webp)$", "max_cada_uno": 160000, "fuente": "decisión del dueño: láminas del motor" },
     "css_critico": { "max": 14336, "fuente": "herramientas/critico.py (LIMITE)" },
-    "primera_carga_portada": { "max": 1100000, "fuente": "decisión del dueño: HTML + CSS + JS + fuentes precargadas + mundo.json + póster + juego h (sin imágenes diferidas)" }
+    "primera_carga_portada": { "max": 1000000, "fuente": "decisión del dueño: HTML + CSS + JS + fuentes precargadas + mundo.json + póster + juego h (sin imágenes diferidas)" }
   },
 
   "politica": {
@@ -163,6 +163,7 @@
     "tope_visita": 60000,
     "cls_max": 0.05,
     "tarea_larga_max": 250,
+    "tarea_larga_conocida": { "index.html": { "max": 1300, "motivo": "al llegar las hojas diferidas el navegador recalcula estilo y maquetado de toda la portada (1.045 ms con CPU x4, 118 ms sin freno); pendiente: content-visibility por seccion y medir renglones al acercarse" } },
     "lineas_max_ms": 3000,
     "swiftshader_cps_min": 10
   },

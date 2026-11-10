@@ -17,13 +17,20 @@ uniform float u_fin;      // dónde termina la sala (fracción del alto de u_esc
 uniform vec4 u_texto;     // bloque de texto del héroe (px de búfer): ahí el fondo vivo no aparece aunque la sala se funda
 /* cuánto tapa el escenario (el héroe) en este píxel: el fondo aparece donde la sala se funde, con la MISMA curva que
    la salida de sala.js (así no queda una franja negra entre la sala y el fondo vivo) */
-float tapa(vec2 q){
+float tapaSala(vec2 q){
   vec2 e = (q - u_esc.xy) / u_esc.zw;
   if (e.x < 0.0 || e.x > 1.0 || e.y < 0.0 || e.y > 1.0) return 0.0;
   float f = clamp((u_fin - e.y) / max(u_par.x, 1e-3), 0.0, 1.0);
+  return f * f * f * (f * (f * 6.0 - 15.0) + 10.0) * u_par.y;
+}
+/* las motas, además, no pasan detrás de un renglón del héroe (con un borde ancho y suave). La bruma, que es continua,
+   NO se recorta con el bloque de texto: al deslizar, el bloque quedaba como un rectángulo más oscuro con filo recto */
+float tapa(vec2 q){
+  vec2 e = (q - u_esc.xy) / u_esc.zw;
+  if (e.x < 0.0 || e.x > 1.0 || e.y < 0.0 || e.y > 1.0) return 0.0;
   vec2 dq = max(u_texto.xy - q, q - u_texto.zw);
-  float enTexto = 1.0 - smoothstep(0.0, 24.0 * u_par.w, max(dq.x, dq.y));   // ninguna mota detrás de un renglón del héroe
-  return max(f * f * f * (f * (f * 6.0 - 15.0) + 10.0), enTexto) * u_par.y;
+  float enTexto = 1.0 - smoothstep(0.0, 64.0 * u_par.w, max(dq.x, dq.y));
+  return max(tapaSala(q), enTexto * u_par.y);
 }
 float azar(float n){ n = fract(n * 0.1031); n *= n + 33.33; n *= n + n; return fract(n); }
 float ruido1(float x){ float i = floor(x), f = fract(x); f = f * f * (3.0 - 2.0 * f); return mix(azar(i), azar(i + 1.0), f); }
@@ -54,25 +61,26 @@ void main(){
   p += (vec2(ruido1(t * lento + id * 3.1), ruido1(t * lento * 0.83 + id * 5.7 + 40.0)) - 0.5) * (60.0 + 420.0 * par);
   p.y -= u_mov.z * par;                                                  // paralaje con el scroll
   p = mod(p, campo) - (radio + 60.0);
-  /* motas del canto: una parte del enjambre recorre el borde de las placas marcadas (data-iman), con el sentido que
-     marca el scroll; las que rondan la placa más cercana al centro de la pantalla son más y más brillantes */
+  /* trazo del canto (A04): de vez en cuando, un puñado de motas finas recorre en fila un tramo corto del borde de la placa
+     más cercana al centro, como un cometa que pasa, y se apaga. Antes una parte grande del enjambre rodeaba TODAS las
+     placas y las contorneaba de puntos (escarcha). Sin período: la aparición sale de un ruido lento. */
   int nI = int(u_imanP.x);
   float canto = 0.0;
-  if (nI > 0 && plano < 1.5 && h5 < (plano < 0.5 ? 0.42 : 0.3)) {
-    int k = int(floor(azar(id * 9.13) * float(nI) * 1.6)); if (k >= nI) k = int(u_imanP.y);
-    vec4 R = u_iman[k];
+  float aparece = smoothstep(0.62, 0.86, ruido1(t * 0.045 + 3.7));
+  if (nI > 0 && plano < 0.5 && h5 < 0.06 && aparece > 0.01) {
+    vec4 R = u_iman[int(u_imanP.y)];
     vec2 lado = R.zw - R.xy;
     float L = 2.0 * (lado.x + lado.y);
     if (L > 40.0) {
-      float off = 3.0 + 22.0 * h3 * h3 + 5.0 * ruido1(t * 0.2 + id * 1.7);
-      float vel = (14.0 + 22.0 * h4) * u_imanP.z;
-      float u = fract(h2 + t * vel / L + u_mov.z * 0.25 / L * u_imanP.z) * L;   // también avanza con el scroll
+      float off = 2.0 + 5.0 * h3;
+      float cabeza = ruido1(t * 0.013 + 11.0) * 3.0 + t * 26.0 * u_imanP.z / L + u_mov.z * 0.25 / L * u_imanP.z;
+      float u = fract(cabeza - h3 * 0.07) * L;           // en fila: el tramo ocupa el 7 % del contorno
       vec2 q;
       if (u < lado.x) q = vec2(R.x + u, R.y - off);
       else if (u < lado.x + lado.y) q = vec2(R.z + off, R.y + (u - lado.x));
       else if (u < 2.0 * lado.x + lado.y) q = vec2(R.z - (u - lado.x - lado.y), R.w + off);
       else q = vec2(R.x - off, R.w - (u - 2.0 * lado.x - lado.y));
-      p = q; canto = (k == int(u_imanP.y) ? 1.0 : 0.6) * smoothstep(0.0, 0.25, u_imanP.w + 0.25);
+      p = q; canto = aparece * (1.0 - h3) * smoothstep(0.0, 0.25, u_imanP.w + 0.25);   // la cola se apaga
     }
   }
   /* evento: una ráfaga cruza la pantalla y empuja lo que encuentra */
@@ -88,7 +96,7 @@ void main(){
   float titila = 0.55 + 0.9 * pow(ruido1(t * mix(0.2, 1.3, h5) + id * 17.0), 2.0);
   float op = plano < 0.5 ? 0.5 * titila : (plano < 1.5 ? 0.10 * titila : 0.035 + 0.02 * titila);
   op *= 1.0 + 1.5 * u_ev.y * exp(-fr * fr);                              // la ráfaga las enciende un momento
-  if (canto > 0.0) op *= 0.55 + 0.9 * canto * (0.6 + 0.4 * u_imanP.w);
+  if (canto > 0.0) op *= 0.35 + 0.65 * canto;
   op *= r * r / (r * r + 0.64 * r * estiron * E);                        // la energía se conserva al estirarse
   op *= 1.0 - 0.65 * rapidez;
   float g = h4 * 2.0 - 1.0;
@@ -132,7 +140,7 @@ void main(){
   p.y += u_mov.z * 0.1;                                   // la bruma queda lejos: casi no acompaña al scroll
   p += u_mov.xy * 0.5;
   float n = ruido2(p / 520.0 + vec2(u_t * 0.011, -u_t * 0.006)) * 0.65 + ruido2(p / 190.0 + vec2(-u_t * 0.017, u_t * 0.012) + 7.0) * 0.35;
-  float a = 0.085 * smoothstep(0.38, 0.95, n) * (1.0 - tapa(q));
+  float a = 0.085 * smoothstep(0.38, 0.95, n) * (1.0 - tapaSala(q));
   /* la placa más cercana al centro junta algo de luz en su borde superior (filo de luz que respira con ruido) */
   if (u_imanP.x > 0.5 && u_imanP.w > 0.01) {
     vec4 R = u_iman[int(u_imanP.y)];
@@ -142,7 +150,7 @@ void main(){
     float x = clamp((pc.x - R.x) / max(an, 1.0), 0.0, 1.0);
     float largo = smoothstep(0.0, 0.18, x) * smoothstep(1.0, 0.82, x) * step(R.x, pc.x) * step(pc.x, R.z);
     float vivo = 0.55 + 0.45 * ruido2(vec2(pc.x / 140.0 - u_t * 0.06, u_t * 0.03));
-    a += u_imanP.w * largo * vivo * (0.10 * exp(-dy * dy / 24.0) + 0.05 * exp(-max(-dy, 0.0) / 30.0) * step(dy, 0.0)) * (1.0 - tapa(q));
+    a += u_imanP.w * largo * vivo * (0.10 * exp(-dy * dy / 24.0) + 0.05 * exp(-max(-dy, 0.0) / 30.0) * step(dy, 0.0)) * (1.0 - tapaSala(q));
   }
   a += (azar2(q + u_t) + azar2(q * 1.37 + 11.0 - u_t) - 1.0) / 255.0 * step(0.002, a);   // tramado: sin bandas
   a = max(a, 0.0);
@@ -277,6 +285,6 @@ export function crearFondo(motor) {
   motor.ganchos.fondo.push(gancho);
   motor.ganchos.alPerder.push(() => { listo = false; });
   armar();
-  const api = { evento: ev, dibujo: false };
+  const api = { evento: ev, dibujo: false, listo: () => listo && pMota.listo() && pBruma.listo() };
   return api;
 }

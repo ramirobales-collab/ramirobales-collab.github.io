@@ -24,7 +24,7 @@ Lo que se consideró, de más a menos probable para un sitio así:
 | Secretos en el repositorio o en su historial | Prueba que busca credenciales, archivos de claves, rutas locales y correos no declarados en el árbol y en todo el historial de git |
 | Filtrar a dónde va el visitante | `referrer` en `no-referrer` y `rel="noopener noreferrer"` en los enlaces que abren pestaña nueva |
 | Datos personales de más | Sin cookies, sin analítica, sin formularios que envíen; en el navegador sólo se guardan preferencias (abajo) |
-| Enmarcado (clickjacking) | No se puede bloquear por cabecera desde GitHub Pages (ver «Límites»). La portada lleva un guion al inicio del `<head>` que sale del marco o, si no puede, oculta la página y deja sólo un aviso con la dirección real (el riesgo es una copia con otro correo encima); las demás páginas todavía no lo tienen. El sitio no tiene sesión ni acciones con efecto |
+| Enmarcado (clickjacking) | No se puede bloquear por cabecera desde GitHub Pages (ver «Límites»). Todas las páginas HTML del sitio (portada, casos, seguridad ES/EN, 404, legal, créditos y las cuatro demos; no los CV) llevan un guion al inicio del `<head>` que sale del marco o, si no puede, oculta la página y deja sólo un aviso con la dirección real (el riesgo es una copia con otro correo encima). Comprobado enmarcando las páginas desde otro origen: se ve sólo el aviso. Un `iframe` con `sandbox` sin scripts lo esquiva. El sitio no tiene sesión ni acciones con efecto |
 
 ## Qué se hizo
 

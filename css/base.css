@@ -156,17 +156,36 @@ em { font-family: var(--playfair); font-style: italic; }
 main, .pie { text-shadow: 0 0 3px light-dark(transparent, oklch(0% 0 0 / 0.92)), 0 0 9px light-dark(transparent, oklch(0% 0 0 / 0.88)), 0 0 22px light-dark(transparent, oklch(0% 0 0 / 0.72)); }
 .boton--primario, .conmutador button[aria-pressed="true"], .riel__t, .cursor-rotulo { text-shadow: none; }
 
-.seccion { position: relative; padding-block: var(--e-seccion); }
+.seccion { position: relative; padding-block: var(--e-aire); }
 .seccion > .contenedor { position: relative; z-index: 1; }
 /* banda tinta: oscura en los dos temas y translúcida (el fondo vivo se intuye detrás) */
-/* En oscuro la banda entra y sale con fundidos largos (--banda-fundido): ningún borde horizontal entre secciones, sólo
-   una capa apenas menos oscura. En claro es una banda oscura sobre el papel, con su canto y su sombra. */
+/* La banda entra y sale con fundidos (--banda-fundido) que nacen en el aire de la sección vecina (--banda-fuera):
+   ningún borde horizontal entre secciones. En oscuro es una capa apenas menos oscura; en claro, el papel se oscurece
+   con una rampa suave (en oklab, más lenta al principio) antes del primer renglón. */
 .seccion--tinta {
+  --bf-a: var(--banda-fuera);
+  --bf-b: var(--banda-fuera);
+  --bfun-a: var(--banda-fundido);
+  --bfun-b: var(--banda-fundido);
   color-scheme: dark;
-  background: linear-gradient(transparent, var(--tinta-banda) var(--banda-fundido), var(--tinta-banda) calc(100% - var(--banda-fundido)), transparent);
   color: var(--texto);
   --grano-mezcla: screen;
-  box-shadow: var(--banda-canto);
+}
+.seccion--tinta::before {
+  content: "";
+  position: absolute;
+  inset: calc(-1 * var(--bf-a)) 0 calc(-1 * var(--bf-b));
+  z-index: 0;
+  pointer-events: none;
+  background: linear-gradient(in oklab,
+    transparent,
+    color-mix(in oklab, var(--tinta-banda) 18%, transparent) calc(var(--bfun-a) * 0.3),
+    color-mix(in oklab, var(--tinta-banda) 62%, transparent) calc(var(--bfun-a) * 0.62),
+    var(--tinta-banda) var(--bfun-a),
+    var(--tinta-banda) calc(100% - var(--bfun-b)),
+    color-mix(in oklab, var(--tinta-banda) 62%, transparent) calc(100% - var(--bfun-b) * 0.62),
+    color-mix(in oklab, var(--tinta-banda) 18%, transparent) calc(100% - var(--bfun-b) * 0.3),
+    transparent);
 }
 .pila > * + * { margin-top: var(--e-3); }
 .pila--chica > * + * { margin-top: var(--e-2); }
@@ -282,6 +301,8 @@ html.mov .cortina[data-mov="fin"], html.mov .mascara[data-mov="fin"] { clip-path
 .rod { display: inline-block; height: 1lh; overflow-y: clip; vertical-align: bottom; }
 .rod__c { display: block; }
 .rod__c > span { display: block; height: 1lh; }
+/* el ancho lo da sólo el dígito real (el primero): un «1» no hereda el ancho de los «0/8/9» que ruedan (verificación 10/11) */
+.rod__c > span + span { width: 0; white-space: nowrap; }
 html.mov [data-rodillo] .rod__c { translate: 0 calc(-1lh * var(--n, 3)); }
 html.mov [data-rodillo].visto .rod__c, html.mov .visto [data-rodillo] .rod__c { translate: 0 0; transition: translate var(--d-titulo) var(--curva-entrada) calc(var(--d, 0ms) + var(--i, 0) * 90ms); }
 /* carga de imagen: aparece cuando terminó de bajar */
@@ -343,6 +364,7 @@ html.ir { scroll-behavior: auto !important; }
   .nav__in { padding-block: 0 6mm; }
   .nav__in::before, .placa::before, .placa::after, .papel::before, .papel::after { display: none !important; }
   .placa, .papel, .seccion--tinta, .marca__media, .caso__media { background: none !important; }
+  .seccion--tinta::before { display: none !important; }
   .placa, .papel { border: 1px solid #ccc; }
   .heroe { min-height: 0 !important; height: auto !important; padding-top: 0 !important; display: block !important; }
   .heroe__sellos { display: flex !important; }

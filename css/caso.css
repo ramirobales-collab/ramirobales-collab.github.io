@@ -153,7 +153,8 @@ html.vt .caso-cabecera__media .caso__capa { animation-name: none; }
   grid-column: 1 / -1;
   position: relative;
   z-index: 3;
-  margin: calc(-1 * var(--e-4)) 0 0;
+  /* A19 (cierre): la placa ya no se monta sobre la foto; queda debajo con aire (row-gap + esto ≥ 32 px) */
+  margin: var(--e-2) 0 0;
   padding: var(--e-2) var(--e-3);
   display: grid;
 }
@@ -166,7 +167,7 @@ html.vt .caso-cabecera__media .caso__capa { animation-name: none; }
   .caso-cabecera__in { grid-template-columns: repeat(6, minmax(0, 1fr)); }
   .caso-cabecera__media { aspect-ratio: 16 / 10; }
   .caso-cabecera__media .caso__capa { object-position: 50% 50%; }
-  .caso-resumen { grid-column: 1 / 6; margin-top: calc(-1 * var(--e-5)); box-shadow: var(--placa-sombra-alta); }
+  .caso-resumen { grid-column: 1 / 6; margin-top: var(--e-2); box-shadow: var(--placa-sombra-alta); }
 }
 @media (min-width: 1024px) {
   .caso-cabecera__in { grid-template-columns: repeat(12, minmax(0, 1fr)); grid-template-rows: auto 1fr auto; }
@@ -179,7 +180,7 @@ html.vt .caso-cabecera__media .caso__capa { animation-name: none; }
     grid-column: 5 / -1;
     grid-row: 1 / span 2;
     aspect-ratio: auto;
-    min-height: clamp(560px, 82svh, 820px);
+    min-height: clamp(520px, 69svh, 760px);
     margin: calc(-1 * var(--e-4)) calc(-1 * max(var(--margen), (100vw - var(--ancho-max)) / 2)) 0 var(--e-2);
   }
   .caso-cabecera__media .caso__capa { object-position: 72% 50%; }
@@ -187,7 +188,7 @@ html.vt .caso-cabecera__media .caso__capa { animation-name: none; }
   .caso-resumen {
     grid-column: 1 / -1;
     grid-row: 3;
-    margin-top: calc(-1 * var(--e-5));
+    margin-top: var(--e-2);
     grid-template-columns: repeat(3, minmax(0, 1fr));
     padding: var(--e-3) var(--e-4);
     column-gap: var(--e-4);
@@ -367,6 +368,12 @@ html.mov .caso-pasos.visto::before { scale: 1 1; transition: scale 2200ms var(--
   scroll-margin-top: calc(var(--nav-alto) + var(--e-3));
   box-shadow: var(--placa-sombra), inset 0 1px 0 oklch(100% 0 0 / 0.12), inset 0 0 0 1px oklch(100% 0 0 / 0.06);
 }
+/* fondo propio (cierre 10/11): la banda tinta de la portada pasó a pintarse en su ::before, que acá es el haz de luz;
+   sin esto el resultado quedaba con texto claro sobre papel en el tema claro. Mismo aspecto que antes: en oscuro entra
+   y sale con fundido; en claro es una placa oscura entera. */
+.caso-resultado { --res-fundido: min(300px, 22%); background: linear-gradient(transparent, var(--tinta-banda) var(--res-fundido), var(--tinta-banda) calc(100% - var(--res-fundido)), transparent); }
+:root[data-theme="light"] .caso-resultado { --res-fundido: 0px; }
+@media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) .caso-resultado { --res-fundido: 0px; } }
 /* haz de luz diagonal y grano: la banda es materia, no un rectángulo plano */
 .caso-resultado::before {
   content: "";

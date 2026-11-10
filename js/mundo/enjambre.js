@@ -674,6 +674,6 @@ export function crearEnjambre(motor, ctx) {
   motor.ganchos.sobreSala.push(gancho);
   motor.ganchos.alPerder.push(() => { listo = false; salaVista = null; });
   armar();   // ya: los programas se compilan mientras bajan las láminas
-  const api = { guias: G, evento: ev, dibujo: false };   // `dibujo`: ya dibujó una vez (la placa ya tiene sus programas listos)
+  const api = { guias: G, evento: ev, dibujo: false, listo: () => listo && progPaso.listo() && progMota.listo() };   // listo(): sus programas ya compilaron (consulta rápida mientras la placa no está trabada)   // `dibujo`: ya dibujó una vez (la placa ya tiene sus programas listos)
   return api;
 }

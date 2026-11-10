@@ -113,6 +113,6 @@ export function crearPost(motor) {
   motor.ganchos.post = gancho;
   motor.ganchos.alPerder.push(() => { listo = false; cadena = []; anchoC = 0; });
   armar();
-  const api = { dibujo: false };
+  const api = { dibujo: false, listo: () => listo && pUmbral.listo() && pBaja.listo() && pSube.listo() };
   return api;
 }

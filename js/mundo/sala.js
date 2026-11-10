@@ -3,6 +3,8 @@
    Sólo depende de mundo.json (nunca de la resolución ni del contenido de las láminas).
    Fórmulas: portfolio-docs/v3/motor.md §3 y §4.1. Interfaz para la segunda mitad: progreso-motor-1.md. */
 
+import { ceder } from './motor.js';
+
 export const IDS = ['fondo', 'lejos', 'medio', 'cerca'];
 const ANCLA_H = [0.64, 0.5], ANCLA_V = [0.5, 0.72];
 const KF = 0.005;       // σ del desenfoque, en fracción del alto de la lámina por dioptría (f/4 con 50 mm da ≈ 0,0105: se cierra un poco para que los productos se lean)
@@ -56,7 +58,7 @@ precision highp float;
 precision highp sampler2D;
 `;
 
-/* Datos de una lámina (-p.png + -n.webp) → RGBA16F: R = profundidad en metros (los huecos se rellenan
+/* Datos de una lámina (-p.webp sin pérdida + -n.webp) → RGBA16F: R = profundidad en metros (los huecos se rellenan
    con el vecino más cercano o con el z de la capa), G = máscara (B/255), B = contorno, A = 1. */
 const FS_DATOS = CABEZA + `
 uniform sampler2D u_p, u_n;
@@ -525,10 +527,16 @@ export function crearSala(motor, datos, formato, base) {
     texColor: null, texInfo: null, fbSala: null, fbColor: null, ancho: 0, alto: 0,
   };
 
-  const progDatos = motor.programa(FS_DATOS, 'datos de lámina');
-  const progPre = motor.programa(FS_PREMULTIPLICA, 'premultiplica');
-  const progDes = motor.programa(FS_DESENFOQUE, 'desenfoque');
-  const progSal = motor.programa(FS_SALIDA, 'salida');
+  /* también los chicos se compilan aparte: compilarlos en el momento esperaba a la placa (≈ 0,3 s con CPU×4) */
+  const progDatos = motor.programaAparte(FS_DATOS, 'datos de lámina');
+  const progPre = motor.programaAparte(FS_PREMULTIPLICA, 'premultiplica');
+  const progDes = motor.programaAparte(FS_DESENFOQUE, 'desenfoque');
+  const progSal = motor.programaAparte(FS_SALIDA, 'salida');
+  const chicos = [progDatos, progPre, progDes, progSal];
+  sala.chicosListos = () => new Promise((ok, mal) => {
+    const f = () => { try { if (!sala.vivo || motor.perdido || chicos.every((c) => c.listo())) ok(); else setTimeout(f, 16); } catch (e) { mal(e); } };
+    f();
+  });
   /* El programa de la sala es grande (compilarlo lleva más de un segundo): se compila aparte, sin trabar la página.
      Al arrancar se espera con `sala.programaListo()`; al cambiar de nivel se sigue dibujando con el anterior hasta
      que el nuevo esté. `Pprog` = la fila de niveles con la que se compiló el que está en uso. */
@@ -586,7 +594,7 @@ export function crearSala(motor, datos, formato, base) {
   }
   function ligar(unidad, tex) { gl.activeTexture(gl.TEXTURE0 + unidad); gl.bindTexture(gl.TEXTURE_2D, tex); }
 
-  /* -p.png (+ -n.webp) → textura de datos con contornos precalculados y su cadena de niveles (resplandor del trazo). */
+  /* -p.webp (+ -n.webp) → textura de datos con contornos precalculados y su cadena de niveles (resplandor del trazo). */
   function armarDatos(i, mapaP, mapaN) {
     const w = mapaP.width, h = mapaP.height;
     const crudo = motor.texturaDeImagen(mapaP, gl.RGBA8, { filtro: gl.NEAREST });
@@ -642,19 +650,26 @@ export function crearSala(motor, datos, formato, base) {
 
   /* Datos primero (livianos): con esto ya corre el acto «defino». */
   sala.cargarDatos = async () => {
-    const ps = IDS.map((id) => motor.cargarImagen(url(id + '-p.png')));
+    const ps = IDS.map((id) => motor.cargarImagen(url(id + '-p.webp')));   // WebP sin pérdida: los mismos píxeles que el PNG, la mitad de peso
     const ns = IDS.map((id) => (conNormal.includes(id) ? motor.cargarImagen(url(id + '-n.webp')).catch(() => null) : null));
     const mp = await Promise.all(ps), mn = await Promise.all(ns);
-    if (!sala.vivo) return;
-    for (let i = 0; i < 4; i++) { armarDatos(i, mp[i], mn[i]); mp[i].close(); mn[i]?.close(); }
+    await sala.chicosListos();
+    /* de a una capa por tarea: las cuatro juntas eran una tarea de ≈ 0,2 s con CPU×4 */
+    for (let i = 0; i < 4; i++) {
+      if (!sala.vivo || motor.perdido) { mp.forEach((x) => x.close()); mn.forEach((x) => x?.close()); return; }
+      if (i > 0) { await ceder(); await motor.placaAlDia(); if (!sala.vivo || motor.perdido) { for (let j = i; j < 4; j++) { mp[j].close(); mn[j]?.close(); } return; } }
+      armarDatos(i, mp[i], mn[i]); mp[i].close(); mn[i]?.close();
+    }
     sala.listoDatos = true;
   };
   /* Colores: se piden ya, se suben de a una lámina por cuadro para no trabar el acto en curso. */
   sala.pedirColor = () => IDS.map((id) => motor.cargarImagen(url(id + '.webp'), motor.P.lado));
   sala.cargarColor = async (pedidos) => {
     const mapas = await Promise.all(pedidos);
+    await sala.chicosListos();
     for (let i = 0; i < 4; i++) {
-      if (!sala.vivo || motor.perdido) return;
+      await motor.placaAlDia();   // con la placa trabada (estreno de un programa) la subida esperaba y trababa la página
+      if (!sala.vivo || motor.perdido) { for (let j = i; j < 4; j++) mapas[j].close(); return; }
       armarColor(i, mapas[i]); mapas[i].close();
       if (!motor.quieto) await cuadroLibre();
     }

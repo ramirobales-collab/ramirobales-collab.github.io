@@ -538,4 +538,8 @@ html { background: var(--fondo); }
 .pie a { text-decoration-color: oklch(100% 0 0 / 0.35); text-underline-offset: 0.18em; }
 .pie a:hover { text-decoration-color: oklch(68% 0.19 29); }
 .pie__enlaces a { display: inline-flex; align-items: center; min-height: 44px; }
+/* Enmarcado: si la página quedó dentro de otro sitio, sólo se ve el aviso con la dirección real. */
+.enmarcado-aviso { display: none; }
+html.enmarcado body > :not(.enmarcado-aviso) { visibility: hidden !important; }
+html.enmarcado .enmarcado-aviso { display: block; position: fixed; inset: 40% 16px auto; z-index: 100; text-align: center; color: var(--texto); }
 /* ==== fin del marco del portfolio ==== */

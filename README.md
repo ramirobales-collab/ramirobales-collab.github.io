@@ -67,8 +67,8 @@ Requisitos: Node 22 o más nuevo y, para humo y vitales, Edge, Chrome o Chromium
 | `presupuestos` | pesos de las láminas, los pósters, el CSS crítico y la primera carga de la portada (abajo) |
 | `secretos` | sin credenciales, archivos de claves, servicios propios (por huella), rutas de una máquina local ni correos no declarados, en el árbol y en todo el historial de git |
 | `humo` | cada página en el navegador, en oscuro/ES y claro/EN, recorrida entera: 0 violaciones de la política, 0 errores de consola, 0 pedidos fallidos o a terceros, sin desborde horizontal, almacenamiento dentro de lo declarado, 0 cookies. En la portada además: el motor llega a `listo`, los respaldos (`?mundo=0`, sin WebGL, `?quieto=1`) dejan la foto y los enlaces, celular, `?idioma=zz` se ignora, y la primera carga medida en red |
-
 | `vitales` | en frío (perfil nuevo, sin caché, red de 150 ms y 1,6 Mbit/s, CPU ×4): salto de maquetado ≤ 0,05 en portada, 404, créditos y legal; ninguna tarea larga de más de 250 ms después del primer pintado; en la portada, la primera vista del motor a menos de 3 s de empezar a cargar; con movimiento reducido, un verbo cambia la sala; sin placa de video (SwiftShader), el motor da 10 cuadros por segundo o cae al póster |
+| `pausa` | el motor de la portada sobrevive a quedar sin cuadros o sin tamaño sin aviso (panel oculto, ventana tapada, pestaña de fondo): cuadros a uno por segundo durante el arranque, ventana en cero con el motor listo, carga con la ventana en cero, pestaña de fondo y respaldo por lentitud que se recupera al volver. Con placa real queda `listo` y dibujando; por software va al póster sin excepciones |
 
 Las excepciones y varas de cada prueba están en `pruebas/config.json`, cada una con su motivo. En CI (`CI=1`) la de humo visita cada página interior una vez, alternando oscuro/ES y claro/EN, para entrar en el tope del flujo.
 

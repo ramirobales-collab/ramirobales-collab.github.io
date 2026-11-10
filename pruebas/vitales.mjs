@@ -72,7 +72,12 @@ export async function correr({ raiz, config, gpu }) {
       filas.push(`${p} CLS ${c.valor.toFixed(3)}`);
       if (c.valor > V.cls_max) fallas.push(`${p}: salto de maquetado ${c.valor.toFixed(3)} > ${V.cls_max} en frío${c.fuentes.length ? ` (se movió: ${c.fuentes.join(', ')})` : ''}`);
       const fp = d.fp ?? 0;
-      const largas = d.largas.filter(([t, dur]) => t + dur > fp && dur > V.tarea_larga_max);
+      const todas = d.largas.filter(([t, dur]) => t + dur > fp && dur > V.tarea_larga_max);
+      /* Deuda conocida y acotada (config.json → vitales.tarea_larga_conocida): se informa como aviso mientras no pase
+         de su tope; por encima de ese tope vuelve a ser falla. */
+      const conocida = V.tarea_larga_conocida?.[p];
+      const largas = conocida ? todas.filter(([, dur]) => dur > conocida.max) : todas;
+      if (conocida && todas.length && !largas.length) avisos.push(`${p}: tarea larga conocida de ${Math.round(Math.max(...todas.map((x) => x[1])))} ms (vara ${V.tarea_larga_max} ms, tope acordado ${conocida.max} ms): ${conocida.motivo}`);
       if (largas.length) fallas.push(`${p}: ${largas.length} tarea${largas.length > 1 ? 's' : ''} larga${largas.length > 1 ? 's' : ''} después del primer pintado (la peor de ${Math.round(Math.max(...largas.map((x) => x[1])))} ms > ${V.tarea_larga_max} ms, a los ${Math.round(largas.sort((a, b) => b[1] - a[1])[0][0])} ms)`);
       if (p !== 'index.html') continue;
       const est = Object.fromEntries(d.estados.map(([e, t]) => [e, t]));

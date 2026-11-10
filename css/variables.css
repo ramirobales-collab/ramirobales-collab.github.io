@@ -19,7 +19,9 @@
   --banda-velo: 0.82; /* opacidad de la banda tinta: translúcida en oscuro (el fondo vivo se intuye detrás), casi plena sobre papel */
   --tinta-banda: oklch(8% 0.005 80 / var(--banda-velo)); /* no usa light-dark(): la banda es oscura en los dos temas */
   --banda-fundido: min(300px, 22%); /* oscuro: la banda entra y sale sin borde */
-  --banda-canto: none;
+  /* la banda se extiende por el aire de las secciones vecinas: el fundido ocupa ese aire y el de la propia banda, nunca
+     el texto. En claro el fundido es más corto (1,8 aires) y termina antes del primer renglón; sin cantos rectos. */
+  --banda-fuera: var(--e-aire);
 
   /* texto */
   --texto: light-dark(oklch(16% 0.012 80), oklch(93% 0.015 85));
@@ -98,6 +100,7 @@
   --e-4: 3rem;
   --e-5: clamp(3.5rem, 2.4rem + 4.4vw, 7rem);
   --e-seccion: clamp(88px, 4.5rem + 7.5vw, 216px);
+  --e-aire: clamp(80px, 2.5rem + 5.5vw, 136px); /* relleno de cada sección de la portada: entre dos bloques quedan dos aires (≈ 240 px a 1440) */
   --margen: clamp(16px, 1rem + 2.5vw, 64px);
   --calle: clamp(16px, 1rem + 0.4vw, 24px);
   --ancho-max: 1360px;
@@ -119,8 +122,8 @@
   --radio-chip: 999px;
 }
 
-:root[data-theme="light"] { color-scheme: light; --vidrio-op: 0; --grano-mezcla: multiply; --banda-velo: 0.97; --banda-fundido: 0px; --banda-canto: inset 0 1px 0 oklch(100% 0 0 / 0.1), inset 0 -1px 0 oklch(100% 0 0 / 0.05), inset 0 90px 120px -90px oklch(0% 0 0 / 0.75), inset 0 -90px 120px -90px oklch(0% 0 0 / 0.75); }
+:root[data-theme="light"] { color-scheme: light; --vidrio-op: 0; --grano-mezcla: multiply; --banda-velo: 0.97; --banda-fundido: calc(var(--e-aire) * 1.8); }
 :root[data-theme="dark"] { color-scheme: dark; }
 @media (prefers-color-scheme: light) {
-  :root:not([data-theme="dark"]) { --vidrio-op: 0; --grano-mezcla: multiply; --banda-velo: 0.97; --banda-fundido: 0px; --banda-canto: inset 0 1px 0 oklch(100% 0 0 / 0.1), inset 0 -1px 0 oklch(100% 0 0 / 0.05), inset 0 90px 120px -90px oklch(0% 0 0 / 0.75), inset 0 -90px 120px -90px oklch(0% 0 0 / 0.75); }
+  :root:not([data-theme="dark"]) { --vidrio-op: 0; --grano-mezcla: multiply; --banda-velo: 0.97; --banda-fundido: calc(var(--e-aire) * 1.8); }
 }

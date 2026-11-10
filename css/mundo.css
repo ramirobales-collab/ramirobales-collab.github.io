@@ -19,6 +19,24 @@
 .js .heroe[data-acto="defino"] .heroe__poster { filter: grayscale(1) contrast(1.5) brightness(0.42); }
 .js .heroe[data-acto="verifico"] .heroe__poster { filter: contrast(1.08) brightness(1.08); }
 
+/* Sin JavaScript (H11): en la composición al lado, el póster con el encuadre que le da index.js (la lámina al 81 % de
+   «cubrir», apoyada a la derecha y centrada en alto, con el fundido izquierdo de 18 % del héroe): el portal queda a la
+   derecha del titular, no detrás. Va acá y no en el CSS crítico: sin JS esta hoja carga por <noscript>, bloqueante. */
+@media (min-width: 1024px) and (min-aspect-ratio: 1334/1000) {
+  html:not(.js) .heroe__poster {
+    inset: 50% -0.5% auto auto;
+    width: min(calc(0.81 * max(100%, 177.8svh - 142px)), 181svh);
+    height: auto;
+    aspect-ratio: 16 / 9;
+    translate: 0 -50%;
+    -webkit-mask-image: linear-gradient(90deg, rgb(0 0 0 / 0.1), rgb(0 0 0 / 0.35) 7.8%, rgb(0 0 0 / 0.75) 15.5%, #000 22%);
+    mask-image: linear-gradient(90deg, rgb(0 0 0 / 0.1), rgb(0 0 0 / 0.35) 7.8%, rgb(0 0 0 / 0.75) 15.5%, #000 22%);
+  }
+}
+
+/* sin JS el póster es el completo de <noscript>; el liviano del primer pintado (el que reemplaza el motor) no se muestra */
+.heroe__fondo:has(.heroe__poster--completo) .heroe__poster:not(.heroe__poster--completo) { display: none; }
+
 /* ---------- Verbos ---------- */
 .acto { border-radius: var(--radio-chico); transition: color var(--d-etiqueta) var(--curva-entrada), text-decoration-color var(--d-etiqueta) var(--curva-entrada); }
 .acto:hover { text-decoration-color: currentColor; }
@@ -191,6 +209,7 @@
   .acto, .obra::before, .obra__estado, .obra__tilde, .lente__lectura { transition: none; }
 }
 @media (forced-colors: active) {
+  .acto.activo, .acto[aria-pressed="true"] { color: Highlight; } /* (sale del CSS crítico: no cabía) */
   .obra__rotulo { border: 1px solid CanvasText; background: Canvas; color: CanvasText; }
   .obra__tilde { stroke: Highlight; }
 }

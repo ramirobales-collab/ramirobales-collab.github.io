@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-HG5cMEl9NOgxBFFeZVXSHD2p0vzv0pJOqP6yvasTouo='; style-src 'self' 'sha256-9YhPxslC9jndyZPVv0pAUUIz6gJHVWb+cYX6DdxsZhM='; img-src 'self' data:; font-src 'self'; connect-src 'self'; media-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-BjDeZJ+ky/450vAa2cIyaFm8NEByY4HxObgC1jkGE+8=' 'sha256-HG5cMEl9NOgxBFFeZVXSHD2p0vzv0pJOqP6yvasTouo='; style-src 'self' 'sha256-rSwG7o6D4qFXfeMwWnc8qv60L2ez8zfI5+hHO9WQtR0='; img-src 'self' data:; font-src 'self'; connect-src 'self'; media-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
 <title>AthleteIQ · demo landing (2026) · Ramiro Bales</title>
@@ -18,6 +18,7 @@
 <meta property="og:image" content="https://ramirobales-collab.github.io/assets/mundo/og-1200x630.jpg"/>
 <meta property="og:url" content="https://ramirobales-collab.github.io/demos/athleteiq/"/>
 <meta name="twitter:image" content="https://ramirobales-collab.github.io/assets/mundo/og-1200x630.jpg"/>
+<script>if(self!==top){document.documentElement.classList.add('enmarcado');try{top.location.replace(location.href)}catch(e){}}</script>
 <link rel="icon" href="../../favicon.svg" type="image/svg+xml"/>
 <link rel="preload" href="../../assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin/>
 <style>
@@ -345,9 +346,11 @@ a:focus-visible,button:focus-visible,[tabindex]:focus-visible{outline:2px solid 
 .demo-rotulo:hover,.demo-rotulo:focus-visible{color:oklch(97% 0.008 85);border:0;box-shadow:inset 0 0 0 1px oklch(68% 0.19 29),inset 0 1px 0 oklch(100% 0 0 / .16),0 18px 40px -18px #000}
 .demo-rotulo:focus-visible{outline:2px solid oklch(97% 0.008 85);outline-offset:3px}
 /* ==== fin del marco del portfolio ==== */
+.enmarcado-aviso{display:none}html.enmarcado body>:not(.enmarcado-aviso){visibility:hidden!important}html.enmarcado .enmarcado-aviso{display:block;position:fixed;inset:40% 16px auto;z-index:2000;text-align:center;color:#f2efe9;font:600 1rem/1.5 Inter,system-ui,sans-serif}
 </style>
 </head>
 <body>
+<a class="enmarcado-aviso" href="https://ramirobales-collab.github.io/demos/athleteiq/" target="_top" rel="noopener noreferrer">This page is inside another site. Open it at its real address: ramirobales-collab.github.io</a>
 
 <a class="demo-rotulo" href="../../index.html" data-i18n="rotulo">Demo — landing built in 2026 · Back to the portfolio</a>
 <div id="pb"></div>
