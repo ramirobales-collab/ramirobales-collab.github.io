@@ -2,8 +2,10 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-3H8oVr/HGPXX3fAQbSetAKEcGxpenzF9/6nAJO5IWwU='; style-src 'self'; img-src 'self'; font-src 'self'; connect-src 'self'; media-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<script>try{var q=new URLSearchParams(location.search).get('tema'),t=q==='claro'?'light':q==='oscuro'?'dark':q||localStorage.getItem('tema');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t;}catch(e){}</script>
+<script>if(self!==top){document.documentElement.classList.add('enmarcado');try{top.location.replace(location.href)}catch(e){}}try{var q=new URLSearchParams(location.search).get('tema'),t=q==='claro'?'light':q==='oscuro'?'dark':q||localStorage.getItem('tema');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t;}catch(e){}</script>
 <title>Sala de bots · demo de Ramiro Bales</title>
 <meta name="description" content="Simulación en el navegador de un bot de respuesta (texto, foto y nota de voz) y de cuatro bots proactivos, con datos ficticios y la arquitectura de proyectos reales. Demo de Ramiro Bales.">
 <meta name="robots" content="index, follow">
@@ -22,6 +24,7 @@
 <link rel="modulepreload" href="js/datos.js">
 </head>
 <body>
+<a class="enmarcado-aviso" href="https://ramirobales-collab.github.io/demos/bots/" target="_top" rel="noopener noreferrer" data-i18n="enmarcado.aviso">Esta página está dentro de otro sitio. Abrila en su dirección real: ramirobales-collab.github.io</a>
 <a class="saltar" href="#respuesta" data-i18n="barra.saltar">Saltar a la demo</a>
 
 <div class="cinta" role="note">
@@ -100,7 +103,7 @@
         <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 11v5.5M12 7.6v.1"/></svg>
         <div>
           <h2 class="aviso__titulo" id="aviso-titulo" data-i18n="aviso.titulo">Es una simulación</h2>
-          <p data-i18n="aviso.texto">No hay servidor, modelo ni bot conectado: todo corre en tu navegador y nada de lo que escribas sale de acá. El club, los jugadores y sus datos son inventados. Lo real es la arquitectura, la misma de mis bots en producción.</p>
+          <p data-i18n="aviso.texto">No hay servidor, modelo ni bot conectado: todo corre en tu navegador y nada de lo que escribas sale de acá. El club, los jugadores y sus datos son inventados. Lo real es la arquitectura: la de los bots que construí para AthleteIQ, Cathedra y Fortal.</p>
         </div>
       </aside>
     </div>
@@ -138,7 +141,7 @@
       </div>
       <ol class="pasos" id="pasos" role="list"></ol>
       <p class="traza__pie" id="traza-pie"></p>
-      <p class="traza__nota" data-i18n="traza.nota">En producción cada paso queda en un registro: qué entró, qué datos se usaron, qué regla se aplicó y qué salió.</p>
+      <p class="traza__nota" data-i18n="traza.nota">En el proyecto real cada paso queda en un registro: qué entró, qué datos se usaron, qué regla se aplicó y qué salió.</p>
     </section>
   </section>
 
@@ -222,7 +225,7 @@
       <h3 class="mini-titulo" data-i18n="usos.titulo">Dónde lo pondría en una marca</h3>
       <ul class="usos" role="list">
         <li><strong data-i18n="uso1.t">Tienda online.</strong> <span data-i18n="uso1.p">El cliente manda la foto del comprobante o pregunta por su pedido; el bot busca el estado y contesta, o lo pasa a una persona con el resumen hecho.</span></li>
-        <li><strong data-i18n="uso2.t">Equipo comercial.</strong> <span data-i18n="uso2.p">Brief de precios de la competencia todas las mañanas y un radar de licitaciones, sponsors o clientes nuevos que no repite lo ya visto.</span></li>
+        <li><strong data-i18n="uso2.t">Equipo comercial.</strong> <span data-i18n="uso2.p">Seguimiento de precios de la competencia todas las mañanas y un radar de licitaciones, sponsors o clientes nuevos que no repite lo ya visto.</span></li>
         <li><strong data-i18n="uso3.t">Operación interna.</strong> <span data-i18n="uso3.p">Notas de voz del depósito o de la calle que se transcriben y se cargan solas en la planilla, con aviso cuando algo no se entiende.</span></li>
       </ul>
     </div>
@@ -234,7 +237,7 @@
       <p class="folio"><span class="folio__cifra" aria-hidden="true">04</span><span class="folio__etiqueta" data-i18n="como.folio">Cómo está hecho de verdad</span></p>
       <div class="cabecera">
         <h2 class="titulo-2" id="como-titulo" data-i18n="como.titulo">Dos caminos: cuando alguien escribe y cuando nadie escribe.</h2>
-        <p class="intro" data-i18n="como.intro">Es la arquitectura de los bots que construí para AthleteIQ (respuesta por Telegram, brief de precios y radar), Cathedra (recordatorios de parciales y entregas) y Fortal (avisos push de rutina). Los hice con desarrollo asistido por IA: yo definí qué hace cada pieza y por qué, y verifiqué el resultado.</p>
+        <p class="intro" data-i18n="como.intro">Es la arquitectura de los bots que construí para AthleteIQ (respuesta por Telegram, un prototipo de brief de noticias y radar), Cathedra (recordatorios de parciales y entregas) y Fortal (avisos push de rutina). Los hice con desarrollo asistido por IA: yo definí qué hace cada pieza y por qué, y verifiqué el resultado.</p>
       </div>
 
       <div class="carriles">
@@ -254,7 +257,7 @@
           <h3 class="carril__titulo" data-i18n="carril2.t">Cuando nadie escribe</h3>
           <ol class="flujo flujo--4" role="list">
             <li class="caja"><span class="caja__n" aria-hidden="true">1</span><h4 data-i18n="caja.reloj.t">Tarea programada</h4><p data-i18n="caja.reloj.p">Un horario fijo o una fecha del calendario despierta al bot.</p></li>
-            <li class="caja"><span class="caja__n" aria-hidden="true">2</span><h4 data-i18n="caja.fuentes.t">Fuentes</h4><p data-i18n="caja.fuentes.p">Lee precios públicos, noticias del rubro, el calendario o la rutina del día.</p></li>
+            <li class="caja"><span class="caja__n" aria-hidden="true">2</span><h4 data-i18n="caja.fuentes.t">Fuentes</h4><p data-i18n="caja.fuentes.p">Lee noticias del rubro, fuentes públicas, el calendario o la rutina del día.</p></li>
             <li class="caja"><span class="caja__n" aria-hidden="true">3</span><h4 data-i18n="caja.novedad.t">Regla de novedad</h4><p data-i18n="caja.novedad.p">Compara con lo ya enviado y descarta lo repetido o lo poco relevante.</p></li>
             <li class="caja"><span class="caja__n" aria-hidden="true">4</span><h4 data-i18n="caja.aviso.t">Aviso</h4><p data-i18n="caja.aviso.p">Mensaje o notificación push, sólo si queda algo que valga la pena.</p></li>
           </ol>
@@ -283,8 +286,8 @@
 
       <div class="comparacion">
         <table class="tabla">
-          <caption data-i18n="tabla.caption">Qué es simulado en esta página y cómo funciona en producción.</caption>
-          <thead><tr><th scope="col" data-i18n="tabla.pieza">Pieza</th><th scope="col" data-i18n="tabla.demo">En esta demo</th><th scope="col" data-i18n="tabla.real">En producción</th></tr></thead>
+          <caption data-i18n="tabla.caption">Qué es simulado en esta página y cómo funciona en el proyecto real.</caption>
+          <thead><tr><th scope="col" data-i18n="tabla.pieza">Pieza</th><th scope="col" data-i18n="tabla.demo">En esta demo</th><th scope="col" data-i18n="tabla.real">En el proyecto real</th></tr></thead>
           <tbody>
             <tr><th scope="row" data-i18n="tabla.f1">Canal</th><td data-i18n="tabla.f1.d">Un chat dibujado en la página.</td><td data-i18n="tabla.f1.r">Telegram, con el servidor recibiendo cada mensaje por HTTP.</td></tr>
             <tr><th scope="row" data-i18n="tabla.f2">Nota de voz</th><td data-i18n="tabla.f2.d">Audio simulado con una transcripción fija.</td><td data-i18n="tabla.f2.r">Transcripción automática del audio antes de responder.</td></tr>
@@ -331,7 +334,7 @@
 
 <footer class="pie">
   <div class="pie__in">
-    <p class="pie__aclara" data-i18n="pie.aclara">Simulación: el club Ventisca RL, sus jugadores, las tiendas, los precios, las oportunidades y las materias son inventados. Cualquier parecido con personas o marcas reales es casual.</p>
+    <p class="pie__aclara" data-i18n="pie.aclara">Simulación: el club Ventisca RL, sus jugadores, las noticias, las oportunidades y las materias son inventados. Cualquier parecido con personas o marcas reales es casual.</p>
     <p class="pie__enlaces">
       <a href="../../proyectos/athleteiq.html" data-i18n="pie.athleteiq">Caso AthleteIQ</a>
       <a href="../../proyectos/cathedra.html" data-i18n="pie.cathedra">Caso Cathedra</a>

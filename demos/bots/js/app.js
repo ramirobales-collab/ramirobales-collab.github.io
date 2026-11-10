@@ -1,5 +1,5 @@
 // Sala de bots: simulación en el navegador. Sin servidor, sin modelo, sin red (salvo los JSON de idioma).
-import { CLUB, PLANTEL, UMBRAL_ACWR, REPORTE_FOTO, VOZ, ONDA, DIA, EVENTOS, PRECIOS, RADAR, PROYECTOS } from './datos.js';
+import { CLUB, PLANTEL, UMBRAL_ACWR, REPORTE_FOTO, VOZ, ONDA, DIA, EVENTOS, NOTICIAS, RADAR, PROYECTOS } from './datos.js';
 
 const params = new URLSearchParams(location.search);
 const html = document.documentElement;
@@ -334,7 +334,7 @@ function htmlMensaje(m, i) {
   const cls = m.lado === 'yo' ? 'yo' : 'bot';
   const nuevo = m.nuevo ? ' entra' : '';
   if (m.lado === 'yo' && m.tipo === 'voz') {
-    const barras = ONDA.map((h, k) => `<i style="height:${Math.round(8 + h * 20)}px" data-k="${k}"></i>`).join('');
+    const barras = ONDA.map((h, k) => `<i data-alto="${Math.round(8 + h * 20)}" data-k="${k}"></i>`).join('');
     const trans = m.transcrita
       ? `<p class="voz__trans"><span class="voz__trans-et">${esc(t('voz.et'))}</span>${esc(t('voz.transcripcion'))}</p>`
       : `<p class="voz__trans pendiente">${esc(t('voz.transcribiendo'))}</p>`;
@@ -356,6 +356,7 @@ function htmlMensaje(m, i) {
 function dibujarChat() {
   const ol = $('#mensajes');
   ol.innerHTML = E.mensajes.map(htmlMensaje).join('');
+  ol.querySelectorAll('i[data-alto]').forEach((i) => { i.style.height = i.dataset.alto + 'px'; });
   E.mensajes.forEach((m) => { m.nuevo = false; });
   ol.scrollTop = ol.scrollHeight;
 }
@@ -546,7 +547,7 @@ form.addEventListener('submit', (ev) => {
    ========================================================= */
 const regla = $('#regla');
 const ICONO_EV = {
-  precios: '<svg viewBox="0 0 12 12"><path d="M2 9.5 5 6l2 2 3-4"/><path d="M7.5 4H10v2.5"/></svg>',
+  noticias: '<svg viewBox="0 0 12 12"><rect x="1.5" y="2" width="9" height="8" rx="1"/><path d="M3.5 4.5h5M3.5 6.5h5M3.5 8.5h3"/></svg>',
   radar: '<svg viewBox="0 0 12 12"><circle cx="6" cy="6" r="4"/><path d="M6 6 9 3"/></svg>',
   parcial: '<svg viewBox="0 0 12 12"><rect x="2" y="2.5" width="8" height="7.5" rx="1"/><path d="M2 5h8M4.5 1.5v2M7.5 1.5v2"/></svg>',
   rutina: '<svg viewBox="0 0 12 12"><path d="M1.5 6h9M3 4v4M9 4v4"/></svg>',
@@ -605,12 +606,9 @@ function dibujarFicha() {
   const hecho = e.min <= E.minuto;
   const k = (s) => t(`ev.${e.id}.${s}`);
   let extra = '';
-  if (e.id === 'precios') {
-    const filas = PRECIOS.map((p) => {
-      const cambio = p.ahora == null ? `<td class="sube">${esc(t('precios.sinstock'))}</td>` : `<td class="${p.ahora < p.antes ? 'baja' : 'sube'}">US$ ${num(p.ahora)} (${p.ahora < p.antes ? '−' : '+'}${num(Math.round(Math.abs(p.ahora / p.antes - 1) * 100))} %)</td>`;
-      return `<tr><th scope="row">${esc(t(`precios.${p.prod}`))}</th><td>${esc(t(`tienda.${p.tienda}`))}</td><td>US$ ${num(p.antes)}</td>${cambio}</tr>`;
-    }).join('');
-    extra = `<div class="ficha__extra"><h4>${esc(t('precios.titulo'))}</h4><table class="ficha__tabla"><thead><tr><th scope="col">${esc(t('precios.col1'))}</th><th scope="col">${esc(t('precios.col2'))}</th><th scope="col">${esc(t('precios.col3'))}</th><th scope="col">${esc(t('precios.col4'))}</th></tr></thead><tbody>${filas}</tbody></table></div>`;
+  if (e.id === 'noticias') {
+    const filas = NOTICIAS.map((n) => `<tr><th scope="row">${esc(t(`noticias.${n}`))}</th><td>${esc(t(`noticias.${n}.f`))}</td></tr>`).join('');
+    extra = `<div class="ficha__extra"><h4>${esc(t('noticias.titulo'))}</h4><table class="ficha__tabla"><thead><tr><th scope="col">${esc(t('noticias.col1'))}</th><th scope="col">${esc(t('noticias.col2'))}</th></tr></thead><tbody>${filas}</tbody></table></div>`;
   } else if (e.id === 'radar') {
     const items = RADAR.map((r) => `<li class="${r.estado !== 'nueva' ? 'descartada' : ''}"><span class="txt">${esc(t(`radar.${r.id}`))}</span><span class="est est--${r.estado}">${esc(t(`radar.est.${r.estado}`))}</span></li>`).join('');
     extra = `<div class="ficha__extra"><h4>${esc(t('radar.titulo'))}</h4><ul class="ficha__lista" role="list">${items}</ul><p class="ficha__costo">${esc(t('radar.costo'))}</p></div>`;

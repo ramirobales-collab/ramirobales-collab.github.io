@@ -480,3 +480,66 @@ body.render .visor__lienzo { opacity: 1; transition: none; }
   .visor__controles, .tejido, .cifra, .flujo__paso, .decision, .sp { border: 1px solid CanvasText; }
   body::before, .visor__fondo::after, .muestra__disco::after { display: none; }
 }
+
+/* ==== marco del portfolio (interiores, 10/11/2026) ==== */
+:root {
+  --fondo: light-dark(oklch(96% 0.01 85), oklch(4% 0 0));
+  --texto-2: light-dark(oklch(35% 0.015 80), oklch(79% 0.014 85));
+  --foco: light-dark(oklch(16% 0.012 80), oklch(97% 0.008 85));
+}
+html { background: var(--fondo); }
+.cinta {
+  background: linear-gradient(oklch(9% 0.004 80), #000);
+  box-shadow: inset 0 -1px 0 oklch(100% 0 0 / 0.12), 0 10px 24px -14px oklch(0% 0 0 / 0.8);
+  color-scheme: dark;
+}
+.cinta__texto { color: oklch(82% 0.012 85); }
+.cinta__volver {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35em;
+  padding: 3px 12px;
+  border-radius: 999px;
+  color: oklch(95% 0.012 85);
+  font-weight: 600;
+  box-shadow: inset 0 0 0 1px oklch(100% 0 0 / 0.22), inset 0 1px 0 oklch(100% 0 0 / 0.14);
+  transition: box-shadow 180ms cubic-bezier(0.16, 1, 0.3, 1), background 180ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.cinta__volver::after { content: ""; position: absolute; inset: -12px -6px; }
+.cinta__volver:hover { text-decoration: none; background: oklch(100% 0 0 / 0.08); box-shadow: inset 0 0 0 1px oklch(68% 0.19 29), inset 0 1px 0 oklch(100% 0 0 / 0.14); }
+.cinta :focus-visible, .pie :focus-visible { outline: 2px solid oklch(97% 0.008 85); outline-color: oklch(97% 0.008 85); outline-offset: 3px; }
+.pie {
+  position: relative;
+  isolation: isolate;
+  color-scheme: dark;
+  background: linear-gradient(oklch(10% 0.005 80), oklch(5% 0.003 80));
+  box-shadow: inset 0 1px 0 oklch(100% 0 0 / 0.12);
+}
+.pie::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: url("../../../assets/grano-512.webp") 0 0 / 256px 256px;
+  opacity: 0.07;
+  mix-blend-mode: screen;
+}
+.pie::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(112deg, transparent 40%, oklch(100% 0.01 85 / 0.03) 48%, oklch(100% 0.01 85 / 0.055) 51%, transparent 60%);
+}
+.pie__copy { color: oklch(79% 0.014 85); }
+.pie a { text-decoration-color: oklch(100% 0 0 / 0.35); text-underline-offset: 0.18em; }
+.pie a:hover { text-decoration-color: oklch(68% 0.19 29); }
+.pie__enlaces a { display: inline-flex; align-items: center; min-height: 44px; }
+/* Enmarcado: si la página quedó dentro de otro sitio, sólo se ve el aviso con la dirección real. */
+.enmarcado-aviso { display: none; }
+html.enmarcado body > :not(.enmarcado-aviso) { visibility: hidden !important; }
+html.enmarcado .enmarcado-aviso { display: block; position: fixed; inset: 40% 16px auto; z-index: 100; text-align: center; color: var(--texto); }
+/* ==== fin del marco del portfolio ==== */

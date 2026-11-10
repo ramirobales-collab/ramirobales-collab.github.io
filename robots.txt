@@ -1,3 +1,9 @@
 User-agent: *
 Allow: /
+# Las páginas HTML del CV llevan <meta name="robots" content="noindex">: se dejan rastrear para que el
+# buscador lea ese noindex (si se bloquearan acá, nunca lo vería y podría indexar la URL igual).
+# Los PDF no pueden llevar noindex y GitHub Pages no deja poner X-Robots-Tag: no se rastrean, así su
+# contenido (que incluye el teléfono) no entra en los buscadores. Quien tiene el enlace los baja igual.
+Disallow: /cv/*.pdf$
+
 Sitemap: https://ramirobales-collab.github.io/sitemap.xml

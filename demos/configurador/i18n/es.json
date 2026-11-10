@@ -10,6 +10,7 @@
   "cinta.volver": "← Volver al portfolio",
   "marca.aria": "Ámbar Muebles, inicio de la ficha",
   "marca.sub": "Muebles",
+  "marca.nombre": "Ámbar Muebles",
   "nav.aria": "Secciones de la demo",
   "nav.ficha": "Ficha",
   "nav.marca": "Qué gana la marca",
@@ -185,10 +186,11 @@
   "afuera3": "El carrito es simulado: no hay pago, stock ni envío.",
   "afuera4": "Las texturas siguen en WebP; con KTX2 ocuparían menos memoria de video en celulares modestos.",
   "afuera5": "Probé teclado, foco y estructura ARIA; no hice pruebas con usuarios ni con lectores de pantalla reales.",
-  "pie.atrib": "Modelos 3D: Sheen Chair © 2020 Wayfair, LLC / Eric Chadwick (CC0) y Glam Velvet Sofa © 2021 Wayfair, LLC / Eric Chadwick (CC BY 4.0), Khronos glTF Sample Assets; HDRI Studio Small 08/09, Poly Haven (CC0).",
+  "pie.atrib": "Modelos 3D: Sheen Chair © 2020 Wayfair, LLC / Eric Chadwick (CC0) y Glam Velvet Sofa © 2021 Wayfair, LLC / Eric Chadwick (CC BY 4.0), Khronos glTF Sample Assets; HDRI Studio Small 09, Poly Haven (CC0).",
   "pie.cambios": "Cambios propios: geometría de la butaca cuantizada, etiqueta interna quitada, colores y acabados agregados por factor. Ámbar Muebles es una marca ficticia; Wayfair no participa ni respalda esta demo.",
   "pie.creditos": "Créditos del portfolio",
   "pie.copy": "Demo de Ramiro Bales, 2026. Hecha con desarrollo asistido por IA y verificada a mano.",
   "cinta.corto": "Demo · marca ficticia",
-  "poster.nota": "Vista fija: tu navegador no muestra 3D aquí. Las opciones cambian el precio y el carrito; la imagen muestra la versión de catálogo."
+  "poster.nota": "Vista fija: tu navegador no muestra 3D aquí. Las opciones cambian el precio y el carrito; la imagen muestra la versión de catálogo.",
+  "enmarcado.aviso": "Esta página está dentro de otro sitio. Abrila en su dirección real: ramirobales-collab.github.io"
 }

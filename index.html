@@ -2,39 +2,65 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-L56wyBkF+j3iE61Rzx1lPMhgwdgwGid/fO2SowIcE+g=' 'sha256-i3nbuetzBhOdfr5xEBOS7VWn3bMf4DQHoEsvl/OpRnA='; style-src 'self' 'sha256-JgAfpBhpXpzHZQbFoPUZxurIaCcsKdjcODYHXM6wJME='; img-src 'self'; font-src 'self'; connect-src 'self'; media-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="no-referrer">
+<script id="hojas-diferidas">document.addEventListener('load',function(e){var l=e.target;if(l.tagName==='LINK'&&l.hasAttribute('data-diferida'))l.media='all'},true)</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script>try{var t=new URLSearchParams(location.search).get('tema')||localStorage.getItem('tema');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t;}catch(e){}</script>
+<script>var d=document.documentElement;if(self!==top){d.classList.add('enmarcado');try{top.location.replace(location.href)}catch(e){}}try{var t=new URLSearchParams(location.search).get('tema')||localStorage.getItem('tema');if(t==='light'||t==='dark')d.dataset.theme=t;}catch(e){}try{var i=new URLSearchParams(location.search).get('idioma'),g=null;try{g=localStorage.getItem('idioma')}catch(e){}var w=i==='es'||i==='en'?i:g==='es'||g==='en'?g:(navigator.language||'es').toLowerCase().indexOf('es')===0?'es':'en';if(w==='en'){var l=document.createElement('link');l.rel='preload';l.as='fetch';l.href='i18n/en.json';l.crossOrigin='anonymous';document.head.appendChild(l)}}catch(e){}d.classList.add('js');if(!/[?&](quieto=1|ir=)/.test(location.search))d.classList.add('mov');setTimeout(function(){if(!d.dataset.mov)d.classList.remove('js','mov')},4000);</script>
 <title data-i18n="meta.titulo">Ramiro Bales — AI Product Builder</title>
 <meta name="description" data-i18n-attr="content=meta.descripcion" content="AI Product Builder. Construyo productos dirigiendo agentes de IA: defino, diseño, verifico. Cuatro productos propios y tres demos para marcas. Remoto desde Buenos Aires.">
 <meta name="color-scheme" content="light dark">
-<meta name="theme-color" media="(prefers-color-scheme: light)" content="#F3EEE4">
-<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#040404">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#000000">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000000">
 <meta name="author" content="Ramiro Bales">
+<link rel="canonical" href="https://ramirobales-collab.github.io/">
 <meta property="og:type" content="website">
+<meta property="og:site_name" content="Ramiro Bales">
+<meta property="og:url" content="https://ramirobales-collab.github.io/">
 <meta property="og:title" content="Ramiro Bales — AI Product Builder">
 <meta property="og:description" content="Construyo productos dirigiendo agentes de IA: defino, diseño, verifico. Remoto desde Buenos Aires.">
-<meta property="og:image" content="assets/og-1200x630.jpg">
+<meta property="og:image" content="https://ramirobales-collab.github.io/assets/mundo/og-1200x630.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:alt" content="Ramiro Bales, AI Product Builder. «Construyo productos dirigiendo agentes de IA: defino, diseño, verifico.» Al lado, el render de la sala negra con Cathedra, AthleteIQ, coro y Fortal en sus dispositivos.">
 <meta property="og:locale" content="es_AR">
 <meta property="og:locale:alternate" content="en_US">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Ramiro Bales — AI Product Builder">
+<meta name="twitter:description" content="Construyo productos dirigiendo agentes de IA: defino, diseño, verifico. Remoto desde Buenos Aires.">
+<meta name="twitter:image" content="https://ramirobales-collab.github.io/assets/mundo/og-1200x630.jpg">
+<meta name="twitter:image:alt" content="Ramiro Bales, AI Product Builder. «Construyo productos dirigiendo agentes de IA: defino, diseño, verifico.» Al lado, el render de la sala negra con Cathedra, AthleteIQ, coro y Fortal en sus dispositivos.">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/playfair-latin.woff2" as="font" type="font/woff2" crossorigin>
-<style id="critico">.papel{background:var(--papel);border:1px solid var(--filete);box-shadow:var(--sombra-papel);border-radius:var(--radio)}.hundida{background:var(--hundida);border-radius:var(--radio)}.nav{position:fixed;inset:0 0 auto 0;z-index:50;height:var(--nav-alto);background:color-mix(in oklab,var(--papel) 92%,transparent);border-bottom:1px solid var(--filete);box-shadow:0 1px 0 var(--sombra-tinte-suave)}@supports (backdrop-filter:blur(1px)){.nav{backdrop-filter:blur(14px) saturate(1.1);-webkit-backdrop-filter:blur(14px) saturate(1.1)}}.nav::before{content:"";position:absolute;inset:0;pointer-events:none;background-image:url("assets/grano-512.webp");background-size:512px 512px;opacity:var(--grano-opacidad);mix-blend-mode:var(--grano-mezcla)}.nav__in{position:relative;height:100%;display:flex;align-items:center;gap:var(--e-3)}.nav__marca{font-weight:600;letter-spacing:-0.01em;text-decoration:none;margin-right:auto;white-space:nowrap}.nav__marca:hover{text-decoration:underline;text-decoration-color:var(--acento-texto)}.nav__enlaces{display:flex;align-items:center;gap:clamp(0.75rem,0.5rem + 1vw,1.75rem)}.nav__enlaces a{font-size:var(--t-secundario);text-decoration:none;padding-block:0.25rem;border-bottom:1px solid transparent;transition:border-color var(--d-micro) var(--curva-entrada)}.nav__enlaces a:hover,.nav__enlaces a[aria-current="true"]{border-bottom-color:var(--acento-texto)}.nav__herramientas{display:flex;align-items:center;gap:var(--e-2)}.conmutador{display:inline-flex;border:1px solid var(--borde);border-radius:var(--radio);overflow:hidden}.conmutador button{font-size:var(--t-etiqueta);font-weight:500;letter-spacing:0.08em;padding:0.45rem 0.7rem;color:var(--texto-2);transition:background var(--d-micro) var(--curva-entrada),color var(--d-micro) var(--curva-entrada)}.conmutador button + button{border-left:1px solid var(--borde)}.conmutador button[aria-pressed="true"]{background:var(--texto);color:var(--fondo)}.conmutador button:focus-visible{outline-offset:-3px}.tema{display:inline-flex;align-items:center;gap:0.45rem;padding:0.4rem 0.7rem;border:1px solid var(--borde);border-radius:var(--radio);font-size:var(--t-etiqueta);font-weight:500;letter-spacing:0.08em;color:var(--texto-2);transition:color var(--d-micro) var(--curva-entrada),border-color var(--d-micro) var(--curva-entrada)}.tema:hover{color:var(--texto);border-color:var(--texto-2)}.tema svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}.tema__sol,.tema__claro{display:none}:root[data-theme="dark"] .tema__luna,:root[data-theme="dark"] .tema__oscuro{display:none}:root[data-theme="dark"] .tema__sol,:root[data-theme="dark"] .tema__claro{display:inline}@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .tema__luna,:root:not([data-theme="light"]) .tema__oscuro{display:none}:root:not([data-theme="light"]) .tema__sol,:root:not([data-theme="light"]) .tema__claro{display:inline}}.nav__menu{display:none}@media (max-width:1023px){:root{--nav-alto:56px}.nav__enlaces,.nav__herramientas{display:none}.nav__menu{display:inline-flex;align-items:center;gap:0.5rem;font-size:var(--t-etiqueta);font-weight:500;letter-spacing:0.08em;text-transform:uppercase;padding:0.5rem 0.25rem}.nav__menu svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round}.nav__menu[aria-expanded="true"] .nav__menu-abrir,.nav__menu:not([aria-expanded="true"]) .nav__menu-cerrar{display:none}.nav__panel{position:fixed;top:var(--nav-alto);left:0;right:0;z-index:49;padding:var(--e-3) var(--margen) var(--e-4);background:var(--papel);border-bottom:1px solid var(--filete);box-shadow:var(--sombra-flotante);display:none}.nav__panel[data-abierto="true"]{display:block}.nav__panel .nav__enlaces{display:flex;flex-direction:column;align-items:flex-start;gap:var(--e-2)}.nav__panel .nav__enlaces a{font-size:var(--t-cuerpo)}.nav__panel .nav__herramientas{display:flex;margin-top:var(--e-3);flex-wrap:wrap}}@media (min-width:1024px){.nav__panel{display:none !important}}.nav__enlaces a{white-space:nowrap}@media (min-width:1024px) and (max-width:1279px){.nav__in{gap:var(--e-2)}.nav__enlaces{gap:0.75rem}.nav__enlaces a{font-size:0.9375rem}}.boton{display:inline-flex;align-items:center;justify-content:center;gap:0.5rem;min-height:48px;padding:0.75rem 1.4rem;border-radius:var(--radio);font-size:var(--t-boton);font-weight:600;letter-spacing:0;text-decoration:none;border:1px solid transparent;transition:transform var(--d-micro) var(--curva-entrada),background var(--d-micro) var(--curva-entrada),border-color var(--d-micro) var(--curva-entrada),box-shadow var(--d-micro) var(--curva-entrada)}.boton--primario{background:var(--acento-texto);color:var(--acento-contra);box-shadow:0 1px 0 var(--sombra-tinte-suave),0 8px 20px -10px var(--sombra-tinte)}.boton--primario:hover{transform:translateY(-1px);box-shadow:0 1px 0 var(--sombra-tinte-suave),0 12px 26px -10px var(--sombra-tinte)}.boton--primario:active{transform:translateY(0)}.boton--secundario{background:transparent;color:var(--texto);border-color:var(--borde)}.boton--secundario:hover{border-color:var(--texto);background:var(--papel)}.boton--texto{min-height:0;padding:0.25rem 0;border-radius:0;font-weight:500;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:0.2em}.boton--texto:hover{text-decoration-color:var(--acento-texto)}.boton--ancho{width:100%}.sello{display:inline-flex;align-items:center;gap:0.5rem;font-family:var(--playfair);font-weight:600;font-size:0.875rem;line-height:1.2;color:var(--estado-proceso);text-decoration:none;white-space:nowrap}.sello::before{content:"";width:8px;height:8px;border-radius:50%;background:currentColor;box-shadow:0 0 0 2px color-mix(in oklab,currentColor 25%,transparent)}.sello--en-uso{color:var(--estado-en-uso)}.sello--proceso{color:var(--estado-proceso)}.sello__nombre{font-family:var(--inter);font-weight:600;color:var(--texto)}a.sello:hover .sello__nombre{text-decoration:underline;text-decoration-color:var(--acento-texto)}.folio{display:grid;grid-template-columns:auto 1fr;align-items:baseline;column-gap:var(--e-3);margin-bottom:var(--e-4)}.folio__cifra{font-family:var(--playfair);font-weight:400;font-size:var(--t-folio);line-height:1;color:var(--acento-display);font-variant-numeric:tabular-nums}.folio__etiqueta{color:var(--texto-3);align-self:end;padding-bottom:0.35em}.folio__filete{grid-column:1 / -1;height:2px;margin-top:var(--e-2);background:var(--acento-display);width:0;transition:width var(--d-filete) var(--curva-entrada)}.folio.visto .folio__filete,.quieto .folio__filete,.ir .folio__filete{width:100%}@media (prefers-reduced-motion:reduce){.folio__filete{width:100%}}.heroe{overflow-y:clip;position:relative;min-height:calc(100svh - 80px);padding-top:var(--nav-alto);display:grid;align-items:center}.saltar{position:absolute;left:var(--margen);top:-100px;z-index:60;padding:0.6rem 1rem;background:var(--papel);border:1px solid var(--borde);border-radius:var(--radio);text-decoration:none;font-weight:600}.saltar:focus-visible{top:calc(var(--nav-alto) + 8px)}.cabecera-seccion{grid-column:1 / -1;display:grid;gap:var(--e-3);margin-bottom:var(--e-4)}@media (min-width:1024px){.cabecera-seccion{grid-column:2 / 11}}.heroe__texto{position:relative;z-index:2;grid-column:1 / -1;padding-block:var(--e-3) 0;container-type:inline-size}@media (min-width:1024px){.heroe__texto{grid-column:2 / 10;padding-block:0}}.heroe__etiqueta{color:var(--texto-3);margin-bottom:var(--e-2)}.heroe__titulo{margin-bottom:var(--e-2)}.heroe__titulo br{display:none}@media (min-width:1024px){.heroe__etiqueta{margin-bottom:var(--e-3)}.heroe__titulo{margin-bottom:var(--e-3);font-size:min(var(--t-display),8.7cqi)}.heroe__titulo br{display:inline}}.heroe__sub{margin-bottom:var(--e-3);max-width:36ch}.heroe__acciones{display:flex;flex-wrap:wrap;align-items:center;gap:var(--e-2) var(--e-3);margin-bottom:var(--e-3)}@media (min-width:1024px){.heroe__sub{margin-bottom:var(--e-4)}.heroe__acciones{margin-bottom:var(--e-4)}}.heroe__secundarias{display:flex;align-items:center;gap:var(--e-3);font-size:var(--t-secundario)}.heroe__sellos{display:flex;flex-wrap:wrap;gap:var(--e-2) var(--e-3);padding-top:var(--e-3);border-top:1px solid var(--filete)}@media (max-width:767px){.heroe__sellos{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin-inline:calc(-1 * var(--margen));padding-inline:var(--margen) calc(var(--margen) + 40px);-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 56px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 56px),transparent)}.heroe__sellos::-webkit-scrollbar{display:none}}.heroe__escena{position:absolute;z-index:1;top:50%;left:calc(50% + 9.5vw);width:44vw;aspect-ratio:16 / 10;transform:translateY(calc(-50% + var(--nav-alto) / 2));pointer-events:none}.heroe__escena>*{position:absolute;inset:0;width:100%;height:100%}.heroe__capa{object-fit:contain}.heroe__capa--sombra{z-index:1;transform-origin:30% 60%}.heroe__capa--losa{z-index:2}.heroe__lcp{z-index:3;transform-origin:0 0;width:1280px;max-width:none;height:720px;object-fit:fill;inset:0 auto auto 0;opacity:0}.heroe__lcp.ubicada{opacity:1}.heroe__capa--marco{z-index:4}.heroe__capa--sello{z-index:5}@media (prefers-reduced-motion:reduce){.heroe__capa,.heroe__lcp{animation:none !important}}@media (max-width:1023px){.heroe{min-height:0;display:block}.heroe__escena{position:relative;inset:auto;transform:none;width:100%;max-width:none;aspect-ratio:390 / 220;margin-top:var(--e-2);pointer-events:none;overflow:hidden}.heroe__escena>*{animation:none !important}.heroe__capa{position:absolute;inset:auto 0 auto 0;width:100%;height:auto;top:-5%;max-width:none}.heroe + main .seccion:first-child{padding-top:var(--e-4)}}@media (max-width:479px){:root{--t-cuerpo:1.0625rem;--t-sub-heroe:1.0625rem}.heroe__titulo{font-size:2.125rem}}</style>
+<link rel="preload" href="assets/fonts/playfair-italic-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="modulepreload" href="js/mundo/index.js">
+<link rel="modulepreload" href="js/mundo/motor.js">
+<link rel="modulepreload" href="js/mundo/sala.js">
+<link rel="modulepreload" href="js/mundo/enjambre.js">
+<link rel="modulepreload" href="js/mundo/post.js">
+<link rel="modulepreload" href="js/mundo/lente.js">
+<link rel="modulepreload" href="js/mundo/fondo.js">
+<link rel="modulepreload" href="js/comun.js">
+<link rel="modulepreload" href="js/movimiento.js">
+<link rel="preload" href="assets/mundo/mundo.json" as="fetch" crossorigin>
+<style id="critico">.nav{position:fixed;inset:0 0 auto 0;z-index:50;height:var(--nav-alto);pointer-events:none}.nav__in{position:relative;isolation:isolate;height:100%;display:flex;align-items:center;gap:var(--e-3);pointer-events:auto;transition:max-width var(--d-titulo) var(--curva-entrada)}.nav__in::before{content:"";position:absolute;inset:9px calc(-1 * min(18px,var(--margen) - 6px));z-index:-1;border-radius:18px;background:linear-gradient(var(--capa-3),var(--capa-1));box-shadow:inset 0 1px 0 var(--placa-filo),inset 0 0 0 1px var(--placa-borde),0 1px 1px var(--sombra-contacto),0 18px 34px -18px var(--sombra-ambiente),0 40px 80px -40px var(--sombra-lejana);transition:opacity var(--d-etiqueta) var(--curva-entrada),scale var(--d-parrafo) var(--curva-entrada)}@media (min-width:80em){.nav--placa .nav__in{max-width:1128px}}html.js .nav:not(.nav--placa,.nav--abierta),html.js .nav--sala:not(.nav--abierta){color-scheme:dark;color:var(--texto)}html.js .nav:not(.nav--placa,.nav--abierta) .nav__in{text-shadow:0 0 2px oklch(0% 0 0 / 0.95),0 0 8px oklch(0% 0 0 / 0.9),0 0 18px oklch(0% 0 0 / 0.75)}html.js .nav:not(.nav--placa) .nav__in::before,.nav--abierta .nav__in::before{opacity:0;scale:1.02 0.7}.nav__marca{display:inline-flex;align-items:center;min-height:44px;margin-right:auto;font-weight:600;letter-spacing:-0.015em;text-decoration:none;white-space:nowrap}.nav__enlaces{display:flex;align-items:center;gap:clamp(0.5rem,0.1rem + 0.9vw,1.375rem)}.nav__enlaces a{position:relative;display:inline-flex;align-items:center;min-height:44px;font-size:0.9375rem;color:var(--texto-2);text-decoration:none;white-space:nowrap}.nav__enlaces a:hover,.nav__enlaces a[aria-current="true"]{color:var(--texto)}.nav__enlaces a:hover{transition:color var(--d-micro) var(--curva-entrada)}.nav__enlaces a::after{content:"";position:absolute;left:50%;bottom:5px;width:5px;height:5px;margin-left:-2.5px;border-radius:50%;background:var(--punto-luz);box-shadow:0 0 10px 2px var(--punto-halo);opacity:0;scale:0;transition:opacity var(--d-etiqueta) var(--curva-entrada),scale var(--d-parrafo) var(--curva-entrada)}.nav__enlaces a[aria-current="true"]::after{opacity:1;scale:1}.nav__herramientas{display:flex;align-items:center;gap:var(--e-2)}.conmutador{display:inline-flex;padding:3px;border-radius:var(--radio-chip);box-shadow:inset 0 0 0 1px var(--borde)}.conmutador button{position:relative;min-width:44px;min-height:32px;padding:0 0.65rem;border-radius:var(--radio-chip);font-size:var(--t-etiqueta);font-weight:600;letter-spacing:0.08em;color:var(--texto-2)}.conmutador button::after,.tema::after{content:"";position:absolute;inset:-6px -1px}.conmutador button:hover{color:var(--texto);transition:color var(--d-micro) var(--curva-entrada)}.conmutador button[aria-pressed="true"]{background:var(--texto);color:var(--fondo)}.conmutador button:focus-visible,.tema:focus-visible{outline-offset:3px;border-radius:var(--radio-chip)}.tema{position:relative;display:inline-flex;align-items:center;gap:0.45rem;min-height:38px;padding:0 0.85rem 0 0.7rem;border-radius:var(--radio-chip);box-shadow:inset 0 0 0 1px var(--borde);font-size:var(--t-etiqueta);font-weight:600;letter-spacing:0.08em;color:var(--texto-2)}.tema:hover{color:var(--texto);box-shadow:inset 0 0 0 1px var(--texto-2);transition:color var(--d-micro) var(--curva-entrada),box-shadow var(--d-micro) var(--curva-entrada)}.tema svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}.tema__sol,.tema__claro{display:none}:root[data-theme="dark"] .tema__luna,:root[data-theme="dark"] .tema__oscuro{display:none}:root[data-theme="dark"] .tema__sol,:root[data-theme="dark"] .tema__claro{display:inline}@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .tema__luna,:root:not([data-theme="light"]) .tema__oscuro{display:none}:root:not([data-theme="light"]) .tema__sol,:root:not([data-theme="light"]) .tema__claro{display:inline}}.nav__menu,.nav__panel,.riel{display:none}@media (max-width:63.99em){:root{--nav-alto:60px}.nav__in>.nav__enlaces,.nav__in>.nav__herramientas{display:none}.nav__in::before{inset-block:7px}.nav__menu{display:inline-flex;align-items:center;gap:0.5rem;min-width:44px;min-height:44px;padding-left:0.75rem;font-size:var(--t-etiqueta);font-weight:600;letter-spacing:0.1em;text-transform:uppercase}.nav__menu svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round}.nav__menu[aria-expanded="true"] .nav__menu-abrir,.nav__menu:not([aria-expanded="true"]) .nav__menu-cerrar{display:none}}@media (min-width:64em) and (max-width:79.99em){.nav__in{gap:var(--e-2)}.nav__enlaces a{font-size:0.875rem}}.boton{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:0.5rem;min-height:48px;padding:0.7rem 1.45rem;border-radius:var(--radio);font-size:var(--t-boton);font-weight:600;line-height:1.2;text-align:center;text-decoration:none;transition:translate var(--d-etiqueta) var(--curva-entrada),background var(--d-micro) var(--curva-entrada),color var(--d-micro) var(--curva-entrada),box-shadow var(--d-etiqueta) var(--curva-entrada)}.boton--primario{background:var(--texto);color:var(--fondo);box-shadow:inset 0 1px 0 oklch(100% 0 0 / 0.5),inset 0 -1px 0 oklch(0% 0 0 / 0.18),0 1px 1px var(--sombra-contacto),0 14px 30px -14px var(--sombra-ambiente)}.boton--primario:hover{translate:0 -2px;animation:halo 2200ms ease-in-out 120ms infinite alternate}.boton--primario:active{translate:0 0}.boton--secundario{color:var(--texto);box-shadow:inset 0 0 0 1px var(--borde)}.boton--secundario:hover{translate:0 -2px;background:color-mix(in oklab,var(--texto) 9%,transparent);box-shadow:inset 0 0 0 1px var(--texto)}.boton--texto{min-height:44px;padding:0;border-radius:0;font-weight:500;background:linear-gradient(currentColor,currentColor) 0 calc(50% + 0.72em) / 100% 1px no-repeat}.boton--texto:hover{animation:subraya var(--d-filete) var(--curva-entrada) 1}.boton--ancho{width:100%}.boton--grande{min-height:60px;padding-inline:1.9rem;font-size:1.0625rem}.sello{position:relative;display:inline-flex;align-items:center;gap:0.5rem;font-family:var(--playfair);font-weight:600;font-size:0.875rem;line-height:1.2;color:var(--estado-proceso);text-decoration:none;white-space:nowrap}.sello::before{content:"";flex:none;width:7px;height:7px;border-radius:50%;background:currentColor;box-shadow:0 0 0 3px color-mix(in oklab,currentColor 22%,transparent),0 0 12px 1px color-mix(in oklab,currentColor 45%,transparent)}a.sello::after{content:"";position:absolute;inset:-14px -6px}.sello--en-uso{color:var(--estado-en-uso)}.sello--proceso{color:var(--estado-proceso)}.sello__nombre{font-family:var(--inter);font-weight:600;color:var(--texto)}a.sello:hover .sello__nombre{text-decoration:underline;text-decoration-color:var(--acento-texto)}.folio{display:flex;align-items:baseline;gap:var(--e-2);margin-bottom:var(--e-4)}.folio__cifra{font-family:var(--playfair);font-weight:400;font-size:1.75rem;line-height:1;color:var(--acento-display);font-variant-numeric:lining-nums tabular-nums}.folio__etiqueta{color:var(--texto-2)}.folio__filete{flex:1;align-self:center;height:1px;margin-left:var(--e-2);background:linear-gradient(90deg,var(--filete-luz),color-mix(in oklab,var(--filete-luz) 30%,transparent) 58%,transparent);transform-origin:0 50%}html.mov .folio__filete{scale:0 1}html.mov .folio.visto .folio__filete{scale:1 1;transition:scale var(--d-titulo) var(--curva-entrada) 120ms}.plano{--plano-fundido:min(280px,24%);position:absolute;inset:0;z-index:0;overflow:clip;pointer-events:none;-webkit-user-select:none;user-select:none;-webkit-mask-image:linear-gradient(transparent,#000 var(--plano-fundido),#000 calc(100% - var(--plano-fundido)),transparent);mask-image:linear-gradient(transparent,#000 var(--plano-fundido),#000 calc(100% - var(--plano-fundido)),transparent)}.plano__numeral{position:absolute;top:0.02em;right:-0.03em;font-family:var(--playfair);font-weight:400;font-size:var(--t-numeral);line-height:0.8;letter-spacing:-0.045em;font-variant-numeric:lining-nums;color:var(--numeral-relleno);-webkit-text-stroke:1px var(--numeral-trazo)}.plano--izq .plano__numeral{right:auto;left:-0.03em}.plano__haz{position:absolute;inset:-12% -30%;background:linear-gradient(112deg,transparent 39%,color-mix(in oklab,var(--haz) 40%,transparent) 45.5%,var(--haz) 50%,color-mix(in oklab,var(--haz) 25%,transparent) 55%,transparent 62%);-webkit-mask-image:linear-gradient(transparent,#000 22%,#000 68%,transparent);mask-image:linear-gradient(transparent,#000 22%,#000 68%,transparent)}.plano--izq .plano__haz{scale:-1 1}.pliegue{--pl-alto:calc(var(--e-aire) * 2);display:none;position:relative;z-index:0;height:var(--pl-alto);margin-bottom:calc(-1 * var(--pl-alto));pointer-events:none;background:linear-gradient(in oklab,#000 0,color-mix(in oklab,var(--fondo) 7%,#000) 10%,color-mix(in oklab,var(--fondo) 24%,#000) 22%,color-mix(in oklab,var(--fondo) 48%,#000) 35%,color-mix(in oklab,var(--fondo) 72%,#000) 48%,color-mix(in oklab,var(--fondo) 89%,#000) 61%,color-mix(in oklab,var(--fondo) 97%,#000) 72%,var(--fondo) 90%,oklch(96% 0.01 85 / 0))}:root[data-theme="light"] .pliegue{display:block}:root[data-theme="light"] #trabajo{padding-top:calc(var(--e-aire) * 2)}@media (prefers-color-scheme:light){:root:not([data-theme="dark"]) .pliegue{display:block}:root:not([data-theme="dark"]) #trabajo{padding-top:calc(var(--e-aire) * 2)}}@media (forced-colors:active){.plano,.pliegue{display:none !important}.nav__in::before{forced-color-adjust:none;background:Canvas}.conmutador button[aria-pressed="true"]{outline:2px solid Highlight;outline-offset:-2px}}.mundo{position:fixed;inset:0;z-index:0;width:100%;height:100%;pointer-events:none}.heroe{position:relative;color-scheme:dark;color:var(--texto);min-height:calc(100svh - 80px);padding-top:var(--nav-alto);display:grid;align-items:center;overflow:clip}.heroe__fondo{position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none;background:#000;-webkit-mask-image:linear-gradient(#000 84%,transparent);mask-image:linear-gradient(#000 84%,transparent)}.heroe__poster{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:cover;object-position:72.3% 48.7%;opacity:0}html:not(.js) .heroe__poster,.heroe__poster.visto{opacity:1}.heroe__dentro{position:relative;z-index:2}.heroe__obras{position:absolute;inset:0;z-index:3;visibility:hidden;pointer-events:none}.obra{position:absolute;left:0;top:0}.heroe__deslizar{position:absolute;display:none}.saltar{position:absolute;left:var(--margen);top:-100px;z-index:60;padding:0.6rem 1rem;background:var(--papel);border:1px solid var(--borde);border-radius:var(--radio);text-decoration:none;font-weight:600}.saltar:focus-visible{top:calc(var(--nav-alto) + 8px)}.heroe__texto{grid-column:1 / -1;padding-block:var(--e-3);container-type:inline-size}.heroe__etiqueta{color:var(--texto-2);margin-bottom:var(--e-2)}.heroe__titulo{margin-bottom:var(--e-2);text-wrap:balance}.heroe__titulo br{display:none}@media (min-width:1024px){.heroe__texto{grid-column:1 / 8;padding-block:0}.heroe__etiqueta{margin-bottom:var(--e-3)}.heroe__titulo{margin-bottom:var(--e-3);font-size:min(var(--t-display),7.6cqi)}.heroe__titulo br{display:inline}}.heroe__acento{font-family:var(--playfair);font-style:italic;font-weight:500;letter-spacing:-0.01em;padding-right:0.08em}.verbo{white-space:nowrap}.acto{padding:0;font-style:inherit;letter-spacing:inherit;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:0.14em;text-decoration-color:color-mix(in oklab,currentColor 38%,transparent)}.acto.activo,.acto[aria-pressed="true"]{color:var(--acento-display);text-decoration-color:currentColor}.heroe__sub{margin-bottom:var(--e-3);max-width:36ch}.heroe__acciones{display:flex;flex-wrap:wrap;align-items:center;gap:var(--e-2) var(--e-3);margin-bottom:var(--e-3)}@media (min-width:1024px){.heroe__sub{margin-bottom:var(--e-4)}.heroe__acciones{margin-bottom:var(--e-4)}}.heroe__secundarias{display:flex;align-items:center;gap:var(--e-3);font-size:var(--t-secundario)}.heroe .boton--primario{background:var(--texto);color:var(--fondo)}.heroe__sellos{display:flex;flex-wrap:wrap;gap:var(--e-2) var(--e-3);padding-top:var(--e-3);border-top:1px solid var(--filete)}@media (max-width:767px){.heroe__sellos{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin-inline:calc(-1 * var(--margen));padding-inline:var(--margen) calc(var(--margen) + 40px);-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 56px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 56px),transparent)}.heroe__sellos::-webkit-scrollbar{display:none}}@media (max-width:1023px){.heroe{min-height:calc(100svh - 40px)}.heroe + main .seccion:first-child{padding-top:var(--e-4)}}@media (min-width:940px) and (max-width:1023px) and (min-aspect-ratio:145/100){.heroe__texto{grid-column:1 / -1;width:57%;padding-block:0}.heroe__titulo{margin-bottom:var(--e-3);font-size:min(var(--t-display),7.6cqi)}.heroe__titulo br{display:inline}.heroe__sub{margin-bottom:var(--e-4)}.heroe__acciones{margin-bottom:var(--e-4)}}@media (max-width:939px),(max-width:1023px) and (max-aspect-ratio:1449/1000),(max-aspect-ratio:1333/1000){.heroe{grid-template-rows:auto minmax(56.25vw,1fr);align-items:start}.heroe__texto{grid-column:1 / -1;padding-block:var(--e-3)}.heroe__titulo{font-size:min(var(--t-display),max(2.25rem,9svh))}.mundo-zonas .heroe__sellos{display:none}.heroe__poster{top:auto;bottom:0;height:56.25vw}}@media (max-aspect-ratio:4/5){.heroe{grid-template-rows:auto minmax(92vw,1fr)}.heroe__texto{padding-block:var(--e-2) var(--e-3)}.heroe__poster{height:auto;max-height:100%;aspect-ratio:9 / 16;object-position:50% 100%}}@media (max-width:479px){:root{--t-cuerpo:1.0625rem;--t-sub-heroe:1.0625rem}.heroe__titulo{font-size:2.125rem}}@media (min-width:1024px) and (min-height:760px) and (min-aspect-ratio:1334/1000){.heroe{padding-bottom:66px;margin-bottom:calc(-10px - var(--e-aire))}@media (prefers-reduced-motion:no-preference){html.mov .heroe{padding-bottom:calc(10svh + 8px);margin-bottom:calc(48px - 10svh - var(--e-aire))}}:root[data-theme="light"] .heroe{margin-bottom:0}@media (prefers-color-scheme:light){:root:not([data-theme="dark"]) .heroe{margin-bottom:0}}}</style>
 <link rel="stylesheet" href="css/variables.css">
 <link rel="stylesheet" href="css/base.css">
-<link rel="stylesheet" href="css/componentes.css" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="css/componentes.css" media="print" data-diferida>
 <noscript><link rel="stylesheet" href="css/componentes.css"></noscript>
+<link rel="stylesheet" href="css/mundo.css" media="print" data-diferida>
+<noscript><link rel="stylesheet" href="css/mundo.css"></noscript>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Person","name":"Ramiro Bales","jobTitle":"AI Product Builder","email":"mailto:ramirobales@gmail.com","url":"https://www.linkedin.com/in/ramiro-bales","sameAs":["https://www.linkedin.com/in/ramiro-bales"],"address":{"@type":"PostalAddress","addressLocality":"Quilmes","addressRegion":"Buenos Aires","addressCountry":"AR"},"knowsLanguage":["es","en"]}
+{"@context":"https://schema.org","@type":"Person","name":"Ramiro Bales","jobTitle":"AI Product Builder","email":"mailto:ramirobales@gmail.com","url":"https://ramirobales-collab.github.io/","sameAs":["https://www.linkedin.com/in/ramiro-bales"],"address":{"@type":"PostalAddress","addressLocality":"Quilmes","addressRegion":"Buenos Aires","addressCountry":"AR"},"knowsLanguage":["es","en"]}
 </script>
 </head>
 <body>
+<a class="enmarcado-aviso" href="https://ramirobales-collab.github.io/" target="_top" rel="noopener noreferrer" data-i18n="enmarcado.aviso">Esta página está dentro de otro sitio. Abrila en su dirección real: ramirobales-collab.github.io</a>
 <a class="saltar" href="#trabajo" data-i18n="nav.saltar">Saltar al contenido</a>
 
 <nav class="nav" aria-label="Principal">
@@ -91,131 +117,134 @@
     </div>
   </div>
 </nav>
+<nav class="riel" aria-label="Secciones" data-i18n-attr="aria-label=riel.aria">
+  <ol role="list">
+    <li><a href="#trabajo"><span class="riel__n cifra" aria-hidden="true">01</span><span class="riel__t" data-i18n="nav.trabajo">Trabajo</span></a></li>
+    <li><a href="#saber"><span class="riel__n cifra" aria-hidden="true">02</span><span class="riel__t" data-i18n="nav.saber">Qué sé hacer</span></a></li>
+    <li><a href="#marcas"><span class="riel__n cifra" aria-hidden="true">03</span><span class="riel__t" data-i18n="nav.marcas">Para marcas</span></a></li>
+    <li><a href="#metodo"><span class="riel__n cifra" aria-hidden="true">04</span><span class="riel__t" data-i18n="nav.metodo">Método</span></a></li>
+    <li><a href="#sobre"><span class="riel__n cifra" aria-hidden="true">05</span><span class="riel__t" data-i18n="nav.sobre">Sobre mí</span></a></li>
+    <li><a href="#contacto"><span class="riel__n cifra" aria-hidden="true">06</span><span class="riel__t" data-i18n="nav.contacto">Contacto</span></a></li>
+  </ol>
+</nav>
 
-<header class="heroe contenedor reticula" id="inicio">
-  <div class="heroe__texto">
-    <p class="etiqueta heroe__etiqueta" data-i18n="heroe.etiqueta">AI Product Builder · remoto desde Buenos Aires</p>
-    <h1 class="display heroe__titulo" data-i18n="heroe.titulo" data-i18n-html>Construyo productos <br>dirigiendo agentes de IA: <br>defino, diseño, verifico.</h1>
-    <p class="sub-heroe heroe__sub" data-i18n="heroe.sub">Estudiante de IA y Ciencia de Datos (UADE). Cuatro productos propios: una app en beta, una en uso diario, una demo y un prototipo.</p>
-    <div class="heroe__acciones">
-      <a class="boton boton--primario" href="#trabajo" data-i18n="heroe.cta">Ver el trabajo</a>
-      <a class="boton boton--secundario" href="cv/ramiro-bales-cv-es.pdf" data-cv data-i18n="heroe.cv">CV (PDF)</a>
-      <div class="heroe__secundarias">
-        <a class="boton boton--texto" href="mailto:ramirobales@gmail.com" data-i18n="heroe.mail">ramirobales@gmail.com</a>
-        <a class="boton boton--texto" href="https://www.linkedin.com/in/ramiro-bales" rel="me noopener" target="_blank" aria-label="LinkedIn de Ramiro Bales (abre en pestaña nueva)" data-i18n-attr="aria-label=heroe.linkedin.aria" data-i18n="heroe.linkedin">LinkedIn</a>
+<canvas class="mundo" aria-hidden="true"></canvas>
+<header class="heroe" id="inicio">
+  <div class="heroe__fondo" aria-hidden="true"><picture><source media="(max-aspect-ratio: 4/5)" type="image/avif" srcset="assets/mundo/poster-v-810.avif" data-completo="assets/mundo/poster-v-1080.avif 1080w, assets/mundo/poster-v.avif 1440w" sizes="100vw"><source media="(max-aspect-ratio: 4/5)" srcset="assets/mundo/poster-v-810.webp" data-completo="assets/mundo/poster-v-1080.webp 1080w, assets/mundo/poster-v.webp 1440w" sizes="100vw"><source type="image/avif" srcset="assets/mundo/poster-h-1280.avif" data-completo="assets/mundo/poster-h-1600.avif 1600w, assets/mundo/poster-h.avif 2560w" sizes="(min-width: 1024px) and (min-aspect-ratio: 1334/1000) 81vw, 100vw"><img class="heroe__poster" src="assets/mundo/poster-h-1280.webp" data-completo="assets/mundo/poster-h-1600.webp 1600w, assets/mundo/poster-h.webp 2560w" sizes="(min-width: 1024px) and (min-aspect-ratio: 1334/1000) 81vw, 100vw" alt="" decoding="async"></picture><noscript><picture><source media="(max-aspect-ratio: 4/5)" type="image/avif" srcset="assets/mundo/poster-v-1080.avif 1080w, assets/mundo/poster-v.avif 1440w" sizes="100vw"><source media="(max-aspect-ratio: 4/5)" srcset="assets/mundo/poster-v-1080.webp 1080w, assets/mundo/poster-v.webp 1440w" sizes="100vw"><source type="image/avif" srcset="assets/mundo/poster-h-1600.avif 1600w, assets/mundo/poster-h.avif 2560w" sizes="(min-width: 1024px) and (min-aspect-ratio: 1334/1000) 81vw, 100vw"><img class="heroe__poster heroe__poster--completo" src="assets/mundo/poster-h.webp" srcset="assets/mundo/poster-h-1600.webp 1600w, assets/mundo/poster-h.webp 2560w" sizes="(min-width: 1024px) and (min-aspect-ratio: 1334/1000) 81vw, 100vw" alt="" decoding="async"></picture></noscript></div>
+  <div class="heroe__dentro contenedor reticula">
+    <div class="heroe__texto">
+      <p class="etiqueta heroe__etiqueta" data-i18n="heroe.etiqueta">AI Product Builder · remoto desde Buenos Aires</p>
+      <h1 class="display heroe__titulo" data-i18n="heroe.titulo" data-i18n-html>Construyo productos <br>dirigiendo agentes de IA: <br><em class="heroe__acento"><span class="verbo"><button type="button" class="acto" data-acto="defino" aria-pressed="false">defino</button>,</span> <span class="verbo"><button type="button" class="acto" data-acto="diseno" aria-pressed="false">diseño</button>,</span> <span class="verbo"><button type="button" class="acto" data-acto="verifico" aria-pressed="false">verifico</button>.</span></em></h1>
+      <p class="sub-heroe heroe__sub" data-i18n="heroe.sub">Cuatro productos propios: una app en beta, una en uso diario, una demo y un prototipo. Estudiante de IA y Ciencia de Datos (UADE).</p>
+      <div class="heroe__acciones">
+        <a class="boton boton--primario" href="#trabajo" data-i18n="heroe.cta">Ver el trabajo</a>
+        <a class="boton boton--secundario" href="cv/ramiro-bales-cv-es.pdf" data-cv data-i18n="heroe.cv">CV (PDF)</a>
+        <div class="heroe__secundarias">
+          <a class="boton boton--texto" href="mailto:ramirobales@gmail.com" data-i18n="heroe.mail">ramirobales@gmail.com</a>
+          <a class="boton boton--texto" href="https://www.linkedin.com/in/ramiro-bales" rel="me noopener noreferrer" target="_blank" aria-label="LinkedIn de Ramiro Bales (abre en pestaña nueva)" data-i18n-attr="aria-label=heroe.linkedin.aria" data-i18n="heroe.linkedin">LinkedIn</a>
+        </div>
       </div>
+      <ul class="heroe__sellos" role="list" aria-label="Estado de los cuatro productos" data-i18n-attr="aria-label=heroe.sellos.aria">
+        <li><a class="sello sello--proceso" href="proyectos/cathedra.html"><span class="sello__nombre">Cathedra</span><span aria-hidden="true">·</span><span data-i18n="heroe.sellos.cathedra">beta</span></a></li>
+        <li><a class="sello sello--en-uso" href="proyectos/fortal.html"><span class="sello__nombre">Fortal</span><span aria-hidden="true">·</span><span data-i18n="heroe.sellos.fortal">en uso</span></a></li>
+        <li><a class="sello sello--proceso" href="proyectos/athleteiq.html"><span class="sello__nombre">AthleteIQ</span><span aria-hidden="true">·</span><span data-i18n="heroe.sellos.athleteiq">demo</span></a></li>
+        <li><a class="sello sello--proceso" href="proyectos/coro.html"><span class="sello__nombre">coro</span><span aria-hidden="true">·</span><span data-i18n="heroe.sellos.coro">prototipo</span></a></li>
+      </ul>
+      <p class="heroe__ayuda" id="actos-ayuda" hidden data-i18n="heroe.actos.ayuda">Lleva la sala a esta fase</p>
     </div>
-    <ul class="heroe__sellos" role="list" aria-label="Estado de los cuatro productos" data-i18n-attr="aria-label=heroe.sellos.aria">
-      <li><a class="sello sello--proceso" href="proyectos/cathedra.html"><span class="sello__nombre">Cathedra</span><span aria-hidden="true">·</span><span data-i18n="heroe.sellos.cathedra">beta</span></a></li>
-      <li><a class="sello sello--en-uso" href="proyectos/fortal.html"><span class="sello__nombre">Fortal</span><span aria-hidden="true">·</span><span data-i18n="heroe.sellos.fortal">en uso</span></a></li>
-      <li><a class="sello sello--proceso" href="proyectos/athleteiq.html"><span class="sello__nombre">AthleteIQ</span><span aria-hidden="true">·</span><span data-i18n="heroe.sellos.athleteiq">demo</span></a></li>
-      <li><a class="sello sello--proceso" href="proyectos/coro.html"><span class="sello__nombre">coro</span><span aria-hidden="true">·</span><span data-i18n="heroe.sellos.coro">prototipo</span></a></li>
-    </ul>
   </div>
-  <div class="heroe__escena" data-esquinas="[[0.2761,0.1615],[0.6686,0.1844],[0.6544,0.5422],[0.2786,0.5032]]">
-    <picture>
-      <source type="image/avif" srcset="assets/img/heroe/sombra-800.avif 800w, assets/img/heroe/sombra-1200.avif 1200w, assets/img/heroe/sombra-1600.avif 1600w" sizes="(min-width: 1024px) 58vw, 100vw">
-      <img class="heroe__capa heroe__capa--sombra" src="assets/img/heroe/sombra-1600.webp" srcset="assets/img/heroe/sombra-800.webp 800w, assets/img/heroe/sombra-1200.webp 1200w, assets/img/heroe/sombra-1600.webp 1600w" sizes="(min-width: 1024px) 58vw, 100vw" width="1600" height="1000" alt="" decoding="async">
-    </picture>
-    <picture>
-      <source type="image/avif" srcset="assets/img/heroe/losa-800.avif 800w, assets/img/heroe/losa-1200.avif 1200w, assets/img/heroe/losa-1600.avif 1600w" sizes="(min-width: 1024px) 58vw, 100vw">
-      <img class="heroe__capa heroe__capa--losa" src="assets/img/heroe/losa-1600.webp" srcset="assets/img/heroe/losa-800.webp 800w, assets/img/heroe/losa-1200.webp 1200w, assets/img/heroe/losa-1600.webp 1600w" sizes="(min-width: 1024px) 58vw, 100vw" width="1600" height="1000" alt="" decoding="async">
-    </picture>
-    <picture>
-      <source type="image/avif" srcset="assets/img/cathedra/app-guia-640.avif 640w, assets/img/cathedra/app-guia-1280.avif 1280w" sizes="(min-width: 1024px) 24vw, 100vw">
-      <img class="heroe__lcp" src="assets/img/cathedra/app-guia-1280.webp" srcset="assets/img/cathedra/app-guia-640.webp 640w, assets/img/cathedra/app-guia-1280.webp 1280w" sizes="(min-width: 1024px) 24vw, 100vw" width="1280" height="720" fetchpriority="high" alt="Pantalla de Cathedra con la guía de una clase, bloque por bloque" data-i18n-attr="alt=heroe.alt">
-    </picture>
-    <picture>
-      <source type="image/avif" srcset="assets/img/heroe/marco-800.avif 800w, assets/img/heroe/marco-1200.avif 1200w, assets/img/heroe/marco-1600.avif 1600w" sizes="(min-width: 1024px) 58vw, 100vw">
-      <img class="heroe__capa heroe__capa--marco" src="assets/img/heroe/marco-1600.webp" srcset="assets/img/heroe/marco-800.webp 800w, assets/img/heroe/marco-1200.webp 1200w, assets/img/heroe/marco-1600.webp 1600w" sizes="(min-width: 1024px) 58vw, 100vw" width="1600" height="1000" alt="" fetchpriority="high">
-    </picture>
-    <picture>
-      <source type="image/avif" srcset="assets/img/heroe/sello-es-800.avif 800w, assets/img/heroe/sello-es-1200.avif 1200w, assets/img/heroe/sello-es-1600.avif 1600w" sizes="(min-width: 1024px) 58vw, 100vw" data-i18n-attr="srcset=heroe.sello.srcset.avif">
-      <img class="heroe__capa heroe__capa--sello" src="assets/img/heroe/sello-es-1600.webp" srcset="assets/img/heroe/sello-es-800.webp 800w, assets/img/heroe/sello-es-1200.webp 1200w, assets/img/heroe/sello-es-1600.webp 1600w" sizes="(min-width: 1024px) 58vw, 100vw" width="1600" height="1000" alt="" decoding="async" data-i18n-attr="srcset=heroe.sello.srcset.webp">
-    </picture>
+  <div class="heroe__deslizar" aria-hidden="true"><span class="heroe__desliza" data-i18n="heroe.desliza">Deslizá</span><span class="heroe__filete"><span class="heroe__gota"></span></span></div>
+  <div class="heroe__obras">
+    <a class="obra obra--cathedra" href="proyectos/cathedra.html"><span class="obra__rotulo"><span class="obra__nombre">Cathedra</span> <span class="obra__estado" data-i18n="heroe.obra.cathedra.estado">beta</span><svg class="obra__tilde" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.5l3.6 3.4 7.4-8"/></svg></span></a>
+    <a class="obra obra--athleteiq" href="proyectos/athleteiq.html"><span class="obra__rotulo"><span class="obra__nombre">AthleteIQ</span> <span class="obra__estado" data-i18n="heroe.obra.athleteiq.estado">demo</span><svg class="obra__tilde" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.5l3.6 3.4 7.4-8"/></svg></span></a>
+    <a class="obra obra--coro" href="proyectos/coro.html"><span class="obra__rotulo"><span class="obra__nombre">coro</span> <span class="obra__estado" data-i18n="heroe.obra.coro.estado">prototipo</span><svg class="obra__tilde" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.5l3.6 3.4 7.4-8"/></svg></span></a>
+    <a class="obra obra--fortal" href="proyectos/fortal.html"><span class="obra__rotulo"><span class="obra__nombre">Fortal</span> <span class="obra__estado" data-i18n="heroe.obra.fortal.estado">en uso</span><svg class="obra__tilde" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.5l3.6 3.4 7.4-8"/></svg></span></a>
   </div>
-  <script src="js/lcp.js"></script>
-  <script>(function(){var r=function(){if(window.__ubicarLcp)window.__ubicarLcp();};if(document.fonts&&document.fonts.ready)document.fonts.ready.then(r);addEventListener('load',r);})();</script>
 </header>
 
 <main>
+  <div class="pliegue" aria-hidden="true"></div>
   <section class="seccion" id="trabajo" aria-labelledby="trabajo-titulo">
+    <div class="plano" aria-hidden="true"><span class="plano__haz"></span><span class="plano__numeral">01</span></div>
     <div class="contenedor">
-      <div class="folio">
-        <span class="folio__cifra cifra" data-revelar="bloque" data-revelar-rango="100 88" aria-hidden="true">01</span>
-        <span class="folio__etiqueta etiqueta" data-i18n="folio.trabajo">Trabajo</span>
-        <span class="folio__filete" aria-hidden="true"></span>
-      </div>
-      <div class="reticula">
-        <div class="cabecera-seccion">
-          <h2 class="h-seccion" id="trabajo-titulo" data-revelar data-i18n="trabajo.titulo">Cuatro productos, estado real.</h2>
-          <p class="secundario cuerpo" data-revelar data-i18n="trabajo.sub">Cada uno con sus decisiones, lo que verifiqué y lo que falta.</p>
-        </div>
-      </div>
-      <div class="reticula casos">
-        <article class="caso papel caso--7" style="view-transition-name: caso-cathedra">
+      <header class="cabecera">
+        <p class="folio">
+          <span class="folio__cifra cifra" data-revelar="bloque" aria-hidden="true">01</span>
+          <span class="folio__etiqueta etiqueta" data-revelar="bloque" data-i18n="folio.trabajo">Trabajo</span>
+          <span class="folio__filete" aria-hidden="true"></span>
+        </p>
+        <h2 class="h-seccion" id="trabajo-titulo" data-revelar data-i18n="trabajo.titulo">Cuatro productos, estado real.</h2>
+        <p class="cabecera__bajada" data-revelar data-i18n="trabajo.sub">Cada uno con sus decisiones, lo que verifiqué y lo que falta.</p>
+      </header>
+      <div class="casos">
+        <article class="caso caso--cathedra">
           <a class="caso__enlace" href="proyectos/cathedra.html" aria-label="Cathedra: leer el caso" data-i18n-attr="aria-label=trabajo.cathedra.aria"></a>
-          <div class="caso__media mascara">
-            <picture>
-              <source type="image/avif" srcset="assets/img/cathedra/app-preguntar-640.avif 640w, assets/img/cathedra/app-preguntar-1280.avif 1280w, assets/img/cathedra/app-preguntar-1920.avif 1920w" sizes="(min-width: 1024px) 48vw, 100vw">
-              <img src="assets/img/cathedra/app-preguntar-1280.webp" srcset="assets/img/cathedra/app-preguntar-640.webp 640w, assets/img/cathedra/app-preguntar-1280.webp 1280w, assets/img/cathedra/app-preguntar-1920.webp 1920w" sizes="(min-width: 1024px) 48vw, 100vw" width="1920" height="1080" loading="lazy" decoding="async" alt="Cathedra respondiendo una pregunta con la frase de la profesora y el minuto de la clase" data-i18n-attr="alt=trabajo.cathedra.alt">
-            </picture>
+          <div class="caso__media placa cortina" data-iman data-paralaje data-cursor="Leer el caso" data-i18n-attr="data-cursor=trabajo.cursor">
+            <img class="caso__capa caso__capa--fondo" src="assets/mundo/casos/cathedra-fondo.webp" width="1600" height="1000" loading="lazy" decoding="async" data-carga alt="">
+            <img class="caso__capa caso__capa--disp" src="assets/mundo/casos/cathedra-dispositivo.webp" width="1600" height="1000" loading="lazy" decoding="async" data-carga alt="Render: Cathedra abierta en un monitor, sobre un zócalo de piedra oscura en la sala negra" data-i18n-attr="alt=trabajo.cathedra.foto">
+            <span class="caso__luz" aria-hidden="true"></span>
           </div>
           <div class="caso__cuerpo">
+            <p class="caso__indice" data-revelar="bloque" aria-hidden="true">01 / 04</p>
             <h3 class="h-caso caso__nombre" data-revelar>Cathedra</h3>
             <p class="caso__frase" data-revelar data-i18n="trabajo.cathedra.frase">App de estudio para Windows: transcribe clases, arma el plan, genera exámenes y fichas, y cada respuesta cita clase y minuto.</p>
-            <div class="caso__pie">
+            <p class="caso__prueba" data-revelar="bloque" data-i18n="trabajo.cathedra.prueba">Beta 1.2.0 con instalador para Windows&nbsp;· más de 5.500 pruebas automáticas</p>
+            <div class="caso__pie" data-revelar="bloque">
               <span class="sello sello--proceso" data-i18n="trabajo.cathedra.sello">Producto propio · en beta</span>
               <span class="caso__leer" data-i18n="trabajo.leer">Leer el caso →</span>
+              <a class="caso__externo" href="https://cathedra-beta.vercel.app" rel="noopener noreferrer" target="_blank"><span data-i18n="caso.cathedra.enlace">Página y descarga para Windows</span>&nbsp;↗<span class="oculto-visual" data-i18n="caso.enlace.nuevo">(abre en pestaña nueva)</span></a>
             </div>
           </div>
         </article>
-        <article class="caso papel caso--5" style="view-transition-name: caso-fortal">
+        <article class="caso caso--fortal">
           <a class="caso__enlace" href="proyectos/fortal.html" aria-label="Fortal: leer el caso" data-i18n-attr="aria-label=trabajo.fortal.aria"></a>
-          <div class="caso__media caso__media--telefono mascara">
-            <picture>
-              <source type="image/avif" srcset="assets/img/fortal/musculo-pecho-640.avif 640w, assets/img/fortal/musculo-pecho-1206.avif 1206w" sizes="(min-width: 1024px) 34vw, 100vw">
-              <img src="assets/img/fortal/musculo-pecho-1206.webp" srcset="assets/img/fortal/musculo-pecho-640.webp 640w, assets/img/fortal/musculo-pecho-1206.webp 1206w" sizes="(min-width: 1024px) 34vw, 100vw" width="1206" height="2622" loading="lazy" decoding="async" alt="Ficha del músculo pecho sobre el cuerpo 3D: recuperación, rango y series de la semana" data-i18n-attr="alt=trabajo.fortal.alt">
-            </picture>
+          <div class="caso__media placa cortina" data-iman data-paralaje data-cursor="Leer el caso" data-i18n-attr="data-cursor=trabajo.cursor">
+            <img class="caso__capa caso__capa--fondo" src="assets/mundo/casos/fortal-fondo.webp" width="1600" height="1000" loading="lazy" decoding="async" data-carga alt="">
+            <img class="caso__capa caso__capa--disp" src="assets/mundo/casos/fortal-dispositivo.webp" width="1600" height="1000" loading="lazy" decoding="async" data-carga alt="Render: Fortal en un teléfono sobre un zócalo de piedra oscura, con la pantalla de la rutina del día" data-i18n-attr="alt=trabajo.fortal.foto">
+            <span class="caso__luz" aria-hidden="true"></span>
           </div>
           <div class="caso__cuerpo">
+            <p class="caso__indice" data-revelar="bloque" aria-hidden="true">02 / 04</p>
             <h3 class="h-caso caso__nombre" data-revelar>Fortal</h3>
             <p class="caso__frase" data-revelar data-i18n="trabajo.fortal.frase">App web para iPhone que arma tu rutina con tu equipo y tu tiempo reales, sobre un cuerpo 3D.</p>
-            <div class="caso__pie">
+            <p class="caso__prueba" data-revelar="bloque" data-i18n="trabajo.fortal.prueba">En uso diario&nbsp;· 746 pruebas automáticas</p>
+            <div class="caso__pie" data-revelar="bloque">
               <span class="sello sello--en-uso" data-i18n="trabajo.fortal.sello">App personal · publicada y en uso</span>
               <span class="caso__leer" data-i18n="trabajo.leer">Leer el caso →</span>
             </div>
           </div>
         </article>
-        <article class="caso papel caso--5" style="view-transition-name: caso-athleteiq">
+        <article class="caso caso--athleteiq">
           <a class="caso__enlace" href="proyectos/athleteiq.html" aria-label="AthleteIQ: leer el caso" data-i18n-attr="aria-label=trabajo.athleteiq.aria"></a>
-          <div class="caso__media mascara">
-            <picture>
-              <source type="image/avif" srcset="assets/img/athleteiq/landing-heroe-640.avif 640w, assets/img/athleteiq/landing-heroe-1280.avif 1280w, assets/img/athleteiq/landing-heroe-1920.avif 1920w" sizes="(min-width: 1024px) 34vw, 100vw">
-              <img src="assets/img/athleteiq/landing-heroe-1280.webp" srcset="assets/img/athleteiq/landing-heroe-640.webp 640w, assets/img/athleteiq/landing-heroe-1280.webp 1280w, assets/img/athleteiq/landing-heroe-1920.webp 1920w" sizes="(min-width: 1024px) 34vw, 100vw" width="1920" height="1080" loading="lazy" decoding="async" alt="Portada de AthleteIQ con la pelota 3D rodeada de métricas" data-i18n-attr="alt=trabajo.athleteiq.alt">
-            </picture>
+          <div class="caso__media placa cortina" data-iman data-paralaje data-cursor="Leer el caso" data-i18n-attr="data-cursor=trabajo.cursor">
+            <img class="caso__capa caso__capa--fondo" src="assets/mundo/casos/athleteiq-fondo.webp" width="1600" height="1000" loading="lazy" decoding="async" data-carga alt="">
+            <img class="caso__capa caso__capa--disp" src="assets/mundo/casos/athleteiq-dispositivo.webp" width="1600" height="1000" loading="lazy" decoding="async" data-carga alt="Render: la portada de AthleteIQ en una pantalla apoyada sobre un zócalo de piedra oscura" data-i18n-attr="alt=trabajo.athleteiq.foto">
+            <span class="caso__luz" aria-hidden="true"></span>
           </div>
           <div class="caso__cuerpo">
+            <p class="caso__indice" data-revelar="bloque" aria-hidden="true">03 / 04</p>
             <h3 class="h-caso caso__nombre" data-revelar>AthleteIQ</h3>
             <p class="caso__frase" data-revelar data-i18n="trabajo.athleteiq.frase">Asistente de IA para el staff de un equipo: se pregunta por chat y responde con los datos del plantel.</p>
-            <div class="caso__pie">
+            <p class="caso__prueba" data-revelar="bloque" data-i18n="trabajo.athleteiq.prueba">Landing con 3D en cinco idiomas&nbsp;· bots probados por texto, voz y foto</p>
+            <div class="caso__pie" data-revelar="bloque">
               <span class="sello sello--proceso" data-i18n="trabajo.athleteiq.sello">Demo funcional</span>
               <span class="caso__leer" data-i18n="trabajo.leer">Leer el caso →</span>
             </div>
           </div>
         </article>
-        <article class="caso papel caso--7" style="view-transition-name: caso-coro">
+        <article class="caso caso--coro">
           <a class="caso__enlace" href="proyectos/coro.html" aria-label="coro: leer el caso" data-i18n-attr="aria-label=trabajo.coro.aria"></a>
-          <div class="caso__media mascara">
-            <picture>
-              <source type="image/avif" srcset="assets/img/coro/reporte-veredicto-640.avif 640w, assets/img/coro/reporte-veredicto-1280.avif 1280w, assets/img/coro/reporte-veredicto-1920.avif 1920w" sizes="(min-width: 1024px) 48vw, 100vw">
-              <img src="assets/img/coro/reporte-veredicto-1280.webp" srcset="assets/img/coro/reporte-veredicto-640.webp 640w, assets/img/coro/reporte-veredicto-1280.webp 1280w, assets/img/coro/reporte-veredicto-1920.webp 1920w" sizes="(min-width: 1024px) 48vw, 100vw" width="1920" height="1080" loading="lazy" decoding="async" alt="Reporte de coro con el veredicto y las cuatro métricas del producto de prueba" data-i18n-attr="alt=trabajo.coro.alt">
-            </picture>
+          <div class="caso__media placa cortina" data-iman data-paralaje data-cursor="Leer el caso" data-i18n-attr="data-cursor=trabajo.cursor">
+            <img class="caso__capa caso__capa--fondo" src="assets/mundo/casos/coro-fondo.webp" width="1600" height="1000" loading="lazy" decoding="async" data-carga alt="">
+            <img class="caso__capa caso__capa--disp" src="assets/mundo/casos/coro-dispositivo.webp" width="1600" height="1000" loading="lazy" decoding="async" data-carga alt="Render: el reporte de coro en una tableta apoyada sobre un zócalo de piedra oscura" data-i18n-attr="alt=trabajo.coro.foto">
+            <span class="caso__luz" aria-hidden="true"></span>
           </div>
           <div class="caso__cuerpo">
+            <p class="caso__indice" data-revelar="bloque" aria-hidden="true">04 / 04</p>
             <h3 class="h-caso caso__nombre" data-revelar>coro</h3>
-            <p class="caso__frase" data-revelar data-i18n="trabajo.coro.frase">Lee miles de reseñas de un producto, agrupa el defecto que se repite y encuentra qué competidor ya lo resolvió.</p>
-            <div class="caso__pie">
+            <p class="caso__frase" data-revelar data-i18n="trabajo.coro.frase">Lee las reseñas de un producto (400 en la corrida real más grande), agrupa el defecto que se repite y encuentra qué competidor ya lo resolvió.</p>
+            <p class="caso__prueba" data-revelar="bloque" data-i18n="trabajo.coro.prueba">1.200 reseñas en una prueba de carga&nbsp;· valida la muestra antes de gastar en el análisis</p>
+            <div class="caso__pie" data-revelar="bloque">
               <span class="sello sello--proceso" data-i18n="trabajo.coro.sello">Prototipo</span>
               <span class="caso__leer" data-i18n="trabajo.leer">Leer el caso →</span>
             </div>
@@ -227,23 +256,22 @@
 
   <!-- saber:inicio -->
   <section class="seccion" id="saber" aria-labelledby="saber-titulo">
+    <div class="plano" aria-hidden="true"><span class="plano__haz"></span><span class="plano__numeral">02</span></div>
     <div class="contenedor">
-      <div class="folio">
-        <span class="folio__cifra cifra" data-revelar="bloque" data-revelar-rango="100 88" aria-hidden="true">02</span>
-        <span class="folio__etiqueta etiqueta" data-i18n="folio.saber">Qué sé hacer</span>
-        <span class="folio__filete" aria-hidden="true"></span>
-      </div>
-      <div class="reticula">
-        <div class="cabecera-seccion">
-          <h2 class="h-seccion" id="saber-titulo" data-revelar data-i18n="saber.titulo">Ocho áreas, cada una con el proyecto donde la usé.</h2>
-          <p class="secundario cuerpo" data-revelar data-i18n="saber.sub">Cada etiqueta lleva al caso. «Interno» es trabajo propio que no publico; «cliente», un trabajo para un tercero que no nombro.</p>
-        </div>
-      </div>
+      <header class="cabecera">
+        <p class="folio">
+          <span class="folio__cifra cifra" data-revelar="bloque" aria-hidden="true">02</span>
+          <span class="folio__etiqueta etiqueta" data-revelar="bloque" data-i18n="folio.saber">Qué sé hacer</span>
+          <span class="folio__filete" aria-hidden="true"></span>
+        </p>
+        <h2 class="h-seccion" id="saber-titulo" data-revelar data-i18n="saber.titulo">Ocho áreas, cada una con el proyecto donde la usé.</h2>
+        <p class="cabecera__bajada" data-revelar data-i18n="saber.sub">Las etiquetas con nombre de producto llevan al caso. «Interno» es trabajo propio que no publico; «cliente», un trabajo para un tercero que no nombro.</p>
+      </header>
       <p class="saber__deslizar etiqueta" aria-hidden="true" data-i18n="saber.deslizar">Deslizá para ver las ocho áreas →</p>
-      <div class="saberes" role="region" tabindex="0" aria-label="Qué sé hacer: ocho áreas" data-i18n-attr="aria-label=saber.region.aria">
-        <article class="saber papel" aria-labelledby="saber-1-t">
+      <div class="saberes" role="region" tabindex="0" data-revelar-hijos=".saber__item, .saber__accion" aria-label="Qué sé hacer: ocho áreas" data-i18n-attr="aria-label=saber.region.aria">
+        <article class="saber papel" data-visto aria-labelledby="saber-1-t">
           <header class="saber__cabecera">
-            <span class="saber__n cifra" aria-hidden="true">01</span>
+            <span class="saber__n cifra" data-revelar="bloque" aria-hidden="true">01</span>
             <h3 class="saber__t" id="saber-1-t" data-revelar data-i18n="saber.1.t">Automatización de procesos</h3>
           </header>
           <ul class="saber__lista" role="list">
@@ -255,38 +283,38 @@
             <li class="saber__item"><span data-i18n="saber.1.6">Analizador de reseñas que valida la muestra antes de gastar en el análisis.</span> <span class="saber__donde"><span class="oculto-visual" data-i18n="saber.donde">Dónde:</span> <a class="chip" href="proyectos/coro.html">coro</a></span></li>
           </ul>
         </article>
-        <article class="saber papel" aria-labelledby="saber-2-t">
+        <article class="saber papel" data-visto aria-labelledby="saber-2-t">
           <header class="saber__cabecera">
-            <span class="saber__n cifra" aria-hidden="true">02</span>
+            <span class="saber__n cifra" data-revelar="bloque" aria-hidden="true">02</span>
             <h3 class="saber__t" id="saber-2-t" data-revelar data-i18n="saber.2.t">Bots</h3>
           </header>
           <ul class="saber__lista" role="list">
             <li class="saber__item"><span data-i18n="saber.2.1">Bot de Telegram que responde texto, fotos y notas de voz transcriptas, con historial por chat y límite de uso.</span> <span class="saber__donde"><span class="oculto-visual" data-i18n="saber.donde">Dónde:</span> <a class="chip" href="proyectos/athleteiq.html">AthleteIQ</a></span></li>
             <li class="saber__item"><span data-i18n="saber.2.2">Recordatorios de parciales y entregas, generados a partir del calendario de la cursada.</span> <span class="saber__donde"><span class="oculto-visual" data-i18n="saber.donde">Dónde:</span> <a class="chip" href="proyectos/cathedra.html">Cathedra</a></span></li>
-            <li class="saber__item"><span data-i18n="saber.2.3">Brief diario de precios de la competencia y radar de oportunidades que descarta las repetidas, programados.</span> <span class="saber__donde"><span class="oculto-visual" data-i18n="saber.donde">Dónde:</span> <a class="chip" href="proyectos/athleteiq.html">AthleteIQ</a></span></li>
+            <li class="saber__item"><span data-i18n="saber.2.3">Prototipo de brief diario con noticias del sector y radar de oportunidades que descarta las repetidas, programados.</span> <span class="saber__donde"><span class="oculto-visual" data-i18n="saber.donde">Dónde:</span> <a class="chip" href="proyectos/athleteiq.html">AthleteIQ</a></span></li>
             <li class="saber__item"><span data-i18n="saber.2.4">Avisos push de la rutina en el iPhone.</span> <span class="saber__donde"><span class="oculto-visual" data-i18n="saber.donde">Dónde:</span> <a class="chip" href="proyectos/fortal.html">Fortal</a></span></li>
             <li class="saber__item"><span data-i18n="saber.2.5">Examen oral y asistente de voz.</span> <span class="saber__donde"><span class="oculto-visual" data-i18n="saber.donde">Dónde:</span> <a class="chip" href="proyectos/cathedra.html">Cathedra</a></span></li>
             <li class="saber__item"><span data-i18n="saber.2.6">Recepción de mensajes con deduplicación y caché, en Apps Script.</span> <span class="saber__donde"><span class="oculto-visual" data-i18n="saber.donde">Dónde:</span> <a class="chip" href="proyectos/athleteiq.html">AthleteIQ</a></span></li>
           </ul>
           <p class="saber__accion"><a class="boton boton--texto" href="demos/bots/index.html" data-i18n="saber.2.enlace">Abrir la sala de bots →</a></p>
         </article>
-        <article class="saber papel" aria-labelledby="saber-3-t">
+        <article class="saber papel" data-visto aria-labelledby="saber-3-t">
           <header class="saber__cabecera">
-            <span class="saber__n cifra" aria-hidden="true">03</span>
+            <span class="saber__n cifra" data-revelar="bloque" aria-hidden="true">03</span>
             <h3 class="saber__t" id="saber-3-t" data-revelar data-i18n="saber.3.t">IA aplicada</h3>
           </header>
           <ul class="saber__lista" role="list">
-            <li class="saber__item"><span data-i18n="saber.3.1">Transcripción local de clases de hasta 4 horas, con el modelo elegido por mediciones en mi propia placa de video.</span> <span class="saber__donde"><span class="oculto-visual" data-i18n="saber.donde">Dónde:</span> <a class="chip" href="proyectos/cathedra.html">Cathedra</a></span></li>
+            <li class="saber__item"><span data-i18n="saber.3.1">Transcripción local de clases de hasta 4 horas, con la opción elegida midiendo en mi propia placa de video.</span> <span class="saber__donde"><span class="oculto-visual" data-i18n="saber.donde">Dónde:</span> <a class="chip" href="proyectos/cathedra.html">Cathedra</a></span></li>
             <li class="saber__item"><span data-i18n="saber.3.2">Motor de lenguaje, recuperación por embeddings y voz sintética locales, sin conexión.</span> <span class="saber__donde"><span class="oculto-visual" data-i18n="saber.donde">Dónde:</span> <a class="chip" href="proyectos/cathedra.html">Cathedra</a></span></li>
             <li class="saber__item"><span data-i18n="saber.3.3">Respuestas que citan clase y minuto; lo que no está en el material se marca como ausente, no se inventa.</span> <span class="saber__donde"><span class="oculto-visual" data-i18n="saber.donde">Dónde:</span> <a class="chip" href="proyectos/cathedra.html">Cathedra</a></span></li>
             <li class="saber__item"><span data-i18n="saber.3.4">Exámenes, fichas y juegos generados del material, y un alumno simulado que estudia una semana para medir la calidad.</span> <span class="saber__donde"><span class="oculto-visual" data-i18n="saber.donde">Dónde:</span> <a class="chip" href="proyectos/cathedra.html">Cathedra</a></span></li>
-            <li class="saber__item"><span data-i18n="saber.3.5">Reparto del trabajo entre modelos según costo y calidad.</span> <span class="saber__donde"><span class="oculto-visual" data-i18n="saber.donde">Dónde:</span> <a class="chip" href="proyectos/cathedra.html">Cathedra</a></span></li>
+            <li class="saber__item"><span data-i18n="saber.3.5">Reparto del trabajo entre modelos según costo y calidad.</span> <span class="saber__donde"><span class="oculto-visual" data-i18n="saber.donde">Dónde:</span> <span class="chip chip--sin" data-i18n="saber.chip.interno">interno</span></span></li>
             <li class="saber__item"><span data-i18n="saber.3.6" data-i18n-html>Agente antifraude con regresión logística: 83,3&nbsp;% de exactitud contra 33,3&nbsp;% y 66,7&nbsp;% de las líneas base; nota 10/10.</span> <span class="saber__donde"><span class="oculto-visual" data-i18n="saber.donde">Dónde:</span> <span class="chip chip--sin" data-i18n="saber.chip.hackaton">hackatón UADE</span></span></li>
           </ul>
         </article>
-        <article class="saber papel" aria-labelledby="saber-4-t">
+        <article class="saber papel" data-visto aria-labelledby="saber-4-t">
           <header class="saber__cabecera">
-            <span class="saber__n cifra" aria-hidden="true">04</span>
+            <span class="saber__n cifra" data-revelar="bloque" aria-hidden="true">04</span>
             <h3 class="saber__t" id="saber-4-t" data-revelar data-i18n="saber.4.t">Seguridad y análisis de riesgo</h3>
           </header>
           <ul class="saber__lista" role="list">
@@ -299,9 +327,9 @@
           </ul>
           <p class="saber__accion"><a class="boton boton--texto" href="proyectos/seguridad.html" data-i18n="saber.4.enlace">Leer la revisión de seguridad →</a></p>
         </article>
-        <article class="saber papel" aria-labelledby="saber-5-t">
+        <article class="saber papel" data-visto aria-labelledby="saber-5-t">
           <header class="saber__cabecera">
-            <span class="saber__n cifra" aria-hidden="true">05</span>
+            <span class="saber__n cifra" data-revelar="bloque" aria-hidden="true">05</span>
             <h3 class="saber__t" id="saber-5-t" data-revelar data-i18n="saber.5.t">Diseño y 3D</h3>
           </header>
           <ul class="saber__lista" role="list">
@@ -309,13 +337,13 @@
             <li class="saber__item"><span data-i18n="saber.5.2">23 scripts de Blender con render Cycles para fondos, íconos y atlas, con materiales PBR y texturas reales.</span> <span class="saber__donde"><span class="oculto-visual" data-i18n="saber.donde">Dónde:</span> <a class="chip" href="proyectos/cathedra.html">Cathedra</a></span></li>
             <li class="saber__item"><span data-i18n="saber.5.3">Vidrio líquido con refracción, y tema claro y oscuro con el contraste medido sobre píxeles.</span> <span class="saber__donde"><span class="oculto-visual" data-i18n="saber.donde">Dónde:</span> <a class="chip" href="proyectos/cathedra.html">Cathedra</a></span></li>
             <li class="saber__item"><span data-i18n="saber.5.4">Shader de holograma con bloom y un cuerpo 3D con los músculos etiquetados.</span> <span class="saber__donde"><span class="oculto-visual" data-i18n="saber.donde">Dónde:</span> <a class="chip" href="proyectos/fortal.html">Fortal</a></span></li>
-            <li class="saber__item"><span data-i18n="saber.5.5">Escenas Three.js atadas al scroll.</span> <span class="saber__donde"><span class="oculto-visual" data-i18n="saber.donde">Dónde:</span> <a class="chip" href="proyectos/athleteiq.html">AthleteIQ</a> <span class="chip chip--sin" data-i18n="saber.chip.sitio">este sitio</span></span></li>
+            <li class="saber__item"><span data-i18n="saber.5.5">Escena Three.js en tiempo real que responde al clic.</span> <span class="saber__donde"><span class="oculto-visual" data-i18n="saber.donde">Dónde:</span> <a class="chip" href="proyectos/athleteiq.html">AthleteIQ</a></span></li>
             <li class="saber__item"><span data-i18n="saber.5.6">Firmas sonoras masterizadas a −18 LUFS, y movimiento reducido respetado.</span> <span class="saber__donde"><span class="oculto-visual" data-i18n="saber.donde">Dónde:</span> <a class="chip" href="proyectos/cathedra.html">Cathedra</a></span></li>
           </ul>
         </article>
-        <article class="saber papel" aria-labelledby="saber-6-t">
+        <article class="saber papel" data-visto aria-labelledby="saber-6-t">
           <header class="saber__cabecera">
-            <span class="saber__n cifra" aria-hidden="true">06</span>
+            <span class="saber__n cifra" data-revelar="bloque" aria-hidden="true">06</span>
             <h3 class="saber__t" id="saber-6-t" data-revelar data-i18n="saber.6.t">Web y apps</h3>
           </header>
           <ul class="saber__lista" role="list">
@@ -327,9 +355,9 @@
             <li class="saber__item"><span data-i18n="saber.6.6">Despliegues en Vercel, Cloudflare y Netlify.</span> <span class="saber__donde"><span class="oculto-visual" data-i18n="saber.donde">Dónde:</span> <a class="chip" href="proyectos/cathedra.html">Cathedra</a> <a class="chip" href="proyectos/fortal.html">Fortal</a> <a class="chip" href="proyectos/athleteiq.html">AthleteIQ</a></span></li>
           </ul>
         </article>
-        <article class="saber papel" aria-labelledby="saber-7-t">
+        <article class="saber papel" data-visto aria-labelledby="saber-7-t">
           <header class="saber__cabecera">
-            <span class="saber__n cifra" aria-hidden="true">07</span>
+            <span class="saber__n cifra" data-revelar="bloque" aria-hidden="true">07</span>
             <h3 class="saber__t" id="saber-7-t" data-revelar data-i18n="saber.7.t">Datos</h3>
           </header>
           <ul class="saber__lista" role="list">
@@ -341,9 +369,9 @@
             <li class="saber__item"><span data-i18n="saber.7.6">Graficador y álgebra simbólica.</span> <span class="saber__donde"><span class="oculto-visual" data-i18n="saber.donde">Dónde:</span> <a class="chip" href="proyectos/cathedra.html">Cathedra</a></span></li>
           </ul>
         </article>
-        <article class="saber papel" aria-labelledby="saber-8-t">
+        <article class="saber papel" data-visto aria-labelledby="saber-8-t">
           <header class="saber__cabecera">
-            <span class="saber__n cifra" aria-hidden="true">08</span>
+            <span class="saber__n cifra" data-revelar="bloque" aria-hidden="true">08</span>
             <h3 class="saber__t" id="saber-8-t" data-revelar data-i18n="saber.8.t">Producto y método</h3>
           </header>
           <ul class="saber__lista" role="list">
@@ -352,7 +380,7 @@
             <li class="saber__item"><span data-i18n="saber.8.3">Verificación con capturas a resolución real antes de dar algo por hecho.</span> <span class="saber__donde"><span class="oculto-visual" data-i18n="saber.donde">Dónde:</span> <a class="chip" href="proyectos/fortal.html">Fortal</a> <span class="chip chip--sin" data-i18n="saber.chip.sitio">este sitio</span></span></li>
             <li class="saber__item"><span data-i18n="saber.8.4">Suites de pruebas: más de 5.500 en verde en Cathedra; 391 unitarias, 85 de servidor y 270 de extremo a extremo en Fortal.</span> <span class="saber__donde"><span class="oculto-visual" data-i18n="saber.donde">Dónde:</span> <a class="chip" href="proyectos/cathedra.html">Cathedra</a> <a class="chip" href="proyectos/fortal.html">Fortal</a></span></li>
             <li class="saber__item"><span data-i18n="saber.8.5">Medición de rendimiento: milisegundos por cuadro y memoria.</span> <span class="saber__donde"><span class="oculto-visual" data-i18n="saber.donde">Dónde:</span> <a class="chip" href="proyectos/cathedra.html">Cathedra</a></span></li>
-            <li class="saber__item"><span data-i18n="saber.8.6">Precios por plan, estudios de costo y economía unitaria de e-commerce.</span> <span class="saber__donde"><span class="oculto-visual" data-i18n="saber.donde">Dónde:</span> <a class="chip" href="proyectos/cathedra.html">Cathedra</a> <span class="chip chip--sin" data-i18n="saber.chip.interno">interno</span></span></li>
+            <li class="saber__item"><span data-i18n="saber.8.6">Estudios de costo y economía unitaria de e-commerce.</span> <span class="saber__donde"><span class="oculto-visual" data-i18n="saber.donde">Dónde:</span> <span class="chip chip--sin" data-i18n="saber.chip.interno">interno</span></span></li>
           </ul>
         </article>
       </div>
@@ -361,80 +389,79 @@
   <!-- saber:fin -->
 
   <section class="seccion" id="marcas" aria-labelledby="marcas-titulo">
+    <div class="plano" aria-hidden="true"><span class="plano__haz"></span><span class="plano__numeral">03</span></div>
     <div class="contenedor">
-      <div class="folio">
-        <span class="folio__cifra cifra" data-revelar="bloque" data-revelar-rango="100 88" aria-hidden="true">03</span>
-        <span class="folio__etiqueta etiqueta" data-i18n="folio.marcas">Para marcas</span>
-        <span class="folio__filete" aria-hidden="true"></span>
-      </div>
-      <div class="reticula">
-        <div class="cabecera-seccion">
-          <h2 class="h-seccion" id="marcas-titulo" data-revelar data-i18n="marcas.titulo">Tres demos con un beneficio que se puede medir.</h2>
-          <p class="secundario cuerpo" data-revelar data-i18n="marcas.sub">Hechas con el mismo método que mis productos. Ámbar Muebles es una marca ficticia creada para estas demos, y el club de la sala de bots también. Las cifras de terceros van con su fuente; la de los bots es una medición mía.</p>
-        </div>
-      </div>
-      <div class="reticula marcas">
-        <article class="marca papel" aria-labelledby="marca-1-titulo">
-          <div class="marca__media mascara">
-            <img src="demos/configurador/img/poster-silla-800.webp" srcset="demos/configurador/img/poster-silla-800.webp 800w, demos/configurador/img/poster-silla-1600.webp 1600w" sizes="(min-width: 1024px) 42vw, 100vw" width="1600" height="1200" loading="lazy" decoding="async" alt="Butaca en terciopelo con madera de nogal y botones de latón, en el configurador 3D de la demo" data-i18n-attr="alt=marcas.config.alt">
+      <header class="cabecera">
+        <p class="folio">
+          <span class="folio__cifra cifra" data-revelar="bloque" aria-hidden="true">03</span>
+          <span class="folio__etiqueta etiqueta" data-revelar="bloque" data-i18n="folio.marcas">Para marcas</span>
+          <span class="folio__filete" aria-hidden="true"></span>
+        </p>
+        <h2 class="h-seccion" id="marcas-titulo" data-revelar data-i18n="marcas.titulo">Tres demos con un beneficio que se puede medir.</h2>
+        <p class="cabecera__bajada" data-revelar data-i18n="marcas.sub">Hechas con el mismo método que mis productos. Ámbar Muebles es una marca ficticia creada para estas demos, y el club de la sala de bots también. Las cifras de terceros van con su fuente; la de los bots es una medición mía.</p>
+      </header>
+      <div class="marcas">
+        <article class="marca marca--1 placa placa--bloque" data-iman aria-labelledby="marca-1-titulo">
+          <div class="marca__media cortina">
+            <img src="demos/configurador/img/poster-silla-800.webp" srcset="demos/configurador/img/poster-silla-800.webp 800w, demos/configurador/img/poster-silla-1600.webp 1600w" sizes="(min-width: 768px) 56vw, 100vw" width="1600" height="1200" loading="lazy" decoding="async" data-carga alt="Butaca en terciopelo con madera de nogal y botones de latón, en el configurador 3D de la demo" data-i18n-attr="alt=marcas.config.alt">
           </div>
           <div class="marca__cuerpo">
-            <p class="etiqueta marca__etiqueta" data-i18n="marcas.config.etiqueta">Demo 01 · e-commerce</p>
-            <h3 class="h3 marca__titulo" id="marca-1-titulo" data-i18n="marcas.config.titulo">Configurador 3D de producto</h3>
-            <dl class="marca__datos">
+            <p class="etiqueta marca__etiqueta" data-revelar="bloque" data-i18n="marcas.config.etiqueta">Demo 01 · e-commerce</p>
+            <h3 class="h3 marca__titulo" id="marca-1-titulo" data-revelar data-i18n="marcas.config.titulo">Configurador 3D de producto</h3>
+            <dl class="marca__datos" data-revelar-hijos>
               <div><dt class="etiqueta" data-i18n="marcas.resuelve">Qué resuelve</dt><dd data-i18n="marcas.config.resuelve">El cliente gira el mueble, cambia tela, madera y metal, y ve el precio al instante, desde el celular y sin instalar nada.</dd></div>
               <div><dt class="etiqueta" data-i18n="marcas.gana">Qué gana la marca</dt><dd data-i18n="marcas.config.gana">Menos dudas antes de comprar: textura, escala y acabado se ven antes de pagar, y baja el «no era lo que esperaba».</dd></div>
             </dl>
-            <figure class="marca__cifra">
-              <p class="marca__numero cifra" aria-hidden="true">2×</p>
+            <figure class="marca__cifra" data-revelar="bloque">
+              <p class="marca__numero cifra" data-rodillo aria-hidden="true">2×</p>
               <figcaption>
                 <span class="marca__cifra-texto" data-i18n="marcas.config.cifra">Hasta el doble de conversión en fichas de producto con 3D y realidad aumentada.</span>
-                <span class="marca__fuente"><span data-i18n="marcas.segun">Según</span> <a href="https://www.threekit.com/guide-to-roi-in-3d-and-augmented-reality" rel="noopener" target="_blank"><span data-i18n="marcas.config.fuente">Threekit, guía de ROI en 3D y AR (datos de Shopify)</span> <span class="oculto-visual" data-i18n="caso.enlace.nuevo">(abre en pestaña nueva)</span></a></span>
+                <span class="marca__fuente"><span data-i18n="marcas.segun">Según</span> <a href="https://www.threekit.com/guide-to-roi-in-3d-and-augmented-reality" rel="noopener noreferrer" target="_blank"><span data-i18n="marcas.config.fuente">Threekit, guía de ROI en 3D y AR (datos de Shopify)</span> <span class="oculto-visual" data-i18n="caso.enlace.nuevo">(abre en pestaña nueva)</span></a></span>
               </figcaption>
             </figure>
-            <p class="marca__accion"><a class="boton boton--primario" href="demos/configurador/index.html" data-i18n="marcas.config.abrir">Abrir demo →</a></p>
+            <p class="marca__accion" data-revelar="bloque"><a class="boton boton--primario" href="demos/configurador/index.html" data-i18n="marcas.config.abrir">Abrir demo →</a></p>
           </div>
         </article>
-        <article class="marca papel" aria-labelledby="marca-2-titulo">
-          <div class="marca__media marca__media--captura mascara">
-            <img src="assets/img/marcas/asistente-chat-800.webp" srcset="assets/img/marcas/asistente-chat-800.webp 800w, assets/img/marcas/asistente-chat-1600.webp 1600w" sizes="(min-width: 1024px) 28vw, 100vw" width="1600" height="1000" loading="lazy" decoding="async" alt="El asistente de la demo responde si una butaca entra por una puerta de 70 cm, con la cita a la ficha del producto y la regla que aplicó" data-i18n-attr="alt=marcas.asis.alt">
+        <article class="marca marca--2 placa placa--bloque" data-iman aria-labelledby="marca-2-titulo">
+          <div class="marca__media marca__media--captura cortina">
+            <img src="assets/img/marcas/asistente-chat-800.webp" srcset="assets/img/marcas/asistente-chat-800.webp 800w, assets/img/marcas/asistente-chat-1600.webp 1600w" sizes="(min-width: 768px) 46vw, 100vw" width="1600" height="1000" loading="lazy" decoding="async" data-carga alt="El asistente de la demo responde si una butaca entra por una puerta de 70 cm, con la cita a la ficha del producto y la regla que aplicó" data-i18n-attr="alt=marcas.asis.alt">
           </div>
           <div class="marca__cuerpo">
-            <p class="etiqueta marca__etiqueta" data-i18n="marcas.asis.etiqueta">Demo 02 · atención al cliente</p>
-            <h3 class="h3 marca__titulo" id="marca-2-titulo" data-i18n="marcas.asis.titulo">Asistente de catálogo que no inventa</h3>
-            <dl class="marca__datos">
+            <p class="etiqueta marca__etiqueta" data-revelar="bloque" data-i18n="marcas.asis.etiqueta">Demo 02 · atención al cliente</p>
+            <h3 class="h3 marca__titulo" id="marca-2-titulo" data-revelar data-i18n="marcas.asis.titulo">Asistente de catálogo que no inventa</h3>
+            <dl class="marca__datos" data-revelar-hijos>
               <div><dt class="etiqueta" data-i18n="marcas.resuelve">Qué resuelve</dt><dd data-i18n="marcas.asis.resuelve">Contesta preguntas de preventa (medidas, plazos, cuidado) citando la ficha del producto; si el dato no está, lo dice y deriva a una persona con un resumen.</dd></div>
               <div><dt class="etiqueta" data-i18n="marcas.gana">Qué gana la marca</dt><dd data-i18n="marcas.asis.gana">Menos tickets repetidos, la misma respuesta para todos, cada respuesta auditable y atención fuera de horario.</dd></div>
             </dl>
-            <figure class="marca__cifra">
-              <p class="marca__numero cifra" aria-hidden="true">−20 %</p>
+            <figure class="marca__cifra" data-revelar="bloque">
+              <p class="marca__numero cifra" data-rodillo aria-hidden="true">−20 %</p>
               <figcaption>
-                <span class="marca__cifra-texto" data-i18n="marcas.asis.cifra">De costo promedio en empresas que automatizan; los procesos de alto volumen y con reglas son los que más rinden.</span>
-                <span class="marca__fuente"><span data-i18n="marcas.segun">Según</span> <a href="https://zapier.com/blog/how-to-automate-your-business/" rel="noopener" target="_blank"><span data-i18n="marcas.asis.fuente">Bain &amp; Company, citado por Zapier en su guía para automatizar un negocio</span> <span class="oculto-visual" data-i18n="caso.enlace.nuevo">(abre en pestaña nueva)</span></a></span>
+                <span class="marca__cifra-texto" data-i18n="marcas.asis.cifra" data-i18n-html><span class="oculto-visual">20&nbsp;% menos </span>de costo promedio en empresas que automatizan; los procesos de alto volumen y con reglas son los que más rinden.</span>
+                <span class="marca__fuente"><span data-i18n="marcas.segun">Según</span> <a href="https://zapier.com/blog/how-to-automate-your-business/" rel="noopener noreferrer" target="_blank"><span data-i18n="marcas.asis.fuente">Bain &amp; Company, citado por Zapier en su guía para automatizar un negocio</span> <span class="oculto-visual" data-i18n="caso.enlace.nuevo">(abre en pestaña nueva)</span></a></span>
               </figcaption>
             </figure>
-            <p class="marca__accion"><a class="boton boton--primario" href="demos/asistente/index.html" data-i18n="marcas.asis.abrir">Abrir demo →</a></p>
+            <p class="marca__accion" data-revelar="bloque"><a class="boton boton--primario" href="demos/asistente/index.html" data-i18n="marcas.asis.abrir">Abrir demo →</a></p>
           </div>
         </article>
-        <article class="marca papel" aria-labelledby="marca-3-titulo">
-          <div class="marca__media marca__media--captura mascara">
-            <img src="assets/img/marcas/bots-sala-800.webp" srcset="assets/img/marcas/bots-sala-800.webp 800w, assets/img/marcas/bots-sala-1600.webp 1600w" sizes="(min-width: 1024px) 28vw, 100vw" width="1600" height="1287" loading="lazy" decoding="async" alt="La sala de bots: el chat del staff de un club ficticio con el bot que responde con datos del plantel, y el panel con cada paso del mensaje" data-i18n-attr="alt=marcas.bots.alt">
+        <article class="marca marca--3 placa placa--bloque" data-iman aria-labelledby="marca-3-titulo">
+          <div class="marca__media marca__media--captura cortina">
+            <img src="assets/img/marcas/bots-sala-800.webp" srcset="assets/img/marcas/bots-sala-800.webp 800w, assets/img/marcas/bots-sala-1600.webp 1600w" sizes="(min-width: 768px) 46vw, 100vw" width="1600" height="1287" loading="lazy" decoding="async" data-carga alt="La sala de bots: el chat del staff de un club ficticio con el bot que responde con datos del plantel, y el panel con cada paso del mensaje" data-i18n-attr="alt=marcas.bots.alt">
           </div>
           <div class="marca__cuerpo">
-            <p class="etiqueta marca__etiqueta" data-i18n="marcas.bots.etiqueta">Demo 03 · bots</p>
-            <h3 class="h3 marca__titulo" id="marca-3-titulo" data-i18n="marcas.bots.titulo">Sala de bots</h3>
-            <dl class="marca__datos">
-              <div><dt class="etiqueta" data-i18n="marcas.resuelve">Qué resuelve</dt><dd data-i18n="marcas.bots.resuelve">Un bot que contesta por chat texto, fotos y notas de voz con los datos del negocio, y bots que avisan solos: recordatorios, brief de precios y radar de oportunidades.</dd></div>
+            <p class="etiqueta marca__etiqueta" data-revelar="bloque" data-i18n="marcas.bots.etiqueta">Demo 03 · bots</p>
+            <h3 class="h3 marca__titulo" id="marca-3-titulo" data-revelar data-i18n="marcas.bots.titulo">Sala de bots</h3>
+            <dl class="marca__datos" data-revelar-hijos>
+              <div><dt class="etiqueta" data-i18n="marcas.resuelve">Qué resuelve</dt><dd data-i18n="marcas.bots.resuelve">Un bot que contesta por chat texto, fotos y notas de voz con los datos del negocio, y bots que avisan solos: recordatorios, brief de noticias y radar de oportunidades.</dd></div>
               <div><dt class="etiqueta" data-i18n="marcas.gana">Qué gana la marca</dt><dd data-i18n="marcas.bots.gana">Atención las 24 horas, avisos sin que nadie tenga que mirar, el rastro de cada mensaje y un costo por mensaje conocido.</dd></div>
             </dl>
-            <figure class="marca__cifra">
-              <p class="marca__numero cifra" aria-hidden="true">US$&nbsp;0,18</p>
+            <figure class="marca__cifra" data-revelar="bloque">
+              <p class="marca__numero cifra" data-rodillo aria-hidden="true">US$&nbsp;0,18</p>
               <figcaption>
-                <span class="marca__cifra-texto" data-i18n="marcas.bots.cifra" data-i18n-html>Por corrida de un radar diario de oportunidades: unos US$&nbsp;5,50 por mes.</span>
-                <span class="marca__fuente"><a href="proyectos/athleteiq.html" data-i18n="marcas.bots.fuente">Medición propia, en un bot de AthleteIQ</a></span>
+                <span class="marca__cifra-texto" data-i18n="marcas.bots.cifra" data-i18n-html><span class="oculto-visual">US$ 0,18 </span>por corrida de un radar diario de oportunidades: unos US$&nbsp;5,50 por mes.</span>
+                <span class="marca__fuente"><a href="demos/bots/index.html#como" data-i18n="marcas.bots.fuente">Medición propia, en un bot de AthleteIQ</a></span>
               </figcaption>
             </figure>
-            <p class="marca__accion"><a class="boton boton--primario" href="demos/bots/index.html" data-i18n="marcas.bots.abrir">Abrir demo →</a></p>
+            <p class="marca__accion" data-revelar="bloque"><a class="boton boton--primario" href="demos/bots/index.html" data-i18n="marcas.bots.abrir">Abrir demo →</a></p>
           </div>
         </article>
       </div>
@@ -442,127 +469,151 @@
   </section>
 
   <section class="seccion seccion--tinta" id="metodo" aria-labelledby="metodo-titulo">
+    <div class="plano plano--izq" aria-hidden="true"><span class="plano__haz"></span><span class="plano__numeral">04</span></div>
     <div class="contenedor">
-      <div class="folio">
-        <span class="folio__cifra cifra" data-revelar="bloque" data-revelar-rango="100 88" aria-hidden="true">04</span>
-        <span class="folio__etiqueta etiqueta" data-i18n="folio.metodo">Método</span>
-        <span class="folio__filete" aria-hidden="true"></span>
-      </div>
-      <div class="reticula">
-        <div class="cabecera-seccion">
-          <h2 class="h-seccion" id="metodo-titulo" data-revelar data-i18n="metodo.titulo">Construyo con IA. Dirijo, diseño y verifico.</h2>
-          <p class="secundario cuerpo" data-revelar data-i18n="metodo.sub">La generación es barata. Lo que pongo yo es agencia, juicio y orquestación.</p>
+      <header class="cabecera">
+        <p class="folio">
+          <span class="folio__cifra cifra" data-revelar="bloque" aria-hidden="true">04</span>
+          <span class="folio__etiqueta etiqueta" data-revelar="bloque" data-i18n="folio.metodo">Método</span>
+          <span class="folio__filete" aria-hidden="true"></span>
+        </p>
+        <h2 class="h-seccion" id="metodo-titulo" data-revelar data-i18n="metodo.titulo">Construyo con IA. Defino, diseño y verifico.</h2>
+        <p class="cabecera__bajada" data-revelar data-i18n="metodo.sub">La generación es barata. Lo que pongo yo es agencia, juicio y orquestación.</p>
+      </header>
+      <ol class="triptico" role="list" aria-label="La sala del inicio en sus tres fases" data-i18n-attr="aria-label=metodo.actos.aria">
+        <li><figure class="triptico__hoja placa" data-iman>
+          <div class="triptico__media cortina"><img src="assets/mundo/actos/defino.webp" width="1200" height="750" loading="lazy" decoding="async" data-carga alt="La sala en líneas: contornos de luz sobre cada dispositivo y una grilla en perspectiva sobre el piso" data-i18n-attr="alt=metodo.actos.defino.alt"></div>
+          <figcaption class="triptico__pie" data-revelar="bloque"><span class="triptico__n cifra" aria-hidden="true">1</span><span class="triptico__t" data-i18n="metodo.actos.defino">Defino</span></figcaption>
+        </figure></li>
+        <li><figure class="triptico__hoja placa" data-iman>
+          <div class="triptico__media cortina"><img src="assets/mundo/actos/diseno.webp" width="1200" height="750" loading="lazy" decoding="async" data-carga alt="La sala con la materia: los cuatro productos renderizados en sus dispositivos" data-i18n-attr="alt=metodo.actos.diseno.alt"></div>
+          <figcaption class="triptico__pie" data-revelar="bloque"><span class="triptico__n cifra" aria-hidden="true">2</span><span class="triptico__t" data-i18n="metodo.actos.diseno">Diseño</span></figcaption>
+        </figure></li>
+        <li><figure class="triptico__hoja placa" data-iman>
+          <div class="triptico__media cortina"><img src="assets/mundo/actos/verifico.webp" width="1200" height="750" loading="lazy" decoding="async" data-carga alt="La sala durante la verificación: una lámina de luz recorre los dispositivos en profundidad" data-i18n-attr="alt=metodo.actos.verifico.alt"></div>
+          <figcaption class="triptico__pie" data-revelar="bloque"><span class="triptico__n cifra" aria-hidden="true">3</span><span class="triptico__t" data-i18n="metodo.actos.verifico">Verifico</span></figcaption>
+        </figure></li>
+      </ol>
+      <p class="triptico__nota" data-revelar="bloque"><span data-i18n="metodo.actos.nota">Las tres vistas son la sala de la portada: modelada y renderizada en Blender y compuesta en vivo por un motor WebGL2 propio, sin bibliotecas. Hecha con este mismo método: yo defino y verifico, los agentes construyen.</span> <a href="creditos.html" data-i18n="metodo.actos.nota.enlace">Detalle en créditos →</a></p>
+      <ol class="esquema" role="list" data-visto data-revelar-hijos aria-label="El método en cuatro pasos" data-i18n-attr="aria-label=metodo.esquema.aria">
+        <li class="esquema__paso"><span class="esquema__n" aria-hidden="true">01</span><span class="esquema__quien etiqueta" data-i18n="metodo.esquema.yo">Yo</span><h3 class="esquema__t" data-i18n="metodo.esquema.1.t">Problema</h3><p data-i18n="metodo.esquema.1">Qué duele, a quién y cómo se nota que se resolvió.</p></li>
+        <li class="esquema__paso"><span class="esquema__n" aria-hidden="true">02</span><span class="esquema__quien etiqueta" data-i18n="metodo.esquema.yo">Yo</span><h3 class="esquema__t" data-i18n="metodo.esquema.2.t">Brief y criterios</h3><p data-i18n="metodo.esquema.2">Flujo, vara de calidad y criterio de aceptación por escrito, antes de pedir una línea.</p></li>
+        <li class="esquema__paso esquema__paso--agentes"><span class="esquema__n" aria-hidden="true">03</span><span class="esquema__quien etiqueta" data-i18n="metodo.esquema.agentes">Agentes de IA</span><h3 class="esquema__t" data-i18n="metodo.esquema.3.t">Los agentes construyen</h3><p data-i18n="metodo.esquema.3">Tandas acotadas: cada una con su brief, sus pruebas y capturas obligatorias.</p></li>
+        <li class="esquema__paso"><span class="esquema__n" aria-hidden="true">04</span><span class="esquema__quien etiqueta" data-i18n="metodo.esquema.yo">Yo</span><h3 class="esquema__t" data-i18n="metodo.esquema.4.t">Yo verifico</h3><p data-i18n="metodo.esquema.4">Pruebas automáticas y capturas a resolución real; lo que no coincide vuelve al paso 3 con el porqué.</p></li>
+      </ol>
+      <div class="metodo__cols" data-visto>
+        <div class="metodo__col">
+          <span class="metodo__cifra" data-revelar="bloque" aria-hidden="true">1</span>
+          <h3 class="h3" data-revelar data-i18n="metodo.agencia.titulo">Agencia</h3>
+          <p data-revelar data-i18n="metodo.agencia.texto">Decido qué se construye y qué no. Escribo el brief, el flujo y la vara de calidad antes de pedir una línea.</p>
+          <p class="metodo__ejemplo" data-revelar data-i18n="metodo.agencia.ejemplo" data-i18n-html><strong>Fortal:</strong> las reglas de entrenamiento (progresión doble, volumen por tiempo disponible, pesos que de verdad se pueden armar) se escribieron antes de la primera pantalla.</p>
+        </div>
+        <div class="metodo__col">
+          <span class="metodo__cifra" data-revelar="bloque" aria-hidden="true">2</span>
+          <h3 class="h3" data-revelar data-i18n="metodo.juicio.titulo">Juicio</h3>
+          <p data-revelar data-i18n="metodo.juicio.texto">Reviso cada entrega: la acepto, la corrijo o la hago rehacer con el porqué. Elijo entre alternativas y lo documento.</p>
+          <p class="metodo__ejemplo" data-revelar data-i18n="metodo.juicio.ejemplo" data-i18n-html><strong>coro:</strong> descarté rankear quejas por cantidad y elegí medir concentración; veinte temas con cinco quejas no son un defecto, uno con el 47&nbsp;% sí.</p>
+        </div>
+        <div class="metodo__col">
+          <span class="metodo__cifra" data-revelar="bloque" aria-hidden="true">3</span>
+          <h3 class="h3" data-revelar data-i18n="metodo.orquestacion.titulo">Orquestación</h3>
+          <p data-revelar data-i18n="metodo.orquestacion.texto">Encadeno agentes, pruebas y capturas a resolución real. Nada se declara hecho sin verlo renderizado.</p>
+          <p class="metodo__ejemplo" data-revelar data-i18n="metodo.orquestacion.ejemplo" data-i18n-html><strong>Cathedra:</strong> más de 5.500 pruebas automáticas. <strong>Fortal:</strong> 746, y cada fase verificada con capturas a 1206×2622, una por una.</p>
         </div>
       </div>
-      <div class="reticula">
-        <ol class="esquema" aria-label="El método en cuatro pasos" data-i18n-attr="aria-label=metodo.esquema.aria">
-          <li class="esquema__paso"><span class="esquema__n" aria-hidden="true">01</span><span class="esquema__quien etiqueta" data-i18n="metodo.esquema.yo">Yo</span><h3 class="esquema__t" data-i18n="metodo.esquema.1.t">Problema</h3><p data-i18n="metodo.esquema.1">Qué duele, a quién y cómo se nota que se resolvió.</p></li>
-          <li class="esquema__paso"><span class="esquema__n" aria-hidden="true">02</span><span class="esquema__quien etiqueta" data-i18n="metodo.esquema.yo">Yo</span><h3 class="esquema__t" data-i18n="metodo.esquema.2.t">Brief y criterios</h3><p data-i18n="metodo.esquema.2">Flujo, vara de calidad y criterio de aceptación por escrito, antes de pedir una línea.</p></li>
-          <li class="esquema__paso esquema__paso--agentes"><span class="esquema__n" aria-hidden="true">03</span><span class="esquema__quien etiqueta" data-i18n="metodo.esquema.agentes">Agentes de IA</span><h3 class="esquema__t" data-i18n="metodo.esquema.3.t">Los agentes construyen</h3><p data-i18n="metodo.esquema.3">Tandas acotadas: cada una con su brief, sus pruebas y capturas obligatorias.</p></li>
-          <li class="esquema__paso"><span class="esquema__n" aria-hidden="true">04</span><span class="esquema__quien etiqueta" data-i18n="metodo.esquema.yo">Yo</span><h3 class="esquema__t" data-i18n="metodo.esquema.4.t">Yo verifico</h3><p data-i18n="metodo.esquema.4">Pruebas automáticas y capturas a resolución real; lo que no coincide vuelve al paso 3 con el porqué.</p></li>
-        </ol>
-      </div>
-      <div class="reticula">
-        <div class="metodo__cols">
-          <div class="metodo__col">
-            <span class="metodo__cifra" data-revelar="bloque" aria-hidden="true">1</span>
-            <h3 class="h3" data-revelar data-i18n="metodo.agencia.titulo">Agencia</h3>
-            <p data-revelar data-i18n="metodo.agencia.texto">Decido qué se construye y qué no. Escribo el brief, el flujo y la vara de calidad antes de pedir una línea.</p>
-            <p class="metodo__ejemplo" data-revelar data-i18n="metodo.agencia.ejemplo" data-i18n-html><strong>Fortal:</strong> las reglas de entrenamiento (progresión doble, volumen por tiempo disponible, pesos que de verdad se pueden armar) se escribieron antes de la primera pantalla.</p>
-          </div>
-          <div class="metodo__col">
-            <span class="metodo__cifra" data-revelar="bloque" aria-hidden="true">2</span>
-            <h3 class="h3" data-revelar data-i18n="metodo.juicio.titulo">Juicio</h3>
-            <p data-revelar data-i18n="metodo.juicio.texto">Reviso cada entrega: la acepto, la corrijo o la hago rehacer con el porqué. Elijo entre alternativas y lo documento.</p>
-            <p class="metodo__ejemplo" data-revelar data-i18n="metodo.juicio.ejemplo" data-i18n-html><strong>coro:</strong> descarté rankear quejas por cantidad y elegí medir concentración; veinte temas con cinco quejas no son un defecto, uno con el 47&nbsp;% sí.</p>
-          </div>
-          <div class="metodo__col">
-            <span class="metodo__cifra" data-revelar="bloque" aria-hidden="true">3</span>
-            <h3 class="h3" data-revelar data-i18n="metodo.orquestacion.titulo">Orquestación</h3>
-            <p data-revelar data-i18n="metodo.orquestacion.texto">Encadeno agentes, pruebas y capturas a resolución real. Nada se declara hecho sin verlo renderizado.</p>
-            <p class="metodo__ejemplo" data-revelar data-i18n="metodo.orquestacion.ejemplo" data-i18n-html><strong>Cathedra:</strong> más de 6.000 pruebas automáticas. <strong>Fortal:</strong> 746, y cada fase verificada con capturas a 1206×2622, una por una.</p>
-          </div>
-        </div>
-      </div>
-      <div class="reticula">
-        <div class="metodo__confio">
-          <h3 class="h3" data-revelar data-i18n="metodo.confio.titulo">Cuándo confío y cuándo rehago</h3>
-          <p data-revelar data-i18n="metodo.confio.texto">Confío cuando la prueba pasa y la captura coincide con el brief. Rehago cuando no entiendo el resultado: si no puedo explicarlo, no se publica. Cada caso muestra un ejemplo de las dos cosas.</p>
-        </div>
+      <div class="metodo__confio placa placa--bloque" data-iman>
+        <h3 class="h3" data-revelar data-i18n="metodo.confio.titulo">Cuándo confío y cuándo rehago</h3>
+        <p data-revelar data-i18n="metodo.confio.texto">Confío cuando la prueba pasa y la captura coincide con el brief. Rehago cuando no entiendo el resultado: si no puedo explicarlo, no se publica.</p>
       </div>
     </div>
   </section>
 
   <section class="seccion" id="sobre" aria-labelledby="sobre-titulo">
+    <div class="plano" aria-hidden="true"><span class="plano__haz"></span><span class="plano__numeral">05</span></div>
     <div class="contenedor">
-      <div class="folio">
-        <span class="folio__cifra cifra" data-revelar="bloque" data-revelar-rango="100 88" aria-hidden="true">05</span>
-        <span class="folio__etiqueta etiqueta" data-i18n="folio.sobre">Sobre mí</span>
+      <p class="folio">
+        <span class="folio__cifra cifra" data-revelar="bloque" aria-hidden="true">05</span>
+        <span class="folio__etiqueta etiqueta" data-revelar="bloque" data-i18n="folio.sobre">Sobre mí</span>
         <span class="folio__filete" aria-hidden="true"></span>
-      </div>
-      <div class="reticula">
+      </p>
+      <div class="sobre">
         <div class="sobre__texto pila">
-          <h2 class="h-seccion" id="sobre-titulo" data-revelar data-i18n="sobre.titulo">Quilmes, Buenos Aires. Remoto.</h2>
-          <p data-revelar data-i18n="sobre.texto">Ramiro Bales. Curso el primer año de la Licenciatura en IA y Ciencia de Datos en UADE y construyo productos propios desde la idea hasta la publicación. Español nativo, inglés fluido. Busco trabajo remoto como AI Product Builder, en automatización con IA o como tecnólogo creativo. Uso lo que construyo antes que nadie.</p>
+          <h2 class="h-seccion" id="sobre-titulo" data-revelar data-i18n="sobre.titulo">Uso lo que construyo antes que nadie.</h2>
+          <p data-revelar data-i18n="sobre.texto">Ramiro Bales. Estudio la Licenciatura en IA y Ciencia de Datos en UADE y construyo productos propios desde la idea hasta la publicación. Español nativo, inglés B2 (Duolingo English Test). Busco trabajo remoto como AI Product Builder, en automatización con IA o como tecnólogo creativo.</p>
           <h3 class="etiqueta" data-revelar="bloque" data-i18n="sobre.busco.titulo">Qué busco</h3>
           <ul class="busco" role="list">
-            <li data-revelar data-i18n="sobre.busco.1">Trabajo remoto, solo o en equipo, en inglés o español.</li>
-            <li data-revelar data-i18n="sobre.busco.2">Producto con IA: definir, diseñar y verificar lo que se construye.</li>
-            <li data-revelar data-i18n="sobre.busco.3">Automatización con IA de procesos y tareas reales.</li>
-            <li data-revelar data-i18n="sobre.busco.4">Tecnología creativa: 3D en tiempo real, web y experiencias.</li>
+            <li data-revelar="bloque" data-i18n="sobre.busco.1">Trabajo remoto, solo o en equipo, en inglés o español.</li>
+            <li data-revelar="bloque" data-i18n="sobre.busco.2">Producto con IA: definir, diseñar y verificar lo que se construye.</li>
+            <li data-revelar="bloque" data-i18n="sobre.busco.3">Automatización con IA de procesos y tareas reales.</li>
+            <li data-revelar="bloque" data-i18n="sobre.busco.4">Tecnología creativa: 3D en tiempo real, web y experiencias.</li>
           </ul>
         </div>
         <div class="sobre__lado">
-          <div class="sobre__sello mascara">
-            <picture>
-              <source type="image/avif" srcset="assets/img/sobre/cilindro-es-400.avif 400w, assets/img/sobre/cilindro-es-800.avif 800w" sizes="(min-width: 1024px) 24vw, 60vw" data-i18n-attr="srcset=sobre.sello.srcset.avif">
-              <img src="assets/img/sobre/cilindro-es-800.webp" srcset="assets/img/sobre/cilindro-es-400.webp 400w, assets/img/sobre/cilindro-es-800.webp 800w" sizes="(min-width: 1024px) 24vw, 60vw" width="800" height="800" loading="lazy" decoding="async" alt="Sello de arcilla con el texto «verificado · 2026» en bajorrelieve" data-i18n-attr="alt=sobre.sello.alt;srcset=sobre.sello.srcset.webp">
-            </picture>
-          </div>
-          <p class="terciario etiqueta" data-revelar="bloque" data-i18n="sobre.actualizado">Última actualización: noviembre de 2026</p>
+          <dl class="ficha placa placa--bloque" data-revelar-hijos>
+            <div><dt class="etiqueta" data-i18n="sobre.ficha.lugar">Lugar</dt><dd data-i18n="sobre.ficha.lugar.v">Quilmes, Buenos Aires</dd></div>
+            <div><dt class="etiqueta" data-i18n="sobre.ficha.estudios">Estudios</dt><dd data-i18n="sobre.ficha.estudios.v">Licenciatura en IA y Ciencia de Datos, UADE · primer año</dd></div>
+            <div><dt class="etiqueta" data-i18n="sobre.ficha.idiomas">Idiomas</dt><dd data-i18n="sobre.ficha.idiomas.v">Español nativo, inglés B2 (Duolingo English Test)</dd></div>
+            <div><dt class="etiqueta" data-i18n="sobre.ficha.modalidad">Modalidad</dt><dd data-i18n="sobre.ficha.modalidad.v">Remoto</dd></div>
+            <div><dt class="etiqueta" data-i18n="sobre.ficha.herramienta">Herramienta principal</dt><dd data-i18n="sobre.ficha.herramienta.v">Desarrollo asistido por IA (Claude Code)</dd></div>
+          </dl>
+          <p class="etiqueta sobre__actualizado" data-revelar="bloque" data-i18n="sobre.actualizado">Última actualización: noviembre de 2026</p>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="seccion" id="contacto" aria-labelledby="contacto-titulo">
+  <section class="seccion seccion--tinta seccion--contacto" id="contacto" aria-labelledby="contacto-titulo">
+    <div class="plano plano--ambiente" aria-hidden="true"><img class="plano__ambiente" src="assets/mundo/contacto/contacto-a.webp" width="1280" height="720" loading="lazy" decoding="async" alt=""></div>
     <div class="contenedor">
-      <div class="folio">
-        <span class="folio__cifra cifra" data-revelar="bloque" data-revelar-rango="100 88" aria-hidden="true">06</span>
-        <span class="folio__etiqueta etiqueta" data-i18n="folio.contacto">Contacto</span>
+      <p class="folio">
+        <span class="folio__cifra cifra" data-revelar="bloque" aria-hidden="true">06</span>
+        <span class="folio__etiqueta etiqueta" data-revelar="bloque" data-i18n="folio.contacto">Contacto</span>
         <span class="folio__filete" aria-hidden="true"></span>
-      </div>
-      <div class="reticula">
-        <div class="cabecera-seccion">
-          <h2 class="h-seccion" id="contacto-titulo" data-revelar data-i18n="contacto.titulo">Hablemos de lo que falta construir.</h2>
-          <p class="secundario cuerpo" data-revelar data-i18n="contacto.sub">Respondo en el día.</p>
-          <div class="contacto__acciones" data-revelar="bloque">
-            <a class="boton boton--primario" href="mailto:ramirobales@gmail.com" data-i18n="contacto.mail">Escribir a ramirobales@gmail.com</a>
-            <a class="boton boton--secundario" href="https://www.linkedin.com/in/ramiro-bales" rel="me noopener" target="_blank" aria-label="LinkedIn de Ramiro Bales (abre en pestaña nueva)" data-i18n-attr="aria-label=heroe.linkedin.aria" data-i18n="contacto.linkedin">LinkedIn</a>
-            <a class="boton boton--secundario" href="cv/ramiro-bales-cv-es.pdf" data-cv data-i18n="contacto.cv">Descargar CV (PDF)</a>
-          </div>
+      </p>
+      <div class="contacto">
+        <h2 class="h-seccion contacto__titulo" id="contacto-titulo" data-revelar data-i18n="contacto.titulo">Hablemos de lo que falta construir.</h2>
+        <p class="contacto__sub" data-revelar data-i18n="contacto.sub">Respondo en el día.</p>
+        <div class="contacto__acciones" data-revelar-hijos>
+          <a class="boton boton--primario boton--grande" href="mailto:ramirobales@gmail.com" data-i18n="contacto.mail">Escribir a ramirobales@gmail.com</a>
+          <a class="boton boton--secundario boton--grande" href="https://www.linkedin.com/in/ramiro-bales" rel="me noopener noreferrer" target="_blank" aria-label="LinkedIn de Ramiro Bales (abre en pestaña nueva)" data-i18n-attr="aria-label=heroe.linkedin.aria" data-i18n="contacto.linkedin">LinkedIn</a>
+          <a class="boton boton--secundario boton--grande" href="cv/ramiro-bales-cv-es.pdf" data-cv data-i18n="contacto.cv">Descargar CV (PDF)</a>
         </div>
       </div>
     </div>
   </section>
 </main>
 
-<footer class="pie seccion--tinta">
-  <div class="contenedor pie__in">
-    <div class="pila--chica">
-      <p class="pie__enlaces">
-        <a href="creditos.html" data-i18n="pie.creditos">Créditos: texturas, modelos 3D y entornos de terceros</a>
-        <a href="legal.html" data-i18n="pie.legal">Aviso legal y privacidad</a>
-      </p>
-      <p data-i18n="pie.hecho">Sitio estático hecho con desarrollo asistido por IA y verificado a mano. Sin cookies ni analítica.</p>
+<footer class="pie">
+  <div class="contenedor">
+    <div class="pie__in placa placa--bloque">
+      <div class="pila--chica">
+        <p class="pie__enlaces">
+          <a href="creditos.html" data-i18n="pie.creditos">Créditos: texturas, modelos 3D y entornos de terceros</a>
+          <a href="legal.html" data-i18n="pie.legal">Aviso legal y privacidad</a>
+        </p>
+        <p class="pie__colofon"><span data-i18n="pie.colofon">La sala de la portada se modeló y renderizó en Blender, y la compone en vivo un motor WebGL2 propio, sin bibliotecas. Está hecha con el mismo método que describe esta página: yo defino y verifico, los agentes construyen.</span> <a href="creditos.html" data-i18n="pie.colofon.enlace">Detalle en créditos →</a></p>
+        <p class="pie__hecho" data-i18n="pie.hecho">Sitio estático hecho con desarrollo asistido por IA y verificado a mano. Sin cookies ni analítica.</p>
+      </div>
+      <div class="pie__lado">
+        <div class="nav__herramientas">
+          <div class="conmutador conmutador--idioma" role="group" aria-label="Idioma" data-i18n-attr="aria-label=nav.idioma.aria">
+            <button type="button" data-idioma="es" aria-pressed="true" lang="es">ES</button>
+            <button type="button" data-idioma="en" aria-pressed="false" lang="en">EN</button>
+          </div>
+          <button type="button" class="tema" aria-pressed="false" aria-label="Cambiar entre tema claro y oscuro" data-i18n-attr="aria-label=tema.aria">
+            <svg class="tema__luna" viewBox="0 0 20 20" aria-hidden="true"><path d="M16.4 12.2A7 7 0 0 1 7.8 3.6a7.2 7.2 0 1 0 8.6 8.6Z"/></svg>
+            <svg class="tema__sol" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="3.6"/><path d="M10 1.8v2.2M10 16v2.2M1.8 10H4M16 10h2.2M4.2 4.2l1.6 1.6M14.2 14.2l1.6 1.6M4.2 15.8l1.6-1.6M14.2 5.8l1.6-1.6"/></svg>
+            <span class="tema__oscuro" data-i18n="tema.oscuro">Oscuro</span>
+            <span class="tema__claro" data-i18n="tema.claro">Claro</span>
+          </button>
+        </div>
+        <p class="pie__copy" data-i18n="pie.copy">© 2026 Ramiro Bales</p>
+      </div>
     </div>
-    <p class="pie__copy" data-i18n="pie.copy">© 2026 Ramiro Bales</p>
   </div>
 </footer>
 
-<script src="lib/gsap.min.js" defer></script>
-<script src="lib/ScrollTrigger.min.js" defer></script>
-<script src="lib/Flip.min.js" defer></script>
+<script type="module" async src="js/mundo/index.js"></script>
 <script type="module" src="js/comun.js"></script>
 </body>
 </html>

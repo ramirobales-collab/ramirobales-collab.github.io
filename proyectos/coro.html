@@ -2,8 +2,10 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-qjuWUyWKqt0Fss48UG4bCZhHldwUiLUb4aBs52h7UYk='; style-src 'self'; img-src 'self'; font-src 'self'; connect-src 'self'; media-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script>try{var t=new URLSearchParams(location.search).get('tema')||localStorage.getItem('tema');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t;}catch(e){}</script>
+<script>var d=document.documentElement;if(self!==top){d.classList.add('enmarcado');try{top.location.replace(location.href)}catch(e){}}try{var t=new URLSearchParams(location.search).get('tema')||localStorage.getItem('tema');if(t==='light'||t==='dark')d.dataset.theme=t;}catch(e){}d.classList.add('js');if(!/[?&](quieto=1|ir=)/.test(location.search))d.classList.add('mov');setTimeout(function(){if(!d.dataset.mov)d.classList.remove('js','mov')},4000);(function(){var r=matchMedia('(prefers-reduced-motion: reduce)'),h=[];function n(el,v){if(el){el.style.viewTransitionName=v;h.push(el);}}addEventListener('pagereveal',function(e){h.forEach(function(el){el.style.viewTransitionName='';});h=[];var v=e.viewTransition;if(v){if(r.matches){v.ready.catch(function(){});v.skipTransition();}else d.classList.add('vt');}});addEventListener('pageswap',function(e){var v=e.viewTransition;if(!v)return;if(r.matches){v.ready.catch(function(){});v.skipTransition();return;}var a=e.activation,u=a&&a.entry&&a.entry.url?new URL(a.entry.url):null,c=document.querySelector('.caso-cabecera__media'),m=u&&u.pathname.match(/\/proyectos\/(cathedra|fortal|athleteiq|coro)\.html$/);if(m){n(c,'none');n(document.querySelector('[data-vt="'+m[1]+'"]'),'caso-'+m[1]);}else if(!(a&&(a.navigationType==='traverse'||(u&&u.hash==='#trabajo'))))n(c,'none');});})();</script>
 <title data-i18n="caso.coro.titulo">coro — caso de estudio · Ramiro Bales</title>
 <meta name="description" data-i18n-attr="content=caso.coro.descripcion" content="coro lee las reseñas públicas de un producto, agrupa el defecto que se repite y encuentra qué competidor ya lo resolvió. Prototipo con informe HTML.">
 <meta name="color-scheme" content="light dark">
@@ -13,14 +15,14 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="coro — caso de estudio · Ramiro Bales">
 <meta property="og:description" content="coro lee las reseñas públicas de un producto, agrupa el defecto que se repite y encuentra qué competidor ya lo resolvió. Prototipo con informe HTML.">
-<meta property="og:image" content="https://ramirobales-collab.github.io/assets/og-1200x630.jpg">
+<meta property="og:image" content="https://ramirobales-collab.github.io/assets/mundo/og-1200x630.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:url" content="https://ramirobales-collab.github.io/proyectos/coro.html">
 <meta property="og:locale" content="es_AR">
 <meta property="og:locale:alternate" content="en_US">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://ramirobales-collab.github.io/assets/og-1200x630.jpg">
+<meta name="twitter:image" content="https://ramirobales-collab.github.io/assets/mundo/og-1200x630.jpg">
 <link rel="canonical" href="https://ramirobales-collab.github.io/proyectos/coro.html">
 <link rel="alternate" hreflang="es" href="https://ramirobales-collab.github.io/proyectos/coro.html?idioma=es">
 <link rel="alternate" hreflang="en" href="https://ramirobales-collab.github.io/proyectos/coro.html?idioma=en">
@@ -31,18 +33,27 @@
 <link rel="manifest" href="../manifest.webmanifest">
 <link rel="preload" href="../assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../assets/fonts/playfair-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="modulepreload" href="../js/mundo/pagina.js">
+<link rel="modulepreload" href="../js/mundo/motor.js">
+<link rel="modulepreload" href="../js/mundo/fondo.js">
+<link rel="modulepreload" href="../js/comun.js">
+<link rel="modulepreload" href="../js/movimiento.js">
+<link rel="preload" as="image" href="../assets/mundo/casos/coro-dispositivo.webp" fetchpriority="high">
+<link rel="preload" as="image" href="../assets/mundo/casos/coro-fondo.webp">
 <link rel="stylesheet" href="../css/variables.css">
 <link rel="stylesheet" href="../css/base.css">
 <link rel="stylesheet" href="../css/componentes.css">
 <link rel="stylesheet" href="../css/caso.css">
 </head>
 <body>
+<a class="enmarcado-aviso" href="https://ramirobales-collab.github.io/proyectos/coro.html" target="_top" rel="noopener noreferrer" data-i18n="enmarcado.aviso">Esta página está dentro de otro sitio. Abrila en su dirección real: ramirobales-collab.github.io</a>
 <a class="saltar" href="#contenido" data-i18n="nav.saltar">Saltar al contenido</a>
-<nav class="nav" aria-label="Principal">
+<nav class="nav nav--placa" aria-label="Principal">
   <div class="contenedor nav__in">
     <a class="nav__marca" href="../index.html" data-i18n="nav.marca">Ramiro Bales</a>
     <div class="nav__enlaces">
       <a href="../index.html#trabajo" data-i18n="nav.trabajo">Trabajo</a>
+      <a href="../index.html#saber" data-i18n="nav.saber">Qué sé hacer</a>
       <a href="../index.html#marcas" data-i18n="nav.marcas">Para marcas</a>
       <a href="../index.html#metodo" data-i18n="nav.metodo">Método</a>
       <a href="../index.html#sobre" data-i18n="nav.sobre">Sobre mí</a>
@@ -70,6 +81,7 @@
   <div class="nav__panel" id="panel-menu" data-abierto="false">
     <div class="nav__enlaces">
       <a href="../index.html#trabajo" data-i18n="nav.trabajo">Trabajo</a>
+      <a href="../index.html#saber" data-i18n="nav.saber">Qué sé hacer</a>
       <a href="../index.html#marcas" data-i18n="nav.marcas">Para marcas</a>
       <a href="../index.html#metodo" data-i18n="nav.metodo">Método</a>
       <a href="../index.html#sobre" data-i18n="nav.sobre">Sobre mí</a>
@@ -90,32 +102,27 @@
     </div>
   </div>
 </nav>
+<canvas class="mundo" aria-hidden="true"></canvas>
 <main class="caso-pagina" id="contenido">
-  <div class="contenedor">
-  <div class="folio">
-    <span class="folio__cifra cifra" aria-hidden="true">04</span>
-    <span class="folio__etiqueta etiqueta" data-i18n="caso.folio">Caso de estudio</span>
-    <span class="folio__filete" aria-hidden="true"></span>
-  </div>
-  <header class="reticula caso-cabecera" id="cabecera">
-    <div class="caso-cabecera__texto">
-      <p class="etiqueta caso-cabecera__sello"><span class="sello sello--proceso" data-i18n="trabajo.coro.sello">Prototipo</span></p>
-      <h1 class="display caso-cabecera__titulo">coro</h1>
-      <p class="sub-heroe caso-cabecera__linea" data-i18n="caso.coro.gancho">De miles de reseñas a un defecto concreto y a quién ya lo resolvió.</p>
-      <dl class="caso-resumen">
+  <header class="caso-cabecera" id="cabecera" data-caso="coro">
+    <div class="contenedor caso-cabecera__in">
+      <p class="folio caso-cabecera__folio"><span class="folio__cifra cifra" aria-hidden="true">04</span><span class="folio__etiqueta etiqueta" data-revelar="bloque" data-i18n="caso.folio">Caso de estudio</span><span class="folio__filete" aria-hidden="true"></span></p>
+      <div class="caso-cabecera__texto">
+        <p class="caso-cabecera__sello" data-revelar="bloque"><span class="sello sello--proceso" data-i18n="trabajo.coro.sello">Prototipo</span></p>
+        <h1 class="display caso-cabecera__titulo" data-revelar>coro</h1>
+        <p class="sub-heroe caso-cabecera__linea" data-revelar data-i18n="caso.coro.gancho">De cientos de reseñas a un defecto concreto y a quién ya lo resolvió.</p>
+        
+      </div>
+      <div class="caso-cabecera__media" data-paralaje data-iman><img class="caso__capa caso__capa--fondo" src="../assets/mundo/casos/coro-fondo.webp" width="1600" height="1000" fetchpriority="high" decoding="async" alt=""><img class="caso__capa caso__capa--disp" src="../assets/mundo/casos/coro-dispositivo.webp" width="1600" height="1000" fetchpriority="high" decoding="async" alt="Render: el reporte de coro en una tableta apoyada sobre un zócalo de piedra oscura" data-i18n-attr="alt=trabajo.coro.foto"><img class="caso__capa caso__capa--disp caso__brillo" src="../assets/mundo/casos/coro-dispositivo.webp" width="1600" height="1000" decoding="async" alt=""><span class="caso__luz" aria-hidden="true"></span></div>
+      <dl class="caso-resumen placa placa--bloque" data-revelar-hijos>
         <div><dt class="etiqueta" data-i18n="caso.resumen.que">Qué es</dt><dd data-i18n="caso.coro.resumen.1">Herramienta que lee reseñas públicas de un producto, agrupa el defecto que se repite y busca qué competidor ya lo resolvió.</dd></div>
         <div><dt class="etiqueta" data-i18n="caso.resumen.para">Para quién</dt><dd data-i18n="caso.coro.resumen.2">Quien compra, vende o fabrica: cuatro perfiles leen el mismo informe con otra pregunta.</dd></div>
         <div><dt class="etiqueta" data-i18n="caso.resumen.estado">Estado</dt><dd data-i18n="caso.coro.resumen.3">Prototipo de línea de comandos que genera un informe HTML por producto.</dd></div>
       </dl>
     </div>
-    <div class="caso-cabecera__media mascara" style="view-transition-name: caso-coro; aspect-ratio: 1920 / 1080">
-<picture>
-  <source type="image/avif" srcset="../assets/img/coro/reporte-veredicto-640.avif 640w, ../assets/img/coro/reporte-veredicto-1280.avif 1280w, ../assets/img/coro/reporte-veredicto-1920.avif 1920w" sizes="(min-width: 1600px) 1400px, (min-width: 1024px) 58vw, 100vw">
-  <img src="../assets/img/coro/reporte-veredicto-1280.webp" srcset="../assets/img/coro/reporte-veredicto-640.webp 640w, ../assets/img/coro/reporte-veredicto-1280.webp 1280w, ../assets/img/coro/reporte-veredicto-1920.webp 1920w" sizes="(min-width: 1600px) 1400px, (min-width: 1024px) 58vw, 100vw" width="1920" height="1080" fetchpriority="high" alt="Informe de coro: cabecera, veredicto y cuatro métricas del producto de prueba" data-i18n-attr="alt=caso.coro.cabecera.alt">
-</picture>
-    </div>
   </header>
-  <dl class="reticula caso-ficha" aria-label="Ficha del proyecto" data-i18n-attr="aria-label=caso.meta.aria">
+  <div class="contenedor">
+  <dl class="reticula caso-ficha placa placa--bloque" data-revelar-hijos aria-label="Ficha del proyecto" data-i18n-attr="aria-label=caso.meta.aria">
     <div class="caso-ficha__item"><dt class="etiqueta" data-i18n="caso.meta.proyecto">Proyecto</dt><dd data-i18n="caso.meta.propio">Propio, sin cliente</dd></div>
     <div class="caso-ficha__item caso-ficha__item--ancho"><dt class="etiqueta" data-i18n="caso.meta.rol">Mi rol</dt><dd data-i18n="caso.coro.rol">Definí el producto, los perfiles, la métrica que decide, la regla sobre las soluciones y el formato del informe; dirigí el desarrollo y lo validé.</dd></div>
     <div class="caso-ficha__item caso-ficha__item--ancho"><dt class="etiqueta" data-i18n="caso.meta.herramientas">Herramientas</dt><dd data-i18n="caso.coro.herramientas">Desarrollo asistido por IA · Node.js · módulos ES · informe HTML estático</dd></div>
@@ -135,41 +142,41 @@
       </ol>
     </nav>
     <div class="caso-contenido">
-      <section class="caso-parte" id="problema" aria-labelledby="t-problema">
+      <section class="caso-parte" id="problema" data-n="02" data-visto aria-labelledby="t-problema">
         <span class="etiqueta caso-parte__n" aria-hidden="true">02</span>
         <h2 class="caso-parte__titulo" id="t-problema" data-revelar data-i18n="caso.parte.problema">Problema</h2>
         <p data-revelar data-i18n="caso.coro.problema.1">Mil reseñas negativas repartidas en veinte temas son ruido; cien diciendo lo mismo es un defecto arreglable.</p>
         <p data-revelar data-i18n="caso.coro.problema.2">Quien compra, vende o fabrica no tiene tiempo de leerlas ni sabe si otro ya lo resolvió.</p>
       </section>
-      <section class="caso-parte" id="hace" aria-labelledby="t-hace">
+      <section class="caso-parte" id="hace" data-n="03" data-visto aria-labelledby="t-hace">
         <span class="etiqueta caso-parte__n" aria-hidden="true">03</span>
         <h2 class="caso-parte__titulo" id="t-hace" data-revelar data-i18n="caso.parte.hace">Qué hace</h2>
-        <ul class="capacidades capacidades--6" role="list">
-          <li class="capacidad"><span class="capacidad__icono"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M10.5 4a6.5 6.5 0 1 0 0 13a6.5 6.5 0 1 0 0-13zM15.5 15.5L20.5 20.5"/></svg></span><div><h3 class="capacidad__t" data-i18n="caso.coro.hace.1.t">Lee las reseñas</h3><p data-i18n="caso.coro.hace.1">Reseñas públicas de un producto, de a miles.</p></div></li>
-          <li class="capacidad"><span class="capacidad__icono"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM15 15.5h3M16.5 14v3"/></svg></span><div><h3 class="capacidad__t" data-i18n="caso.coro.hace.2.t">Mide concentración</h3><p data-i18n="caso.coro.hace.2">Agrupa temas y calcula qué parte de las negativas señala lo mismo, por severidad y con recargo si crece.</p></div></li>
-          <li class="capacidad"><span class="capacidad__icono"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 7h5v5c0 3-1.6 4.8-4 5.5M14 7h5v5c0 3-1.6 4.8-4 5.5"/></svg></span><div><h3 class="capacidad__t" data-i18n="caso.coro.hace.3.t">Citas textuales</h3><p data-i18n="caso.coro.hace.3">Cada tema trae citas con fecha y estrellas.</p></div></li>
-          <li class="capacidad"><span class="capacidad__icono"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h13M12.5 6.5L18 12l-5.5 5.5M20.5 5v14"/></svg></span><div><h3 class="capacidad__t" data-i18n="caso.coro.hace.4.t">Causa e impacto</h3><p data-i18n="caso.coro.hace.4">Hipótesis de causa raíz e impacto estimado por tema.</p></div></li>
-          <li class="capacidad"><span class="capacidad__icono"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3a9 9 0 1 0 0 18a9 9 0 1 0 0-18zM8 12.5l2.8 2.8L16.5 9"/></svg></span><div><h3 class="capacidad__t" data-i18n="caso.coro.hace.5.t">Quién ya lo resolvió</h3><p data-i18n="caso.coro.hace.5">Soluciones con fuente; si no hay evidencia, el informe lo dice.</p></div></li>
-          <li class="capacidad"><span class="capacidad__icono"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 6a3 3 0 1 0 0 6a3 3 0 1 0 0-6zM3.5 20c0-3.2 2.5-5.5 5.5-5.5s5.5 2.3 5.5 5.5M16 5.5a3 3 0 0 1 0 6M17.5 14.8c2 .6 3.2 2.5 3.2 5.2"/></svg></span><div><h3 class="capacidad__t" data-i18n="caso.coro.hace.6.t">Cuatro lecturas</h3><p data-i18n="caso.coro.hace.6">Consumidor, emprendedor, marca que compra a un tercero y marca que fabrica.</p></div></li>
+        <ul class="capacidades capacidades--6" role="list" data-revelar-hijos>
+          <li class="capacidad placa placa--viva"><span class="capacidad__icono"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M10.5 4a6.5 6.5 0 1 0 0 13a6.5 6.5 0 1 0 0-13zM15.5 15.5L20.5 20.5"/></svg></span><div><h3 class="capacidad__t" data-i18n="caso.coro.hace.1.t">Lee las reseñas</h3><p data-i18n="caso.coro.hace.1">Reseñas públicas de un producto: 400 en la corrida real más grande y 1.200 en una prueba de carga.</p></div></li>
+          <li class="capacidad placa placa--viva"><span class="capacidad__icono"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM15 15.5h3M16.5 14v3"/></svg></span><div><h3 class="capacidad__t" data-i18n="caso.coro.hace.2.t">Mide concentración</h3><p data-i18n="caso.coro.hace.2">Agrupa temas y calcula qué parte de las negativas señala lo mismo, por severidad y con recargo si crece.</p></div></li>
+          <li class="capacidad placa placa--viva"><span class="capacidad__icono"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 7h5v5c0 3-1.6 4.8-4 5.5M14 7h5v5c0 3-1.6 4.8-4 5.5"/></svg></span><div><h3 class="capacidad__t" data-i18n="caso.coro.hace.3.t">Citas textuales</h3><p data-i18n="caso.coro.hace.3">Cada tema trae citas con fecha y estrellas.</p></div></li>
+          <li class="capacidad placa placa--viva"><span class="capacidad__icono"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h13M12.5 6.5L18 12l-5.5 5.5M20.5 5v14"/></svg></span><div><h3 class="capacidad__t" data-i18n="caso.coro.hace.4.t">Causa e impacto</h3><p data-i18n="caso.coro.hace.4">Hipótesis de causa raíz e impacto estimado por tema.</p></div></li>
+          <li class="capacidad placa placa--viva"><span class="capacidad__icono"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3a9 9 0 1 0 0 18a9 9 0 1 0 0-18zM8 12.5l2.8 2.8L16.5 9"/></svg></span><div><h3 class="capacidad__t" data-i18n="caso.coro.hace.5.t">Quién ya lo resolvió</h3><p data-i18n="caso.coro.hace.5">Soluciones con fuente; si no hay evidencia, el informe lo dice.</p></div></li>
+          <li class="capacidad placa placa--viva"><span class="capacidad__icono"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 6a3 3 0 1 0 0 6a3 3 0 1 0 0-6zM3.5 20c0-3.2 2.5-5.5 5.5-5.5s5.5 2.3 5.5 5.5M16 5.5a3 3 0 0 1 0 6M17.5 14.8c2 .6 3.2 2.5 3.2 5.2"/></svg></span><div><h3 class="capacidad__t" data-i18n="caso.coro.hace.6.t">Cuatro lecturas</h3><p data-i18n="caso.coro.hace.6">Consumidor, emprendedor, marca que compra a un tercero y marca que fabrica.</p></div></li>
         </ul>
       </section>
-      <section class="caso-parte" id="decisiones" aria-labelledby="t-decisiones">
+      <section class="caso-parte" id="decisiones" data-n="04" data-visto aria-labelledby="t-decisiones">
         <span class="etiqueta caso-parte__n" aria-hidden="true">04</span>
         <h2 class="caso-parte__titulo" id="t-decisiones" data-revelar data-i18n="caso.parte.decisiones">Decisiones</h2>
         <div class="caso-decisiones">
-          <article class="caso-decision hundida">
+          <article class="caso-decision placa placa--bloque" data-iman>
             <span class="caso-decision__n cifra" aria-hidden="true">01</span>
             <div class="caso-decision__vi"><span class="caso-decision__etiqueta etiqueta" data-i18n="caso.vi">Lo que vi</span><p data-revelar data-i18n="caso.coro.decision.1.vi">Veinte temas con cinco quejas no son un defecto; uno con el 47 % sí.</p></div>
             <div class="caso-decision__elegi-bloque"><span class="caso-decision__etiqueta etiqueta" data-i18n="caso.elegi">Decidí</span><h3 class="caso-decision__elegi" data-revelar data-i18n="caso.coro.decision.1.elegi">Medir concentración: qué parte de las negativas señala lo mismo.</h3></div>
             <div class="caso-decision__descarte-bloque"><span class="caso-decision__etiqueta etiqueta" data-i18n="caso.descarte">Descarté</span><p class="tachado caso-decision__descarte" data-revelar data-i18n="caso.coro.decision.1.descarte">Rankear por cantidad de quejas.</p><p class="caso-decision__porque"><span class="etiqueta" data-i18n="caso.porque">Porque</span> <span data-i18n="caso.coro.decision.1.porque">La cantidad premia al tema más charlado, no al defecto que se repite.</span></p></div>
           </article>
-          <article class="caso-decision hundida">
+          <article class="caso-decision placa placa--bloque" data-iman>
             <span class="caso-decision__n cifra" aria-hidden="true">02</span>
             <div class="caso-decision__vi"><span class="caso-decision__etiqueta etiqueta" data-i18n="caso.vi">Lo que vi</span><p data-revelar data-i18n="caso.coro.decision.2.vi">Una solución inventada se lee con la misma seguridad que una real.</p></div>
             <div class="caso-decision__elegi-bloque"><span class="caso-decision__etiqueta etiqueta" data-i18n="caso.elegi">Decidí</span><h3 class="caso-decision__elegi" data-revelar data-i18n="caso.coro.decision.2.elegi">Que las soluciones se busquen y se citen con fuente, y que el informe diga cuando no hay evidencia.</h3></div>
             <div class="caso-decision__descarte-bloque"><span class="caso-decision__etiqueta etiqueta" data-i18n="caso.descarte">Descarté</span><p class="tachado caso-decision__descarte" data-revelar data-i18n="caso.coro.decision.2.descarte">Que el modelo proponga soluciones.</p><p class="caso-decision__porque"><span class="etiqueta" data-i18n="caso.porque">Porque</span> <span data-i18n="caso.coro.decision.2.porque">Un «no se encontró» vale más que una solución inventada.</span></p></div>
           </article>
-          <article class="caso-decision hundida">
+          <article class="caso-decision placa placa--bloque" data-iman>
             <span class="caso-decision__n cifra" aria-hidden="true">03</span>
             <div class="caso-decision__vi"><span class="caso-decision__etiqueta etiqueta" data-i18n="caso.vi">Lo que vi</span><p data-revelar data-i18n="caso.coro.decision.3.vi">La misma queja pide cosas distintas a quien compra y a quien fabrica.</p></div>
             <div class="caso-decision__elegi-bloque"><span class="caso-decision__etiqueta etiqueta" data-i18n="caso.elegi">Decidí</span><h3 class="caso-decision__elegi" data-revelar data-i18n="caso.coro.decision.3.elegi">Un informe con cuatro lecturas: consumidor, emprendedor, marca que compra a un tercero y marca que fabrica.</h3></div>
@@ -177,37 +184,45 @@
           </article>
         </div>
       </section>
-      <section class="caso-parte" id="agentes" aria-labelledby="t-agentes">
+      <section class="caso-parte" id="agentes" data-n="05" data-visto aria-labelledby="t-agentes">
         <span class="etiqueta caso-parte__n" aria-hidden="true">05</span>
         <h2 class="caso-parte__titulo" id="t-agentes" data-revelar data-i18n="caso.parte.agentes.titulo">Cómo lo construí con agentes de IA</h2>
-        <ol class="caso-pasos">
+        <ol class="caso-pasos" data-visto>
           <li><div><strong data-revelar="bloque" data-i18n="caso.coro.agentes.1.t">Brief.</strong><p data-revelar data-i18n="caso.coro.agentes.1">Los perfiles y la métrica se definieron antes del código: concentración, por severidad, con recargo si el tema crece.</p></div></li>
           <li><div><strong data-revelar="bloque" data-i18n="caso.coro.agentes.2.t">Un módulo por tanda.</strong><p data-revelar data-i18n="caso.coro.agentes.2">Análisis, calidad, historial, perfiles, soluciones e informe, cada uno con su criterio de aceptación.</p></div></li>
           <li><div><strong data-revelar="bloque" data-i18n="caso.coro.agentes.3.t">Regla de soluciones.</strong><p data-revelar data-i18n="caso.coro.agentes.3">Se buscan y se citan con fuente; si no hay evidencia, el informe lo dice.</p></div></li>
-          <li><div><strong data-revelar="bloque" data-i18n="caso.coro.agentes.4.t">Verificación.</strong><p data-revelar data-i18n="caso.coro.agentes.4">Validé con un fixture propio de 32 reseñas de un cabezal de ducha con filtro y revisé el informe renderizado.</p></div></li>
+          <li><div><strong data-revelar="bloque" data-i18n="caso.coro.agentes.4.t">Verificación.</strong><p data-revelar data-i18n="caso.coro.agentes.4">Lo corrí sobre 400 reseñas reales en la corrida más grande y sobre 1.200 en una prueba de carga; como caso de prueba usé un juego propio de 32 reseñas de un cabezal de ducha con filtro, y revisé el informe renderizado.</p></div></li>
           <li><div><strong data-revelar="bloque" data-i18n="caso.coro.agentes.5.t">Qué saqué para mostrarlo.</strong><p data-revelar data-i18n="caso.coro.agentes.5">En una copia del informe reemplacé tiendas y proveedores reales por nombres genéricos.</p></div></li>
         </ol>
       </section>
     </div>
-    <section class="caso-resultado seccion--tinta" id="resultado" aria-labelledby="t-resultado">
+    <section class="caso-resultado seccion--tinta placa--bloque" data-visto data-iman id="resultado" aria-labelledby="t-resultado">
       <h2 class="etiqueta" id="t-resultado"><span aria-hidden="true">06 —</span> <span data-i18n="caso.parte.resultado">Resultado</span></h2>
-      <p class="caso-resultado__frase" data-revelar data-i18n="caso.coro.resultado">Prototipo de línea de comandos que genera el informe HTML de un producto.</p>
+      <p class="caso-resultado__frase" data-revelar="lineas" data-i18n="caso.coro.resultado">Prototipo de línea de comandos que genera el informe HTML de un producto.</p>
       <p class="caso-resultado__apoyo" data-revelar data-i18n="caso.coro.apoyo">Corre sobre las reseñas de un producto o sobre un conjunto de prueba local. Sin usuarios ni clientes.</p>
     </section>
     <div class="caso-contenido caso-contenido--sigue">
-      <section class="caso-parte caso-reflexion" aria-labelledby="t-reflexion">
+      <section class="caso-parte caso-reflexion" data-visto aria-labelledby="t-reflexion">
         <h2 class="caso-parte__titulo" id="t-reflexion" data-revelar data-i18n="caso.parte.reflexion">Qué cambiaría y qué falta</h2>
         <p data-revelar data-i18n="caso.coro.reflexion.1">Lo que cambiaría: publicar desde el principio un informe de ejemplo como página; hoy sólo hay capturas.</p>
         <p data-revelar data-i18n="caso.coro.reflexion.2">Lo que falta: corre por línea de comandos, así que una marca todavía no lo puede usar sola.</p>
       </section>
     </div>
-    <section class="caso-galeria caso-parte" id="galeria" aria-labelledby="t-galeria">
+    <section class="caso-galeria caso-parte" id="galeria" data-n="07" data-visto aria-labelledby="t-galeria">
       <span class="etiqueta caso-parte__n" aria-hidden="true">07</span>
       <h2 class="caso-parte__titulo" id="t-galeria" data-revelar data-i18n="caso.parte.galeria">Galería</h2>
-      <p class="caso-galeria__aviso etiqueta" data-revelar="bloque" data-i18n="caso.coro.galeria.aviso">Capturas sobre el fixture de prueba; proveedores y fuentes reemplazados por nombres genéricos.</p>
+      <p class="caso-galeria__aviso etiqueta" data-revelar="bloque" data-i18n="caso.coro.galeria.aviso">Capturas sobre el juego de prueba propio; proveedores y fuentes reemplazados por nombres genéricos.</p>
       <div class="caso-galeria__items">
+        <figure class="caso-galeria__item caso-galeria__item--12 caso-galeria__item--antes">
+          <div class="caso-galeria__media placa mascara">
+<picture>
+  <source type="image/avif" srcset="../assets/img/coro/reporte-veredicto-640.avif 640w, ../assets/img/coro/reporte-veredicto-1280.avif 1280w, ../assets/img/coro/reporte-veredicto-1920.avif 1920w" sizes="(min-width: 1024px) 75vw, 100vw">
+  <img src="../assets/img/coro/reporte-veredicto-1280.webp" srcset="../assets/img/coro/reporte-veredicto-640.webp 640w, ../assets/img/coro/reporte-veredicto-1280.webp 1280w, ../assets/img/coro/reporte-veredicto-1920.webp 1920w" sizes="(min-width: 1024px) 75vw, 100vw" width="1920" height="1080" loading="lazy" decoding="async" alt="Informe de coro: cabecera, veredicto y cuatro métricas del producto de prueba" data-i18n-attr="alt=caso.coro.cabecera.alt">
+</picture>
+          </div>
+        </figure>
         <figure class="caso-galeria__item caso-galeria__item--6">
-          <div class="caso-galeria__media mascara">
+          <div class="caso-galeria__media placa mascara">
 <picture>
   <source type="image/avif" srcset="../assets/img/coro/reporte-veredicto-640.avif 640w, ../assets/img/coro/reporte-veredicto-1280.avif 1280w, ../assets/img/coro/reporte-veredicto-1920.avif 1920w" sizes="(min-width: 1024px) 40vw, 100vw">
   <img src="../assets/img/coro/reporte-veredicto-1280.webp" srcset="../assets/img/coro/reporte-veredicto-640.webp 640w, ../assets/img/coro/reporte-veredicto-1280.webp 1280w, ../assets/img/coro/reporte-veredicto-1920.webp 1920w" sizes="(min-width: 1024px) 40vw, 100vw" width="1920" height="1080" loading="lazy" decoding="async" alt="Cabecera del informe: veredicto y cuatro métricas" data-i18n-attr="alt=caso.coro.galeria.1">
@@ -216,7 +231,7 @@
           <figcaption data-revelar data-i18n="caso.coro.galeria.1.pie">Veredicto: el 47,4 % de las negativas señala lo mismo.</figcaption>
         </figure>
         <figure class="caso-galeria__item caso-galeria__item--6">
-          <div class="caso-galeria__media mascara">
+          <div class="caso-galeria__media placa mascara">
 <picture>
   <source type="image/avif" srcset="../assets/img/coro/reporte-tema-640.avif 640w, ../assets/img/coro/reporte-tema-1280.avif 1280w, ../assets/img/coro/reporte-tema-1920.avif 1920w" sizes="(min-width: 1024px) 40vw, 100vw">
   <img src="../assets/img/coro/reporte-tema-1280.webp" srcset="../assets/img/coro/reporte-tema-640.webp 640w, ../assets/img/coro/reporte-tema-1280.webp 1280w, ../assets/img/coro/reporte-tema-1920.webp 1920w" sizes="(min-width: 1024px) 40vw, 100vw" width="1920" height="1080" loading="lazy" decoding="async" alt="Tema 1 completo: hipótesis de causa raíz, citas, impacto estimado y quién ya lo resolvió" data-i18n-attr="alt=caso.coro.galeria.2">
@@ -227,51 +242,63 @@
       </div>
     </section>
   </div>
-  <nav class="reticula caso-nav" id="otros" aria-label="Otros casos" data-i18n-attr="aria-label=caso.otros.aria">
-    <a class="caso-siguiente papel" href="cathedra.html" aria-label="Caso siguiente: Cathedra" data-i18n-attr="aria-label=caso.coro.siguiente.aria" data-visto>
-      <div class="caso-siguiente__texto">
-        <span class="etiqueta caso-siguiente__etiqueta" data-revelar="bloque" data-i18n="caso.siguiente">Caso siguiente →</span>
-        <span class="caso-siguiente__nombre h-seccion" data-revelar>Cathedra</span>
-        <span class="caso-siguiente__frase secundario" data-revelar data-i18n="trabajo.cathedra.frase">App de estudio para Windows: transcribe clases, arma el plan, genera exámenes y fichas, y cada respuesta cita clase y minuto.</span>
-      </div>
-      <div class="caso-siguiente__marco">
-        <picture>
-          <source type="image/avif" srcset="../assets/img/coro/siguiente-370.avif 370w, ../assets/img/coro/siguiente-740.avif 740w" sizes="(min-width: 1024px) 40vw, 80vw">
-          <img src="../assets/img/coro/siguiente-740.webp" srcset="../assets/img/coro/siguiente-370.webp 370w, ../assets/img/coro/siguiente-740.webp 740w" sizes="(min-width: 1024px) 40vw, 80vw" width="740" height="520" loading="lazy" decoding="async" alt="Marco de porcelana con una captura de Cathedra" data-i18n-attr="alt=caso.coro.siguiente.alt">
-        </picture>
-      </div>
+  <section class="caso-contacto placa placa--bloque" aria-labelledby="t-contacto" data-iman>
+    <div class="caso-contacto__texto">
+      <p class="etiqueta caso-contacto__etiqueta" data-revelar="bloque" data-i18n="folio.contacto">Contacto</p>
+      <h2 class="caso-contacto__titulo" id="t-contacto" data-revelar data-i18n="contacto.titulo">Hablemos de lo que falta construir.</h2>
+      <p class="caso-contacto__sub" data-revelar data-i18n="contacto.sub">Respondo en el día.</p>
+    </div>
+    <div class="caso-contacto__acciones" data-revelar-hijos>
+      <a class="boton boton--primario boton--grande" href="mailto:ramirobales@gmail.com" data-i18n="contacto.mail">Escribir a ramirobales@gmail.com</a>
+      <a class="boton boton--secundario boton--grande" href="../cv/ramiro-bales-cv-es.pdf" data-cv data-i18n="contacto.cv">Descargar CV (PDF)</a>
+      <a class="boton boton--secundario boton--grande" href="https://www.linkedin.com/in/ramiro-bales" rel="me noopener noreferrer" target="_blank" aria-label="LinkedIn de Ramiro Bales (abre en pestaña nueva)" data-i18n-attr="aria-label=heroe.linkedin.aria" data-i18n="contacto.linkedin">LinkedIn</a>
+    </div>
+  </section>
+  <nav class="caso-nav" id="otros" aria-label="Otros casos" data-i18n-attr="aria-label=caso.otros.aria">
+    <p class="folio caso-nav__folio"><span class="folio__etiqueta etiqueta" data-i18n="caso.otros.aria">Otros casos</span><span class="folio__filete" aria-hidden="true"></span></p>
+    <div class="caso-nav__pares">
+    <a class="caso-par caso-par--siguiente caso-puerta" href="cathedra.html">
+      <span class="caso-par__media" data-paralaje data-vt="cathedra"><img class="caso__capa caso__capa--fondo" src="../assets/mundo/casos/cathedra-fondo.webp" srcset="../assets/mundo/casos/cathedra-fondo-480.webp 480w, ../assets/mundo/casos/cathedra-fondo-800.webp 800w, ../assets/mundo/casos/cathedra-fondo.webp 1600w" sizes="100vw" width="1600" height="1000" loading="lazy" decoding="async" data-carga alt=""><img class="caso__capa caso__capa--disp" src="../assets/mundo/casos/cathedra-dispositivo.webp" srcset="../assets/mundo/casos/cathedra-dispositivo-480.webp 480w, ../assets/mundo/casos/cathedra-dispositivo-800.webp 800w, ../assets/mundo/casos/cathedra-dispositivo.webp 1600w" sizes="100vw" width="1600" height="1000" loading="lazy" decoding="async" data-carga alt="Render: Cathedra abierta en un monitor, sobre un zócalo de piedra oscura en la sala negra" data-i18n-attr="alt=trabajo.cathedra.foto"><span class="caso__luz" aria-hidden="true"></span></span>
+      <span class="caso-par__texto"><span class="etiqueta caso-par__etiqueta" data-i18n="caso.siguiente">Caso siguiente →</span><span class="caso-par__nombre" data-revelar="lineas">Cathedra</span><span class="caso-par__frase" data-i18n="trabajo.cathedra.frase">App de estudio para Windows: transcribe clases, arma el plan, genera exámenes y fichas, y cada respuesta cita clase y minuto.</span><span class="sello sello--proceso" data-i18n="trabajo.cathedra.sello">Producto propio · en beta</span></span>
     </a>
-    <p class="caso-nav__fila"><a class="boton boton--texto" href="athleteiq.html" aria-label="Caso anterior: AthleteIQ" data-i18n-attr="aria-label=caso.coro.anterior.aria" data-i18n="caso.coro.anterior.texto">← Caso anterior: AthleteIQ</a> <span class="caso-nav__item"><span aria-hidden="true">·</span> <a class="boton boton--texto" href="../index.html#trabajo" data-i18n="caso.volver">Todos los casos</a></span> <span class="caso-nav__item"><span aria-hidden="true">·</span> <a class="boton boton--texto" href="cathedra.html" aria-label="Caso siguiente: Cathedra" data-i18n-attr="aria-label=caso.coro.siguiente.aria" data-i18n="caso.coro.siguiente.texto">Caso siguiente: Cathedra →</a></span></p>
+    <a class="caso-par caso-par--anterior placa placa--bloque placa--viva" href="athleteiq.html" data-iman>
+      <span class="caso-par__media" data-vt="athleteiq"><img class="caso__capa caso__capa--fondo" src="../assets/mundo/casos/athleteiq-fondo.webp" srcset="../assets/mundo/casos/athleteiq-fondo-480.webp 480w, ../assets/mundo/casos/athleteiq-fondo-800.webp 800w, ../assets/mundo/casos/athleteiq-fondo.webp 1600w" sizes="(min-width: 768px) 240px, 100vw" width="1600" height="1000" loading="lazy" decoding="async" data-carga alt=""><img class="caso__capa caso__capa--disp" src="../assets/mundo/casos/athleteiq-dispositivo.webp" srcset="../assets/mundo/casos/athleteiq-dispositivo-480.webp 480w, ../assets/mundo/casos/athleteiq-dispositivo-800.webp 800w, ../assets/mundo/casos/athleteiq-dispositivo.webp 1600w" sizes="(min-width: 768px) 240px, 100vw" width="1600" height="1000" loading="lazy" decoding="async" data-carga alt="Render: la portada de AthleteIQ en una pantalla apoyada sobre un zócalo de piedra oscura" data-i18n-attr="alt=trabajo.athleteiq.foto"><span class="caso__luz" aria-hidden="true"></span></span>
+      <span class="caso-par__texto"><span class="etiqueta caso-par__etiqueta" data-i18n="caso.anterior">← Caso anterior</span><span class="caso-par__nombre" data-revelar="lineas">AthleteIQ</span><span class="caso-par__frase" data-i18n="trabajo.athleteiq.frase">Asistente de IA para el staff de un equipo: se pregunta por chat y responde con los datos del plantel.</span><span class="sello sello--proceso" data-i18n="trabajo.athleteiq.sello">Demo funcional</span></span>
+    </a>
+    <p class="caso-nav__todos" data-revelar="bloque"><a class="boton boton--secundario" href="../index.html#trabajo" data-i18n="caso.volver">Todos los casos</a></p>
+    </div>
   </nav>
   </div>
 </main>
-<footer class="pie seccion--tinta">
-  <div class="contenedor pie__in">
-    <div class="pila--chica">
-      <p class="pie__enlaces">
-        <a href="../creditos.html" data-i18n="pie.creditos">Créditos: texturas, modelos 3D y entornos de terceros</a>
-        <a href="../legal.html" data-i18n="pie.legal">Aviso legal y privacidad</a>
-      </p>
-      <p data-i18n="pie.hecho">Sitio estático hecho con desarrollo asistido por IA y verificado a mano. Sin cookies ni analítica.</p>
+<footer class="pie">
+  <div class="contenedor">
+    <div class="pie__in placa placa--bloque">
+      <div class="pila--chica">
+        <p class="pie__enlaces">
+          <a href="../creditos.html" data-i18n="pie.creditos">Créditos: texturas, modelos 3D y entornos de terceros</a>
+          <a href="../legal.html" data-i18n="pie.legal">Aviso legal y privacidad</a>
+        </p>
+        <p class="pie__hecho" data-i18n="pie.hecho">Sitio estático hecho con desarrollo asistido por IA y verificado a mano. Sin cookies ni analítica.</p>
+      </div>
+      <div class="pie__lado">
+        <div class="nav__herramientas">
+          <div class="conmutador conmutador--idioma" role="group" aria-label="Idioma" data-i18n-attr="aria-label=nav.idioma.aria">
+            <button type="button" data-idioma="es" aria-pressed="true" lang="es">ES</button>
+            <button type="button" data-idioma="en" aria-pressed="false" lang="en">EN</button>
+          </div>
+          <button type="button" class="tema" aria-pressed="false" aria-label="Cambiar entre tema claro y oscuro" data-i18n-attr="aria-label=tema.aria">
+            <svg class="tema__luna" viewBox="0 0 20 20" aria-hidden="true"><path d="M16.4 12.2A7 7 0 0 1 7.8 3.6a7.2 7.2 0 1 0 8.6 8.6Z"/></svg>
+            <svg class="tema__sol" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="3.6"/><path d="M10 1.8v2.2M10 16v2.2M1.8 10H4M16 10h2.2M4.2 4.2l1.6 1.6M14.2 14.2l1.6 1.6M4.2 15.8l1.6-1.6M14.2 5.8l1.6-1.6"/></svg>
+            <span class="tema__oscuro" data-i18n="tema.oscuro">Oscuro</span>
+            <span class="tema__claro" data-i18n="tema.claro">Claro</span>
+          </button>
+        </div>
+        <p class="pie__copy" data-i18n="pie.copy">© 2026 Ramiro Bales</p>
+      </div>
     </div>
-    <p class="pie__copy" data-i18n="pie.copy">© 2026 Ramiro Bales</p>
   </div>
 </footer>
-<script src="../lib/gsap.min.js" defer></script>
-<script src="../lib/ScrollTrigger.min.js" defer></script>
+<script type="module" src="../js/mundo/pagina.js"></script>
 <script type="module" src="../js/comun.js"></script>
-<script type="module">
-const enlaces = [...document.querySelectorAll('.caso-indice a')];
-const partes = enlaces.map((a) => document.querySelector(a.getAttribute('href'))).filter(Boolean);
-if (partes.length && 'IntersectionObserver' in window) {
-  const io = new IntersectionObserver((es) => {
-    es.forEach((e) => {
-      if (!e.isIntersecting) return;
-      enlaces.forEach((a) => { if (a.getAttribute('href') === '#' + e.target.id) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current'); });
-    });
-  }, { rootMargin: '-30% 0px -55% 0px' });
-  partes.forEach((s) => io.observe(s));
-}
-</script>
 </body>
 </html>

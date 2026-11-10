@@ -1,44 +1,96 @@
+/* Tokens de «la sala negra» (DIRECCION-3 §3 y v3/pagina.md).
+   Oscuro: negro absoluto y capas apenas menos oscuras, luz blanca, un solo acento cereza.
+   Claro: papel marfil, tinta y cereza. Todo en light-dark(): cualquier bloque puede fijar su esquema
+   con color-scheme (el héroe y la barra sobre la sala son oscuros en los dos temas). */
+@property --luz { syntax: "<number>"; inherits: true; initial-value: 0; }
+
 :root {
   color-scheme: light dark;
 
-  --fondo: light-dark(oklch(95% 0.012 85), oklch(7% 0 0));
-  --papel: light-dark(oklch(98% 0.008 85), oklch(11% 0.004 80));
-  --hundida: light-dark(oklch(91.5% 0.018 80), oklch(15% 0.008 80));
-  --tinta-bloque: light-dark(oklch(19% 0.008 80), oklch(19% 0.01 80));
-  --borde: light-dark(oklch(58% 0.03 80), oklch(49% 0.02 80));
-  --filete: light-dark(oklch(81% 0.02 80), oklch(30% 0.01 80));
-  --texto: light-dark(oklch(16% 0.012 80), oklch(92.5% 0.015 85));
-  --texto-2: light-dark(oklch(39% 0.015 80), oklch(71% 0.02 80));
-  --texto-3: light-dark(oklch(49% 0.018 80), oklch(58% 0.02 80));
-  --acento-display: light-dark(oklch(55% 0.21 29), oklch(66% 0.19 29));
-  --acento-texto: light-dark(oklch(51% 0.20 29), oklch(66% 0.19 29));
-  --acento-contra: light-dark(oklch(95% 0.012 85), oklch(7% 0 0));
-  --estado-en-uso: light-dark(oklch(46% 0.11 150), oklch(78% 0.08 140));
-  --estado-proceso: light-dark(oklch(47% 0.11 75), oklch(80% 0.12 85));
-  --foco: light-dark(oklch(41% 0.11 258), oklch(83% 0.08 258));
+  /* fondo y capas */
+  --fondo: light-dark(oklch(96% 0.01 85), oklch(4% 0 0));
+  --capa-1: light-dark(oklch(98.5% 0.006 85), oklch(7% 0.004 80));
+  --capa-2: light-dark(oklch(93% 0.014 85), oklch(10% 0.005 80));
+  --capa-3: light-dark(oklch(90% 0.017 82), oklch(13% 0.006 80));
+  --capa-4: light-dark(oklch(86.5% 0.02 80), oklch(16% 0.007 80));
+  --papel: var(--capa-1);
+  --hundida: var(--capa-2);
+  --tinta-bloque: light-dark(oklch(15% 0.01 80), oklch(9% 0.005 80));
+  --banda-velo: 0.82; /* opacidad de la banda tinta: translúcida en oscuro (el fondo vivo se intuye detrás), casi plena sobre papel */
+  --tinta-banda: oklch(8% 0.005 80 / var(--banda-velo)); /* no usa light-dark(): la banda es oscura en los dos temas */
+  --banda-fundido: min(300px, 22%); /* oscuro: la banda entra y sale sin borde */
+  /* la banda se extiende por el aire de las secciones vecinas: el fundido ocupa ese aire y el de la propia banda, nunca
+     el texto. En claro el fundido es más corto (1,8 aires) y termina antes del primer renglón; sin cantos rectos. */
+  --banda-fuera: var(--e-aire);
 
-  --marfil-sobre-tinta: oklch(95% 0.012 85);
-  --sec-sobre-tinta: oklch(80% 0.012 80);
-  --hundida-sobre-tinta: light-dark(oklch(24% 0.01 80), oklch(15% 0.008 80));
+  /* texto */
+  --texto: light-dark(oklch(16% 0.012 80), oklch(93% 0.015 85));
+  --texto-2: light-dark(oklch(35% 0.015 80), oklch(79% 0.014 85)); /* 79 % y no 72 %: va también directo sobre el fondo vivo y una mota clara detrás no puede bajarlo de 4,5:1 */
+  --texto-3: light-dark(oklch(43% 0.018 80), oklch(63% 0.012 85));
 
-  --sombra-tinte: light-dark(oklch(40% 0.05 80 / 0.18), oklch(10% 0.02 80 / 0.7));
-  --sombra-tinte-suave: light-dark(oklch(40% 0.05 80 / 0.08), oklch(10% 0.02 80 / 0.45));
-  --sombra-papel: 0 1px 0 var(--sombra-tinte-suave), 0 6px 18px -6px var(--sombra-tinte), 0 24px 48px -28px var(--sombra-tinte);
-  --sombra-flotante: 0 1px 0 var(--sombra-tinte-suave), 0 12px 32px -12px var(--sombra-tinte);
-  --grano-opacidad: 0.04;
-  --grano-mezcla: multiply;
+  /* acento único: cereza */
+  --acento-display: light-dark(oklch(51% 0.20 29), oklch(68% 0.19 29));
+  --acento-texto: light-dark(oklch(45% 0.185 29), oklch(70% 0.18 29));
+  --acento-contra: light-dark(oklch(97% 0.01 85), oklch(4% 0 0));
+
+  /* estados */
+  --estado-en-uso: light-dark(oklch(43% 0.11 150), oklch(78% 0.08 140));
+  --estado-proceso: light-dark(oklch(44% 0.10 75), oklch(80% 0.12 85));
+
+  /* bordes: funcional (≥ 3:1) y filete decorativo */
+  --borde: light-dark(oklch(56% 0.03 80), oklch(50% 0.015 80));
+  --filete: light-dark(oklch(84% 0.02 80), oklch(21% 0.006 80));
+  --filete-luz: light-dark(oklch(16% 0.012 80 / 0.34), oklch(100% 0 0 / 0.26));
+  --foco: light-dark(oklch(16% 0.012 80), oklch(97% 0.008 85));
+
+  /* placa: vidrio ahumado (oscuro) / papel (claro) */
+  --placa-a: light-dark(oklch(99% 0.005 85), oklch(13% 0.006 80 / 0.86));
+  --placa-b: light-dark(oklch(96.8% 0.009 85), oklch(8% 0.004 80 / 0.9));
+  --placa-borde: light-dark(oklch(40% 0.04 78 / 0.2), oklch(100% 0 0 / 0.07));
+  --placa-filo: light-dark(oklch(100% 0 0 / 0.95), oklch(100% 0 0 / 0.16));
+  --placa-canto: light-dark(oklch(45% 0.185 29 / 0.55), oklch(100% 0.01 85 / 0.7));
+  --placa-luz: light-dark(oklch(100% 0 0 / 0.8), oklch(97% 0.02 85 / 0.075));
+  --placa-barrido: light-dark(oklch(100% 0 0 / 0.75), oklch(100% 0 0 / 0.055));
+  --sombra-contacto: light-dark(oklch(30% 0.045 70 / 0.2), oklch(0% 0 0 / 0.7));
+  --sombra-ambiente: light-dark(oklch(42% 0.06 75 / 0.2), oklch(0% 0 0 / 0.62));
+  --sombra-lejana: light-dark(oklch(50% 0.05 80 / 0.13), oklch(2% 0.01 60 / 0.5));
+  --placa-sombra: 0 1px 1px var(--sombra-contacto), 0 22px 44px -22px var(--sombra-ambiente), 0 56px 110px -48px var(--sombra-lejana);
+  --placa-sombra-alta: 0 2px 2px var(--sombra-contacto), 0 34px 60px -26px var(--sombra-ambiente), 0 84px 150px -56px var(--sombra-lejana);
+  --grano-opacidad: 0.075;
+  --grano-mezcla: screen;
+  --vidrio-op: 0.6; /* textura de vidrio bajo la luz del puntero; en claro (papel) no hay */
+
+  /* plano medio de cada sección */
+  --numeral-relleno: light-dark(oklch(16% 0.012 80 / 0.035), oklch(100% 0 0 / 0.028));
+  --numeral-trazo: light-dark(oklch(16% 0.012 80 / 0.1), oklch(100% 0 0 / 0.085));
+  --haz: light-dark(oklch(100% 0 0 / 0.7), oklch(100% 0.01 85 / 0.05));
+  --punto-luz: light-dark(oklch(51% 0.20 29), oklch(100% 0 0));
+  --punto-halo: light-dark(oklch(51% 0.20 29 / 0.35), oklch(100% 0 0 / 0.65));
+  --halo: light-dark(oklch(16% 0.012 80 / 0.28), oklch(100% 0 0 / 0.3));
+
+  /* sobre la banda tinta (oscura en los dos temas) */
+  --marfil-sobre-tinta: oklch(93% 0.015 85);
+  --sec-sobre-tinta: oklch(78% 0.014 85);
+  --hundida-sobre-tinta: oklch(13% 0.006 80);
+
+  /* compatibilidad con las páginas interiores (hasta su rediseño) */
+  --sombra-tinte: var(--sombra-ambiente);
+  --sombra-tinte-suave: var(--sombra-contacto);
+  --sombra-papel: var(--placa-sombra);
+  --sombra-flotante: var(--placa-sombra-alta);
 
   --inter: "Inter", "Inter-respaldo", system-ui, sans-serif;
   --playfair: "Playfair Display", "Playfair-respaldo", Georgia, serif;
 
   --t-display: clamp(2.25rem, 1.2rem + 4.6vw, 8rem);
-  --t-seccion: clamp(2rem, 1.3rem + 3vw, 4.75rem);
-  --t-caso: clamp(1.75rem, 1.4rem + 1.2vw, 2.44rem);
+  --t-seccion: clamp(2.125rem, 1.15rem + 4.1vw, 5.5rem);
+  --t-caso: clamp(2.25rem, 1.5rem + 3.1vw, 4.75rem);
   --t-h3: 1.5625rem;
   --t-cuerpo: 1.125rem;
   --t-secundario: 1rem;
   --t-etiqueta: 0.8125rem;
   --t-folio: clamp(3rem, 2rem + 4vw, 5.9rem);
+  --t-numeral: clamp(13rem, 6rem + 30vw, 40rem);
   --t-sub-heroe: clamp(1.25rem, 1.05rem + 0.9vw, 1.75rem);
   --t-boton: 0.9375rem;
 
@@ -46,7 +98,9 @@
   --e-2: 0.75rem;
   --e-3: 1.5rem;
   --e-4: 3rem;
-  --e-seccion: clamp(72px, 4rem + 5vw, 160px);
+  --e-5: clamp(3.5rem, 2.4rem + 4.4vw, 7rem);
+  --e-seccion: clamp(88px, 4.5rem + 7.5vw, 216px);
+  --e-aire: clamp(80px, 2.5rem + 5.5vw, 136px); /* relleno de cada sección de la portada: entre dos bloques quedan dos aires (≈ 240 px a 1440) */
   --margen: clamp(16px, 1rem + 2.5vw, 64px);
   --calle: clamp(16px, 1rem + 0.4vw, 24px);
   --ancho-max: 1360px;
@@ -59,13 +113,17 @@
   --d-parrafo: 600ms;
   --d-filete: 700ms;
   --d-titulo: 900ms;
+  --d-cortina: 1100ms;
 
-  --radio: 6px;
-  --radio-chico: 3px;
+  --radio: 10px;
+  --radio-chico: 4px;
+  --radio-placa: 14px;
+  --radio-bloque: 20px;
+  --radio-chip: 999px;
 }
 
-:root[data-theme="light"] { color-scheme: light; }
-:root[data-theme="dark"] { color-scheme: dark; --grano-opacidad: 0.02; --grano-mezcla: screen; }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) { --grano-opacidad: 0.02; --grano-mezcla: screen; }
+:root[data-theme="light"] { color-scheme: light; --vidrio-op: 0; --grano-mezcla: multiply; --banda-velo: 0.97; --banda-fundido: calc(var(--e-aire) * 1.8); }
+:root[data-theme="dark"] { color-scheme: dark; }
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) { --vidrio-op: 0; --grano-mezcla: multiply; --banda-velo: 0.97; --banda-fundido: calc(var(--e-aire) * 1.8); }
 }

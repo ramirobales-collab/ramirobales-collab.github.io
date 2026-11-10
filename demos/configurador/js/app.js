@@ -142,8 +142,11 @@ function crearSwatches() {
       b.className = 'muestra';
       b.dataset.grupo = g.id;
       b.dataset.op = o.id;
-      b.innerHTML = `<span class="muestra__disco" style="--m1:${o.muestra[0]};--m2:${o.muestra[1]}"><svg class="muestra__tilde" viewBox="0 0 20 20" aria-hidden="true"><path d="m5 10.4 3.2 3.1L15 6.6"/></svg></span>
+      b.innerHTML = `<span class="muestra__disco"><svg class="muestra__tilde" viewBox="0 0 20 20" aria-hidden="true"><path d="m5 10.4 3.2 3.1L15 6.6"/></svg></span>
         <span class="muestra__nombre"></span><span class="muestra__extra"></span>`;
+      const disco = b.querySelector('.muestra__disco');
+      disco.style.setProperty('--m1', o.muestra[0]);
+      disco.style.setProperty('--m2', o.muestra[1]);
       lista.append(b);
     });
     cont.append(sec);

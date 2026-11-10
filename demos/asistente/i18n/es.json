@@ -11,6 +11,7 @@
   "cinta.volver": "← Volver al portfolio",
   "marca.aria": "Ámbar Muebles, inicio de la demo",
   "marca.sub": "Muebles",
+  "marca.nombre": "Ámbar Muebles",
   "nav.aria": "Secciones de la demo",
   "nav.asistente": "Asistente",
   "nav.marca": "Qué gana la marca",
@@ -229,5 +230,6 @@
   "anuncio.respuesta": "Respuesta del asistente. Regla: {r}.",
   "msg.fuentes": "{n} fuentes",
   "traza.mas": "Y {n} fragmentos citados más.",
-  "vista.traza.corto": "Por dentro"
+  "vista.traza.corto": "Por dentro",
+  "enmarcado.aviso": "Esta página está dentro de otro sitio. Abrila en su dirección real: ramirobales-collab.github.io"
 }

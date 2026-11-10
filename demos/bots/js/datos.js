@@ -1,4 +1,4 @@
-// Sala de bots: datos de la simulación. TODO es inventado (club, jugadores, cifras, tiendas, materias).
+// Sala de bots: datos de la simulación. TODO es inventado (club, jugadores, cifras, noticias, materias).
 // Lo único real que aparece en la página es el tipo de bot, su arquitectura y el costo medido del radar.
 
 export const CLUB = { semana: 14, limite: 20 };
@@ -40,18 +40,15 @@ export const ONDA = [0.18, 0.32, 0.55, 0.42, 0.7, 0.88, 0.62, 0.4, 0.3, 0.52, 0.
 // Línea de tiempo de los bots proactivos (minutos desde las 0:00).
 export const DIA = { desde: 6 * 60, hasta: 22 * 60 };
 export const EVENTOS = [
-  { id: 'precios', min: 8 * 60, proyecto: 'athleteiq', canal: 'mensaje' },
+  { id: 'noticias', min: 8 * 60, proyecto: 'athleteiq', canal: 'mensaje' },
   { id: 'radar', min: 9 * 60, proyecto: 'athleteiq', canal: 'mensaje', costo: true },
   { id: 'parcial', min: 10 * 60, proyecto: 'cathedra', canal: 'mensaje' },
   { id: 'rutina', min: 18 * 60 + 30, proyecto: 'fortal', canal: 'push' },
 ];
 
-// Brief de precios: 12 productos en 3 tiendas inventadas; se avisan sólo cambios ≥ 5 % o faltantes.
-export const PRECIOS = [
-  { prod: 'pelota', tienda: 'norte', antes: 38, ahora: 35 },
-  { prod: 'camiseta', tienda: 'sur', antes: 64, ahora: 69 },
-  { prod: 'botines', tienda: 'centro', antes: 129, ahora: null },
-];
+// Brief de noticias (el prototipo de AthleteIQ lee noticias, no precios): de 17 notas públicas inventadas avisa sólo
+// las 3 nuevas y relevantes para el club; el resto queda descartado por repetida o ajena.
+export const NOTICIAS = [1, 2, 3];
 
 // Radar: lo que encontró la corrida de hoy y qué hizo con cada cosa.
 export const RADAR = [

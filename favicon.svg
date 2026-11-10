@@ -1,8 +1,22 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="12" fill="#F3EEE4"/>
-  <g transform="rotate(-6 32 34)">
-    <rect x="11" y="17" width="38" height="25" rx="2.5" fill="#FBF8F2" stroke="#17150F" stroke-width="3.2"/>
-    <rect x="16" y="22" width="28" height="15" rx="1" fill="#EAE3D6"/>
-  </g>
-  <circle cx="48" cy="46" r="8" fill="#D3261B"/>
+  <defs>
+    <radialGradient id="h" cx="32" cy="25" r="26" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff" stop-opacity=".30"/><stop offset=".45" stop-color="#fff" stop-opacity=".08"/><stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="p" x1="0" y1="7" x2="0" y2="43" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff" stop-opacity=".55"/><stop offset=".18" stop-color="#f7f3ea"/><stop offset="1" stop-color="#fff"/>
+    </linearGradient>
+    <linearGradient id="r" x1="0" y1="44" x2="0" y2="60" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff" stop-opacity=".42"/><stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="s" x1="0" y1="43.5" x2="64" y2="43.5" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".22"/><stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="#000"/>
+  <ellipse cx="32" cy="26" rx="20" ry="27" fill="url(#h)"/>
+  <rect x="29.4" y="7" width="5.2" height="36.4" rx=".8" fill="url(#p)"/>
+  <rect x="6" y="43.2" width="52" height=".7" fill="url(#s)"/>
+  <rect x="29.4" y="44.4" width="5.2" height="14" fill="url(#r)"/>
+  <circle cx="47.5" cy="47.5" r="4.6" fill="#f75f4f"/>
 </svg>

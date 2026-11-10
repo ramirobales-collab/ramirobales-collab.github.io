@@ -616,9 +616,13 @@ $$('[data-idioma]').forEach((b) => b.addEventListener('click', () => cambiarIdio
   dibujarMedidas();
   $('#flujo2-d').textContent = estado.idioma === 'es' ? `BM25 en JavaScript sobre ${motor.total} fragmentos.` : `BM25 in JavaScript over ${motor.total} passages.`;
   // Parámetros de captura: ?q=…&q=… (en orden; «@id» elige en la aclaración anterior), ?persona=1, ?ver=N, ?ficha=id[#campo], ?pruebas=1, ?panel=traza, ?ir=seccion
+  // ?q= sólo acepta las sugerencias (sug:N o su texto exacto) y «@id»: nadie puede armar un enlace que muestre su propio
+  // texto como consulta dentro de la demo. El texto libre queda para el campo que escribe el visitante.
+  const sugerencias = $$('.sug').map((b) => t('sug.' + b.dataset.sug));
   for (const q of params.getAll('q')) {
     if (q.startsWith('@')) { const prev = estado.turnos.filter((x) => !x.tipo).pop(); if (prev) preguntar(prev.q, q.slice(1), true); }
-    else preguntar(q);
+    else if (/^sug:\d$/.test(q) && sugerencias.includes(t('sug.' + q.slice(4)))) preguntar(t('sug.' + q.slice(4)));
+    else if (sugerencias.includes(q)) preguntar(q);
   }
   if (params.get('persona') === '1') persona();
   if (params.get('ver')) { const l = respuestas(); const n = Math.min(+params.get('ver'), l.length) - 1; if (l[n]) verTurno(l[n].i, true); }

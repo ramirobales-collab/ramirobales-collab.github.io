@@ -46,7 +46,9 @@
 html {
   -webkit-text-size-adjust: 100%;
   scroll-behavior: smooth;
-  scroll-padding-top: var(--nav-alto);
+  scroll-padding-top: calc(var(--nav-alto) + 12px);
+  background: var(--fondo);
+  scrollbar-color: var(--capa-4) var(--fondo);
 }
 body {
   min-height: 100vh;
@@ -61,26 +63,25 @@ body {
   overflow-x: clip;
   position: relative;
 }
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  background-image: url("../assets/grano-512.webp");
-  background-size: 512px 512px;
-  opacity: var(--grano-opacidad);
-  mix-blend-mode: var(--grano-mezcla);
-}
+/* todo el contenido va por encima del lienzo fijo (canvas.mundo, z-index 0) */
 body > * { position: relative; z-index: 1; }
+/* tema claro: el documento es negro detrás de la sala (--heroe-fin lo pone js/movimiento.js); sin JS no cambia */
+:root[data-theme="light"] body { background: linear-gradient(#000 var(--heroe-fin, 0px), var(--fondo) var(--heroe-fin, 0px)); }
+@media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) body { background: linear-gradient(#000 var(--heroe-fin, 0px), var(--fondo) var(--heroe-fin, 0px)); } }
 img, picture, video, canvas, svg { display: block; max-width: 100%; }
 img { height: auto; }
 a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 0.18em; }
 a:hover { text-decoration-color: var(--acento-texto); }
 button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+a, button, summary, label { -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
 ul[role="list"], ol[role="list"] { list-style: none; padding: 0; }
-:focus-visible { outline: 2px solid var(--foco); outline-offset: 2px; border-radius: var(--radio-chico); }
-::selection { background: var(--acento-texto); color: var(--acento-contra); }
+:focus-visible { outline: 2px solid var(--foco); outline-offset: 3px; border-radius: var(--radio-chico); }
+::selection { background: var(--acento-display); color: var(--acento-contra); text-shadow: none; }
+[id] { scroll-margin-top: calc(var(--nav-alto) + 12px); }
+::-webkit-scrollbar { width: 12px; height: 12px; }
+::-webkit-scrollbar-track { background: var(--fondo); }
+::-webkit-scrollbar-thumb { background: var(--capa-4); border-radius: 999px; border: 3px solid var(--fondo); }
+::-webkit-scrollbar-thumb:hover { background: var(--borde); }
 
 h1, h2, h3, h4 { font-weight: 600; text-wrap: balance; }
 p { text-wrap: pretty; max-width: 64ch; }
@@ -90,21 +91,23 @@ em { font-family: var(--playfair); font-style: italic; }
 .display {
   font-family: var(--inter);
   font-weight: 600;
-  font-size: var(--t-display);
   line-height: 1.02;
   letter-spacing: -0.03em;
 }
+/* tamaño sin especificidad: el CSS crítico va antes que esta hoja y su .heroe__titulo (que acota el titular al ancho
+   de su columna) tiene que ganar desde el primer pintado; si no, el titular sale enorme y salta al llegar la hoja diferida */
+:where(.display) { font-size: var(--t-display); }
 .h-seccion {
   font-size: var(--t-seccion);
-  line-height: 1.05;
-  letter-spacing: -0.025em;
+  line-height: 1.02;
+  letter-spacing: -0.032em;
 }
 .h-caso {
   font-size: var(--t-caso);
-  line-height: 1.1;
-  letter-spacing: -0.02em;
+  line-height: 1;
+  letter-spacing: -0.035em;
 }
-.h3 { font-size: var(--t-h3); line-height: 1.2; letter-spacing: -0.01em; }
+.h3 { font-size: var(--t-h3); line-height: 1.2; letter-spacing: -0.015em; }
 .cuerpo { font-size: var(--t-cuerpo); line-height: 1.55; }
 .secundario { font-size: var(--t-secundario); line-height: 1.5; color: var(--texto-2); }
 .terciario { font-size: var(--t-secundario); color: var(--texto-3); }
@@ -133,7 +136,7 @@ em { font-family: var(--playfair); font-style: italic; }
   text-decoration-color: var(--acento-texto);
   text-decoration-thickness: 1.5px;
 }
-.cifra { font-family: var(--playfair); font-weight: 400; font-variant-numeric: tabular-nums; }
+.cifra { font-family: var(--playfair); font-weight: 400; font-variant-numeric: lining-nums tabular-nums; }
 .datos { font-variant-numeric: tabular-nums; }
 
 .contenedor {
@@ -148,22 +151,50 @@ em { font-family: var(--playfair); font-style: italic; }
 @media (min-width: 768px) { .reticula { grid-template-columns: repeat(6, minmax(0, 1fr)); } }
 @media (min-width: 1024px) { .reticula { grid-template-columns: repeat(12, minmax(0, 1fr)); } }
 
-.seccion { padding-block: var(--e-seccion); }
+/* sombra de contacto del texto: sobre negro no se ve; si una mota clara del fondo vivo pasa por detrás, el texto
+   conserva su contraste (medido sobre píxeles con scripts/contraste_pagina.py). En tema claro es transparente. */
+main, .pie { text-shadow: 0 0 3px light-dark(transparent, oklch(0% 0 0 / 0.92)), 0 0 9px light-dark(transparent, oklch(0% 0 0 / 0.88)), 0 0 22px light-dark(transparent, oklch(0% 0 0 / 0.72)); }
+.boton--primario, .conmutador button[aria-pressed="true"], .riel__t, .cursor-rotulo { text-shadow: none; }
+
+.seccion { position: relative; padding-block: var(--e-aire); }
+.seccion > .contenedor { position: relative; z-index: 1; }
+/* banda tinta: oscura en los dos temas y translúcida (el fondo vivo se intuye detrás) */
+/* La banda entra y sale con fundidos (--banda-fundido) que nacen en el aire de la sección vecina (--banda-fuera):
+   ningún borde horizontal entre secciones. En oscuro es una capa apenas menos oscura; en claro, el papel se oscurece
+   con una rampa suave (en oklab, más lenta al principio) antes del primer renglón. */
 .seccion--tinta {
-  background: var(--tinta-bloque);
-  color: var(--marfil-sobre-tinta);
-  --texto: var(--marfil-sobre-tinta);
-  --texto-2: var(--sec-sobre-tinta);
-  --texto-3: var(--sec-sobre-tinta);
-  --hundida: var(--hundida-sobre-tinta);
-  --borde: oklch(55% 0.02 80);
-  --acento-texto: oklch(72% 0.17 29);
-  --acento-display: oklch(72% 0.17 29);
-  --foco: oklch(83% 0.08 258);
+  --bf-a: var(--banda-fuera);
+  --bf-b: var(--banda-fuera);
+  --bfun-a: var(--banda-fundido);
+  --bfun-b: var(--banda-fundido);
+  color-scheme: dark;
+  color: var(--texto);
+  --grano-mezcla: screen;
+}
+.seccion--tinta::before {
+  content: "";
+  position: absolute;
+  inset: calc(-1 * var(--bf-a)) 0 calc(-1 * var(--bf-b));
+  z-index: 0;
+  pointer-events: none;
+  background: linear-gradient(in oklab,
+    transparent,
+    color-mix(in oklab, var(--tinta-banda) 18%, transparent) calc(var(--bfun-a) * 0.3),
+    color-mix(in oklab, var(--tinta-banda) 62%, transparent) calc(var(--bfun-a) * 0.62),
+    var(--tinta-banda) var(--bfun-a),
+    var(--tinta-banda) calc(100% - var(--bfun-b)),
+    color-mix(in oklab, var(--tinta-banda) 62%, transparent) calc(100% - var(--bfun-b) * 0.62),
+    color-mix(in oklab, var(--tinta-banda) 18%, transparent) calc(100% - var(--bfun-b) * 0.3),
+    transparent);
 }
 .pila > * + * { margin-top: var(--e-3); }
 .pila--chica > * + * { margin-top: var(--e-2); }
 .pila--grande > * + * { margin-top: var(--e-4); }
+/* enmarcada por otro sitio (posible suplantación): si el guion del <head> no pudo salir del marco, la página no se
+   muestra y queda sólo el aviso con la dirección real */
+.enmarcado-aviso { display: none; }
+html.enmarcado body > :not(.enmarcado-aviso) { visibility: hidden !important; }
+html.enmarcado .enmarcado-aviso { display: block; position: fixed; inset: 40% var(--margen) auto; z-index: 100; text-align: center; font-size: var(--t-cuerpo); color: var(--texto); }
 .oculto-visual {
   position: absolute !important;
   width: 1px; height: 1px;
@@ -171,20 +202,128 @@ em { font-family: var(--playfair); font-style: italic; }
   white-space: nowrap;
 }
 
-.linea { display: block; }
-.linea__t { display: block; will-change: clip-path, transform; }
-[data-revelar] { --revelado: 0; }
-.quieto [data-revelar] .linea__t,
-.quieto [data-revelar="bloque"] { clip-path: none !important; transform: none !important; opacity: 1 !important; }
+/* ---------- Placa ---------- */
+/* Vidrio ahumado en oscuro, papel en claro (v3/pagina.md §3). Sin backdrop-filter: la profundidad la da el fondo.
+   .papel es el nombre anterior y queda como sinónimo. --mx/--my las pone js/movimiento.js (puntero fino). */
+.placa, .papel {
+  --mx: 50%;
+  --my: -20%;
+  position: relative;
+  isolation: isolate;
+  border-radius: var(--radio-placa);
+  background:
+    radial-gradient(circle 24rem at var(--mx) var(--my), color-mix(in oklab, var(--placa-luz) calc(var(--luz) * 100%), transparent), transparent 72%),
+    linear-gradient(104deg, transparent 43%, var(--placa-barrido) 50%, transparent 57%) 170% 0 / 320% 100% no-repeat,
+    linear-gradient(var(--placa-a), var(--placa-b));
+  box-shadow: var(--placa-sombra);
+  transition: translate 520ms var(--curva-entrada), box-shadow 520ms var(--curva-entrada), opacity var(--d-etiqueta) var(--curva-entrada), --luz 420ms var(--curva-entrada);
+}
+.placa--bloque { border-radius: var(--radio-bloque); }
+/* grano fino */
+.placa::before, .papel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  pointer-events: none;
+  background: url("../assets/grano-512.webp") 0 0 / 256px 256px;
+  opacity: var(--grano-opacidad);
+  mix-blend-mode: var(--grano-mezcla);
+}
+/* canto: filo de luz arriba, borde tenue y el tramo más cercano al puntero encendido */
+.placa::after, .papel::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  border-radius: inherit;
+  padding: 1px;
+  pointer-events: none;
+  background:
+    radial-gradient(circle 15rem at var(--mx) var(--my), color-mix(in oklab, var(--placa-canto) calc(var(--luz) * 100%), transparent), transparent 72%),
+    linear-gradient(var(--placa-filo), var(--placa-borde) 34%, var(--placa-borde));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+}
+@media (hover: hover) and (pointer: fine) {
+  .placa:hover, .papel:hover { --luz: 1; }
+  .placa--viva:hover { translate: 0 -3px; box-shadow: var(--placa-sombra-alta); animation: placa-barrido 600ms var(--curva-entrada) 1; }
+}
+/* Vidrio con vida (sólo oscuro y puntero fino): bajo la luz del puntero aparecen el polvo y las micro-rayas del vidrio,
+   como en un vidrio real cuando una luz lo recorre; fuera de esa luz no se ven. Las dos texturas son mapas en gris
+   generados localmente (etiquetados en créditos) y se mezclan por pantalla: el negro no aporta nada. */
+@media (hover: hover) and (pointer: fine) {
+  .placa::before, .papel::before { transition: opacity 420ms var(--curva-entrada); }
+  .placa:hover::before, .papel:hover::before {
+    background: url("../assets/mundo/vidrio/vidrio-rayas.webp") 0 0 / 460px 460px, url("../assets/mundo/vidrio/vidrio-polvo.webp") 113px 57px / 340px 340px;
+    background-blend-mode: screen;
+    mix-blend-mode: screen;
+    opacity: var(--vidrio-op);
+    -webkit-mask-image: radial-gradient(circle 16rem at var(--mx) var(--my), #000, rgb(0 0 0 / 0.4) 42%, transparent 78%);
+    mask-image: radial-gradient(circle 16rem at var(--mx) var(--my), #000, rgb(0 0 0 / 0.4) 42%, transparent 78%);
+  }
+}
+@keyframes placa-barrido {
+  from { background-position: 0 0, 170% 0, 0 0; }
+  to { background-position: 0 0, -70% 0, 0 0; }
+}
+.hundida { background: var(--hundida); border-radius: var(--radio); }
 
-.mascara { clip-path: inset(0 0 0 100%); }
-.mascara.visto, .quieto .mascara { clip-path: inset(0); }
+/* ---------- Texto que entra al deslizar ---------- */
+/* Sin JS todo se ve: el estado oculto sólo existe bajo html.mov (la pone el guion en línea del <head>; si el
+   módulo no llega a arrancar, el mismo guion la quita). js/movimiento.js marca cada elemento con data-mov
+   («lineas» o «bloque»), le pone .visto al entrar y data-mov="fin" cuando terminó. */
+html.mov [data-revelar]:not([data-mov]) { opacity: 0; }
+.pal { display: inline-block; vertical-align: top; overflow-x: visible; overflow-y: clip; padding-block: 0.14em 0.22em; margin-block: -0.14em -0.22em; }
+.pal__t { display: inline-block; transform-origin: 0 100%; }
+html.mov [data-mov="lineas"] { filter: blur(6px); }
+html.mov [data-mov="lineas"] .pal__t { transform: translateY(116%) rotate(5deg); }
+html.mov [data-mov="lineas"].visto { filter: blur(0); transition: filter var(--d-titulo) var(--curva-entrada) var(--d, 0ms); }
+html.mov [data-mov="lineas"].visto .pal__t { transform: none; transition: transform var(--d-titulo) var(--curva-entrada) calc(var(--d, 0ms) + var(--l, 0) * 80ms); }
+html.mov [data-mov="bloque"] { opacity: 0; translate: 0 18px; filter: blur(4px); }
+html.mov [data-mov="bloque"].visto {
+  opacity: 1; translate: 0 0; filter: blur(0);
+  transition: opacity var(--d-parrafo) var(--curva-entrada) var(--d, 0ms), translate var(--d-parrafo) var(--curva-entrada) var(--d, 0ms), filter var(--d-parrafo) var(--curva-entrada) var(--d, 0ms);
+}
+/* filetes: se dibujan de izquierda a derecha */
+.filete { display: block; height: 1px; background: linear-gradient(90deg, var(--filete-luz), color-mix(in oklab, var(--filete-luz) 35%, transparent) 62%, transparent); transform-origin: 0 50%; }
+html.mov .filete { scale: 0 1; }
+html.mov .filete.visto, html.mov .visto > .filete { scale: 1 1; transition: scale var(--d-filete) var(--curva-entrada) var(--d, 0ms); }
+/* imágenes: cortina + escala que se asienta (.mascara es el nombre anterior) */
+html.mov .cortina, html.mov .mascara { clip-path: inset(0 0 100% 0 round var(--radio-cortina, var(--radio-placa))); }
+html.mov .cortina > :is(img, picture), html.mov .mascara > :is(img, picture) { scale: var(--escala-oculta, 1.06); }
+html.mov .cortina.visto, html.mov .mascara.visto { clip-path: inset(0 0 0 0 round var(--radio-cortina, var(--radio-placa))); transition: clip-path var(--d-cortina) var(--curva-entrada) var(--d, 0ms), translate 520ms var(--curva-entrada), box-shadow 520ms var(--curva-entrada), --luz 420ms var(--curva-entrada); }
+html.mov .cortina.visto > :is(img, picture), html.mov .mascara.visto > :is(img, picture) { scale: var(--escala, 1); transition: scale 1400ms var(--curva-entrada) var(--d, 0ms); }
+html.mov .cortina[data-mov="fin"], html.mov .mascara[data-mov="fin"] { clip-path: none; }
+/* cifras: rodillo, dígito a dígito (la columna termina en el dígito real: sin JS o en quieto se ve el final) */
+.rod { display: inline-block; height: 1lh; overflow-y: clip; vertical-align: bottom; }
+.rod__c { display: block; }
+.rod__c > span { display: block; height: 1lh; }
+/* el ancho lo da sólo el dígito real (el primero): un «1» no hereda el ancho de los «0/8/9» que ruedan (verificación 10/11) */
+.rod__c > span + span { width: 0; white-space: nowrap; }
+html.mov [data-rodillo] .rod__c { translate: 0 calc(-1lh * var(--n, 3)); }
+html.mov [data-rodillo].visto .rod__c, html.mov .visto [data-rodillo] .rod__c { translate: 0 0; transition: translate var(--d-titulo) var(--curva-entrada) calc(var(--d, 0ms) + var(--i, 0) * 90ms); }
+/* carga de imagen: aparece cuando terminó de bajar */
+html.mov img[data-carga] { opacity: 0; }
+html.mov img[data-carga].cargada { opacity: 1; transition: opacity 700ms var(--curva-entrada); }
+/* flecha de los enlaces: avanza al pasar */
+.flecha { display: inline-block; transition: translate var(--d-etiqueta) var(--curva-entrada); }
+:is(a, button):hover .flecha, .caso:hover .flecha { translate: 4px 0; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  [data-revelar] { opacity: 0; transition: opacity 200ms linear; }
-  [data-revelar].visto, .ir [data-revelar] { opacity: 1; }
-  .mascara { clip-path: inset(0); }
+  html.mov [data-mov="lineas"], html.mov [data-mov="bloque"] { opacity: 0; filter: none; translate: none; }
+  html.mov [data-mov="lineas"] .pal__t { transform: none; }
+  html.mov [data-mov="lineas"].visto, html.mov [data-mov="bloque"].visto { opacity: 1; filter: none; translate: none; transition: opacity 200ms linear; }
+  html.mov [data-mov="lineas"].visto .pal__t { transition: none; }
+  html.mov .filete { scale: none; }
+  html.mov .cortina > :is(img, picture), html.mov .mascara > :is(img, picture) { scale: var(--escala, 1); }
+  html.mov .cortina, html.mov .mascara { clip-path: none; opacity: 0; }
+  html.mov .cortina.visto, html.mov .mascara.visto { clip-path: none; opacity: 1; transition: opacity 200ms linear; }
+  html.mov [data-rodillo] .rod__c { translate: none; }
+  .flecha, .placa, .papel { transition: none; translate: none !important; }
   *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; }
 }
 html.ir { scroll-behavior: auto !important; }
@@ -195,9 +334,58 @@ html.ir { scroll-behavior: auto !important; }
 }
 
 @media (forced-colors: active) {
-  body::before { display: none; }
-  .papel, .boton, .sello, .caso, .nav { border: 1px solid CanvasText; box-shadow: none; }
+  .placa, .papel, .boton, .sello, .nav { border: 1px solid CanvasText; box-shadow: none; }
+  .placa::before, .placa::after, .papel::before, .papel::after { display: none; }
 }
 
+/* ---------- Entre páginas ---------- */
+/* Nombres compartidos: «caso-<id>» entre la foto de la tarjeta (portada) y la cabecera del caso. */
 @view-transition { navigation: auto; }
-::view-transition-old(root), ::view-transition-new(root) { animation-duration: 200ms; }
+::view-transition-old(root) { animation: 200ms var(--curva-salida) both vt-sale; }
+::view-transition-new(root) { animation: 320ms var(--curva-entrada) 80ms both vt-entra; }
+::view-transition-group(*) { animation-duration: 560ms; animation-timing-function: var(--curva-entrada); }
+@keyframes vt-sale { to { opacity: 0; } }
+@keyframes vt-entra { from { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; }
+}
+
+/* ---------- Impresión ---------- */
+/* Texto negro sobre blanco, sin lienzo, sin fondo vivo ni decoración; todo el texto visible (sin estados de entrada),
+   enlaces externos con su dirección y sin cortes dentro de un bloque. En pantalla no cambia nada. */
+@media print {
+  @page { margin: 16mm 14mm; }
+  *, *::before, *::after { color-scheme: light !important; text-shadow: none !important; box-shadow: none !important; animation: none !important; transition: none !important; }
+  :root { --fondo: #fff; --texto: #000; --texto-2: #222; --texto-3: #3a3a3a; --acento-display: #9e2418; --acento-texto: #9e2418; --borde: #888; --filete: #bbb; --filete-luz: #bbb; }
+  html, body { background: #fff !important; color: #000; }
+  canvas, .mundo, .riel, .saltar, .enmarcado-aviso, .cursor-rotulo, .plano, .pliegue, .heroe__fondo, .heroe__obras, .heroe__deslizar,
+  .nav__menu, .nav__panel, .nav__herramientas, .nav__enlaces, .pie__lado, .caso__luz, .saber__deslizar, .lente { display: none !important; }
+  .nav { position: static !important; height: auto !important; }
+  .nav__in { padding-block: 0 6mm; }
+  .nav__in::before, .placa::before, .placa::after, .papel::before, .papel::after { display: none !important; }
+  .placa, .papel, .seccion--tinta, .marca__media, .caso__media { background: none !important; }
+  .seccion--tinta::before { display: none !important; }
+  .placa, .papel { border: 1px solid #ccc; }
+  .heroe { min-height: 0 !important; height: auto !important; padding-top: 0 !important; display: block !important; }
+  .heroe__sellos { display: flex !important; }
+  .heroe__dentro, .heroe__texto { min-height: 0 !important; height: auto !important; }
+  .seccion { padding-block: 10mm; }
+  [data-mov], [data-revelar], .pal__t, .cortina, .mascara, .cortina > *, .mascara > *, img[data-carga], .filete, .folio__filete, .rod__c {
+    opacity: 1 !important; filter: none !important; transform: none !important; translate: none !important; scale: none !important; clip-path: none !important;
+  }
+  .saberes { display: block !important; overflow: visible !important; margin: 0 !important; padding: 0 !important; }
+  .saber { display: block !important; padding: 4mm 0 !important; }
+  .saber__lista { display: block !important; }
+  .caso { display: block !important; }
+  .caso__media { max-width: 120mm; aspect-ratio: 16 / 10; margin-bottom: 4mm; }
+  .caso__enlace { display: none; }
+  .caso__cuerpo { pointer-events: auto; }
+  .boton { border: 1px solid #000; background: none !important; color: #000 !important; min-height: 0; padding: 1.5mm 3mm; }
+  a { color: #000; }
+  main a[href^="http"]::after, .pie a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 0.8em; font-weight: 400; word-break: break-all; }
+  main a[href^="mailto:"]::after { content: " (" attr(href) ")"; font-size: 0.8em; font-weight: 400; }
+  h1, h2, h3, .folio, .cabecera { break-after: avoid; }
+  .caso, .saber, .marca, figure, li, .ficha, .metodo__col, .esquema__paso, .contacto { break-inside: avoid; }
+  img { max-width: 100% !important; }
+  .triptico { display: grid !important; grid-template-columns: repeat(3, minmax(0, 1fr)) !important; gap: 4mm !important; }
+}
