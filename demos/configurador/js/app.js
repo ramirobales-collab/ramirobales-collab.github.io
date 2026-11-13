@@ -4,9 +4,12 @@ const params = new URLSearchParams(location.search);
 const html = document.documentElement;
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const quieto = params.get('quieto') === '1' || reduce;
+if (!quieto && 'IntersectionObserver' in window) html.classList.add('js-mov');
 const modoPoster = params.get('poster') === '1';
 const modoRender = params.get('render') === '1';
 const medir = params.get('medir') === '1';
+// En celular la primera vista es el póster: el modelo y el entorno se piden recién al primer toque sobre el visor.
+const diferir3d = !modoRender && !medir && matchMedia('(max-width: 767px)').matches;
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 
@@ -20,12 +23,15 @@ const estado = {
   macro: false,
 };
 const dics = {};
+const miniaturas = {};
+let relojMini = 0;
 let visor = null;
 let visorListo = false;
 const cargados = new Set(['__']);
 
 // Pide el GLB del producto inicial y el entorno antes de que cargue three.js (el visor los toma de la caché).
-if (params.get('poster') !== '1') {
+// No en celular ni con ahorro de datos: ahí el póster cubre la primera pantalla y el 3D espera.
+if (params.get('poster') !== '1' && !diferir3d && !(navigator.connection || {}).saveData) {
   const raiz = new URL('../../', location.href);
   for (const [href, tipo] of [[PRODUCTOS[params.get('producto') === 'sofa' ? 'sofa' : 'silla'].glb, 'fetch'], ['assets/3d/env/studio_small_09_512.hdr', 'fetch']]) {
     const l = document.createElement('link');
@@ -135,6 +141,8 @@ function crearSwatches() {
     sec.innerHTML = `<p class="grupo__cabeza" id="cab-${g.id}"><span class="grupo__nombre"></span><span class="grupo__elegido"></span></p>
       <div class="muestras" role="radiogroup" aria-labelledby="cab-${g.id}"></div>`;
     const lista = $('.muestras', sec);
+    // Filas parejas: hasta 6 muestras en una fila; con 7 o más, dos filas casi iguales (sin una muestra huérfana).
+    lista.style.setProperty('--cols', String(g.opciones.length <= 6 ? 6 : Math.ceil(g.opciones.length / 2)));
     g.opciones.forEach((o) => {
       const b = document.createElement('button');
       b.type = 'button';
@@ -177,7 +185,8 @@ function pintarProducto(animar = true) {
     const sec = $(`#grupo-${g.id}`);
     sec.classList.toggle('activo', activo);
     $('.grupo__nombre', sec).textContent = nombreGrupo(pid, g.id);
-    $('.grupo__elegido', sec).textContent = nombreOp(pid, g.id, estado.sel[pid][g.id]);
+    const elegida = opcion(p, g.id, estado.sel[pid][g.id]);
+    $('.grupo__elegido', sec).textContent = nombreOp(pid, g.id, elegida.id) + (elegida.precio ? ` · +${dinero(elegida.precio)}` : '');
     $$('.muestra', sec).forEach((b) => {
       const o = opcion(p, g.id, b.dataset.op);
       const si = o.id === estado.sel[pid][g.id];
@@ -206,7 +215,7 @@ function seleccionar(gid, oid, { foco = false } = {}) {
   estado.sel[p.id][gid] = oid;
   pintarProducto();
   if (foco) $(`#grupo-${gid} .muestra[data-op="${oid}"]`).focus();
-  if (visor && visorListo) visor.aplicar(gid, opcion(p, gid, oid), quieto);
+  if (visor && visorListo) { visor.aplicar(gid, opcion(p, gid, oid), quieto); programarMiniatura(); }
   if (modoPoster) ponerPoster();
 }
 
@@ -262,7 +271,24 @@ async function cambiarProducto(pid) {
     $('#visor').classList.add('listo');
     ocultarEstado();
     if (!quieto) { visor.autoRotar(autoPedido); marcarAuto(autoPedido); }
+    programarMiniatura();
   }
+}
+
+// La miniatura del selector y la del carrito muestran la tela, la madera y el metal elegidos, no la foto de catálogo.
+function programarMiniatura() {
+  clearTimeout(relojMini);
+  relojMini = setTimeout(async () => {
+    if (!visor || !visorListo) return;
+    const pid = estado.producto;
+    const url = await visor.instantanea(200, 150);
+    if (!url || pid !== estado.producto) { if (url) URL.revokeObjectURL(url); return; }
+    const img = $(`.sp[data-producto="${pid}"] img`);
+    const vieja = miniaturas[pid];
+    miniaturas[pid] = url;
+    if (img) img.src = url;
+    if (vieja && !estado.carrito.some((it) => it.mini === vieja)) URL.revokeObjectURL(vieja);
+  }, 420);
 }
 
 function seleccionesVisor(pid) {
@@ -291,7 +317,7 @@ function pintarCarrito() {
     const li = document.createElement('li');
     li.className = 'item';
     const p = PRODUCTOS[it.pid];
-    li.innerHTML = `<img src="img/poster-${it.pid}-200.webp" width="100" height="75" alt=""><div class="item__txt"><p class="item__nombre"></p><p class="item__conf"></p></div><p class="item__precio"></p><button type="button" class="item__quitar" data-i="${i}"></button>`;
+    li.innerHTML = `<img src="${it.mini || `img/poster-${it.pid}-200.webp`}" width="100" height="75" alt=""><div class="item__txt"><p class="item__nombre"></p><p class="item__conf"></p></div><p class="item__precio"></p><button type="button" class="item__quitar" data-i="${i}"></button>`;
     $('.item__nombre', li).textContent = t(`${it.pid}.nombre`);
     $('.item__conf', li).textContent = p.grupos.map((g) => nombreOp(it.pid, g.id, it.sel[g.id])).join(' · ');
     $('.item__precio', li).textContent = dinero(precioDe(it.pid, it.sel));
@@ -313,7 +339,7 @@ $('#cajon-lista').addEventListener('click', (e) => {
 let tCta = 0;
 $('#cta').addEventListener('click', () => {
   const pid = estado.producto;
-  estado.carrito.push({ pid, sel: { ...estado.sel[pid] } });
+  estado.carrito.push({ pid, sel: { ...estado.sel[pid] }, mini: miniaturas[pid] || null });
   const p = prod();
   const nombre = t(`${pid}.nombre`);
   const conf = p.grupos.map((g) => nombreOp(pid, g.id, estado.sel[pid][g.id])).join(', ');
@@ -402,6 +428,7 @@ async function iniciarVisor() {
   await visor.mostrar(prod(), seleccionesVisor(estado.producto));
   visorListo = true;
   cargados.add(estado.producto);
+  if (PRODUCTOS[estado.producto].grupos.some((g) => estado.sel[estado.producto][g.id] !== g.opciones[0].id)) programarMiniatura();
   if (params.get('macro') === '1') { estado.macro = true; visor.macro(true); visor.saltar(); actualizarMacroTexto(); }
   visorEl.classList.add('listo');
   ocultarEstado();
@@ -482,6 +509,26 @@ function medicion() {
   }, 1500);
 }
 
+/* ---------- Celular: el 3D arranca al primer toque ---------- */
+function esperarToque() {
+  ocultarEstado();
+  const visorEl = $('#visor');
+  const pista = $('#pista');
+  const rotular = (k) => { pista.dataset.i18n = k; pista.textContent = t(k); };
+  rotular('visor.tocar');
+  visorEl.classList.add('en-espera');
+  const ir = async (e) => {
+    if (e.type === 'keydown' && e.key !== 'Enter' && e.key !== ' ') return;
+    visorEl.removeEventListener('pointerdown', ir);
+    visorEl.removeEventListener('keydown', ir);
+    visorEl.classList.remove('en-espera');
+    rotular('visor.pista');
+    try { await iniciarVisor(); } catch (err) { console.error('visor', err); document.body.classList.add('modo-poster'); ocultarEstado(); }
+  };
+  visorEl.addEventListener('pointerdown', ir);
+  visorEl.addEventListener('keydown', ir);
+}
+
 /* ---------- Móvil: la hoja inferior se compacta fuera de la ficha ---------- */
 function hojaMovil() {
   // Compacta cuando el final del panel ya pasó por arriba de la pantalla (no cuando todavía está abajo).
@@ -502,7 +549,9 @@ async function arrancar() {
   if (estado.producto !== 'silla') ponerPoster();
   hojaMovil();
   const conexion = navigator.connection || {};
-  if (!modoPoster && hayWebGL() && !conexion.saveData) {
+  if (!modoPoster && hayWebGL() && !conexion.saveData && diferir3d) {
+    esperarToque();
+  } else if (!modoPoster && hayWebGL() && !conexion.saveData) {
     try { await iniciarVisor(); } catch (e) { console.error('visor', e); document.body.classList.add('modo-poster'); ocultarEstado(); }
   } else {
     document.body.classList.add('modo-poster');
@@ -510,3 +559,14 @@ async function arrancar() {
   }
 }
 arrancar();
+
+/* ---------- Entrada de los titulares de sección ---------- */
+(function montarRevelado() {
+  if (!html.classList.contains('js-mov')) return;
+  const els = $$('.seccion .folio, .seccion .titulo, .seccion .intro, .seccion .subtitulo, .proceso h3');
+  els.forEach((el) => el.setAttribute('data-corte', ''));
+  const io = new IntersectionObserver((entradas) => entradas.forEach((en) => {
+    if (en.isIntersecting) { en.target.classList.add('visto'); io.unobserve(en.target); }
+  }), { rootMargin: '0px 0px -12% 0px' });
+  els.forEach((el) => io.observe(el));
+})();

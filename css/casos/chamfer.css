@@ -1,0 +1,57 @@
+/* ---------- Caso Chamfer (proyecto adicional) ---------- */
+/* Reglas propias de proyectos/chamfer.html; se carga después de caso.css y sólo agrega piezas que el patrón v4 no trae:
+   la firma (despiece a todo el ancho y dos primeros planos debajo), el fragmento de brief y la tira del giro. */
+
+/* Ficha: el rol es una oración entera, ocupa su propio renglón ancho */
+.caso-pagina--chamfer .ficha-linea dd { max-width: 62ch; }
+@media (min-width: 1024px) {
+  .caso-pagina--chamfer .ficha-linea { flex-wrap: wrap; row-gap: var(--e-3); }
+  .caso-pagina--chamfer .ficha-linea > .ficha-linea__ancho:first-child { flex: 1 1 100%; }
+}
+
+/* Firma: la captura de Anatomy a todo el ancho del contenido; debajo, el texto y los dos primeros planos lado a lado
+   (también en celular, para no sumar dos fotos grandes al largo de la página) */
+.firma--chamfer { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--e-2); }
+.firma--chamfer .firma__despiece, .firma--chamfer .firma__texto { grid-column: 1 / -1; }
+.firma__despiece, .firma__plano { margin: 0; gap: var(--e-2); }
+.firma__despiece figcaption, .firma__plano figcaption { font-size: var(--t-secundario); line-height: 1.5; color: var(--texto-2); max-width: 46ch; }
+.firma--chamfer .firma__texto { margin: 0; }
+.firma__foto {
+  --radio-cortina: var(--radio-placa);
+  position: relative;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radio-placa);
+  overflow: clip;
+  background: #000;
+  color-scheme: dark;
+  box-shadow: var(--placa-sombra);
+}
+.firma__foto img { display: block; width: 100%; height: 100%; max-width: none; object-fit: cover; }
+.ampliable > .firma__foto { grid-area: 1 / 1; }
+.firma__plano .ampliar { border-radius: var(--radio-placa); }
+@media (min-width: 560px) { .firma--chamfer { column-gap: var(--calle); } }
+@media (min-width: 1024px) {
+  .firma--chamfer { grid-template-columns: repeat(12, minmax(0, 1fr)); row-gap: var(--e-4); }
+  .firma--chamfer .firma__despiece { grid-column: 1 / -1; }
+  .firma--chamfer .firma__texto { grid-column: 1 / 5; padding: 0; align-self: start; }
+  .firma--chamfer .firma__plano:nth-of-type(2) { grid-column: 5 / 9; }
+  .firma--chamfer .firma__plano:nth-of-type(3) { grid-column: 9 / 13; }
+}
+
+/* Cómo lo construí: fragmento real del brief, como cita tipográfica */
+.artefacto-brief__texto { margin: 0; padding: 0.15rem 0 0.15rem var(--e-3); border-left: 2px solid var(--acento-display); }
+.artefacto-brief__texto p { font-size: var(--t-secundario); line-height: 1.6; color: var(--texto); max-width: 52ch; }
+.artefacto-brief__texto code { font-family: ui-monospace, "Cascadia Mono", Consolas, monospace; font-size: 0.92em; color: var(--acento-texto); }
+
+/* La tira del giro es ancha: ocupa toda la columna del artefacto */
+.taller__paso--giro .taller__imagen, .taller__paso--giro .taller__artefacto--imagen .ampliar { width: 100%; }
+.taller__paso--giro .taller__imagen { background: #000; color-scheme: dark; }
+
+/* Decisiones: la entrada dice quién decidió (los agentes, dentro de las reglas del dueño) */
+.decide__entrada { color: var(--texto-2); font-size: var(--t-secundario); line-height: 1.55; max-width: 38ch; text-align: left; }
+
+/* Galería: el segundo ángulo solo, a todo el ancho y apaisado (el estuche salió el 13/11: parecía un ícono 3D) */
+@media (min-width: 1024px) { .caso-pagina--chamfer .album__foto { aspect-ratio: 21 / 9; } }
+
+@media (forced-colors: active) { .firma__foto, .artefacto-brief__texto { border: 1px solid CanvasText; box-shadow: none; } }
+@media print { .firma__plano { display: none; } .artefacto-brief__texto { box-shadow: none; border: 1px solid #888; } }

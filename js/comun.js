@@ -54,8 +54,11 @@ const preferido = (pedido === 'es' || pedido === 'en' ? pedido : null) || (guard
 
 export function idiomaActual() { return idioma; }
 
+/* Cada tipo de página pide sólo sus textos: <html data-dic="casos"> carga i18n/casos-<idioma>.json (que trae todo);
+   sin el atributo se carga el general, que no lleva los textos de los casos (la portada no los descarga). */
+const DIC = html.dataset.dic ? `${html.dataset.dic}-` : '';
 async function cargarDiccionario(l) {
-  const r = await fetch(new URL(`i18n/${l}.json`, BASE));
+  const r = await fetch(new URL(`i18n/${DIC}${l}.json`, BASE));
   if (!r.ok) throw new Error('i18n ' + l);
   return r.json();
 }

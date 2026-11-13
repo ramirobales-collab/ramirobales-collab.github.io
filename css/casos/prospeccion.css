@@ -1,0 +1,104 @@
+/* ---------- Caso «Prospección verificada» ---------- */
+/* Reglas propias de proyectos/prospeccion.html; va enlazada después de caso.css (patrón v4). Sólo agrega piezas que
+   el patrón no tiene: el aviso para quien recibió un correo del motor, los fragmentos de código en ventana, la figura
+   del embudo con el registro del verificador y el flujo de pasos del motor. Sin animaciones nuevas: las capturas y
+   los fragmentos entran por la cortina del patrón y el texto por renglones. */
+
+.caso-pagina--v4 { --mono: ui-monospace, "Cascadia Mono", "Cascadia Code", Consolas, "SF Mono", Menlo, monospace; }
+
+/* Aire vertical: lo gobierna caso.css; acá sólo se baja la foto de la galería (es la única pieza del bloque) */
+@media (min-width: 1024px) { #galeria .album__foto { aspect-ratio: 21 / 9; } }
+
+/* Apertura: el nombre tiene dos palabras largas; se achica para que «Prospección» quepa en el aire oscuro */
+.caso-cabecera[data-caso="prospeccion"] .apertura__titulo { font-size: clamp(2.75rem, 1.5rem + 5.2vw, 6.25rem); line-height: 0.98; letter-spacing: -0.035em; }
+
+/* Al pie de la página: aviso para quien recibió un correo del motor (13/11: salió del cuerpo del caso) */
+.lector { display: grid; gap: 0.5rem; max-width: 52ch; margin: 0; padding-top: var(--e-3); border-top: 1px solid var(--filete); }
+.lector__t { color: var(--acento-texto); }
+.lector__texto { font-size: var(--t-secundario); line-height: 1.6; color: var(--texto-2); }
+.lector--pie { margin-top: var(--v4-entre); padding-top: var(--e-2); max-width: 60ch; }
+.lector--pie .lector__t { font-size: var(--t-etiqueta); color: var(--texto-3); }
+.registro__concilia { margin: var(--e-2) 0 0; font-size: var(--t-secundario); line-height: 1.5; color: var(--texto-2); max-width: 52ch; }
+
+/* Fragmentos de código en la ventana del patrón: oscuros en los dos temas, como el marco */
+.codigo-fig { margin: 0; display: grid; gap: var(--e-2); min-width: 0; }
+.codigo-fig .ventana, .codigo { min-width: 0; }
+.codigo-fig__pie { font-size: var(--t-secundario); line-height: 1.5; color: var(--texto-2); max-width: 60ch; }
+.codigo { color-scheme: dark; color: var(--texto); background: oklch(11% 0.004 70); }
+.codigo__barra { display: flex; justify-content: space-between; gap: var(--e-2); margin: 0; padding: 0.75rem 1.15rem; border-bottom: 1px solid oklch(100% 0 0 / 0.08); font-family: var(--mono); font-size: 0.8125rem; letter-spacing: 0.02em; color: var(--texto-3); }
+.codigo__archivo { color: var(--texto-2); }
+.codigo__pre { margin: 0; padding: 1.15rem 1.4rem 1.35rem 0.6rem; overflow-x: auto; font-family: var(--mono); font-size: clamp(0.8125rem, 0.65rem + 0.36vw, 0.9375rem); line-height: 1.8; tab-size: 4; color: oklch(90% 0.012 85); scrollbar-width: thin; scrollbar-color: oklch(40% 0.005 70) transparent; }
+.codigo__pre code { display: block; font: inherit; white-space: pre-wrap; overflow-wrap: anywhere; }
+/* cada renglón es un bloque con sangría francesa: si no entra, sigue debajo del código y no debajo del número */
+.c-l { display: block; padding-left: 8.8ch; text-indent: -8.8ch; }
+.c-n { display: inline-block; width: 3.2ch; margin-right: 1.6ch; text-indent: 0; text-align: right; color: var(--texto-3); -webkit-user-select: none; user-select: none; }
+.c-n--salto { color: var(--texto-3); }
+.c-cad { color: oklch(85% 0.075 78); }
+.c-pal { color: oklch(78% 0.1 22); }
+.c-num { color: oklch(88% 0.05 120); }
+.c-com { color: var(--texto-2); font-style: italic; }
+.c-marca { padding: 0.1em 0.15em; border-radius: 3px; color: inherit; background: oklch(55% 0.2 22 / 0.28); box-shadow: inset 0 -2px 0 oklch(68% 0.19 22); }
+
+/* Firma: la figura (embudo y registro) a todo el ancho y, debajo, el texto junto a la captura real */
+.embudo { display: grid; gap: var(--e-4); }
+.embudo__parte { display: grid; align-content: start; min-width: 0; }
+.embudo__rotulo { color: var(--texto-3); margin-bottom: var(--e-3); }
+.embudo__etapas { list-style: none; margin: 0; padding: 0; display: grid; gap: 1rem; }
+.embudo__etapa { --v: 100%; display: grid; grid-template-columns: 3.4rem minmax(0, 1fr); column-gap: var(--e-2); row-gap: 0.45rem; align-items: end; }
+.embudo__etapa:nth-child(2) { --v: 87.72%; }
+.embudo__etapa:nth-child(3) { --v: 29.82%; }
+.embudo__etapa:nth-child(4) { --v: 24.56%; }
+.embudo__etapa:nth-child(5) { --v: 19.3%; }
+.embudo__etapa:nth-child(6) { --v: 10.53%; }
+.embudo__n { grid-row: span 2; align-self: center; font-size: clamp(2rem, 1.4rem + 1.5vw, 2.75rem); line-height: 0.9; text-align: right; color: var(--texto); font-variant-numeric: tabular-nums; }
+.embudo__que { font-size: var(--t-secundario); line-height: 1.3; color: var(--texto-2); }
+.embudo__barra { position: relative; height: 9px; border-radius: 2px; background: var(--hundida); box-shadow: inset 0 0 0 1px var(--filete); overflow: hidden; }
+.embudo__barra::before { content: ""; position: absolute; inset: 0 auto 0 0; width: var(--v); border-radius: 2px; background: color-mix(in oklab, var(--texto) 72%, transparent); }
+.embudo__etapa--fin .embudo__n { color: var(--acento-display); }
+.embudo__etapa--fin .embudo__que { color: var(--texto); }
+.embudo__etapa--fin .embudo__barra::before { background: var(--acento-display); }
+
+.registro__trio { list-style: none; margin: 0 0 var(--e-3); padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--e-2); }
+.registro__trio li { display: grid; gap: 0.35rem; align-content: start; font-size: var(--t-secundario); line-height: 1.3; color: var(--texto-2); }
+.registro__cifra { font-size: clamp(2.25rem, 1.5rem + 2vw, 3.25rem); line-height: 0.9; color: var(--texto); font-variant-numeric: tabular-nums; }
+.registro__trio-frenados .registro__cifra { color: var(--acento-display); }
+.registro { width: 100%; border-collapse: collapse; font-size: var(--t-secundario); }
+.registro__cuando { caption-side: bottom; padding-top: var(--e-2); text-align: left; font-size: var(--t-secundario); line-height: 1.5; color: var(--texto-2); }
+.registro th { padding: 0 0.75rem 0.6rem 0; border-bottom: 1px solid var(--borde); text-align: left; font-size: var(--t-etiqueta); font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--texto-3); }
+.registro td { padding: 0.7rem 0.75rem 0.7rem 0; border-bottom: 1px solid var(--filete); vertical-align: baseline; color: var(--texto-2); }
+.registro td.cifra { width: 3.2rem; color: var(--texto); }
+.registro .registro__hora { padding-right: 0; text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.registro__motivo { font-family: var(--mono); font-size: 0.94em; color: var(--texto) !important; }
+.registro__coma { padding: 0 0.12em; border-radius: 2px; color: var(--acento-texto); font-weight: 700; background: color-mix(in oklab, var(--acento-display) 16%, transparent); box-shadow: inset 0 -2px 0 var(--acento-display); }
+.embudo__nota { font-size: var(--t-secundario); line-height: 1.5; color: var(--texto-2); max-width: 70ch; padding-top: var(--e-3); border-top: 1px solid var(--filete); }
+#firma .firma__captura .ventana { max-width: 44rem; }
+@media (min-width: 1024px) {
+  #firma .firma { row-gap: var(--e-5); }
+  #firma .firma__tarjeta { grid-column: 1 / -1; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); column-gap: var(--e-5); row-gap: var(--e-4); padding: var(--e-5); }
+  .embudo__nota { grid-column: 1 / -1; }
+  #firma .firma__lado { grid-column: 1 / -1; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--calle); align-items: center; padding-left: 0; }
+  #firma .firma__texto { grid-column: 1 / 6; }
+  #firma .firma__captura { grid-column: 7 / 13; }
+}
+
+/* Cómo lo construí: los nueve pasos del motor; el que usa IA va marcado */
+.flujo-motor .artefacto-flujo__pasos li { font-family: var(--mono); font-weight: 500; font-size: var(--t-secundario); letter-spacing: 0; }
+.flujo-motor__ia { margin: -0.4rem -0.55rem; padding: 0.4rem 0.55rem; border-radius: var(--radio-chico); background: color-mix(in oklab, var(--acento-display) 14%, transparent); box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--acento-display) 55%, transparent); color: var(--acento-texto); }
+
+@media (forced-colors: active) {
+  .embudo__barra::before { background: CanvasText; }
+  .registro__coma, .c-marca { forced-color-adjust: none; outline: 2px solid Highlight; }
+}
+@media print {
+  .codigo { background: none; color: #000; }
+  .codigo__pre { white-space: pre-wrap; overflow: visible; color: #000; }
+  .embudo__barra::before { background: #555 !important; }
+}
+
+/* Registro en celular: la frase del motivo no se corta; si no entra, la cifra baja entera al renglón siguiente */
+.registro__frase { white-space: nowrap; }
+@media (max-width: 479px) {
+  .registro td.cifra { width: 2.2rem; }
+  .registro td, .registro th { padding-right: 0.5rem; }
+  .registro__motivo { font-size: 0.86em; }
+}

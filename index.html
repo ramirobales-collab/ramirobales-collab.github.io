@@ -135,7 +135,7 @@
     <div class="heroe__texto">
       <p class="etiqueta heroe__etiqueta" data-i18n="heroe.etiqueta">AI Product Builder · remoto desde Buenos Aires</p>
       <h1 class="display heroe__titulo" data-i18n="heroe.titulo" data-i18n-html>Construyo productos <br>dirigiendo agentes de IA: <br><em class="heroe__acento"><span class="verbo"><button type="button" class="acto" data-acto="defino" aria-pressed="false">defino</button>,</span> <span class="verbo"><button type="button" class="acto" data-acto="diseno" aria-pressed="false">diseño</button>,</span> <span class="verbo"><button type="button" class="acto" data-acto="verifico" aria-pressed="false">verifico</button>.</span></em></h1>
-      <p class="sub-heroe heroe__sub" data-i18n="heroe.sub">Cuatro productos propios: una app en beta, una en uso diario, una demo y un prototipo. Estudiante de IA y Ciencia de Datos (UADE).</p>
+      <p class="sub-heroe heroe__sub" data-i18n="heroe.sub">Cuatro productos propios: una app en beta, una en uso diario y dos prototipos.</p>
       <div class="heroe__acciones">
         <a class="boton boton--primario" href="#trabajo" data-i18n="heroe.cta">Ver el trabajo</a>
         <a class="boton boton--secundario" href="cv/ramiro-bales-cv-es.pdf" data-cv data-i18n="heroe.cv">CV (PDF)</a>
@@ -147,7 +147,7 @@
       <ul class="heroe__sellos" role="list" aria-label="Estado de los cuatro productos" data-i18n-attr="aria-label=heroe.sellos.aria">
         <li><a class="sello sello--proceso" href="proyectos/cathedra.html"><span class="sello__nombre">Cathedra</span><span aria-hidden="true">·</span><span data-i18n="heroe.sellos.cathedra">beta</span></a></li>
         <li><a class="sello sello--en-uso" href="proyectos/fortal.html"><span class="sello__nombre">Fortal</span><span aria-hidden="true">·</span><span data-i18n="heroe.sellos.fortal">en uso</span></a></li>
-        <li><a class="sello sello--proceso" href="proyectos/athleteiq.html"><span class="sello__nombre">AthleteIQ</span><span aria-hidden="true">·</span><span data-i18n="heroe.sellos.athleteiq">demo</span></a></li>
+        <li><a class="sello sello--proceso" href="proyectos/athleteiq.html"><span class="sello__nombre">AthleteIQ</span><span aria-hidden="true">·</span><span data-i18n="heroe.sellos.athleteiq">prototipo</span></a></li>
         <li><a class="sello sello--proceso" href="proyectos/coro.html"><span class="sello__nombre">coro</span><span aria-hidden="true">·</span><span data-i18n="heroe.sellos.coro">prototipo</span></a></li>
       </ul>
       <p class="heroe__ayuda" id="actos-ayuda" hidden data-i18n="heroe.actos.ayuda">Lleva la sala a esta fase</p>
@@ -173,15 +173,15 @@
           <span class="folio__etiqueta etiqueta" data-revelar="bloque" data-i18n="folio.trabajo">Trabajo</span>
           <span class="folio__filete" aria-hidden="true"></span>
         </p>
-        <h2 class="h-seccion" id="trabajo-titulo" data-revelar data-i18n="trabajo.titulo">Cuatro productos, estado real.</h2>
-        <p class="cabecera__bajada" data-revelar data-i18n="trabajo.sub">Cada uno con sus decisiones, lo que verifiqué y lo que falta.</p>
+        <h2 class="h-seccion" id="trabajo-titulo" data-revelar data-i18n="trabajo.titulo">Cuatro productos propios y en qué punto está cada uno.</h2>
+        <p class="cabecera__bajada" data-revelar data-i18n="trabajo.sub">En cada caso cuento qué decidí, cómo lo comprobé y qué falta.</p>
       </header>
       <div class="casos">
         <article class="caso caso--cathedra">
           <a class="caso__enlace" href="proyectos/cathedra.html" aria-label="Cathedra: leer el caso" data-i18n-attr="aria-label=trabajo.cathedra.aria"></a>
           <div class="caso__media placa cortina" data-iman data-paralaje data-cursor="Leer el caso" data-i18n-attr="data-cursor=trabajo.cursor">
-            <img class="caso__capa caso__capa--fondo" src="assets/mundo/casos/cathedra-fondo.webp" width="1600" height="1000" loading="lazy" decoding="async" data-carga alt="">
-            <img class="caso__capa caso__capa--disp" src="assets/mundo/casos/cathedra-dispositivo.webp" width="1600" height="1000" loading="lazy" decoding="async" data-carga alt="Render: Cathedra abierta en un monitor, sobre un zócalo de piedra oscura en la sala negra" data-i18n-attr="alt=trabajo.cathedra.foto">
+            <img class="caso__capa caso__capa--fondo" src="assets/mundo/casos/cathedra-fondo.webp" srcset="assets/mundo/casos/cathedra-fondo-480.webp 480w, assets/mundo/casos/cathedra-fondo-800.webp 800w, assets/mundo/casos/cathedra-fondo-1600.webp 1600w, assets/mundo/casos/cathedra-fondo.webp 2400w" sizes="(min-width: 1024px) 58vw, 100vw" width="2400" height="1500" loading="lazy" decoding="async" data-carga alt="">
+            <img class="caso__capa caso__capa--disp" src="assets/mundo/casos/cathedra-dispositivo.webp" srcset="assets/mundo/casos/cathedra-dispositivo-480.webp 480w, assets/mundo/casos/cathedra-dispositivo-800.webp 800w, assets/mundo/casos/cathedra-dispositivo-1600.webp 1600w, assets/mundo/casos/cathedra-dispositivo.webp 2400w" sizes="(min-width: 1024px) 58vw, 100vw" width="2400" height="1500" loading="lazy" decoding="async" data-carga alt="Render: Cathedra abierta en un monitor de plata, sobre una losa de mármol oscuro en la sala negra" data-i18n-attr="alt=trabajo.cathedra.foto">
             <span class="caso__luz" aria-hidden="true"></span>
           </div>
           <div class="caso__cuerpo">
@@ -199,8 +199,8 @@
         <article class="caso caso--fortal">
           <a class="caso__enlace" href="proyectos/fortal.html" aria-label="Fortal: leer el caso" data-i18n-attr="aria-label=trabajo.fortal.aria"></a>
           <div class="caso__media placa cortina" data-iman data-paralaje data-cursor="Leer el caso" data-i18n-attr="data-cursor=trabajo.cursor">
-            <img class="caso__capa caso__capa--fondo" src="assets/mundo/casos/fortal-fondo.webp" width="1600" height="1000" loading="lazy" decoding="async" data-carga alt="">
-            <img class="caso__capa caso__capa--disp" src="assets/mundo/casos/fortal-dispositivo.webp" width="1600" height="1000" loading="lazy" decoding="async" data-carga alt="Render: Fortal en un teléfono sobre un zócalo de piedra oscura, con la pantalla de la rutina del día" data-i18n-attr="alt=trabajo.fortal.foto">
+            <img class="caso__capa caso__capa--fondo" src="assets/mundo/casos/fortal-fondo.webp" srcset="assets/mundo/casos/fortal-fondo-480.webp 480w, assets/mundo/casos/fortal-fondo-800.webp 800w, assets/mundo/casos/fortal-fondo-1600.webp 1600w, assets/mundo/casos/fortal-fondo.webp 2400w" sizes="(min-width: 1024px) 50vw, 100vw" width="2400" height="1500" loading="lazy" decoding="async" data-carga alt="">
+            <img class="caso__capa caso__capa--disp" src="assets/mundo/casos/fortal-dispositivo.webp" srcset="assets/mundo/casos/fortal-dispositivo-480.webp 480w, assets/mundo/casos/fortal-dispositivo-800.webp 800w, assets/mundo/casos/fortal-dispositivo-1600.webp 1600w, assets/mundo/casos/fortal-dispositivo.webp 2400w" sizes="(min-width: 1024px) 50vw, 100vw" width="2400" height="1500" loading="lazy" decoding="async" data-carga alt="Render: Fortal en un teléfono apoyado en su base sobre una columna de mármol, con la pantalla de la rutina del día" data-i18n-attr="alt=trabajo.fortal.foto">
             <span class="caso__luz" aria-hidden="true"></span>
           </div>
           <div class="caso__cuerpo">
@@ -217,17 +217,17 @@
         <article class="caso caso--athleteiq">
           <a class="caso__enlace" href="proyectos/athleteiq.html" aria-label="AthleteIQ: leer el caso" data-i18n-attr="aria-label=trabajo.athleteiq.aria"></a>
           <div class="caso__media placa cortina" data-iman data-paralaje data-cursor="Leer el caso" data-i18n-attr="data-cursor=trabajo.cursor">
-            <img class="caso__capa caso__capa--fondo" src="assets/mundo/casos/athleteiq-fondo.webp" width="1600" height="1000" loading="lazy" decoding="async" data-carga alt="">
-            <img class="caso__capa caso__capa--disp" src="assets/mundo/casos/athleteiq-dispositivo.webp" width="1600" height="1000" loading="lazy" decoding="async" data-carga alt="Render: la portada de AthleteIQ en una pantalla apoyada sobre un zócalo de piedra oscura" data-i18n-attr="alt=trabajo.athleteiq.foto">
+            <img class="caso__capa caso__capa--fondo" src="assets/mundo/casos/athleteiq-fondo.webp" srcset="assets/mundo/casos/athleteiq-fondo-480.webp 480w, assets/mundo/casos/athleteiq-fondo-800.webp 800w, assets/mundo/casos/athleteiq-fondo-1600.webp 1600w, assets/mundo/casos/athleteiq-fondo.webp 2400w" sizes="(min-width: 1024px) 50vw, 100vw" width="2400" height="1500" loading="lazy" decoding="async" data-carga alt="">
+            <img class="caso__capa caso__capa--disp" src="assets/mundo/casos/athleteiq-dispositivo.webp" srcset="assets/mundo/casos/athleteiq-dispositivo-480.webp 480w, assets/mundo/casos/athleteiq-dispositivo-800.webp 800w, assets/mundo/casos/athleteiq-dispositivo-1600.webp 1600w, assets/mundo/casos/athleteiq-dispositivo.webp 2400w" sizes="(min-width: 1024px) 50vw, 100vw" width="2400" height="1500" loading="lazy" decoding="async" data-carga alt="Render: la portada de AthleteIQ en una pantalla negra apoyada sobre un bloque de mármol" data-i18n-attr="alt=trabajo.athleteiq.foto">
             <span class="caso__luz" aria-hidden="true"></span>
           </div>
           <div class="caso__cuerpo">
             <p class="caso__indice" data-revelar="bloque" aria-hidden="true">03 / 04</p>
             <h3 class="h-caso caso__nombre" data-revelar>AthleteIQ</h3>
             <p class="caso__frase" data-revelar data-i18n="trabajo.athleteiq.frase">Asistente de IA para el staff de un equipo: se pregunta por chat y responde con los datos del plantel.</p>
-            <p class="caso__prueba" data-revelar="bloque" data-i18n="trabajo.athleteiq.prueba">Landing con 3D en cinco idiomas&nbsp;· bots probados por texto, voz y foto</p>
+            <p class="caso__prueba" data-revelar="bloque" data-i18n="trabajo.athleteiq.prueba">Landing con 3D en cinco idiomas · bots que reciben texto, voz y foto</p>
             <div class="caso__pie" data-revelar="bloque">
-              <span class="sello sello--proceso" data-i18n="trabajo.athleteiq.sello">Demo funcional</span>
+              <span class="sello sello--proceso" data-i18n="trabajo.athleteiq.sello">Prototipo</span>
               <span class="caso__leer" data-i18n="trabajo.leer">Leer el caso →</span>
             </div>
           </div>
@@ -235,14 +235,14 @@
         <article class="caso caso--coro">
           <a class="caso__enlace" href="proyectos/coro.html" aria-label="coro: leer el caso" data-i18n-attr="aria-label=trabajo.coro.aria"></a>
           <div class="caso__media placa cortina" data-iman data-paralaje data-cursor="Leer el caso" data-i18n-attr="data-cursor=trabajo.cursor">
-            <img class="caso__capa caso__capa--fondo" src="assets/mundo/casos/coro-fondo.webp" width="1600" height="1000" loading="lazy" decoding="async" data-carga alt="">
-            <img class="caso__capa caso__capa--disp" src="assets/mundo/casos/coro-dispositivo.webp" width="1600" height="1000" loading="lazy" decoding="async" data-carga alt="Render: el reporte de coro en una tableta apoyada sobre un zócalo de piedra oscura" data-i18n-attr="alt=trabajo.coro.foto">
+            <img class="caso__capa caso__capa--fondo" src="assets/mundo/casos/coro-fondo.webp" srcset="assets/mundo/casos/coro-fondo-480.webp 480w, assets/mundo/casos/coro-fondo-800.webp 800w, assets/mundo/casos/coro-fondo-1600.webp 1600w, assets/mundo/casos/coro-fondo.webp 2400w" sizes="(min-width: 1024px) 50vw, 100vw" width="2400" height="1500" loading="lazy" decoding="async" data-carga alt="">
+            <img class="caso__capa caso__capa--disp" src="assets/mundo/casos/coro-dispositivo.webp" srcset="assets/mundo/casos/coro-dispositivo-480.webp 480w, assets/mundo/casos/coro-dispositivo-800.webp 800w, assets/mundo/casos/coro-dispositivo-1600.webp 1600w, assets/mundo/casos/coro-dispositivo.webp 2400w" sizes="(min-width: 1024px) 50vw, 100vw" width="2400" height="1500" loading="lazy" decoding="async" data-carga alt="Render: el reporte de coro en una tableta sobre su atril, encima de un cubo de mármol" data-i18n-attr="alt=trabajo.coro.foto">
             <span class="caso__luz" aria-hidden="true"></span>
           </div>
           <div class="caso__cuerpo">
             <p class="caso__indice" data-revelar="bloque" aria-hidden="true">04 / 04</p>
             <h3 class="h-caso caso__nombre" data-revelar>coro</h3>
-            <p class="caso__frase" data-revelar data-i18n="trabajo.coro.frase">Lee las reseñas de un producto (400 en la corrida real más grande), agrupa el defecto que se repite y encuentra qué competidor ya lo resolvió.</p>
+            <p class="caso__frase" data-revelar data-i18n="trabajo.coro.frase">Lee las reseñas de un producto (400 en la corrida real más grande), agrupa el defecto que se repite y busca quién ya lo resolvió, con su fuente.</p>
             <p class="caso__prueba" data-revelar="bloque" data-i18n="trabajo.coro.prueba">1.200 reseñas en una prueba de carga&nbsp;· valida la muestra antes de gastar en el análisis</p>
             <div class="caso__pie" data-revelar="bloque">
               <span class="sello sello--proceso" data-i18n="trabajo.coro.sello">Prototipo</span>
@@ -251,6 +251,51 @@
           </div>
         </article>
       </div>
+      <!-- adicionales:inicio -->
+      <div class="adicionales">
+        <header class="adicionales__cabecera">
+          <p class="etiqueta adicionales__etiqueta" data-revelar="bloque" data-i18n="trabajo.adicionales.etiqueta">Proyectos adicionales</p>
+          <h3 class="h3 adicionales__titulo" data-revelar data-i18n="trabajo.adicionales.titulo">Dos proyectos más, los dos en prototipo.</h3>
+          <p class="adicionales__bajada" data-revelar data-i18n="trabajo.adicionales.sub">Son de noviembre de 2026 y no están en la escena 3D de arriba.</p>
+        </header>
+        <div class="adicionales__lista">
+          <article class="caso caso--adicional caso--chamfer">
+            <a class="caso__enlace" href="proyectos/chamfer.html" aria-label="Chamfer: leer el caso" data-i18n-attr="aria-label=trabajo.chamfer.aria"></a>
+            <div class="caso__media placa cortina" data-iman data-paralaje data-cursor="Leer el caso" data-i18n-attr="data-cursor=trabajo.cursor">
+              <img class="caso__capa caso__capa--fondo" src="assets/mundo/casos/chamfer-fondo.webp" srcset="assets/mundo/casos/chamfer-fondo-480.webp 480w, assets/mundo/casos/chamfer-fondo-800.webp 800w, assets/mundo/casos/chamfer-fondo-1600.webp 1600w, assets/mundo/casos/chamfer-fondo.webp 2400w" sizes="(min-width: 1024px) 36vw, (min-width: 768px) 50vw, 100vw" width="2400" height="1500" loading="lazy" decoding="async" data-carga alt="">
+              <img class="caso__capa caso__capa--disp" src="assets/mundo/casos/chamfer-dispositivo.webp" srcset="assets/mundo/casos/chamfer-dispositivo-480.webp 480w, assets/mundo/casos/chamfer-dispositivo-800.webp 800w, assets/mundo/casos/chamfer-dispositivo-1600.webp 1600w, assets/mundo/casos/chamfer-dispositivo.webp 2400w" sizes="(min-width: 1024px) 36vw, (min-width: 768px) 50vw, 100vw" width="2400" height="1500" loading="lazy" decoding="async" data-carga alt="Render: una portátil abierta con la demo Anatomy de Chamfer, sobre una losa de mármol oscuro" data-i18n-attr="alt=trabajo.chamfer.foto">
+              <span class="caso__luz" aria-hidden="true"></span>
+            </div>
+            <div class="caso__cuerpo">
+              <h4 class="h-caso caso__nombre" data-revelar>Chamfer</h4>
+              <p class="caso__frase" data-revelar data-i18n="trabajo.chamfer.frase">Secciones para tiendas Shopify: cada una es un solo archivo que le suma luz y profundidad a las fotos que la tienda ya tiene. Todavía sin probar en una tienda real.</p>
+              <p class="caso__prueba" data-revelar="bloque" data-i18n="trabajo.chamfer.prueba">5 secciones de menos de 40&nbsp;KB, sin librerías&nbsp;· 0 problemas en el validador de temas de Shopify</p>
+              <div class="caso__pie" data-revelar="bloque">
+                <span class="sello sello--proceso" data-i18n="trabajo.chamfer.sello">Prototipo</span>
+                <span class="caso__leer" data-i18n="trabajo.leer">Leer el caso →</span>
+              </div>
+            </div>
+          </article>
+          <article class="caso caso--adicional caso--prospeccion">
+            <a class="caso__enlace" href="proyectos/prospeccion.html" aria-label="Prospección verificada: leer el caso" data-i18n-attr="aria-label=trabajo.prospeccion.aria"></a>
+            <div class="caso__media placa cortina" data-iman data-paralaje data-cursor="Leer el caso" data-i18n-attr="data-cursor=trabajo.cursor">
+              <img class="caso__capa caso__capa--fondo" src="assets/mundo/casos/prospeccion-fondo.webp" srcset="assets/mundo/casos/prospeccion-fondo-480.webp 480w, assets/mundo/casos/prospeccion-fondo-800.webp 800w, assets/mundo/casos/prospeccion-fondo-1600.webp 1600w, assets/mundo/casos/prospeccion-fondo.webp 2400w" sizes="(min-width: 1024px) 36vw, (min-width: 768px) 50vw, 100vw" width="2400" height="1500" loading="lazy" decoding="async" data-carga alt="">
+              <img class="caso__capa caso__capa--disp" src="assets/mundo/casos/prospeccion-dispositivo.webp" srcset="assets/mundo/casos/prospeccion-dispositivo-480.webp 480w, assets/mundo/casos/prospeccion-dispositivo-800.webp 800w, assets/mundo/casos/prospeccion-dispositivo-1600.webp 1600w, assets/mundo/casos/prospeccion-dispositivo.webp 2400w" sizes="(min-width: 1024px) 36vw, (min-width: 768px) 50vw, 100vw" width="2400" height="1500" loading="lazy" decoding="async" data-carga alt="Render: una pantalla con el embudo del motor de prospección y el registro del verificador, sobre un banco de mármol" data-i18n-attr="alt=trabajo.prospeccion.foto">
+              <span class="caso__luz" aria-hidden="true"></span>
+            </div>
+            <div class="caso__cuerpo">
+              <h4 class="h-caso caso__nombre" data-revelar data-i18n="trabajo.prospeccion.nombre">Prospección verificada</h4>
+              <p class="caso__frase" data-revelar data-i18n="trabajo.prospeccion.frase">Un motor que encuentra pymes con sitio propio, revisa su página y redacta un primer correo. Antes del envío, un verificador sin IA frena toda frase que la auditoría no midió.</p>
+              <p class="caso__prueba" data-revelar="bloque" data-i18n="trabajo.prospeccion.prueba">Al 11 de noviembre de 2026: 57 negocios relevados&nbsp;· 16 borradores revisados por el verificador&nbsp;· 6 correos enviados</p>
+              <div class="caso__pie" data-revelar="bloque">
+                <span class="sello sello--proceso" data-i18n="trabajo.prospeccion.sello">Prototipo</span>
+                <span class="caso__leer" data-i18n="trabajo.leer">Leer el caso →</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+      <!-- adicionales:fin -->
     </div>
   </section>
 
@@ -306,7 +351,7 @@
           <ul class="saber__lista" role="list">
             <li class="saber__item"><span data-i18n="saber.3.1">Transcripción local de clases de hasta 4 horas, con la opción elegida midiendo en mi propia placa de video.</span> <span class="saber__donde"><span class="oculto-visual" data-i18n="saber.donde">Dónde:</span> <a class="chip" href="proyectos/cathedra.html">Cathedra</a></span></li>
             <li class="saber__item"><span data-i18n="saber.3.2">Motor de lenguaje, recuperación por embeddings y voz sintética locales, sin conexión.</span> <span class="saber__donde"><span class="oculto-visual" data-i18n="saber.donde">Dónde:</span> <a class="chip" href="proyectos/cathedra.html">Cathedra</a></span></li>
-            <li class="saber__item"><span data-i18n="saber.3.3">Respuestas que citan clase y minuto; lo que no está en el material se marca como ausente, no se inventa.</span> <span class="saber__donde"><span class="oculto-visual" data-i18n="saber.donde">Dónde:</span> <a class="chip" href="proyectos/cathedra.html">Cathedra</a></span></li>
+            <li class="saber__item"><span data-i18n="saber.3.3">Respuestas que citan clase y minuto; si algo no está en el material, la respuesta lo dice.</span> <span class="saber__donde"><span class="oculto-visual" data-i18n="saber.donde">Dónde:</span> <a class="chip" href="proyectos/cathedra.html">Cathedra</a></span></li>
             <li class="saber__item"><span data-i18n="saber.3.4">Exámenes, fichas y juegos generados del material, y un alumno simulado que estudia una semana para medir la calidad.</span> <span class="saber__donde"><span class="oculto-visual" data-i18n="saber.donde">Dónde:</span> <a class="chip" href="proyectos/cathedra.html">Cathedra</a></span></li>
             <li class="saber__item"><span data-i18n="saber.3.5">Reparto del trabajo entre modelos según costo y calidad.</span> <span class="saber__donde"><span class="oculto-visual" data-i18n="saber.donde">Dónde:</span> <span class="chip chip--sin" data-i18n="saber.chip.interno">interno</span></span></li>
             <li class="saber__item"><span data-i18n="saber.3.6" data-i18n-html>Agente antifraude con regresión logística: 83,3&nbsp;% de exactitud contra 33,3&nbsp;% y 66,7&nbsp;% de las líneas base; nota 10/10.</span> <span class="saber__donde"><span class="oculto-visual" data-i18n="saber.donde">Dónde:</span> <span class="chip chip--sin" data-i18n="saber.chip.hackaton">hackatón UADE</span></span></li>
@@ -318,7 +363,7 @@
             <h3 class="saber__t" id="saber-4-t" data-revelar data-i18n="saber.4.t">Seguridad y análisis de riesgo</h3>
           </header>
           <ul class="saber__lista" role="list">
-            <li class="saber__item"><span data-i18n="saber.4.1">Servidor local con control de Origin y defensa contra path traversal: escuchar sólo en la propia máquina no alcanza.</span> <span class="saber__donde"><span class="oculto-visual" data-i18n="saber.donde">Dónde:</span> <a class="chip" href="proyectos/cathedra.html">Cathedra</a></span></li>
+            <li class="saber__item"><span data-i18n="saber.4.1">Servidor local que, además de escuchar sólo en la propia máquina, controla el Origin y se defiende del path traversal.</span> <span class="saber__donde"><span class="oculto-visual" data-i18n="saber.donde">Dónde:</span> <a class="chip" href="proyectos/cathedra.html">Cathedra</a></span></li>
             <li class="saber__item"><span data-i18n="saber.4.2">CSP y contraseñas con scrypt y sal, con tope de intentos y escritura atómica.</span> <span class="saber__donde"><span class="oculto-visual" data-i18n="saber.donde">Dónde:</span> <a class="chip" href="proyectos/cathedra.html">Cathedra</a></span></li>
             <li class="saber__item"><span data-i18n="saber.4.3">Códigos guardados como hash con límite por minuto, y la clave del usuario cifrada con DPAPI.</span> <span class="saber__donde"><span class="oculto-visual" data-i18n="saber.donde">Dónde:</span> <a class="chip" href="proyectos/cathedra.html">Cathedra</a></span></li>
             <li class="saber__item"><span data-i18n="saber.4.4">Proxies sin SSRF, tope de tamaño y credencial obligatoria en todas las rutas, con pruebas.</span> <span class="saber__donde"><span class="oculto-visual" data-i18n="saber.donde">Dónde:</span> <a class="chip" href="proyectos/fortal.html">Fortal</a></span></li>
@@ -431,7 +476,7 @@
             <h3 class="h3 marca__titulo" id="marca-2-titulo" data-revelar data-i18n="marcas.asis.titulo">Asistente de catálogo que no inventa</h3>
             <dl class="marca__datos" data-revelar-hijos>
               <div><dt class="etiqueta" data-i18n="marcas.resuelve">Qué resuelve</dt><dd data-i18n="marcas.asis.resuelve">Contesta preguntas de preventa (medidas, plazos, cuidado) citando la ficha del producto; si el dato no está, lo dice y deriva a una persona con un resumen.</dd></div>
-              <div><dt class="etiqueta" data-i18n="marcas.gana">Qué gana la marca</dt><dd data-i18n="marcas.asis.gana">Menos tickets repetidos, la misma respuesta para todos, cada respuesta auditable y atención fuera de horario.</dd></div>
+              <div><dt class="etiqueta" data-i18n="marcas.gana">Qué gana la marca</dt><dd data-i18n="marcas.asis.gana">Bajan los tickets repetidos, todos reciben la misma respuesta, cada respuesta se puede auditar y la atención sigue fuera de horario.</dd></div>
             </dl>
             <figure class="marca__cifra" data-revelar="bloque">
               <p class="marca__numero cifra" data-rodillo aria-hidden="true">−20 %</p>
@@ -452,7 +497,7 @@
             <h3 class="h3 marca__titulo" id="marca-3-titulo" data-revelar data-i18n="marcas.bots.titulo">Sala de bots</h3>
             <dl class="marca__datos" data-revelar-hijos>
               <div><dt class="etiqueta" data-i18n="marcas.resuelve">Qué resuelve</dt><dd data-i18n="marcas.bots.resuelve">Un bot que contesta por chat texto, fotos y notas de voz con los datos del negocio, y bots que avisan solos: recordatorios, brief de noticias y radar de oportunidades.</dd></div>
-              <div><dt class="etiqueta" data-i18n="marcas.gana">Qué gana la marca</dt><dd data-i18n="marcas.bots.gana">Atención las 24 horas, avisos sin que nadie tenga que mirar, el rastro de cada mensaje y un costo por mensaje conocido.</dd></div>
+              <div><dt class="etiqueta" data-i18n="marcas.gana">Qué gana la marca</dt><dd data-i18n="marcas.bots.gana">Atiende las 24 horas, avisa sin que nadie esté mirando, deja rastro de cada mensaje y se sabe cuánto cuesta cada uno.</dd></div>
             </dl>
             <figure class="marca__cifra" data-revelar="bloque">
               <p class="marca__numero cifra" data-rodillo aria-hidden="true">US$&nbsp;0,18</p>
@@ -477,8 +522,8 @@
           <span class="folio__etiqueta etiqueta" data-revelar="bloque" data-i18n="folio.metodo">Método</span>
           <span class="folio__filete" aria-hidden="true"></span>
         </p>
-        <h2 class="h-seccion" id="metodo-titulo" data-revelar data-i18n="metodo.titulo">Construyo con IA. Defino, diseño y verifico.</h2>
-        <p class="cabecera__bajada" data-revelar data-i18n="metodo.sub">La generación es barata. Lo que pongo yo es agencia, juicio y orquestación.</p>
+        <h2 class="h-seccion" id="metodo-titulo" data-revelar data-i18n="metodo.titulo">Primero escribo cómo lo voy a comprobar.</h2>
+        <p class="cabecera__bajada" data-revelar data-i18n="metodo.sub">Generar código ya cuesta poco. Abajo está la parte que hago yo, cada una con un ejemplo real.</p>
       </header>
       <ol class="triptico" role="list" aria-label="La sala del inicio en sus tres fases" data-i18n-attr="aria-label=metodo.actos.aria">
         <li><figure class="triptico__hoja placa" data-iman>
@@ -494,36 +539,36 @@
           <figcaption class="triptico__pie" data-revelar="bloque"><span class="triptico__n cifra" aria-hidden="true">3</span><span class="triptico__t" data-i18n="metodo.actos.verifico">Verifico</span></figcaption>
         </figure></li>
       </ol>
-      <p class="triptico__nota" data-revelar="bloque"><span data-i18n="metodo.actos.nota">Las tres vistas son la sala de la portada: modelada y renderizada en Blender y compuesta en vivo por un motor WebGL2 propio, sin bibliotecas. Hecha con este mismo método: yo defino y verifico, los agentes construyen.</span> <a href="creditos.html" data-i18n="metodo.actos.nota.enlace">Detalle en créditos →</a></p>
+      <p class="triptico__nota" data-revelar="bloque"><span data-i18n="metodo.actos.nota">Las tres vistas son la sala de la portada: modelada y renderizada en Blender y compuesta en vivo por un motor WebGL2 propio, sin bibliotecas. La construyeron agentes con este método; yo la definí y la verifiqué.</span> <a href="creditos.html" data-i18n="metodo.actos.nota.enlace">Detalle en créditos →</a></p>
       <ol class="esquema" role="list" data-visto data-revelar-hijos aria-label="El método en cuatro pasos" data-i18n-attr="aria-label=metodo.esquema.aria">
-        <li class="esquema__paso"><span class="esquema__n" aria-hidden="true">01</span><span class="esquema__quien etiqueta" data-i18n="metodo.esquema.yo">Yo</span><h3 class="esquema__t" data-i18n="metodo.esquema.1.t">Problema</h3><p data-i18n="metodo.esquema.1">Qué duele, a quién y cómo se nota que se resolvió.</p></li>
-        <li class="esquema__paso"><span class="esquema__n" aria-hidden="true">02</span><span class="esquema__quien etiqueta" data-i18n="metodo.esquema.yo">Yo</span><h3 class="esquema__t" data-i18n="metodo.esquema.2.t">Brief y criterios</h3><p data-i18n="metodo.esquema.2">Flujo, vara de calidad y criterio de aceptación por escrito, antes de pedir una línea.</p></li>
-        <li class="esquema__paso esquema__paso--agentes"><span class="esquema__n" aria-hidden="true">03</span><span class="esquema__quien etiqueta" data-i18n="metodo.esquema.agentes">Agentes de IA</span><h3 class="esquema__t" data-i18n="metodo.esquema.3.t">Los agentes construyen</h3><p data-i18n="metodo.esquema.3">Tandas acotadas: cada una con su brief, sus pruebas y capturas obligatorias.</p></li>
-        <li class="esquema__paso"><span class="esquema__n" aria-hidden="true">04</span><span class="esquema__quien etiqueta" data-i18n="metodo.esquema.yo">Yo</span><h3 class="esquema__t" data-i18n="metodo.esquema.4.t">Yo verifico</h3><p data-i18n="metodo.esquema.4">Pruebas automáticas y capturas a resolución real; lo que no coincide vuelve al paso 3 con el porqué.</p></li>
+        <li class="esquema__paso"><span class="esquema__n" aria-hidden="true">01</span><span class="esquema__quien etiqueta" data-i18n="metodo.esquema.yo">Yo</span><h3 class="esquema__t" data-i18n="metodo.esquema.1.t">Defino el problema</h3><p data-i18n="metodo.esquema.1">Escribo qué duele, a quién y cómo se va a notar que se resolvió.</p></li>
+        <li class="esquema__paso"><span class="esquema__n" aria-hidden="true">02</span><span class="esquema__quien etiqueta" data-i18n="metodo.esquema.yo">Yo</span><h3 class="esquema__t" data-i18n="metodo.esquema.2.t">Escribo el brief</h3><p data-i18n="metodo.esquema.2">El flujo, la vara de calidad y el criterio de aceptación quedan por escrito antes de pedir una línea.</p></li>
+        <li class="esquema__paso esquema__paso--agentes"><span class="esquema__n" aria-hidden="true">03</span><span class="esquema__quien etiqueta" data-i18n="metodo.esquema.agentes">Agentes de IA</span><h3 class="esquema__t" data-i18n="metodo.esquema.3.t">Los agentes construyen</h3><p data-i18n="metodo.esquema.3">Trabajan en tandas acotadas, cada una con su brief, sus pruebas y sus capturas obligatorias.</p></li>
+        <li class="esquema__paso"><span class="esquema__n" aria-hidden="true">04</span><span class="esquema__quien etiqueta" data-i18n="metodo.esquema.yo">Yo</span><h3 class="esquema__t" data-i18n="metodo.esquema.4.t">Yo verifico</h3><p data-i18n="metodo.esquema.4">Corro las pruebas y miro las capturas a resolución real. Lo que no coincide vuelve al paso 3 con el motivo.</p></li>
       </ol>
       <div class="metodo__cols" data-visto>
         <div class="metodo__col">
           <span class="metodo__cifra" data-revelar="bloque" aria-hidden="true">1</span>
-          <h3 class="h3" data-revelar data-i18n="metodo.agencia.titulo">Agencia</h3>
-          <p data-revelar data-i18n="metodo.agencia.texto">Decido qué se construye y qué no. Escribo el brief, el flujo y la vara de calidad antes de pedir una línea.</p>
+          <h3 class="h3" data-revelar data-i18n="metodo.agencia.titulo">Decido qué se construye</h3>
+          <p data-revelar data-i18n="metodo.agencia.texto">Escribo el brief, el flujo y la vara de calidad antes de pedirle una línea a un agente. También decido qué queda afuera.</p>
           <p class="metodo__ejemplo" data-revelar data-i18n="metodo.agencia.ejemplo" data-i18n-html><strong>Fortal:</strong> las reglas de entrenamiento (progresión doble, volumen por tiempo disponible, pesos que de verdad se pueden armar) se escribieron antes de la primera pantalla.</p>
         </div>
         <div class="metodo__col">
           <span class="metodo__cifra" data-revelar="bloque" aria-hidden="true">2</span>
-          <h3 class="h3" data-revelar data-i18n="metodo.juicio.titulo">Juicio</h3>
-          <p data-revelar data-i18n="metodo.juicio.texto">Reviso cada entrega: la acepto, la corrijo o la hago rehacer con el porqué. Elijo entre alternativas y lo documento.</p>
-          <p class="metodo__ejemplo" data-revelar data-i18n="metodo.juicio.ejemplo" data-i18n-html><strong>coro:</strong> descarté rankear quejas por cantidad y elegí medir concentración; veinte temas con cinco quejas no son un defecto, uno con el 47&nbsp;% sí.</p>
+          <h3 class="h3" data-revelar data-i18n="metodo.juicio.titulo">Reviso cada entrega</h3>
+          <p data-revelar data-i18n="metodo.juicio.texto">La acepto, la corrijo o la devuelvo con el motivo por escrito. Cuando hay alternativas, elijo una y anoto por qué.</p>
+          <p class="metodo__ejemplo" data-revelar data-i18n="metodo.juicio.ejemplo" data-i18n-html><strong>coro:</strong> descarté ordenar las quejas por cantidad y elegí medir concentración. Si un solo tema junta el 47&nbsp;% de las quejas, ahí hay un defecto.</p>
         </div>
         <div class="metodo__col">
           <span class="metodo__cifra" data-revelar="bloque" aria-hidden="true">3</span>
-          <h3 class="h3" data-revelar data-i18n="metodo.orquestacion.titulo">Orquestación</h3>
-          <p data-revelar data-i18n="metodo.orquestacion.texto">Encadeno agentes, pruebas y capturas a resolución real. Nada se declara hecho sin verlo renderizado.</p>
+          <h3 class="h3" data-revelar data-i18n="metodo.orquestacion.titulo">Encadeno agentes y pruebas</h3>
+          <p data-revelar data-i18n="metodo.orquestacion.texto">Cada tanda termina en pruebas automáticas y capturas a resolución real. Algo está hecho cuando lo vi renderizado.</p>
           <p class="metodo__ejemplo" data-revelar data-i18n="metodo.orquestacion.ejemplo" data-i18n-html><strong>Cathedra:</strong> más de 5.500 pruebas automáticas. <strong>Fortal:</strong> 746, y cada fase verificada con capturas a 1206×2622, una por una.</p>
         </div>
       </div>
       <div class="metodo__confio placa placa--bloque" data-iman>
         <h3 class="h3" data-revelar data-i18n="metodo.confio.titulo">Cuándo confío y cuándo rehago</h3>
-        <p data-revelar data-i18n="metodo.confio.texto">Confío cuando la prueba pasa y la captura coincide con el brief. Rehago cuando no entiendo el resultado: si no puedo explicarlo, no se publica.</p>
+        <p data-revelar data-i18n="metodo.confio.texto">Confío en una entrega cuando la prueba pasa y la captura coincide con el brief. Si no puedo explicar cómo llegó a ese resultado, la rehago aunque funcione.</p>
       </div>
     </div>
   </section>
@@ -538,23 +583,23 @@
       </p>
       <div class="sobre">
         <div class="sobre__texto pila">
-          <h2 class="h-seccion" id="sobre-titulo" data-revelar data-i18n="sobre.titulo">Uso lo que construyo antes que nadie.</h2>
-          <p data-revelar data-i18n="sobre.texto">Ramiro Bales. Estudio la Licenciatura en IA y Ciencia de Datos en UADE y construyo productos propios desde la idea hasta la publicación. Español nativo, inglés B2 (Duolingo English Test). Busco trabajo remoto como AI Product Builder, en automatización con IA o como tecnólogo creativo.</p>
+          <h2 class="h-seccion" id="sobre-titulo" data-revelar data-i18n="sobre.titulo">Cathedra y Fortal los usé yo antes que nadie.</h2>
+          <p data-revelar data-i18n="sobre.texto">Ramiro Bales. Construyo productos propios desde la idea hasta la publicación: escribo el brief, dirijo a los agentes de IA que programan y verifico lo que entregan. Además curso la Licenciatura en IA y Ciencia de Datos en UADE. Español nativo, inglés B2 (Duolingo English Test). Busco trabajo remoto como AI Product Builder, en automatización con IA o como tecnólogo creativo.</p>
           <h3 class="etiqueta" data-revelar="bloque" data-i18n="sobre.busco.titulo">Qué busco</h3>
           <ul class="busco" role="list">
             <li data-revelar="bloque" data-i18n="sobre.busco.1">Trabajo remoto, solo o en equipo, en inglés o español.</li>
             <li data-revelar="bloque" data-i18n="sobre.busco.2">Producto con IA: definir, diseñar y verificar lo que se construye.</li>
             <li data-revelar="bloque" data-i18n="sobre.busco.3">Automatización con IA de procesos y tareas reales.</li>
-            <li data-revelar="bloque" data-i18n="sobre.busco.4">Tecnología creativa: 3D en tiempo real, web y experiencias.</li>
+            <li data-revelar="bloque" data-i18n="sobre.busco.4">Tecnología creativa: 3D en tiempo real y sitios interactivos.</li>
           </ul>
         </div>
         <div class="sobre__lado">
           <dl class="ficha placa placa--bloque" data-revelar-hijos>
             <div><dt class="etiqueta" data-i18n="sobre.ficha.lugar">Lugar</dt><dd data-i18n="sobre.ficha.lugar.v">Quilmes, Buenos Aires</dd></div>
-            <div><dt class="etiqueta" data-i18n="sobre.ficha.estudios">Estudios</dt><dd data-i18n="sobre.ficha.estudios.v">Licenciatura en IA y Ciencia de Datos, UADE · primer año</dd></div>
             <div><dt class="etiqueta" data-i18n="sobre.ficha.idiomas">Idiomas</dt><dd data-i18n="sobre.ficha.idiomas.v">Español nativo, inglés B2 (Duolingo English Test)</dd></div>
             <div><dt class="etiqueta" data-i18n="sobre.ficha.modalidad">Modalidad</dt><dd data-i18n="sobre.ficha.modalidad.v">Remoto</dd></div>
             <div><dt class="etiqueta" data-i18n="sobre.ficha.herramienta">Herramienta principal</dt><dd data-i18n="sobre.ficha.herramienta.v">Desarrollo asistido por IA (Claude Code)</dd></div>
+            <div><dt class="etiqueta" data-i18n="sobre.ficha.estudios">Estudios</dt><dd data-i18n="sobre.ficha.estudios.v">Licenciatura en IA y Ciencia de Datos, UADE (en curso)</dd></div>
           </dl>
           <p class="etiqueta sobre__actualizado" data-revelar="bloque" data-i18n="sobre.actualizado">Última actualización: noviembre de 2026</p>
         </div>
@@ -571,7 +616,7 @@
         <span class="folio__filete" aria-hidden="true"></span>
       </p>
       <div class="contacto">
-        <h2 class="h-seccion contacto__titulo" id="contacto-titulo" data-revelar data-i18n="contacto.titulo">Hablemos de lo que falta construir.</h2>
+        <h2 class="h-seccion contacto__titulo" id="contacto-titulo" data-revelar data-i18n="contacto.titulo">Escribime si tenés un producto para construir o un proceso para automatizar.</h2>
         <p class="contacto__sub" data-revelar data-i18n="contacto.sub">Respondo en el día.</p>
         <div class="contacto__acciones" data-revelar-hijos>
           <a class="boton boton--primario boton--grande" href="mailto:ramirobales@gmail.com" data-i18n="contacto.mail">Escribir a ramirobales@gmail.com</a>

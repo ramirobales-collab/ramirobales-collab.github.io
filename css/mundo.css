@@ -10,6 +10,10 @@
   mask-image: linear-gradient(#000 var(--fundido-desde, 84%), transparent var(--fundido-hasta, 100%));
 }
 .mundo-vivo .heroe__fondo { opacity: 0; }
+/* WebGL sólo por software: motor.js suelta el contexto y el navegador pinta el lienzo perdido como un rectángulo claro
+   estirado a toda la pantalla (con --gpu=0 la portada salía blanca debajo del héroe en oscuro). Queda el póster y el
+   fondo del body, como en los demás estados sin motor. Mismo arreglo que caso.css para las interiores. */
+canvas.mundo[data-estado="software"] { visibility: hidden; }
 /* el póster (primer pintado, la pausa mientras la placa prepara el motor, y el respaldo): aparece con un fundido y
    se asienta despacio (un acercamiento de cámara que se detiene, una sola vez): nunca hay una pausa muerta */
 .heroe__poster { transition: opacity 900ms var(--curva-entrada), filter 900ms var(--curva-entrada); }

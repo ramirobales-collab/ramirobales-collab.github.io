@@ -16,20 +16,31 @@
    placa oscura sobre el papel y no se funde (alfa 1). Registrada como color para que se resuelva en :root. */
 @property --mascara-foto { syntax: "<color>"; inherits: true; initial-value: #000; }
 :root { --mascara-foto: light-dark(#000, transparent); }
+:root {
+  --atmosfera:
+    radial-gradient(ellipse 60% 52% at 88% -6%, light-dark(oklch(100% 0 0 / 0.75), oklch(100% 0.006 85 / 0.05)), transparent 70%),
+    radial-gradient(ellipse 42% 60% at -4% 32%, light-dark(oklch(100% 0 0 / 0.35), oklch(100% 0.006 85 / 0.022)), transparent 72%),
+    linear-gradient(transparent 55%, light-dark(oklch(88% 0.02 80 / 0.35), oklch(0% 0 0 / 0.6)));
+}
 body:has(> canvas.mundo)::before {
   content: "";
   position: fixed;
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  background:
-    radial-gradient(ellipse 60% 52% at 88% -6%, light-dark(oklch(100% 0 0 / 0.75), oklch(100% 0.006 85 / 0.05)), transparent 70%),
-    radial-gradient(ellipse 42% 60% at -4% 32%, light-dark(oklch(100% 0 0 / 0.35), oklch(100% 0.006 85 / 0.022)), transparent 72%),
-    linear-gradient(transparent 55%, light-dark(oklch(88% 0.02 80 / 0.35), oklch(0% 0 0 / 0.6)));
+  background: var(--atmosfera);
 }
 /* Sin motor (sin WebGL2, ahorro de datos, ?mundo=0, error): motas quietas pintadas en CSS sobre el mismo lienzo. */
 canvas.mundo:is([data-estado="sin-webgl2"], [data-estado="ahorro-de-datos"], [data-estado="respaldo"], [data-estado^="error"]) {
-  background:
+  background: var(--motas-quietas);
+}
+/* WebGL sólo por software: motor.js suelta el contexto que ya había pedido y el navegador pinta ese lienzo perdido como
+   un rectángulo claro con un ícono, estirado a toda la pantalla (relevamiento-demos B5: legal salía blanca en oscuro).
+   El lienzo se esconde y las mismas motas quietas pasan a la atmósfera del body. */
+canvas.mundo[data-estado="software"] { visibility: hidden; }
+body:has(> canvas.mundo[data-estado="software"])::before { background: var(--motas-quietas), var(--atmosfera); }
+:root {
+  --motas-quietas:
     radial-gradient(circle 2px at 12% 22%, light-dark(oklch(30% 0.01 80 / 0.22), oklch(100% 0 0 / 0.5)), transparent),
     radial-gradient(circle 1.5px at 31% 64%, light-dark(oklch(30% 0.01 80 / 0.2), oklch(100% 0 0 / 0.42)), transparent),
     radial-gradient(circle 2.5px at 58% 18%, light-dark(oklch(30% 0.01 80 / 0.18), oklch(100% 0.01 85 / 0.38)), transparent),
@@ -97,6 +108,8 @@ canvas.mundo:is([data-estado="sin-webgl2"], [data-estado="ahorro-de-datos"], [da
 [data-caso="fortal"] .caso-cabecera__media { view-transition-name: caso-fortal; }
 [data-caso="athleteiq"] .caso-cabecera__media { view-transition-name: caso-athleteiq; }
 [data-caso="coro"] .caso-cabecera__media { view-transition-name: caso-coro; }
+[data-caso="chamfer"] .caso-cabecera__media { view-transition-name: caso-chamfer; }
+[data-caso="prospeccion"] .caso-cabecera__media { view-transition-name: caso-prospeccion; }
 .caso-cabecera__media .caso__capa { object-position: 78% 50%; }
 /* las capas entran solas al cargar (es la imagen principal: no espera al observador) */
 html.mov .caso-cabecera__media .caso__capa--fondo { animation: capa-asienta 1600ms var(--curva-entrada) both; }
@@ -432,7 +445,7 @@ html.mov .caso-resultado.visto > h2::after { scale: 1 1; transition: scale var(-
 .caso-contacto > * { position: relative; }
 .caso-contacto__texto { display: grid; gap: var(--e-2); justify-items: start; }
 .caso-contacto__etiqueta { color: var(--acento-texto); }
-.caso-contacto__titulo { font-size: var(--t-caso); line-height: 1.02; letter-spacing: -0.035em; max-width: 16ch; }
+.caso-contacto__titulo { font-size: clamp(2rem, 1.25rem + 2.2vw, 3.5rem); line-height: 1.04; letter-spacing: -0.035em; max-width: 20ch; }
 .caso-contacto__sub { font-family: var(--playfair); font-style: italic; font-size: var(--t-sub-heroe); line-height: 1.35; color: var(--texto-2); }
 .caso-contacto__acciones { display: flex; flex-wrap: wrap; gap: var(--e-2); }
 .caso-contacto__acciones .boton { max-width: 100%; white-space: normal; text-align: center; }
@@ -602,12 +615,463 @@ html.mov .caso-resultado.visto > h2::after { scale: 1 1; transition: scale var(-
 }
 @media (max-width: 599px) { .pagina-404__acciones .boton { flex: 1 1 100%; } }
 
+/* ---------- Patrón de caso v4: «ensayo fotográfico con pruebas» ---------- */
+/* DIRECCION-4 §5; el molde para copiarlo está en portfolio-docs/v4/patron-caso.md. Lo usa una página con
+   main.caso-pagina--v4. Bloques: apertura a sangre → ficha en una línea → problema → recorrido (capturas en ventana) →
+   foto de detalle → firma → decisiones → cómo lo construí → resultado → galería (ángulo + capturas) → contacto y puerta.
+   Tres familias de movimiento: texto por renglones (data-revelar), fotos por capas con paralaje (apertura, detalle y
+   ángulo) y capturas que entran por máscara (.cortina dentro de .ventana). */
+.caso-pagina--v4 {
+  /* ritmo vertical del patrón (13/11: de 16 a ~12 pantallas a 1440×900): entre bloques, entre capturas del recorrido,
+     debajo de cada titular y relleno de las filas editoriales */
+  --v4-entre: clamp(48px, 1rem + 3.6vw, 88px);
+  --v4-paso: clamp(2.25rem, 0.75rem + 2.4vw, 3.5rem);
+  --v4-titulo: clamp(1.5rem, 0.95rem + 1.4vw, 2.25rem);
+  --v4-fila: clamp(1.25rem, 0.8rem + 1.1vw, 2rem);
+  padding-top: 0;
+}
+
+/* Apertura: la foto ocupa todo el ancho y casi todo el alto; el texto va sobre el aire oscuro de la izquierda y la tira
+   de tres datos es una placa de vidrio apoyada abajo. Oscura en los dos temas (color-scheme: dark resuelve los tokens).
+   Conserva .caso-cabecera y .caso-cabecera__media[data-paralaje]: pagina.js mueve las capas con el puntero y el guion
+   del <head> usa esa caja para la transición desde la portada. */
+.caso-cabecera.apertura {
+  display: grid;
+  padding-bottom: 0;
+  isolation: isolate;
+  color-scheme: dark;
+  color: var(--texto);
+  background: #000;
+}
+.caso-cabecera.apertura .apertura__foto {
+  --funde-izq: 0%;
+  --funde-arr: 0px;
+  --funde-aba: 18%;
+  grid-column: auto;
+  grid-row: auto;
+  height: min(62svh, 580px);
+  min-height: 340px;
+  aspect-ratio: auto;
+  margin: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+/* velo: lado del texto y piso, en los dos temas (en claro la máscara no funde y la foto termina en filo) */
+.apertura__foto::after { content: ""; position: absolute; inset: 0; z-index: 3; pointer-events: none; background: linear-gradient(transparent 46%, oklch(0% 0 0 / 0.5) 72%, #000); }
+.caso-cabecera.apertura .caso__capa { object-position: 74% 50%; }
+.caso-cabecera.apertura .caso__capa--fondo { --escala: 1.08; transform: translate3d(calc(var(--px, 0) * -18px), calc(var(--py, 0) * -10px), 0); }
+.caso-cabecera.apertura .caso__capa--disp { --escala: 1.05; transform: translate3d(calc(var(--px, 0) * 14px), calc(var(--py, 0) * 8px), 0); }
+.apertura__in { position: relative; z-index: 2; display: grid; gap: var(--e-3); margin-top: calc(-1 * clamp(5rem, 22vw, 8rem)); padding-bottom: var(--e-3); }
+.apertura__texto { display: grid; gap: var(--e-2); justify-items: start; }
+.apertura__folio { width: min(100%, 24rem); margin-bottom: var(--e-1); }
+.apertura__sello { margin: 0; }
+.apertura__titulo { margin-block: var(--e-1) 0; }
+.apertura__promesa { max-width: 24ch; color: var(--texto); }
+.apertura__tira { margin: 0; padding: var(--e-1) var(--e-3); display: grid; box-shadow: var(--placa-sombra-alta); }
+.apertura__tira > div { display: grid; gap: 0.3rem; align-content: start; padding-block: var(--e-2); }
+.apertura__tira > div + div { border-top: 1px solid var(--filete); }
+.apertura__tira dt { color: var(--texto-3); }
+.apertura__tira dd { margin: 0; font-size: var(--t-secundario); line-height: 1.5; }
+/* tableta (640 a 1023): sigue la apertura apilada del celular, con la tira en tres columnas. Antes, desde 768, el
+   texto iba encima de la foto y el nombre tapaba la pantalla del producto. */
+@media (min-width: 640px) and (max-width: 1023.98px) {
+  .apertura__tira { grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: var(--e-3); }
+  .apertura__tira > div + div { border-top: 0; }
+}
+@media (min-width: 1024px) {
+  .caso-cabecera.apertura { grid-template-areas: "todo"; min-height: clamp(620px, 88svh, 960px); }
+  .caso-cabecera.apertura .apertura__foto { grid-area: todo; height: auto; min-height: 0; }
+  .apertura__foto::after { background: linear-gradient(90deg, oklch(0% 0 0 / 0.82), oklch(0% 0 0 / 0.5) 28%, transparent 54%), linear-gradient(transparent 62%, oklch(0% 0 0 / 0.6)); }
+  .caso-cabecera.apertura .caso__capa { object-position: 70% 50%; }
+  .apertura__in { grid-area: todo; grid-template-rows: 1fr auto; margin-top: 0; padding-top: calc(var(--nav-alto) + var(--e-4)); padding-bottom: var(--e-4); }
+  .apertura__texto { align-self: center; max-width: min(36rem, 46vw); }
+  .apertura__tira { align-self: end; grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: var(--e-4); padding: var(--e-3) var(--e-4); }
+  .apertura__tira > div { padding-block: var(--e-1); }
+  .apertura__tira > div + div { border-top: 0; position: relative; }
+  .apertura__tira > div + div::before { content: ""; position: absolute; left: calc(var(--e-4) / -2); top: 0; bottom: 0; width: 1px; background: linear-gradient(transparent, var(--filete) 18%, var(--filete) 82%, transparent); }
+}
+@media (min-width: 1280px) { .apertura__tira { width: min(100%, 72rem); } }
+
+/* Ficha: una línea de datos sin placa, cerrada por un filete */
+.ficha-linea { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--e-3) var(--calle); margin: var(--v4-titulo, var(--e-4)) 0 0; padding-bottom: var(--e-3); border-bottom: 1px solid var(--filete); }
+.ficha-linea > div { display: grid; gap: 0.3rem; align-content: start; min-width: 0; }
+.ficha-linea__ancho { grid-column: 1 / -1; }
+.ficha-linea dt { color: var(--texto-3); }
+.ficha-linea dd { margin: 0; font-size: var(--t-secundario); line-height: 1.5; }
+.ficha-linea dd a { text-decoration-color: var(--borde); }
+.ficha-linea dd a:hover { text-decoration-color: var(--acento-texto); }
+@media (min-width: 1024px) {
+  .ficha-linea { display: flex; gap: var(--e-5); }
+  .ficha-linea > div { flex: 0 1 auto; }
+  .ficha-linea__ancho { flex: 1 1 24rem; }
+}
+
+/* Cabeza común de cada bloque: folio de la portada + titular que dice el punto */
+.seccion-caso { position: relative; margin-top: var(--v4-entre, clamp(80px, 3rem + 6vw, 176px)); scroll-margin-top: calc(var(--nav-alto) + var(--e-3)); }
+.seccion-caso > .folio { margin-bottom: 1.125rem; }
+.seccion-caso__titulo { font-size: clamp(2rem, 1.3rem + 2.5vw, 3.875rem); line-height: 1.04; letter-spacing: -0.033em; max-width: 22ch; margin-bottom: var(--v4-titulo, var(--e-4)); }
+.seccion-caso__cabeza { display: grid; gap: var(--e-2); margin-bottom: var(--v4-titulo, var(--e-4)); }
+.seccion-caso__cabeza .seccion-caso__titulo { margin-bottom: 0; }
+.seccion-caso__aviso { color: var(--texto-3); }
+@media (min-width: 1024px) {
+  .seccion-caso__cabeza { grid-template-columns: minmax(0, 8fr) minmax(0, 4fr); align-items: end; column-gap: var(--calle); }
+  .seccion-caso__aviso { justify-self: end; text-align: right; max-width: 30ch; }
+}
+
+/* Problema: una oración grande en serif itálica y, corrido a la derecha, el párrafo corto */
+.caso-problema { display: grid; gap: var(--v4-titulo, var(--e-4)); }
+.caso-problema > .folio { margin-bottom: 0; }
+.caso-problema__frase { font-family: var(--playfair); font-style: italic; font-weight: 400; font-size: clamp(1.875rem, 1.05rem + 3vw, 4.125rem); line-height: 1.1; letter-spacing: -0.02em; max-width: 25ch; }
+.caso-problema__texto { font-size: var(--t-cuerpo); line-height: 1.6; color: var(--texto-2); max-width: 50ch; }
+@media (min-width: 1024px) {
+  .caso-problema { grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--calle); }
+  .caso-problema > .folio { grid-column: 1 / -1; }
+  .caso-problema__frase { grid-column: 1 / 12; }
+  .caso-problema__texto { grid-column: 6 / 12; }
+}
+
+/* Recorrido: captura grande en una ventana sobria (marco grafito, filo de luz arriba, sombra de contacto), lados
+   alternados; el resto de las capacidades en una lista de dos columnas */
+.recorrido { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--v4-paso, clamp(4rem, 1.8rem + 5vw, 8rem)); }
+.recorrido__paso { display: grid; gap: var(--e-3); align-items: center; }
+.recorrido__media { margin: 0; }
+.recorrido__texto { display: grid; gap: var(--e-2); justify-items: start; align-content: center; }
+.recorrido__n { font-size: 1.5rem; line-height: 1; color: var(--acento-display); }
+.recorrido__t { font-size: clamp(1.5rem, 1.1rem + 1.1vw, 2.25rem); line-height: 1.14; letter-spacing: -0.025em; max-width: 19ch; }
+.recorrido__texto > p { font-size: var(--t-cuerpo); line-height: 1.6; color: var(--texto-2); max-width: 40ch; }
+.recorrido__prueba { margin-top: var(--e-1); padding-top: var(--e-2); border-top: 1px solid var(--filete); }
+.recorrido__texto > .recorrido__prueba { font-size: var(--t-secundario); line-height: 1.5; }
+.recorrido__prueba .etiqueta { display: block; color: var(--acento-texto); margin-bottom: 0.35rem; }
+@media (min-width: 1024px) {
+  .recorrido__paso { grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--calle); }
+  .recorrido__media { grid-column: 1 / 9; grid-row: 1; }
+  .recorrido__texto { grid-column: 9 / 13; grid-row: 1; padding-left: var(--e-3); }
+  .recorrido__paso:nth-child(even) .recorrido__media { grid-column: 5 / 13; }
+  .recorrido__paso:nth-child(even) .recorrido__texto { grid-column: 1 / 5; padding: 0 var(--e-3) 0 0; }
+}
+.recorrido__mas { margin-top: var(--v4-paso, clamp(4rem, 1.8rem + 5vw, 8rem)); padding-top: var(--e-3); border-top: 1px solid var(--filete); display: grid; gap: var(--e-3); }
+.recorrido__mas-t { color: var(--texto-3); }
+.recorrido__lista { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.25rem var(--e-5); }
+.recorrido__lista li { font-size: var(--t-secundario); line-height: 1.55; color: var(--texto-2); max-width: 54ch; }
+.recorrido__lista strong { color: var(--texto); font-weight: 600; }
+@media (min-width: 768px) { .recorrido__lista { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1024px) {
+  .recorrido__mas { grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--calle); }
+  .recorrido__mas-t { grid-column: 1 / 4; }
+  .recorrido__lista { grid-column: 4 / 13; }
+}
+
+/* La ventana: el marco es igual en los dos temas (grafito, como el bisel de un monitor); la captura entra por máscara */
+.ventana {
+  position: relative;
+  padding: 6px;
+  border-radius: 14px;
+  background: linear-gradient(oklch(24% 0.006 70), oklch(13% 0.004 70) 40%, oklch(10% 0.004 70));
+  box-shadow:
+    inset 0 1px 0 oklch(100% 0 0 / 0.16),
+    inset 0 0 0 1px oklch(100% 0 0 / 0.05),
+    0 1px 1px var(--sombra-contacto),
+    0 3px 4px -1px var(--sombra-contacto),
+    0 34px 56px -34px var(--sombra-ambiente),
+    0 70px 120px -60px var(--sombra-lejana);
+}
+/* sombra de contacto: la ventana «apoya» (elipse corta y densa justo debajo del canto) */
+.ventana::after { content: ""; position: absolute; z-index: -1; left: 7%; right: 7%; bottom: -10px; height: 22px; border-radius: 50%; background: radial-gradient(closest-side, var(--sombra-contacto), transparent); pointer-events: none; }
+.ventana__pantalla { --radio-cortina: 9px; position: relative; border-radius: 9px; overflow: clip; background: #000; }
+.ventana__pantalla picture { display: block; }
+.ventana__pantalla img { display: block; width: 100%; height: auto; }
+
+/* Ampliar: el botón cubre la imagen (no el pie); el «+» aparece al pasar o al enfocar, y siempre en pantallas táctiles */
+.ampliable { position: relative; isolation: isolate; display: grid; align-content: start; }
+.ampliable > :is(.ventana, .album__foto, .taller__imagen), .ampliable > .ampliar { grid-area: 1 / 1; }
+.ampliable > figcaption { grid-row: 2; }
+.ampliar { position: relative; z-index: 4; margin: 0; padding: 0; border: 0; border-radius: 14px; background: transparent; cursor: zoom-in; color: oklch(96% 0.01 85); }
+.ampliar::after {
+  content: "";
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background:
+    linear-gradient(currentColor, currentColor) 50% 50% / 14px 1.5px no-repeat,
+    linear-gradient(currentColor, currentColor) 50% 50% / 1.5px 14px no-repeat,
+    oklch(8% 0.004 70 / 0.78);
+  box-shadow: inset 0 0 0 1px oklch(100% 0 0 / 0.18), 0 6px 18px -6px oklch(0% 0 0 / 0.6);
+  opacity: 0;
+  scale: 0.86;
+  transition: opacity var(--d-etiqueta) var(--curva-entrada), scale var(--d-etiqueta) var(--curva-entrada);
+}
+.ampliar:hover::after, .ampliar:focus-visible::after { opacity: 1; scale: 1; }
+.ampliar:focus-visible { outline: 2px solid var(--foco); outline-offset: 4px; }
+/* en pantallas táctiles el «+» queda siempre: más chico y arriba a la derecha, para no tapar datos de la captura */
+@media (hover: none) { .ampliar::after { top: 10px; right: 10px; bottom: auto; width: 32px; height: 32px; opacity: 0.75; scale: 1; } }
+.ampliacion {
+  width: min(100vw - 2 * var(--margen), 1680px);
+  max-width: none;
+  max-height: calc(100svh - 2 * var(--e-3));
+  margin: auto;
+  padding: var(--e-2);
+  border: 0;
+  border-radius: var(--radio-bloque);
+  color-scheme: dark;
+  color: var(--texto);
+  background: oklch(9% 0.004 70);
+  box-shadow: inset 0 1px 0 oklch(100% 0 0 / 0.12), 0 40px 120px -40px oklch(0% 0 0 / 0.9);
+  overflow: auto;
+}
+.ampliacion::backdrop { background: oklch(3% 0.004 70 / 0.86); }
+.ampliacion__marco img { display: block; width: 100%; height: auto; max-height: calc(100svh - 2 * var(--e-3) - 6.5rem); object-fit: contain; border-radius: var(--radio); }
+.ampliacion__pie { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--e-2) var(--e-3); padding: var(--e-2) var(--e-1) var(--e-1); }
+.ampliacion__texto { font-size: var(--t-secundario); color: var(--texto-2); max-width: 70ch; }
+html:has(.ampliacion[open]) { overflow: hidden; }
+@media (prefers-reduced-motion: no-preference) {
+  .ampliacion[open] { animation: ampliacion-abre 460ms var(--curva-entrada); }
+  .ampliacion[open]::backdrop { animation: ampliacion-fondo 460ms var(--curva-entrada); }
+}
+@keyframes ampliacion-abre { from { opacity: 0; scale: 0.975; } }
+@keyframes ampliacion-fondo { from { opacity: 0; } }
+
+/* Foto a sangre (detalle): todo el ancho, se desplaza más lento que la página; en oscuro se funde arriba y abajo, en
+   claro es una banda oscura con cantos de luz */
+.caso-foto { margin: var(--v4-entre, clamp(80px, 3rem + 6vw, 176px)) 0 0; display: grid; gap: var(--e-2); }
+.caso-foto__marco {
+  position: relative;
+  overflow: clip;
+  aspect-ratio: 4 / 3;
+  background: #000;
+  color-scheme: dark;
+  -webkit-mask-image: linear-gradient(180deg, var(--mascara-foto), #000 16%, #000 84%, var(--mascara-foto));
+  mask-image: linear-gradient(180deg, var(--mascara-foto), #000 16%, #000 84%, var(--mascara-foto));
+}
+.caso-foto__img { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; object-fit: cover; scale: 1.12; }
+.caso-foto__pie { font-size: var(--t-secundario); color: var(--texto-2); }
+@media (min-width: 1024px) { .caso-foto__marco { aspect-ratio: 2.4 / 1; } }
+:root[data-theme="light"] .caso-foto__marco { box-shadow: inset 0 1px 0 oklch(100% 0 0 / 0.1), inset 0 -1px 0 oklch(100% 0 0 / 0.06); }
+@media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) .caso-foto__marco { box-shadow: inset 0 1px 0 oklch(100% 0 0 / 0.1), inset 0 -1px 0 oklch(100% 0 0 / 0.06); } }
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .caso-foto__img, .album__foto img { animation: foto-deriva linear both; animation-timeline: view(); }
+  }
+}
+@keyframes foto-deriva { from { translate: 0 -4.5%; } to { translate: 0 4.5%; } }
+
+/* Firma: la respuesta ampliada (texto copiado de la captura, en su idioma) junto a la captura real recortada */
+.firma { display: grid; gap: var(--e-3); align-items: start; }
+.firma__tarjeta { margin: 0; padding: var(--e-3); display: grid; gap: var(--e-3); }
+.firma__pregunta {
+  justify-self: end;
+  max-width: 28ch;
+  padding: 0.85rem 1.15rem;
+  border-radius: 18px 18px 4px 18px;
+  background: color-mix(in oklab, var(--acento-display) 18%, var(--hundida));
+  box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--acento-display) 30%, transparent);
+  font-size: var(--t-cuerpo);
+  line-height: 1.45;
+}
+.firma__etiqueta { margin-top: var(--e-2); color: var(--acento-texto); }
+.firma__cita { margin: 0; padding-left: var(--e-3); border-left: 2px solid var(--acento-display); }
+.firma__cita p { font-family: var(--playfair); font-style: italic; font-weight: 400; font-size: clamp(1.5rem, 0.95rem + 2vw, 2.75rem); line-height: 1.22; letter-spacing: -0.012em; max-width: 28ch; }
+.firma__sello { display: flex; flex-wrap: wrap; align-items: center; gap: var(--e-2) var(--e-3); padding-top: var(--e-2); font-size: var(--t-secundario); color: var(--texto-2); }
+.firma__minuto { display: inline-flex; align-items: center; gap: 0.55rem; min-height: 40px; padding: 0 1rem; border-radius: var(--radio-chip); box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--acento-display) 60%, transparent); color: var(--acento-texto); font-weight: 600; font-variant-numeric: tabular-nums; }
+.firma__minuto::before { content: ""; width: 0; height: 0; border-left: 7px solid currentColor; border-block: 4.5px solid transparent; }
+.firma__lado { display: grid; gap: var(--e-3); }
+.firma__texto { font-size: var(--t-cuerpo); line-height: 1.6; color: var(--texto-2); max-width: 46ch; }
+.firma__captura { margin: 0; gap: var(--e-2); }
+.firma__captura figcaption { font-size: var(--t-secundario); color: var(--texto-2); max-width: 46ch; }
+/* recorte del panel Preguntar de app-preguntar-1920 (x 1236–1900, y 10–810): la imagen se agranda y se corre dentro de
+   la ventana; los márgenes en % se miden sobre el ancho de la caja */
+.ventana--recorte { max-width: 26rem; }
+/* min-height: 0 — sin esto la imagen agrandada estira la caja (el mínimo automático de aspect-ratio) y el recorte
+   mostraba la captura entera de alto en vez de la zona 10–810 */
+.ventana--recorte .ventana__pantalla { aspect-ratio: 664 / 800; min-height: 0; }
+.ventana--recorte .firma__recorte { width: 289.16%; max-width: none; margin-left: -186.14%; margin-top: -1.51%; }
+@media (min-width: 1024px) {
+  .firma { grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--calle); }
+  .firma__tarjeta { grid-column: 1 / 8; padding: var(--e-4) var(--e-4) var(--e-3); }
+  .firma__lado { grid-column: 8 / 13; padding-left: var(--e-4); }
+}
+
+/* Decisiones: tres filas editoriales separadas por filetes, sin placas */
+.decide { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--filete); }
+.decide__fila { display: grid; grid-template-columns: 2.75rem minmax(0, 1fr); gap: 1rem var(--e-3); padding-block: var(--v4-fila, var(--e-4)); border-bottom: 1px solid var(--filete); }
+.decide__n { grid-row: span 3; font-size: 2rem; line-height: 1; color: var(--acento-display); }
+.decide__eje, .decide__nota { grid-column: 2; min-width: 0; }
+.decide__rotulo { display: block; color: var(--texto-3); margin-bottom: 0.45rem; }
+.decide__eje .decide__rotulo { color: var(--acento-texto); }
+.decide__t { font-size: clamp(1.375rem, 1rem + 1.05vw, 2rem); line-height: 1.2; letter-spacing: -0.02em; max-width: 30ch; }
+.decide__nota p { font-size: var(--t-secundario); line-height: 1.55; color: var(--texto-2); max-width: 40ch; }
+@media (min-width: 1024px) {
+  .decide__fila { grid-template-columns: 4.5rem minmax(0, 6fr) minmax(0, 3fr) minmax(0, 3fr); column-gap: var(--e-4); padding-block: calc(var(--v4-fila, var(--e-4)) + var(--e-2)) var(--v4-fila, var(--e-4)); align-items: start; }
+  .decide__n { grid-row: auto; font-size: 3rem; line-height: 0.9; }
+  .decide__eje, .decide__nota { grid-column: auto; }
+}
+
+/* Cómo lo construí: pasos numerados; los que tienen un artefacto real lo muestran al costado */
+.taller { list-style: none; margin: 0; padding: 0; display: grid; }
+.taller__paso { display: grid; grid-template-columns: 2.75rem minmax(0, 1fr); gap: var(--e-2) var(--e-3); align-items: start; padding-block: var(--v4-fila, var(--e-4)); border-top: 1px solid var(--filete); }
+.taller__paso:last-child { border-bottom: 1px solid var(--filete); }
+.taller__n { font-size: 1.5rem; line-height: 1.15; color: var(--acento-display); }
+.taller__texto { display: grid; gap: 0.45rem; }
+.taller__t { font-size: var(--t-h3); line-height: 1.2; letter-spacing: -0.015em; }
+.taller__texto p { color: var(--texto-2); max-width: 54ch; }
+.taller__artefacto { grid-column: 2; margin: var(--e-2) 0 0; display: grid; gap: var(--e-2); }
+.taller__artefacto figcaption { font-size: var(--t-secundario); color: var(--texto-2); max-width: 44ch; }
+.artefacto-flujo__pasos { list-style: none; margin: 0; padding: var(--e-3); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--e-3) var(--e-2); border-radius: var(--radio-placa); background: var(--hundida); box-shadow: inset 0 0 0 1px var(--filete); }
+.artefacto-flujo__pasos li { display: grid; gap: 0.2rem; font-size: var(--t-cuerpo); font-weight: 600; letter-spacing: -0.01em; }
+.artefacto-flujo__pasos .cifra { font-size: 1.0625rem; color: var(--acento-texto); }
+.taller__imagen { --radio-cortina: var(--radio-placa); width: min(100%, 12rem); border-radius: var(--radio-placa); overflow: clip; box-shadow: var(--placa-sombra); }
+.taller__imagen img { display: block; width: 100%; height: auto; }
+.taller__artefacto--imagen .ampliar { width: min(100%, 12rem); }
+@media (min-width: 1024px) {
+  .taller__paso { grid-template-columns: 4.5rem minmax(0, 6fr) minmax(0, 5fr); column-gap: var(--e-4); }
+  .taller__artefacto { grid-column: 3; grid-row: 1; margin: 0; }
+}
+
+/* Resultado: hasta tres cifras verificadas en numerales grandes, el estado real y «qué falta» */
+.balance__cifras { list-style: none; margin: 0 0 var(--e-4); padding: 0; display: grid; gap: var(--e-3); }
+.balance__cifras li { display: grid; gap: var(--e-2); align-content: start; padding-top: clamp(2.25rem, 1.5rem + 2vw, 3rem); border-top: 1px solid var(--filete); }
+.balance__cifra { position: relative; font-size: clamp(3.5rem, 1.9rem + 5.4vw, 7.75rem); line-height: 0.95; letter-spacing: -0.035em; color: var(--acento-display); white-space: nowrap; }
+.balance__antes { position: absolute; left: 0; bottom: 100%; margin-bottom: 0.45rem; font-family: var(--inter); font-size: var(--t-etiqueta); font-weight: 500; letter-spacing: 0.12em; line-height: 1.3; text-transform: uppercase; color: var(--texto-3); }
+.balance__que { font-size: var(--t-secundario); line-height: 1.5; color: var(--texto-2); max-width: 28ch; }
+@media (min-width: 768px) { .balance__cifras { grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: var(--calle); } }
+.balance__estado { display: grid; gap: var(--e-4); }
+.balance__texto { font-size: var(--t-cuerpo); line-height: 1.6; max-width: 50ch; }
+.balance__falta-t { color: var(--texto-3); margin-bottom: var(--e-2); }
+.balance__falta ul { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--e-2); }
+.balance__falta li { position: relative; padding-left: 1.5rem; color: var(--texto-2); max-width: 54ch; }
+.balance__falta li::before { content: ""; position: absolute; left: 0; top: 0.8em; width: 0.7rem; height: 1px; background: var(--acento-display); }
+@media (min-width: 1024px) { .balance__estado { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--e-5); } }
+
+/* Galería: el segundo ángulo a todo el ancho y el resto de las capturas reales; todo se amplía */
+.album { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: var(--e-4) var(--calle); }
+.album__item { grid-column: 1 / -1; margin: 0; gap: var(--e-2); }
+.album__item figcaption { font-size: var(--t-secundario); color: var(--texto-2); max-width: 52ch; }
+.album__foto { --radio-cortina: var(--radio-bloque); --escala: 1.1; --escala-oculta: 1.18; position: relative; aspect-ratio: 4 / 3; border-radius: var(--radio-bloque); overflow: clip; background: #000; color-scheme: dark; box-shadow: var(--placa-sombra); }
+.album__foto img { display: block; width: 100%; height: 100%; max-width: none; object-fit: cover; }
+.album__item--foto .ampliar { border-radius: var(--radio-bloque); }
+@media (min-width: 1024px) {
+  .album__foto { aspect-ratio: 16 / 9; }
+  .album__item--captura { grid-column: 4 / -1; }
+  /* el par más común (el ángulo y una sola captura): lado a lado, la foto en su proporción 16:10 */
+  .album:has(> .album__item--captura:nth-child(2):last-child) > .album__item--foto { grid-column: 1 / 8; }
+  .album:has(> .album__item--captura:nth-child(2):last-child) > .album__item--foto .album__foto { aspect-ratio: 16 / 10; }
+  .album:has(> .album__item--captura:nth-child(2):last-child) > .album__item--captura { grid-column: 8 / -1; align-self: center; }
+}
+/* cierre (contacto y puerta al siguiente caso) con el mismo ritmo que los bloques */
+.caso-pagina--v4 .caso-contacto, .caso-pagina--v4 .caso-nav { margin-top: var(--v4-entre); }
+@media (min-width: 768px) { .caso-pagina--v4 .caso-puerta { min-height: clamp(380px, 46svh, 560px); } }
+@media (max-width: 767px) { .caso-pagina--v4 .caso-par--anterior .caso-par__media { aspect-ratio: 2 / 1; } }
+@media (min-width: 1024px) { .caso-pagina--v4 .caso-contacto { padding: var(--e-4) var(--e-5); } }
+
+/* ---------- Patrón v4: arreglos de la revisión del 13/11 ---------- */
+/* Titulares de sección: con 15 a 20 palabras a tamaño de display pesaban como bloques de texto */
+.caso-pagina--v4 .seccion-caso__titulo { font-size: clamp(1.75rem, 1.1rem + 1.9vw, 3rem); max-width: 26ch; }
+.caso-pagina--v4 .caso-contacto__titulo { max-width: 26ch; }
+/* sin viudas en pies, datos, listas y citas (base.css sólo lo hace en p) */
+.caso-pagina--v4 :is(figcaption, dd, li, blockquote) { text-wrap: pretty; }
+
+/* Apertura: desde 1024 la tira de vidrio baja debajo de la foto (antes cruzaba el borde inferior y tapaba pies,
+   zócalos y bases: sin sombra de contacto a la vista el producto flotaba). La caja interna se disuelve para que el
+   texto quede sobre la foto y la tira en su propia fila. */
+@media (min-width: 1024px) {
+  .caso-pagina--v4 .caso-cabecera.apertura { grid-template-areas: "todo" "tira"; grid-template-rows: clamp(560px, 80svh, 860px) auto; min-height: 0; }
+  .caso-pagina--v4 .apertura__in { display: contents; }
+  .caso-pagina--v4 .apertura__texto { grid-area: todo; position: relative; z-index: 2; align-self: center; margin-left: max(var(--margen), (100% - var(--ancho-max)) / 2); padding-top: var(--nav-alto); }
+  .caso-pagina--v4 .apertura__tira { grid-area: tira; position: relative; z-index: 2; justify-self: center; width: min(100% - 2 * var(--margen), var(--ancho-max)); margin: 0 0 var(--e-3); }
+  /* Cathedra: el monitor arranca más a la izquierda que en los otros casos y el nombre le pisaba el bisel */
+  .caso-pagina--v4 .caso-cabecera.apertura[data-caso="cathedra"] .caso__capa { translate: 6.5vw 0; }
+}
+
+/* Detalle a sangre: desde 1024 a 16:9 y con poco recorte, para que se vea casi toda la foto y la parte con foco */
+@media (min-width: 1024px) {
+  .caso-pagina--v4 .caso-foto__marco {
+    aspect-ratio: 16 / 9;
+    -webkit-mask-image: linear-gradient(180deg, var(--mascara-foto), #000 8%, #000 92%, var(--mascara-foto));
+    mask-image: linear-gradient(180deg, var(--mascara-foto), #000 8%, #000 92%, var(--mascara-foto));
+  }
+  .caso-pagina--v4 .caso-foto__img { scale: 1.04; object-position: 50% var(--detalle-y, 50%); }
+}
+.caso-pagina--v4:has(> [data-caso="cathedra"]) { --detalle-y: 55%; }
+.caso-pagina--v4:has(> [data-caso="fortal"]) { --detalle-y: 60%; }
+.caso-pagina--v4:has(> [data-caso="athleteiq"]) { --detalle-y: 45%; }
+.caso-pagina--v4:has(> [data-caso="coro"]) { --detalle-y: 45%; }
+.caso-pagina--v4:has(> [data-caso="chamfer"]) { --detalle-y: 60%; }
+.caso-pagina--v4:has(> [data-caso="prospeccion"]) { --detalle-y: 45%; }
+/* con la escala casi en 1, la deriva al deslizar tiene que ser corta o asoma el borde */
+@supports (animation-timeline: view()) {
+  @media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+    .caso-pagina--v4 .caso-foto__img { animation-name: foto-deriva-corta; }
+  }
+}
+@keyframes foto-deriva-corta { from { translate: 0 -1.8%; } to { translate: 0 1.8%; } }
+
+/* La puerta al caso siguiente: más alta, con el nombre más chico y el dispositivo corrido a la derecha (la banda es
+   más ancha que la foto, así que object-position no lo puede correr de costado); el negro llega más lejos */
+@media (min-width: 768px) {
+  .caso-pagina--v4 .caso-puerta { min-height: clamp(460px, 60svh, 680px); }
+  .caso-pagina--v4 .caso-puerta .caso-par__nombre { font-size: clamp(3rem, 1rem + 5vw, 6rem); }
+  /* «Prospección verificada» son dos palabras largas: más chica, para que no llegue a la pantalla */
+  .caso-pagina--v4 .caso-puerta[href="prospeccion.html"] .caso-par__nombre { font-size: clamp(2.5rem, 0.9rem + 3.6vw, 4.5rem); }
+  .caso-pagina--v4 .caso-puerta .caso-par__media .caso__capa { left: 11%; right: -11%; width: auto; object-position: 50% var(--puerta-y, 50%); }
+  .caso-pagina--v4 .caso-puerta .caso-par__media::after { background: linear-gradient(90deg, #000 0%, oklch(0% 0 0 / 0.86) 34%, oklch(0% 0 0 / 0.5) 50%, transparent 62%); }
+  .caso-puerta [data-vt="cathedra"] { --puerta-y: 50%; }
+  .caso-puerta [data-vt="fortal"] { --puerta-y: 50%; }
+  .caso-puerta [data-vt="athleteiq"] { --puerta-y: 50%; }
+  .caso-puerta [data-vt="coro"] { --puerta-y: 50%; }
+  .caso-puerta [data-vt="chamfer"] { --puerta-y: 50%; }
+  .caso-puerta [data-vt="prospeccion"] { --puerta-y: 50%; }
+}
+
+/* Galería en claro: el render de estudio negro va a sangre como banda, con canto de luz, sin tarjeta flotante */
+:root[data-theme="light"] .caso-pagina--v4 .album__foto, :root[data-theme="light"] .caso-pagina--v4 .album__item--foto > .ampliar { border-radius: 0; box-shadow: none; }
+:root[data-theme="light"] .caso-pagina--v4 .album__foto { outline: 1px solid oklch(100% 0 0 / 0.12); outline-offset: -1px; }
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) .caso-pagina--v4 .album__foto, :root:not([data-theme="dark"]) .caso-pagina--v4 .album__item--foto > .ampliar { border-radius: 0; box-shadow: none; }
+  :root:not([data-theme="dark"]) .caso-pagina--v4 .album__foto { outline: 1px solid oklch(100% 0 0 / 0.12); outline-offset: -1px; }
+}
+
+/* Resultado de una sola cifra con peso: el numeral al lado de lo que mide, y el resto en una línea de texto */
+@media (min-width: 768px) {
+  .balance__cifras--una { grid-template-columns: minmax(0, 1fr); }
+  .balance__cifras--una li { grid-template-columns: auto minmax(0, 30ch); justify-content: start; align-items: end; column-gap: var(--e-3); }
+  .balance__cifras--una .balance__que { padding-bottom: 0.6em; }
+}
+.balance__cifras--una { margin-bottom: var(--e-3); }
+.balance__linea { margin: 0 0 var(--e-4); font-size: var(--t-cuerpo); line-height: 1.6; color: var(--texto-2); max-width: 56ch; }
+.balance__cambio-t { margin-top: var(--e-4); }
+.balance__cambio { color: var(--texto-2); max-width: 54ch; }
+
+/* Traducción de las pruebas copiadas en español: sólo con la página en inglés, debajo de la tarjeta */
+.firma__traduccion { grid-column: 1 / -1; margin: 0; padding-top: var(--e-2); border-top: 1px solid var(--filete); font-size: var(--t-secundario); line-height: 1.55; color: var(--texto-2); max-width: 72ch; }
+html:not([lang="en"]) .firma__traduccion { display: none; }
+@media (min-width: 1024px) { .firma > .firma__traduccion { grid-column: 1 / 8; } }
+
+/* Ampliar en el teléfono: el diálogo ocupa la pantalla y la captura se recorre y se pellizca (antes la ampliación
+   salía más chica que la imagen de la página) */
+@media (max-width: 767px) {
+  .ampliacion { width: 100vw; height: 100svh; max-height: none; margin: 0; padding: 0; border-radius: 0; display: grid; grid-template-rows: minmax(0, 1fr) auto; overflow: hidden; }
+  .ampliacion:not([open]) { display: none; }
+  .ampliacion__marco { display: flex; overflow: auto; touch-action: pan-x pan-y pinch-zoom; }
+  .ampliacion__marco img { flex: none; margin: auto; width: max(200%, 760px); max-width: none; max-height: none; border-radius: 0; }
+  .ampliacion__marco img[data-vertical] { width: 100%; }
+  .ampliacion__pie { position: sticky; bottom: 0; padding: var(--e-2) var(--margen); background: oklch(9% 0.004 70); box-shadow: 0 -1px 0 oklch(100% 0 0 / 0.08); }
+}
+
+/* Foco a la vista: con el desplazamiento suave y la entrada por bloque, el botón enfocado quedaba invisible varios
+   segundos */
+html:has(.caso-pagina--v4):focus-within { scroll-behavior: auto; }
+html.mov .caso-pagina--v4 [data-mov]:focus-visible, html.mov .caso-pagina--v4 [data-mov]:has(:focus-visible) { opacity: 1; translate: none; filter: none; }
+
 /* ---------- Movimiento reducido y colores forzados ---------- */
 @media (prefers-reduced-motion: reduce) {
   .caso-cabecera__media .caso__capa, .caso-par .caso__capa, .puerta .caso__capa, .sala404 img { animation: none !important; transition: none; }
   .caso__brillo { display: none; }
   .caso-puerta .caso-par__media, .caso-puerta .caso-par__nombre { transition: none; }
   .caso-parte::before, .caso-pasos::before, .caso-resultado > h2::after { scale: none !important; }
+  .caso-foto__img, .album__foto img { animation: none !important; }
+  .ampliar::after { transition: none; }
 }
 .quieto .caso__brillo { display: none; }
 .quieto .caso-parte::before, .quieto .caso-pasos::before, .quieto .caso-resultado > h2::after { scale: none !important; }
@@ -615,6 +1079,8 @@ html.mov .caso-resultado.visto > h2::after { scale: 1 1; transition: scale var(-
   .caso-decision, .caso-resultado, .capacidad, .caso-galeria__media, .caso-par, .caso-resumen, .caso-ficha, .doc, .lista-creditos li, .puerta, .caso-contacto { border: 1px solid CanvasText; box-shadow: none; }
   .caso__brillo, .caso-puerta .caso-par__media::after { display: none; }
   .caso-parte[data-n]::after, body:has(> canvas.mundo)::before { display: none; }
+  .ventana, .apertura__tira, .firma__tarjeta, .album__foto, .ampliacion { border: 1px solid CanvasText; box-shadow: none; }
+  .apertura__foto::after, .ventana::after { display: none; }
 }
 
 /* ---------- Impresión de un caso ---------- */
@@ -661,4 +1127,19 @@ html.mov .caso-resultado.visto > h2::after { scale: 1 1; transition: scale var(-
   .caso-contacto__titulo { font-size: 18pt; }
   .caso-contacto__acciones { display: block; margin-top: 3mm; }
   .caso-contacto__acciones .boton { display: block; margin: 1.5mm 0; text-align: left; }
+  /* patrón v4 */
+  .ampliar, .ampliacion, .apertura__foto::after, .ventana::after { display: none !important; }
+  .caso-cabecera.apertura { display: block; background: none; color: #000; }
+  .caso-cabecera.apertura .apertura__foto { width: 110mm; height: auto !important; aspect-ratio: 16 / 10; margin: 0 0 4mm !important; }
+  .apertura__in { margin: 0 !important; padding: 0 !important; display: block; }
+  .apertura__tira { display: block; padding: 3mm 4mm; margin-top: 4mm; }
+  .seccion-caso { margin-top: 8mm; break-inside: auto; }
+  .seccion-caso__titulo, .caso-problema__frase { font-size: 18pt; max-width: none; margin-bottom: 3mm; }
+  .recorrido, .taller, .decide { display: block; }
+  .recorrido__paso, .decide__fila, .taller__paso, .firma__tarjeta, .album__item { display: block; break-inside: avoid; margin-bottom: 5mm; }
+  .recorrido__media, .album__item--captura { max-width: 120mm; }
+  .ventana { box-shadow: none; padding: 0; background: none; border: 1px solid #888; }
+  .caso-foto { display: none; }
+  .balance__cifras { grid-template-columns: repeat(3, 1fr) !important; }
+  .balance__cifra { font-size: 26pt; }
 }

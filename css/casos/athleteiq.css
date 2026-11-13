@@ -1,0 +1,51 @@
+/* Caso AthleteIQ: reglas propias sobre el patrón de caso v4 (css/caso.css). Se carga después de caso.css. */
+
+/* Firma: la respuesta del bot copiada tal cual de la captura. Sans y no serif itálica: lo dice una máquina, no una
+   persona; el veredicto va en el acento, como en el chat. */
+.firma-bot { margin: 0; padding-left: var(--e-3); border-left: 2px solid var(--acento-display); }
+.firma-bot p {
+  font-size: clamp(1.375rem, 0.9rem + 1.55vw, 2.25rem);
+  font-weight: 500;
+  line-height: 1.28;
+  letter-spacing: -0.018em;
+  max-width: 30ch;
+  text-wrap: pretty;
+}
+.firma-bot__veredicto { display: block; margin-bottom: 0.3em; color: var(--acento-texto); font-weight: 650; }
+.firma-bot__chip { display: inline-flex; align-items: center; min-height: 32px; padding: 0 0.85rem; border-radius: var(--radio-chip); box-shadow: inset 0 0 0 1px var(--filete); }
+
+/* El teléfono de la landing: la captura ya trae su marco, así que va sin ventana; se recortan las esquinas al radio
+   del teléfono (60 px sobre 572 × 1180) y apoya con una sombra de contacto corta. */
+.firma-telefono { justify-items: start; }
+.firma-telefono > .firma-telefono__pantalla { grid-area: 1 / 1; }
+/* la tarjeta es más baja que el lado (texto + teléfono): acompaña al bajar en vez de dejar un hueco */
+@media (min-width: 1024px) {
+  .firma__tarjeta { position: sticky; top: calc(var(--nav-alto) + var(--e-4)); }
+}
+.firma-telefono__pantalla {
+  position: relative;
+  width: min(62vw, 17rem);
+  border-radius: 10.5% / 5.1%;
+  background: #000;
+  box-shadow: 0 2px 3px -1px var(--sombra-contacto), 0 40px 70px -40px var(--sombra-ambiente), 0 80px 120px -70px var(--sombra-lejana);
+}
+.firma-telefono__mascara { --radio-cortina: 10.5% / 5.1%; border-radius: inherit; overflow: clip; }
+.firma-telefono__pantalla img { display: block; width: 100%; height: auto; }
+.firma-telefono .ampliar { width: min(62vw, 17rem); border-radius: 10.5% / 5.1%; }
+
+/* Listas de «Cómo lo construí» con frases enteras (preguntas, lo que saqué): una columna, peso normal */
+.artefacto-flujo--lista .artefacto-flujo__pasos { grid-template-columns: minmax(0, 1fr); gap: var(--e-2); }
+.artefacto-flujo--lista .artefacto-flujo__pasos li { display: flex; gap: 0.75rem; align-items: baseline; font-size: var(--t-secundario); font-weight: 500; line-height: 1.45; }
+.artefacto-flujo--lista .artefacto-flujo__pasos .cifra { flex: none; font-size: 0.9375rem; }
+
+/* La captura de «Cómo funciona» es una franja ancha (1920 × 613): en escritorio ocupa todo el ancho del contenido */
+@media (min-width: 1024px) {
+  .caso-album .album__item--captura { grid-column: 1 / -1; }
+}
+
+@media (forced-colors: active) {
+  .firma-telefono__pantalla { border: 1px solid CanvasText; box-shadow: none; }
+}
+@media print {
+  .firma-telefono__pantalla { box-shadow: none; width: 50mm; }
+}

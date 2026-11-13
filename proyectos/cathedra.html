@@ -1,11 +1,11 @@
 <!doctype html>
-<html lang="es">
+<html lang="es" data-dic="casos">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-qjuWUyWKqt0Fss48UG4bCZhHldwUiLUb4aBs52h7UYk='; style-src 'self'; img-src 'self'; font-src 'self'; connect-src 'self'; media-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-WVrqxGBOCFO/Cp2nS+4U+eTNuPdla3QGlJrPwf9tiP8='; style-src 'self'; img-src 'self'; font-src 'self'; connect-src 'self'; media-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script>var d=document.documentElement;if(self!==top){d.classList.add('enmarcado');try{top.location.replace(location.href)}catch(e){}}try{var t=new URLSearchParams(location.search).get('tema')||localStorage.getItem('tema');if(t==='light'||t==='dark')d.dataset.theme=t;}catch(e){}d.classList.add('js');if(!/[?&](quieto=1|ir=)/.test(location.search))d.classList.add('mov');setTimeout(function(){if(!d.dataset.mov)d.classList.remove('js','mov')},4000);(function(){var r=matchMedia('(prefers-reduced-motion: reduce)'),h=[];function n(el,v){if(el){el.style.viewTransitionName=v;h.push(el);}}addEventListener('pagereveal',function(e){h.forEach(function(el){el.style.viewTransitionName='';});h=[];var v=e.viewTransition;if(v){if(r.matches){v.ready.catch(function(){});v.skipTransition();}else d.classList.add('vt');}});addEventListener('pageswap',function(e){var v=e.viewTransition;if(!v)return;if(r.matches){v.ready.catch(function(){});v.skipTransition();return;}var a=e.activation,u=a&&a.entry&&a.entry.url?new URL(a.entry.url):null,c=document.querySelector('.caso-cabecera__media'),m=u&&u.pathname.match(/\/proyectos\/(cathedra|fortal|athleteiq|coro)\.html$/);if(m){n(c,'none');n(document.querySelector('[data-vt="'+m[1]+'"]'),'caso-'+m[1]);}else if(!(a&&(a.navigationType==='traverse'||(u&&u.hash==='#trabajo'))))n(c,'none');});})();</script>
+<script>var d=document.documentElement;if(self!==top){d.classList.add('enmarcado');try{top.location.replace(location.href)}catch(e){}}try{var t=new URLSearchParams(location.search).get('tema')||localStorage.getItem('tema');if(t==='light'||t==='dark')d.dataset.theme=t;}catch(e){}d.classList.add('js');if(!/[?&](quieto=1|ir=)/.test(location.search))d.classList.add('mov');setTimeout(function(){if(!d.dataset.mov)d.classList.remove('js','mov')},4000);(function(){var r=matchMedia('(prefers-reduced-motion: reduce)'),h=[];function n(el,v){if(el){el.style.viewTransitionName=v;h.push(el);}}addEventListener('pagereveal',function(e){h.forEach(function(el){el.style.viewTransitionName='';});h=[];var v=e.viewTransition;if(v){if(r.matches){v.ready.catch(function(){});v.skipTransition();}else d.classList.add('vt');}});addEventListener('pageswap',function(e){var v=e.viewTransition;if(!v)return;if(r.matches){v.ready.catch(function(){});v.skipTransition();return;}var a=e.activation,u=a&&a.entry&&a.entry.url?new URL(a.entry.url):null,c=document.querySelector('.caso-cabecera__media'),m=u&&u.pathname.match(/\/proyectos\/(cathedra|fortal|athleteiq|coro|chamfer|prospeccion).html$/);if(m){n(c,'none');n(document.querySelector('[data-vt="'+m[1]+'"]'),'caso-'+m[1]);}else if(!(a&&(a.navigationType==='traverse'||(u&&u.hash==='#trabajo'))))n(c,'none');});})();</script>
 <title data-i18n="caso.cathedra.titulo">Cathedra — caso de estudio · Ramiro Bales</title>
 <meta name="description" data-i18n-attr="content=caso.cathedra.descripcion" content="Cathedra, app de estudio para Windows en beta: transcribe clases, arma el plan, genera exámenes y fichas, y cada respuesta cita clase y minuto. Cómo la definí, la dirigí con agentes de IA y la verifiqué.">
 <meta name="color-scheme" content="light dark">
@@ -38,8 +38,8 @@
 <link rel="modulepreload" href="../js/mundo/fondo.js">
 <link rel="modulepreload" href="../js/comun.js">
 <link rel="modulepreload" href="../js/movimiento.js">
-<link rel="preload" as="image" href="../assets/mundo/casos/cathedra-dispositivo.webp" fetchpriority="high">
-<link rel="preload" as="image" href="../assets/mundo/casos/cathedra-fondo.webp">
+<link rel="preload" as="image" href="../assets/mundo/casos/cathedra-dispositivo.webp" imagesrcset="../assets/mundo/casos/cathedra-dispositivo-480.webp 480w, ../assets/mundo/casos/cathedra-dispositivo-800.webp 800w, ../assets/mundo/casos/cathedra-dispositivo-1600.webp 1600w, ../assets/mundo/casos/cathedra-dispositivo.webp 2400w" imagesizes="(min-width: 768px) 100vw, 220vw" fetchpriority="high">
+<link rel="preload" as="image" href="../assets/mundo/casos/cathedra-fondo.webp" imagesrcset="../assets/mundo/casos/cathedra-fondo-480.webp 480w, ../assets/mundo/casos/cathedra-fondo-800.webp 800w, ../assets/mundo/casos/cathedra-fondo-1600.webp 1600w, ../assets/mundo/casos/cathedra-fondo.webp 2400w" imagesizes="(min-width: 768px) 100vw, 220vw">
 <link rel="stylesheet" href="../css/variables.css">
 <link rel="stylesheet" href="../css/base.css">
 <link rel="stylesheet" href="../css/componentes.css">
@@ -48,7 +48,7 @@
 <body>
 <a class="enmarcado-aviso" href="https://ramirobales-collab.github.io/proyectos/cathedra.html" target="_top" rel="noopener noreferrer" data-i18n="enmarcado.aviso">Esta página está dentro de otro sitio. Abrila en su dirección real: ramirobales-collab.github.io</a>
 <a class="saltar" href="#contenido" data-i18n="nav.saltar">Saltar al contenido</a>
-<nav class="nav nav--placa" aria-label="Principal">
+<nav class="nav nav--placa" aria-label="Principal" data-i18n-attr="aria-label=nav.aria">
   <div class="contenedor nav__in">
     <a class="nav__marca" href="../index.html" data-i18n="nav.marca">Ramiro Bales</a>
     <div class="nav__enlaces">
@@ -103,191 +103,276 @@
   </div>
 </nav>
 <canvas class="mundo" aria-hidden="true"></canvas>
-<main class="caso-pagina" id="contenido">
-  <header class="caso-cabecera" id="cabecera" data-caso="cathedra">
-    <div class="contenedor caso-cabecera__in">
-      <p class="folio caso-cabecera__folio"><span class="folio__cifra cifra" aria-hidden="true">01</span><span class="folio__etiqueta etiqueta" data-revelar="bloque" data-i18n="caso.folio">Caso de estudio</span><span class="folio__filete" aria-hidden="true"></span></p>
-      <div class="caso-cabecera__texto">
-        <p class="caso-cabecera__sello" data-revelar="bloque"><span class="sello sello--proceso" data-i18n="trabajo.cathedra.sello">Producto propio · en beta</span></p>
-        <h1 class="display caso-cabecera__titulo" data-revelar>Cathedra</h1>
-        <p class="sub-heroe caso-cabecera__linea" data-revelar data-i18n="caso.cathedra.gancho">De horas de clase grabada a un plan de estudio donde cada respuesta cita clase y minuto.</p>
-        
+<main class="caso-pagina caso-pagina--v4" id="contenido">
+  <header class="caso-cabecera apertura" id="cabecera" data-caso="cathedra">
+    <div class="caso-cabecera__media apertura__foto" data-paralaje><img class="caso__capa caso__capa--fondo" src="../assets/mundo/casos/cathedra-fondo.webp" srcset="../assets/mundo/casos/cathedra-fondo-480.webp 480w, ../assets/mundo/casos/cathedra-fondo-800.webp 800w, ../assets/mundo/casos/cathedra-fondo-1600.webp 1600w, ../assets/mundo/casos/cathedra-fondo.webp 2400w" sizes="(min-width: 768px) 100vw, 220vw" width="2400" height="1500" fetchpriority="high" decoding="async" alt=""><img class="caso__capa caso__capa--disp" src="../assets/mundo/casos/cathedra-dispositivo.webp" srcset="../assets/mundo/casos/cathedra-dispositivo-480.webp 480w, ../assets/mundo/casos/cathedra-dispositivo-800.webp 800w, ../assets/mundo/casos/cathedra-dispositivo-1600.webp 1600w, ../assets/mundo/casos/cathedra-dispositivo.webp 2400w" sizes="(min-width: 768px) 100vw, 220vw" width="2400" height="1500" fetchpriority="high" decoding="async" alt="Render: Cathedra abierta en un monitor de plata, sobre una losa de mármol oscuro en la sala negra" data-i18n-attr="alt=trabajo.cathedra.foto"><img class="caso__capa caso__capa--disp caso__brillo" src="../assets/mundo/casos/cathedra-dispositivo.webp" srcset="../assets/mundo/casos/cathedra-dispositivo-480.webp 480w, ../assets/mundo/casos/cathedra-dispositivo-800.webp 800w, ../assets/mundo/casos/cathedra-dispositivo-1600.webp 1600w, ../assets/mundo/casos/cathedra-dispositivo.webp 2400w" sizes="(min-width: 768px) 100vw, 220vw" width="2400" height="1500" decoding="async" alt=""></div>
+    <div class="contenedor apertura__in">
+      <div class="apertura__texto">
+        <p class="folio apertura__folio"><span class="folio__cifra cifra" aria-hidden="true">01</span><span class="folio__etiqueta etiqueta" data-revelar="bloque" data-i18n="caso.folio">Caso de estudio</span><span class="folio__filete" aria-hidden="true"></span></p>
+        <p class="apertura__sello" data-revelar="bloque"><span class="sello sello--proceso" data-i18n="trabajo.cathedra.sello">Producto propio · en beta</span></p>
+        <h1 class="display caso-cabecera__titulo apertura__titulo" data-revelar>Cathedra</h1>
+        <p class="sub-heroe apertura__promesa" data-revelar data-i18n="caso.cathedra.gancho">De horas de clase grabada a un plan de estudio donde cada respuesta cita clase y minuto.</p>
       </div>
-      <div class="caso-cabecera__media" data-paralaje data-iman><img class="caso__capa caso__capa--fondo" src="../assets/mundo/casos/cathedra-fondo.webp" width="1600" height="1000" fetchpriority="high" decoding="async" alt=""><img class="caso__capa caso__capa--disp" src="../assets/mundo/casos/cathedra-dispositivo.webp" width="1600" height="1000" fetchpriority="high" decoding="async" alt="Render: Cathedra abierta en un monitor, sobre un zócalo de piedra oscura en la sala negra" data-i18n-attr="alt=trabajo.cathedra.foto"><img class="caso__capa caso__capa--disp caso__brillo" src="../assets/mundo/casos/cathedra-dispositivo.webp" width="1600" height="1000" decoding="async" alt=""><span class="caso__luz" aria-hidden="true"></span></div>
-      <dl class="caso-resumen placa placa--bloque" data-revelar-hijos>
-        <div><dt class="etiqueta" data-i18n="caso.resumen.que">Qué es</dt><dd data-i18n="caso.cathedra.resumen.1">App de estudio para Windows que transcribe clases y genera, desde ese material, el plan, las guías, los exámenes y las fichas.</dd></div>
+      <dl class="apertura__tira placa placa--bloque" data-revelar-hijos data-iman>
+        <div><dt class="etiqueta" data-i18n="caso.resumen.que">Qué es</dt><dd data-i18n="caso.cathedra.resumen.1">App de estudio para Windows: transcribe tus clases y arma con ellas la guía, el simulacro y las fichas.</dd></div>
         <div><dt class="etiqueta" data-i18n="caso.resumen.para">Para quién</dt><dd data-i18n="caso.cathedra.resumen.2">Estudiantes universitarios con clases grabadas y material de cátedra.</dd></div>
-        <div><dt class="etiqueta" data-i18n="caso.resumen.estado">Estado</dt><dd data-i18n="caso.cathedra.resumen.3">En beta (1.2.0), con instalador para Windows y página pública.</dd></div>
+        <div><dt class="etiqueta" data-i18n="caso.resumen.estado">Estado</dt><dd data-i18n="caso.cathedra.resumen.3">Beta 1.2.0, con instalador para Windows 10 y 11 y página pública.</dd></div>
       </dl>
     </div>
   </header>
   <div class="contenedor">
-  <dl class="reticula caso-ficha placa placa--bloque" data-revelar-hijos aria-label="Ficha del proyecto" data-i18n-attr="aria-label=caso.meta.aria">
-    <div class="caso-ficha__item"><dt class="etiqueta" data-i18n="caso.meta.proyecto">Proyecto</dt><dd data-i18n="caso.meta.propio">Propio, sin cliente</dd></div>
-    <div class="caso-ficha__item caso-ficha__item--ancho"><dt class="etiqueta" data-i18n="caso.meta.rol">Mi rol</dt><dd data-i18n="caso.cathedra.rol">Fundador y product builder. Definí el producto, el flujo de seis pasos, la identidad y la vara de calidad; dirigí el desarrollo y verifiqué cada tanda.</dd></div>
-    <div class="caso-ficha__item caso-ficha__item--ancho"><dt class="etiqueta" data-i18n="caso.meta.herramientas">Herramientas</dt><dd data-i18n="caso.cathedra.herramientas">Desarrollo asistido por IA · Python · HTML, CSS y JavaScript · transcripción local · recuperación por embeddings</dd></div>
-    <div class="caso-ficha__item"><dt class="etiqueta" data-i18n="caso.meta.periodo">Período</dt><dd data-i18n="caso.cathedra.periodo">Desde septiembre de 2026, en desarrollo activo</dd></div>
-    <div class="caso-ficha__item"><dt class="etiqueta" data-i18n="caso.meta.enlace">Enlace</dt><dd><a href="https://cathedra-beta.vercel.app" rel="noopener noreferrer" target="_blank"><span data-i18n="caso.cathedra.enlace">Página y descarga para Windows</span>&nbsp;↗<span class="oculto-visual" data-i18n="caso.enlace.nuevo">(abre en pestaña nueva)</span></a></dd></div>
-  </dl>
-  <div class="reticula caso-cuerpo">
-    <nav class="caso-indice" aria-label="Partes del caso" data-i18n-attr="aria-label=caso.indice.aria">
-      <ol>
-      <li><a href="#cabecera"><span class="caso-indice__n" aria-hidden="true">01</span><span data-i18n="caso.parte.cabecera">Resumen</span></a></li>
-      <li><a href="#problema"><span class="caso-indice__n" aria-hidden="true">02</span><span data-i18n="caso.parte.problema">Problema</span></a></li>
-      <li><a href="#hace"><span class="caso-indice__n" aria-hidden="true">03</span><span data-i18n="caso.parte.hace">Qué hace</span></a></li>
-      <li><a href="#decisiones"><span class="caso-indice__n" aria-hidden="true">04</span><span data-i18n="caso.parte.decisiones">Decisiones</span></a></li>
-      <li><a href="#agentes"><span class="caso-indice__n" aria-hidden="true">05</span><span data-i18n="caso.parte.agentes">Cómo lo construí</span></a></li>
-      <li><a href="#resultado"><span class="caso-indice__n" aria-hidden="true">06</span><span data-i18n="caso.parte.resultado">Resultado</span></a></li>
-      <li><a href="#galeria"><span class="caso-indice__n" aria-hidden="true">07</span><span data-i18n="caso.parte.galeria">Galería</span></a></li>
-      </ol>
-    </nav>
-    <div class="caso-contenido">
-      <section class="caso-parte" id="problema" data-n="02" data-visto aria-labelledby="t-problema">
-        <span class="etiqueta caso-parte__n" aria-hidden="true">02</span>
-        <h2 class="caso-parte__titulo" id="t-problema" data-revelar data-i18n="caso.parte.problema">Problema</h2>
-        <p data-revelar data-i18n="caso.cathedra.problema.1">Un estudiante junta horas de clases grabadas y material de cátedra, y no sabe qué entra en el examen ni dónde está cada explicación.</p>
-        <p data-revelar data-i18n="caso.cathedra.problema.2">Volver a ver la clase entera no escala. Y un asistente genérico contesta con la misma seguridad cuando el dato no está en el material.</p>
-      </section>
-      <section class="caso-parte" id="hace" data-n="03" data-visto aria-labelledby="t-hace">
-        <span class="etiqueta caso-parte__n" aria-hidden="true">03</span>
-        <h2 class="caso-parte__titulo" id="t-hace" data-revelar data-i18n="caso.parte.hace">Qué hace</h2>
-        <ul class="capacidades capacidades--12" role="list" data-revelar-hijos>
-          <li class="capacidad placa placa--viva"><span class="capacidad__icono"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 12h1.5M7 8v8M11 4.5v15M15 8v8M19 10.5v3M21.5 12h-.5"/></svg></span><div><h3 class="capacidad__t" data-i18n="caso.cathedra.hace.1.t">Transcribe clases largas</h3><p data-i18n="caso.cathedra.hace.1">Clases grabadas de hasta 4 horas, con control anti-alucinación; el texto alcanza para no volver a ver la clase.</p></div></li>
-          <li class="capacidad placa placa--viva"><span class="capacidad__icono"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 6.5h6l2 2h10V19H3zM3 11h18"/></svg></span><div><h3 class="capacidad__t" data-i18n="caso.cathedra.hace.2.t">Ordena por materia</h3><p data-i18n="caso.cathedra.hace.2">Clasifica cada material en contenido, examen, práctico o cursada.</p></div></li>
-          <li class="capacidad placa placa--viva"><span class="capacidad__icono"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 6h16v14H4zM4 10h16M8 3.5v4M16 3.5v4M8 14h3"/></svg></span><div><h3 class="capacidad__t" data-i18n="caso.cathedra.hace.3.t">Un plan por materia</h3><p data-i18n="caso.cathedra.hace.3">Arma un único plan de estudio desde el cronograma; lo que el cronograma no dice queda marcado.</p></div></li>
-          <li class="capacidad placa placa--viva"><span class="capacidad__icono"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 3h9l3 3v15H6zM9 10h6M9 14h6M9 18h3.5"/></svg></span><div><h3 class="capacidad__t" data-i18n="caso.cathedra.hace.4.t">Guías y explicaciones</h3><p data-i18n="caso.cathedra.hace.4">Guía por clase y por tema, bloque por bloque, con la frase y el minuto de origen.</p></div></li>
-          <li class="capacidad placa placa--viva"><span class="capacidad__icono"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 4h14v16H5zM8.5 12.5l2.5 2.5 4.5-5.5"/></svg></span><div><h3 class="capacidad__t" data-i18n="caso.cathedra.hace.5.t">Exámenes calibrados</h3><p data-i18n="caso.cathedra.hace.5">Simulacros con el formato que anunció el profesor, calibrados con parciales anteriores.</p></div></li>
-          <li class="capacidad placa placa--viva"><span class="capacidad__icono"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 8h11v12H4zM8 4h12v12"/></svg></span><div><h3 class="capacidad__t" data-i18n="caso.cathedra.hace.6.t">Fichas con repetición espaciada</h3><p data-i18n="caso.cathedra.hace.6">Errores, juegos y fichas van a un mazo que se reparte hasta cada examen.</p></div></li>
-          <li class="capacidad placa placa--viva"><span class="capacidad__icono"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9.5 18h5M10.5 21h3M12 3a6 6 0 0 0-3.5 10.9V16h7v-2.1A6 6 0 0 0 12 3z"/></svg></span><div><h3 class="capacidad__t" data-i18n="caso.cathedra.hace.7.t">Modo Feynman</h3><p data-i18n="caso.cathedra.hace.7">Explicar el tema con palabras propias para comprobar que se entendió.</p></div></li>
-          <li class="capacidad placa placa--viva"><span class="capacidad__icono"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3a9 9 0 1 0 0 18a9 9 0 1 0 0-18zM12 8a4 4 0 1 0 0 8a4 4 0 1 0 0-8zM12 12h.01"/></svg></span><div><h3 class="capacidad__t" data-i18n="caso.cathedra.hace.8.t">Huecos contra el programa</h3><p data-i18n="caso.cathedra.hace.8">Compara lo visto con el programa oficial y muestra qué falta cubrir.</p></div></li>
-          <li class="capacidad placa placa--viva"><span class="capacidad__icono"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 7h5v5c0 3-1.6 4.8-4 5.5M14 7h5v5c0 3-1.6 4.8-4 5.5"/></svg></span><div><h3 class="capacidad__t" data-i18n="caso.cathedra.hace.9.t">Cita al minuto</h3><p data-i18n="caso.cathedra.hace.9">Cada respuesta trae clase, minuto y quién lo dijo; lo que no está en el material se marca como ausente y se ofrece buscar afuera.</p></div></li>
-          <li class="capacidad placa placa--viva"><span class="capacidad__icono"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 18a4 4 0 0 1-.7-7.9A5.5 5.5 0 0 1 16.8 9 4.5 4.5 0 0 1 17 18zM4 4l16 16"/></svg></span><div><h3 class="capacidad__t" data-i18n="caso.cathedra.hace.10.t">Con o sin conexión</h3><p data-i18n="caso.cathedra.hace.10">Motor en la nube o motor local de cuatro capas: lenguaje, reglas, recuperación por embeddings y matemática simbólica.</p></div></li>
-          <li class="capacidad placa placa--viva"><span class="capacidad__icono"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 9.5h3.5L13 5v14l-5.5-4.5H4zM16.5 9a4 4 0 0 1 0 6M19 6.5a7.5 7.5 0 0 1 0 11"/></svg></span><div><h3 class="capacidad__t" data-i18n="caso.cathedra.hace.11.t">Voz</h3><p data-i18n="caso.cathedra.hace.11">Lectura en voz alta y resúmenes en audio: la clase en 5 minutos.</p></div></li>
-          <li class="capacidad placa placa--viva"><span class="capacidad__icono"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 3h12v18H6zM9 7h6M9 11h.01M12 11h.01M15 11h.01M9 14.5h.01M12 14.5h.01M15 14.5h.01M9 18h.01M12 18h.01M15 18h.01"/></svg></span><div><h3 class="capacidad__t" data-i18n="caso.cathedra.hace.12.t">Herramientas de estudio</h3><p data-i18n="caso.cathedra.hace.12">Calculadora con graficador, escenas 3D de conceptos, juegos de memoria y recordatorios por Telegram.</p></div></li>
-        </ul>
-      </section>
-      <section class="caso-parte" id="decisiones" data-n="04" data-visto aria-labelledby="t-decisiones">
-        <span class="etiqueta caso-parte__n" aria-hidden="true">04</span>
-        <h2 class="caso-parte__titulo" id="t-decisiones" data-revelar data-i18n="caso.parte.decisiones">Decisiones</h2>
-        <div class="caso-decisiones">
-          <article class="caso-decision placa placa--bloque" data-iman>
-            <span class="caso-decision__n cifra" aria-hidden="true">01</span>
-            <div class="caso-decision__vi"><span class="caso-decision__etiqueta etiqueta" data-i18n="caso.vi">Lo que vi</span><p data-revelar data-i18n="caso.cathedra.decision.1.vi">Un estudiante no distingue una explicación fluida de un invento.</p></div>
-            <div class="caso-decision__elegi-bloque"><span class="caso-decision__etiqueta etiqueta" data-i18n="caso.elegi">Decidí</span><h3 class="caso-decision__elegi" data-revelar data-i18n="caso.cathedra.decision.1.elegi">Que cada respuesta lleve clase, minuto y quién lo dijo, y que el sello quede vacío si el dato no está en el material.</h3></div>
-            <div class="caso-decision__descarte-bloque"><span class="caso-decision__etiqueta etiqueta" data-i18n="caso.descarte">Descarté</span><p class="tachado caso-decision__descarte" data-revelar data-i18n="caso.cathedra.decision.1.descarte">Responder siempre con un texto fluido.</p><p class="caso-decision__porque"><span class="etiqueta" data-i18n="caso.porque">Porque</span> <span data-i18n="caso.cathedra.decision.1.porque">Si no se puede rastrear hasta el profesor, no sirve para estudiar.</span></p></div>
-          </article>
-          <article class="caso-decision placa placa--bloque" data-iman>
-            <span class="caso-decision__n cifra" aria-hidden="true">02</span>
-            <div class="caso-decision__vi"><span class="caso-decision__etiqueta etiqueta" data-i18n="caso.vi">Lo que vi</span><p data-revelar data-i18n="caso.cathedra.decision.2.vi">En una misma clase el profesor mezcla contenido con avisos del parcial y de la cursada.</p></div>
-            <div class="caso-decision__elegi-bloque"><span class="caso-decision__etiqueta etiqueta" data-i18n="caso.elegi">Decidí</span><h3 class="caso-decision__elegi" data-revelar data-i18n="caso.cathedra.decision.2.elegi">Clasificar cada bloque en contenido, examen, práctico o cursada, y armar un solo plan por materia.</h3></div>
-            <div class="caso-decision__descarte-bloque"><span class="caso-decision__etiqueta etiqueta" data-i18n="caso.descarte">Descarté</span><p class="tachado caso-decision__descarte" data-revelar data-i18n="caso.cathedra.decision.2.descarte">Un plan por cada archivo subido.</p><p class="caso-decision__porque"><span class="etiqueta" data-i18n="caso.porque">Porque</span> <span data-i18n="caso.cathedra.decision.2.porque">Con varios planes no se sabe cuál seguir; uno solo, alimentado por todo el material, sí.</span></p></div>
-          </article>
-          <article class="caso-decision placa placa--bloque" data-iman>
-            <span class="caso-decision__n cifra" aria-hidden="true">03</span>
-            <div class="caso-decision__vi"><span class="caso-decision__etiqueta etiqueta" data-i18n="caso.vi">Lo que vi</span><p data-revelar data-i18n="caso.cathedra.decision.3.vi">Las clases son del alumno y no siempre hay buena conexión.</p></div>
-            <div class="caso-decision__elegi-bloque"><span class="caso-decision__etiqueta etiqueta" data-i18n="caso.elegi">Decidí</span><h3 class="caso-decision__elegi" data-revelar data-i18n="caso.cathedra.decision.3.elegi">Transcribir y guardar en la computadora, con un motor local que funciona sin internet.</h3></div>
-            <div class="caso-decision__descarte-bloque"><span class="caso-decision__etiqueta etiqueta" data-i18n="caso.descarte">Descarté</span><p class="tachado caso-decision__descarte" data-revelar data-i18n="caso.cathedra.decision.3.descarte">Depender sólo de un servicio en la nube.</p><p class="caso-decision__porque"><span class="etiqueta" data-i18n="caso.porque">Porque</span> <span data-i18n="caso.cathedra.decision.3.porque">Estudiar no puede cortarse por falta de conexión.</span></p></div>
-          </article>
-        </div>
-      </section>
-      <section class="caso-parte" id="agentes" data-n="05" data-visto aria-labelledby="t-agentes">
-        <span class="etiqueta caso-parte__n" aria-hidden="true">05</span>
-        <h2 class="caso-parte__titulo" id="t-agentes" data-revelar data-i18n="caso.parte.agentes.titulo">Cómo lo construí con agentes de IA</h2>
-        <ol class="caso-pasos" data-visto>
-          <li><div><strong data-revelar="bloque" data-i18n="caso.cathedra.agentes.1.t">Brief y flujo.</strong><p data-revelar data-i18n="caso.cathedra.agentes.1">Antes de pedir una línea escribí los seis pasos (empezás, subís, la lee, preguntás, rendís, repasás) y la regla que los gobierna: nada que no esté en el material.</p></div></li>
-          <li><div><strong data-revelar="bloque" data-i18n="caso.cathedra.agentes.2.t">Una tanda por vez.</strong><p data-revelar data-i18n="caso.cathedra.agentes.2">Cada función fue una tanda con brief, criterio de aceptación y capturas obligatorias, y un solo agente responsable.</p></div></li>
-          <li><div><strong data-revelar="bloque" data-i18n="caso.cathedra.agentes.3.t">Revisión independiente.</strong><p data-revelar data-i18n="caso.cathedra.agentes.3">Antes de llamar «final» a algo, otra revisión mira el frente y el fondo: textos, botones y contraste medido en el tema claro.</p></div></li>
-          <li><div><strong data-revelar="bloque" data-i18n="caso.cathedra.agentes.4.t">Verificación.</strong><p data-revelar data-i18n="caso.cathedra.agentes.4">Capturas a resolución real, miradas una por una, y más de 5.500 pruebas automáticas.</p></div></li>
-          <li><div><strong data-revelar="bloque" data-i18n="caso.cathedra.agentes.5.t">Qué rehice.</strong><p data-revelar data-i18n="caso.cathedra.agentes.5">La identidad, dos veces: la primera paleta (negro y celeste) salió y quedó cuero, marfil, cristal y cereza; el emblema se rehízo hasta que el material se leyera como real.</p></div></li>
-        </ol>
-      </section>
-    </div>
-    <section class="caso-resultado seccion--tinta placa--bloque" data-visto data-iman id="resultado" aria-labelledby="t-resultado">
-      <h2 class="etiqueta" id="t-resultado"><span aria-hidden="true">06 —</span> <span data-i18n="caso.parte.resultado">Resultado</span></h2>
-      <p class="caso-resultado__frase" data-revelar="lineas" data-i18n="caso.cathedra.resultado">Beta 1.2.0 publicada, con instalador para Windows y página pública.</p>
-      <p class="caso-resultado__apoyo" data-revelar data-i18n="caso.cathedra.apoyo">Instalador completo y liviano para Windows 10/11, revisión de seguridad y textos legales antes de la beta, más de 5.500 pruebas automáticas y un panel de administración. Sin usuarios ni métricas que contar todavía.</p>
+    <dl class="ficha-linea" aria-label="Ficha del proyecto" data-i18n-attr="aria-label=caso.meta.aria" data-revelar-hijos>
+      <div><dt class="etiqueta" data-i18n="caso.meta.rol">Mi rol</dt><dd data-i18n="caso.cathedra.rol.corto">Fundador y product builder</dd></div>
+      <div><dt class="etiqueta" data-i18n="caso.meta.periodo">Período</dt><dd data-i18n="caso.cathedra.periodo">Desde agosto de 2026, en desarrollo activo</dd></div>
+      <div class="ficha-linea__ancho"><dt class="etiqueta" data-i18n="caso.meta.herramientas">Herramientas</dt><dd data-i18n="caso.cathedra.herramientas">Desarrollo asistido por IA · Python · HTML, CSS y JavaScript · transcripción local · recuperación por embeddings</dd></div>
+      <div><dt class="etiqueta" data-i18n="caso.meta.enlace">Enlace</dt><dd><a href="https://cathedra-beta.vercel.app" rel="noopener noreferrer" target="_blank"><span data-i18n="caso.cathedra.enlace">Página y descarga para Windows</span>&nbsp;↗<span class="oculto-visual" data-i18n="caso.enlace.nuevo">(abre en pestaña nueva)</span></a></dd></div>
+    </dl>
+
+    <section class="seccion-caso caso-problema" id="problema" aria-labelledby="t-problema">
+      <p class="folio"><span class="folio__cifra cifra" aria-hidden="true">02</span><span class="folio__etiqueta etiqueta" data-revelar="bloque" data-i18n="caso.patron.problema">El problema</span><span class="folio__filete" aria-hidden="true"></span></p>
+      <h2 class="caso-problema__frase" id="t-problema" data-revelar data-i18n="caso.cathedra.problema.titulo">Una clase grabada puede durar cuatro horas, y la explicación que entra en el parcial está en algún minuto de ese audio.</h2>
+      <p class="caso-problema__texto" data-revelar data-i18n="caso.cathedra.problema.texto">Con varias materias así, más el material de cátedra, no se sabe qué entra en el examen ni dónde se explicó cada tema. Volver a ver todo no escala, y un asistente genérico contesta con la misma seguridad cuando el dato no está en el material.</p>
     </section>
-    <div class="caso-contenido caso-contenido--sigue">
-      <section class="caso-parte caso-reflexion" data-visto aria-labelledby="t-reflexion">
-        <h2 class="caso-parte__titulo" id="t-reflexion" data-revelar data-i18n="caso.parte.reflexion">Qué cambiaría y qué falta</h2>
-        <p data-revelar data-i18n="caso.cathedra.reflexion.1">Lo que cambiaría: fijar la identidad antes de construir pantallas; rehacerla dos veces costó tandas enteras.</p>
-        <p data-revelar data-i18n="caso.cathedra.reflexion.2">Lo que falta: sin usuarios todavía, no sé si un estudiante la adopta sin ayuda. «Grabar en vivo» figura como «pronto» y no está.</p>
-      </section>
-    </div>
-    <section class="caso-galeria caso-parte" id="galeria" data-n="07" data-visto aria-labelledby="t-galeria">
-      <span class="etiqueta caso-parte__n" aria-hidden="true">07</span>
-      <h2 class="caso-parte__titulo" id="t-galeria" data-revelar data-i18n="caso.parte.galeria">Galería</h2>
-      <p class="caso-galeria__aviso etiqueta" data-revelar="bloque" data-i18n="caso.cathedra.galeria.aviso">Capturas con datos de demostración: materias, docentes y alumna ficticios.</p>
-      <div class="caso-galeria__items">
-        <figure class="caso-galeria__item caso-galeria__item--12 caso-galeria__item--antes">
-          <div class="caso-galeria__media placa mascara">
+
+    <section class="seccion-caso caso-recorrido" id="recorrido" aria-labelledby="t-recorrido">
+      <p class="folio"><span class="folio__cifra cifra" aria-hidden="true">03</span><span class="folio__etiqueta etiqueta" data-revelar="bloque" data-i18n="caso.patron.recorrido">Recorrido</span><span class="folio__filete" aria-hidden="true"></span></p>
+      <div class="seccion-caso__cabeza">
+        <h2 class="h-caso seccion-caso__titulo" id="t-recorrido" data-revelar data-i18n="caso.cathedra.recorrido.titulo">Todo sale de las clases que subís: el plan, la guía, el simulacro y el repaso.</h2>
+        <p class="seccion-caso__aviso etiqueta" data-revelar="bloque" data-i18n="caso.cathedra.galeria.aviso">Capturas con datos de demostración: materias, docentes y alumna ficticios.</p>
+      </div>
+      <ol class="recorrido" role="list">
+        <li class="recorrido__paso">
+          <figure class="recorrido__media ampliable">
+            <div class="ventana"><div class="ventana__pantalla cortina">
 <picture>
-  <source type="image/avif" srcset="../assets/img/cathedra/escena-sec_03_claro-640.avif 640w, ../assets/img/cathedra/escena-sec_03_claro-1280.avif 1280w, ../assets/img/cathedra/escena-sec_03_claro-1920.avif 1920w" sizes="(min-width: 1024px) 75vw, 100vw">
-  <img src="../assets/img/cathedra/escena-sec_03_claro-1280.webp" srcset="../assets/img/cathedra/escena-sec_03_claro-640.webp 640w, ../assets/img/cathedra/escena-sec_03_claro-1280.webp 1280w, ../assets/img/cathedra/escena-sec_03_claro-1920.webp 1920w" sizes="(min-width: 1024px) 75vw, 100vw" width="1920" height="1200" loading="lazy" decoding="async" alt="Cathedra: una clase con sus pasos (guía, preguntas, fichas, simulacro, repaso) en un panel de vidrio sobre el escritorio" data-i18n-attr="alt=caso.cathedra.cabecera.alt">
+  <source type="image/avif" srcset="../assets/img/cathedra/app-panel-640.avif 640w, ../assets/img/cathedra/app-panel-1280.avif 1280w, ../assets/img/cathedra/app-panel-1920.avif 1920w" sizes="(min-width: 1024px) 58vw, 100vw">
+  <img src="../assets/img/cathedra/app-panel-1280.webp" srcset="../assets/img/cathedra/app-panel-640.webp 640w, ../assets/img/cathedra/app-panel-1280.webp 1280w, ../assets/img/cathedra/app-panel-1920.webp 1920w" sizes="(min-width: 1024px) 58vw, 100vw" width="1920" height="1080" loading="lazy" decoding="async" alt="Panel de inicio de Cathedra en tema oscuro: siguiente paso, materias y lo que viene" data-i18n-attr="alt=caso.cathedra.galeria.1">
 </picture>
+            </div></div>
+            <button type="button" class="ampliar" data-ampliar="../assets/img/cathedra/app-panel-1920.webp"><span class="oculto-visual" data-i18n="caso.patron.ampliar">Ampliar imagen</span></button>
+          </figure>
+          <div class="recorrido__texto">
+            <span class="recorrido__n cifra" aria-hidden="true">01</span>
+            <h3 class="recorrido__t" data-revelar data-i18n="caso.cathedra.recorrido.1.t">Un solo plan por materia, armado desde el cronograma</h3>
+            <p data-revelar data-i18n="caso.cathedra.recorrido.1">Subís el cronograma en PDF, Word o foto y arma materias, clases, fechas y parciales. Lo que el cronograma no dice queda marcado, sin inventar. El inicio muestra el siguiente paso y cuántos días faltan para cada entrega.</p>
           </div>
-        </figure>
-        <figure class="caso-galeria__item caso-galeria__item--7">
-          <div class="caso-galeria__media placa mascara">
+        </li>
+        <li class="recorrido__paso">
+          <figure class="recorrido__media ampliable">
+            <div class="ventana"><div class="ventana__pantalla cortina">
 <picture>
-  <source type="image/avif" srcset="../assets/img/cathedra/app-panel-640.avif 640w, ../assets/img/cathedra/app-panel-1280.avif 1280w, ../assets/img/cathedra/app-panel-1920.avif 1920w" sizes="(min-width: 1024px) 46vw, 100vw">
-  <img src="../assets/img/cathedra/app-panel-1280.webp" srcset="../assets/img/cathedra/app-panel-640.webp 640w, ../assets/img/cathedra/app-panel-1280.webp 1280w, ../assets/img/cathedra/app-panel-1920.webp 1920w" sizes="(min-width: 1024px) 46vw, 100vw" width="1920" height="1080" loading="lazy" decoding="async" alt="Panel de inicio de Cathedra en tema oscuro: siguiente paso, materias y lo que viene" data-i18n-attr="alt=caso.cathedra.galeria.1">
+  <source type="image/avif" srcset="../assets/img/cathedra/app-guia-640.avif 640w, ../assets/img/cathedra/app-guia-1280.avif 1280w, ../assets/img/cathedra/app-guia-1920.avif 1920w" sizes="(min-width: 1024px) 58vw, 100vw">
+  <img src="../assets/img/cathedra/app-guia-1280.webp" srcset="../assets/img/cathedra/app-guia-640.webp 640w, ../assets/img/cathedra/app-guia-1280.webp 1280w, ../assets/img/cathedra/app-guia-1920.webp 1920w" sizes="(min-width: 1024px) 58vw, 100vw" width="1920" height="1080" loading="lazy" decoding="async" alt="Guía de una clase bloque por bloque, en tema claro" data-i18n-attr="alt=caso.cathedra.galeria.3">
 </picture>
-          </div>
-          <figcaption data-revelar data-i18n="caso.cathedra.galeria.1.pie">Inicio, tema oscuro: el siguiente paso y lo que viene, por materia.</figcaption>
-        </figure>
-        <figure class="caso-galeria__item caso-galeria__item--5">
-          <div class="caso-galeria__media placa mascara">
+            </div></div>
+            <button type="button" class="ampliar" data-ampliar="../assets/img/cathedra/app-guia-1920.webp"><span class="oculto-visual" data-i18n="caso.patron.ampliar">Ampliar imagen</span></button>
+          </figure>
+          <div class="recorrido__texto">
+            <span class="recorrido__n cifra" aria-hidden="true">02</span>
+            <h3 class="recorrido__t" data-revelar data-i18n="caso.cathedra.recorrido.2.t">Cada clase se convierte en una guía que se lee por bloques</h3>
+            <p data-revelar data-i18n="caso.cathedra.recorrido.2">La grabación se transcribe en la computadora, también sin conexión, y se convierte en una guía por clase y por tema. Cada bloque guarda la frase y el minuto de origen. Arriba, la clase resumida en cinco minutos de audio.</p>          </div>
+        </li>
+        <li class="recorrido__paso">
+          <figure class="recorrido__media ampliable">
+            <div class="ventana"><div class="ventana__pantalla cortina">
 <picture>
-  <source type="image/avif" srcset="../assets/img/cathedra/app-preguntar-640.avif 640w, ../assets/img/cathedra/app-preguntar-1280.avif 1280w, ../assets/img/cathedra/app-preguntar-1920.avif 1920w" sizes="(min-width: 1024px) 33vw, 100vw">
-  <img src="../assets/img/cathedra/app-preguntar-1280.webp" srcset="../assets/img/cathedra/app-preguntar-640.webp 640w, ../assets/img/cathedra/app-preguntar-1280.webp 1280w, ../assets/img/cathedra/app-preguntar-1920.webp 1920w" sizes="(min-width: 1024px) 33vw, 100vw" width="1920" height="1080" loading="lazy" decoding="async" alt="Preguntar: respuesta con la frase de la profesora, la clase y el minuto" data-i18n-attr="alt=caso.cathedra.galeria.2">
+  <source type="image/avif" srcset="../assets/img/cathedra/app-simulacro-640.avif 640w, ../assets/img/cathedra/app-simulacro-1280.avif 1280w, ../assets/img/cathedra/app-simulacro-1920.avif 1920w" sizes="(min-width: 1024px) 58vw, 100vw">
+  <img src="../assets/img/cathedra/app-simulacro-1280.webp" srcset="../assets/img/cathedra/app-simulacro-640.webp 640w, ../assets/img/cathedra/app-simulacro-1280.webp 1280w, ../assets/img/cathedra/app-simulacro-1920.webp 1920w" sizes="(min-width: 1024px) 58vw, 100vw" width="1920" height="1080" loading="lazy" decoding="async" alt="«Cómo lo va a tomar»: lo que el profesor dijo del parcial, con clase y minuto" data-i18n-attr="alt=caso.cathedra.galeria.4">
 </picture>
+            </div></div>
+            <button type="button" class="ampliar" data-ampliar="../assets/img/cathedra/app-simulacro-1920.webp"><span class="oculto-visual" data-i18n="caso.patron.ampliar">Ampliar imagen</span></button>
+          </figure>
+          <div class="recorrido__texto">
+            <span class="recorrido__n cifra" aria-hidden="true">03</span>
+            <h3 class="recorrido__t" data-revelar data-i18n="caso.cathedra.recorrido.3.t">El simulacro sale de lo que el profesor dijo que toma</h3>
+            <p data-revelar data-i18n="caso.cathedra.recorrido.3">La app separa lo que se dijo sobre el parcial del contenido de la clase y lo junta en «Cómo lo va a tomar», cada frase con su clase y su minuto. El simulacro respeta ese formato y la corrección dice de dónde salió cada consigna.</p>
           </div>
-          <figcaption data-revelar data-i18n="caso.cathedra.galeria.2.pie">Preguntar: la respuesta trae la frase, la clase y el minuto.</figcaption>
-        </figure>
-        <figure class="caso-galeria__item caso-galeria__item--5">
-          <div class="caso-galeria__media placa mascara">
+        </li>
+        <li class="recorrido__paso">
+          <figure class="recorrido__media ampliable">
+            <div class="ventana"><div class="ventana__pantalla cortina">
 <picture>
-  <source type="image/avif" srcset="../assets/img/cathedra/app-guia-640.avif 640w, ../assets/img/cathedra/app-guia-1280.avif 1280w, ../assets/img/cathedra/app-guia-1920.avif 1920w" sizes="(min-width: 1024px) 33vw, 100vw">
-  <img src="../assets/img/cathedra/app-guia-1280.webp" srcset="../assets/img/cathedra/app-guia-640.webp 640w, ../assets/img/cathedra/app-guia-1280.webp 1280w, ../assets/img/cathedra/app-guia-1920.webp 1920w" sizes="(min-width: 1024px) 33vw, 100vw" width="1920" height="1080" loading="lazy" decoding="async" alt="Guía de una clase bloque por bloque, en tema claro" data-i18n-attr="alt=caso.cathedra.galeria.3">
+  <source type="image/avif" srcset="../assets/img/cathedra/app-fichas-640.avif 640w, ../assets/img/cathedra/app-fichas-1280.avif 1280w, ../assets/img/cathedra/app-fichas-1920.avif 1920w" sizes="(min-width: 1024px) 58vw, 100vw">
+  <img src="../assets/img/cathedra/app-fichas-1280.webp" srcset="../assets/img/cathedra/app-fichas-640.webp 640w, ../assets/img/cathedra/app-fichas-1280.webp 1280w, ../assets/img/cathedra/app-fichas-1920.webp 1920w" sizes="(min-width: 1024px) 58vw, 100vw" width="1920" height="1080" loading="lazy" decoding="async" alt="Fichas de repaso de una clase con los cuatro grados de dificultad" data-i18n-attr="alt=caso.cathedra.galeria.5">
 </picture>
+            </div></div>
+            <button type="button" class="ampliar" data-ampliar="../assets/img/cathedra/app-fichas-1920.webp"><span class="oculto-visual" data-i18n="caso.patron.ampliar">Ampliar imagen</span></button>
+          </figure>
+          <div class="recorrido__texto">
+            <span class="recorrido__n cifra" aria-hidden="true">04</span>
+            <h3 class="recorrido__t" data-revelar data-i18n="caso.cathedra.recorrido.4.t">Lo que te salió mal vuelve antes del examen</h3>
+            <p data-revelar data-i18n="caso.cathedra.recorrido.4">Errores, juegos y fichas van a un mazo de repaso. Cada ficha se califica de «otra vez» a «fácil», y «Cuánto por día» reparte lo pendiente hasta la fecha de cada examen.</p>
           </div>
-          <figcaption data-revelar data-i18n="caso.cathedra.galeria.3.pie">La guía de una clase, bloque por bloque, en tema claro.</figcaption>
-        </figure>
-        <figure class="caso-galeria__item caso-galeria__item--7">
-          <div class="caso-galeria__media placa mascara">
-<picture>
-  <source type="image/avif" srcset="../assets/img/cathedra/app-simulacro-640.avif 640w, ../assets/img/cathedra/app-simulacro-1280.avif 1280w, ../assets/img/cathedra/app-simulacro-1920.avif 1920w" sizes="(min-width: 1024px) 46vw, 100vw">
-  <img src="../assets/img/cathedra/app-simulacro-1280.webp" srcset="../assets/img/cathedra/app-simulacro-640.webp 640w, ../assets/img/cathedra/app-simulacro-1280.webp 1280w, ../assets/img/cathedra/app-simulacro-1920.webp 1920w" sizes="(min-width: 1024px) 46vw, 100vw" width="1920" height="1080" loading="lazy" decoding="async" alt="«Cómo lo va a tomar»: lo que el profesor dijo del parcial, con clase y minuto" data-i18n-attr="alt=caso.cathedra.galeria.4">
-</picture>
-          </div>
-          <figcaption data-revelar data-i18n="caso.cathedra.galeria.4.pie">«Cómo lo va a tomar»: lo que se dijo del parcial, con su cita.</figcaption>
-        </figure>
-        <figure class="caso-galeria__item caso-galeria__item--8">
-          <div class="caso-galeria__media placa mascara">
-<picture>
-  <source type="image/avif" srcset="../assets/img/cathedra/app-fichas-640.avif 640w, ../assets/img/cathedra/app-fichas-1280.avif 1280w, ../assets/img/cathedra/app-fichas-1920.avif 1920w" sizes="(min-width: 1024px) 54vw, 100vw">
-  <img src="../assets/img/cathedra/app-fichas-1280.webp" srcset="../assets/img/cathedra/app-fichas-640.webp 640w, ../assets/img/cathedra/app-fichas-1280.webp 1280w, ../assets/img/cathedra/app-fichas-1920.webp 1920w" sizes="(min-width: 1024px) 54vw, 100vw" width="1920" height="1080" loading="lazy" decoding="async" alt="Fichas de repaso de una clase con los cuatro grados de dificultad" data-i18n-attr="alt=caso.cathedra.galeria.5">
-</picture>
-          </div>
-          <figcaption data-revelar data-i18n="caso.cathedra.galeria.5.pie">Fichas con repetición espaciada y cuatro grados de dificultad.</figcaption>
-        </figure>
-        <figure class="caso-galeria__item caso-galeria__item--4">
-          <div class="caso-galeria__media placa mascara">
-<picture>
-  <source type="image/avif" srcset="../assets/img/cathedra/emblema-ivory-640.avif 640w, ../assets/img/cathedra/emblema-ivory-948.avif 948w" sizes="(min-width: 1024px) 26vw, 50vw">
-  <img src="../assets/img/cathedra/emblema-ivory-948.webp" srcset="../assets/img/cathedra/emblema-ivory-640.webp 640w, ../assets/img/cathedra/emblema-ivory-948.webp 948w" sizes="(min-width: 1024px) 26vw, 50vw" width="948" height="966" loading="lazy" decoding="async" alt="Emblema 3D de Cathedra: cuero, cristal y cereza sobre marfil" data-i18n-attr="alt=caso.cathedra.galeria.6">
-</picture>
-          </div>
-          <figcaption data-revelar data-i18n="caso.cathedra.galeria.6.pie">Emblema 3D: render propio, iterado hasta que el material se leyera como real.</figcaption>
-        </figure>
+        </li>
+      </ol>
+      <div class="recorrido__mas">
+        <h3 class="etiqueta recorrido__mas-t" data-revelar="bloque" data-i18n="caso.patron.tambien">También hace</h3>
+        <ul class="recorrido__lista" role="list" data-revelar-hijos>
+          <li><strong data-i18n="caso.cathedra.hace.1.t">Transcribe clases largas</strong> <span data-i18n="caso.cathedra.hace.1">Clases grabadas de hasta 4 horas, con control anti-alucinación; el texto alcanza para no volver a ver la clase.</span></li>
+          <li><strong data-i18n="caso.cathedra.hace.2.t">Ordena por materia</strong> <span data-i18n="caso.cathedra.hace.2">Clasifica cada material en contenido, examen, práctico o cursada.</span></li>
+          <li><strong data-i18n="caso.cathedra.hace.8.t">Huecos contra el programa</strong> <span data-i18n="caso.cathedra.hace.8">Compara lo visto con el programa oficial y muestra qué falta cubrir.</span></li>
+          <li><strong data-i18n="caso.cathedra.hace.7.t">Modo Feynman</strong> <span data-i18n="caso.cathedra.hace.7">Explicar el tema con palabras propias para comprobar que se entendió.</span></li>
+          <li><strong data-i18n="caso.cathedra.hace.10.t">Con o sin conexión</strong> <span data-i18n="caso.cathedra.hace.10">Motor en la nube o motor local de cuatro capas: lenguaje, reglas, recuperación por embeddings y matemática simbólica.</span></li>
+          <li><strong data-i18n="caso.cathedra.hace.11.t">Voz</strong> <span data-i18n="caso.cathedra.hace.11">Lectura en voz alta y resúmenes en audio: la clase en 5 minutos.</span></li>
+          <li><strong data-i18n="caso.cathedra.hace.12.t">Herramientas de estudio</strong> <span data-i18n="caso.cathedra.hace.12">Calculadora con graficador, escenas 3D de conceptos, juegos de memoria y recordatorios por Telegram.</span></li>
+        </ul>
       </div>
     </section>
   </div>
+
+  <figure class="caso-foto caso-foto--detalle">
+    <div class="caso-foto__marco"><img class="caso-foto__img" src="../assets/mundo/casos/cathedra-detalle.webp" srcset="../assets/mundo/casos/cathedra-detalle-480.webp 480w, ../assets/mundo/casos/cathedra-detalle-800.webp 800w, ../assets/mundo/casos/cathedra-detalle.webp 2000w" sizes="100vw" width="2000" height="1250" loading="lazy" decoding="async" data-carga alt="Render en primer plano del canto del monitor, con el menú de Cathedra detrás del vidrio" data-i18n-attr="alt=caso.cathedra.detalle.alt"></div>
+    <figcaption class="contenedor caso-foto__pie" data-revelar="bloque" data-i18n="caso.cathedra.detalle.pie">El menú lateral de Cathedra a pocos centímetros del vidrio: Inicio, Materias, Agenda, Notas y Buscar.</figcaption>
+  </figure>
+
+  <div class="contenedor">
+    <section class="seccion-caso caso-firma" id="firma" aria-labelledby="t-firma">
+      <p class="folio"><span class="folio__cifra cifra" aria-hidden="true">04</span><span class="folio__etiqueta etiqueta" data-revelar="bloque" data-i18n="caso.cathedra.firma.etiqueta">Una respuesta, ampliada</span><span class="folio__filete" aria-hidden="true"></span></p>
+      <h2 class="h-caso seccion-caso__titulo" id="t-firma" data-revelar data-i18n="caso.cathedra.firma.titulo">Cada respuesta se puede rastrear hasta el minuto en que la profesora lo dijo.</h2>
+      <div class="firma">
+        <figure class="firma__tarjeta placa placa--bloque" lang="es" data-iman data-revelar-hijos>
+          <p class="firma__pregunta">¿Por qué las didonas no se usan para el texto de un diario?</p>
+          <p class="firma__etiqueta etiqueta">Cómo lo dijo la profesora</p>
+          <blockquote class="firma__cita"><p>«pero en cuerpos chicos los trazos finos desaparecen, se rompen, sobre todo si imprimen en papel malo. por eso no se usan para el texto de un diario»</p></blockquote>
+          <figcaption class="firma__sello"><span>Clase 2</span><span class="firma__minuto">minuto 14:20</span></figcaption>
+        </figure>
+        <p class="firma__traduccion" lang="en" data-i18n="caso.cathedra.firma.traduccion">La traducción al inglés aparece sólo en la versión en inglés de esta página.</p>
+        <div class="firma__lado">
+          <p class="firma__texto" data-revelar data-i18n="caso.cathedra.firma.texto">La respuesta separa lo que explica la app, un ejemplo propio marcado como «esto no lo dijo la profe» y la frase textual de la profesora, con la clase y un botón al minuto 14:20 de la grabación. Si el dato no está en el material, el sello queda vacío y la app ofrece buscar afuera.</p>
+          <figure class="firma__captura ampliable">
+            <div class="ventana ventana--recorte"><div class="ventana__pantalla cortina">
+<picture>
+  <source type="image/avif" srcset="../assets/img/cathedra/app-preguntar-1920.avif">
+  <img class="firma__recorte" src="../assets/img/cathedra/app-preguntar-1920.webp" width="1920" height="1080" loading="lazy" decoding="async" alt="Panel Preguntar de Cathedra: la pregunta, la respuesta, un ejemplo marcado como propio y la cita de la profesora con el botón al minuto 14:20" data-i18n-attr="alt=caso.cathedra.firma.alt">
+</picture>
+            </div></div>
+            <button type="button" class="ampliar" data-ampliar="../assets/img/cathedra/app-preguntar-1920.webp"><span class="oculto-visual" data-i18n="caso.patron.ampliar">Ampliar imagen</span></button>
+            <figcaption data-revelar="bloque" data-i18n="caso.cathedra.firma.pie">La misma respuesta en la app, en tema oscuro. Arriba, el texto copiado tal cual de la captura.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="seccion-caso caso-decide" id="decisiones" aria-labelledby="t-decisiones">
+      <p class="folio"><span class="folio__cifra cifra" aria-hidden="true">05</span><span class="folio__etiqueta etiqueta" data-revelar="bloque" data-i18n="caso.parte.decisiones">Decisiones</span><span class="folio__filete" aria-hidden="true"></span></p>
+      <h2 class="h-caso seccion-caso__titulo" id="t-decisiones" data-revelar data-i18n="caso.cathedra.decisiones.titulo">Lo que decidí para que cada respuesta se pueda rastrear.</h2>
+      <ol class="decide" role="list">
+        <li class="decide__fila">
+          <span class="decide__n cifra" aria-hidden="true">01</span>
+          <div class="decide__eje"><span class="etiqueta decide__rotulo" data-revelar="bloque" data-i18n="caso.elegi">Decidí</span><h3 class="decide__t" data-revelar data-i18n="caso.cathedra.decision.1.elegi">Que cada respuesta lleve clase, minuto y quién lo dijo, y que el sello quede vacío si el dato no está en el material.</h3></div>
+          <div class="decide__nota" data-revelar="bloque"><span class="etiqueta decide__rotulo" data-i18n="caso.vi">Lo que vi</span><p data-i18n="caso.cathedra.decision.1.vi">Un estudiante no distingue una explicación fluida de un invento.</p></div>
+          <div class="decide__nota" data-revelar="bloque"><span class="etiqueta decide__rotulo" data-i18n="caso.descarte">Descarté</span><p><span data-i18n="caso.cathedra.decision.1.descarte">Responder siempre con un texto fluido.</span> <span data-i18n="caso.cathedra.decision.1.porque">Si no se puede rastrear hasta el profesor, no sirve para estudiar.</span></p></div>
+        </li>
+        <li class="decide__fila">
+          <span class="decide__n cifra" aria-hidden="true">02</span>
+          <div class="decide__eje"><span class="etiqueta decide__rotulo" data-revelar="bloque" data-i18n="caso.elegi">Decidí</span><h3 class="decide__t" data-revelar data-i18n="caso.cathedra.decision.2.elegi">Clasificar cada bloque en contenido, examen, práctico o cursada, y armar un solo plan por materia.</h3></div>
+          <div class="decide__nota" data-revelar="bloque"><span class="etiqueta decide__rotulo" data-i18n="caso.vi">Lo que vi</span><p data-i18n="caso.cathedra.decision.2.vi">En una misma clase el profesor mezcla contenido con avisos del parcial y de la cursada.</p></div>
+          <div class="decide__nota" data-revelar="bloque"><span class="etiqueta decide__rotulo" data-i18n="caso.descarte">Descarté</span><p><span data-i18n="caso.cathedra.decision.2.descarte">Un plan por cada archivo subido.</span> <span data-i18n="caso.cathedra.decision.2.porque">Con varios planes no se sabe cuál seguir; uno solo, alimentado por todo el material, sí.</span></p></div>
+        </li>
+        <li class="decide__fila">
+          <span class="decide__n cifra" aria-hidden="true">03</span>
+          <div class="decide__eje"><span class="etiqueta decide__rotulo" data-revelar="bloque" data-i18n="caso.elegi">Decidí</span><h3 class="decide__t" data-revelar data-i18n="caso.cathedra.decision.3.elegi">Transcribir y guardar en la computadora, con un motor local que funciona sin internet.</h3></div>
+          <div class="decide__nota" data-revelar="bloque"><span class="etiqueta decide__rotulo" data-i18n="caso.vi">Lo que vi</span><p data-i18n="caso.cathedra.decision.3.vi">Las clases son del alumno y no siempre hay buena conexión.</p></div>
+          <div class="decide__nota" data-revelar="bloque"><span class="etiqueta decide__rotulo" data-i18n="caso.descarte">Descarté</span><p><span data-i18n="caso.cathedra.decision.3.descarte">Depender sólo de un servicio en la nube.</span> <span data-i18n="caso.cathedra.decision.3.porque">Estudiar no puede cortarse por falta de conexión.</span></p></div>
+        </li>
+      </ol>
+    </section>
+
+    <section class="seccion-caso caso-taller" id="construccion" aria-labelledby="t-taller">
+      <p class="folio"><span class="folio__cifra cifra" aria-hidden="true">06</span><span class="folio__etiqueta etiqueta" data-revelar="bloque" data-i18n="caso.parte.agentes">Cómo lo construí</span><span class="folio__filete" aria-hidden="true"></span></p>
+      <h2 class="h-caso seccion-caso__titulo" id="t-taller" data-revelar data-i18n="caso.cathedra.construi.titulo">Dirigí agentes de IA por tandas, cada una con brief, criterio de aceptación y capturas obligatorias.</h2>
+      <ol class="taller" role="list">
+        <li class="taller__paso taller__paso--artefacto">
+          <span class="taller__n cifra" aria-hidden="true">01</span>
+          <div class="taller__texto"><h3 class="taller__t" data-revelar data-i18n="caso.cathedra.agentes.1.t">Brief y flujo.</h3><p data-revelar data-i18n="caso.cathedra.agentes.1">Los seis pasos ordenan la app y su página (empezás, subís, la lee, preguntás, rendís, repasás), y una regla los gobierna: nada que no esté en el material.</p></div>
+          <figure class="taller__artefacto artefacto-flujo" data-revelar="bloque">
+            <ol class="artefacto-flujo__pasos" lang="es" role="list">
+              <li><span class="cifra">01</span> Empezás</li>
+              <li><span class="cifra">02</span> Subís</li>
+              <li><span class="cifra">03</span> La lee</li>
+              <li><span class="cifra">04</span> Preguntás</li>
+              <li><span class="cifra">05</span> Rendís</li>
+              <li><span class="cifra">06</span> Repasás</li>
+            </ol>
+            <p class="firma__traduccion" lang="en" data-i18n="caso.cathedra.flujo.traduccion">La traducción al inglés aparece sólo en la versión en inglés de esta página.</p>
+            <figcaption data-i18n="caso.cathedra.construi.artefacto.1">Los seis pasos con los que se ordenan la app y su página.</figcaption>
+          </figure>
+        </li>
+        <li class="taller__paso">
+          <span class="taller__n cifra" aria-hidden="true">02</span>
+          <div class="taller__texto"><h3 class="taller__t" data-revelar data-i18n="caso.cathedra.agentes.2.t">Una tanda por vez.</h3><p data-revelar data-i18n="caso.cathedra.agentes.2">Cada función fue una tanda con brief, criterio de aceptación y capturas obligatorias, y un solo agente responsable.</p></div>
+        </li>
+        <li class="taller__paso">
+          <span class="taller__n cifra" aria-hidden="true">03</span>
+          <div class="taller__texto"><h3 class="taller__t" data-revelar data-i18n="caso.cathedra.agentes.3.t">Revisión independiente.</h3><p data-revelar data-i18n="caso.cathedra.agentes.3">Antes de llamar «final» a algo, otra revisión mira el frente y el fondo: textos, botones y contraste medido en el tema claro.</p></div>
+        </li>
+        <li class="taller__paso">
+          <span class="taller__n cifra" aria-hidden="true">04</span>
+          <div class="taller__texto"><h3 class="taller__t" data-revelar data-i18n="caso.cathedra.agentes.4.t">Verificación.</h3><p data-revelar data-i18n="caso.cathedra.agentes.4">Capturas a resolución real, miradas una por una, y más de 5.500 pruebas automáticas.</p></div>
+        </li>
+        <li class="taller__paso taller__paso--artefacto">
+          <span class="taller__n cifra" aria-hidden="true">05</span>
+          <div class="taller__texto"><h3 class="taller__t" data-revelar data-i18n="caso.cathedra.agentes.5.t">Qué rehice.</h3><p data-revelar data-i18n="caso.cathedra.agentes.5">La identidad, dos veces: la primera paleta (negro y celeste) salió y quedó cuero, marfil, cristal y cereza; el emblema se rehízo hasta que el material se leyera como real.</p></div>
+          <figure class="taller__artefacto taller__artefacto--imagen ampliable">
+            <div class="taller__imagen cortina">
+<picture>
+  <source type="image/avif" srcset="../assets/img/cathedra/emblema-ivory-640.avif 640w, ../assets/img/cathedra/emblema-ivory-948.avif 948w" sizes="(min-width: 1024px) 26vw, 70vw">
+  <img src="../assets/img/cathedra/emblema-ivory-948.webp" srcset="../assets/img/cathedra/emblema-ivory-640.webp 640w, ../assets/img/cathedra/emblema-ivory-948.webp 948w" sizes="(min-width: 1024px) 26vw, 70vw" width="948" height="966" loading="lazy" decoding="async" alt="Emblema 3D de Cathedra: cuero, cristal y cereza sobre marfil" data-i18n-attr="alt=caso.cathedra.galeria.6">
+</picture>
+            </div>
+            <button type="button" class="ampliar" data-ampliar="../assets/img/cathedra/emblema-ivory-948.webp"><span class="oculto-visual" data-i18n="caso.patron.ampliar">Ampliar imagen</span></button>
+            <figcaption data-revelar="bloque" data-i18n="caso.cathedra.galeria.6.pie">Emblema 3D: render propio, iterado hasta que el material se leyera como real.</figcaption>
+          </figure>
+        </li>
+      </ol>
+    </section>
+
+    <section class="seccion-caso caso-balance" id="resultado" aria-labelledby="t-resultado">
+      <p class="folio"><span class="folio__cifra cifra" aria-hidden="true">07</span><span class="folio__etiqueta etiqueta" data-revelar="bloque" data-i18n="caso.parte.resultado">Resultado</span><span class="folio__filete" aria-hidden="true"></span></p>
+      <h2 class="h-caso seccion-caso__titulo" id="t-resultado" data-revelar data-i18n="caso.cathedra.resultado">Beta 1.2.0 publicada, con instalador para Windows y página pública.</h2>
+      <ul class="balance__cifras balance__cifras--una" role="list" data-revelar-hijos>
+        <li><p class="balance__cifra cifra"><span class="balance__antes" data-i18n="caso.cathedra.cifra.2.antes">más de</span> <span data-rodillo data-i18n="caso.cathedra.cifra.2.n">5.500</span></p><p class="balance__que" data-i18n="caso.cathedra.cifra.2">pruebas automáticas</p></li>
+      </ul>
+      <p class="balance__linea" data-revelar="bloque" data-i18n="caso.cathedra.cifra.linea">Transcribe clases de hasta cuatro horas en la computadora, también sin conexión.</p>
+      <div class="balance__estado">
+        <p class="balance__texto" data-revelar data-i18n="caso.cathedra.estado">Instalador completo y liviano para Windows 10 y 11, revisión de seguridad y textos legales antes de abrir la beta, y un panel de administración. Sin usuarios ni métricas que contar todavía.</p>
+        <div class="balance__falta">
+          <h3 class="etiqueta balance__falta-t" data-revelar="bloque" data-i18n="caso.patron.falta">Qué falta</h3>
+          <ul role="list" data-revelar-hijos>
+            <li data-i18n="caso.cathedra.falta.1">Usuarios: sin ellos no sé si un estudiante la adopta sin ayuda.</li>
+            <li data-i18n="caso.cathedra.falta.2">«Grabar en vivo» figura como «pronto» y todavía no está.</li>
+          </ul>
+          <h3 class="etiqueta balance__falta-t balance__cambio-t" data-revelar="bloque" data-i18n="caso.patron.cambiaria">Qué cambiaría</h3>
+          <p class="balance__cambio" data-revelar="bloque" data-i18n="caso.cathedra.reflexion.1">Fijar la identidad antes de construir pantallas; rehacerla dos veces costó tandas enteras.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="seccion-caso caso-album" id="galeria" aria-labelledby="t-galeria">
+      <p class="folio"><span class="folio__cifra cifra" aria-hidden="true">08</span><span class="folio__etiqueta etiqueta" data-revelar="bloque" data-i18n="caso.parte.galeria">Galería</span><span class="folio__filete" aria-hidden="true"></span></p>
+      <h2 class="h-caso seccion-caso__titulo" id="t-galeria" data-revelar data-i18n="caso.cathedra.galeria.titulo">El monitor visto desde arriba, y la pantalla de Preguntar entera.</h2>
+      <div class="album">
+        <figure class="album__item album__item--foto ampliable">
+          <div class="album__foto cortina"><img src="../assets/mundo/casos/cathedra-angulo.webp" srcset="../assets/mundo/casos/cathedra-angulo-480.webp 480w, ../assets/mundo/casos/cathedra-angulo-800.webp 800w, ../assets/mundo/casos/cathedra-angulo.webp 2000w" sizes="(min-width: 1440px) 1360px, 100vw" width="2000" height="1250" loading="lazy" decoding="async" alt="Render: el monitor con Cathedra abierta, visto desde arriba sobre su losa de mármol oscuro" data-i18n-attr="alt=caso.cathedra.angulo.alt"></div>
+          <button type="button" class="ampliar" data-ampliar="../assets/mundo/casos/cathedra-angulo.webp"><span class="oculto-visual" data-i18n="caso.patron.ampliar">Ampliar imagen</span></button>
+          <figcaption data-revelar="bloque" data-i18n="caso.cathedra.angulo.pie">Desde arriba: la app entera en el monitor de plata y el canto de la losa.</figcaption>
+        </figure>
+        <figure class="album__item album__item--captura ampliable">
+          <div class="ventana"><div class="ventana__pantalla cortina">
+<picture>
+  <source type="image/avif" srcset="../assets/img/cathedra/app-preguntar-640.avif 640w, ../assets/img/cathedra/app-preguntar-1280.avif 1280w, ../assets/img/cathedra/app-preguntar-1920.avif 1920w" sizes="(min-width: 1024px) 66vw, 100vw">
+  <img src="../assets/img/cathedra/app-preguntar-1280.webp" srcset="../assets/img/cathedra/app-preguntar-640.webp 640w, ../assets/img/cathedra/app-preguntar-1280.webp 1280w, ../assets/img/cathedra/app-preguntar-1920.webp 1920w" sizes="(min-width: 1024px) 66vw, 100vw" width="1920" height="1080" loading="lazy" decoding="async" alt="Preguntar: respuesta con la frase de la profesora, la clase y el minuto" data-i18n-attr="alt=caso.cathedra.galeria.2">
+</picture>
+          </div></div>
+          <button type="button" class="ampliar" data-ampliar="../assets/img/cathedra/app-preguntar-1920.webp"><span class="oculto-visual" data-i18n="caso.patron.ampliar">Ampliar imagen</span></button>
+          <figcaption data-revelar="bloque" data-i18n="caso.cathedra.galeria.2.pie">Preguntar: la respuesta trae la frase, la clase y el minuto.</figcaption>
+        </figure>
+      </div>
+    </section>
   <section class="caso-contacto placa placa--bloque" aria-labelledby="t-contacto" data-iman>
     <div class="caso-contacto__texto">
       <p class="etiqueta caso-contacto__etiqueta" data-revelar="bloque" data-i18n="folio.contacto">Contacto</p>
-      <h2 class="caso-contacto__titulo" id="t-contacto" data-revelar data-i18n="contacto.titulo">Hablemos de lo que falta construir.</h2>
+      <h2 class="caso-contacto__titulo" id="t-contacto" data-revelar data-i18n="contacto.titulo">Escribime si tenés un producto para construir o un proceso para automatizar.</h2>
       <p class="caso-contacto__sub" data-revelar data-i18n="contacto.sub">Respondo en el día.</p>
     </div>
     <div class="caso-contacto__acciones" data-revelar-hijos>
@@ -300,17 +385,21 @@
     <p class="folio caso-nav__folio"><span class="folio__etiqueta etiqueta" data-i18n="caso.otros.aria">Otros casos</span><span class="folio__filete" aria-hidden="true"></span></p>
     <div class="caso-nav__pares">
     <a class="caso-par caso-par--siguiente caso-puerta" href="fortal.html">
-      <span class="caso-par__media" data-paralaje data-vt="fortal"><img class="caso__capa caso__capa--fondo" src="../assets/mundo/casos/fortal-fondo.webp" srcset="../assets/mundo/casos/fortal-fondo-480.webp 480w, ../assets/mundo/casos/fortal-fondo-800.webp 800w, ../assets/mundo/casos/fortal-fondo.webp 1600w" sizes="100vw" width="1600" height="1000" loading="lazy" decoding="async" data-carga alt=""><img class="caso__capa caso__capa--disp" src="../assets/mundo/casos/fortal-dispositivo.webp" srcset="../assets/mundo/casos/fortal-dispositivo-480.webp 480w, ../assets/mundo/casos/fortal-dispositivo-800.webp 800w, ../assets/mundo/casos/fortal-dispositivo.webp 1600w" sizes="100vw" width="1600" height="1000" loading="lazy" decoding="async" data-carga alt="Render: Fortal en un teléfono sobre un zócalo de piedra oscura, con la pantalla de la rutina del día" data-i18n-attr="alt=trabajo.fortal.foto"><span class="caso__luz" aria-hidden="true"></span></span>
+      <span class="caso-par__media" data-paralaje data-vt="fortal"><img class="caso__capa caso__capa--fondo" src="../assets/mundo/casos/fortal-fondo.webp" srcset="../assets/mundo/casos/fortal-fondo-480.webp 480w, ../assets/mundo/casos/fortal-fondo-800.webp 800w, ../assets/mundo/casos/fortal-fondo-1600.webp 1600w, ../assets/mundo/casos/fortal-fondo.webp 2400w" sizes="100vw" width="2400" height="1500" loading="lazy" decoding="async" data-carga alt=""><img class="caso__capa caso__capa--disp" src="../assets/mundo/casos/fortal-dispositivo.webp" srcset="../assets/mundo/casos/fortal-dispositivo-480.webp 480w, ../assets/mundo/casos/fortal-dispositivo-800.webp 800w, ../assets/mundo/casos/fortal-dispositivo-1600.webp 1600w, ../assets/mundo/casos/fortal-dispositivo.webp 2400w" sizes="100vw" width="2400" height="1500" loading="lazy" decoding="async" data-carga alt=""><span class="caso__luz" aria-hidden="true"></span></span>
       <span class="caso-par__texto"><span class="etiqueta caso-par__etiqueta" data-i18n="caso.siguiente">Caso siguiente →</span><span class="caso-par__nombre" data-revelar="lineas">Fortal</span><span class="caso-par__frase" data-i18n="trabajo.fortal.frase">App web para iPhone que arma tu rutina con tu equipo y tu tiempo reales, sobre un cuerpo 3D.</span><span class="sello sello--en-uso" data-i18n="trabajo.fortal.sello">App personal · publicada y en uso</span></span>
     </a>
-    <a class="caso-par caso-par--anterior placa placa--bloque placa--viva" href="coro.html" data-iman>
-      <span class="caso-par__media" data-vt="coro"><img class="caso__capa caso__capa--fondo" src="../assets/mundo/casos/coro-fondo.webp" srcset="../assets/mundo/casos/coro-fondo-480.webp 480w, ../assets/mundo/casos/coro-fondo-800.webp 800w, ../assets/mundo/casos/coro-fondo.webp 1600w" sizes="(min-width: 768px) 240px, 100vw" width="1600" height="1000" loading="lazy" decoding="async" data-carga alt=""><img class="caso__capa caso__capa--disp" src="../assets/mundo/casos/coro-dispositivo.webp" srcset="../assets/mundo/casos/coro-dispositivo-480.webp 480w, ../assets/mundo/casos/coro-dispositivo-800.webp 800w, ../assets/mundo/casos/coro-dispositivo.webp 1600w" sizes="(min-width: 768px) 240px, 100vw" width="1600" height="1000" loading="lazy" decoding="async" data-carga alt="Render: el reporte de coro en una tableta apoyada sobre un zócalo de piedra oscura" data-i18n-attr="alt=trabajo.coro.foto"><span class="caso__luz" aria-hidden="true"></span></span>
-      <span class="caso-par__texto"><span class="etiqueta caso-par__etiqueta" data-i18n="caso.anterior">← Caso anterior</span><span class="caso-par__nombre" data-revelar="lineas">coro</span><span class="caso-par__frase" data-i18n="trabajo.coro.frase">Lee las reseñas de un producto (400 en la corrida real más grande), agrupa el defecto que se repite y encuentra qué competidor ya lo resolvió.</span><span class="sello sello--proceso" data-i18n="trabajo.coro.sello">Prototipo</span></span>
+    <a class="caso-par caso-par--anterior placa placa--bloque placa--viva" href="prospeccion.html" data-iman>
+      <span class="caso-par__media" data-vt="prospeccion"><img class="caso__capa caso__capa--fondo" src="../assets/mundo/casos/prospeccion-fondo.webp" srcset="../assets/mundo/casos/prospeccion-fondo-480.webp 480w, ../assets/mundo/casos/prospeccion-fondo-800.webp 800w, ../assets/mundo/casos/prospeccion-fondo-1600.webp 1600w, ../assets/mundo/casos/prospeccion-fondo.webp 2400w" sizes="(min-width: 768px) 240px, 100vw" width="2400" height="1500" loading="lazy" decoding="async" data-carga alt=""><img class="caso__capa caso__capa--disp" src="../assets/mundo/casos/prospeccion-dispositivo.webp" srcset="../assets/mundo/casos/prospeccion-dispositivo-480.webp 480w, ../assets/mundo/casos/prospeccion-dispositivo-800.webp 800w, ../assets/mundo/casos/prospeccion-dispositivo-1600.webp 1600w, ../assets/mundo/casos/prospeccion-dispositivo.webp 2400w" sizes="(min-width: 768px) 240px, 100vw" width="2400" height="1500" loading="lazy" decoding="async" data-carga alt=""><span class="caso__luz" aria-hidden="true"></span></span>
+      <span class="caso-par__texto"><span class="etiqueta caso-par__etiqueta" data-i18n="caso.anterior">← Caso anterior</span><span class="caso-par__nombre" data-revelar="lineas" data-i18n="trabajo.prospeccion.nombre">Prospección verificada</span><span class="caso-par__frase" data-i18n="trabajo.prospeccion.frase">Un motor que encuentra pymes con sitio propio, revisa su página y redacta un primer correo. Antes del envío, un verificador sin IA frena toda frase que la auditoría no midió.</span><span class="sello sello--proceso" data-i18n="trabajo.prospeccion.sello">Prototipo</span></span>
     </a>
     <p class="caso-nav__todos" data-revelar="bloque"><a class="boton boton--secundario" href="../index.html#trabajo" data-i18n="caso.volver">Todos los casos</a></p>
     </div>
   </nav>
   </div>
+  <dialog class="ampliacion" aria-label="Imagen ampliada" data-i18n-attr="aria-label=caso.patron.ampliada">
+    <div class="ampliacion__marco"></div>
+    <div class="ampliacion__pie"><p class="ampliacion__texto"></p><button type="button" class="boton boton--secundario ampliacion__cerrar" data-i18n="caso.patron.cerrar">Cerrar</button></div>
+  </dialog>
 </main>
 <footer class="pie">
   <div class="contenedor">
@@ -342,5 +431,6 @@
 </footer>
 <script type="module" src="../js/mundo/pagina.js"></script>
 <script type="module" src="../js/comun.js"></script>
+<script type="module" src="../js/caso.js"></script>
 </body>
 </html>

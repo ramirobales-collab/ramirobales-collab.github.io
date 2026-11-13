@@ -10,7 +10,7 @@ Es un sitio estático, sin frameworks ni dependencias de compilación, publicado
 
 ```
 index.html                portada
-proyectos/                los cuatro casos y la revisión de seguridad (ES y EN)
+proyectos/                los seis casos y la revisión de seguridad (ES y EN)
 demos/                    demos para marcas (configurador 3D, asistente, bots) y la demo de AthleteIQ
 js/comun.js               idioma, tema, navegación (módulo ES)
 js/movimiento.js          transiciones de texto

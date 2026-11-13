@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="es" data-dic="casos">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-PQnDiTRWd0OmsHrmGgrIepjVKEQZ9wpJxRSCjULjoAs='; style-src 'self'; img-src 'self'; font-src 'self'; connect-src 'self'; media-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="no-referrer">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>var d=document.documentElement;if(self!==top){d.classList.add('enmarcado');try{top.location.replace(location.href)}catch(e){}}try{var t=new URLSearchParams(location.search).get('tema')||localStorage.getItem('tema');if(t==='light'||t==='dark')d.dataset.theme=t;}catch(e){}d.classList.add('js');if(!/[?&](quieto=1|ir=)/.test(location.search))d.classList.add('mov');setTimeout(function(){if(!d.dataset.mov)d.classList.remove('js','mov')},4000);(function(){var r=matchMedia('(prefers-reduced-motion: reduce)'),h=[];function n(el,v){if(el){el.style.viewTransitionName=v;h.push(el);}}addEventListener('pagereveal',function(e){h.forEach(function(el){el.style.viewTransitionName='';});h=[];var v=e.viewTransition;if(v){if(r.matches){v.ready.catch(function(){});v.skipTransition();}else d.classList.add('vt');}});addEventListener('pageswap',function(e){var v=e.viewTransition;if(!v)return;if(r.matches){v.ready.catch(function(){});v.skipTransition();return;}var a=e.activation,u=a&&a.entry&&a.entry.url?new URL(a.entry.url):null,c=document.querySelector('.caso-cabecera__media'),m=u&&u.pathname.match(/\/proyectos\/(cathedra|fortal|athleteiq|coro|chamfer|prospeccion)\.html$/);if(m){n(c,'none');n(document.querySelector('[data-vt="'+m[1]+'"]'),'caso-'+m[1]);}else if(!(a&&(a.navigationType==='traverse'||(u&&u.hash==='#trabajo'))))n(c,'none');});})();</script>
+<title data-i18n="caso.chamfer.titulo">Chamfer — caso de estudio · Ramiro Bales</title>
+<meta name="description" data-i18n-attr="content=caso.chamfer.descripcion" content="Chamfer, cinco secciones para tiendas Shopify, cada una en un solo archivo y sin librerías. Prototipo sin publicar: cómo lo dirigí con agentes de IA, qué se verificó y qué falta probar.">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#F3EEE4">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#040404">
+<meta name="author" content="Ramiro Bales">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Chamfer — caso de estudio · Ramiro Bales">
+<meta property="og:description" content="Chamfer, cinco secciones para tiendas Shopify, cada una en un solo archivo y sin librerías. Prototipo sin publicar: cómo lo dirigí con agentes de IA, qué se verificó y qué falta probar.">
+<meta property="og:image" content="https://ramirobales-collab.github.io/assets/mundo/og-1200x630.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://ramirobales-collab.github.io/proyectos/chamfer.html">
+<meta property="og:locale" content="es_AR">
+<meta property="og:locale:alternate" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://ramirobales-collab.github.io/assets/mundo/og-1200x630.jpg">
+<link rel="canonical" href="https://ramirobales-collab.github.io/proyectos/chamfer.html">
+<link rel="alternate" hreflang="es" href="https://ramirobales-collab.github.io/proyectos/chamfer.html?idioma=es">
+<link rel="alternate" hreflang="en" href="https://ramirobales-collab.github.io/proyectos/chamfer.html?idioma=en">
+<link rel="alternate" hreflang="x-default" href="https://ramirobales-collab.github.io/proyectos/chamfer.html">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="manifest" href="../manifest.webmanifest">
+<link rel="preload" href="../assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fonts/playfair-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="modulepreload" href="../js/mundo/pagina.js">
+<link rel="modulepreload" href="../js/mundo/motor.js">
+<link rel="modulepreload" href="../js/mundo/fondo.js">
+<link rel="modulepreload" href="../js/comun.js">
+<link rel="modulepreload" href="../js/movimiento.js">
+<link rel="preload" as="image" href="../assets/mundo/casos/chamfer-dispositivo.webp" imagesrcset="../assets/mundo/casos/chamfer-dispositivo-480.webp 480w, ../assets/mundo/casos/chamfer-dispositivo-800.webp 800w, ../assets/mundo/casos/chamfer-dispositivo-1600.webp 1600w, ../assets/mundo/casos/chamfer-dispositivo.webp 2400w" imagesizes="(min-width: 768px) 100vw, 220vw" fetchpriority="high">
+<link rel="preload" as="image" href="../assets/mundo/casos/chamfer-fondo.webp" imagesrcset="../assets/mundo/casos/chamfer-fondo-480.webp 480w, ../assets/mundo/casos/chamfer-fondo-800.webp 800w, ../assets/mundo/casos/chamfer-fondo-1600.webp 1600w, ../assets/mundo/casos/chamfer-fondo.webp 2400w" imagesizes="(min-width: 768px) 100vw, 220vw">
+<link rel="stylesheet" href="../css/variables.css">
+<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/componentes.css">
+<link rel="stylesheet" href="../css/caso.css">
+<link rel="stylesheet" href="../css/casos/chamfer.css">
+</head>
+<body>
+<a class="enmarcado-aviso" href="https://ramirobales-collab.github.io/proyectos/chamfer.html" target="_top" rel="noopener noreferrer" data-i18n="enmarcado.aviso">Esta página está dentro de otro sitio. Abrila en su dirección real: ramirobales-collab.github.io</a>
+<a class="saltar" href="#contenido" data-i18n="nav.saltar">Saltar al contenido</a>
+<nav class="nav nav--placa" aria-label="Principal" data-i18n-attr="aria-label=nav.aria">
+  <div class="contenedor nav__in">
+    <a class="nav__marca" href="../index.html" data-i18n="nav.marca">Ramiro Bales</a>
+    <div class="nav__enlaces">
+      <a href="../index.html#trabajo" data-i18n="nav.trabajo">Trabajo</a>
+      <a href="../index.html#saber" data-i18n="nav.saber">Qué sé hacer</a>
+      <a href="../index.html#marcas" data-i18n="nav.marcas">Para marcas</a>
+      <a href="../index.html#metodo" data-i18n="nav.metodo">Método</a>
+      <a href="../index.html#sobre" data-i18n="nav.sobre">Sobre mí</a>
+      <a href="../index.html#contacto" data-i18n="nav.contacto">Contacto</a>
+      <a href="../cv/ramiro-bales-cv-es.pdf" data-cv data-i18n="nav.cv">CV (PDF)</a>
+    </div>
+    <div class="nav__herramientas">
+      <div class="conmutador conmutador--idioma" role="group" aria-label="Idioma" data-i18n-attr="aria-label=nav.idioma.aria">
+        <button type="button" data-idioma="es" aria-pressed="true" lang="es">ES</button>
+        <button type="button" data-idioma="en" aria-pressed="false" lang="en">EN</button>
+      </div>
+      <button type="button" class="tema" aria-pressed="false" aria-label="Cambiar entre tema claro y oscuro" data-i18n-attr="aria-label=tema.aria">
+        <svg class="tema__luna" viewBox="0 0 20 20" aria-hidden="true"><path d="M16.4 12.2A7 7 0 0 1 7.8 3.6a7.2 7.2 0 1 0 8.6 8.6Z"/></svg>
+        <svg class="tema__sol" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="3.6"/><path d="M10 1.8v2.2M10 16v2.2M1.8 10H4M16 10h2.2M4.2 4.2l1.6 1.6M14.2 14.2l1.6 1.6M4.2 15.8l1.6-1.6M14.2 5.8l1.6-1.6"/></svg>
+        <span class="tema__oscuro" data-i18n="tema.oscuro">Oscuro</span>
+        <span class="tema__claro" data-i18n="tema.claro">Claro</span>
+      </button>
+    </div>
+    <button type="button" class="nav__menu" aria-expanded="false" aria-controls="panel-menu" aria-label="Abrir o cerrar el menú" data-i18n-attr="aria-label=nav.menu.aria">
+      <span data-i18n="nav.menu">Menú</span>
+      <svg class="nav__menu-abrir" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 6h14M3 10h14M3 14h14"/></svg>
+      <svg class="nav__menu-cerrar" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15"/></svg>
+    </button>
+  </div>
+  <div class="nav__panel" id="panel-menu" data-abierto="false">
+    <div class="nav__enlaces">
+      <a href="../index.html#trabajo" data-i18n="nav.trabajo">Trabajo</a>
+      <a href="../index.html#saber" data-i18n="nav.saber">Qué sé hacer</a>
+      <a href="../index.html#marcas" data-i18n="nav.marcas">Para marcas</a>
+      <a href="../index.html#metodo" data-i18n="nav.metodo">Método</a>
+      <a href="../index.html#sobre" data-i18n="nav.sobre">Sobre mí</a>
+      <a href="../index.html#contacto" data-i18n="nav.contacto">Contacto</a>
+      <a href="../cv/ramiro-bales-cv-es.pdf" data-cv data-i18n="nav.cv">CV (PDF)</a>
+    </div>
+    <div class="nav__herramientas">
+      <div class="conmutador conmutador--idioma" role="group" aria-label="Idioma" data-i18n-attr="aria-label=nav.idioma.aria">
+        <button type="button" data-idioma="es" aria-pressed="true" lang="es">ES</button>
+        <button type="button" data-idioma="en" aria-pressed="false" lang="en">EN</button>
+      </div>
+      <button type="button" class="tema" aria-pressed="false" aria-label="Cambiar entre tema claro y oscuro" data-i18n-attr="aria-label=tema.aria">
+        <svg class="tema__luna" viewBox="0 0 20 20" aria-hidden="true"><path d="M16.4 12.2A7 7 0 0 1 7.8 3.6a7.2 7.2 0 1 0 8.6 8.6Z"/></svg>
+        <svg class="tema__sol" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="3.6"/><path d="M10 1.8v2.2M10 16v2.2M1.8 10H4M16 10h2.2M4.2 4.2l1.6 1.6M14.2 14.2l1.6 1.6M4.2 15.8l1.6-1.6M14.2 5.8l1.6-1.6"/></svg>
+        <span class="tema__oscuro" data-i18n="tema.oscuro">Oscuro</span>
+        <span class="tema__claro" data-i18n="tema.claro">Claro</span>
+      </button>
+    </div>
+  </div>
+</nav>
+<canvas class="mundo" aria-hidden="true"></canvas>
+<main class="caso-pagina caso-pagina--v4 caso-pagina--chamfer" id="contenido">
+  <header class="caso-cabecera apertura" id="cabecera" data-caso="chamfer">
+    <div class="caso-cabecera__media apertura__foto" data-paralaje><img class="caso__capa caso__capa--fondo" src="../assets/mundo/casos/chamfer-fondo.webp" srcset="../assets/mundo/casos/chamfer-fondo-480.webp 480w, ../assets/mundo/casos/chamfer-fondo-800.webp 800w, ../assets/mundo/casos/chamfer-fondo-1600.webp 1600w, ../assets/mundo/casos/chamfer-fondo.webp 2400w" sizes="(min-width: 768px) 100vw, 220vw" width="2400" height="1500" fetchpriority="high" decoding="async" alt=""><img class="caso__capa caso__capa--disp" src="../assets/mundo/casos/chamfer-dispositivo.webp" srcset="../assets/mundo/casos/chamfer-dispositivo-480.webp 480w, ../assets/mundo/casos/chamfer-dispositivo-800.webp 800w, ../assets/mundo/casos/chamfer-dispositivo-1600.webp 1600w, ../assets/mundo/casos/chamfer-dispositivo.webp 2400w" sizes="(min-width: 768px) 100vw, 220vw" width="2400" height="1500" fetchpriority="high" decoding="async" alt="Render: una portátil abierta con la demo Anatomy de Chamfer, sobre una losa de mármol oscuro" data-i18n-attr="alt=trabajo.chamfer.foto"><img class="caso__capa caso__capa--disp caso__brillo" src="../assets/mundo/casos/chamfer-dispositivo.webp" srcset="../assets/mundo/casos/chamfer-dispositivo-480.webp 480w, ../assets/mundo/casos/chamfer-dispositivo-800.webp 800w, ../assets/mundo/casos/chamfer-dispositivo-1600.webp 1600w, ../assets/mundo/casos/chamfer-dispositivo.webp 2400w" sizes="(min-width: 768px) 100vw, 220vw" width="2400" height="1500" decoding="async" alt=""></div>
+    <div class="contenedor apertura__in">
+      <div class="apertura__texto">
+        <p class="folio apertura__folio"><span class="folio__cifra cifra" aria-hidden="true">01</span><span class="folio__etiqueta etiqueta" data-revelar="bloque" data-i18n="caso.chamfer.folio">Proyecto adicional</span><span class="folio__filete" aria-hidden="true"></span></p>
+        <p class="apertura__sello" data-revelar="bloque"><span class="sello sello--proceso" data-i18n="trabajo.chamfer.sello">Prototipo</span></p>
+        <h1 class="display caso-cabecera__titulo apertura__titulo" data-revelar>Chamfer</h1>
+        <p class="sub-heroe apertura__promesa" data-revelar data-i18n="caso.chamfer.gancho">Luz, material y profundidad para la página de producto, a partir de las fotos que la tienda ya tiene.</p>
+      </div>
+      <dl class="apertura__tira placa placa--bloque" data-revelar-hijos data-iman>
+        <div><dt class="etiqueta" data-i18n="caso.resumen.que">Qué es</dt><dd data-i18n="caso.chamfer.resumen.1">Cinco secciones para tiendas Shopify, cada una en un solo archivo que se configura desde el editor.</dd></div>
+        <div><dt class="etiqueta" data-i18n="caso.resumen.para">Para quién</dt><dd data-i18n="caso.chamfer.resumen.2">Tiendas de productos de diseño que quieren que sus fotos muestren textura y profundidad sin contratar a un programador.</dd></div>
+        <div><dt class="etiqueta" data-i18n="caso.resumen.estado">Estado</dt><dd data-i18n="caso.chamfer.resumen.3">Prototipo terminado en local. Sin publicar y sin probar todavía en una tienda real.</dd></div>
+      </dl>
+    </div>
+  </header>
+  <div class="contenedor">
+    <dl class="ficha-linea" aria-label="Ficha del proyecto" data-i18n-attr="aria-label=caso.meta.aria" data-revelar-hijos>
+      <div class="ficha-linea__ancho"><dt class="etiqueta" data-i18n="caso.meta.rol">Mi rol</dt><dd data-i18n="caso.chamfer.rol">Fijé el objetivo, el presupuesto y las reglas; delegué en agentes de IA la investigación, la elección del negocio y la construcción; revisé el resultado y decido cuándo sale.</dd></div>
+      <div><dt class="etiqueta" data-i18n="caso.meta.periodo">Período</dt><dd data-i18n="caso.chamfer.periodo">Noviembre de 2026</dd></div>
+      <div class="ficha-linea__ancho"><dt class="etiqueta" data-i18n="caso.meta.herramientas">Herramientas</dt><dd data-i18n="caso.chamfer.herramientas">Desarrollo asistido por IA · Liquid · JavaScript sin librerías · WebGL · Blender (Cycles) por script</dd></div>
+    </dl>
+
+    <section class="seccion-caso caso-problema" id="problema" aria-labelledby="t-problema">
+      <p class="folio"><span class="folio__cifra cifra" aria-hidden="true">02</span><span class="folio__etiqueta etiqueta" data-revelar="bloque" data-i18n="caso.patron.problema">El problema</span><span class="folio__filete" aria-hidden="true"></span></p>
+      <h2 class="caso-problema__frase" id="t-problema" data-revelar data-i18n="caso.chamfer.problema.titulo">Una tienda chica arma su página de producto con los bloques del editor, y al lado de la marca que admira se ve plana.</h2>
+      <p class="caso-problema__texto" data-revelar data-i18n="caso.chamfer.problema.texto">El editor de temas resuelve bien lo básico: foto, título, precio y botón. Sus bloques muestran la foto plana, sin giro, sin despiece y sin un primer plano del material, y el comerciante no tiene modelos 3D de su producto para armarlos. La otra salida es pagarle a un programador por una sola página.</p>
+    </section>
+
+    <section class="seccion-caso caso-recorrido" id="recorrido" aria-labelledby="t-recorrido">
+      <p class="folio"><span class="folio__cifra cifra" aria-hidden="true">03</span><span class="folio__etiqueta etiqueta" data-revelar="bloque" data-i18n="caso.patron.recorrido">Recorrido</span><span class="folio__filete" aria-hidden="true"></span></p>
+      <div class="seccion-caso__cabeza">
+        <h2 class="h-caso seccion-caso__titulo" id="t-recorrido" data-revelar data-i18n="caso.chamfer.recorrido.titulo">Cada sección trabaja con fotos de la tienda: nadie tiene que modelar el producto en 3D.</h2>
+        <p class="seccion-caso__aviso etiqueta" data-revelar="bloque" data-i18n="caso.chamfer.galeria.aviso">Capturas de las demos, con el contenido de muestra en inglés de una marca ficticia.</p>
+      </div>
+      <ol class="recorrido" role="list">
+        <li class="recorrido__paso">
+          <figure class="recorrido__media ampliable">
+            <div class="ventana"><div class="ventana__pantalla cortina">
+<picture>
+  <source type="image/avif" srcset="../assets/img/chamfer/turntable-640.avif 640w, ../assets/img/chamfer/turntable-1280.avif 1280w, ../assets/img/chamfer/turntable-1408.avif 1408w" sizes="(min-width: 1024px) 58vw, 100vw">
+  <img src="../assets/img/chamfer/turntable-1280.webp" srcset="../assets/img/chamfer/turntable-640.webp 640w, ../assets/img/chamfer/turntable-1280.webp 1280w, ../assets/img/chamfer/turntable-1408.webp 1408w" sizes="(min-width: 1024px) 58vw, 100vw" width="1408" height="868" loading="lazy" decoding="async" alt="Demo Turntable: el frasco de muestra sobre un plato graduado, con tres etapas de texto a la izquierda y el control de grados abajo" data-i18n-attr="alt=caso.chamfer.recorrido.1.alt">
+</picture>
+            </div></div>
+            <button type="button" class="ampliar" data-ampliar="../assets/img/chamfer/turntable-1408.webp"><span class="oculto-visual" data-i18n="caso.patron.ampliar">Ampliar imagen</span></button>
+          </figure>
+          <div class="recorrido__texto">
+            <span class="recorrido__n cifra" aria-hidden="true">01</span>
+            <h3 class="recorrido__t" data-revelar data-i18n="caso.chamfer.recorrido.1.t">El producto da la vuelta a medida que bajás por la página</h3>
+            <p data-revelar data-i18n="caso.chamfer.recorrido.1">Turntable arma un giro de 360° con 12 a 36 fotos de una vuelta completa. Al desplazarse, el frasco gira sobre un plato graduado y los textos aparecen por etapas, cada uno con una línea hasta su pieza.</p>
+            <p class="recorrido__prueba" data-revelar="bloque"><span class="etiqueta" data-i18n="caso.patron.comprobe">Cómo lo comprobé</span> <span data-i18n="caso.chamfer.recorrido.1.prueba">Capturas en escritorio y en teléfono al principio, a la mitad y al final del recorrido, para ver cada etapa en su lugar.</span></p>
+          </div>
+        </li>
+        <li class="recorrido__paso">
+          <figure class="recorrido__media ampliable">
+            <div class="ventana"><div class="ventana__pantalla cortina">
+<picture>
+  <source type="image/avif" srcset="../assets/img/chamfer/swatch-640.avif 640w, ../assets/img/chamfer/swatch-1280.avif 1280w, ../assets/img/chamfer/swatch-1440.avif 1440w" sizes="(min-width: 1024px) 58vw, 100vw">
+  <img src="../assets/img/chamfer/swatch-1280.webp" srcset="../assets/img/chamfer/swatch-640.webp 640w, ../assets/img/chamfer/swatch-1280.webp 1280w, ../assets/img/chamfer/swatch-1440.webp 1440w" sizes="(min-width: 1024px) 58vw, 100vw" width="1440" height="900" loading="lazy" decoding="async" alt="Demo Swatch: tres muestras de material, la tapa moleteada con la lupa encima, el vidrio y la placa grabada" data-i18n-attr="alt=caso.chamfer.recorrido.2.alt">
+</picture>
+            </div></div>
+            <button type="button" class="ampliar" data-ampliar="../assets/img/chamfer/swatch-1440.webp"><span class="oculto-visual" data-i18n="caso.patron.ampliar">Ampliar imagen</span></button>
+          </figure>
+          <div class="recorrido__texto">
+            <span class="recorrido__n cifra" aria-hidden="true">02</span>
+            <h3 class="recorrido__t" data-revelar data-i18n="caso.chamfer.recorrido.2.t">Una lupa al doble para mirar el material como en el taller</h3>
+            <p data-revelar data-i18n="caso.chamfer.recorrido.2">Swatch muestra tres materiales en tarjetas. Al pasar el cursor por una, la luz barre la superficie y una lupa la amplía al doble. La luz rasante se dibuja con WebGL.</p>
+            <p class="recorrido__prueba" data-revelar="bloque"><span class="etiqueta" data-i18n="caso.patron.comprobe">Cómo lo comprobé</span> <span data-i18n="caso.chamfer.recorrido.2.prueba">Una captura con WebGL apagado: las tres tarjetas siguen ahí, con sus fotos y sus textos.</span></p>
+          </div>
+        </li>
+        <li class="recorrido__paso">
+          <figure class="recorrido__media ampliable">
+            <div class="ventana"><div class="ventana__pantalla cortina">
+<picture>
+  <source type="image/avif" srcset="../assets/img/chamfer/reducido-640.avif 640w, ../assets/img/chamfer/reducido-1280.avif 1280w, ../assets/img/chamfer/reducido-1408.avif 1408w" sizes="(min-width: 1024px) 58vw, 100vw">
+  <img src="../assets/img/chamfer/reducido-1280.webp" srcset="../assets/img/chamfer/reducido-640.webp 640w, ../assets/img/chamfer/reducido-1280.webp 1280w, ../assets/img/chamfer/reducido-1408.webp 1408w" sizes="(min-width: 1024px) 58vw, 100vw" width="1408" height="720" loading="lazy" decoding="async" alt="Demo Turntable con movimiento reducido: el frasco quieto de frente y las tres etapas de texto visibles a la vez" data-i18n-attr="alt=caso.chamfer.recorrido.3.alt">
+</picture>
+            </div></div>
+            <button type="button" class="ampliar" data-ampliar="../assets/img/chamfer/reducido-1408.webp"><span class="oculto-visual" data-i18n="caso.patron.ampliar">Ampliar imagen</span></button>
+          </figure>
+          <div class="recorrido__texto">
+            <span class="recorrido__n cifra" aria-hidden="true">03</span>
+            <h3 class="recorrido__t" data-revelar data-i18n="caso.chamfer.recorrido.3.t">Con movimiento reducido, la sección queda quieta y completa</h3>
+            <p data-revelar data-i18n="caso.chamfer.recorrido.3">Si el visitante pidió menos movimiento, ninguna sección deja un hueco. Turntable, por ejemplo, muestra el frasco de frente y las tres etapas a la vez, para que la página siga contando el producto.</p>
+            <p class="recorrido__prueba" data-revelar="bloque"><span class="etiqueta" data-i18n="caso.patron.comprobe">Cómo lo comprobé</span> <span data-i18n="caso.chamfer.recorrido.3.prueba">Una captura con movimiento reducido de cada una de las cinco demos.</span></p>
+          </div>
+        </li>
+      </ol>
+      <div class="recorrido__mas">
+        <h3 class="etiqueta recorrido__mas-t" data-revelar="bloque" data-i18n="caso.patron.tambien">También hace</h3>
+        <ul class="recorrido__lista" role="list" data-revelar-hijos>
+          <li><strong data-i18n="caso.chamfer.hace.1.t">Plinth</strong> <span data-i18n="caso.chamfer.hace.1">Portada con el producto sobre un pedestal iluminado; usa WebGL y tiene versión sin WebGL.</span></li>
+          <li><strong data-i18n="caso.chamfer.hace.2.t">Vitrine</strong> <span data-i18n="caso.chamfer.hace.2">Vitrina de dos a cuatro productos que se recorre con el teclado y se lee sin JavaScript.</span></li>
+          <li><strong data-i18n="caso.chamfer.hace.3.t">Responde al editor</strong> <span data-i18n="caso.chamfer.hace.3">Cada sección se reinicia cuando el comerciante la agrega, la cambia o la quita en el editor de temas.</span></li>
+          <li><strong data-i18n="caso.chamfer.hace.4.t">Espera a verse</strong> <span data-i18n="caso.chamfer.hace.4">Ninguna arranca su animación hasta entrar en pantalla.</span></li>
+          <li><strong data-i18n="caso.chamfer.hace.5.t">Guía de instalación</strong> <span data-i18n="caso.chamfer.hace.5">Cada sección trae la suya en inglés: seis pasos y la lista de ajustes del editor.</span></li>
+        </ul>
+      </div>
+    </section>
+  </div>
+
+  <figure class="caso-foto caso-foto--detalle">
+    <div class="caso-foto__marco"><img class="caso-foto__img" src="../assets/mundo/casos/chamfer-detalle.webp" srcset="../assets/mundo/casos/chamfer-detalle-480.webp 480w, ../assets/mundo/casos/chamfer-detalle-800.webp 800w, ../assets/mundo/casos/chamfer-detalle.webp 2000w" sizes="100vw" width="2000" height="1250" loading="lazy" decoding="async" data-carga alt="Render en primer plano de la bisagra de la portátil, con la demo de Chamfer en la pantalla" data-i18n-attr="alt=caso.chamfer.detalle.alt"></div>
+    <figcaption class="contenedor caso-foto__pie" data-revelar="bloque" data-i18n="caso.chamfer.detalle.pie">La bisagra de la portátil y las primeras filas del teclado, con la demo encendida arriba.</figcaption>
+  </figure>
+
+  <div class="contenedor">
+    <section class="seccion-caso caso-firma" id="firma" aria-labelledby="t-firma">
+      <p class="folio"><span class="folio__cifra cifra" aria-hidden="true">04</span><span class="folio__etiqueta etiqueta" data-revelar="bloque" data-i18n="caso.chamfer.firma.etiqueta">El despiece, ampliado</span><span class="folio__filete" aria-hidden="true"></span></p>
+      <h2 class="h-caso seccion-caso__titulo" id="t-firma" data-revelar data-i18n="caso.chamfer.firma.titulo">Anatomy separa cada pieza del frasco y le pone su medida, como un plano de taller.</h2>
+      <div class="firma firma--chamfer">
+        <figure class="firma__despiece ampliable">
+          <div class="ventana"><div class="ventana__pantalla cortina">
+<picture>
+  <source type="image/avif" srcset="../assets/img/chamfer/anatomy-640.avif 640w, ../assets/img/chamfer/anatomy-1280.avif 1280w, ../assets/img/chamfer/anatomy-1440.avif 1440w" sizes="(min-width: 1440px) 1360px, 100vw">
+  <img src="../assets/img/chamfer/anatomy-1280.webp" srcset="../assets/img/chamfer/anatomy-640.webp 640w, ../assets/img/chamfer/anatomy-1280.webp 1280w, ../assets/img/chamfer/anatomy-1440.webp 1440w" sizes="(min-width: 1440px) 1360px, 100vw" width="1440" height="900" loading="lazy" decoding="async" alt="Demo Anatomy: el frasco abierto en cinco piezas (tapa, collar, vidrio, líquido y placa), cada una con su cota y una línea hasta el texto que la describe" data-i18n-attr="alt=caso.chamfer.firma.alt">
+</picture>
+          </div></div>
+          <button type="button" class="ampliar" data-ampliar="../assets/img/chamfer/anatomy-1440.webp"><span class="oculto-visual" data-i18n="caso.patron.ampliar">Ampliar imagen</span></button>
+          <figcaption data-revelar="bloque" data-i18n="caso.chamfer.firma.pie">La demo Anatomy a 1440 × 900, con el contenido de muestra en inglés.</figcaption>
+        </figure>
+        <p class="firma__texto" data-revelar data-i18n="caso.chamfer.firma.texto">Al bajar por la página, el frasco se abre en cinco piezas. Cada una lleva su cota en tipografía mono y una línea hasta el punto que describe. Dos de esas piezas, de cerca: renders propios hechos en Blender por script.</p>
+        <figure class="firma__plano ampliable">
+          <div class="firma__foto cortina">
+<picture>
+  <source type="image/avif" srcset="../assets/img/chamfer/tapa-640.avif 640w, ../assets/img/chamfer/tapa-1280.avif 1280w" sizes="(min-width: 1024px) 30vw, 100vw">
+  <img src="../assets/img/chamfer/tapa-1280.webp" srcset="../assets/img/chamfer/tapa-640.webp 640w, ../assets/img/chamfer/tapa-1280.webp 1280w" sizes="(min-width: 1024px) 30vw, 100vw" width="1280" height="960" loading="lazy" decoding="async" alt="Render en primer plano de la tapa de aluminio moleteada" data-i18n-attr="alt=caso.chamfer.plano.1.alt">
+</picture>
+          </div>
+          <button type="button" class="ampliar" data-ampliar="../assets/img/chamfer/tapa-1280.webp"><span class="oculto-visual" data-i18n="caso.patron.ampliar">Ampliar imagen</span></button>
+          <figcaption data-revelar="bloque" data-i18n="caso.chamfer.plano.1.pie">La tapa moleteada: la pieza 01 del despiece.</figcaption>
+        </figure>
+        <figure class="firma__plano ampliable">
+          <div class="firma__foto cortina">
+<picture>
+  <source type="image/avif" srcset="../assets/img/chamfer/placa-640.avif 640w, ../assets/img/chamfer/placa-1280.avif 1280w, ../assets/img/chamfer/placa-1600.avif 1600w" sizes="(min-width: 1024px) 30vw, 100vw">
+  <img src="../assets/img/chamfer/placa-1280.webp" srcset="../assets/img/chamfer/placa-640.webp 640w, ../assets/img/chamfer/placa-1280.webp 1280w, ../assets/img/chamfer/placa-1600.webp 1600w" sizes="(min-width: 1024px) 30vw, 100vw" width="1600" height="1200" loading="lazy" decoding="async" alt="Render en primer plano de la placa grabada «Nº 45 Atelier» sobre la base biselada del frasco" data-i18n-attr="alt=caso.chamfer.plano.2.alt">
+</picture>
+          </div>
+          <button type="button" class="ampliar" data-ampliar="../assets/img/chamfer/placa-1600.webp"><span class="oculto-visual" data-i18n="caso.patron.ampliar">Ampliar imagen</span></button>
+          <figcaption data-revelar="bloque" data-i18n="caso.chamfer.plano.2.pie">La placa grabada sobre la base biselada: la pieza 05.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="seccion-caso caso-decide" id="decisiones" aria-labelledby="t-decisiones">
+      <p class="folio"><span class="folio__cifra cifra" aria-hidden="true">05</span><span class="folio__etiqueta etiqueta" data-revelar="bloque" data-i18n="caso.parte.decisiones">Decisiones</span><span class="folio__filete" aria-hidden="true"></span></p>
+      <div class="seccion-caso__cabeza">
+        <h2 class="h-caso seccion-caso__titulo" id="t-decisiones" data-revelar data-i18n="caso.chamfer.decisiones.titulo">Lo que cada sección tenía que cumplir antes de darla por buena.</h2>
+        <p class="seccion-caso__aviso decide__entrada" data-revelar="bloque" data-i18n="caso.chamfer.decisiones.quien">Las tomaron los agentes de IA, dentro del objetivo, el presupuesto y las reglas que fijé yo. Yo revisé el resultado.</p>
+      </div>
+      <ol class="decide" role="list">
+        <li class="decide__fila">
+          <span class="decide__n cifra" aria-hidden="true">01</span>
+          <div class="decide__eje"><span class="etiqueta decide__rotulo" data-revelar="bloque" data-i18n="caso.chamfer.elegi">Se decidió</span><h3 class="decide__t" data-revelar data-i18n="caso.chamfer.decision.1.elegi">Que cada sección trabaje con las fotos que la tienda ya tiene.</h3></div>
+          <div class="decide__nota" data-revelar="bloque"><span class="etiqueta decide__rotulo" data-i18n="caso.chamfer.vi">Por qué</span><p data-i18n="caso.chamfer.decision.1.vi">Los comerciantes no tienen modelos 3D de sus productos.</p></div>
+          <div class="decide__nota" data-revelar="bloque"><span class="etiqueta decide__rotulo" data-i18n="caso.chamfer.descarte">Se descartó</span><p><span data-i18n="caso.chamfer.decision.1.descarte">Un visor 3D.</span> <span data-i18n="caso.chamfer.decision.1.porque">Sin modelos que cargarle, queda vacío.</span></p></div>
+        </li>
+        <li class="decide__fila">
+          <span class="decide__n cifra" aria-hidden="true">02</span>
+          <div class="decide__eje"><span class="etiqueta decide__rotulo" data-revelar="bloque" data-i18n="caso.chamfer.elegi">Se decidió</span><h3 class="decide__t" data-revelar data-i18n="caso.chamfer.decision.2.elegi">Un solo archivo por sección, sin librerías y con un tope de 40 KB.</h3></div>
+          <div class="decide__nota" data-revelar="bloque"><span class="etiqueta decide__rotulo" data-i18n="caso.chamfer.vi">Por qué</span><p data-i18n="caso.chamfer.decision.2.vi">Un bloque pesado arruina la página que viene a mejorar.</p></div>
+          <div class="decide__nota" data-revelar="bloque"><span class="etiqueta decide__rotulo" data-i18n="caso.chamfer.descarte">Se descartó</span><p><span data-i18n="caso.chamfer.decision.2.descarte">Apoyarse en librerías 3D.</span> <span data-i18n="caso.chamfer.decision.2.porque">Ese peso lo paga la tienda en cada visita.</span></p></div>
+        </li>
+        <li class="decide__fila">
+          <span class="decide__n cifra" aria-hidden="true">03</span>
+          <div class="decide__eje"><span class="etiqueta decide__rotulo" data-revelar="bloque" data-i18n="caso.chamfer.elegi">Se decidió</span><h3 class="decide__t" data-revelar data-i18n="caso.chamfer.decision.3.elegi">Que cada sección tenga una versión estática completa.</h3></div>
+          <div class="decide__nota" data-revelar="bloque"><span class="etiqueta decide__rotulo" data-i18n="caso.chamfer.vi">Por qué</span><p data-i18n="caso.chamfer.decision.3.vi">Con movimiento reducido o sin WebGL, un efecto que falla deja un hueco en la página.</p></div>
+          <div class="decide__nota" data-revelar="bloque"><span class="etiqueta decide__rotulo" data-i18n="caso.chamfer.descarte">Se descartó</span><p><span data-i18n="caso.chamfer.decision.3.descarte">Ocultar la sección en esos casos.</span> <span data-i18n="caso.chamfer.decision.3.porque">La página tiene que seguir mostrando el producto.</span></p></div>
+        </li>
+      </ol>
+    </section>
+
+    <section class="seccion-caso caso-taller" id="construccion" aria-labelledby="t-taller">
+      <p class="folio"><span class="folio__cifra cifra" aria-hidden="true">06</span><span class="folio__etiqueta etiqueta" data-revelar="bloque" data-i18n="caso.parte.agentes">Cómo lo construí</span><span class="folio__filete" aria-hidden="true"></span></p>
+      <h2 class="h-caso seccion-caso__titulo" id="t-taller" data-revelar data-i18n="caso.chamfer.construi.titulo">Puse las reglas y delegué la construcción en agentes de IA, una sección por tanda.</h2>
+      <ol class="taller" role="list">
+        <li class="taller__paso taller__paso--artefacto">
+          <span class="taller__n cifra" aria-hidden="true">01</span>
+          <div class="taller__texto"><h3 class="taller__t" data-revelar data-i18n="caso.chamfer.agentes.1.t">Un método común.</h3><p data-revelar data-i18n="caso.chamfer.agentes.1">Antes de la primera sección quedó escrito un brief único: qué entrega cada tanda, cómo se construye y cómo se verifica.</p></div>
+          <figure class="taller__artefacto artefacto-brief" data-revelar="bloque">
+            <blockquote class="artefacto-brief__texto" lang="es">
+              <p>Escribí UNA sola implementación de la lógica (CSS + JS) y usala igual en <code>demo.html</code> y en el <code>.liquid</code>. La demo reemplaza los valores de Liquid por contenido de muestra, nada más.</p>
+            </blockquote>
+            <p class="firma__traduccion" lang="en" data-i18n="caso.chamfer.brief.traduccion">La traducción al inglés aparece sólo en la versión en inglés de esta página.</p>
+            <figcaption data-i18n="caso.chamfer.construi.artefacto.1">Del brief que siguió cada tanda, copiado tal cual.</figcaption>
+          </figure>
+        </li>
+        <li class="taller__paso">
+          <span class="taller__n cifra" aria-hidden="true">02</span>
+          <div class="taller__texto"><h3 class="taller__t" data-revelar data-i18n="caso.chamfer.agentes.2.t">Una sección por tanda.</h3><p data-revelar data-i18n="caso.chamfer.agentes.2">Cada tanda entregó su sección, una demo con el contenido de una marca de muestra, su guía de instalación en inglés y sus capturas.</p></div>
+        </li>
+        <li class="taller__paso taller__paso--artefacto taller__paso--giro">
+          <span class="taller__n cifra" aria-hidden="true">03</span>
+          <div class="taller__texto"><h3 class="taller__t" data-revelar data-i18n="caso.chamfer.agentes.3.t">Renders propios.</h3><p data-revelar data-i18n="caso.chamfer.agentes.3">Los cuatro productos de muestra se modelaron y renderizaron en Blender por script, con Cycles: frente, primeros planos de material, un giro de 36 cuadros y un despiece.</p></div>
+          <figure class="taller__artefacto taller__artefacto--imagen ampliable">
+            <div class="taller__imagen cortina">
+<picture>
+  <source type="image/avif" srcset="../assets/img/chamfer/giro-640.avif 640w, ../assets/img/chamfer/giro-1280.avif 1280w, ../assets/img/chamfer/giro-1920.avif 1920w" sizes="(min-width: 1024px) 40vw, 100vw">
+  <img src="../assets/img/chamfer/giro-1280.webp" srcset="../assets/img/chamfer/giro-640.webp 640w, ../assets/img/chamfer/giro-1280.webp 1280w, ../assets/img/chamfer/giro-1920.webp 1920w" sizes="(min-width: 1024px) 40vw, 100vw" width="1920" height="619" loading="lazy" decoding="async" alt="Seis cuadros del giro del frasco de muestra, de 0 a 150 grados, sobre fondo oscuro" data-i18n-attr="alt=caso.chamfer.giro.alt">
+</picture>
+            </div>
+            <button type="button" class="ampliar" data-ampliar="../assets/img/chamfer/giro-1920.webp"><span class="oculto-visual" data-i18n="caso.patron.ampliar">Ampliar imagen</span></button>
+            <figcaption data-revelar="bloque" data-i18n="caso.chamfer.giro.pie">Seis de los 36 cuadros del giro que usa la demo de Turntable.</figcaption>
+          </figure>
+        </li>
+        <li class="taller__paso">
+          <span class="taller__n cifra" aria-hidden="true">04</span>
+          <div class="taller__texto"><h3 class="taller__t" data-revelar data-i18n="caso.chamfer.agentes.4.t">Revisión.</h3><p data-revelar data-i18n="caso.chamfer.agentes.4">Cada demo se capturó en escritorio y en teléfono, incrustada, con movimiento reducido y sin WebGL, y las capturas se miraron una por una. El validador de temas de Shopify da 0 problemas en las cinco secciones.</p></div>
+        </li>
+      </ol>
+    </section>
+
+    <section class="seccion-caso caso-balance" id="resultado" aria-labelledby="t-resultado">
+      <p class="folio"><span class="folio__cifra cifra" aria-hidden="true">07</span><span class="folio__etiqueta etiqueta" data-revelar="bloque" data-i18n="caso.parte.resultado">Resultado</span><span class="folio__filete" aria-hidden="true"></span></p>
+      <h2 class="h-caso seccion-caso__titulo" id="t-resultado" data-revelar data-i18n="caso.chamfer.resultado">Cinco secciones terminadas y medidas en local, que todavía no corrieron en una tienda.</h2>
+      <ul class="balance__cifras balance__cifras--una" role="list" data-revelar-hijos>
+        <li><p class="balance__cifra cifra"><span class="balance__antes" data-i18n="caso.chamfer.cifra.2.antes">de 26,5 a</span> <span data-rodillo data-i18n="caso.chamfer.cifra.2.n">39,0</span>&nbsp;KB</p><p class="balance__que" data-i18n="caso.chamfer.cifra.2">pesa cada archivo, por debajo del tope de 40 KB</p></li>
+      </ul>
+      <p class="balance__linea" data-revelar="bloque" data-i18n="caso.chamfer.cifra.linea">Cinco secciones, cada una en un solo archivo y sin librerías, y 0 problemas en el validador de temas de Shopify.</p>
+      <div class="balance__estado">
+        <p class="balance__texto" data-revelar data-i18n="caso.chamfer.estado">Prototipo terminado en local: las cinco secciones con su demo y su guía de instalación, y la web de la marca con cada sección andando. Nada está publicado y no hubo ninguna venta.</p>
+        <div class="balance__falta">
+          <h3 class="etiqueta balance__falta-t" data-revelar="bloque" data-i18n="caso.patron.falta">Qué falta</h3>
+          <ul role="list" data-revelar-hijos>
+            <li data-i18n="caso.chamfer.falta.1">Probarlo en una tienda Shopify real, con temas distintos.</li>
+            <li data-i18n="caso.chamfer.falta.2">Publicarlo.</li>
+            <li data-i18n="caso.chamfer.falta.3">Cobrar: el pago todavía no está conectado.</li>
+          </ul>
+          <h3 class="etiqueta balance__falta-t balance__cambio-t" data-revelar="bloque" data-i18n="caso.patron.cambiaria">Qué cambiaría</h3>
+          <p class="balance__cambio" data-revelar="bloque" data-i18n="caso.chamfer.reflexion.1">Probar en una tienda de prueba antes de hacer la web de la marca.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="seccion-caso caso-album" id="galeria" aria-labelledby="t-galeria">
+      <p class="folio"><span class="folio__cifra cifra" aria-hidden="true">08</span><span class="folio__etiqueta etiqueta" data-revelar="bloque" data-i18n="caso.parte.galeria">Galería</span><span class="folio__filete" aria-hidden="true"></span></p>
+      <h2 class="h-caso seccion-caso__titulo" id="t-galeria" data-revelar data-i18n="caso.chamfer.galeria.titulo">La portátil de costado, sobre su losa de mármol.</h2>
+      <div class="album">
+        <figure class="album__item album__item--foto ampliable">
+          <div class="album__foto cortina"><img src="../assets/mundo/casos/chamfer-angulo.webp" srcset="../assets/mundo/casos/chamfer-angulo-480.webp 480w, ../assets/mundo/casos/chamfer-angulo-800.webp 800w, ../assets/mundo/casos/chamfer-angulo.webp 2000w" sizes="(min-width: 1440px) 1360px, 100vw" width="2000" height="1250" loading="lazy" decoding="async" alt="Render: la portátil con la demo de Chamfer vista de costado sobre la losa de mármol" data-i18n-attr="alt=caso.chamfer.angulo.alt"></div>
+          <button type="button" class="ampliar" data-ampliar="../assets/mundo/casos/chamfer-angulo.webp"><span class="oculto-visual" data-i18n="caso.patron.ampliar">Ampliar imagen</span></button>
+          <figcaption data-revelar="bloque" data-i18n="caso.chamfer.angulo.pie">De costado: la demo en la pantalla, el teclado y el cable sobre la losa.</figcaption>
+        </figure>
+      </div>
+    </section>
+  <section class="caso-contacto placa placa--bloque" aria-labelledby="t-contacto" data-iman>
+    <div class="caso-contacto__texto">
+      <p class="etiqueta caso-contacto__etiqueta" data-revelar="bloque" data-i18n="folio.contacto">Contacto</p>
+      <h2 class="caso-contacto__titulo" id="t-contacto" data-revelar data-i18n="contacto.titulo">Escribime si tenés un producto para construir o un proceso para automatizar.</h2>
+      <p class="caso-contacto__sub" data-revelar data-i18n="contacto.sub">Respondo en el día.</p>
+    </div>
+    <div class="caso-contacto__acciones" data-revelar-hijos>
+      <a class="boton boton--primario boton--grande" href="mailto:ramirobales@gmail.com" data-i18n="contacto.mail">Escribir a ramirobales@gmail.com</a>
+      <a class="boton boton--secundario boton--grande" href="../cv/ramiro-bales-cv-es.pdf" data-cv data-i18n="contacto.cv">Descargar CV (PDF)</a>
+      <a class="boton boton--secundario boton--grande" href="https://www.linkedin.com/in/ramiro-bales" rel="me noopener noreferrer" target="_blank" aria-label="LinkedIn de Ramiro Bales (abre en pestaña nueva)" data-i18n-attr="aria-label=heroe.linkedin.aria" data-i18n="contacto.linkedin">LinkedIn</a>
+    </div>
+  </section>
+  <nav class="caso-nav" id="otros" aria-label="Otros casos" data-i18n-attr="aria-label=caso.otros.aria">
+    <p class="folio caso-nav__folio"><span class="folio__etiqueta etiqueta" data-i18n="caso.otros.aria">Otros casos</span><span class="folio__filete" aria-hidden="true"></span></p>
+    <div class="caso-nav__pares">
+    <a class="caso-par caso-par--siguiente caso-puerta" href="prospeccion.html">
+      <span class="caso-par__media" data-paralaje data-vt="prospeccion"><img class="caso__capa caso__capa--fondo" src="../assets/mundo/casos/prospeccion-fondo.webp" srcset="../assets/mundo/casos/prospeccion-fondo-480.webp 480w, ../assets/mundo/casos/prospeccion-fondo-800.webp 800w, ../assets/mundo/casos/prospeccion-fondo-1600.webp 1600w, ../assets/mundo/casos/prospeccion-fondo.webp 2400w" sizes="100vw" width="2400" height="1500" loading="lazy" decoding="async" data-carga alt=""><img class="caso__capa caso__capa--disp" src="../assets/mundo/casos/prospeccion-dispositivo.webp" srcset="../assets/mundo/casos/prospeccion-dispositivo-480.webp 480w, ../assets/mundo/casos/prospeccion-dispositivo-800.webp 800w, ../assets/mundo/casos/prospeccion-dispositivo-1600.webp 1600w, ../assets/mundo/casos/prospeccion-dispositivo.webp 2400w" sizes="100vw" width="2400" height="1500" loading="lazy" decoding="async" data-carga alt=""><span class="caso__luz" aria-hidden="true"></span></span>
+      <span class="caso-par__texto"><span class="etiqueta caso-par__etiqueta" data-i18n="caso.siguiente">Caso siguiente →</span><span class="caso-par__nombre" data-revelar="lineas" data-i18n="trabajo.prospeccion.nombre">Prospección verificada</span><span class="caso-par__frase" data-i18n="trabajo.prospeccion.frase">Un motor que encuentra pymes con sitio propio, revisa su página y redacta un primer correo. Antes del envío, un verificador sin IA frena toda frase que la auditoría no midió.</span><span class="sello sello--proceso" data-i18n="trabajo.prospeccion.sello">Prototipo</span></span>
+    </a>
+    <a class="caso-par caso-par--anterior placa placa--bloque placa--viva" href="coro.html" data-iman>
+      <span class="caso-par__media" data-vt="coro"><img class="caso__capa caso__capa--fondo" src="../assets/mundo/casos/coro-fondo.webp" srcset="../assets/mundo/casos/coro-fondo-480.webp 480w, ../assets/mundo/casos/coro-fondo-800.webp 800w, ../assets/mundo/casos/coro-fondo-1600.webp 1600w, ../assets/mundo/casos/coro-fondo.webp 2400w" sizes="(min-width: 768px) 240px, 100vw" width="2400" height="1500" loading="lazy" decoding="async" data-carga alt=""><img class="caso__capa caso__capa--disp" src="../assets/mundo/casos/coro-dispositivo.webp" srcset="../assets/mundo/casos/coro-dispositivo-480.webp 480w, ../assets/mundo/casos/coro-dispositivo-800.webp 800w, ../assets/mundo/casos/coro-dispositivo-1600.webp 1600w, ../assets/mundo/casos/coro-dispositivo.webp 2400w" sizes="(min-width: 768px) 240px, 100vw" width="2400" height="1500" loading="lazy" decoding="async" data-carga alt=""><span class="caso__luz" aria-hidden="true"></span></span>
+      <span class="caso-par__texto"><span class="etiqueta caso-par__etiqueta" data-i18n="caso.anterior">← Caso anterior</span><span class="caso-par__nombre" data-revelar="lineas">coro</span><span class="caso-par__frase" data-i18n="trabajo.coro.frase">Lee las reseñas de un producto (400 en la corrida real más grande), agrupa el defecto que se repite y busca quién ya lo resolvió, con su fuente.</span><span class="sello sello--proceso" data-i18n="trabajo.coro.sello">Prototipo</span></span>
+    </a>
+    <p class="caso-nav__todos" data-revelar="bloque"><a class="boton boton--secundario" href="../index.html#trabajo" data-i18n="caso.volver">Todos los casos</a></p>
+    </div>
+  </nav>
+  </div>
+  <dialog class="ampliacion" aria-label="Imagen ampliada" data-i18n-attr="aria-label=caso.patron.ampliada">
+    <div class="ampliacion__marco"></div>
+    <div class="ampliacion__pie"><p class="ampliacion__texto"></p><button type="button" class="boton boton--secundario ampliacion__cerrar" data-i18n="caso.patron.cerrar">Cerrar</button></div>
+  </dialog>
+</main>
+<footer class="pie">
+  <div class="contenedor">
+    <div class="pie__in placa placa--bloque">
+      <div class="pila--chica">
+        <p class="pie__enlaces">
+          <a href="../creditos.html" data-i18n="pie.creditos">Créditos: texturas, modelos 3D y entornos de terceros</a>
+          <a href="../legal.html" data-i18n="pie.legal">Aviso legal y privacidad</a>
+        </p>
+        <p class="pie__hecho" data-i18n="pie.hecho">Sitio estático hecho con desarrollo asistido por IA y verificado a mano. Sin cookies ni analítica.</p>
+      </div>
+      <div class="pie__lado">
+        <div class="nav__herramientas">
+          <div class="conmutador conmutador--idioma" role="group" aria-label="Idioma" data-i18n-attr="aria-label=nav.idioma.aria">
+            <button type="button" data-idioma="es" aria-pressed="true" lang="es">ES</button>
+            <button type="button" data-idioma="en" aria-pressed="false" lang="en">EN</button>
+          </div>
+          <button type="button" class="tema" aria-pressed="false" aria-label="Cambiar entre tema claro y oscuro" data-i18n-attr="aria-label=tema.aria">
+            <svg class="tema__luna" viewBox="0 0 20 20" aria-hidden="true"><path d="M16.4 12.2A7 7 0 0 1 7.8 3.6a7.2 7.2 0 1 0 8.6 8.6Z"/></svg>
+            <svg class="tema__sol" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="3.6"/><path d="M10 1.8v2.2M10 16v2.2M1.8 10H4M16 10h2.2M4.2 4.2l1.6 1.6M14.2 14.2l1.6 1.6M4.2 15.8l1.6-1.6M14.2 5.8l1.6-1.6"/></svg>
+            <span class="tema__oscuro" data-i18n="tema.oscuro">Oscuro</span>
+            <span class="tema__claro" data-i18n="tema.claro">Claro</span>
+          </button>
+        </div>
+        <p class="pie__copy" data-i18n="pie.copy">© 2026 Ramiro Bales</p>
+      </div>
+    </div>
+  </div>
+</footer>
+<script type="module" src="../js/mundo/pagina.js"></script>
+<script type="module" src="../js/comun.js"></script>
+<script type="module" src="../js/caso.js"></script>
+</body>
+</html>

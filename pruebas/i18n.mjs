@@ -45,7 +45,12 @@ export function correr({ raiz }) {
     let dic = null;
     const demo = p.match(/^(demos\/[^/]+)\//);
     if (demo && dics.has(`${demo[1]}/i18n/`)) dic = dics.get(`${demo[1]}/i18n/`);
-    else if (/js\/comun\.js/.test(texto)) dic = dics.get('i18n/');
+    else if (/js\/comun\.js/.test(texto)) {
+      // <html data-dic="casos"> pide i18n/casos-<idioma>.json; sin el atributo, el general
+      const propio = texto.match(/<html\b[^>]*\bdata-dic="([\w-]+)"/);
+      dic = propio ? dics.get(`i18n/${propio[1]}-`) : dics.get('i18n/');
+      if (propio && !dic) fallas.push(`${p}: pide el diccionario «${propio[1]}» y no existe i18n/${propio[1]}-es.json`);
+    }
     if (!dic) continue;
     for (const e of etiquetas(texto)) {
       const pedidas = [];

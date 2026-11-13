@@ -1,20 +1,20 @@
 <!doctype html>
-<html lang="es">
+<html lang="es" data-dic="casos">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-qjuWUyWKqt0Fss48UG4bCZhHldwUiLUb4aBs52h7UYk='; style-src 'self'; img-src 'self'; font-src 'self'; connect-src 'self'; media-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-WVrqxGBOCFO/Cp2nS+4U+eTNuPdla3QGlJrPwf9tiP8='; style-src 'self'; img-src 'self'; font-src 'self'; connect-src 'self'; media-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script>var d=document.documentElement;if(self!==top){d.classList.add('enmarcado');try{top.location.replace(location.href)}catch(e){}}try{var t=new URLSearchParams(location.search).get('tema')||localStorage.getItem('tema');if(t==='light'||t==='dark')d.dataset.theme=t;}catch(e){}d.classList.add('js');if(!/[?&](quieto=1|ir=)/.test(location.search))d.classList.add('mov');setTimeout(function(){if(!d.dataset.mov)d.classList.remove('js','mov')},4000);(function(){var r=matchMedia('(prefers-reduced-motion: reduce)'),h=[];function n(el,v){if(el){el.style.viewTransitionName=v;h.push(el);}}addEventListener('pagereveal',function(e){h.forEach(function(el){el.style.viewTransitionName='';});h=[];var v=e.viewTransition;if(v){if(r.matches){v.ready.catch(function(){});v.skipTransition();}else d.classList.add('vt');}});addEventListener('pageswap',function(e){var v=e.viewTransition;if(!v)return;if(r.matches){v.ready.catch(function(){});v.skipTransition();return;}var a=e.activation,u=a&&a.entry&&a.entry.url?new URL(a.entry.url):null,c=document.querySelector('.caso-cabecera__media'),m=u&&u.pathname.match(/\/proyectos\/(cathedra|fortal|athleteiq|coro)\.html$/);if(m){n(c,'none');n(document.querySelector('[data-vt="'+m[1]+'"]'),'caso-'+m[1]);}else if(!(a&&(a.navigationType==='traverse'||(u&&u.hash==='#trabajo'))))n(c,'none');});})();</script>
+<script>var d=document.documentElement;if(self!==top){d.classList.add('enmarcado');try{top.location.replace(location.href)}catch(e){}}try{var t=new URLSearchParams(location.search).get('tema')||localStorage.getItem('tema');if(t==='light'||t==='dark')d.dataset.theme=t;}catch(e){}d.classList.add('js');if(!/[?&](quieto=1|ir=)/.test(location.search))d.classList.add('mov');setTimeout(function(){if(!d.dataset.mov)d.classList.remove('js','mov')},4000);(function(){var r=matchMedia('(prefers-reduced-motion: reduce)'),h=[];function n(el,v){if(el){el.style.viewTransitionName=v;h.push(el);}}addEventListener('pagereveal',function(e){h.forEach(function(el){el.style.viewTransitionName='';});h=[];var v=e.viewTransition;if(v){if(r.matches){v.ready.catch(function(){});v.skipTransition();}else d.classList.add('vt');}});addEventListener('pageswap',function(e){var v=e.viewTransition;if(!v)return;if(r.matches){v.ready.catch(function(){});v.skipTransition();return;}var a=e.activation,u=a&&a.entry&&a.entry.url?new URL(a.entry.url):null,c=document.querySelector('.caso-cabecera__media'),m=u&&u.pathname.match(/\/proyectos\/(cathedra|fortal|athleteiq|coro|chamfer|prospeccion).html$/);if(m){n(c,'none');n(document.querySelector('[data-vt="'+m[1]+'"]'),'caso-'+m[1]);}else if(!(a&&(a.navigationType==='traverse'||(u&&u.hash==='#trabajo'))))n(c,'none');});})();</script>
 <title data-i18n="caso.coro.titulo">coro — caso de estudio · Ramiro Bales</title>
-<meta name="description" data-i18n-attr="content=caso.coro.descripcion" content="coro lee las reseñas públicas de un producto, agrupa el defecto que se repite y encuentra qué competidor ya lo resolvió. Prototipo con informe HTML.">
+<meta name="description" data-i18n-attr="content=caso.coro.descripcion" content="coro lee las reseñas públicas de un producto, agrupa el defecto que se repite y busca quién ya lo resolvió: un competidor, un proveedor o una patente, con su fuente. Prototipo con informe HTML.">
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#F3EEE4">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#040404">
 <meta name="author" content="Ramiro Bales">
 <meta property="og:type" content="article">
 <meta property="og:title" content="coro — caso de estudio · Ramiro Bales">
-<meta property="og:description" content="coro lee las reseñas públicas de un producto, agrupa el defecto que se repite y encuentra qué competidor ya lo resolvió. Prototipo con informe HTML.">
+<meta property="og:description" content="coro lee las reseñas públicas de un producto, agrupa el defecto que se repite y busca quién ya lo resolvió: un competidor, un proveedor o una patente, con su fuente. Prototipo con informe HTML.">
 <meta property="og:image" content="https://ramirobales-collab.github.io/assets/mundo/og-1200x630.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -38,17 +38,18 @@
 <link rel="modulepreload" href="../js/mundo/fondo.js">
 <link rel="modulepreload" href="../js/comun.js">
 <link rel="modulepreload" href="../js/movimiento.js">
-<link rel="preload" as="image" href="../assets/mundo/casos/coro-dispositivo.webp" fetchpriority="high">
-<link rel="preload" as="image" href="../assets/mundo/casos/coro-fondo.webp">
+<link rel="preload" as="image" href="../assets/mundo/casos/coro-dispositivo.webp" imagesrcset="../assets/mundo/casos/coro-dispositivo-480.webp 480w, ../assets/mundo/casos/coro-dispositivo-800.webp 800w, ../assets/mundo/casos/coro-dispositivo-1600.webp 1600w, ../assets/mundo/casos/coro-dispositivo.webp 2400w" imagesizes="(min-width: 768px) 100vw, 220vw" fetchpriority="high">
+<link rel="preload" as="image" href="../assets/mundo/casos/coro-fondo.webp" imagesrcset="../assets/mundo/casos/coro-fondo-480.webp 480w, ../assets/mundo/casos/coro-fondo-800.webp 800w, ../assets/mundo/casos/coro-fondo-1600.webp 1600w, ../assets/mundo/casos/coro-fondo.webp 2400w" imagesizes="(min-width: 768px) 100vw, 220vw">
 <link rel="stylesheet" href="../css/variables.css">
 <link rel="stylesheet" href="../css/base.css">
 <link rel="stylesheet" href="../css/componentes.css">
 <link rel="stylesheet" href="../css/caso.css">
+<link rel="stylesheet" href="../css/casos/coro.css">
 </head>
 <body>
 <a class="enmarcado-aviso" href="https://ramirobales-collab.github.io/proyectos/coro.html" target="_top" rel="noopener noreferrer" data-i18n="enmarcado.aviso">Esta página está dentro de otro sitio. Abrila en su dirección real: ramirobales-collab.github.io</a>
 <a class="saltar" href="#contenido" data-i18n="nav.saltar">Saltar al contenido</a>
-<nav class="nav nav--placa" aria-label="Principal">
+<nav class="nav nav--placa" aria-label="Principal" data-i18n-attr="aria-label=nav.aria">
   <div class="contenedor nav__in">
     <a class="nav__marca" href="../index.html" data-i18n="nav.marca">Ramiro Bales</a>
     <div class="nav__enlaces">
@@ -103,149 +104,269 @@
   </div>
 </nav>
 <canvas class="mundo" aria-hidden="true"></canvas>
-<main class="caso-pagina" id="contenido">
-  <header class="caso-cabecera" id="cabecera" data-caso="coro">
-    <div class="contenedor caso-cabecera__in">
-      <p class="folio caso-cabecera__folio"><span class="folio__cifra cifra" aria-hidden="true">04</span><span class="folio__etiqueta etiqueta" data-revelar="bloque" data-i18n="caso.folio">Caso de estudio</span><span class="folio__filete" aria-hidden="true"></span></p>
-      <div class="caso-cabecera__texto">
-        <p class="caso-cabecera__sello" data-revelar="bloque"><span class="sello sello--proceso" data-i18n="trabajo.coro.sello">Prototipo</span></p>
-        <h1 class="display caso-cabecera__titulo" data-revelar>coro</h1>
-        <p class="sub-heroe caso-cabecera__linea" data-revelar data-i18n="caso.coro.gancho">De cientos de reseñas a un defecto concreto y a quién ya lo resolvió.</p>
-        
+<main class="caso-pagina caso-pagina--v4" id="contenido">
+  <header class="caso-cabecera apertura" id="cabecera" data-caso="coro">
+    <div class="caso-cabecera__media apertura__foto" data-paralaje><img class="caso__capa caso__capa--fondo" src="../assets/mundo/casos/coro-fondo.webp" srcset="../assets/mundo/casos/coro-fondo-480.webp 480w, ../assets/mundo/casos/coro-fondo-800.webp 800w, ../assets/mundo/casos/coro-fondo-1600.webp 1600w, ../assets/mundo/casos/coro-fondo.webp 2400w" sizes="(min-width: 768px) 100vw, 220vw" width="2400" height="1500" fetchpriority="high" decoding="async" alt=""><img class="caso__capa caso__capa--disp" src="../assets/mundo/casos/coro-dispositivo.webp" srcset="../assets/mundo/casos/coro-dispositivo-480.webp 480w, ../assets/mundo/casos/coro-dispositivo-800.webp 800w, ../assets/mundo/casos/coro-dispositivo-1600.webp 1600w, ../assets/mundo/casos/coro-dispositivo.webp 2400w" sizes="(min-width: 768px) 100vw, 220vw" width="2400" height="1500" fetchpriority="high" decoding="async" alt="Render: el reporte de coro en una tableta sobre su atril, encima de un cubo de mármol" data-i18n-attr="alt=trabajo.coro.foto"><img class="caso__capa caso__capa--disp caso__brillo" src="../assets/mundo/casos/coro-dispositivo.webp" srcset="../assets/mundo/casos/coro-dispositivo-480.webp 480w, ../assets/mundo/casos/coro-dispositivo-800.webp 800w, ../assets/mundo/casos/coro-dispositivo-1600.webp 1600w, ../assets/mundo/casos/coro-dispositivo.webp 2400w" sizes="(min-width: 768px) 100vw, 220vw" width="2400" height="1500" decoding="async" alt=""></div>
+    <div class="contenedor apertura__in">
+      <div class="apertura__texto">
+        <p class="folio apertura__folio"><span class="folio__cifra cifra" aria-hidden="true">01</span><span class="folio__etiqueta etiqueta" data-revelar="bloque" data-i18n="caso.folio">Caso de estudio</span><span class="folio__filete" aria-hidden="true"></span></p>
+        <p class="apertura__sello" data-revelar="bloque"><span class="sello sello--proceso" data-i18n="trabajo.coro.sello">Prototipo</span></p>
+        <h1 class="display caso-cabecera__titulo apertura__titulo" data-revelar>coro</h1>
+        <p class="sub-heroe apertura__promesa" data-revelar data-i18n="caso.coro.gancho">De cientos de reseñas a un defecto concreto y a quién ya lo resolvió.</p>
       </div>
-      <div class="caso-cabecera__media" data-paralaje data-iman><img class="caso__capa caso__capa--fondo" src="../assets/mundo/casos/coro-fondo.webp" width="1600" height="1000" fetchpriority="high" decoding="async" alt=""><img class="caso__capa caso__capa--disp" src="../assets/mundo/casos/coro-dispositivo.webp" width="1600" height="1000" fetchpriority="high" decoding="async" alt="Render: el reporte de coro en una tableta apoyada sobre un zócalo de piedra oscura" data-i18n-attr="alt=trabajo.coro.foto"><img class="caso__capa caso__capa--disp caso__brillo" src="../assets/mundo/casos/coro-dispositivo.webp" width="1600" height="1000" decoding="async" alt=""><span class="caso__luz" aria-hidden="true"></span></div>
-      <dl class="caso-resumen placa placa--bloque" data-revelar-hijos>
-        <div><dt class="etiqueta" data-i18n="caso.resumen.que">Qué es</dt><dd data-i18n="caso.coro.resumen.1">Herramienta que lee reseñas públicas de un producto, agrupa el defecto que se repite y busca qué competidor ya lo resolvió.</dd></div>
+      <dl class="apertura__tira placa placa--bloque" data-revelar-hijos data-iman>
+        <div><dt class="etiqueta" data-i18n="caso.resumen.que">Qué es</dt><dd data-i18n="caso.coro.resumen.1">Herramienta que lee reseñas públicas de un producto, agrupa el defecto que se repite y busca quién ya lo resolvió, con su fuente: un competidor, un proveedor o una patente.</dd></div>
         <div><dt class="etiqueta" data-i18n="caso.resumen.para">Para quién</dt><dd data-i18n="caso.coro.resumen.2">Quien compra, vende o fabrica: cuatro perfiles leen el mismo informe con otra pregunta.</dd></div>
         <div><dt class="etiqueta" data-i18n="caso.resumen.estado">Estado</dt><dd data-i18n="caso.coro.resumen.3">Prototipo de línea de comandos que genera un informe HTML por producto.</dd></div>
       </dl>
     </div>
   </header>
   <div class="contenedor">
-  <dl class="reticula caso-ficha placa placa--bloque" data-revelar-hijos aria-label="Ficha del proyecto" data-i18n-attr="aria-label=caso.meta.aria">
-    <div class="caso-ficha__item"><dt class="etiqueta" data-i18n="caso.meta.proyecto">Proyecto</dt><dd data-i18n="caso.meta.propio">Propio, sin cliente</dd></div>
-    <div class="caso-ficha__item caso-ficha__item--ancho"><dt class="etiqueta" data-i18n="caso.meta.rol">Mi rol</dt><dd data-i18n="caso.coro.rol">Definí el producto, los perfiles, la métrica que decide, la regla sobre las soluciones y el formato del informe; dirigí el desarrollo y lo validé.</dd></div>
-    <div class="caso-ficha__item caso-ficha__item--ancho"><dt class="etiqueta" data-i18n="caso.meta.herramientas">Herramientas</dt><dd data-i18n="caso.coro.herramientas">Desarrollo asistido por IA · Node.js · módulos ES · informe HTML estático</dd></div>
-    <div class="caso-ficha__item"><dt class="etiqueta" data-i18n="caso.meta.periodo">Período</dt><dd data-i18n="caso.coro.periodo">Agosto de 2026</dd></div>
-    <div class="caso-ficha__item"><dt class="etiqueta" data-i18n="caso.meta.enlace">Enlace</dt><dd><span data-i18n="caso.coro.enlace">Demo interna: sin enlace público</span></dd></div>
-  </dl>
-  <div class="reticula caso-cuerpo">
-    <nav class="caso-indice" aria-label="Partes del caso" data-i18n-attr="aria-label=caso.indice.aria">
-      <ol>
-      <li><a href="#cabecera"><span class="caso-indice__n" aria-hidden="true">01</span><span data-i18n="caso.parte.cabecera">Resumen</span></a></li>
-      <li><a href="#problema"><span class="caso-indice__n" aria-hidden="true">02</span><span data-i18n="caso.parte.problema">Problema</span></a></li>
-      <li><a href="#hace"><span class="caso-indice__n" aria-hidden="true">03</span><span data-i18n="caso.parte.hace">Qué hace</span></a></li>
-      <li><a href="#decisiones"><span class="caso-indice__n" aria-hidden="true">04</span><span data-i18n="caso.parte.decisiones">Decisiones</span></a></li>
-      <li><a href="#agentes"><span class="caso-indice__n" aria-hidden="true">05</span><span data-i18n="caso.parte.agentes">Cómo lo construí</span></a></li>
-      <li><a href="#resultado"><span class="caso-indice__n" aria-hidden="true">06</span><span data-i18n="caso.parte.resultado">Resultado</span></a></li>
-      <li><a href="#galeria"><span class="caso-indice__n" aria-hidden="true">07</span><span data-i18n="caso.parte.galeria">Galería</span></a></li>
-      </ol>
-    </nav>
-    <div class="caso-contenido">
-      <section class="caso-parte" id="problema" data-n="02" data-visto aria-labelledby="t-problema">
-        <span class="etiqueta caso-parte__n" aria-hidden="true">02</span>
-        <h2 class="caso-parte__titulo" id="t-problema" data-revelar data-i18n="caso.parte.problema">Problema</h2>
-        <p data-revelar data-i18n="caso.coro.problema.1">Mil reseñas negativas repartidas en veinte temas son ruido; cien diciendo lo mismo es un defecto arreglable.</p>
-        <p data-revelar data-i18n="caso.coro.problema.2">Quien compra, vende o fabrica no tiene tiempo de leerlas ni sabe si otro ya lo resolvió.</p>
-      </section>
-      <section class="caso-parte" id="hace" data-n="03" data-visto aria-labelledby="t-hace">
-        <span class="etiqueta caso-parte__n" aria-hidden="true">03</span>
-        <h2 class="caso-parte__titulo" id="t-hace" data-revelar data-i18n="caso.parte.hace">Qué hace</h2>
-        <ul class="capacidades capacidades--6" role="list" data-revelar-hijos>
-          <li class="capacidad placa placa--viva"><span class="capacidad__icono"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M10.5 4a6.5 6.5 0 1 0 0 13a6.5 6.5 0 1 0 0-13zM15.5 15.5L20.5 20.5"/></svg></span><div><h3 class="capacidad__t" data-i18n="caso.coro.hace.1.t">Lee las reseñas</h3><p data-i18n="caso.coro.hace.1">Reseñas públicas de un producto: 400 en la corrida real más grande y 1.200 en una prueba de carga.</p></div></li>
-          <li class="capacidad placa placa--viva"><span class="capacidad__icono"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM15 15.5h3M16.5 14v3"/></svg></span><div><h3 class="capacidad__t" data-i18n="caso.coro.hace.2.t">Mide concentración</h3><p data-i18n="caso.coro.hace.2">Agrupa temas y calcula qué parte de las negativas señala lo mismo, por severidad y con recargo si crece.</p></div></li>
-          <li class="capacidad placa placa--viva"><span class="capacidad__icono"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 7h5v5c0 3-1.6 4.8-4 5.5M14 7h5v5c0 3-1.6 4.8-4 5.5"/></svg></span><div><h3 class="capacidad__t" data-i18n="caso.coro.hace.3.t">Citas textuales</h3><p data-i18n="caso.coro.hace.3">Cada tema trae citas con fecha y estrellas.</p></div></li>
-          <li class="capacidad placa placa--viva"><span class="capacidad__icono"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h13M12.5 6.5L18 12l-5.5 5.5M20.5 5v14"/></svg></span><div><h3 class="capacidad__t" data-i18n="caso.coro.hace.4.t">Causa e impacto</h3><p data-i18n="caso.coro.hace.4">Hipótesis de causa raíz e impacto estimado por tema.</p></div></li>
-          <li class="capacidad placa placa--viva"><span class="capacidad__icono"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3a9 9 0 1 0 0 18a9 9 0 1 0 0-18zM8 12.5l2.8 2.8L16.5 9"/></svg></span><div><h3 class="capacidad__t" data-i18n="caso.coro.hace.5.t">Quién ya lo resolvió</h3><p data-i18n="caso.coro.hace.5">Soluciones con fuente; si no hay evidencia, el informe lo dice.</p></div></li>
-          <li class="capacidad placa placa--viva"><span class="capacidad__icono"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 6a3 3 0 1 0 0 6a3 3 0 1 0 0-6zM3.5 20c0-3.2 2.5-5.5 5.5-5.5s5.5 2.3 5.5 5.5M16 5.5a3 3 0 0 1 0 6M17.5 14.8c2 .6 3.2 2.5 3.2 5.2"/></svg></span><div><h3 class="capacidad__t" data-i18n="caso.coro.hace.6.t">Cuatro lecturas</h3><p data-i18n="caso.coro.hace.6">Consumidor, emprendedor, marca que compra a un tercero y marca que fabrica.</p></div></li>
-        </ul>
-      </section>
-      <section class="caso-parte" id="decisiones" data-n="04" data-visto aria-labelledby="t-decisiones">
-        <span class="etiqueta caso-parte__n" aria-hidden="true">04</span>
-        <h2 class="caso-parte__titulo" id="t-decisiones" data-revelar data-i18n="caso.parte.decisiones">Decisiones</h2>
-        <div class="caso-decisiones">
-          <article class="caso-decision placa placa--bloque" data-iman>
-            <span class="caso-decision__n cifra" aria-hidden="true">01</span>
-            <div class="caso-decision__vi"><span class="caso-decision__etiqueta etiqueta" data-i18n="caso.vi">Lo que vi</span><p data-revelar data-i18n="caso.coro.decision.1.vi">Veinte temas con cinco quejas no son un defecto; uno con el 47 % sí.</p></div>
-            <div class="caso-decision__elegi-bloque"><span class="caso-decision__etiqueta etiqueta" data-i18n="caso.elegi">Decidí</span><h3 class="caso-decision__elegi" data-revelar data-i18n="caso.coro.decision.1.elegi">Medir concentración: qué parte de las negativas señala lo mismo.</h3></div>
-            <div class="caso-decision__descarte-bloque"><span class="caso-decision__etiqueta etiqueta" data-i18n="caso.descarte">Descarté</span><p class="tachado caso-decision__descarte" data-revelar data-i18n="caso.coro.decision.1.descarte">Rankear por cantidad de quejas.</p><p class="caso-decision__porque"><span class="etiqueta" data-i18n="caso.porque">Porque</span> <span data-i18n="caso.coro.decision.1.porque">La cantidad premia al tema más charlado, no al defecto que se repite.</span></p></div>
-          </article>
-          <article class="caso-decision placa placa--bloque" data-iman>
-            <span class="caso-decision__n cifra" aria-hidden="true">02</span>
-            <div class="caso-decision__vi"><span class="caso-decision__etiqueta etiqueta" data-i18n="caso.vi">Lo que vi</span><p data-revelar data-i18n="caso.coro.decision.2.vi">Una solución inventada se lee con la misma seguridad que una real.</p></div>
-            <div class="caso-decision__elegi-bloque"><span class="caso-decision__etiqueta etiqueta" data-i18n="caso.elegi">Decidí</span><h3 class="caso-decision__elegi" data-revelar data-i18n="caso.coro.decision.2.elegi">Que las soluciones se busquen y se citen con fuente, y que el informe diga cuando no hay evidencia.</h3></div>
-            <div class="caso-decision__descarte-bloque"><span class="caso-decision__etiqueta etiqueta" data-i18n="caso.descarte">Descarté</span><p class="tachado caso-decision__descarte" data-revelar data-i18n="caso.coro.decision.2.descarte">Que el modelo proponga soluciones.</p><p class="caso-decision__porque"><span class="etiqueta" data-i18n="caso.porque">Porque</span> <span data-i18n="caso.coro.decision.2.porque">Un «no se encontró» vale más que una solución inventada.</span></p></div>
-          </article>
-          <article class="caso-decision placa placa--bloque" data-iman>
-            <span class="caso-decision__n cifra" aria-hidden="true">03</span>
-            <div class="caso-decision__vi"><span class="caso-decision__etiqueta etiqueta" data-i18n="caso.vi">Lo que vi</span><p data-revelar data-i18n="caso.coro.decision.3.vi">La misma queja pide cosas distintas a quien compra y a quien fabrica.</p></div>
-            <div class="caso-decision__elegi-bloque"><span class="caso-decision__etiqueta etiqueta" data-i18n="caso.elegi">Decidí</span><h3 class="caso-decision__elegi" data-revelar data-i18n="caso.coro.decision.3.elegi">Un informe con cuatro lecturas: consumidor, emprendedor, marca que compra a un tercero y marca que fabrica.</h3></div>
-            <div class="caso-decision__descarte-bloque"><span class="caso-decision__etiqueta etiqueta" data-i18n="caso.descarte">Descarté</span><p class="tachado caso-decision__descarte" data-revelar data-i18n="caso.coro.decision.3.descarte">Un único informe genérico.</p><p class="caso-decision__porque"><span class="etiqueta" data-i18n="caso.porque">Porque</span> <span data-i18n="caso.coro.decision.3.porque">«¿Me conviene comprarlo?» y «¿qué le reclamo a mi proveedor?» no se contestan con el mismo párrafo.</span></p></div>
-          </article>
-        </div>
-      </section>
-      <section class="caso-parte" id="agentes" data-n="05" data-visto aria-labelledby="t-agentes">
-        <span class="etiqueta caso-parte__n" aria-hidden="true">05</span>
-        <h2 class="caso-parte__titulo" id="t-agentes" data-revelar data-i18n="caso.parte.agentes.titulo">Cómo lo construí con agentes de IA</h2>
-        <ol class="caso-pasos" data-visto>
-          <li><div><strong data-revelar="bloque" data-i18n="caso.coro.agentes.1.t">Brief.</strong><p data-revelar data-i18n="caso.coro.agentes.1">Los perfiles y la métrica se definieron antes del código: concentración, por severidad, con recargo si el tema crece.</p></div></li>
-          <li><div><strong data-revelar="bloque" data-i18n="caso.coro.agentes.2.t">Un módulo por tanda.</strong><p data-revelar data-i18n="caso.coro.agentes.2">Análisis, calidad, historial, perfiles, soluciones e informe, cada uno con su criterio de aceptación.</p></div></li>
-          <li><div><strong data-revelar="bloque" data-i18n="caso.coro.agentes.3.t">Regla de soluciones.</strong><p data-revelar data-i18n="caso.coro.agentes.3">Se buscan y se citan con fuente; si no hay evidencia, el informe lo dice.</p></div></li>
-          <li><div><strong data-revelar="bloque" data-i18n="caso.coro.agentes.4.t">Verificación.</strong><p data-revelar data-i18n="caso.coro.agentes.4">Lo corrí sobre 400 reseñas reales en la corrida más grande y sobre 1.200 en una prueba de carga; como caso de prueba usé un juego propio de 32 reseñas de un cabezal de ducha con filtro, y revisé el informe renderizado.</p></div></li>
-          <li><div><strong data-revelar="bloque" data-i18n="caso.coro.agentes.5.t">Qué saqué para mostrarlo.</strong><p data-revelar data-i18n="caso.coro.agentes.5">En una copia del informe reemplacé tiendas y proveedores reales por nombres genéricos.</p></div></li>
-        </ol>
-      </section>
-    </div>
-    <section class="caso-resultado seccion--tinta placa--bloque" data-visto data-iman id="resultado" aria-labelledby="t-resultado">
-      <h2 class="etiqueta" id="t-resultado"><span aria-hidden="true">06 —</span> <span data-i18n="caso.parte.resultado">Resultado</span></h2>
-      <p class="caso-resultado__frase" data-revelar="lineas" data-i18n="caso.coro.resultado">Prototipo de línea de comandos que genera el informe HTML de un producto.</p>
-      <p class="caso-resultado__apoyo" data-revelar data-i18n="caso.coro.apoyo">Corre sobre las reseñas de un producto o sobre un conjunto de prueba local. Sin usuarios ni clientes.</p>
+    <dl class="ficha-linea" aria-label="Ficha del proyecto" data-i18n-attr="aria-label=caso.meta.aria" data-revelar-hijos>
+      <div><dt class="etiqueta" data-i18n="caso.meta.rol">Mi rol</dt><dd data-i18n="caso.coro.rol.corto">Definí el producto y sus reglas, y dirigí el desarrollo</dd></div>
+      <div><dt class="etiqueta" data-i18n="caso.meta.periodo">Período</dt><dd data-i18n="caso.coro.periodo">Agosto de 2026</dd></div>
+      <div class="ficha-linea__ancho"><dt class="etiqueta" data-i18n="caso.meta.herramientas">Herramientas</dt><dd data-i18n="caso.coro.herramientas">Desarrollo asistido por IA · Node.js · módulos ES · informe HTML estático</dd></div>
+      <div><dt class="etiqueta" data-i18n="caso.meta.enlace">Enlace</dt><dd data-i18n="caso.coro.enlace">Demo interna: sin enlace público</dd></div>
+    </dl>
+
+    <section class="seccion-caso caso-problema" id="problema" aria-labelledby="t-problema">
+      <p class="folio"><span class="folio__cifra cifra" aria-hidden="true">02</span><span class="folio__etiqueta etiqueta" data-revelar="bloque" data-i18n="caso.patron.problema">El problema</span><span class="folio__filete" aria-hidden="true"></span></p>
+      <h2 class="caso-problema__frase" id="t-problema" data-revelar data-i18n="caso.coro.problema.titulo">Las reseñas sobre una misma falla quedan tapadas por las quejas sobre todo lo demás.</h2>
+      <p class="caso-problema__texto" data-revelar data-i18n="caso.coro.problema.texto">Quien compra, vende o fabrica no tiene tiempo de leerlas ni sabe si otro ya resolvió ese defecto. El promedio de estrellas tampoco ayuda: no separa un defecto concentrado, que se puede arreglar, de un producto con quejas sueltas.</p>
     </section>
-    <div class="caso-contenido caso-contenido--sigue">
-      <section class="caso-parte caso-reflexion" data-visto aria-labelledby="t-reflexion">
-        <h2 class="caso-parte__titulo" id="t-reflexion" data-revelar data-i18n="caso.parte.reflexion">Qué cambiaría y qué falta</h2>
-        <p data-revelar data-i18n="caso.coro.reflexion.1">Lo que cambiaría: publicar desde el principio un informe de ejemplo como página; hoy sólo hay capturas.</p>
-        <p data-revelar data-i18n="caso.coro.reflexion.2">Lo que falta: corre por línea de comandos, así que una marca todavía no lo puede usar sola.</p>
-      </section>
-    </div>
-    <section class="caso-galeria caso-parte" id="galeria" data-n="07" data-visto aria-labelledby="t-galeria">
-      <span class="etiqueta caso-parte__n" aria-hidden="true">07</span>
-      <h2 class="caso-parte__titulo" id="t-galeria" data-revelar data-i18n="caso.parte.galeria">Galería</h2>
-      <p class="caso-galeria__aviso etiqueta" data-revelar="bloque" data-i18n="caso.coro.galeria.aviso">Capturas sobre el juego de prueba propio; proveedores y fuentes reemplazados por nombres genéricos.</p>
-      <div class="caso-galeria__items">
-        <figure class="caso-galeria__item caso-galeria__item--12 caso-galeria__item--antes">
-          <div class="caso-galeria__media placa mascara">
+
+    <section class="seccion-caso caso-recorrido" id="recorrido" aria-labelledby="t-recorrido">
+      <p class="folio"><span class="folio__cifra cifra" aria-hidden="true">03</span><span class="folio__etiqueta etiqueta" data-revelar="bloque" data-i18n="caso.patron.recorrido">Recorrido</span><span class="folio__filete" aria-hidden="true"></span></p>
+      <div class="seccion-caso__cabeza">
+        <h2 class="h-caso seccion-caso__titulo" id="t-recorrido" data-revelar data-i18n="caso.coro.recorrido.titulo">Un informe que se lee de arriba abajo: el veredicto, la causa, la prueba y la solución.</h2>
+        <p class="seccion-caso__aviso etiqueta" data-revelar="bloque" data-i18n="caso.coro.galeria.aviso">Informe de muestra sobre el juego de prueba: los temas, sus reseñas y la solución se cargaron a mano; coro calcula la concentración, la prioridad y el quiebre. Proveedores con nombres genéricos.</p>
+      </div>
+      <ol class="recorrido" role="list">
+        <li class="recorrido__paso">
+          <figure class="recorrido__media ampliable">
+            <div class="ventana"><div class="ventana__pantalla cortina">
 <picture>
-  <source type="image/avif" srcset="../assets/img/coro/reporte-veredicto-640.avif 640w, ../assets/img/coro/reporte-veredicto-1280.avif 1280w, ../assets/img/coro/reporte-veredicto-1920.avif 1920w" sizes="(min-width: 1024px) 75vw, 100vw">
-  <img src="../assets/img/coro/reporte-veredicto-1280.webp" srcset="../assets/img/coro/reporte-veredicto-640.webp 640w, ../assets/img/coro/reporte-veredicto-1280.webp 1280w, ../assets/img/coro/reporte-veredicto-1920.webp 1920w" sizes="(min-width: 1024px) 75vw, 100vw" width="1920" height="1080" loading="lazy" decoding="async" alt="Informe de coro: cabecera, veredicto y cuatro métricas del producto de prueba" data-i18n-attr="alt=caso.coro.cabecera.alt">
+  <source type="image/avif" srcset="../assets/img/coro/informe-veredicto-640.avif 640w, ../assets/img/coro/informe-veredicto-1280.avif 1280w, ../assets/img/coro/informe-veredicto-1920.avif 1920w" sizes="(min-width: 1024px) 58vw, 100vw">
+  <img src="../assets/img/coro/informe-veredicto-1280.webp" srcset="../assets/img/coro/informe-veredicto-640.webp 640w, ../assets/img/coro/informe-veredicto-1280.webp 1280w, ../assets/img/coro/informe-veredicto-1920.webp 1920w" sizes="(min-width: 1024px) 58vw, 100vw" width="1920" height="434" loading="lazy" decoding="async" alt="El veredicto del informe de muestra en una franja ámbar y cuatro métricas del producto de prueba" data-i18n-attr="alt=caso.coro.recorrido.1.alt">
 </picture>
+            </div></div>
+            <button type="button" class="ampliar" data-ampliar="../assets/img/coro/informe-veredicto-1920.webp"><span class="oculto-visual" data-i18n="caso.patron.ampliar">Ampliar imagen</span></button>
+          </figure>
+          <div class="recorrido__texto">
+            <span class="recorrido__n cifra" aria-hidden="true">01</span>
+            <h3 class="recorrido__t" data-revelar data-i18n="caso.coro.recorrido.1.t">El veredicto dice primero si hay un defecto o sólo quejas sueltas</h3>
+            <p data-revelar data-i18n="caso.coro.recorrido.1">La métrica que decide es la concentración: qué parte de las reseñas negativas señala lo mismo. Al lado van las estrellas promedio, las reseñas de tres estrellas o menos y cuántos temas encontró.</p>
+            <p class="recorrido__prueba" data-revelar="bloque"><span class="etiqueta" data-i18n="caso.patron.comprobe">Cómo lo comprobé</span> <span data-i18n="caso.coro.recorrido.1.prueba">Con un juego de prueba de 32 reseñas de un cabezal de ducha con filtro, una corrida real juntó el 47,4 % de las negativas en un solo tema, igual que el informe de muestra de las capturas.</span></p>
           </div>
-        </figure>
-        <figure class="caso-galeria__item caso-galeria__item--6">
-          <div class="caso-galeria__media placa mascara">
+        </li>
+        <li class="recorrido__paso">
+          <figure class="recorrido__media ampliable">
+            <div class="ventana"><div class="ventana__pantalla cortina">
 <picture>
-  <source type="image/avif" srcset="../assets/img/coro/reporte-veredicto-640.avif 640w, ../assets/img/coro/reporte-veredicto-1280.avif 1280w, ../assets/img/coro/reporte-veredicto-1920.avif 1920w" sizes="(min-width: 1024px) 40vw, 100vw">
-  <img src="../assets/img/coro/reporte-veredicto-1280.webp" srcset="../assets/img/coro/reporte-veredicto-640.webp 640w, ../assets/img/coro/reporte-veredicto-1280.webp 1280w, ../assets/img/coro/reporte-veredicto-1920.webp 1920w" sizes="(min-width: 1024px) 40vw, 100vw" width="1920" height="1080" loading="lazy" decoding="async" alt="Cabecera del informe: veredicto y cuatro métricas" data-i18n-attr="alt=caso.coro.galeria.1">
+  <source type="image/avif" srcset="../assets/img/coro/informe-quiebre-640.avif 640w, ../assets/img/coro/informe-quiebre-1280.avif 1280w, ../assets/img/coro/informe-quiebre-1584.avif 1584w" sizes="(min-width: 1024px) 58vw, 100vw">
+  <img src="../assets/img/coro/informe-quiebre-1280.webp" srcset="../assets/img/coro/informe-quiebre-640.webp 640w, ../assets/img/coro/informe-quiebre-1280.webp 1280w, ../assets/img/coro/informe-quiebre-1584.webp 1584w" sizes="(min-width: 1024px) 58vw, 100vw" width="1584" height="760" loading="lazy" decoding="async" alt="Tema 1 del informe: marcado como tema nuevo con la fecha en que empezó, y la hipótesis de causa raíz" data-i18n-attr="alt=caso.coro.recorrido.2.alt">
 </picture>
+            </div></div>
+            <button type="button" class="ampliar" data-ampliar="../assets/img/coro/informe-quiebre-1584.webp"><span class="oculto-visual" data-i18n="caso.patron.ampliar">Ampliar imagen</span></button>
+          </figure>
+          <div class="recorrido__texto">
+            <span class="recorrido__n cifra" aria-hidden="true">02</span>
+            <h3 class="recorrido__t" data-revelar data-i18n="caso.coro.recorrido.2.t">Si una queja empezó en una fecha, el informe la da</h3>
+            <p data-revelar data-i18n="caso.coro.recorrido.2">Un tema que casi no aparece antes de un día y después es constante queda marcado como nuevo: suele ser un cambio de lote, de proveedor o de proceso. Debajo va la causa raíz probable, marcada como hipótesis.</p>
           </div>
-          <figcaption data-revelar data-i18n="caso.coro.galeria.1.pie">Veredicto: el 47,4 % de las negativas señala lo mismo.</figcaption>
-        </figure>
-        <figure class="caso-galeria__item caso-galeria__item--6">
-          <div class="caso-galeria__media placa mascara">
+        </li>
+        <li class="recorrido__paso">
+          <figure class="recorrido__media ampliable">
+            <div class="ventana"><div class="ventana__pantalla cortina">
 <picture>
-  <source type="image/avif" srcset="../assets/img/coro/reporte-tema-640.avif 640w, ../assets/img/coro/reporte-tema-1280.avif 1280w, ../assets/img/coro/reporte-tema-1920.avif 1920w" sizes="(min-width: 1024px) 40vw, 100vw">
-  <img src="../assets/img/coro/reporte-tema-1280.webp" srcset="../assets/img/coro/reporte-tema-640.webp 640w, ../assets/img/coro/reporte-tema-1280.webp 1280w, ../assets/img/coro/reporte-tema-1920.webp 1920w" sizes="(min-width: 1024px) 40vw, 100vw" width="1920" height="1080" loading="lazy" decoding="async" alt="Tema 1 completo: hipótesis de causa raíz, citas, impacto estimado y quién ya lo resolvió" data-i18n-attr="alt=caso.coro.galeria.2">
+  <source type="image/avif" srcset="../assets/img/coro/informe-citas-640.avif 640w, ../assets/img/coro/informe-citas-1280.avif 1280w, ../assets/img/coro/informe-citas-1584.avif 1584w" sizes="(min-width: 1024px) 58vw, 100vw">
+  <img src="../assets/img/coro/informe-citas-1280.webp" srcset="../assets/img/coro/informe-citas-640.webp 640w, ../assets/img/coro/informe-citas-1280.webp 1280w, ../assets/img/coro/informe-citas-1584.webp 1584w" sizes="(min-width: 1024px) 58vw, 100vw" width="1584" height="860" loading="lazy" decoding="async" alt="Cuatro citas textuales del juego de prueba, cada una con sus estrellas, la fecha y la marca de compra verificada" data-i18n-attr="alt=caso.coro.recorrido.3.alt">
 </picture>
+            </div></div>
+            <button type="button" class="ampliar" data-ampliar="../assets/img/coro/informe-citas-1584.webp"><span class="oculto-visual" data-i18n="caso.patron.ampliar">Ampliar imagen</span></button>
+          </figure>
+          <div class="recorrido__texto">
+            <span class="recorrido__n cifra" aria-hidden="true">03</span>
+            <h3 class="recorrido__t" data-revelar data-i18n="caso.coro.recorrido.3.t">Cada tema trae sus reseñas, palabra por palabra</h3>
+            <p data-revelar data-i18n="caso.coro.recorrido.3">Las citas van textuales, con estrellas, fecha y si la compra está verificada; en las capturas salen del juego de prueba. Quien lee el informe puede comprobar el tema sin volver a la tienda.</p>
           </div>
-          <figcaption data-revelar data-i18n="caso.coro.galeria.2.pie">Un tema completo: causa, citas, impacto y quién lo resolvió.</figcaption>
-        </figure>
+        </li>
+        <li class="recorrido__paso recorrido__paso--alta">
+          <figure class="recorrido__media ampliable">
+            <div class="ventana"><div class="ventana__pantalla cortina">
+<picture>
+  <source type="image/avif" srcset="../assets/img/coro/informe-sin-evidencia-640.avif 640w, ../assets/img/coro/informe-sin-evidencia-1280.avif 1280w, ../assets/img/coro/informe-sin-evidencia-1584.avif 1584w" sizes="(min-width: 1024px) 50vw, 100vw">
+  <img src="../assets/img/coro/informe-sin-evidencia-1280.webp" srcset="../assets/img/coro/informe-sin-evidencia-640.webp 640w, ../assets/img/coro/informe-sin-evidencia-1280.webp 1280w, ../assets/img/coro/informe-sin-evidencia-1584.webp 1584w" sizes="(min-width: 1024px) 50vw, 100vw" width="1584" height="1280" loading="lazy" decoding="async" alt="Tema 2 del informe, una pérdida de agua por la conexión: citas y, en «Quién ya lo resolvió», el aviso de que no se encontró evidencia pública" data-i18n-attr="alt=caso.coro.recorrido.4.alt">
+</picture>
+            </div></div>
+            <button type="button" class="ampliar" data-ampliar="../assets/img/coro/informe-sin-evidencia-1584.webp"><span class="oculto-visual" data-i18n="caso.patron.ampliar">Ampliar imagen</span></button>
+          </figure>
+          <div class="recorrido__texto">
+            <span class="recorrido__n cifra" aria-hidden="true">04</span>
+            <h3 class="recorrido__t" data-revelar data-i18n="caso.coro.recorrido.4.t">Cuando nadie lo resolvió, el informe lo escribe así</h3>
+            <p data-revelar data-i18n="caso.coro.recorrido.4">Las soluciones se buscan y se citan con su fuente. Si no aparece evidencia pública, el informe lo dice y aclara que puede ser una oportunidad o una búsqueda que no dio con la fuente. En el informe de muestra, ese tema no tenía una solución cargada.</p>
+          </div>
+        </li>
+      </ol>
+      <div class="recorrido__mas">
+        <h3 class="etiqueta recorrido__mas-t" data-revelar="bloque" data-i18n="caso.patron.tambien">También hace</h3>
+        <ul class="recorrido__lista" role="list" data-revelar-hijos>
+          <li><strong data-i18n="caso.coro.hace.1.t">Lee las reseñas</strong> <span data-i18n="caso.coro.hace.1">Reseñas públicas de un producto: 400 en la corrida real más grande y 1.200 en una prueba de carga.</span></li>
+          <li><strong data-i18n="caso.coro.hace.7.t">Revisa la muestra</strong> <span data-i18n="caso.coro.hace.7">Valida la muestra antes de gastar en el análisis.</span></li>
+          <li><strong data-i18n="caso.coro.hace.6.t">Cuatro lecturas</strong> <span data-i18n="caso.coro.hace.6">Consumidor, emprendedor, marca que compra a un tercero y marca que fabrica.</span></li>
+          <li><strong data-i18n="caso.coro.hace.8.t">Historial</strong> <span data-i18n="caso.coro.hace.8">Guarda cada corrida y sube la prioridad de un tema que crece.</span></li>
+        </ul>
       </div>
     </section>
   </div>
+
+  <figure class="caso-foto caso-foto--detalle">
+    <div class="caso-foto__marco"><img class="caso-foto__img" src="../assets/mundo/casos/coro-detalle.webp" srcset="../assets/mundo/casos/coro-detalle-480.webp 480w, ../assets/mundo/casos/coro-detalle-800.webp 800w, ../assets/mundo/casos/coro-detalle.webp 2000w" sizes="100vw" width="2000" height="1250" loading="lazy" decoding="async" data-carga alt="Render en primer plano de la tableta con el veredicto ámbar del informe de coro" data-i18n-attr="alt=caso.coro.detalle.alt"></div>
+    <figcaption class="contenedor caso-foto__pie" data-revelar="bloque" data-i18n="caso.coro.detalle.pie">La franja ámbar del veredicto y la métrica de temas, inclinadas detrás del vidrio.</figcaption>
+  </figure>
+
+  <div class="contenedor">
+    <section class="seccion-caso caso-firma" id="firma" aria-labelledby="t-firma">
+      <p class="folio"><span class="folio__cifra cifra" aria-hidden="true">04</span><span class="folio__etiqueta etiqueta" data-revelar="bloque" data-i18n="caso.coro.firma.etiqueta">El hallazgo, ampliado</span><span class="folio__filete" aria-hidden="true"></span></p>
+      <h2 class="h-caso seccion-caso__titulo" id="t-firma" data-revelar data-i18n="caso.coro.firma.titulo">En 32 reseñas de prueba, casi la mitad de las quejas eran la misma.</h2>
+      <div class="firma">
+        <figure class="firma__tarjeta placa placa--bloque hallazgo" lang="es" data-iman data-revelar-hijos>
+          <p class="hallazgo__etiqueta etiqueta">Veredicto</p>
+          <blockquote class="hallazgo__veredicto"><p>Defecto único y arreglable — 47.4% de las reseñas negativas señalan lo mismo.</p></blockquote>
+          <ol class="hallazgo__temas" role="list">
+            <li class="hallazgo__tema hallazgo__tema--uno"><span class="hallazgo__pri cifra">6.5</span><span class="hallazgo__nombre">El cabezal no se puede abrir para cambiar el filtro</span><span class="hallazgo__pct cifra">47.4%</span><span class="hallazgo__barra" aria-hidden="true"><span class="hallazgo__relleno"></span></span></li>
+            <li class="hallazgo__tema"><span class="hallazgo__pri cifra">1.9</span><span class="hallazgo__nombre">Pérdida de agua por la conexión</span><span class="hallazgo__pct cifra">15.8%</span><span class="hallazgo__barra" aria-hidden="true"><span class="hallazgo__relleno"></span></span></li>
+            <li class="hallazgo__tema"><span class="hallazgo__pri cifra">1.2</span><span class="hallazgo__nombre">Caída de presión percibida</span><span class="hallazgo__pct cifra">15.8%</span><span class="hallazgo__barra" aria-hidden="true"><span class="hallazgo__relleno"></span></span></li>
+            <li class="hallazgo__tema"><span class="hallazgo__pri cifra">0.9</span><span class="hallazgo__nombre">Cobro y cancelación de la suscripción de filtros</span><span class="hallazgo__pct cifra">15.8%</span><span class="hallazgo__barra" aria-hidden="true"><span class="hallazgo__relleno"></span></span></li>
+          </ol>
+          <figcaption class="hallazgo__solucion">
+            <span class="hallazgo__etiqueta etiqueta">Quién ya lo resolvió</span>
+            <span class="hallazgo__quien">Proveedor A — modelo 1</span>
+            <span class="hallazgo__como">Cabezal filtrante con traba patentada: la cara del rociador se suelta con un pellizco de dos dedos y el cartucho sale en menos de 5 segundos, sin herramientas.</span>
+            <span class="hallazgo__adopcion">Adopción: cambio de proveedor · confianza alta</span>
+          </figcaption>
+        </figure>
+        <p class="firma__traduccion" lang="en" data-i18n="caso.coro.firma.traduccion">La traducción al inglés aparece sólo en la versión en inglés de esta página.</p>
+        <div class="firma__lado">
+          <p class="firma__texto" data-revelar data-i18n="caso.coro.firma.texto">En la tarjeta, los cuatro temas del informe de muestra con su prioridad y la parte de las negativas que menciona cada uno. El primero concentra tres veces más que cualquier otro, y una corrida real sobre el mismo juego de prueba le dio también el 47,4 %. La solución es un ejemplo cargado a mano para mostrar cómo el informe cita la fuente.</p>
+          <figure class="firma__captura ampliable">
+            <div class="ventana"><div class="ventana__pantalla cortina">
+<picture>
+  <source type="image/avif" srcset="../assets/img/coro/informe-solucion-640.avif 640w, ../assets/img/coro/informe-solucion-1280.avif 1280w, ../assets/img/coro/informe-solucion-1584.avif 1584w" sizes="(min-width: 1024px) 34vw, 100vw">
+  <img src="../assets/img/coro/informe-solucion-1280.webp" srcset="../assets/img/coro/informe-solucion-640.webp 640w, ../assets/img/coro/informe-solucion-1280.webp 1280w, ../assets/img/coro/informe-solucion-1584.webp 1584w" sizes="(min-width: 1024px) 34vw, 100vw" width="1584" height="468" loading="lazy" decoding="async" alt="La solución de ejemplo del tema 1 en el informe de muestra, con su fuente: Proveedor A, modelo 1" data-i18n-attr="alt=caso.coro.firma.alt">
+</picture>
+            </div></div>
+            <button type="button" class="ampliar" data-ampliar="../assets/img/coro/informe-solucion-1584.webp"><span class="oculto-visual" data-i18n="caso.patron.ampliar">Ampliar imagen</span></button>
+            <figcaption data-revelar="bloque" data-i18n="caso.coro.firma.pie">El mismo tema en el informe de muestra, recortado a la solución de ejemplo y su fuente. La tarjeta copia tal cual el texto del informe.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="seccion-caso caso-decide" id="decisiones" aria-labelledby="t-decisiones">
+      <p class="folio"><span class="folio__cifra cifra" aria-hidden="true">05</span><span class="folio__etiqueta etiqueta" data-revelar="bloque" data-i18n="caso.parte.decisiones">Decisiones</span><span class="folio__filete" aria-hidden="true"></span></p>
+      <h2 class="h-caso seccion-caso__titulo" id="t-decisiones" data-revelar data-i18n="caso.coro.decisiones.titulo">Qué dice el informe y qué se calla.</h2>
+      <ol class="decide" role="list">
+        <li class="decide__fila">
+          <span class="decide__n cifra" aria-hidden="true">01</span>
+          <div class="decide__eje"><span class="etiqueta decide__rotulo" data-revelar="bloque" data-i18n="caso.elegi">Decidí</span><h3 class="decide__t" data-revelar data-i18n="caso.coro.decision.1.elegi">Medir concentración: qué parte de las negativas señala lo mismo.</h3></div>
+          <div class="decide__nota" data-revelar="bloque"><span class="etiqueta decide__rotulo" data-i18n="caso.vi">Lo que vi</span><p data-i18n="caso.coro.decision.1.vi">Veinte temas con cinco quejas no son un defecto; uno con el 47 % sí.</p></div>
+          <div class="decide__nota" data-revelar="bloque"><span class="etiqueta decide__rotulo" data-i18n="caso.descarte">Descarté</span><p><span data-i18n="caso.coro.decision.1.descarte">Rankear por cantidad de quejas.</span> <span data-i18n="caso.coro.decision.1.porque">La cantidad premia al tema más charlado, no al defecto que se repite.</span></p></div>
+        </li>
+        <li class="decide__fila">
+          <span class="decide__n cifra" aria-hidden="true">02</span>
+          <div class="decide__eje"><span class="etiqueta decide__rotulo" data-revelar="bloque" data-i18n="caso.elegi">Decidí</span><h3 class="decide__t" data-revelar data-i18n="caso.coro.decision.2.elegi">Que las soluciones se busquen y se citen con fuente, y que el informe diga cuando no hay evidencia.</h3></div>
+          <div class="decide__nota" data-revelar="bloque"><span class="etiqueta decide__rotulo" data-i18n="caso.vi">Lo que vi</span><p data-i18n="caso.coro.decision.2.vi">Una solución inventada se lee con la misma seguridad que una real.</p></div>
+          <div class="decide__nota" data-revelar="bloque"><span class="etiqueta decide__rotulo" data-i18n="caso.descarte">Descarté</span><p><span data-i18n="caso.coro.decision.2.descarte">Que el modelo proponga soluciones.</span> <span data-i18n="caso.coro.decision.2.porque">Un «no se encontró» vale más que una solución inventada.</span></p></div>
+        </li>
+        <li class="decide__fila">
+          <span class="decide__n cifra" aria-hidden="true">03</span>
+          <div class="decide__eje"><span class="etiqueta decide__rotulo" data-revelar="bloque" data-i18n="caso.elegi">Decidí</span><h3 class="decide__t" data-revelar data-i18n="caso.coro.decision.3.elegi">Un informe con cuatro lecturas: consumidor, emprendedor, marca que compra a un tercero y marca que fabrica.</h3></div>
+          <div class="decide__nota" data-revelar="bloque"><span class="etiqueta decide__rotulo" data-i18n="caso.vi">Lo que vi</span><p data-i18n="caso.coro.decision.3.vi">La misma queja pide cosas distintas a quien compra y a quien fabrica.</p></div>
+          <div class="decide__nota" data-revelar="bloque"><span class="etiqueta decide__rotulo" data-i18n="caso.descarte">Descarté</span><p><span data-i18n="caso.coro.decision.3.descarte">Un único informe genérico.</span> <span data-i18n="caso.coro.decision.3.porque">«¿Me conviene comprarlo?» y «¿qué le reclamo a mi proveedor?» no se contestan con el mismo párrafo.</span></p></div>
+        </li>
+      </ol>
+    </section>
+
+    <section class="seccion-caso caso-taller" id="construccion" aria-labelledby="t-taller">
+      <p class="folio"><span class="folio__cifra cifra" aria-hidden="true">06</span><span class="folio__etiqueta etiqueta" data-revelar="bloque" data-i18n="caso.parte.agentes">Cómo lo construí</span><span class="folio__filete" aria-hidden="true"></span></p>
+      <h2 class="h-caso seccion-caso__titulo" id="t-taller" data-revelar data-i18n="caso.coro.construi.titulo">Fijé la métrica y las reglas antes del código, y los agentes de IA construyeron un módulo por tanda.</h2>
+      <ol class="taller" role="list">
+        <li class="taller__paso">
+          <span class="taller__n cifra" aria-hidden="true">01</span>
+          <div class="taller__texto"><h3 class="taller__t" data-revelar data-i18n="caso.coro.agentes.1.t">Brief.</h3><p data-revelar data-i18n="caso.coro.agentes.1">Los perfiles y la métrica se definieron antes del código: concentración, por severidad, con recargo si el tema crece.</p></div>
+        </li>
+        <li class="taller__paso taller__paso--artefacto">
+          <span class="taller__n cifra" aria-hidden="true">02</span>
+          <div class="taller__texto"><h3 class="taller__t" data-revelar data-i18n="caso.coro.agentes.2.t">Un módulo por tanda.</h3><p data-revelar data-i18n="caso.coro.agentes.2">Análisis, calidad, historial, perfiles, soluciones e informe, cada uno con su criterio de aceptación.</p></div>
+          <figure class="taller__artefacto artefacto-flujo" data-revelar="bloque">
+            <ol class="artefacto-flujo__pasos" role="list">
+              <li><span class="cifra">01</span> <span data-i18n="caso.coro.modulo.1">Análisis</span></li>
+              <li><span class="cifra">02</span> <span data-i18n="caso.coro.modulo.2">Calidad</span></li>
+              <li><span class="cifra">03</span> <span data-i18n="caso.coro.modulo.3">Historial</span></li>
+              <li><span class="cifra">04</span> <span data-i18n="caso.coro.modulo.4">Perfiles</span></li>
+              <li><span class="cifra">05</span> <span data-i18n="caso.coro.modulo.5">Soluciones</span></li>
+              <li><span class="cifra">06</span> <span data-i18n="caso.coro.modulo.6">Informe</span></li>
+            </ol>
+            <figcaption data-i18n="caso.coro.construi.artefacto.1">Los seis módulos del prototipo, en el orden en que pasa cada producto.</figcaption>
+          </figure>
+        </li>
+        <li class="taller__paso">
+          <span class="taller__n cifra" aria-hidden="true">03</span>
+          <div class="taller__texto"><h3 class="taller__t" data-revelar data-i18n="caso.coro.agentes.4.t">Verificación.</h3><p data-revelar data-i18n="caso.coro.agentes.4">Lo corrí sobre 400 reseñas reales en la corrida más grande y sobre 1.200 en una prueba de carga; como caso de prueba usé un juego de 32 reseñas de un cabezal de ducha con filtro, y revisé el informe renderizado.</p></div>
+        </li>
+        <li class="taller__paso">
+          <span class="taller__n cifra" aria-hidden="true">04</span>
+          <div class="taller__texto"><h3 class="taller__t" data-revelar data-i18n="caso.coro.agentes.5.t">Qué saqué para mostrarlo.</h3><p data-revelar data-i18n="caso.coro.agentes.5">En una copia del informe reemplacé tiendas y proveedores reales por nombres genéricos.</p></div>
+        </li>
+      </ol>
+    </section>
+
+    <section class="seccion-caso caso-balance" id="resultado" aria-labelledby="t-resultado">
+      <p class="folio"><span class="folio__cifra cifra" aria-hidden="true">07</span><span class="folio__etiqueta etiqueta" data-revelar="bloque" data-i18n="caso.parte.resultado">Resultado</span><span class="folio__filete" aria-hidden="true"></span></p>
+      <h2 class="h-caso seccion-caso__titulo" id="t-resultado" data-revelar data-i18n="caso.coro.resultado">Prototipo de línea de comandos que genera el informe HTML de un producto.</h2>
+      <ul class="balance__cifras balance__cifras--una" role="list" data-revelar-hijos>
+        <li><p class="balance__cifra cifra"><span data-rodillo>400</span></p><p class="balance__que" data-i18n="caso.coro.cifra.1">reseñas reales en la corrida más grande</p></li>
+      </ul>
+      <p class="balance__linea" data-revelar="bloque" data-i18n="caso.coro.cifra.linea">Además, 1.200 reseñas en una prueba de carga y un juego de prueba de 32, el de las capturas.</p>
+      <div class="balance__estado">
+        <p class="balance__texto" data-revelar data-i18n="caso.coro.apoyo">Corre sobre las reseñas de un producto o sobre un conjunto de prueba local. Sin usuarios ni clientes.</p>
+        <div class="balance__falta">
+          <h3 class="etiqueta balance__falta-t" data-revelar="bloque" data-i18n="caso.patron.falta">Qué falta</h3>
+          <ul role="list" data-revelar-hijos>
+            <li data-i18n="caso.coro.reflexion.2">Corre por línea de comandos, así que una marca todavía no lo puede usar sola.</li>
+          </ul>
+          <h3 class="etiqueta balance__falta-t balance__cambio-t" data-revelar="bloque" data-i18n="caso.patron.cambiaria">Qué cambiaría</h3>
+          <p class="balance__cambio" data-revelar="bloque" data-i18n="caso.coro.reflexion.1">Publicar desde el principio un informe de ejemplo como página; hoy sólo hay capturas.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="seccion-caso caso-album" id="galeria" aria-labelledby="t-galeria">
+      <p class="folio"><span class="folio__cifra cifra" aria-hidden="true">08</span><span class="folio__etiqueta etiqueta" data-revelar="bloque" data-i18n="caso.parte.galeria">Galería</span><span class="folio__filete" aria-hidden="true"></span></p>
+      <h2 class="h-caso seccion-caso__titulo" id="t-galeria" data-revelar data-i18n="caso.coro.galeria.titulo">El dorso de la tableta en su atril, y la nota con la que el informe explica su cuenta.</h2>
+      <div class="album">
+        <figure class="album__item album__item--foto ampliable">
+          <div class="album__foto cortina"><img src="../assets/mundo/casos/coro-angulo.webp" srcset="../assets/mundo/casos/coro-angulo-480.webp 480w, ../assets/mundo/casos/coro-angulo-800.webp 800w, ../assets/mundo/casos/coro-angulo.webp 2000w" sizes="(min-width: 1024px) 58vw, 100vw" width="2000" height="1250" loading="lazy" decoding="async" alt="Render: la tableta de coro vista desde atrás, en su atril sobre un cubo de mármol" data-i18n-attr="alt=caso.coro.angulo.alt"></div>
+          <button type="button" class="ampliar" data-ampliar="../assets/mundo/casos/coro-angulo.webp"><span class="oculto-visual" data-i18n="caso.patron.ampliar">Ampliar imagen</span></button>
+          <figcaption data-revelar="bloque" data-i18n="caso.coro.angulo.pie">Render propio en Blender: el dorso de la tableta y su atril.</figcaption>
+        </figure>
+        <figure class="album__item album__item--captura ampliable">
+          <div class="ventana"><div class="ventana__pantalla cortina">
+<picture>
+  <source type="image/avif" srcset="../assets/img/coro/informe-calculo-640.avif 640w, ../assets/img/coro/informe-calculo-1280.avif 1280w, ../assets/img/coro/informe-calculo-1584.avif 1584w" sizes="(min-width: 1024px) 40vw, 100vw">
+  <img src="../assets/img/coro/informe-calculo-1280.webp" srcset="../assets/img/coro/informe-calculo-640.webp 640w, ../assets/img/coro/informe-calculo-1280.webp 1280w, ../assets/img/coro/informe-calculo-1584.webp 1584w" sizes="(min-width: 1024px) 40vw, 100vw" width="1584" height="538" loading="lazy" decoding="async" alt="Cierre del informe, «Cómo se calculó»: prioridad igual a concentración por severidad, y la regla de no inventar soluciones" data-i18n-attr="alt=caso.coro.galeria.3">
+</picture>
+          </div></div>
+          <button type="button" class="ampliar" data-ampliar="../assets/img/coro/informe-calculo-1584.webp"><span class="oculto-visual" data-i18n="caso.patron.ampliar">Ampliar imagen</span></button>
+          <figcaption data-revelar="bloque" data-i18n="caso.coro.galeria.3.pie">El informe cierra explicando su propia cuenta y el límite de la muestra.</figcaption>
+        </figure>
+      </div>
+    </section>
   <section class="caso-contacto placa placa--bloque" aria-labelledby="t-contacto" data-iman>
     <div class="caso-contacto__texto">
       <p class="etiqueta caso-contacto__etiqueta" data-revelar="bloque" data-i18n="folio.contacto">Contacto</p>
-      <h2 class="caso-contacto__titulo" id="t-contacto" data-revelar data-i18n="contacto.titulo">Hablemos de lo que falta construir.</h2>
+      <h2 class="caso-contacto__titulo" id="t-contacto" data-revelar data-i18n="contacto.titulo">Escribime si tenés un producto para construir o un proceso para automatizar.</h2>
       <p class="caso-contacto__sub" data-revelar data-i18n="contacto.sub">Respondo en el día.</p>
     </div>
     <div class="caso-contacto__acciones" data-revelar-hijos>
@@ -257,18 +378,22 @@
   <nav class="caso-nav" id="otros" aria-label="Otros casos" data-i18n-attr="aria-label=caso.otros.aria">
     <p class="folio caso-nav__folio"><span class="folio__etiqueta etiqueta" data-i18n="caso.otros.aria">Otros casos</span><span class="folio__filete" aria-hidden="true"></span></p>
     <div class="caso-nav__pares">
-    <a class="caso-par caso-par--siguiente caso-puerta" href="cathedra.html">
-      <span class="caso-par__media" data-paralaje data-vt="cathedra"><img class="caso__capa caso__capa--fondo" src="../assets/mundo/casos/cathedra-fondo.webp" srcset="../assets/mundo/casos/cathedra-fondo-480.webp 480w, ../assets/mundo/casos/cathedra-fondo-800.webp 800w, ../assets/mundo/casos/cathedra-fondo.webp 1600w" sizes="100vw" width="1600" height="1000" loading="lazy" decoding="async" data-carga alt=""><img class="caso__capa caso__capa--disp" src="../assets/mundo/casos/cathedra-dispositivo.webp" srcset="../assets/mundo/casos/cathedra-dispositivo-480.webp 480w, ../assets/mundo/casos/cathedra-dispositivo-800.webp 800w, ../assets/mundo/casos/cathedra-dispositivo.webp 1600w" sizes="100vw" width="1600" height="1000" loading="lazy" decoding="async" data-carga alt="Render: Cathedra abierta en un monitor, sobre un zócalo de piedra oscura en la sala negra" data-i18n-attr="alt=trabajo.cathedra.foto"><span class="caso__luz" aria-hidden="true"></span></span>
-      <span class="caso-par__texto"><span class="etiqueta caso-par__etiqueta" data-i18n="caso.siguiente">Caso siguiente →</span><span class="caso-par__nombre" data-revelar="lineas">Cathedra</span><span class="caso-par__frase" data-i18n="trabajo.cathedra.frase">App de estudio para Windows: transcribe clases, arma el plan, genera exámenes y fichas, y cada respuesta cita clase y minuto.</span><span class="sello sello--proceso" data-i18n="trabajo.cathedra.sello">Producto propio · en beta</span></span>
+    <a class="caso-par caso-par--siguiente caso-puerta" href="chamfer.html">
+      <span class="caso-par__media" data-paralaje data-vt="chamfer"><img class="caso__capa caso__capa--fondo" src="../assets/mundo/casos/chamfer-fondo.webp" srcset="../assets/mundo/casos/chamfer-fondo-480.webp 480w, ../assets/mundo/casos/chamfer-fondo-800.webp 800w, ../assets/mundo/casos/chamfer-fondo-1600.webp 1600w, ../assets/mundo/casos/chamfer-fondo.webp 2400w" sizes="100vw" width="2400" height="1500" loading="lazy" decoding="async" data-carga alt=""><img class="caso__capa caso__capa--disp" src="../assets/mundo/casos/chamfer-dispositivo.webp" srcset="../assets/mundo/casos/chamfer-dispositivo-480.webp 480w, ../assets/mundo/casos/chamfer-dispositivo-800.webp 800w, ../assets/mundo/casos/chamfer-dispositivo-1600.webp 1600w, ../assets/mundo/casos/chamfer-dispositivo.webp 2400w" sizes="100vw" width="2400" height="1500" loading="lazy" decoding="async" data-carga alt=""><span class="caso__luz" aria-hidden="true"></span></span>
+      <span class="caso-par__texto"><span class="etiqueta caso-par__etiqueta" data-i18n="caso.siguiente">Caso siguiente →</span><span class="caso-par__nombre" data-revelar="lineas">Chamfer</span><span class="caso-par__frase" data-i18n="trabajo.chamfer.frase">Secciones para tiendas Shopify: cada una es un solo archivo que le suma luz y profundidad a las fotos que la tienda ya tiene. Todavía sin probar en una tienda real.</span><span class="sello sello--proceso" data-i18n="trabajo.chamfer.sello">Prototipo</span></span>
     </a>
     <a class="caso-par caso-par--anterior placa placa--bloque placa--viva" href="athleteiq.html" data-iman>
-      <span class="caso-par__media" data-vt="athleteiq"><img class="caso__capa caso__capa--fondo" src="../assets/mundo/casos/athleteiq-fondo.webp" srcset="../assets/mundo/casos/athleteiq-fondo-480.webp 480w, ../assets/mundo/casos/athleteiq-fondo-800.webp 800w, ../assets/mundo/casos/athleteiq-fondo.webp 1600w" sizes="(min-width: 768px) 240px, 100vw" width="1600" height="1000" loading="lazy" decoding="async" data-carga alt=""><img class="caso__capa caso__capa--disp" src="../assets/mundo/casos/athleteiq-dispositivo.webp" srcset="../assets/mundo/casos/athleteiq-dispositivo-480.webp 480w, ../assets/mundo/casos/athleteiq-dispositivo-800.webp 800w, ../assets/mundo/casos/athleteiq-dispositivo.webp 1600w" sizes="(min-width: 768px) 240px, 100vw" width="1600" height="1000" loading="lazy" decoding="async" data-carga alt="Render: la portada de AthleteIQ en una pantalla apoyada sobre un zócalo de piedra oscura" data-i18n-attr="alt=trabajo.athleteiq.foto"><span class="caso__luz" aria-hidden="true"></span></span>
-      <span class="caso-par__texto"><span class="etiqueta caso-par__etiqueta" data-i18n="caso.anterior">← Caso anterior</span><span class="caso-par__nombre" data-revelar="lineas">AthleteIQ</span><span class="caso-par__frase" data-i18n="trabajo.athleteiq.frase">Asistente de IA para el staff de un equipo: se pregunta por chat y responde con los datos del plantel.</span><span class="sello sello--proceso" data-i18n="trabajo.athleteiq.sello">Demo funcional</span></span>
+      <span class="caso-par__media" data-vt="athleteiq"><img class="caso__capa caso__capa--fondo" src="../assets/mundo/casos/athleteiq-fondo.webp" srcset="../assets/mundo/casos/athleteiq-fondo-480.webp 480w, ../assets/mundo/casos/athleteiq-fondo-800.webp 800w, ../assets/mundo/casos/athleteiq-fondo-1600.webp 1600w, ../assets/mundo/casos/athleteiq-fondo.webp 2400w" sizes="(min-width: 768px) 240px, 100vw" width="2400" height="1500" loading="lazy" decoding="async" data-carga alt=""><img class="caso__capa caso__capa--disp" src="../assets/mundo/casos/athleteiq-dispositivo.webp" srcset="../assets/mundo/casos/athleteiq-dispositivo-480.webp 480w, ../assets/mundo/casos/athleteiq-dispositivo-800.webp 800w, ../assets/mundo/casos/athleteiq-dispositivo-1600.webp 1600w, ../assets/mundo/casos/athleteiq-dispositivo.webp 2400w" sizes="(min-width: 768px) 240px, 100vw" width="2400" height="1500" loading="lazy" decoding="async" data-carga alt=""><span class="caso__luz" aria-hidden="true"></span></span>
+      <span class="caso-par__texto"><span class="etiqueta caso-par__etiqueta" data-i18n="caso.anterior">← Caso anterior</span><span class="caso-par__nombre" data-revelar="lineas">AthleteIQ</span><span class="caso-par__frase" data-i18n="trabajo.athleteiq.frase">Asistente de IA para el staff de un equipo: se pregunta por chat y responde con los datos del plantel.</span><span class="sello sello--proceso" data-i18n="trabajo.athleteiq.sello">Prototipo</span></span>
     </a>
     <p class="caso-nav__todos" data-revelar="bloque"><a class="boton boton--secundario" href="../index.html#trabajo" data-i18n="caso.volver">Todos los casos</a></p>
     </div>
   </nav>
   </div>
+  <dialog class="ampliacion" aria-label="Imagen ampliada" data-i18n-attr="aria-label=caso.patron.ampliada">
+    <div class="ampliacion__marco"></div>
+    <div class="ampliacion__pie"><p class="ampliacion__texto"></p><button type="button" class="boton boton--secundario ampliacion__cerrar" data-i18n="caso.patron.cerrar">Cerrar</button></div>
+  </dialog>
 </main>
 <footer class="pie">
   <div class="contenedor">
@@ -300,5 +425,6 @@
 </footer>
 <script type="module" src="../js/mundo/pagina.js"></script>
 <script type="module" src="../js/comun.js"></script>
+<script type="module" src="../js/caso.js"></script>
 </body>
 </html>

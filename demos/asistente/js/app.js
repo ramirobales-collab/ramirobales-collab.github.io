@@ -7,6 +7,7 @@ const params = new URLSearchParams(location.search);
 const html = document.documentElement;
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const quieto = params.get('quieto') === '1' || reduce;
+if (!quieto && 'IntersectionObserver' in window) document.documentElement.classList.add('js-mov');
 if (params.get('quieto') === '1') html.classList.add('quieto');
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
@@ -125,8 +126,23 @@ function dibujarLog(desde = 0, todo = false) {
   const log = $('#log');
   if (todo || desde === 0) {
     log.innerHTML = '';
-    const b = el('li', 'msg msg--asistente');
+    const b = el('li', 'msg msg--asistente msg--bienvenida');
     b.append(el('p', 'msg__p', t('chat.bienvenida')));
+    // Dos fichas del catálogo con su foto de estudio: el cliente ve de qué tienda es antes de preguntar.
+    const vitrina = el('div', 'vitrina');
+    for (const p of motor.productos.filter((x) => x.configurador)) {
+      const f = el('button', 'vitrina__item');
+      f.type = 'button';
+      f.dataset.ficha = p.id;
+      const img = el('img', 'vitrina__img');
+      img.src = `../configurador/img/poster-${p.configurador}-800.webp`;
+      img.width = 800; img.height = 600; img.decoding = 'async'; img.alt = '';
+      f.append(img, el('span', 'vitrina__n', p.nombre[estado.idioma]), el('span', 'vitrina__p', `${t('catalogo.desde')} ${dinero(p.precio.desde)}`));
+      f.setAttribute('aria-label', `${p.nombre[estado.idioma]}, ${t('catalogo.desde')} ${dinero(p.precio.desde)}. ${t('catalogo.ver')}`);
+      f.addEventListener('click', () => abrirFicha(p.id));
+      vitrina.append(f);
+    }
+    b.append(vitrina);
     log.append(b);
   }
   for (let i = desde; i < estado.resultados.length; i++) {
@@ -364,9 +380,16 @@ function verTurno(i, sinAnimar = false) {
   p1.append(el('p', 'paso__q', `«${r.consulta}»`));
   const ts = el('div', 'terminos');
   let vacias = 0;
-  for (const x of r.terminos) {
-    if (x.tipo === 'vacia') { vacias++; continue; }
-    if (x.tipo === 'numero') continue;
+  const vistos = new Set();
+  const deLaIntencion = new Set(r.intencion ? r.intencion.por : []);
+  for (const x0 of r.terminos) {
+    if (x0.tipo === 'vacia') { vacias++; continue; }
+    if (x0.tipo === 'numero') continue;
+    // Una palabra que pertenece a otra intención (el «hay» de «qué diferencia hay») no se rotula como intención.
+    const x = x0.tipo === 'intencion' && !deLaIntencion.has(x0.palabra) ? { ...x0, tipo: 'contenido' } : x0;
+    const clave = `${x.palabra}|${x.tipo}|${x.corregida || ''}`;
+    if (vistos.has(clave)) continue;
+    vistos.add(clave);
     const s = el('span', `termino termino--${x.tipo}`);
     s.append(document.createTextNode(x.palabra));
     const etq = x.corregida ? `${t('tipo.corregida')} ${x.corregida}` : t('tipo.' + x.tipo);
@@ -632,4 +655,15 @@ $$('[data-idioma]').forEach((b) => b.addEventListener('click', () => cambiarIdio
   if (params.get('ir')) { const s = document.getElementById(params.get('ir')); if (s) s.scrollIntoView({ block: 'start' }); }
   window.__listo = true;
   window.__pruebas = PRUEBAS.length;
+})();
+
+/* ---------- Entrada de los titulares de sección ---------- */
+(function montarRevelado() {
+  if (!document.documentElement.classList.contains('js-mov')) return;
+  const els = [...document.querySelectorAll('.seccion .folio, .seccion .titulo, .seccion .intro, .seccion .subtitulo, .proceso h3')];
+  els.forEach((e) => e.setAttribute('data-corte', ''));
+  const io = new IntersectionObserver((entradas) => entradas.forEach((en) => {
+    if (en.isIntersecting) { en.target.classList.add('visto'); io.unobserve(en.target); }
+  }), { rootMargin: '0px 0px -12% 0px' });
+  els.forEach((e) => io.observe(e));
 })();

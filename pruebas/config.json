@@ -34,8 +34,8 @@
       { "re": "\\bbrief de precios\\b|\\bprice brief\\b|\\bbot de precios\\b|\\bprice bot\\b", "motivo": "el brief de AthleteIQ es un prototipo que lee noticias, no precios" }
     ],
     "paginas_sin_proveedor": {
-      "_léeme": "AthleteIQ: sin proveedor. Se mira la página del caso entera contra la huella «proveedores».",
-      "paginas": ["proyectos/athleteiq.html"]
+      "_léeme": "Páginas que no nombran proveedores. Se mira la página del caso entera (con sus claves ES y EN) contra la huella «proveedores». AthleteIQ: regla del dueño. Chamfer: la evidencia del caso y DIRECCION-4 §3.7 lo prohíben (sin proveedores ni modelos de IA: el dueño fijó las reglas y delegó en agentes).",
+      "paginas": ["proyectos/athleteiq.html", "proyectos/chamfer.html"]
     },
     "coro_reseñas": {
       "_léeme": "coro: 400 reseñas en la corrida real más grande, 1.200 en una prueba de carga. Toda cifra pegada a «reseñas/reviews» tiene que ser una de esas o estar declarada abajo con su motivo.",
