@@ -768,6 +768,43 @@ html.mov .caso__media.visto:not([data-mov="fin"]) .caso__luz { animation: barrid
   .caso--coro .caso__cuerpo { grid-column: 10 / 13; }
   .caso--cathedra .caso__nombre { font-size: clamp(3rem, 1.2rem + 4.6vw, 6rem); }
 }
+/* Proyectos adicionales: fuera de la sala y de la numeración de los cuatro. Dos piezas más chicas, separadas por un
+   filete; en escritorio la cabecera va a la izquierda y las dos piezas lado a lado. Reusan .caso (paralaje, rótulo,
+   cortina, barrido) pero con su propia grilla: foto arriba, texto abajo. */
+.adicionales { margin-top: var(--e-5); padding-top: var(--e-4); border-top: 1px solid var(--filete); }
+.adicionales__cabecera { display: grid; row-gap: var(--e-2); justify-items: start; align-content: start; margin-bottom: var(--e-4); }
+.adicionales__etiqueta { color: var(--texto-2); }
+.adicionales__titulo { max-width: 22ch; text-wrap: balance; }
+.adicionales__bajada { max-width: 40ch; font-size: var(--t-secundario); line-height: 1.5; color: var(--texto-2); }
+.adicionales__lista { display: grid; grid-template-columns: minmax(0, 1fr); row-gap: var(--e-5); }
+.caso--adicional { grid-column: auto; grid-template-columns: minmax(0, 1fr); align-items: start; align-content: start; }
+.caso--adicional .caso__media { aspect-ratio: 16 / 10; }
+.caso--adicional .caso__capa { object-position: 50% 50%; }
+.caso--adicional .caso__nombre { font-size: clamp(1.75rem, 1.35rem + 1.2vw, 2.375rem); letter-spacing: -0.03em; }
+.caso--adicional .caso__frase { max-width: 46ch; font-size: 1rem; }
+.caso--adicional .caso__prueba { max-width: 46ch; }
+.caso--chamfer .caso__media { view-transition-name: caso-chamfer; }
+.caso--prospeccion .caso__media { view-transition-name: caso-prospeccion; }
+.caso--chamfer { --acerca: 1.12; --fx: 64.5%; --fy: 47%; }
+/* sin acercar: con 1,12 el borde de la tarjeta cortaba la cara del zócalo y la pantalla quedaba pegada arriba */
+.caso--prospeccion { --acerca: 1; --fx: 64.5%; --fy: 40%; }
+/* en claro la foto negra no flota sobre el papel: la sombra de la placa se resolvería con la de oscuro (la media
+   lleva color-scheme dark), así que en reposo queda sólo un canto de luz de 1 px */
+:root[data-theme="light"] .caso--adicional .caso__media { box-shadow: inset 0 1px 0 oklch(100% 0 0 / 0.2), 0 1px 0 oklch(100% 0 0 / 0.9); }
+@media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) .caso--adicional .caso__media { box-shadow: inset 0 1px 0 oklch(100% 0 0 / 0.2), 0 1px 0 oklch(100% 0 0 / 0.9); } }
+@media (min-width: 768px) {
+  .adicionales__lista { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--calle); }
+}
+/* con el riel de folios a la vista, la franja le deja aire para que no quede encimado sobre la foto */
+@media (min-width: 1360px) and (min-height: 560px) {
+  .adicionales__lista { padding-right: 3rem; }
+}
+@media (min-width: 1024px) {
+  .adicionales { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--calle); margin-top: clamp(6rem, 3rem + 7vw, 11rem); padding-top: var(--e-5); }
+  .adicionales__cabecera { grid-column: 1 / 4; margin-bottom: 0; }
+  .adicionales__lista { grid-column: 4 / 13; }
+  .caso--adicional .caso__media, .caso--adicional .caso__cuerpo { grid-row: auto; grid-column: 1 / -1; }
+}
 /* rótulo que acompaña al cursor dentro de una tarjeta (puntero fino; el cursor del sistema sigue visible) */
 .cursor-rotulo {
   position: fixed;
@@ -1063,7 +1100,7 @@ html.mov .metodo__cols.visto .metodo__col::before { scale: 1 1; transition: scal
   .plano__ambiente { top: 0; right: -30%; width: 160%; translate: none; -webkit-mask-image: linear-gradient(90deg, transparent 8%, #000 46%), linear-gradient(#000 40%, transparent 92%); mask-image: linear-gradient(90deg, transparent 8%, #000 46%), linear-gradient(#000 40%, transparent 92%); }
 }
 .contacto { display: grid; row-gap: var(--e-3); }
-.contacto__titulo { font-size: clamp(2.375rem, 0.9rem + 6.6vw, 7.75rem); line-height: 0.98; letter-spacing: -0.04em; max-width: 13ch; }
+.contacto__titulo { font-size: clamp(2rem, 0.75rem + 3.6vw, 4.25rem); line-height: 1.02; letter-spacing: -0.035em; max-width: 22ch; }
 .contacto__sub { font-family: var(--playfair); font-style: italic; font-size: var(--t-sub-heroe); color: var(--texto-2); }
 .contacto__acciones { display: flex; flex-wrap: wrap; gap: var(--e-2); margin-top: var(--e-3); }
 @media (max-width: 599px) { .contacto__acciones .boton { width: 100%; } }

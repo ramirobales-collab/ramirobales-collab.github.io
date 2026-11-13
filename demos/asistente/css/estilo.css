@@ -45,7 +45,7 @@
   --playfair: "Playfair Display", "Playfair-respaldo", Georgia, serif;
   --margen: clamp(16px, 1rem + 2.5vw, 64px);
   --calle: clamp(16px, 1rem + 0.4vw, 24px);
-  --e-seccion: clamp(72px, 4rem + 5vw, 160px);
+  --e-seccion: clamp(56px, 2rem + 3.2vw, 96px);
   --cinta: 36px;
   --barra: 64px;
   --radio: 10px;
@@ -99,6 +99,9 @@ a:hover { text-decoration-thickness: 2px; }
 .conm button[aria-pressed="true"] { background: var(--texto); color: var(--fondo); }
 .tema { display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 0 14px; border: 1px solid var(--borde); border-radius: 999px; font: 500 0.8125rem/1 var(--inter); letter-spacing: 0.06em; color: var(--texto-2); }
 .tema:hover { color: var(--texto); }
+/* ES/EN miden 36 px y el tema 40: el área táctil se amplía 4 px por lado sin cambiar el dibujo */
+.conm button, .tema { position: relative; }
+.conm button::after, .tema::after { content: ""; position: absolute; inset: -4px; }
 .tema svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
 .tema__sol, .tema__claro { display: none; }
 :root[data-theme="dark"] .tema__luna, :root[data-theme="dark"] .tema__oscuro { display: none; }
@@ -282,7 +285,7 @@ a:hover { text-decoration-thickness: 2px; }
 .folio__etiqueta { font: 500 0.8125rem/1 var(--inter); letter-spacing: 0.12em; text-transform: uppercase; color: var(--texto-3); }
 .titulo { font: 600 clamp(2rem, 1.3rem + 2.2vw, 3.9rem)/1.05 var(--inter); letter-spacing: -0.025em; text-wrap: balance; max-width: 22ch; }
 .intro { margin-top: 24px; max-width: 64ch; color: var(--texto-2); text-wrap: pretty; }
-.subtitulo { margin-top: clamp(56px, 4vw, 96px); margin-bottom: 24px; font: 600 1.5625rem/1.2 var(--inter); letter-spacing: -0.01em; }
+.subtitulo { margin-top: clamp(40px, 3vw, 64px); margin-bottom: 24px; font: 600 1.5625rem/1.2 var(--inter); letter-spacing: -0.01em; }
 
 .ganas { margin-top: clamp(40px, 3vw, 64px); display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--calle); }
 .gana { display: grid; grid-template-rows: auto auto 1fr auto; gap: 10px; padding: 24px; background: var(--papel); border: 1px solid var(--filete); border-radius: var(--radio); box-shadow: 0 1px 0 var(--sombra-suave), 0 18px 40px -32px var(--sombra-tinte); }
@@ -332,9 +335,13 @@ a:hover { text-decoration-thickness: 2px; }
 .proceso__como { margin-top: 16px; color: var(--texto-2) !important; font-size: 1rem; }
 .decisiones { grid-column: 7 / span 6; display: grid; gap: 14px; }
 .decision { padding: 22px 24px; background: var(--papel); border-radius: var(--radio); border: 1px solid var(--filete); }
-.decision__insight { font: 500 0.8125rem/1.3 var(--inter); letter-spacing: 0.12em; text-transform: uppercase; color: var(--texto-3); margin-bottom: 8px; }
+/* oración entera: tipografía de oración, no rótulo en mayúsculas (con --texto-3 y 13 px no llegaba a 7:1 en claro) */
+.decision__insight { font: 500 0.9375rem/1.45 var(--inter); letter-spacing: 0; text-transform: none; color: var(--texto-2); margin-bottom: 8px; text-wrap: pretty; }
 .decision h3 { font-size: 1.25rem; line-height: 1.3; margin-bottom: 10px; }
-.decision__no { font: italic 400 1.125rem/1.4 var(--playfair); color: var(--texto-2); text-decoration: line-through; text-decoration-color: var(--tachado); text-decoration-thickness: 1px; }
+.decision__no { font-size: 0.9375rem; line-height: 1.5; color: var(--texto-2); text-wrap: pretty; }
+/* Entrada de los titulares: se descubren de arriba abajo al llegar (sólo con movimiento). */
+.js-mov [data-corte] { clip-path: inset(0 0 100% 0); transform: translateY(14px); opacity: 0; transition: clip-path 900ms var(--entrada), transform 900ms var(--entrada), opacity 600ms var(--entrada); }
+.js-mov [data-corte].visto { clip-path: inset(0 0 -12% 0); transform: none; opacity: 1; }
 .pruebas { grid-column: 1 / span 7; }
 .pruebas__p { color: var(--texto-2); font-size: 1rem; max-width: 60ch; margin-bottom: 16px; }
 .pruebas__res { margin-top: 14px; font-weight: 600; font-variant-numeric: tabular-nums; min-height: 1.55em; }
@@ -472,14 +479,26 @@ a:hover { text-decoration-thickness: 2px; }
 .fuentes__plegadas summary::after { content: ""; width: 7px; height: 7px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: rotate(45deg) translateY(-2px); margin-left: 2px; }
 .fuentes__plegadas[open] summary::after { transform: rotate(-135deg) translateY(-1px); }
 
-/* Con la conversación empezada, las sugeridas pasan a una fila que se desliza: más lugar para leer. */
+/* Las sugeridas van en una fila que se desliza: la conversación se queda con el alto. */
 @media (min-width: 600px) {
-  .chat.con-charla .sugeridas__lista { display: flex; overflow-x: auto; scroll-snap-type: x proximity; scrollbar-width: thin; padding-bottom: 6px; }
-  .chat.con-charla .sugeridas__lista li { flex: 0 0 auto; scroll-snap-align: start; }
-  .chat.con-charla .sug { display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; min-height: 44px; padding: 0 14px; border-radius: 999px; }
-  .chat.con-charla .sugeridas__t { margin-bottom: 6px; }
+  .chat .sugeridas__lista { display: flex; overflow-x: auto; scroll-snap-type: x proximity; scrollbar-width: thin; padding-bottom: 6px; }
+  .chat .sugeridas__lista li { flex: 0 0 auto; scroll-snap-align: start; }
+  .chat .sug { display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; min-height: 44px; padding: 0 14px; border-radius: 999px; }
+  .chat.con-charla .sugeridas__t { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  .chat.con-charla .sug__tipo { display: none; }
+  .chat.con-charla .sugeridas { padding-top: 8px; }
+  .chat.con-charla .entrada__ayuda { display: none; }
 }
 
+/* Bienvenida con vitrina: dos fichas con su foto de estudio */
+/* fichas de 176 px: la primera pantalla tiene que mostrar el producto, no sólo el texto. La foto va a 3:2 (sólo se
+   recorta fondo de estudio arriba y abajo) para que foto, nombre y precio entren en el chat de una pantalla de 900 px */
+.vitrina { display: grid; grid-template-columns: repeat(2, minmax(0, 176px)); gap: 14px; margin-top: 14px; }
+.vitrina__item { display: grid; gap: 2px; text-align: left; padding: 0 0 2px; border-radius: 12px; }
+.vitrina__img { width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; object-position: 50% 58%; border-radius: 10px; margin-bottom: 6px; box-shadow: 0 1px 0 var(--sombra-suave), 0 14px 28px -20px var(--sombra-tinte); transition: transform var(--productivo) var(--entrada); }
+.vitrina__item:hover .vitrina__img { transform: translateY(-2px); }
+.vitrina__n { font-weight: 600; font-size: 0.9375rem; line-height: 1.25; }
+.vitrina__p { font-size: 0.8125rem; color: var(--texto-3); font-variant-numeric: tabular-nums; }
 .ficha--destacada { grid-column: span 2; }
 .ficha__b--img { grid-template-columns: minmax(0, 0.9fr) minmax(0, 1fr); grid-template-rows: auto auto 1fr auto; column-gap: 20px; padding: 10px 20px 16px 10px; }
 .ficha__b--img > :not(.ficha__img) { grid-column: 2; }

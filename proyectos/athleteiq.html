@@ -1,20 +1,20 @@
 <!doctype html>
-<html lang="es">
+<html lang="es" data-dic="casos">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-qjuWUyWKqt0Fss48UG4bCZhHldwUiLUb4aBs52h7UYk='; style-src 'self'; img-src 'self'; font-src 'self'; connect-src 'self'; media-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-WVrqxGBOCFO/Cp2nS+4U+eTNuPdla3QGlJrPwf9tiP8='; style-src 'self'; img-src 'self'; font-src 'self'; connect-src 'self'; media-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script>var d=document.documentElement;if(self!==top){d.classList.add('enmarcado');try{top.location.replace(location.href)}catch(e){}}try{var t=new URLSearchParams(location.search).get('tema')||localStorage.getItem('tema');if(t==='light'||t==='dark')d.dataset.theme=t;}catch(e){}d.classList.add('js');if(!/[?&](quieto=1|ir=)/.test(location.search))d.classList.add('mov');setTimeout(function(){if(!d.dataset.mov)d.classList.remove('js','mov')},4000);(function(){var r=matchMedia('(prefers-reduced-motion: reduce)'),h=[];function n(el,v){if(el){el.style.viewTransitionName=v;h.push(el);}}addEventListener('pagereveal',function(e){h.forEach(function(el){el.style.viewTransitionName='';});h=[];var v=e.viewTransition;if(v){if(r.matches){v.ready.catch(function(){});v.skipTransition();}else d.classList.add('vt');}});addEventListener('pageswap',function(e){var v=e.viewTransition;if(!v)return;if(r.matches){v.ready.catch(function(){});v.skipTransition();return;}var a=e.activation,u=a&&a.entry&&a.entry.url?new URL(a.entry.url):null,c=document.querySelector('.caso-cabecera__media'),m=u&&u.pathname.match(/\/proyectos\/(cathedra|fortal|athleteiq|coro)\.html$/);if(m){n(c,'none');n(document.querySelector('[data-vt="'+m[1]+'"]'),'caso-'+m[1]);}else if(!(a&&(a.navigationType==='traverse'||(u&&u.hash==='#trabajo'))))n(c,'none');});})();</script>
+<script>var d=document.documentElement;if(self!==top){d.classList.add('enmarcado');try{top.location.replace(location.href)}catch(e){}}try{var t=new URLSearchParams(location.search).get('tema')||localStorage.getItem('tema');if(t==='light'||t==='dark')d.dataset.theme=t;}catch(e){}d.classList.add('js');if(!/[?&](quieto=1|ir=)/.test(location.search))d.classList.add('mov');setTimeout(function(){if(!d.dataset.mov)d.classList.remove('js','mov')},4000);(function(){var r=matchMedia('(prefers-reduced-motion: reduce)'),h=[];function n(el,v){if(el){el.style.viewTransitionName=v;h.push(el);}}addEventListener('pagereveal',function(e){h.forEach(function(el){el.style.viewTransitionName='';});h=[];var v=e.viewTransition;if(v){if(r.matches){v.ready.catch(function(){});v.skipTransition();}else d.classList.add('vt');}});addEventListener('pageswap',function(e){var v=e.viewTransition;if(!v)return;if(r.matches){v.ready.catch(function(){});v.skipTransition();return;}var a=e.activation,u=a&&a.entry&&a.entry.url?new URL(a.entry.url):null,c=document.querySelector('.caso-cabecera__media'),m=u&&u.pathname.match(/\/proyectos\/(cathedra|fortal|athleteiq|coro|chamfer|prospeccion).html$/);if(m){n(c,'none');n(document.querySelector('[data-vt="'+m[1]+'"]'),'caso-'+m[1]);}else if(!(a&&(a.navigationType==='traverse'||(u&&u.hash==='#trabajo'))))n(c,'none');});})();</script>
 <title data-i18n="caso.athleteiq.titulo">AthleteIQ — caso de estudio · Ramiro Bales</title>
-<meta name="description" data-i18n-attr="content=caso.athleteiq.descripcion" content="AthleteIQ, asistente de IA para el staff de equipos deportivos: se pregunta por chat y responde con los datos del plantel. Landing en cinco idiomas con 3D y bots de chat. Demo funcional.">
+<meta name="description" data-i18n-attr="content=caso.athleteiq.descripcion" content="AthleteIQ, prototipo de un bot de chat para el cuerpo técnico de un equipo de rugby league: se le pregunta por texto, voz o foto y contesta con la ficha de cada jugador. Landing de demostración en cinco idiomas.">
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#F3EEE4">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#040404">
 <meta name="author" content="Ramiro Bales">
 <meta property="og:type" content="article">
 <meta property="og:title" content="AthleteIQ — caso de estudio · Ramiro Bales">
-<meta property="og:description" content="AthleteIQ, asistente de IA para el staff de equipos deportivos: se pregunta por chat y responde con los datos del plantel. Landing en cinco idiomas con 3D y bots de chat. Demo funcional.">
+<meta property="og:description" content="AthleteIQ, prototipo de un bot de chat para el cuerpo técnico de un equipo de rugby league: se le pregunta por texto, voz o foto y contesta con la ficha de cada jugador. Landing de demostración en cinco idiomas.">
 <meta property="og:image" content="https://ramirobales-collab.github.io/assets/mundo/og-1200x630.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -38,17 +38,18 @@
 <link rel="modulepreload" href="../js/mundo/fondo.js">
 <link rel="modulepreload" href="../js/comun.js">
 <link rel="modulepreload" href="../js/movimiento.js">
-<link rel="preload" as="image" href="../assets/mundo/casos/athleteiq-dispositivo.webp" fetchpriority="high">
-<link rel="preload" as="image" href="../assets/mundo/casos/athleteiq-fondo.webp">
+<link rel="preload" as="image" href="../assets/mundo/casos/athleteiq-dispositivo.webp" imagesrcset="../assets/mundo/casos/athleteiq-dispositivo-480.webp 480w, ../assets/mundo/casos/athleteiq-dispositivo-800.webp 800w, ../assets/mundo/casos/athleteiq-dispositivo-1600.webp 1600w, ../assets/mundo/casos/athleteiq-dispositivo.webp 2400w" imagesizes="(min-width: 768px) 100vw, 220vw" fetchpriority="high">
+<link rel="preload" as="image" href="../assets/mundo/casos/athleteiq-fondo.webp" imagesrcset="../assets/mundo/casos/athleteiq-fondo-480.webp 480w, ../assets/mundo/casos/athleteiq-fondo-800.webp 800w, ../assets/mundo/casos/athleteiq-fondo-1600.webp 1600w, ../assets/mundo/casos/athleteiq-fondo.webp 2400w" imagesizes="(min-width: 768px) 100vw, 220vw">
 <link rel="stylesheet" href="../css/variables.css">
 <link rel="stylesheet" href="../css/base.css">
 <link rel="stylesheet" href="../css/componentes.css">
 <link rel="stylesheet" href="../css/caso.css">
+<link rel="stylesheet" href="../css/casos/athleteiq.css">
 </head>
 <body>
 <a class="enmarcado-aviso" href="https://ramirobales-collab.github.io/proyectos/athleteiq.html" target="_top" rel="noopener noreferrer" data-i18n="enmarcado.aviso">Esta página está dentro de otro sitio. Abrila en su dirección real: ramirobales-collab.github.io</a>
 <a class="saltar" href="#contenido" data-i18n="nav.saltar">Saltar al contenido</a>
-<nav class="nav nav--placa" aria-label="Principal">
+<nav class="nav nav--placa" aria-label="Principal" data-i18n-attr="aria-label=nav.aria">
   <div class="contenedor nav__in">
     <a class="nav__marca" href="../index.html" data-i18n="nav.marca">Ramiro Bales</a>
     <div class="nav__enlaces">
@@ -103,157 +104,208 @@
   </div>
 </nav>
 <canvas class="mundo" aria-hidden="true"></canvas>
-<main class="caso-pagina" id="contenido">
-  <header class="caso-cabecera" id="cabecera" data-caso="athleteiq">
-    <div class="contenedor caso-cabecera__in">
-      <p class="folio caso-cabecera__folio"><span class="folio__cifra cifra" aria-hidden="true">03</span><span class="folio__etiqueta etiqueta" data-revelar="bloque" data-i18n="caso.folio">Caso de estudio</span><span class="folio__filete" aria-hidden="true"></span></p>
-      <div class="caso-cabecera__texto">
-        <p class="caso-cabecera__sello" data-revelar="bloque"><span class="sello sello--proceso" data-i18n="trabajo.athleteiq.sello">Demo funcional</span></p>
-        <h1 class="display caso-cabecera__titulo" data-revelar>AthleteIQ</h1>
-        <p class="sub-heroe caso-cabecera__linea" data-revelar data-i18n="caso.athleteiq.gancho">El plantel, consultable por chat desde el campo.</p>
-        <p class="caso-cabecera__cta" data-revelar="bloque"><a class="boton boton--primario" href="../demos/athleteiq/index.html" data-i18n="caso.athleteiq.cta">Abrir la demo →</a></p>
+<main class="caso-pagina caso-pagina--v4" id="contenido">
+  <header class="caso-cabecera apertura" id="cabecera" data-caso="athleteiq">
+    <div class="caso-cabecera__media apertura__foto" data-paralaje><img class="caso__capa caso__capa--fondo" src="../assets/mundo/casos/athleteiq-fondo.webp" srcset="../assets/mundo/casos/athleteiq-fondo-480.webp 480w, ../assets/mundo/casos/athleteiq-fondo-800.webp 800w, ../assets/mundo/casos/athleteiq-fondo-1600.webp 1600w, ../assets/mundo/casos/athleteiq-fondo.webp 2400w" sizes="(min-width: 768px) 100vw, 220vw" width="2400" height="1500" fetchpriority="high" decoding="async" alt=""><img class="caso__capa caso__capa--disp" src="../assets/mundo/casos/athleteiq-dispositivo.webp" srcset="../assets/mundo/casos/athleteiq-dispositivo-480.webp 480w, ../assets/mundo/casos/athleteiq-dispositivo-800.webp 800w, ../assets/mundo/casos/athleteiq-dispositivo-1600.webp 1600w, ../assets/mundo/casos/athleteiq-dispositivo.webp 2400w" sizes="(min-width: 768px) 100vw, 220vw" width="2400" height="1500" fetchpriority="high" decoding="async" alt="Render: la portada de AthleteIQ en una pantalla negra apoyada sobre un bloque de mármol" data-i18n-attr="alt=trabajo.athleteiq.foto"><img class="caso__capa caso__capa--disp caso__brillo" src="../assets/mundo/casos/athleteiq-dispositivo.webp" srcset="../assets/mundo/casos/athleteiq-dispositivo-480.webp 480w, ../assets/mundo/casos/athleteiq-dispositivo-800.webp 800w, ../assets/mundo/casos/athleteiq-dispositivo-1600.webp 1600w, ../assets/mundo/casos/athleteiq-dispositivo.webp 2400w" sizes="(min-width: 768px) 100vw, 220vw" width="2400" height="1500" decoding="async" alt=""></div>
+    <div class="contenedor apertura__in">
+      <div class="apertura__texto">
+        <p class="folio apertura__folio"><span class="folio__cifra cifra" aria-hidden="true">01</span><span class="folio__etiqueta etiqueta" data-revelar="bloque" data-i18n="caso.folio">Caso de estudio</span><span class="folio__filete" aria-hidden="true"></span></p>
+        <p class="apertura__sello" data-revelar="bloque"><span class="sello sello--proceso" data-i18n="trabajo.athleteiq.sello">Prototipo</span></p>
+        <h1 class="display caso-cabecera__titulo apertura__titulo" data-revelar>AthleteIQ</h1>
+        <p class="sub-heroe apertura__promesa" data-revelar data-i18n="caso.athleteiq.gancho">El cuerpo técnico pregunta por un jugador desde la cancha y el bot contesta con su ficha.</p>
       </div>
-      <div class="caso-cabecera__media" data-paralaje data-iman><img class="caso__capa caso__capa--fondo" src="../assets/mundo/casos/athleteiq-fondo.webp" width="1600" height="1000" fetchpriority="high" decoding="async" alt=""><img class="caso__capa caso__capa--disp" src="../assets/mundo/casos/athleteiq-dispositivo.webp" width="1600" height="1000" fetchpriority="high" decoding="async" alt="Render: la portada de AthleteIQ en una pantalla apoyada sobre un zócalo de piedra oscura" data-i18n-attr="alt=trabajo.athleteiq.foto"><img class="caso__capa caso__capa--disp caso__brillo" src="../assets/mundo/casos/athleteiq-dispositivo.webp" width="1600" height="1000" decoding="async" alt=""><span class="caso__luz" aria-hidden="true"></span></div>
-      <dl class="caso-resumen placa placa--bloque" data-revelar-hijos>
-        <div><dt class="etiqueta" data-i18n="caso.resumen.que">Qué es</dt><dd data-i18n="caso.athleteiq.resumen.1">Asistente de IA para el staff de equipos deportivos: se pregunta por chat y responde con los datos del plantel.</dd></div>
+      <dl class="apertura__tira placa placa--bloque" data-revelar-hijos data-iman>
+        <div><dt class="etiqueta" data-i18n="caso.resumen.que">Qué es</dt><dd data-i18n="caso.athleteiq.resumen.1">Un bot de chat que contesta preguntas sobre el plantel con la ficha de cada jugador, por texto, voz o foto.</dd></div>
         <div><dt class="etiqueta" data-i18n="caso.resumen.para">Para quién</dt><dd data-i18n="caso.athleteiq.resumen.2">Preparadores físicos y cuerpos técnicos de clubes profesionales; la demo está pensada para rugby league.</dd></div>
-        <div><dt class="etiqueta" data-i18n="caso.resumen.estado">Estado</dt><dd data-i18n="caso.athleteiq.resumen.3">Demo funcional: landing en cinco idiomas y bots de chat de prueba.</dd></div>
+        <div><dt class="etiqueta" data-i18n="caso.resumen.estado">Estado</dt><dd data-i18n="caso.athleteiq.resumen.3">Prototipo con demo funcional: una landing en cinco idiomas y bots de chat de prueba. Sin clientes ni contratos.</dd></div>
       </dl>
     </div>
   </header>
   <div class="contenedor">
-  <dl class="reticula caso-ficha placa placa--bloque" data-revelar-hijos aria-label="Ficha del proyecto" data-i18n-attr="aria-label=caso.meta.aria">
-    <div class="caso-ficha__item"><dt class="etiqueta" data-i18n="caso.meta.proyecto">Proyecto</dt><dd data-i18n="caso.meta.propio">Propio, sin cliente</dd></div>
-    <div class="caso-ficha__item caso-ficha__item--ancho"><dt class="etiqueta" data-i18n="caso.meta.rol">Mi rol</dt><dd data-i18n="caso.athleteiq.rol">Fundador. Definí el concepto y la propuesta de valor, escribí el copy en cinco idiomas, dirigí el diseño y la construcción de los bots y de la landing.</dd></div>
-    <div class="caso-ficha__item caso-ficha__item--ancho"><dt class="etiqueta" data-i18n="caso.meta.herramientas">Herramientas</dt><dd data-i18n="caso.athleteiq.herramientas">Desarrollo asistido por IA · Three.js · API de Telegram · HTML, CSS y JavaScript</dd></div>
-    <div class="caso-ficha__item"><dt class="etiqueta" data-i18n="caso.meta.periodo">Período</dt><dd data-i18n="caso.athleteiq.periodo">Mayo de 2026</dd></div>
-    <div class="caso-ficha__item"><dt class="etiqueta" data-i18n="caso.meta.enlace">Enlace</dt><dd><a href="../demos/athleteiq/index.html"><span data-i18n="caso.athleteiq.enlace">Abrir la demo (club genérico, datos ficticios)</span>&nbsp;→</a></dd></div>
-  </dl>
-  <div class="reticula caso-cuerpo">
-    <nav class="caso-indice" aria-label="Partes del caso" data-i18n-attr="aria-label=caso.indice.aria">
-      <ol>
-      <li><a href="#cabecera"><span class="caso-indice__n" aria-hidden="true">01</span><span data-i18n="caso.parte.cabecera">Resumen</span></a></li>
-      <li><a href="#problema"><span class="caso-indice__n" aria-hidden="true">02</span><span data-i18n="caso.parte.problema">Problema</span></a></li>
-      <li><a href="#hace"><span class="caso-indice__n" aria-hidden="true">03</span><span data-i18n="caso.parte.hace">Qué hace</span></a></li>
-      <li><a href="#decisiones"><span class="caso-indice__n" aria-hidden="true">04</span><span data-i18n="caso.parte.decisiones">Decisiones</span></a></li>
-      <li><a href="#agentes"><span class="caso-indice__n" aria-hidden="true">05</span><span data-i18n="caso.parte.agentes">Cómo lo construí</span></a></li>
-      <li><a href="#resultado"><span class="caso-indice__n" aria-hidden="true">06</span><span data-i18n="caso.parte.resultado">Resultado</span></a></li>
-      <li><a href="#galeria"><span class="caso-indice__n" aria-hidden="true">07</span><span data-i18n="caso.parte.galeria">Galería</span></a></li>
-      </ol>
-    </nav>
-    <div class="caso-contenido">
-      <section class="caso-parte" id="problema" data-n="02" data-visto aria-labelledby="t-problema">
-        <span class="etiqueta caso-parte__n" aria-hidden="true">02</span>
-        <h2 class="caso-parte__titulo" id="t-problema" data-revelar data-i18n="caso.parte.problema">Problema</h2>
-        <p data-revelar data-i18n="caso.athleteiq.problema.1">El cuerpo técnico tiene los datos repartidos: historial de lesiones, carga de entrenamiento, calidad de sesión, estado psicológico.</p>
-        <p data-revelar data-i18n="caso.athleteiq.problema.2">No puede consultarlos en segundos desde el campo, que es donde se decide.</p>
-      </section>
-      <section class="caso-parte" id="hace" data-n="03" data-visto aria-labelledby="t-hace">
-        <span class="etiqueta caso-parte__n" aria-hidden="true">03</span>
-        <h2 class="caso-parte__titulo" id="t-hace" data-revelar data-i18n="caso.parte.hace">Qué hace</h2>
-        <ul class="capacidades capacidades--5" role="list" data-revelar-hijos>
-          <li class="capacidad placa placa--viva"><span class="capacidad__icono"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 5h16v11H9.5L4 20.5z"/></svg></span><div><h3 class="capacidad__t" data-i18n="caso.athleteiq.hace.1.t">Preguntas en lenguaje natural</h3><p data-i18n="caso.athleteiq.hace.1">El staff escribe como habla y recibe una lectura de los datos del plantel.</p></div></li>
-          <li class="capacidad placa placa--viva"><span class="capacidad__icono"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3.5l9.5 16.5h-19zM12 10v4.5M12 17.5h.01"/></svg></span><div><h3 class="capacidad__t" data-i18n="caso.athleteiq.hace.2.t">Riesgo, carga y recuperación</h3><p data-i18n="caso.athleteiq.hace.2">Consultas sobre riesgo de lesión, carga de entrenamiento, recuperación y talento del plantel.</p></div></li>
-          <li class="capacidad placa placa--viva"><span class="capacidad__icono"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 8h3.5l2-3h5l2 3H20v11H4zM12 10.5a3 3 0 1 0 0 6a3 3 0 1 0 0-6z"/></svg></span><div><h3 class="capacidad__t" data-i18n="caso.athleteiq.hace.3.t">Voz y foto</h3><p data-i18n="caso.athleteiq.hace.3">Acepta notas de voz y fotos, además de texto.</p></div></li>
-          <li class="capacidad placa placa--viva"><span class="capacidad__icono"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3a9 9 0 1 0 0 18a9 9 0 1 0 0-18zM3 12h18M12 3c3.2 3 3.2 15 0 18M12 3c-3.2 3-3.2 15 0 18"/></svg></span><div><h3 class="capacidad__t" data-i18n="caso.athleteiq.hace.4.t">En el idioma de quien pregunta</h3><p data-i18n="caso.athleteiq.hace.4">Los bots responden en el idioma del usuario; la landing está en cinco.</p></div></li>
-          <li class="capacidad placa placa--viva"><span class="capacidad__icono"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9zM12 12l8-4.5M12 12v9M12 12L4 7.5"/></svg></span><div><h3 class="capacidad__t" data-i18n="caso.athleteiq.hace.5.t">Landing con 3D</h3><p data-i18n="caso.athleteiq.hace.5">Pelota de rugby 3D en tiempo real rodeada de métricas, y un chat de demostración.</p></div></li>
-        </ul>
-      </section>
-      <section class="caso-parte" id="decisiones" data-n="04" data-visto aria-labelledby="t-decisiones">
-        <span class="etiqueta caso-parte__n" aria-hidden="true">04</span>
-        <h2 class="caso-parte__titulo" id="t-decisiones" data-revelar data-i18n="caso.parte.decisiones">Decisiones</h2>
-        <div class="caso-decisiones">
-          <article class="caso-decision placa placa--bloque" data-iman>
-            <span class="caso-decision__n cifra" aria-hidden="true">01</span>
-            <div class="caso-decision__vi"><span class="caso-decision__etiqueta etiqueta" data-i18n="caso.vi">Lo que vi</span><p data-revelar data-i18n="caso.athleteiq.decision.1.vi">El staff decide en el campo, con el teléfono en la mano.</p></div>
-            <div class="caso-decision__elegi-bloque"><span class="caso-decision__etiqueta etiqueta" data-i18n="caso.elegi">Decidí</span><h3 class="caso-decision__elegi" data-revelar data-i18n="caso.athleteiq.decision.1.elegi">Bots de chat que responden en lenguaje natural.</h3></div>
-            <div class="caso-decision__descarte-bloque"><span class="caso-decision__etiqueta etiqueta" data-i18n="caso.descarte">Descarté</span><p class="tachado caso-decision__descarte" data-revelar data-i18n="caso.athleteiq.decision.1.descarte">Un tablero web con filtros.</p><p class="caso-decision__porque"><span class="etiqueta" data-i18n="caso.porque">Porque</span> <span data-i18n="caso.athleteiq.decision.1.porque">Nadie abre un tablero entre dos ejercicios.</span></p></div>
-          </article>
-          <article class="caso-decision placa placa--bloque" data-iman>
-            <span class="caso-decision__n cifra" aria-hidden="true">02</span>
-            <div class="caso-decision__vi"><span class="caso-decision__etiqueta etiqueta" data-i18n="caso.vi">Lo que vi</span><p data-revelar data-i18n="caso.athleteiq.decision.2.vi">Un cuerpo técnico internacional no trabaja en un solo idioma.</p></div>
-            <div class="caso-decision__elegi-bloque"><span class="caso-decision__etiqueta etiqueta" data-i18n="caso.elegi">Decidí</span><h3 class="caso-decision__elegi" data-revelar data-i18n="caso.athleteiq.decision.2.elegi">Responder en el idioma de quien pregunta y escribir la landing en cinco (EN, ES, PT, FR, ZH).</h3></div>
-            <div class="caso-decision__descarte-bloque"><span class="caso-decision__etiqueta etiqueta" data-i18n="caso.descarte">Descarté</span><p class="tachado caso-decision__descarte" data-revelar data-i18n="caso.athleteiq.decision.2.descarte">Sólo inglés.</p><p class="caso-decision__porque"><span class="etiqueta" data-i18n="caso.porque">Porque</span> <span data-i18n="caso.athleteiq.decision.2.porque">La pregunta tiene que salir como se piensa, sin traducir.</span></p></div>
-          </article>
-          <article class="caso-decision placa placa--bloque" data-iman>
-            <span class="caso-decision__n cifra" aria-hidden="true">03</span>
-            <div class="caso-decision__vi"><span class="caso-decision__etiqueta etiqueta" data-i18n="caso.vi">Lo que vi</span><p data-revelar data-i18n="caso.athleteiq.decision.3.vi">Sin contrato, un nombre ajeno o una cifra supuesta se leen como promesa.</p></div>
-            <div class="caso-decision__elegi-bloque"><span class="caso-decision__etiqueta etiqueta" data-i18n="caso.elegi">Decidí</span><h3 class="caso-decision__elegi" data-revelar data-i18n="caso.athleteiq.decision.3.elegi">Mostrar la demo con un club genérico y jugadores ficticios, sin cifras de retorno.</h3></div>
-            <div class="caso-decision__descarte-bloque"><span class="caso-decision__etiqueta etiqueta" data-i18n="caso.descarte">Descarté</span><p class="tachado caso-decision__descarte" data-revelar data-i18n="caso.athleteiq.decision.3.descarte">Publicar la versión atada a un club real.</p><p class="caso-decision__porque"><span class="etiqueta" data-i18n="caso.porque">Porque</span> <span data-i18n="caso.athleteiq.decision.3.porque">Lo que no está medido no se muestra como resultado.</span></p></div>
-          </article>
-        </div>
-      </section>
-      <section class="caso-parte" id="agentes" data-n="05" data-visto aria-labelledby="t-agentes">
-        <span class="etiqueta caso-parte__n" aria-hidden="true">05</span>
-        <h2 class="caso-parte__titulo" id="t-agentes" data-revelar data-i18n="caso.parte.agentes.titulo">Cómo lo construí con agentes de IA</h2>
-        <ol class="caso-pasos" data-visto>
-          <li><div><strong data-revelar="bloque" data-i18n="caso.athleteiq.agentes.1.t">Propuesta de valor y copy.</strong><p data-revelar data-i18n="caso.athleteiq.agentes.1">Primero el mensaje («The Data Has No Favourites») y las preguntas que el staff haría de verdad; después las pantallas.</p></div></li>
-          <li><div><strong data-revelar="bloque" data-i18n="caso.athleteiq.agentes.2.t">Landing.</strong><p data-revelar data-i18n="caso.athleteiq.agentes.2">Oscura, con la pelota 3D y las métricas en hexágonos; cinco idiomas por diccionario.</p></div></li>
-          <li><div><strong data-revelar="bloque" data-i18n="caso.athleteiq.agentes.3.t">Bots de chat.</strong><p data-revelar data-i18n="caso.athleteiq.agentes.3">Responden por texto, voz y foto, en el idioma del usuario, sobre el plantel.</p></div></li>
-          <li><div><strong data-revelar="bloque" data-i18n="caso.athleteiq.agentes.4.t">Verificación.</strong><p data-revelar data-i18n="caso.athleteiq.agentes.4">Landing capturada a 1920×1080; bots probados por texto, voz y foto.</p></div></li>
-          <li><div><strong data-revelar="bloque" data-i18n="caso.athleteiq.agentes.5.t">Qué rehice.</strong><p data-revelar data-i18n="caso.athleteiq.agentes.5">Para publicarla saqué el club real, los jugadores, los accesos a los bots y las cifras supuestas; la demo de este sitio es esa copia saneada.</p></div></li>
-        </ol>
-      </section>
-    </div>
-    <section class="caso-resultado seccion--tinta placa--bloque" data-visto data-iman id="resultado" aria-labelledby="t-resultado">
-      <h2 class="etiqueta" id="t-resultado"><span aria-hidden="true">06 —</span> <span data-i18n="caso.parte.resultado">Resultado</span></h2>
-      <p class="caso-resultado__frase" data-revelar="lineas" data-i18n="caso.athleteiq.resultado">Landing y bots funcionando como demo; la landing se puede abrir desde este caso.</p>
-      <p class="caso-resultado__apoyo" data-revelar data-i18n="caso.athleteiq.apoyo">Sin clientes ni contratos. Ninguna cifra de retorno ni de jugadores: eran supuestos de la demo y no se publican.</p>
+    <dl class="ficha-linea" aria-label="Ficha del proyecto" data-i18n-attr="aria-label=caso.meta.aria" data-revelar-hijos>
+      <div><dt class="etiqueta" data-i18n="caso.meta.rol">Mi rol</dt><dd data-i18n="caso.athleteiq.rol.corto">Product owner: concepto, copy, dirección del diseño y construcción con IA</dd></div>
+      <div><dt class="etiqueta" data-i18n="caso.meta.periodo">Período</dt><dd data-i18n="caso.athleteiq.periodo">Mayo de 2026</dd></div>
+      <div class="ficha-linea__ancho"><dt class="etiqueta" data-i18n="caso.meta.herramientas">Herramientas</dt><dd data-i18n="caso.athleteiq.herramientas">Desarrollo asistido por IA · Three.js · API de Telegram · HTML, CSS y JavaScript</dd></div>
+      <div><dt class="etiqueta" data-i18n="caso.meta.enlace">Enlace</dt><dd><a href="../demos/athleteiq/index.html"><span data-i18n="caso.athleteiq.enlace">Maqueta de la landing, con club genérico y nombres inventados</span>&nbsp;→</a></dd></div>
+    </dl>
+
+    <section class="seccion-caso caso-problema" id="problema" aria-labelledby="t-problema">
+      <p class="folio"><span class="folio__cifra cifra" aria-hidden="true">02</span><span class="folio__etiqueta etiqueta" data-revelar="bloque" data-i18n="caso.patron.problema">El problema</span><span class="folio__filete" aria-hidden="true"></span></p>
+      <h2 class="caso-problema__frase" id="t-problema" data-revelar data-i18n="caso.athleteiq.problema.titulo">La pregunta se hace al costado de la cancha y la respuesta está repartida en tres lugares.</h2>
+      <p class="caso-problema__texto" data-revelar data-i18n="caso.athleteiq.problema.texto">El cuerpo técnico tiene los datos de cada jugador: lesiones, carga de entrenamiento, calidad de cada sesión y estado anímico. Están en lugares distintos y no se consultan en segundos con el teléfono en la mano, que es como se decide entre dos ejercicios.</p>
     </section>
-    <div class="caso-contenido caso-contenido--sigue">
-      <section class="caso-parte caso-reflexion" data-visto aria-labelledby="t-reflexion">
-        <h2 class="caso-parte__titulo" id="t-reflexion" data-revelar data-i18n="caso.parte.reflexion">Qué cambiaría y qué falta</h2>
-        <p data-revelar data-i18n="caso.athleteiq.reflexion.1">Lo que cambiaría: armarla genérica desde el principio; atarla a un club real me obligó a sanearla para poder mostrarla.</p>
-        <p data-revelar data-i18n="caso.athleteiq.reflexion.2">Lo que falta, y es lo más importante: validarla con un club.</p>
-      </section>
-    </div>
-    <section class="caso-galeria caso-parte" id="galeria" data-n="07" data-visto aria-labelledby="t-galeria">
-      <span class="etiqueta caso-parte__n" aria-hidden="true">07</span>
-      <h2 class="caso-parte__titulo" id="t-galeria" data-revelar data-i18n="caso.parte.galeria">Galería</h2>
-      <p class="caso-galeria__aviso etiqueta" data-revelar="bloque" data-i18n="caso.athleteiq.galeria.aviso">Capturas de la demo con un club genérico y jugadores ficticios.</p>
-      <div class="caso-galeria__items">
-        <figure class="caso-galeria__item caso-galeria__item--12 caso-galeria__item--antes">
-          <div class="caso-galeria__media placa mascara">
+
+    <section class="seccion-caso caso-recorrido" id="recorrido" aria-labelledby="t-recorrido">
+      <p class="folio"><span class="folio__cifra cifra" aria-hidden="true">03</span><span class="folio__etiqueta etiqueta" data-revelar="bloque" data-i18n="caso.patron.recorrido">Recorrido</span><span class="folio__filete" aria-hidden="true"></span></p>
+      <div class="seccion-caso__cabeza">
+        <h2 class="h-caso seccion-caso__titulo" id="t-recorrido" data-revelar data-i18n="caso.athleteiq.recorrido.titulo">El bot contesta lo que un cuerpo técnico pregunta antes de entrenar, con la ficha de cada jugador y en su idioma.</h2>
+        <p class="seccion-caso__aviso etiqueta" data-revelar="bloque" data-i18n="caso.athleteiq.galeria.aviso">Capturas de la landing de demostración: club genérico y nombres de jugadores inventados.</p>
+      </div>
+      <ol class="recorrido" role="list">
+        <li class="recorrido__paso">
+          <figure class="recorrido__media ampliable">
+            <div class="ventana"><div class="ventana__pantalla cortina">
 <picture>
-  <source type="image/avif" srcset="../assets/img/athleteiq/landing-heroe-640.avif 640w, ../assets/img/athleteiq/landing-heroe-1280.avif 1280w, ../assets/img/athleteiq/landing-heroe-1920.avif 1920w" sizes="(min-width: 1024px) 75vw, 100vw">
-  <img src="../assets/img/athleteiq/landing-heroe-1280.webp" srcset="../assets/img/athleteiq/landing-heroe-640.webp 640w, ../assets/img/athleteiq/landing-heroe-1280.webp 1280w, ../assets/img/athleteiq/landing-heroe-1920.webp 1920w" sizes="(min-width: 1024px) 75vw, 100vw" width="1920" height="1080" loading="lazy" decoding="async" alt="Portada de AthleteIQ: titular, pelota de rugby 3D rodeada de métricas en hexágonos" data-i18n-attr="alt=caso.athleteiq.cabecera.alt">
+  <source type="image/avif" srcset="../assets/img/athleteiq/demo-responde-640.avif 640w, ../assets/img/athleteiq/demo-responde-1280.avif 1280w, ../assets/img/athleteiq/demo-responde-1920.avif 1920w" sizes="(min-width: 1024px) 58vw, 100vw">
+  <img src="../assets/img/athleteiq/demo-responde-1280.webp" srcset="../assets/img/athleteiq/demo-responde-640.webp 640w, ../assets/img/athleteiq/demo-responde-1280.webp 1280w, ../assets/img/athleteiq/demo-responde-1920.webp 1920w" sizes="(min-width: 1024px) 58vw, 100vw" width="1920" height="1080" loading="lazy" decoding="async" alt="Sección «Qué responde» de la landing: seis tarjetas, de a quién cuidar por lesión a contestar en tu idioma" data-i18n-attr="alt=caso.athleteiq.recorrido.1.alt">
 </picture>
+            </div></div>
+            <button type="button" class="ampliar" data-ampliar="../assets/img/athleteiq/demo-responde-1920.webp"><span class="oculto-visual" data-i18n="caso.patron.ampliar">Ampliar imagen</span></button>
+          </figure>
+          <div class="recorrido__texto">
+            <span class="recorrido__n cifra" aria-hidden="true">01</span>
+            <h3 class="recorrido__t" data-revelar data-i18n="caso.athleteiq.recorrido.1.t">Responde las preguntas de antes de entrenar</h3>
+            <p data-revelar data-i18n="caso.athleteiq.recorrido.1">Riesgo de lesión, carga, recuperación, si alguien está listo para la pretemporada, quién es el jugador más subvalorado. El staff escribe como habla y el bot contesta en lenguaje natural, sin un tablero que aprender.</p>
           </div>
-        </figure>
-        <figure class="caso-galeria__item caso-galeria__item--12">
-          <div class="caso-galeria__media placa mascara">
+        </li>
+        <li class="recorrido__paso">
+          <figure class="recorrido__media ampliable">
+            <div class="ventana"><div class="ventana__pantalla cortina">
 <picture>
-  <source type="image/avif" srcset="../assets/img/athleteiq/landing-heroe-640.avif 640w, ../assets/img/athleteiq/landing-heroe-1280.avif 1280w, ../assets/img/athleteiq/landing-heroe-1920.avif 1920w" sizes="(min-width: 1024px) 80vw, 100vw">
-  <img src="../assets/img/athleteiq/landing-heroe-1280.webp" srcset="../assets/img/athleteiq/landing-heroe-640.webp 640w, ../assets/img/athleteiq/landing-heroe-1280.webp 1280w, ../assets/img/athleteiq/landing-heroe-1920.webp 1920w" sizes="(min-width: 1024px) 80vw, 100vw" width="1920" height="1080" loading="lazy" decoding="async" alt="Héroe de la landing: titular, pelota 3D con hexágonos y botón de contacto" data-i18n-attr="alt=caso.athleteiq.galeria.1">
+  <source type="image/avif" srcset="../assets/img/athleteiq/demo-ficha-640.avif 640w, ../assets/img/athleteiq/demo-ficha-1280.avif 1280w, ../assets/img/athleteiq/demo-ficha-1920.avif 1920w" sizes="(min-width: 1024px) 58vw, 100vw">
+  <img src="../assets/img/athleteiq/demo-ficha-1280.webp" srcset="../assets/img/athleteiq/demo-ficha-640.webp 640w, ../assets/img/athleteiq/demo-ficha-1280.webp 1280w, ../assets/img/athleteiq/demo-ficha-1920.webp 1920w" sizes="(min-width: 1024px) 58vw, 100vw" width="1920" height="842" loading="lazy" decoding="async" alt="Sección «El proyecto» de la landing: el texto del prototipo y los campos de la ficha de un jugador: lesiones, entrenamiento, estado anímico y estadísticas" data-i18n-attr="alt=caso.athleteiq.recorrido.2.alt">
 </picture>
+            </div></div>
+            <button type="button" class="ampliar" data-ampliar="../assets/img/athleteiq/demo-ficha-1920.webp"><span class="oculto-visual" data-i18n="caso.patron.ampliar">Ampliar imagen</span></button>
+          </figure>
+          <div class="recorrido__texto">
+            <span class="recorrido__n cifra" aria-hidden="true">02</span>
+            <h3 class="recorrido__t" data-revelar data-i18n="caso.athleteiq.recorrido.2.t">Cada respuesta sale de la ficha del jugador</h3>
+            <p data-revelar data-i18n="caso.athleteiq.recorrido.2">El bot contesta con los datos de cada jugador: historial de lesiones, carga de entrenamiento, calidad de sesión y estado anímico. La demostración publicada usa un club genérico y nombres de jugadores inventados.</p>
           </div>
-          <figcaption data-revelar data-i18n="caso.athleteiq.galeria.1.pie">El héroe: la pelota 3D en tiempo real y las métricas en hexágonos.</figcaption>
-        </figure>
-        <figure class="caso-galeria__item caso-galeria__item--7">
-          <div class="caso-galeria__media placa mascara">
-<picture>
-  <source type="image/avif" srcset="../assets/img/athleteiq/landing-funciones-640.avif 640w, ../assets/img/athleteiq/landing-funciones-1280.avif 1280w, ../assets/img/athleteiq/landing-funciones-1920.avif 1920w" sizes="(min-width: 1024px) 46vw, 100vw">
-  <img src="../assets/img/athleteiq/landing-funciones-1280.webp" srcset="../assets/img/athleteiq/landing-funciones-640.webp 640w, ../assets/img/athleteiq/landing-funciones-1280.webp 1280w, ../assets/img/athleteiq/landing-funciones-1920.webp 1920w" sizes="(min-width: 1024px) 46vw, 100vw" width="1920" height="1080" loading="lazy" decoding="async" alt="Sección de funciones: seis tarjetas, de riesgo de lesión a interfaz en lenguaje natural" data-i18n-attr="alt=caso.athleteiq.galeria.2">
-</picture>
-          </div>
-          <figcaption data-revelar data-i18n="caso.athleteiq.galeria.2.pie">Seis funciones, de riesgo de lesión a lenguaje natural.</figcaption>
-        </figure>
-        <figure class="caso-galeria__item caso-galeria__item--5">
-          <div class="caso-galeria__media placa mascara">
-<picture>
-  <source type="image/avif" srcset="../assets/img/athleteiq/landing-demo-640.avif 640w, ../assets/img/athleteiq/landing-demo-1280.avif 1280w, ../assets/img/athleteiq/landing-demo-1920.avif 1920w" sizes="(min-width: 1024px) 33vw, 100vw">
-  <img src="../assets/img/athleteiq/landing-demo-1280.webp" srcset="../assets/img/athleteiq/landing-demo-640.webp 640w, ../assets/img/athleteiq/landing-demo-1280.webp 1280w, ../assets/img/athleteiq/landing-demo-1920.webp 1920w" sizes="(min-width: 1024px) 33vw, 100vw" width="1920" height="1080" loading="lazy" decoding="async" alt="Sección de demo: teléfono con el chat del bot" data-i18n-attr="alt=caso.athleteiq.galeria.3">
-</picture>
-          </div>
-          <figcaption data-revelar data-i18n="caso.athleteiq.galeria.3.pie">La sección de demo, con el chat en el teléfono.</figcaption>
-        </figure>
+        </li>
+      </ol>
+      <div class="recorrido__mas">
+        <h3 class="etiqueta recorrido__mas-t" data-revelar="bloque" data-i18n="caso.patron.tambien">También hace</h3>
+        <ul class="recorrido__lista" role="list" data-revelar-hijos>
+          <li><strong data-i18n="caso.athleteiq.hace.7.t">Contesta en tu idioma</strong> <span data-i18n="caso.athleteiq.hace.7">Los bots responden en el idioma de quien escribe, y la landing está en cinco: inglés, español, portugués, francés y chino.</span></li>
+          <li><strong data-i18n="caso.athleteiq.hace.3.t">Voz y foto</strong> <span data-i18n="caso.athleteiq.hace.3">Además de texto, acepta notas de voz y fotos.</span></li>
+          <li><strong data-i18n="caso.athleteiq.hace.6.t">Un bot por equipo</strong> <span data-i18n="caso.athleteiq.hace.6">Hay un bot de demostración y bots separados para cada equipo.</span></li>
+          <li><strong data-i18n="caso.athleteiq.hace.5.t">Landing con 3D</strong> <span data-i18n="caso.athleteiq.hace.5">Una pelota de rugby en 3D hecha con Three.js y un chat guionado con cuatro preguntas.</span></li>
+        </ul>
       </div>
     </section>
   </div>
+
+  <figure class="caso-foto caso-foto--detalle">
+    <div class="caso-foto__marco"><img class="caso-foto__img" src="../assets/mundo/casos/athleteiq-detalle.webp" srcset="../assets/mundo/casos/athleteiq-detalle-480.webp 480w, ../assets/mundo/casos/athleteiq-detalle-800.webp 800w, ../assets/mundo/casos/athleteiq-detalle.webp 2000w" sizes="100vw" width="2000" height="1250" loading="lazy" decoding="async" data-carga alt="Render en primer plano del canto de la pantalla con la landing de AthleteIQ y su titular" data-i18n-attr="alt=caso.athleteiq.detalle.alt"></div>
+    <figcaption class="contenedor caso-foto__pie" data-revelar="bloque" data-i18n="caso.athleteiq.detalle.pie">El canto de aluminio de la pantalla y un titular de la landing, vistos de costado.</figcaption>
+  </figure>
+
+  <div class="contenedor">
+    <section class="seccion-caso caso-decide" id="decisiones" aria-labelledby="t-decisiones">
+      <p class="folio"><span class="folio__cifra cifra" aria-hidden="true">04</span><span class="folio__etiqueta etiqueta" data-revelar="bloque" data-i18n="caso.parte.decisiones">Decisiones</span><span class="folio__filete" aria-hidden="true"></span></p>
+      <h2 class="h-caso seccion-caso__titulo" id="t-decisiones" data-revelar data-i18n="caso.athleteiq.decisiones.titulo">Dónde se pregunta y qué se puede mostrar sin un club real.</h2>
+      <ol class="decide" role="list">
+        <li class="decide__fila">
+          <span class="decide__n cifra" aria-hidden="true">01</span>
+          <div class="decide__eje"><span class="etiqueta decide__rotulo" data-revelar="bloque" data-i18n="caso.elegi">Decidí</span><h3 class="decide__t" data-revelar data-i18n="caso.athleteiq.decision.1.elegi">Bots de chat que responden en lenguaje natural.</h3></div>
+          <div class="decide__nota" data-revelar="bloque"><span class="etiqueta decide__rotulo" data-i18n="caso.vi">Lo que vi</span><p data-i18n="caso.athleteiq.decision.1.vi">El staff decide en el campo, con el teléfono en la mano.</p></div>
+          <div class="decide__nota" data-revelar="bloque"><span class="etiqueta decide__rotulo" data-i18n="caso.descarte">Descarté</span><p><span data-i18n="caso.athleteiq.decision.1.descarte">Un tablero web con filtros.</span> <span data-i18n="caso.athleteiq.decision.1.porque">Nadie abre un tablero entre dos ejercicios.</span></p></div>
+        </li>
+        <li class="decide__fila">
+          <span class="decide__n cifra" aria-hidden="true">02</span>
+          <div class="decide__eje"><span class="etiqueta decide__rotulo" data-revelar="bloque" data-i18n="caso.elegi">Decidí</span><h3 class="decide__t" data-revelar data-i18n="caso.athleteiq.decision.2.elegi">Responder en el idioma de quien pregunta y escribir la landing en cinco (EN, ES, PT, FR, ZH).</h3></div>
+          <div class="decide__nota" data-revelar="bloque"><span class="etiqueta decide__rotulo" data-i18n="caso.vi">Lo que vi</span><p data-i18n="caso.athleteiq.decision.2.vi">Un cuerpo técnico internacional no trabaja en un solo idioma.</p></div>
+          <div class="decide__nota" data-revelar="bloque"><span class="etiqueta decide__rotulo" data-i18n="caso.descarte">Descarté</span><p><span data-i18n="caso.athleteiq.decision.2.descarte">Sólo inglés.</span> <span data-i18n="caso.athleteiq.decision.2.porque">La pregunta tiene que salir como se piensa, sin traducir.</span></p></div>
+        </li>
+        <li class="decide__fila">
+          <span class="decide__n cifra" aria-hidden="true">03</span>
+          <div class="decide__eje"><span class="etiqueta decide__rotulo" data-revelar="bloque" data-i18n="caso.elegi">Decidí</span><h3 class="decide__t" data-revelar data-i18n="caso.athleteiq.decision.3.elegi">Mostrar la demo con un club genérico y nombres de jugadores inventados, sin cifras de retorno.</h3></div>
+          <div class="decide__nota" data-revelar="bloque"><span class="etiqueta decide__rotulo" data-i18n="caso.vi">Lo que vi</span><p data-i18n="caso.athleteiq.decision.3.vi">Sin contrato, un nombre ajeno o una cifra supuesta se leen como promesa.</p></div>
+          <div class="decide__nota" data-revelar="bloque"><span class="etiqueta decide__rotulo" data-i18n="caso.descarte">Descarté</span><p><span data-i18n="caso.athleteiq.decision.3.descarte">Publicar la versión atada a un club real.</span> <span data-i18n="caso.athleteiq.decision.3.porque">Lo que no está medido no se muestra como resultado.</span></p></div>
+        </li>
+      </ol>
+    </section>
+
+    <section class="seccion-caso caso-taller" id="construccion" aria-labelledby="t-taller">
+      <p class="folio"><span class="folio__cifra cifra" aria-hidden="true">05</span><span class="folio__etiqueta etiqueta" data-revelar="bloque" data-i18n="caso.parte.agentes">Cómo lo construí</span><span class="folio__filete" aria-hidden="true"></span></p>
+      <h2 class="h-caso seccion-caso__titulo" id="t-taller" data-revelar data-i18n="caso.athleteiq.construi.titulo">Primero el mensaje y las preguntas; después la landing, los bots y la limpieza para poder mostrarla.</h2>
+      <ol class="taller" role="list">
+        <li class="taller__paso taller__paso--artefacto">
+          <span class="taller__n cifra" aria-hidden="true">01</span>
+          <div class="taller__texto"><h3 class="taller__t" data-revelar data-i18n="caso.athleteiq.agentes.1.t">Propuesta de valor y copy.</h3><p data-revelar data-i18n="caso.athleteiq.agentes.1">Primero el mensaje («The Data Has No Favourites») y las preguntas que el staff haría de verdad; después las pantallas.</p></div>
+          <figure class="taller__artefacto artefacto-flujo artefacto-flujo--lista" data-revelar="bloque">
+            <ol class="artefacto-flujo__pasos" role="list">
+              <li><span class="cifra">01</span> <span data-i18n="caso.athleteiq.pregunta.1">¿Quién tiene más riesgo de lesión?</span></li>
+              <li><span class="cifra">02</span> <span data-i18n="caso.athleteiq.pregunta.2">¿Quién es el jugador más subvalorado?</span></li>
+              <li><span class="cifra">03</span> <span data-i18n="caso.athleteiq.pregunta.3">¿Reyes o Lindqvist en la fecha 1?</span></li>
+              <li><span class="cifra">04</span> <span data-i18n="caso.athleteiq.pregunta.4">¿Okafor está listo para la pretemporada?</span></li>
+            </ol>
+            <figcaption data-i18n="caso.athleteiq.construi.artefacto.1">Las cuatro preguntas del chat guionado, como quedaron en la landing, con nombres de jugadores inventados.</figcaption>
+          </figure>
+        </li>
+        <li class="taller__paso">
+          <span class="taller__n cifra" aria-hidden="true">02</span>
+          <div class="taller__texto"><h3 class="taller__t" data-revelar data-i18n="caso.athleteiq.agentes.2.t">Landing.</h3><p data-revelar data-i18n="caso.athleteiq.agentes.2">Oscura, con la pelota 3D y, alrededor, los campos de la ficha del jugador; cinco idiomas por diccionario.</p></div>
+        </li>
+        <li class="taller__paso">
+          <span class="taller__n cifra" aria-hidden="true">03</span>
+          <div class="taller__texto"><h3 class="taller__t" data-revelar data-i18n="caso.athleteiq.agentes.3.t">Bots de chat.</h3><p data-revelar data-i18n="caso.athleteiq.agentes.3">Responden por texto, voz y foto, en el idioma del usuario, sobre el plantel.</p></div>
+        </li>
+        <li class="taller__paso">
+          <span class="taller__n cifra" aria-hidden="true">04</span>
+          <div class="taller__texto"><h3 class="taller__t" data-revelar data-i18n="caso.athleteiq.agentes.4.t">Verificación.</h3><p data-revelar data-i18n="caso.athleteiq.agentes.4">Landing capturada a 1920×1080; bots que reciben texto, nota de voz y foto.</p></div>
+        </li>
+        <li class="taller__paso taller__paso--artefacto">
+          <span class="taller__n cifra" aria-hidden="true">05</span>
+          <div class="taller__texto"><h3 class="taller__t" data-revelar data-i18n="caso.athleteiq.agentes.5.t">Qué saqué antes de publicar.</h3><p data-revelar data-i18n="caso.athleteiq.agentes.5">Para publicarla saqué el club real, los jugadores, los accesos a los bots y las cifras supuestas; la demo de este sitio es esa copia saneada.</p></div>
+          <figure class="taller__artefacto artefacto-flujo artefacto-flujo--lista" data-revelar="bloque">
+            <ol class="artefacto-flujo__pasos" role="list">
+              <li><span class="cifra">01</span> <span data-i18n="caso.athleteiq.construi.saque.1">El club, el entrenador y los jugadores reales</span></li>
+              <li><span class="cifra">02</span> <span data-i18n="caso.athleteiq.construi.saque.2">Los accesos a los bots</span></li>
+              <li><span class="cifra">03</span> <span data-i18n="caso.athleteiq.construi.saque.3">El formulario de contacto</span></li>
+              <li><span class="cifra">04</span> <span data-i18n="caso.athleteiq.construi.saque.4">Los enlaces a clubes y medios de la liga</span></li>
+              <li><span class="cifra">05</span> <span data-i18n="caso.athleteiq.construi.saque.5">Las cifras de retorno y de jugadores, que eran supuestos</span></li>
+            </ol>
+            <figcaption data-i18n="caso.athleteiq.construi.artefacto.2">Lo que saqué de la landing original antes de publicar la copia.</figcaption>
+          </figure>
+        </li>
+      </ol>
+    </section>
+
+    <section class="seccion-caso caso-balance" id="resultado" aria-labelledby="t-resultado">
+      <p class="folio"><span class="folio__cifra cifra" aria-hidden="true">06</span><span class="folio__etiqueta etiqueta" data-revelar="bloque" data-i18n="caso.parte.resultado">Resultado</span><span class="folio__filete" aria-hidden="true"></span></p>
+      <h2 class="h-caso seccion-caso__titulo" id="t-resultado" data-revelar data-i18n="caso.athleteiq.resultado">Landing y bots funcionando como demo, sin clientes ni contratos.</h2>
+      <div class="balance__estado">
+        <p class="balance__texto" data-revelar data-i18n="caso.athleteiq.estado">Prototipo con landing y bots de prueba. No hay clientes ni contratos, y ninguna cifra de retorno ni de jugadores se publica: eran supuestos de la demo.</p>
+        <div class="balance__falta">
+          <h3 class="etiqueta balance__falta-t" data-revelar="bloque" data-i18n="caso.patron.falta">Qué falta</h3>
+          <ul role="list" data-revelar-hijos>
+            <li data-i18n="caso.athleteiq.falta.1">Validarla con un club: es lo más importante y todavía no pasó.</li>
+            <li data-i18n="caso.athleteiq.falta.2">Que un cuerpo médico revise sus respuestas antes de usarlas con jugadores reales.</li>
+          </ul>
+          <h3 class="etiqueta balance__falta-t balance__cambio-t" data-revelar="bloque" data-i18n="caso.patron.cambiaria">Qué cambiaría</h3>
+          <p class="balance__cambio" data-revelar="bloque" data-i18n="caso.athleteiq.reflexion.1">Armarla genérica desde el principio; atarla a un club real me obligó a sanearla para poder mostrarla.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="seccion-caso caso-album" id="galeria" aria-labelledby="t-galeria">
+      <p class="folio"><span class="folio__cifra cifra" aria-hidden="true">07</span><span class="folio__etiqueta etiqueta" data-revelar="bloque" data-i18n="caso.parte.galeria">Galería</span><span class="folio__filete" aria-hidden="true"></span></p>
+      <h2 class="h-caso seccion-caso__titulo" id="t-galeria" data-revelar data-i18n="caso.athleteiq.galeria.titulo">La pantalla recostada sobre el mármol, y lo que pasa cuando se pregunta, según la landing.</h2>
+      <div class="album">
+        <figure class="album__item album__item--foto ampliable">
+          <div class="album__foto cortina"><img src="../assets/mundo/casos/athleteiq-angulo.webp" srcset="../assets/mundo/casos/athleteiq-angulo-480.webp 480w, ../assets/mundo/casos/athleteiq-angulo-800.webp 800w, ../assets/mundo/casos/athleteiq-angulo.webp 2000w" sizes="(min-width: 1440px) 1360px, 100vw" width="2000" height="1250" loading="lazy" decoding="async" alt="Render: la pantalla con AthleteIQ vista desde arriba, recostada sobre un bloque de mármol" data-i18n-attr="alt=caso.athleteiq.angulo.alt"></div>
+          <button type="button" class="ampliar" data-ampliar="../assets/mundo/casos/athleteiq-angulo.webp"><span class="oculto-visual" data-i18n="caso.patron.ampliar">Ampliar imagen</span></button>
+          <figcaption data-revelar="bloque" data-i18n="caso.athleteiq.angulo.pie">La pantalla recostada en ángulo sobre el bloque de mármol.</figcaption>
+        </figure>
+        <figure class="album__item album__item--captura ampliable">
+          <div class="ventana"><div class="ventana__pantalla cortina">
+<picture>
+  <source type="image/avif" srcset="../assets/img/athleteiq/demo-funciona-640.avif 640w, ../assets/img/athleteiq/demo-funciona-1280.avif 1280w, ../assets/img/athleteiq/demo-funciona-1920.avif 1920w" sizes="(min-width: 1024px) 66vw, 100vw">
+  <img src="../assets/img/athleteiq/demo-funciona-1280.webp" srcset="../assets/img/athleteiq/demo-funciona-640.webp 640w, ../assets/img/athleteiq/demo-funciona-1280.webp 1280w, ../assets/img/athleteiq/demo-funciona-1920.webp 1920w" sizes="(min-width: 1024px) 66vw, 100vw" width="1920" height="613" loading="lazy" decoding="async" alt="Sección «Cómo funciona» de la landing: escribís o mandás un audio, el bot lee las fichas, contesta con una recomendación, y lo que falta" data-i18n-attr="alt=caso.athleteiq.galeria.1">
+</picture>
+          </div></div>
+          <button type="button" class="ampliar" data-ampliar="../assets/img/athleteiq/demo-funciona-1920.webp"><span class="oculto-visual" data-i18n="caso.patron.ampliar">Ampliar imagen</span></button>
+          <figcaption data-revelar="bloque" data-i18n="caso.athleteiq.galeria.1.pie">«Cómo funciona», en la landing: el cuarto paso dice lo que todavía falta.</figcaption>
+        </figure>
+      </div>
+    </section>
   <section class="caso-contacto placa placa--bloque" aria-labelledby="t-contacto" data-iman>
     <div class="caso-contacto__texto">
       <p class="etiqueta caso-contacto__etiqueta" data-revelar="bloque" data-i18n="folio.contacto">Contacto</p>
-      <h2 class="caso-contacto__titulo" id="t-contacto" data-revelar data-i18n="contacto.titulo">Hablemos de lo que falta construir.</h2>
+      <h2 class="caso-contacto__titulo" id="t-contacto" data-revelar data-i18n="contacto.titulo">Escribime si tenés un producto para construir o un proceso para automatizar.</h2>
       <p class="caso-contacto__sub" data-revelar data-i18n="contacto.sub">Respondo en el día.</p>
     </div>
     <div class="caso-contacto__acciones" data-revelar-hijos>
@@ -266,17 +318,21 @@
     <p class="folio caso-nav__folio"><span class="folio__etiqueta etiqueta" data-i18n="caso.otros.aria">Otros casos</span><span class="folio__filete" aria-hidden="true"></span></p>
     <div class="caso-nav__pares">
     <a class="caso-par caso-par--siguiente caso-puerta" href="coro.html">
-      <span class="caso-par__media" data-paralaje data-vt="coro"><img class="caso__capa caso__capa--fondo" src="../assets/mundo/casos/coro-fondo.webp" srcset="../assets/mundo/casos/coro-fondo-480.webp 480w, ../assets/mundo/casos/coro-fondo-800.webp 800w, ../assets/mundo/casos/coro-fondo.webp 1600w" sizes="100vw" width="1600" height="1000" loading="lazy" decoding="async" data-carga alt=""><img class="caso__capa caso__capa--disp" src="../assets/mundo/casos/coro-dispositivo.webp" srcset="../assets/mundo/casos/coro-dispositivo-480.webp 480w, ../assets/mundo/casos/coro-dispositivo-800.webp 800w, ../assets/mundo/casos/coro-dispositivo.webp 1600w" sizes="100vw" width="1600" height="1000" loading="lazy" decoding="async" data-carga alt="Render: el reporte de coro en una tableta apoyada sobre un zócalo de piedra oscura" data-i18n-attr="alt=trabajo.coro.foto"><span class="caso__luz" aria-hidden="true"></span></span>
-      <span class="caso-par__texto"><span class="etiqueta caso-par__etiqueta" data-i18n="caso.siguiente">Caso siguiente →</span><span class="caso-par__nombre" data-revelar="lineas">coro</span><span class="caso-par__frase" data-i18n="trabajo.coro.frase">Lee las reseñas de un producto (400 en la corrida real más grande), agrupa el defecto que se repite y encuentra qué competidor ya lo resolvió.</span><span class="sello sello--proceso" data-i18n="trabajo.coro.sello">Prototipo</span></span>
+      <span class="caso-par__media" data-paralaje data-vt="coro"><img class="caso__capa caso__capa--fondo" src="../assets/mundo/casos/coro-fondo.webp" srcset="../assets/mundo/casos/coro-fondo-480.webp 480w, ../assets/mundo/casos/coro-fondo-800.webp 800w, ../assets/mundo/casos/coro-fondo-1600.webp 1600w, ../assets/mundo/casos/coro-fondo.webp 2400w" sizes="100vw" width="2400" height="1500" loading="lazy" decoding="async" data-carga alt=""><img class="caso__capa caso__capa--disp" src="../assets/mundo/casos/coro-dispositivo.webp" srcset="../assets/mundo/casos/coro-dispositivo-480.webp 480w, ../assets/mundo/casos/coro-dispositivo-800.webp 800w, ../assets/mundo/casos/coro-dispositivo-1600.webp 1600w, ../assets/mundo/casos/coro-dispositivo.webp 2400w" sizes="100vw" width="2400" height="1500" loading="lazy" decoding="async" data-carga alt=""><span class="caso__luz" aria-hidden="true"></span></span>
+      <span class="caso-par__texto"><span class="etiqueta caso-par__etiqueta" data-i18n="caso.siguiente">Caso siguiente →</span><span class="caso-par__nombre" data-revelar="lineas">coro</span><span class="caso-par__frase" data-i18n="trabajo.coro.frase">Lee las reseñas de un producto (400 en la corrida real más grande), agrupa el defecto que se repite y busca quién ya lo resolvió, con su fuente.</span><span class="sello sello--proceso" data-i18n="trabajo.coro.sello">Prototipo</span></span>
     </a>
     <a class="caso-par caso-par--anterior placa placa--bloque placa--viva" href="fortal.html" data-iman>
-      <span class="caso-par__media" data-vt="fortal"><img class="caso__capa caso__capa--fondo" src="../assets/mundo/casos/fortal-fondo.webp" srcset="../assets/mundo/casos/fortal-fondo-480.webp 480w, ../assets/mundo/casos/fortal-fondo-800.webp 800w, ../assets/mundo/casos/fortal-fondo.webp 1600w" sizes="(min-width: 768px) 240px, 100vw" width="1600" height="1000" loading="lazy" decoding="async" data-carga alt=""><img class="caso__capa caso__capa--disp" src="../assets/mundo/casos/fortal-dispositivo.webp" srcset="../assets/mundo/casos/fortal-dispositivo-480.webp 480w, ../assets/mundo/casos/fortal-dispositivo-800.webp 800w, ../assets/mundo/casos/fortal-dispositivo.webp 1600w" sizes="(min-width: 768px) 240px, 100vw" width="1600" height="1000" loading="lazy" decoding="async" data-carga alt="Render: Fortal en un teléfono sobre un zócalo de piedra oscura, con la pantalla de la rutina del día" data-i18n-attr="alt=trabajo.fortal.foto"><span class="caso__luz" aria-hidden="true"></span></span>
+      <span class="caso-par__media" data-vt="fortal"><img class="caso__capa caso__capa--fondo" src="../assets/mundo/casos/fortal-fondo.webp" srcset="../assets/mundo/casos/fortal-fondo-480.webp 480w, ../assets/mundo/casos/fortal-fondo-800.webp 800w, ../assets/mundo/casos/fortal-fondo-1600.webp 1600w, ../assets/mundo/casos/fortal-fondo.webp 2400w" sizes="(min-width: 768px) 240px, 100vw" width="2400" height="1500" loading="lazy" decoding="async" data-carga alt=""><img class="caso__capa caso__capa--disp" src="../assets/mundo/casos/fortal-dispositivo.webp" srcset="../assets/mundo/casos/fortal-dispositivo-480.webp 480w, ../assets/mundo/casos/fortal-dispositivo-800.webp 800w, ../assets/mundo/casos/fortal-dispositivo-1600.webp 1600w, ../assets/mundo/casos/fortal-dispositivo.webp 2400w" sizes="(min-width: 768px) 240px, 100vw" width="2400" height="1500" loading="lazy" decoding="async" data-carga alt=""><span class="caso__luz" aria-hidden="true"></span></span>
       <span class="caso-par__texto"><span class="etiqueta caso-par__etiqueta" data-i18n="caso.anterior">← Caso anterior</span><span class="caso-par__nombre" data-revelar="lineas">Fortal</span><span class="caso-par__frase" data-i18n="trabajo.fortal.frase">App web para iPhone que arma tu rutina con tu equipo y tu tiempo reales, sobre un cuerpo 3D.</span><span class="sello sello--en-uso" data-i18n="trabajo.fortal.sello">App personal · publicada y en uso</span></span>
     </a>
     <p class="caso-nav__todos" data-revelar="bloque"><a class="boton boton--secundario" href="../index.html#trabajo" data-i18n="caso.volver">Todos los casos</a></p>
     </div>
   </nav>
   </div>
+  <dialog class="ampliacion" aria-label="Imagen ampliada" data-i18n-attr="aria-label=caso.patron.ampliada">
+    <div class="ampliacion__marco"></div>
+    <div class="ampliacion__pie"><p class="ampliacion__texto"></p><button type="button" class="boton boton--secundario ampliacion__cerrar" data-i18n="caso.patron.cerrar">Cerrar</button></div>
+  </dialog>
 </main>
 <footer class="pie">
   <div class="contenedor">
@@ -308,5 +364,6 @@
 </footer>
 <script type="module" src="../js/mundo/pagina.js"></script>
 <script type="module" src="../js/comun.js"></script>
+<script type="module" src="../js/caso.js"></script>
 </body>
 </html>

@@ -1,0 +1,51 @@
+/* ---------- Caso coro (patrón v4) ---------- */
+/* Reglas propias de proyectos/coro.html, cargadas después de caso.css. La firma es «el hallazgo»: el veredicto, los
+   cuatro temas del informe con su prioridad y su concentración (copiados tal cual del informe de prueba) y la solución
+   citada del primero. */
+
+/* Paso con captura alta (tema 2 entero, 1584×1280): en escritorio la captura toma 7 columnas en vez de 8, para que
+   entre en una pantalla, y el texto las 5 restantes */
+@media (min-width: 1024px) {
+  .recorrido__paso.recorrido__paso--alta .recorrido__media { grid-column: 6 / 13; }
+  .recorrido__paso.recorrido__paso--alta .recorrido__texto { grid-column: 1 / 6; }
+}
+
+/* los seis módulos en celular: en tres columnas «Soluciones» toca a «Informe»; van en dos */
+@media (max-width: 479px) {
+  .caso-taller .artefacto-flujo__pasos { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* Firma: el hallazgo */
+.hallazgo { gap: var(--e-3); }
+.hallazgo__etiqueta { display: block; color: var(--acento-texto); }
+.hallazgo__veredicto { margin: 0; padding-left: var(--e-3); border-left: 2px solid var(--acento-display); }
+.hallazgo__veredicto p { font-family: var(--playfair); font-style: italic; font-weight: 400; font-size: clamp(1.5rem, 0.95rem + 1.8vw, 2.5rem); line-height: 1.2; letter-spacing: -0.012em; max-width: 26ch; }
+.hallazgo__temas { list-style: none; margin: var(--e-1) 0 0; padding: 0; display: grid; gap: var(--e-2); }
+.hallazgo__tema { display: grid; grid-template-columns: 2.6rem minmax(0, 1fr) auto; align-items: baseline; column-gap: var(--e-2); row-gap: 0.45rem; color: var(--texto-2); font-size: var(--t-secundario); line-height: 1.4; }
+.hallazgo__pri { font-size: 0.9375rem; color: var(--texto-3); font-variant-numeric: tabular-nums; }
+.hallazgo__pct { font-variant-numeric: tabular-nums; color: var(--texto-2); }
+.hallazgo__barra { grid-column: 2 / -1; position: relative; height: 6px; border-radius: 3px; background: var(--hundida); box-shadow: inset 0 0 0 1px var(--filete); overflow: hidden; }
+.hallazgo__relleno { position: absolute; inset: 0 auto 0 0; width: 15.8%; border-radius: inherit; background: var(--texto-3); }
+.hallazgo__tema--uno { color: var(--texto); font-size: var(--t-cuerpo); font-weight: 600; }
+.hallazgo__tema--uno .hallazgo__pri { font-size: 1.0625rem; color: var(--acento-display); }
+.hallazgo__tema--uno .hallazgo__pct { font-size: 1.25rem; color: var(--acento-display); }
+.hallazgo__tema--uno .hallazgo__barra { height: 10px; border-radius: 5px; }
+.hallazgo__tema--uno .hallazgo__relleno { width: 47.4%; background: var(--acento-display); }
+.hallazgo__solucion { display: grid; gap: 0.5rem; margin-top: var(--e-1); padding-top: var(--e-3); border-top: 1px solid var(--filete); }
+.hallazgo__quien { font-size: var(--t-h3); font-weight: 600; letter-spacing: -0.015em; line-height: 1.2; color: var(--texto); }
+.hallazgo__como { font-size: var(--t-cuerpo); line-height: 1.55; color: var(--texto-2); max-width: 52ch; }
+.hallazgo__adopcion { font-size: var(--t-etiqueta); letter-spacing: 0.06em; color: var(--texto-3); }
+
+/* el lado de la firma (texto y captura) se centra contra la tarjeta, que es más alta */
+@media (min-width: 1024px) {
+  .caso-firma .firma__lado { align-self: center; }
+}
+
+@media (forced-colors: active) {
+  .hallazgo__barra { border: 1px solid CanvasText; }
+  .hallazgo__relleno { background: CanvasText; }
+}
+@media print {
+  .hallazgo__barra { box-shadow: none; border: 1px solid #888; }
+  .hallazgo__relleno { background: #444 !important; }
+}

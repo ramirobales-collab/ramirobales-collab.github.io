@@ -1,0 +1,422 @@
+<!doctype html>
+<html lang="es" data-dic="casos">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-WVrqxGBOCFO/Cp2nS+4U+eTNuPdla3QGlJrPwf9tiP8='; style-src 'self'; img-src 'self'; font-src 'self'; connect-src 'self'; media-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="no-referrer">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>var d=document.documentElement;if(self!==top){d.classList.add('enmarcado');try{top.location.replace(location.href)}catch(e){}}try{var t=new URLSearchParams(location.search).get('tema')||localStorage.getItem('tema');if(t==='light'||t==='dark')d.dataset.theme=t;}catch(e){}d.classList.add('js');if(!/[?&](quieto=1|ir=)/.test(location.search))d.classList.add('mov');setTimeout(function(){if(!d.dataset.mov)d.classList.remove('js','mov')},4000);(function(){var r=matchMedia('(prefers-reduced-motion: reduce)'),h=[];function n(el,v){if(el){el.style.viewTransitionName=v;h.push(el);}}addEventListener('pagereveal',function(e){h.forEach(function(el){el.style.viewTransitionName='';});h=[];var v=e.viewTransition;if(v){if(r.matches){v.ready.catch(function(){});v.skipTransition();}else d.classList.add('vt');}});addEventListener('pageswap',function(e){var v=e.viewTransition;if(!v)return;if(r.matches){v.ready.catch(function(){});v.skipTransition();return;}var a=e.activation,u=a&&a.entry&&a.entry.url?new URL(a.entry.url):null,c=document.querySelector('.caso-cabecera__media'),m=u&&u.pathname.match(/\/proyectos\/(cathedra|fortal|athleteiq|coro|chamfer|prospeccion).html$/);if(m){n(c,'none');n(document.querySelector('[data-vt="'+m[1]+'"]'),'caso-'+m[1]);}else if(!(a&&(a.navigationType==='traverse'||(u&&u.hash==='#trabajo'))))n(c,'none');});})();</script>
+<title data-i18n="caso.prospeccion.titulo">Prospección verificada — caso de estudio · Ramiro Bales</title>
+<meta name="description" data-i18n-attr="content=caso.prospeccion.descripcion" content="Un motor en Python que encuentra pymes con sitio propio, mide qué le falta a su página y redacta un primer correo con IA. Un verificador sin IA decide si sale. Prototipo.">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#F3EEE4">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#040404">
+<meta name="author" content="Ramiro Bales">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Prospección verificada — caso de estudio · Ramiro Bales">
+<meta property="og:description" content="Un motor en Python que encuentra pymes con sitio propio, mide qué le falta a su página y redacta un primer correo con IA. Un verificador sin IA decide si sale. Prototipo.">
+<meta property="og:image" content="https://ramirobales-collab.github.io/assets/mundo/og-1200x630.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://ramirobales-collab.github.io/proyectos/prospeccion.html">
+<meta property="og:locale" content="es_AR">
+<meta property="og:locale:alternate" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://ramirobales-collab.github.io/assets/mundo/og-1200x630.jpg">
+<link rel="canonical" href="https://ramirobales-collab.github.io/proyectos/prospeccion.html">
+<link rel="alternate" hreflang="es" href="https://ramirobales-collab.github.io/proyectos/prospeccion.html?idioma=es">
+<link rel="alternate" hreflang="en" href="https://ramirobales-collab.github.io/proyectos/prospeccion.html?idioma=en">
+<link rel="alternate" hreflang="x-default" href="https://ramirobales-collab.github.io/proyectos/prospeccion.html">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="manifest" href="../manifest.webmanifest">
+<link rel="preload" href="../assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fonts/playfair-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="modulepreload" href="../js/mundo/pagina.js">
+<link rel="modulepreload" href="../js/mundo/motor.js">
+<link rel="modulepreload" href="../js/mundo/fondo.js">
+<link rel="modulepreload" href="../js/comun.js">
+<link rel="modulepreload" href="../js/movimiento.js">
+<link rel="preload" as="image" href="../assets/mundo/casos/prospeccion-dispositivo.webp" imagesrcset="../assets/mundo/casos/prospeccion-dispositivo-480.webp 480w, ../assets/mundo/casos/prospeccion-dispositivo-800.webp 800w, ../assets/mundo/casos/prospeccion-dispositivo-1600.webp 1600w, ../assets/mundo/casos/prospeccion-dispositivo.webp 2400w" imagesizes="(min-width: 768px) 100vw, 220vw" fetchpriority="high">
+<link rel="preload" as="image" href="../assets/mundo/casos/prospeccion-fondo.webp" imagesrcset="../assets/mundo/casos/prospeccion-fondo-480.webp 480w, ../assets/mundo/casos/prospeccion-fondo-800.webp 800w, ../assets/mundo/casos/prospeccion-fondo-1600.webp 1600w, ../assets/mundo/casos/prospeccion-fondo.webp 2400w" imagesizes="(min-width: 768px) 100vw, 220vw">
+<link rel="stylesheet" href="../css/variables.css">
+<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/componentes.css">
+<link rel="stylesheet" href="../css/caso.css">
+<link rel="stylesheet" href="../css/casos/prospeccion.css">
+</head>
+<body>
+<a class="enmarcado-aviso" href="https://ramirobales-collab.github.io/proyectos/prospeccion.html" target="_top" rel="noopener noreferrer" data-i18n="enmarcado.aviso">Esta página está dentro de otro sitio. Abrila en su dirección real: ramirobales-collab.github.io</a>
+<a class="saltar" href="#contenido" data-i18n="nav.saltar">Saltar al contenido</a>
+<nav class="nav nav--placa" aria-label="Principal" data-i18n-attr="aria-label=nav.aria">
+  <div class="contenedor nav__in">
+    <a class="nav__marca" href="../index.html" data-i18n="nav.marca">Ramiro Bales</a>
+    <div class="nav__enlaces">
+      <a href="../index.html#trabajo" data-i18n="nav.trabajo">Trabajo</a>
+      <a href="../index.html#saber" data-i18n="nav.saber">Qué sé hacer</a>
+      <a href="../index.html#marcas" data-i18n="nav.marcas">Para marcas</a>
+      <a href="../index.html#metodo" data-i18n="nav.metodo">Método</a>
+      <a href="../index.html#sobre" data-i18n="nav.sobre">Sobre mí</a>
+      <a href="../index.html#contacto" data-i18n="nav.contacto">Contacto</a>
+      <a href="../cv/ramiro-bales-cv-es.pdf" data-cv data-i18n="nav.cv">CV (PDF)</a>
+    </div>
+    <div class="nav__herramientas">
+      <div class="conmutador conmutador--idioma" role="group" aria-label="Idioma" data-i18n-attr="aria-label=nav.idioma.aria">
+        <button type="button" data-idioma="es" aria-pressed="true" lang="es">ES</button>
+        <button type="button" data-idioma="en" aria-pressed="false" lang="en">EN</button>
+      </div>
+      <button type="button" class="tema" aria-pressed="false" aria-label="Cambiar entre tema claro y oscuro" data-i18n-attr="aria-label=tema.aria">
+        <svg class="tema__luna" viewBox="0 0 20 20" aria-hidden="true"><path d="M16.4 12.2A7 7 0 0 1 7.8 3.6a7.2 7.2 0 1 0 8.6 8.6Z"/></svg>
+        <svg class="tema__sol" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="3.6"/><path d="M10 1.8v2.2M10 16v2.2M1.8 10H4M16 10h2.2M4.2 4.2l1.6 1.6M14.2 14.2l1.6 1.6M4.2 15.8l1.6-1.6M14.2 5.8l1.6-1.6"/></svg>
+        <span class="tema__oscuro" data-i18n="tema.oscuro">Oscuro</span>
+        <span class="tema__claro" data-i18n="tema.claro">Claro</span>
+      </button>
+    </div>
+    <button type="button" class="nav__menu" aria-expanded="false" aria-controls="panel-menu" aria-label="Abrir o cerrar el menú" data-i18n-attr="aria-label=nav.menu.aria">
+      <span data-i18n="nav.menu">Menú</span>
+      <svg class="nav__menu-abrir" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 6h14M3 10h14M3 14h14"/></svg>
+      <svg class="nav__menu-cerrar" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15"/></svg>
+    </button>
+  </div>
+  <div class="nav__panel" id="panel-menu" data-abierto="false">
+    <div class="nav__enlaces">
+      <a href="../index.html#trabajo" data-i18n="nav.trabajo">Trabajo</a>
+      <a href="../index.html#saber" data-i18n="nav.saber">Qué sé hacer</a>
+      <a href="../index.html#marcas" data-i18n="nav.marcas">Para marcas</a>
+      <a href="../index.html#metodo" data-i18n="nav.metodo">Método</a>
+      <a href="../index.html#sobre" data-i18n="nav.sobre">Sobre mí</a>
+      <a href="../index.html#contacto" data-i18n="nav.contacto">Contacto</a>
+      <a href="../cv/ramiro-bales-cv-es.pdf" data-cv data-i18n="nav.cv">CV (PDF)</a>
+    </div>
+    <div class="nav__herramientas">
+      <div class="conmutador conmutador--idioma" role="group" aria-label="Idioma" data-i18n-attr="aria-label=nav.idioma.aria">
+        <button type="button" data-idioma="es" aria-pressed="true" lang="es">ES</button>
+        <button type="button" data-idioma="en" aria-pressed="false" lang="en">EN</button>
+      </div>
+      <button type="button" class="tema" aria-pressed="false" aria-label="Cambiar entre tema claro y oscuro" data-i18n-attr="aria-label=tema.aria">
+        <svg class="tema__luna" viewBox="0 0 20 20" aria-hidden="true"><path d="M16.4 12.2A7 7 0 0 1 7.8 3.6a7.2 7.2 0 1 0 8.6 8.6Z"/></svg>
+        <svg class="tema__sol" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="3.6"/><path d="M10 1.8v2.2M10 16v2.2M1.8 10H4M16 10h2.2M4.2 4.2l1.6 1.6M14.2 14.2l1.6 1.6M4.2 15.8l1.6-1.6M14.2 5.8l1.6-1.6"/></svg>
+        <span class="tema__oscuro" data-i18n="tema.oscuro">Oscuro</span>
+        <span class="tema__claro" data-i18n="tema.claro">Claro</span>
+      </button>
+    </div>
+  </div>
+</nav>
+<canvas class="mundo" aria-hidden="true"></canvas>
+<main class="caso-pagina caso-pagina--v4" id="contenido">
+  <header class="caso-cabecera apertura" id="cabecera" data-caso="prospeccion">
+    <div class="caso-cabecera__media apertura__foto" data-paralaje><img class="caso__capa caso__capa--fondo" src="../assets/mundo/casos/prospeccion-fondo.webp" srcset="../assets/mundo/casos/prospeccion-fondo-480.webp 480w, ../assets/mundo/casos/prospeccion-fondo-800.webp 800w, ../assets/mundo/casos/prospeccion-fondo-1600.webp 1600w, ../assets/mundo/casos/prospeccion-fondo.webp 2400w" sizes="(min-width: 768px) 100vw, 220vw" width="2400" height="1500" fetchpriority="high" decoding="async" alt=""><img class="caso__capa caso__capa--disp" src="../assets/mundo/casos/prospeccion-dispositivo.webp" srcset="../assets/mundo/casos/prospeccion-dispositivo-480.webp 480w, ../assets/mundo/casos/prospeccion-dispositivo-800.webp 800w, ../assets/mundo/casos/prospeccion-dispositivo-1600.webp 1600w, ../assets/mundo/casos/prospeccion-dispositivo.webp 2400w" sizes="(min-width: 768px) 100vw, 220vw" width="2400" height="1500" fetchpriority="high" decoding="async" alt="Render: una pantalla con el embudo del motor de prospección y el registro del verificador, sobre un banco de mármol" data-i18n-attr="alt=trabajo.prospeccion.foto"><img class="caso__capa caso__capa--disp caso__brillo" src="../assets/mundo/casos/prospeccion-dispositivo.webp" srcset="../assets/mundo/casos/prospeccion-dispositivo-480.webp 480w, ../assets/mundo/casos/prospeccion-dispositivo-800.webp 800w, ../assets/mundo/casos/prospeccion-dispositivo-1600.webp 1600w, ../assets/mundo/casos/prospeccion-dispositivo.webp 2400w" sizes="(min-width: 768px) 100vw, 220vw" width="2400" height="1500" decoding="async" alt=""></div>
+    <div class="contenedor apertura__in">
+      <div class="apertura__texto">
+        <p class="folio apertura__folio"><span class="folio__cifra cifra" aria-hidden="true">01</span><span class="folio__etiqueta etiqueta" data-revelar="bloque" data-i18n="caso.folio">Caso de estudio</span><span class="folio__filete" aria-hidden="true"></span></p>
+        <p class="apertura__sello" data-revelar="bloque"><span class="sello sello--proceso" data-i18n="trabajo.prospeccion.sello">Prototipo</span></p>
+        <h1 class="display caso-cabecera__titulo apertura__titulo" data-revelar data-i18n="trabajo.prospeccion.nombre">Prospección verificada</h1>
+        <p class="sub-heroe apertura__promesa" data-revelar data-i18n="caso.prospeccion.gancho">Un modelo de IA redacta el primer correo. Un verificador sin IA decide si sale.</p>
+      </div>
+      <dl class="apertura__tira placa placa--bloque" data-revelar-hijos data-iman>
+        <div><dt class="etiqueta" data-i18n="caso.resumen.que">Qué es</dt><dd data-i18n="caso.prospeccion.resumen.1">Un motor que encuentra pymes con sitio propio, mide qué le falta a su página y redacta un primer correo.</dd></div>
+        <div><dt class="etiqueta" data-i18n="caso.resumen.para">Para quién</dt><dd data-i18n="caso.prospeccion.resumen.2">Uso propio: escribirle a una pyme con una mejora medida en su sitio.</dd></div>
+        <div><dt class="etiqueta" data-i18n="caso.resumen.estado">Estado</dt><dd data-i18n="caso.prospeccion.resumen.3">Prototipo. Al 11 de noviembre de 2026 había enviado 6 correos reales, con un tope de 5 por día.</dd></div>
+      </dl>
+    </div>
+  </header>
+  <div class="contenedor">
+    <dl class="ficha-linea" aria-label="Ficha del proyecto" data-i18n-attr="aria-label=caso.meta.aria" data-revelar-hijos>
+      <div><dt class="etiqueta" data-i18n="caso.meta.rol">Mi rol</dt><dd data-i18n="caso.prospeccion.rol.corto">Definí las reglas y dirigí el desarrollo</dd></div>
+      <div><dt class="etiqueta" data-i18n="caso.meta.periodo">Período</dt><dd data-i18n="caso.prospeccion.periodo">Noviembre de 2026</dd></div>
+      <div class="ficha-linea__ancho"><dt class="etiqueta" data-i18n="caso.meta.herramientas">Herramientas</dt><dd data-i18n="caso.prospeccion.herramientas">Desarrollo asistido por IA · Python · SQLite · OpenStreetMap · envío por SMTP</dd></div>
+    </dl>
+
+    <section class="seccion-caso caso-problema" id="problema" aria-labelledby="t-problema">
+      <p class="folio"><span class="folio__cifra cifra" aria-hidden="true">02</span><span class="folio__etiqueta etiqueta" data-revelar="bloque" data-i18n="caso.patron.problema">El problema</span><span class="folio__filete" aria-hidden="true"></span></p>
+      <h2 class="caso-problema__frase" id="t-problema" data-revelar data-i18n="caso.prospeccion.problema.titulo">Si un correo le dice a un negocio que su página no tiene un botón de WhatsApp, ese botón tiene que faltar de verdad.</h2>
+      <p class="caso-problema__texto" data-revelar data-i18n="caso.prospeccion.problema.texto">Quise escribirle a pymes con una mejora concreta para su sitio y que el primer correo lo redactara un modelo de IA. Un modelo escribe con la misma seguridad lo que se midió y lo que no. Los correos salen sin que yo lea cada uno antes del envío, así que la regla tenía que estar en el código.</p>
+    </section>
+
+    <section class="seccion-caso caso-recorrido" id="recorrido" aria-labelledby="t-recorrido">
+      <p class="folio"><span class="folio__cifra cifra" aria-hidden="true">03</span><span class="folio__etiqueta etiqueta" data-revelar="bloque" data-i18n="caso.patron.recorrido">Recorrido</span><span class="folio__filete" aria-hidden="true"></span></p>
+      <div class="seccion-caso__cabeza">
+        <h2 class="h-caso seccion-caso__titulo" id="t-recorrido" data-revelar data-i18n="caso.prospeccion.recorrido.titulo">Un modelo de IA escribe en un solo paso. Todo lo demás es código con reglas escritas.</h2>
+        <p class="seccion-caso__aviso etiqueta" data-revelar="bloque" data-i18n="caso.prospeccion.recorrido.aviso">Fragmentos copiados del código del motor, sin cambios.</p>
+      </div>
+      <ol class="recorrido" role="list">
+        <li class="recorrido__paso">
+          <figure class="recorrido__media codigo-fig">
+            <div class="ventana"><div class="ventana__pantalla cortina codigo" translate="no">
+              <p class="codigo__barra"><span class="codigo__archivo">motor/auditar.py</span><span class="codigo__lineas">208–211</span></p>
+<pre class="codigo__pre"><code><span class="c-l"><span class="c-n">208</span>    <span class="c-pal">if not</span> a[<span class="c-cad">"tiene_chat"</span>] <span class="c-pal">and not</span> a[<span class="c-cad">"tiene_whatsapp"</span>]:</span><span class="c-l"><span class="c-n">209</span>        add(<span class="c-cad">"sin_whatsapp_ni_chat"</span>, <span class="c-num">1</span> <span class="c-pal">if</span> a.get(<span class="c-cad">"gtm"</span>) <span class="c-pal">else</span> <span class="c-num">3</span>, <span class="c-cad">"asistente"</span>,</span><span class="c-l"><span class="c-n">210</span>            <span class="c-cad">f"{donde_es.capitalize()} no encontré un chat ni un botón de WhatsApp para que el cliente te escriba"</span>,</span><span class="c-l"><span class="c-n">211</span>            <span class="c-cad">f"I didn't find a chat widget or a WhatsApp button {donde_en}"</span>)</span></code></pre>
+            </div></div>
+            <figcaption class="codigo-fig__pie" data-revelar="bloque" data-i18n="caso.prospeccion.recorrido.1.pie">La frase sale del código, en los dos idiomas, y el modelo tiene que copiarla tal cual.</figcaption>
+          </figure>
+          <div class="recorrido__texto">
+            <span class="recorrido__n cifra" aria-hidden="true">01</span>
+            <h3 class="recorrido__t" data-revelar data-i18n="caso.prospeccion.recorrido.1.t">Cada medición se convierte en una frase fija</h3>
+            <p data-revelar data-i18n="caso.prospeccion.recorrido.1">El auditor revisa la página principal y hasta dos de contacto. Busca chat o WhatsApp, reservas, tienda, https, adaptación al celular, el año del pie y la descripción para buscadores. Cada falta se vuelve una frase fija.</p>
+          </div>
+        </li>
+        <li class="recorrido__paso">
+          <figure class="recorrido__media codigo-fig">
+            <div class="ventana"><div class="ventana__pantalla cortina codigo" translate="no">
+              <p class="codigo__barra"><span class="codigo__archivo">motor/verificar.py</span><span class="codigo__lineas">20–53</span></p>
+<pre class="codigo__pre"><code><span class="c-l"><span class="c-n">20</span>  <span class="c-pal">def</span> numeros(texto):</span><span class="c-l"><span class="c-n">21</span>      <span class="c-pal">return</span> [re.sub(<span class="c-cad">r"[.,](?=\d{3}\b)"</span>, <span class="c-cad">""</span>, n) <span class="c-pal">for</span> n <span class="c-pal">in</span> re.findall(<mark class="c-marca"><span class="c-cad">r"\d[\d.,]*"</span></mark>, texto)]</span><span class="c-l"><span class="c-n c-n--salto">⋮</span></span><span class="c-l"><span class="c-n">45</span>      <span class="c-com"># 2) números: solo medidos, precio "desde" o cifras chicas</span></span><span class="c-l"><span class="c-n">46</span>      permitidos = {str(b[<span class="c-cad">"desde_num"</span>])}</span><span class="c-l"><span class="c-n c-n--salto">⋮</span></span><span class="c-l"><span class="c-n">51</span>      <span class="c-pal">for</span> n <span class="c-pal">in</span> numeros(cuerpo):</span><span class="c-l"><span class="c-n">52</span>          <span class="c-pal">if</span> n <span class="c-pal">not in</span> permitidos <span class="c-pal">and</span> n <span class="c-pal">not in</span> SMALL:</span><span class="c-l"><span class="c-n">53</span>              m.append(<span class="c-cad">f"número no respaldado: {n}"</span>)</span></code></pre>
+            </div></div>
+            <figcaption class="codigo-fig__pie" data-revelar="bloque" data-i18n="caso.prospeccion.recorrido.2.pie">El patrón marcado en la línea 21 se queda con la coma o el punto que sigue a un número. En la corrida del 11 de noviembre, ese defecto frenó cinco borradores.</figcaption>
+          </figure>
+          <div class="recorrido__texto">
+            <span class="recorrido__n cifra" aria-hidden="true">02</span>
+            <h3 class="recorrido__t" data-revelar data-i18n="caso.prospeccion.recorrido.2.t">Ninguna cifra sale si la auditoría no la midió</h3>
+            <p data-revelar data-i18n="caso.prospeccion.recorrido.2">El verificador no usa IA. Compara cada borrador con la auditoría y lo frena si afirma una falta que no se midió, si usa una cifra sin respaldo o un porcentaje, si promete resultados o si propone una llamada.</p>
+            <p class="recorrido__prueba" data-revelar="bloque"><span class="etiqueta" data-i18n="caso.patron.comprobe">Cómo lo comprobé</span> <span data-i18n="caso.prospeccion.recorrido.2.prueba">En la corrida del 11 de noviembre hubo 16 revisiones de borradores reales: aprobó 11 y frenó 5. Los cinco eran falsos positivos, y lo cuento más abajo.</span></p>
+          </div>
+        </li>
+        <li class="recorrido__paso">
+          <figure class="recorrido__media codigo-fig">
+            <div class="ventana"><div class="ventana__pantalla cortina codigo" translate="no">
+              <p class="codigo__barra"><span class="codigo__archivo">config.json</span><span class="codigo__lineas">10–23</span></p>
+<pre class="codigo__pre"><code><span class="c-l"><span class="c-n">10</span>  <span class="c-cad">"modo_envio"</span>: <span class="c-cad">"smtp"</span>,</span><span class="c-l"><span class="c-n">11</span>  <span class="c-cad">"pausa"</span>: <span class="c-pal">false</span>,</span><span class="c-l"><span class="c-n">12</span>  <span class="c-cad">"tope_diario"</span>: <span class="c-num">5</span>,</span><span class="c-l"><span class="c-n">13</span>  <span class="c-cad">"tope_semanal"</span>: <span class="c-num">30</span>,</span><span class="c-l"><span class="c-n c-n--salto">⋮</span></span><span class="c-l"><span class="c-n">19</span>  <span class="c-cad">"ventana_horaria_destinatario"</span>: [</span><span class="c-l"><span class="c-n">20</span>    <span class="c-num">9</span>,</span><span class="c-l"><span class="c-n">21</span>    <span class="c-num">17</span></span><span class="c-l"><span class="c-n">22</span>  ],</span><span class="c-l"><span class="c-n">23</span>  <span class="c-cad">"dias_sin_recontactar"</span>: <span class="c-num">120</span>,</span></code></pre>
+            </div></div>
+            <figcaption class="codigo-fig__pie" data-revelar="bloque" data-i18n="caso.prospeccion.recorrido.3.pie">La configuración con la que envió el motor.</figcaption>
+          </figure>
+          <div class="recorrido__texto">
+            <span class="recorrido__n cifra" aria-hidden="true">03</span>
+            <h3 class="recorrido__t" data-revelar data-i18n="caso.prospeccion.recorrido.3.t">Los límites de envío están escritos y el código los aplica</h3>
+            <p data-revelar data-i18n="caso.prospeccion.recorrido.3">Hasta 5 correos por día y 30 por semana, de lunes a viernes entre las 9 y las 17 en la hora del destinatario, y 120 días antes de volver a escribirle a un mismo contacto. Con la pausa activada no sale nada.</p>
+          </div>
+        </li>
+      </ol>
+      <div class="recorrido__mas">
+        <h3 class="etiqueta recorrido__mas-t" data-revelar="bloque" data-i18n="caso.patron.tambien">También hace</h3>
+        <ul class="recorrido__lista" role="list" data-revelar-hijos>
+          <li><strong data-i18n="caso.prospeccion.hace.1.t">Sólo negocios con sitio propio</strong> <span data-i18n="caso.prospeccion.hace.1">Descarta redes sociales y directorios como sitio, instituciones grandes y cadenas con marca.</span></li>
+          <li><strong data-i18n="caso.prospeccion.hace.2.t">Nunca dos veces el mismo negocio</strong> <span data-i18n="caso.prospeccion.hace.2">Cada negocio se guarda con su dominio como clave.</span></li>
+          <li><strong data-i18n="caso.prospeccion.hace.3.t">Rubros excluidos</strong> <span data-i18n="caso.prospeccion.hace.3">En Estados Unidos no les escribe a clínicas ni a dentistas, porque manejan datos de salud.</span></li>
+          <li><strong data-i18n="caso.prospeccion.hace.4.t">Se presenta y no insiste</strong> <span data-i18n="caso.prospeccion.hace.4">El auditor se identifica como robot, con nombre y dirección, y si un sitio lo bloquea no vuelve a intentar.</span></li>
+          <li><strong data-i18n="caso.prospeccion.hace.5.t">Identificación y baja en cada correo</strong> <span data-i18n="caso.prospeccion.hace.5">Nombre, rol, web, dirección postal, de dónde salió la dirección de correo, aviso comercial y cómo pedir la baja, más la cabecera List-Unsubscribe.</span></li>
+          <li><strong data-i18n="caso.prospeccion.hace.6.t">Lista de bajas permanente</strong> <span data-i18n="caso.prospeccion.hace.6">Una baja saca para siempre ese correo y su dominio, y el verificador la consulta antes de aprobar.</span></li>
+        </ul>
+      </div>
+    </section>
+  </div>
+
+  <figure class="caso-foto caso-foto--detalle">
+    <div class="caso-foto__marco"><img class="caso-foto__img" src="../assets/mundo/casos/prospeccion-detalle.webp" srcset="../assets/mundo/casos/prospeccion-detalle-480.webp 480w, ../assets/mundo/casos/prospeccion-detalle-800.webp 800w, ../assets/mundo/casos/prospeccion-detalle.webp 2000w" sizes="100vw" width="2000" height="1250" loading="lazy" decoding="async" data-carga alt="Render en primer plano del registro del verificador: los borradores frenados y reescritos" data-i18n-attr="alt=caso.prospeccion.detalle.alt"></div>
+    <figcaption class="contenedor caso-foto__pie" data-revelar="bloque" data-i18n="caso.prospeccion.detalle.pie">Renglones del registro del verificador: el motivo «número no respaldado» y la hora en que cada borrador salió reescrito.</figcaption>
+  </figure>
+
+  <div class="contenedor">
+    <section class="seccion-caso caso-firma" id="firma" aria-labelledby="t-firma">
+      <p class="folio"><span class="folio__cifra cifra" aria-hidden="true">04</span><span class="folio__etiqueta etiqueta" data-revelar="bloque" data-i18n="caso.prospeccion.firma.etiqueta">El embudo y el registro</span><span class="folio__filete" aria-hidden="true"></span></p>
+      <h2 class="h-caso seccion-caso__titulo" id="t-firma" data-revelar data-i18n="caso.prospeccion.firma.titulo">Al 11 de noviembre: 57 negocios relevados, 16 revisiones y 6 correos enviados.</h2>
+      <div class="firma">
+        <figure class="firma__tarjeta placa placa--bloque embudo" data-iman>
+          <div class="embudo__parte" data-revelar="bloque">
+            <p class="etiqueta embudo__rotulo" data-i18n="caso.prospeccion.embudo.t">Por negocio, etapa por etapa, al 11 de noviembre de 2026</p>
+            <ol class="embudo__etapas" role="list">
+              <li class="embudo__etapa"><span class="embudo__n cifra">57</span><span class="embudo__que" data-i18n="caso.prospeccion.embudo.1">Negocios relevados</span><span class="embudo__barra" aria-hidden="true"></span></li>
+              <li class="embudo__etapa"><span class="embudo__n cifra">50</span><span class="embudo__que" data-i18n="caso.prospeccion.embudo.2">Sitios auditados</span><span class="embudo__barra" aria-hidden="true"></span></li>
+              <li class="embudo__etapa"><span class="embudo__n cifra">17</span><span class="embudo__que" data-i18n="caso.prospeccion.embudo.3">Con una mejora medida</span><span class="embudo__barra" aria-hidden="true"></span></li>
+              <li class="embudo__etapa"><span class="embudo__n cifra">14</span><span class="embudo__que" data-i18n="caso.prospeccion.embudo.4">Pasaron a redacción</span><span class="embudo__barra" aria-hidden="true"></span></li>
+              <li class="embudo__etapa"><span class="embudo__n cifra">11</span><span class="embudo__que" data-i18n="caso.prospeccion.embudo.5">Borrador aprobado por el verificador</span><span class="embudo__barra" aria-hidden="true"></span></li>
+              <li class="embudo__etapa embudo__etapa--fin"><span class="embudo__n cifra">6</span><span class="embudo__que" data-i18n="caso.prospeccion.embudo.6">Enviados</span><span class="embudo__barra" aria-hidden="true"></span></li>
+            </ol>
+          </div>
+          <div class="embudo__parte embudo__parte--registro" data-revelar="bloque">
+            <p class="etiqueta embudo__rotulo" data-i18n="caso.prospeccion.registro.t">Lo que frenó el verificador</p>
+            <ul class="registro__trio" role="list">
+              <li><span class="registro__cifra cifra">16</span><span data-i18n="caso.prospeccion.registro.revisados">revisiones</span></li>
+              <li class="registro__trio-frenados"><span class="registro__cifra cifra">5</span><span data-i18n="caso.prospeccion.registro.frenados">frenados</span></li>
+              <li><span class="registro__cifra cifra">11</span><span data-i18n="caso.prospeccion.registro.aprobados">aprobados</span></li>
+            </ul>
+            <table class="registro">
+              <caption class="registro__cuando" data-i18n="caso.prospeccion.registro.cuando">Los cinco fueron frenados a las 15:23 y aprobados a las 15:24, ya reescritos. 11 de noviembre de 2026, hora UTC.</caption>
+              <thead><tr><th scope="col" data-i18n="caso.prospeccion.registro.negocio">Negocio</th><th scope="col" data-i18n="caso.prospeccion.registro.motivo">Motivo guardado</th><th scope="col" class="registro__hora" data-i18n="caso.prospeccion.registro.enviado">Enviado</th></tr></thead>
+              <tbody>
+                <tr><td class="cifra">01</td><td class="registro__motivo" lang="es" translate="no"><span class="registro__frase">número no respaldado:</span> 240<mark class="registro__coma">,</mark></td><td class="registro__hora">15:24</td></tr>
+                <tr><td class="cifra">02</td><td class="registro__motivo" lang="es" translate="no"><span class="registro__frase">número no respaldado:</span> 500<mark class="registro__coma">,</mark></td><td class="registro__hora">15:26</td></tr>
+                <tr><td class="cifra">03</td><td class="registro__motivo" lang="es" translate="no"><span class="registro__frase">número no respaldado:</span> 500<mark class="registro__coma">,</mark></td><td class="registro__hora">15:28</td></tr>
+                <tr><td class="cifra">04</td><td class="registro__motivo" lang="es" translate="no"><span class="registro__frase">número no respaldado:</span> 500<mark class="registro__coma">,</mark></td><td class="registro__hora">15:30</td></tr>
+                <tr><td class="cifra">05</td><td class="registro__motivo" lang="es" translate="no"><span class="registro__frase">número no respaldado:</span> 500<mark class="registro__coma">,</mark></td><td class="registro__hora">15:33</td></tr>
+              </tbody>
+            </table>
+            <p class="registro__concilia" data-i18n="caso.prospeccion.registro.concilia">16 revisiones = 11 borradores: 5 se revisaron dos veces, después de reescribirse. De los 11 aprobados salieron 6; los otros 5 quedaron guardados porque el motor corría en modo borrador.</p>
+          </div>
+          <p class="firma__traduccion" lang="en" data-i18n="caso.prospeccion.firma.traduccion">La traducción al inglés aparece sólo en la versión en inglés de esta página.</p>
+          <figcaption class="embudo__nota" data-revelar="bloque" data-i18n="caso.prospeccion.firma.nota">Números leídos de la base del motor y contados por negocio. Los motivos se copian tal cual: el motor los guarda en español.</figcaption>
+        </figure>
+        <div class="firma__lado">
+          <p class="firma__texto" data-revelar data-i18n="caso.prospeccion.firma.texto">Cada etapa cuenta negocios distintos: uno auditado dos veces cuenta una sola vez. En la corrida del 11 de noviembre, los cinco motivos del registro tienen la misma forma: una cifra con una coma pegada. El verificador leyó «500,» o «240,» y no lo reconoció como la cifra respaldada. Los cinco borradores se reescribieron y salieron ese mismo día.</p>
+          <figure class="firma__captura ampliable">
+            <div class="ventana"><div class="ventana__pantalla cortina">
+<picture>
+  <source type="image/avif" srcset="../assets/img/prospeccion/embudo-640.avif 640w, ../assets/img/prospeccion/embudo-1280.avif 1280w, ../assets/img/prospeccion/embudo-1920.avif 1920w" sizes="(min-width: 1024px) 46vw, 100vw">
+  <img src="../assets/img/prospeccion/embudo-1280.webp" srcset="../assets/img/prospeccion/embudo-640.webp 640w, ../assets/img/prospeccion/embudo-1280.webp 1280w, ../assets/img/prospeccion/embudo-1920.webp 1920w" sizes="(min-width: 1024px) 46vw, 100vw" width="1920" height="1200" loading="lazy" decoding="async" alt="Vista real del motor: a la izquierda, el embudo por negocio; a la derecha, los cinco borradores frenados con su motivo" data-i18n-attr="alt=caso.prospeccion.firma.alt">
+</picture>
+            </div></div>
+            <button type="button" class="ampliar" data-ampliar="../assets/img/prospeccion/embudo-1920.webp"><span class="oculto-visual" data-i18n="caso.patron.ampliar">Ampliar imagen</span></button>
+            <figcaption data-revelar="bloque" data-i18n="caso.prospeccion.firma.pie">La vista real, generada desde la base sin nombres, correos, dominios ni ciudades.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="seccion-caso caso-decide" id="decisiones" aria-labelledby="t-decisiones">
+      <p class="folio"><span class="folio__cifra cifra" aria-hidden="true">05</span><span class="folio__etiqueta etiqueta" data-revelar="bloque" data-i18n="caso.parte.decisiones">Decisiones</span><span class="folio__filete" aria-hidden="true"></span></p>
+      <h2 class="h-caso seccion-caso__titulo" id="t-decisiones" data-revelar data-i18n="caso.prospeccion.decisiones.titulo">Qué puede afirmar un correo que nadie revisa a mano.</h2>
+      <ol class="decide" role="list">
+        <li class="decide__fila">
+          <span class="decide__n cifra" aria-hidden="true">01</span>
+          <div class="decide__eje"><span class="etiqueta decide__rotulo" data-revelar="bloque" data-i18n="caso.elegi">Decidí</span><h3 class="decide__t" data-revelar data-i18n="caso.prospeccion.decision.1.elegi">Que un verificador sin IA, con reglas escritas, tenga la última palabra sobre cada borrador.</h3></div>
+          <div class="decide__nota" data-revelar="bloque"><span class="etiqueta decide__rotulo" data-i18n="caso.vi">Lo que vi</span><p data-i18n="caso.prospeccion.decision.1.vi">Los correos salen sin que yo lea cada uno, y un modelo escribe con la misma seguridad lo medido y lo inventado.</p></div>
+          <div class="decide__nota" data-revelar="bloque"><span class="etiqueta decide__rotulo" data-i18n="caso.descarte">Descarté</span><p><span data-i18n="caso.prospeccion.decision.1.descarte">Que otro modelo revise al primero.</span> <span data-i18n="caso.prospeccion.decision.1.porque">Una regla escrita se puede leer y auditar línea por línea.</span></p></div>
+        </li>
+        <li class="decide__fila">
+          <span class="decide__n cifra" aria-hidden="true">02</span>
+          <div class="decide__eje"><span class="etiqueta decide__rotulo" data-revelar="bloque" data-i18n="caso.elegi">Decidí</span><h3 class="decide__t" data-revelar data-i18n="caso.prospeccion.decision.2.elegi">Que el motor no afirme lo que no puede medir con certeza.</h3></div>
+          <div class="decide__nota" data-revelar="bloque"><span class="etiqueta decide__rotulo" data-i18n="caso.vi">Lo que vi</span><p data-i18n="caso.prospeccion.decision.2.vi">En Windows, la comprobación de certificados de Python marca errores que no existen, y un chat cargado con Google Tag Manager no aparece en el HTML.</p></div>
+          <div class="decide__nota" data-revelar="bloque"><span class="etiqueta decide__rotulo" data-i18n="caso.descarte">Descarté</span><p><span data-i18n="caso.prospeccion.decision.2.descarte">Decirle a un negocio que su certificado falla.</span> <span data-i18n="caso.prospeccion.decision.2.porque">Esa frase no sale nunca, y si el sitio usa Google Tag Manager, la falta de chat no alcanza por sí sola para escribirle.</span></p></div>
+        </li>
+        <li class="decide__fila">
+          <span class="decide__n cifra" aria-hidden="true">03</span>
+          <div class="decide__eje"><span class="etiqueta decide__rotulo" data-revelar="bloque" data-i18n="caso.elegi">Decidí</span><h3 class="decide__t" data-revelar data-i18n="caso.prospeccion.decision.3.elegi">Que ante una cifra dudosa el verificador frene el borrador, aunque se equivoque.</h3></div>
+          <div class="decide__nota" data-revelar="bloque"><span class="etiqueta decide__rotulo" data-i18n="caso.vi">Lo que vi</span><p data-i18n="caso.prospeccion.decision.3.vi">En la corrida del 11 de noviembre frenó 5 de 16 revisiones y las cinco eran falsos positivos: leyó «500,» o «240,» con la coma pegada y no los reconoció como cifras respaldadas.</p></div>
+          <div class="decide__nota" data-revelar="bloque"><span class="etiqueta decide__rotulo" data-i18n="caso.descarte">Descarté</span><p><span data-i18n="caso.prospeccion.decision.3.descarte">Aflojar la regla para que deje pasar números parecidos.</span> <span data-i18n="caso.prospeccion.decision.3.porque">Un borrador frenado de más se reescribe; un correo con una cifra falsa ya salió. El defecto de lectura sigue sin arreglar.</span></p></div>
+        </li>
+      </ol>
+    </section>
+
+    <section class="seccion-caso caso-taller" id="construccion" aria-labelledby="t-taller">
+      <p class="folio"><span class="folio__cifra cifra" aria-hidden="true">06</span><span class="folio__etiqueta etiqueta" data-revelar="bloque" data-i18n="caso.parte.agentes">Cómo lo construí</span><span class="folio__filete" aria-hidden="true"></span></p>
+      <h2 class="h-caso seccion-caso__titulo" id="t-taller" data-revelar data-i18n="caso.prospeccion.construi.titulo">Un proceso automático, probado en modo borrador antes de enviar nada.</h2>
+      <ol class="taller" role="list">
+        <li class="taller__paso taller__paso--artefacto">
+          <span class="taller__n cifra" aria-hidden="true">01</span>
+          <div class="taller__texto"><h3 class="taller__t" data-revelar data-i18n="caso.prospeccion.agentes.1.t">Separé lo que hace el código de lo que hace el modelo.</h3><p data-revelar data-i18n="caso.prospeccion.agentes.1">Un primer tramo descubre, audita y prepara. El cierre compone, verifica, envía, lee la bandeja y arma el panel. En el medio está el único paso con IA: la redacción, con instrucciones escritas.</p></div>
+          <figure class="taller__artefacto artefacto-flujo flujo-motor" data-revelar="bloque">
+            <ol class="artefacto-flujo__pasos" lang="es" translate="no" role="list">
+              <li><span class="cifra">01</span> descubrir</li>
+              <li><span class="cifra">02</span> auditar</li>
+              <li><span class="cifra">03</span> preparar</li>
+              <li class="flujo-motor__ia"><span class="cifra">04</span> redactar</li>
+              <li><span class="cifra">05</span> componer</li>
+              <li><span class="cifra">06</span> verificar</li>
+              <li><span class="cifra">07</span> enviar</li>
+              <li><span class="cifra">08</span> bandeja</li>
+              <li><span class="cifra">09</span> panel</li>
+            </ol>
+            <p class="firma__traduccion" lang="en" data-i18n="caso.prospeccion.flujo.traduccion">La traducción al inglés aparece sólo en la versión en inglés de esta página.</p>
+            <figcaption data-i18n="caso.prospeccion.construi.artefacto.1">Los pasos con el nombre que tienen en el motor. El cuarto, marcado, es el único que usa un modelo de IA.</figcaption>
+          </figure>
+        </li>
+        <li class="taller__paso">
+          <span class="taller__n cifra" aria-hidden="true">02</span>
+          <div class="taller__texto"><h3 class="taller__t" data-revelar data-i18n="caso.prospeccion.agentes.2.t">Modo borrador antes del envío real.</h3><p data-revelar data-i18n="caso.prospeccion.agentes.2">En modo borrador el motor arma el correo completo y lo guarda sin enviarlo. Así quedaron 5 borradores aprobados que nunca salieron.</p></div>
+        </li>
+        <li class="taller__paso">
+          <span class="taller__n cifra" aria-hidden="true">03</span>
+          <div class="taller__texto"><h3 class="taller__t" data-revelar data-i18n="caso.prospeccion.agentes.3.t">Una vista que no muestra a nadie.</h3><p data-revelar data-i18n="caso.prospeccion.agentes.3">La vista del embudo sale de la base abierta sólo para lectura. El guion que la arma se niega a escribirla si encuentra un @, un dominio o cualquier nombre, ciudad o correo guardado en la base.</p></div>
+        </li>
+      </ol>
+    </section>
+
+    <section class="seccion-caso caso-balance" id="resultado" aria-labelledby="t-resultado">
+      <p class="folio"><span class="folio__cifra cifra" aria-hidden="true">07</span><span class="folio__etiqueta etiqueta" data-revelar="bloque" data-i18n="caso.parte.resultado">Resultado</span><span class="folio__filete" aria-hidden="true"></span></p>
+      <h2 class="h-caso seccion-caso__titulo" id="t-resultado" data-revelar data-i18n="caso.prospeccion.resultado">Un prototipo que ya envió correos reales, con tope diario y sin resultados comerciales que contar.</h2>
+      <ul class="balance__cifras" role="list" data-revelar-hijos>
+        <li><p class="balance__cifra cifra"><span data-rodillo>57</span></p><p class="balance__que" data-i18n="caso.prospeccion.cifra.1">negocios relevados en OpenStreetMap, al 11 de noviembre</p></li>
+        <li><p class="balance__cifra cifra"><span data-rodillo>16</span></p><p class="balance__que" data-i18n="caso.prospeccion.cifra.2">revisiones del verificador, al 11 de noviembre</p></li>
+        <li><p class="balance__cifra cifra"><span data-rodillo>6</span></p><p class="balance__que" data-i18n="caso.prospeccion.cifra.3">correos enviados al 11 de noviembre, con un tope de 5 por día</p></li>
+      </ul>
+      <div class="balance__estado">
+        <p class="balance__texto" data-revelar data-i18n="caso.prospeccion.estado">Envía de verdad, por SMTP y con la pausa desactivada. Las cifras de esta página son las de la base al 11 de noviembre de 2026; el motor siguió enviando después. Todavía no tiene resultados comerciales que contar.</p>
+        <div class="balance__falta">
+          <h3 class="etiqueta balance__falta-t" data-revelar="bloque" data-i18n="caso.patron.falta">Qué falta</h3>
+          <ul role="list" data-revelar-hijos>
+            <li data-i18n="caso.prospeccion.falta.1">Arreglar la lectura de cifras: hoy una coma o un punto pegados a un número frenan el borrador entero.</li>
+            <li data-i18n="caso.prospeccion.falta.2">Detectar los chats que se cargan con Google Tag Manager: hoy el auditor puede no verlos y sólo le resta peso a ese hallazgo.</li>
+            <li data-i18n="caso.prospeccion.falta.3">Encender la medición de velocidad en celular: está apagada, así que ese hallazgo nunca aparece.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="seccion-caso caso-album" id="galeria" aria-labelledby="t-galeria">
+      <p class="folio"><span class="folio__cifra cifra" aria-hidden="true">08</span><span class="folio__etiqueta etiqueta" data-revelar="bloque" data-i18n="caso.parte.galeria">Galería</span><span class="folio__filete" aria-hidden="true"></span></p>
+      <h2 class="h-caso seccion-caso__titulo" id="t-galeria" data-revelar data-i18n="caso.prospeccion.galeria.titulo">El caballete de varillas que sostiene la pantalla, visto desde atrás.</h2>
+      <div class="album">
+        <figure class="album__item album__item--foto ampliable">
+          <div class="album__foto cortina"><img src="../assets/mundo/casos/prospeccion-angulo.webp" srcset="../assets/mundo/casos/prospeccion-angulo-480.webp 480w, ../assets/mundo/casos/prospeccion-angulo-800.webp 800w, ../assets/mundo/casos/prospeccion-angulo.webp 2000w" sizes="(min-width: 1440px) 1360px, 100vw" width="2000" height="1250" loading="lazy" decoding="async" alt="Render: la pantalla de prospección vista desde atrás, con su caballete de varillas sobre el banco" data-i18n-attr="alt=caso.prospeccion.angulo.alt"></div>
+          <button type="button" class="ampliar" data-ampliar="../assets/mundo/casos/prospeccion-angulo.webp"><span class="oculto-visual" data-i18n="caso.patron.ampliar">Ampliar imagen</span></button>
+          <figcaption data-revelar="bloque" data-i18n="caso.prospeccion.angulo.pie">Render propio en Blender: el dorso de la pantalla y su caballete.</figcaption>
+        </figure>
+      </div>
+    </section>
+  <section class="caso-contacto placa placa--bloque" aria-labelledby="t-contacto" data-iman>
+    <div class="caso-contacto__texto">
+      <p class="etiqueta caso-contacto__etiqueta" data-revelar="bloque" data-i18n="folio.contacto">Contacto</p>
+      <h2 class="caso-contacto__titulo" id="t-contacto" data-revelar data-i18n="contacto.titulo">Escribime si tenés un producto para construir o un proceso para automatizar.</h2>
+      <p class="caso-contacto__sub" data-revelar data-i18n="contacto.sub">Respondo en el día.</p>
+    </div>
+    <div class="caso-contacto__acciones" data-revelar-hijos>
+      <a class="boton boton--primario boton--grande" href="mailto:ramirobales@gmail.com" data-i18n="contacto.mail">Escribir a ramirobales@gmail.com</a>
+      <a class="boton boton--secundario boton--grande" href="../cv/ramiro-bales-cv-es.pdf" data-cv data-i18n="contacto.cv">Descargar CV (PDF)</a>
+      <a class="boton boton--secundario boton--grande" href="https://www.linkedin.com/in/ramiro-bales" rel="me noopener noreferrer" target="_blank" aria-label="LinkedIn de Ramiro Bales (abre en pestaña nueva)" data-i18n-attr="aria-label=heroe.linkedin.aria" data-i18n="contacto.linkedin">LinkedIn</a>
+    </div>
+  </section>
+  <nav class="caso-nav" id="otros" aria-label="Otros casos" data-i18n-attr="aria-label=caso.otros.aria">
+    <p class="folio caso-nav__folio"><span class="folio__etiqueta etiqueta" data-i18n="caso.otros.aria">Otros casos</span><span class="folio__filete" aria-hidden="true"></span></p>
+    <div class="caso-nav__pares">
+    <a class="caso-par caso-par--siguiente caso-puerta" href="cathedra.html">
+      <span class="caso-par__media" data-paralaje data-vt="cathedra"><img class="caso__capa caso__capa--fondo" src="../assets/mundo/casos/cathedra-fondo.webp" srcset="../assets/mundo/casos/cathedra-fondo-480.webp 480w, ../assets/mundo/casos/cathedra-fondo-800.webp 800w, ../assets/mundo/casos/cathedra-fondo-1600.webp 1600w, ../assets/mundo/casos/cathedra-fondo.webp 2400w" sizes="100vw" width="2400" height="1500" loading="lazy" decoding="async" data-carga alt=""><img class="caso__capa caso__capa--disp" src="../assets/mundo/casos/cathedra-dispositivo.webp" srcset="../assets/mundo/casos/cathedra-dispositivo-480.webp 480w, ../assets/mundo/casos/cathedra-dispositivo-800.webp 800w, ../assets/mundo/casos/cathedra-dispositivo-1600.webp 1600w, ../assets/mundo/casos/cathedra-dispositivo.webp 2400w" sizes="100vw" width="2400" height="1500" loading="lazy" decoding="async" data-carga alt=""><span class="caso__luz" aria-hidden="true"></span></span>
+      <span class="caso-par__texto"><span class="etiqueta caso-par__etiqueta" data-i18n="caso.siguiente">Caso siguiente →</span><span class="caso-par__nombre" data-revelar="lineas">Cathedra</span><span class="caso-par__frase" data-i18n="trabajo.cathedra.frase">App de estudio para Windows: transcribe clases, arma el plan, genera exámenes y fichas, y cada respuesta cita clase y minuto.</span><span class="sello sello--proceso" data-i18n="trabajo.cathedra.sello">Producto propio · en beta</span></span>
+    </a>
+    <a class="caso-par caso-par--anterior placa placa--bloque placa--viva" href="chamfer.html" data-iman>
+      <span class="caso-par__media" data-vt="chamfer"><img class="caso__capa caso__capa--fondo" src="../assets/mundo/casos/chamfer-fondo.webp" srcset="../assets/mundo/casos/chamfer-fondo-480.webp 480w, ../assets/mundo/casos/chamfer-fondo-800.webp 800w, ../assets/mundo/casos/chamfer-fondo-1600.webp 1600w, ../assets/mundo/casos/chamfer-fondo.webp 2400w" sizes="(min-width: 768px) 240px, 100vw" width="2400" height="1500" loading="lazy" decoding="async" data-carga alt=""><img class="caso__capa caso__capa--disp" src="../assets/mundo/casos/chamfer-dispositivo.webp" srcset="../assets/mundo/casos/chamfer-dispositivo-480.webp 480w, ../assets/mundo/casos/chamfer-dispositivo-800.webp 800w, ../assets/mundo/casos/chamfer-dispositivo-1600.webp 1600w, ../assets/mundo/casos/chamfer-dispositivo.webp 2400w" sizes="(min-width: 768px) 240px, 100vw" width="2400" height="1500" loading="lazy" decoding="async" data-carga alt=""><span class="caso__luz" aria-hidden="true"></span></span>
+      <span class="caso-par__texto"><span class="etiqueta caso-par__etiqueta" data-i18n="caso.anterior">← Caso anterior</span><span class="caso-par__nombre" data-revelar="lineas">Chamfer</span><span class="caso-par__frase" data-i18n="trabajo.chamfer.frase">Secciones para tiendas Shopify: cada una es un solo archivo que le suma luz y profundidad a las fotos que la tienda ya tiene. Todavía sin probar en una tienda real.</span><span class="sello sello--proceso" data-i18n="trabajo.chamfer.sello">Prototipo</span></span>
+    </a>
+    <p class="caso-nav__todos" data-revelar="bloque"><a class="boton boton--secundario" href="../index.html#trabajo" data-i18n="caso.volver">Todos los casos</a></p>
+    </div>
+  </nav>
+  <aside class="lector lector--pie" aria-labelledby="t-lector" data-revelar="bloque">
+    <h2 class="etiqueta lector__t" id="t-lector" data-i18n="caso.prospeccion.lector.t">Si te llegó un correo de este motor</h2>
+    <p class="lector__texto" data-i18n="caso.prospeccion.lector">Lo redactó un modelo de IA a partir de lo que el auditor midió en tu sitio, y lo aprobó el verificador: nadie lo leyó antes de que saliera. El motor no vuelve a escribirle a un mismo contacto antes de 120 días. Si respondés «BAJA», tu correo y tu dominio quedan fuera para siempre.</p>
+  </aside>
+  </div>
+  <dialog class="ampliacion" aria-label="Imagen ampliada" data-i18n-attr="aria-label=caso.patron.ampliada">
+    <div class="ampliacion__marco"></div>
+    <div class="ampliacion__pie"><p class="ampliacion__texto"></p><button type="button" class="boton boton--secundario ampliacion__cerrar" data-i18n="caso.patron.cerrar">Cerrar</button></div>
+  </dialog>
+</main>
+<footer class="pie">
+  <div class="contenedor">
+    <div class="pie__in placa placa--bloque">
+      <div class="pila--chica">
+        <p class="pie__enlaces">
+          <a href="../creditos.html" data-i18n="pie.creditos">Créditos: texturas, modelos 3D y entornos de terceros</a>
+          <a href="../legal.html" data-i18n="pie.legal">Aviso legal y privacidad</a>
+        </p>
+        <p class="pie__hecho" data-i18n="pie.hecho">Sitio estático hecho con desarrollo asistido por IA y verificado a mano. Sin cookies ni analítica.</p>
+      </div>
+      <div class="pie__lado">
+        <div class="nav__herramientas">
+          <div class="conmutador conmutador--idioma" role="group" aria-label="Idioma" data-i18n-attr="aria-label=nav.idioma.aria">
+            <button type="button" data-idioma="es" aria-pressed="true" lang="es">ES</button>
+            <button type="button" data-idioma="en" aria-pressed="false" lang="en">EN</button>
+          </div>
+          <button type="button" class="tema" aria-pressed="false" aria-label="Cambiar entre tema claro y oscuro" data-i18n-attr="aria-label=tema.aria">
+            <svg class="tema__luna" viewBox="0 0 20 20" aria-hidden="true"><path d="M16.4 12.2A7 7 0 0 1 7.8 3.6a7.2 7.2 0 1 0 8.6 8.6Z"/></svg>
+            <svg class="tema__sol" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="3.6"/><path d="M10 1.8v2.2M10 16v2.2M1.8 10H4M16 10h2.2M4.2 4.2l1.6 1.6M14.2 14.2l1.6 1.6M4.2 15.8l1.6-1.6M14.2 5.8l1.6-1.6"/></svg>
+            <span class="tema__oscuro" data-i18n="tema.oscuro">Oscuro</span>
+            <span class="tema__claro" data-i18n="tema.claro">Claro</span>
+          </button>
+        </div>
+        <p class="pie__copy" data-i18n="pie.copy">© 2026 Ramiro Bales</p>
+      </div>
+    </div>
+  </div>
+</footer>
+<script type="module" src="../js/mundo/pagina.js"></script>
+<script type="module" src="../js/comun.js"></script>
+<script type="module" src="../js/caso.js"></script>
+</body>
+</html>

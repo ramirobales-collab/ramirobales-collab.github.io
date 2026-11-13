@@ -1,0 +1,94 @@
+/* ---------- Caso Fortal: reglas propias sobre el patrón de caso v4 ---------- */
+/* Se carga después de caso.css. Las capturas de Fortal son de teléfono (1206×2622, verticales): van en una ventana
+   con forma de teléfono, de ancho fijo y centrada, sin estirarse. La firma junta el cuerpo con los músculos del día y
+   la sesión de ese día, con el texto copiado tal cual de las capturas. */
+
+/* Ventana de teléfono: mismo marco grafito que .ventana, esquinas de teléfono */
+.ventana--telefono { width: min(100%, 19.5rem); padding: 5px; border-radius: 40px; }
+.ventana--telefono .ventana__pantalla { --radio-cortina: 35px; border-radius: 35px; }
+.ampliable--telefono { justify-items: center; }
+.ampliable--telefono > .ampliar { width: min(100%, 19.5rem); border-radius: 40px; }
+.ampliable--telefono > figcaption { width: min(100%, 19.5rem); }
+
+/* Recorrido: tres teléfonos en fila (tríptico) con su texto debajo; el del medio baja un escalón para que la fila no
+   sea una grilla de tarjetas. En celular y tableta, uno debajo del otro. */
+.recorrido--telefono { gap: clamp(3.5rem, 1.5rem + 4vw, 5rem); }
+.recorrido--telefono .ventana--telefono, .recorrido--telefono .ampliable--telefono > .ampliar { width: min(100%, 17.5rem); }
+@media (min-width: 1024px) {
+  .recorrido--telefono { grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: var(--calle); align-items: start; }
+  .recorrido--telefono .recorrido__paso, .recorrido--telefono .recorrido__paso:nth-child(even) { grid-template-columns: minmax(0, 1fr); align-items: start; row-gap: var(--e-4); }
+  .recorrido--telefono .recorrido__media, .recorrido--telefono .recorrido__paso:nth-child(even) .recorrido__media,
+  .recorrido--telefono .recorrido__texto, .recorrido--telefono .recorrido__paso:nth-child(even) .recorrido__texto { grid-column: 1; grid-row: auto; padding: 0; }
+  .recorrido--telefono .ampliable--telefono { justify-items: start; }
+  .recorrido--telefono .recorrido__paso:nth-child(2) { margin-top: var(--e-5); }
+  .recorrido--telefono .recorrido__t { font-size: clamp(1.375rem, 1rem + 0.8vw, 1.75rem); }
+  .recorrido--telefono .recorrido__texto > p { font-size: var(--t-secundario); max-width: 36ch; }
+}
+
+/* Firma: tarjeta con el recorte del cuerpo y, al lado, el día y su sesión copiados de las capturas */
+.firma-dia { gap: var(--e-4); }
+@media (min-width: 640px) {
+  .firma-dia { grid-template-columns: minmax(0, 11fr) minmax(0, 9fr); grid-template-areas: "cuerpo dia" "ses ses"; column-gap: var(--e-4); }
+  .firma-dia__cuerpo { grid-area: cuerpo; }
+  .firma-dia__dia { grid-area: dia; align-self: center; }
+  .firma-dia__ses { grid-area: ses; }
+}
+.firma-dia__cuerpo { margin: 0; }
+.ventana--pantallazo { padding: 5px; border-radius: 16px; }
+.ventana--pantallazo .ventana__pantalla { --radio-cortina: 11px; border-radius: 11px; }
+.firma-dia__cuerpo > .ampliar { border-radius: 16px; }
+.firma-dia__dia, .firma-dia__ses { display: grid; gap: 0.5rem; align-content: start; justify-items: start; min-width: 0; }
+.firma-dia__ses { padding-top: var(--e-3); border-top: 1px solid var(--filete); }
+.firma-dia__rotulo { color: var(--acento-texto); }
+@media (min-width: 1024px) {
+  .firma-dia__sesion { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--e-4); }
+  .firma-dia__sesion li:nth-last-child(2) { border-bottom: 0; padding-bottom: 0; }
+}
+.firma-dia__nombre { font-size: clamp(1.75rem, 1.2rem + 1.6vw, 2.5rem); font-weight: 600; line-height: 1.05; letter-spacing: -0.025em; }
+.firma-dia__linea { font-size: var(--t-secundario); line-height: 1.5; color: var(--texto-2); }
+.firma-dia__chips { list-style: none; margin: var(--e-1) 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.45rem; }
+.firma-dia__chips li {
+  padding: 0.3rem 0.7rem;
+  border-radius: var(--radio-chico);
+  font-size: var(--t-etiqueta);
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--acento-texto);
+  background: color-mix(in oklab, var(--acento-display) 9%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--acento-display) 55%, transparent);
+}
+.firma-dia__sesion { list-style: none; margin: 0; padding: 0; display: grid; justify-self: stretch; }
+.firma-dia__sesion li { display: grid; align-content: start; grid-template-columns: 1.6rem minmax(0, 1fr); column-gap: var(--e-2); row-gap: 0.15rem; padding-block: 0.65rem; border-bottom: 1px solid var(--filete); }
+.firma-dia__sesion li:last-child { border-bottom: 0; padding-bottom: 0; }
+.firma-dia__n { grid-row: span 3; font-size: 1.0625rem; line-height: 1.35; color: var(--texto-3); }
+.firma-dia__ej { font-weight: 600; line-height: 1.3; }
+.firma-dia__dato { font-size: var(--t-etiqueta); line-height: 1.45; color: var(--texto-2); font-variant-numeric: tabular-nums; }
+.firma-dia__peso { font-size: var(--t-secundario); font-weight: 600; line-height: 1.4; color: var(--acento-texto); font-variant-numeric: tabular-nums; }
+.firma__captura .ventana--telefono, .firma__captura.ampliable--telefono > .ampliar { width: min(100%, 14rem); }
+.firma__captura.ampliable--telefono > figcaption { width: min(100%, 22rem); }
+@media (min-width: 1024px) {
+  .firma__lado { padding-left: var(--e-3); }
+  .firma__captura.ampliable--telefono { justify-items: start; }
+}
+
+/* Cómo lo construí: las cuatro fases en dos por dos; la salida del pipeline como artefacto chico, en ventana sobre
+   negro; el recorte pixelado más ancho */
+.artefacto-flujo--cuatro .artefacto-flujo__pasos { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.taller__artefacto--regiones .ventana, .taller__artefacto--regiones .ampliar { width: min(100%, 220px); }
+.taller__artefacto--regiones .ventana__pantalla img { display: block; width: 100%; height: auto; }
+.taller__artefacto--ancho .taller__imagen, .taller__artefacto--ancho .ampliar { width: min(100%, 24rem); }
+
+/* Galería: el segundo ángulo y, al lado, la pantalla de hoy entera en su teléfono (en celular, debajo). Alineadas
+   arriba. */
+.album__item--hoy .ventana--telefono, .album__item--hoy > .ampliar, .album__item--hoy > figcaption { width: min(100%, 15rem); }
+@media (min-width: 1024px) {
+  .album { align-items: start; }
+  .album:has(> .album__item--hoy) > .album__item--foto { grid-column: 1 / 9; }
+  .album:has(> .album__item--hoy) > .album__item--hoy { grid-column: 9 / -1; align-self: start; }
+}
+
+@media (forced-colors: active) { .firma-dia__chips li { border: 1px solid CanvasText; box-shadow: none; } }
+@media print {
+  .ventana--telefono { width: 50mm; }
+  .firma-dia__cuerpo { max-width: 60mm; }
+}
