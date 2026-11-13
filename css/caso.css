@@ -999,6 +999,12 @@ html:has(.ampliacion[open]) { overflow: hidden; }
 .caso-pagina--v4:has(> [data-caso="coro"]) { --detalle-y: 45%; }
 .caso-pagina--v4:has(> [data-caso="chamfer"]) { --detalle-y: 60%; }
 .caso-pagina--v4:has(> [data-caso="prospeccion"]) { --detalle-y: 45%; }
+/* apertura apilada (< 1024): las fotos de AthleteIQ y Prospección tienen la pantalla más a la derecha (centro medido
+   en el render: x 68,6 % y 71 %); con el 74 % general la foto recortada le cortaba el canto derecho */
+@media (max-width: 1023.98px) {
+  .caso-pagina--v4:has(> [data-caso="athleteiq"]) .caso-cabecera.apertura .caso__capa { object-position: 85% 50%; }
+  .caso-pagina--v4:has(> [data-caso="prospeccion"]) .caso-cabecera.apertura .caso__capa { object-position: 89% 50%; }
+}
 /* con la escala casi en 1, la deriva al deslizar tiene que ser corta o asoma el borde */
 @supports (animation-timeline: view()) {
   @media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {

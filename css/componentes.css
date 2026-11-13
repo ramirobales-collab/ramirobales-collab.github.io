@@ -689,12 +689,12 @@ html:not(.js) .heroe__poster, .heroe__poster.visto { opacity: 1; }
 .caso .caso__capa { transform-origin: var(--fx, 50%) var(--fy, 50%); }
 .caso--cathedra { --acerca: 1.2; --fx: 52.5%; --fy: 44%; }
 .caso--fortal { --acerca: 1.2; --fx: 52.9%; --fy: 44%; }
-.caso--athleteiq { --acerca: 1.2; --fx: 55%; --fy: 45.5%; }
+.caso--athleteiq { --acerca: 1.2; --fx: 65.4%; --fy: 47.5%; }
 .caso--coro { --acerca: 1.2; --fx: 54.4%; --fy: 45.5%; }
 @media (min-width: 768px) {
   .caso--cathedra { --acerca: 1.3; --fx: 58.5%; }
   .caso--fortal { --acerca: 1.22; --fx: 58.8%; }
-  .caso--athleteiq { --acerca: 1.3; --fx: 60.5%; }
+  .caso--athleteiq { --acerca: 1.3; --fx: 68.6%; }
   .caso--coro { --acerca: 1.3; --fx: 60%; }
 }
 /* barrido de luz: cruza una vez al entrar y otra al pasar */
